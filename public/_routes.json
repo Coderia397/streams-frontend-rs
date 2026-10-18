@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "include": ["/", "/help", "/help/*", "/sitemap.xml", "/robots.txt", "/browse", "/browse/*", "/login", "/signup", "/forgot", "/settings", "/settings/*", "/watch/*", "/search", "/latest", "/clips", "/games", "/profiles/*", "/auth/*", "/terms", "/privacy", "/cookies", "/dmca", "/disclaimer", "/credits"],
+  "exclude": []
+}

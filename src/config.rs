@@ -13,6 +13,29 @@ const fn setting(value: Option<&'static str>, default: &'static str) -> &'static
 /// The public address of the site, used for canonical links and sharing.
 pub const SITE_URL: &str = setting(option_env!("STREAMS_SITE_URL"), "https://streams.watch");
 
+/// The address of the Help Centre. It has a host of its own (help.<domain>, one deployment with the app); `/help` on the main address is sent there.
+pub const HELP_URL: &str = setting(option_env!("STREAMS_HELP_URL"), "https://help.streams.watch");
+
+/// The host part of an address (`https://help.streams.watch/x` gives `help.streams.watch`).
+pub fn host_of(url: &str) -> &str {
+    url.split("://").nth(1).unwrap_or(url).split('/').next().unwrap_or("")
+}
+
+/// True when the page is open on the Help Centre's own host.
+pub fn on_help_host() -> bool {
+    web_sys::window().and_then(|w| w.location().hostname().ok()).is_some_and(|h| h == host_of(HELP_URL) || h.starts_with("help."))
+}
+
+/// True when the page is open on the main site's host (with or without www).
+pub fn on_site_host() -> bool {
+    web_sys::window().and_then(|w| w.location().hostname().ok()).is_some_and(|h| h == host_of(SITE_URL) || h == format!("www.{}", host_of(SITE_URL)))
+}
+
+/// A link into the app. On the Help Centre's host the app is another host, so the link is made absolute; elsewhere the plain path does.
+pub fn app_link(path: &str) -> String {
+    if on_help_host() { format!("{SITE_URL}{path}") } else { path.to_string() }
+}
+
 /// Stream resolver. It runs on a phone behind a Cloudflare tunnel (see streams-resolver-rs/deploy).
 pub const RESOLVER_URL: &str = setting(option_env!("STREAMS_RESOLVER_URL"), "https://resolver.streams.watch");
 

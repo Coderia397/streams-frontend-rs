@@ -34,7 +34,7 @@ pub fn App() -> impl IntoView {
     crate::services::device::register_in_background();
 
     // On help.<domain> the front door is the help center
-    let on_help_host = web_sys::window().and_then(|w| w.location().hostname().ok()).map(|h| h.starts_with("help.")).unwrap_or(false);
+    let on_help_host = crate::config::on_help_host();
 
     let profile_store = crate::store::use_profile_store();
     let has_no_profile = move || profile_store.active_profile_id.get().is_none();
@@ -66,6 +66,7 @@ pub fn App() -> impl IntoView {
             <crate::components::profiles::whos_watching::WhosWatchingGate />
         </Show>
         <Router>
+            <HostGuard />
             <Routes fallback=crate::pages::not_found::NotFoundPage>
                 <Route path=path!("/browse") view=|| view! { <BrowseHome /> } />
                 // the developer pages exist only when the site is opened from this machine or its network (note 67 E8); anywhere else they are a page that is not found
@@ -159,4 +160,22 @@ fn is_local_host() -> bool {
     let host = web_sys::window().and_then(|w| w.location().hostname().ok()).unwrap_or_default();
     let private_172 = host.strip_prefix("172.").and_then(|r| r.split('.').next()).and_then(|n| n.parse::<u8>().ok()).is_some_and(|n| (16..=31).contains(&n));
     host == "localhost" || host == "127.0.0.1" || host == "[::1]" || host.starts_with("10.") || host.starts_with("192.168.") || private_172 || host.ends_with(".local")
+}
+
+/// Keeps each host to its own pages: `/help` on the main address moves to the Help Centre's host, and anything else on that host (the app, sign in, the policies) moves back to the main one.
+/// The server does the same for crawlers (`functions/_middleware.js`); this covers a person moving between pages without a new page load.
+#[component]
+fn HostGuard() -> impl IntoView {
+    let location = leptos_router::hooks::use_location();
+    Effect::new(move |_| {
+        let path = location.pathname.get();
+        let Some(win) = web_sys::window() else { return };
+        let search = win.location().search().unwrap_or_default();
+        let is_help_path = path == "/help" || path.starts_with("/help/");
+        if crate::config::on_site_host() && is_help_path {
+            let _ = win.location().replace(&format!("{}{path}{search}", crate::config::HELP_URL));
+        } else if crate::config::on_help_host() && !is_help_path && path != "/" {
+            let _ = win.location().replace(&format!("{}{path}{search}", crate::config::SITE_URL));
+        }
+    });
 }

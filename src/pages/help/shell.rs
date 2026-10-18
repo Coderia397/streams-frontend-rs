@@ -10,8 +10,10 @@ pub fn set_title(page: &str) {
         if let Some(doc) = window.document() {
             doc.set_title(&full);
             let path = window.location().pathname().unwrap_or_default();
-            set_attr(&doc, "link[rel=canonical]", "href", &format!("{}{path}", crate::config::SITE_URL));
-            set_attr(&doc, "meta[property='og:url']", "content", &format!("{}{path}", crate::config::SITE_URL));
+            // the Help Centre lives on its own host; the policies (/terms and so on) stay on the main one
+            let origin = if path == "/help" || path.starts_with("/help/") { crate::config::HELP_URL } else { crate::config::SITE_URL };
+            set_attr(&doc, "link[rel=canonical]", "href", &format!("{origin}{path}"));
+            set_attr(&doc, "meta[property='og:url']", "content", &format!("{origin}{path}"));
             set_attr(&doc, "meta[property='og:title']", "content", &full);
             set_attr(&doc, "meta[name='twitter:title']", "content", &full);
         }
@@ -75,11 +77,11 @@ fn AccountMenu(name: Signal<String>, dark: bool) -> impl IntoView {
             </button>
             <Show when=move || open.get()>
                 <div role="menu" class="absolute end-0 top-full z-(--z-dialog) mt-2 w-56 rounded-field border border-paper-line bg-paper py-2 shadow-popover">
-                    <a role="menuitem" href="/settings/account" class="flex items-center gap-2 px-4 py-2 text-body-md text-paper-ink hover:bg-paper-soft">
+                    <a role="menuitem" href=crate::config::app_link("/settings/account") class="flex items-center gap-2 px-4 py-2 text-body-md text-paper-ink hover:bg-paper-soft">
                         {tr("help-ui-account")}
                         <i class="ph-bold ph-caret-right text-fine text-brand" aria-hidden="true"></i>
                     </a>
-                    <a role="menuitem" href="/login" class="flex items-center gap-2 px-4 py-2 text-body-md text-paper-ink hover:bg-paper-soft">
+                    <a role="menuitem" href=crate::config::app_link("/login") class="flex items-center gap-2 px-4 py-2 text-body-md text-paper-ink hover:bg-paper-soft">
                         {tr("help-ui-signout")}
                         <i class="ph-bold ph-caret-right text-fine text-brand" aria-hidden="true"></i>
                     </a>
@@ -123,7 +125,7 @@ pub fn HelpShell(children: Children, #[prop(default = Look::Dark)] look: Look, #
             <header class=header_bg>
                 <div class="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-4 px-6 md:px-12">
                     <div class="flex min-w-0 items-center gap-4">
-                        <a href="/browse" class="flex shrink-0 items-center" aria-label=crate::brand::NAME>
+                        <a href=crate::config::app_link("/browse") class="flex shrink-0 items-center" aria-label=crate::brand::NAME>
                             <img src=logo alt=crate::brand::NAME class="h-7 w-auto" />
                         </a>
                         <span class=format!("h-6 w-px {divider}") aria-hidden="true"></span>
@@ -134,8 +136,8 @@ pub fn HelpShell(children: Children, #[prop(default = Look::Dark)] look: Look, #
                             view! { <AccountMenu name=active_name dark=dark /> }.into_any()
                         } else {
                             view! {
-                                <a href="/browse" class=format!("hidden rounded-control border px-4 py-1.5 text-fine font-semibold sm:block {outline}")>{tr("help-ui-browse")}</a>
-                                <a href="/login" class="rounded-control bg-brand px-4 py-1.5 text-fine font-semibold text-ink hover:bg-brand-hover">{tr("help-ui-signin")}</a>
+                                <a href=crate::config::app_link("/browse") class=format!("hidden rounded-control border px-4 py-1.5 text-fine font-semibold sm:block {outline}")>{tr("help-ui-browse")}</a>
+                                <a href=crate::config::app_link("/login") class="rounded-control bg-brand px-4 py-1.5 text-fine font-semibold text-ink hover:bg-brand-hover">{tr("help-ui-signin")}</a>
                             }
                             .into_any()
                         }}
