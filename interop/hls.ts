@@ -133,6 +133,19 @@ export function hlsSetAudioTrack(handle: string, trackIndex: number): void {
   }
 }
 
+/** The audio tracks of the stream as JSON, `[{"i":0,"name":"English","lang":"en"}]`; empty when the stream has fewer than two. */
+export function hlsAudioTracks(handle: string): string {
+  const inst = instances.get(handle) as unknown as { _native?: boolean; audioTracks?: { name?: string; lang?: string }[] } | undefined;
+  if (!inst || inst._native || !inst.audioTracks || inst.audioTracks.length < 2) return "[]";
+  return JSON.stringify(inst.audioTracks.map((t, i) => ({ i, name: t.name || "", lang: t.lang || "" })));
+}
+
+/** The audio track playing now (the index into the list above). */
+export function hlsGetAudioTrack(handle: string): number {
+  const inst = instances.get(handle);
+  return inst && !inst._native ? inst.audioTrack : 0;
+}
+
 export function hlsSetQuality(handle: string, level: number): void {
   const inst = instances.get(handle);
   if (inst && !inst._native) {

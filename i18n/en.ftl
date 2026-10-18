@@ -81,6 +81,7 @@ search-bar-titles-people-genres = Titles, people, genres
 subtitle-drawer-no-subtitles-detected-for-this = No subtitles detected for this stream.
 subtitle-drawer-subtitle-timing-offset = Subtitle Timing Offset
 subtitle-drawer-subtitles = Subtitles
+player-audio = Audio
 vibe-row-scroll-left = Scroll left
 vibe-row-scroll-right = Scroll right
 video-player-forward-10s = Forward 10s

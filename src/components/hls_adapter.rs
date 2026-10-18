@@ -13,6 +13,12 @@ extern "C" {
     #[wasm_bindgen(js_name = hlsSetAudioTrack)]
     pub fn hls_set_audio_track(handle: &str, track_index: i32);
 
+    #[wasm_bindgen(js_name = hlsAudioTracks)]
+    pub fn hls_audio_tracks(handle: &str) -> String;
+
+    #[wasm_bindgen(js_name = hlsGetAudioTrack)]
+    pub fn hls_get_audio_track(handle: &str) -> i32;
+
     #[wasm_bindgen(js_name = hlsSetQuality)]
     pub fn hls_set_quality(handle: &str, level: i32);
 
@@ -54,6 +60,18 @@ impl HlsPlayer {
 
     pub fn set_audio_track(&self, index: i32) {
         hls_set_audio_track(&self.handle, index);
+    }
+
+    /// The audio tracks of the stream as (index, label); empty when the stream has fewer than two.
+    pub fn audio_tracks(&self) -> Vec<(i32, String)> {
+        #[derive(serde::Deserialize)]
+        struct Track { i: i32, name: String, lang: String }
+        serde_json::from_str::<Vec<Track>>(&hls_audio_tracks(&self.handle)).unwrap_or_default().into_iter()
+            .map(|t| (t.i, if t.name.is_empty() { t.lang } else { t.name })).collect()
+    }
+
+    pub fn audio_track(&self) -> i32 {
+        hls_get_audio_track(&self.handle)
     }
 
     pub fn set_quality(&self, level: i32) {

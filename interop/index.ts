@@ -6,6 +6,8 @@ export {
   hlsAttach,
   hlsDestroy,
   hlsSetAudioTrack,
+  hlsAudioTracks,
+  hlsGetAudioTrack,
   hlsSetQuality,
   hlsSeek,
   hlsCurrentTime,

@@ -85,6 +85,17 @@ pub fn StreamsPlayer(
 
     // Internal HLS & timers
     let hls_player = RwSignal::new_local(None::<std::rc::Rc<HlsPlayer>>);
+    // the audio tracks of the stream (read each time the panel opens, since the stream lists them a moment after it starts)
+    let audio_tracks = RwSignal::new(Vec::<(i32, String)>::new());
+    let (audio_selected, set_audio_selected) = signal(0i32);
+    Effect::new(move |_| {
+        if is_subtitles_open.get() {
+            if let Some(p) = hls_player.get_untracked() {
+                audio_tracks.set(p.audio_tracks());
+                set_audio_selected.set(p.audio_track());
+            }
+        }
+    });
     // the address of the stream attached now (a new resolve, even to the same address, clears it so the stream is attached again)
     let attached_url = StoredValue::new(None::<String>);
     let idle_timer = StoredValue::new(None::<i32>);
@@ -600,6 +611,12 @@ pub fn StreamsPlayer(
                                             subtitles=Signal::derive(current_subtitle_tracks)
                                             selected_sub_url=selected_sub_url
                                             sub_delay=sub_delay
+                                            audio_tracks=audio_tracks.into()
+                                            audio_selected=audio_selected.into()
+                                            on_select_audio=Callback::new(move |i| {
+                                                if let Some(p) = hls_player.get_untracked() { p.set_audio_track(i); }
+                                                set_audio_selected.set(i);
+                                            })
                                             on_select_sub=Callback::new(move |u| set_selected_sub_url.set(u))
                                             on_change_delay=Callback::new(move |d| set_sub_delay.set(d))
                                             on_close=Callback::new(move |_| set_is_subtitles_open.set(false))
