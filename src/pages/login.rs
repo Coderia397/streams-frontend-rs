@@ -321,7 +321,7 @@ pub fn LandingPage() -> impl IntoView {
             // Hero
             <section class="relative flex min-h-[70svh] flex-col items-center justify-center overflow-hidden px-6 pb-24 pt-28 text-center md:min-h-[78svh] md:pb-32 md:pt-40">
                 <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-                    <img src="/assets/landing-bg.png" class="h-full w-full scale-105 object-cover opacity-50" alt="" />
+                    <img src=wall("wide") class="h-full w-full scale-105 object-cover opacity-50" alt="" />
                     <div class="absolute inset-0 bg-linear-to-b from-void/60 via-void/20 to-void" />
                 </div>
                 <div class="relative z-10 mx-auto w-full max-w-[720px] space-y-4 px-2 md:space-y-5">
@@ -424,6 +424,14 @@ fn LandingForm(email: ReadSignal<String>, set_email: WriteSignal<String>, on_sub
     }
 }
 
+/// The wall of posters behind the landing page: real posters from the catalogue laid out in a few ways (`assets/landing/walls`, made by rendering the poster pages, so every title is right).
+/// One is chosen at random for each visit; the rest of the set (noir, kids, fantasy) is kept for other pages.
+fn wall(size: &str) -> String {
+    const NAMES: [&str; 5] = ["diagonal-popular", "perspective-cinema", "diagonal-animation", "columns-scifi", "perspective-romcom"];
+    let pick = ((js_sys::Math::random() * NAMES.len() as f64) as usize).min(NAMES.len() - 1);
+    format!("/assets/landing/walls/{}-{size}.webp", NAMES[pick])
+}
+
 /// The phone version of the landing page: four full screen slides (a wall of posters, then three illustrations) that the person
 /// swipes through, dots, and one big button, like the first screens of the Netflix app. From a small tablet width up the long
 /// page is shown instead, so the layout follows the width of the window and a touch laptop gets the page that fits its width.
@@ -449,7 +457,12 @@ fn MobileWelcome() -> impl IntoView {
     };
 
     view! {
-        <div class="flex h-svh min-h-[560px] flex-col bg-linear-to-b from-brand-deep/35 via-page to-void font-sans text-ink sm:hidden">
+        <div class="relative isolate flex h-svh min-h-[560px] flex-col overflow-hidden bg-linear-to-b from-brand-deep/35 via-page to-void font-sans text-ink sm:hidden">
+            // the wall of posters fills the whole screen behind the header and fades into the page, so nothing shows an edge; the other slides keep the plain page
+            <div class="pointer-events-none absolute inset-0 -z-10 transition-opacity duration-(--motion-slow)" class=("opacity-0", move || index.get() != 0) aria-hidden="true">
+                <img src=wall("phone") class="h-full w-full object-cover object-top" alt="" />
+                <div class="absolute inset-0" style="background: linear-gradient(to bottom, rgba(0,0,0,.88) 0%, rgba(0,0,0,.35) 14%, rgba(0,0,0,0) 30%, rgba(0,0,0,.25) 46%, rgba(0,0,0,.82) 62%, #000 76%)"></div>
+            </div>
             <header class="relative z-10 flex items-center justify-between px-4 py-3">
                 <a href="/" aria-label=crate::brand::NAME><img src=crate::brand::LOGO_WORDMARK alt=crate::brand::NAME class="h-7 w-auto" /></a>
                 <div class="flex items-center gap-1 text-fine font-bold uppercase tracking-wide">
@@ -468,11 +481,7 @@ fn MobileWelcome() -> impl IntoView {
                         <section class="relative flex h-full w-full shrink-0 snap-center flex-col">
                             <div class="relative min-h-0 flex-1">
                                 {match art {
-                                    None => view! {
-                                        <img src="/assets/landing-bg.png" class="absolute inset-0 h-full w-full object-cover opacity-50" alt="" aria-hidden="true" />
-                                        <div class="absolute inset-0 bg-linear-to-b from-page/30 via-transparent to-page" aria-hidden="true"></div>
-                                    }
-                                    .into_any(),
+                                    None => view! { <div></div> }.into_any(),
                                     Some(src) => view! {
                                         <img
                                             src=src
