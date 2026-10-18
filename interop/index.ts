@@ -14,6 +14,7 @@ export {
   hlsDuration,
 } from './hls';
 export { applyAmbientColor, setThemeColor } from './theme';
+export { resumeSeal, resumeOpen, resumeForget, resumeFingerprint } from './resume';
 
 export function getCachedAmbientColor(imageUrl: string): string {
   const res = ambient.getCachedAmbientColor(imageUrl);

@@ -178,8 +178,18 @@ pub fn activate_profile(id: &str) {
         if let Some(storage) = window.local_storage().ok().flatten() {
             let _ = storage.set_item(crate::keys::ACTIVE_PROFILE, id);
         }
-        let _ = window.location().set_href(crate::config::routes::BROWSE);
+        let _ = window.location().set_href(home_of(id));
     }
+}
+
+/// Where a profile starts: a Kids profile at `/kids`, every other one at `/browse`.
+pub fn home_of(id: &str) -> &'static str {
+    let kids = web_sys::window()
+        .and_then(|w| w.local_storage().ok().flatten())
+        .and_then(|s| s.get_item(crate::keys::PROFILES).ok().flatten())
+        .and_then(|raw| serde_json::from_str::<Vec<crate::models::profile::Profile>>(&raw).ok())
+        .is_some_and(|list| list.iter().any(|p| p.id == id && p.is_kids));
+    if kids { crate::config::routes::KIDS } else { crate::config::routes::BROWSE }
 }
 
 pub fn use_profile_store() -> ProfileStore {

@@ -23,9 +23,11 @@ fn message(error: &AuthError, email: &str) -> String {
 
 #[component]
 pub fn LoginPage() -> impl IntoView {
-    Effect::new(move |_| crate::pages::help::set_page_title(&tr("login-sign-in")));
+    Effect::new(move |_| crate::pages::help::set_site_title(&tr("login-sign-in")));
     let query = use_query_map();
-    let email = RwSignal::new(query.with_untracked(|q| q.get("email").unwrap_or_default()));
+    // a browser that signed out less than a day ago with "Remember me" comes with its address already filled in
+    let email = RwSignal::new(query.with_untracked(|q| q.get("email")).or_else(account::resume_email).unwrap_or_default());
+    let (resumable, set_resumable) = signal(account::resume_email().is_some());
     let password = RwSignal::new(String::new());
     let (remember, set_remember) = signal(true);
     let (step, set_step) = signal(Step::Email);
@@ -37,6 +39,7 @@ pub fn LoginPage() -> impl IntoView {
     let navigate = use_navigate();
     let profiles = crate::store::use_profile_store();
 
+    let nav_resume = navigate.clone();
     let on_continue = move |ev: leptos::ev::SubmitEvent| {
         ev.prevent_default();
         if !account::valid_email(&email.get_untracked()) {
@@ -44,6 +47,23 @@ pub fn LoginPage() -> impl IntoView {
             return;
         }
         set_error.set(String::new());
+        // the same address as the one this browser signed out with less than a day ago: back in without the password
+        if account::can_resume(&email.get_untracked()) {
+            if busy.get_untracked() { return; }
+            set_busy.set(true);
+            let (nav, e) = (nav_resume.clone(), email.get_untracked());
+            leptos::task::spawn_local(async move {
+                match account::resume_sign_in(&e).await {
+                    Some(session) => {
+                        crate::store::start_account(profiles, &session.first_name);
+                        nav(&crate::components::layout::account_gate::after_sign_in(), Default::default());
+                    }
+                    None => set_step.set(Step::Password),
+                }
+                set_busy.set(false);
+            });
+            return;
+        }
         set_step.set(Step::Password);
     };
     let nav_done = navigate.clone();
@@ -93,10 +113,16 @@ pub fn LoginPage() -> impl IntoView {
                         <h1 class="hidden text-heading-xl font-bold leading-tight sm:block">{tr("auth-login-title")}</h1>
                         <p class="mb-6 mt-2 hidden text-body-md text-ink-body sm:block">{tr("auth-login-subtitle")}</p>
                         <Notice text=error />
-                        <form on:submit=on_continue class="space-y-3" novalidate>
+                        <form on:submit=on_continue.clone() class="space-y-3" novalidate>
                             <Field id="login-email" label="auth-email" value=email kind="email" autocomplete="email" invalid=email_bad />
                             <button type="submit" class=button_class(Look::Dark)>{tr("auth-continue")}</button>
                         </form>
+                        {move || (resumable.get() && account::can_resume(&email.get())).then(|| view! {
+                            <p class="mt-4 text-body-sm leading-5 text-ink-body">
+                                {tr_with("auth-resume-hint", &[("email", FluentValue::from(email.get()))])}" "
+                                <button type="button" on:click=move |_| { account::forget_this_browser(); set_resumable.set(false); email.set(String::new()); } class="font-semibold text-ink underline underline-offset-2">{tr("auth-resume-forget")}</button>
+                            </p>
+                        })}
                         <p class="mt-4 text-body-md text-ink-body max-sm:hidden">
                             {tr("auth-new-here")}" "
                             <a href=move || format!("/signup?email={}", crate::pages::help::encode(&email.get())) class="font-semibold text-ink underline underline-offset-2">{tr("auth-signup-link")}</a>

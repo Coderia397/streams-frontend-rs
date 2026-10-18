@@ -33,18 +33,17 @@ pub fn NavbarProfileMenu() -> impl IntoView {
     };
 
     let logout = move |_| {
-        crate::services::account::sign_out();
-        profile_store.is_authenticated.set(false);
-        active_profile_id.set(None);
-        if let Some(storage) = web_sys::window().and_then(|w| w.local_storage().ok().flatten()) {
-            let _ = storage.remove_item(crate::keys::ACTIVE_PROFILE);
-        }
         set_is_open.set(false);
+        // the same sign out as the settings page (the session is kept for a day, sealed, when "Remember me" was on)
+        crate::pages::settings::hub::sign_out_now();
     };
 
     let switch_profile = move |id: String| {
         set_is_open.set(false);
-        crate::store::activate_profile(&id);
+        match profiles.get_untracked().into_iter().find(|p| p.id == id) {
+            Some(p) => crate::components::profiles::switch_overlay::begin_switch(p),
+            None => crate::store::activate_profile(&id),
+        }
     };
 
     // Manage Profiles opens the account Profiles page (parental controls, transfer, one row per profile, Add Profile), as on the Netflix website.

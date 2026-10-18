@@ -106,6 +106,8 @@ pub const SECURITY_EVENTS_SHOWN: u32 = 10;
 pub mod routes {
     pub const HOME: &str = "/";
     pub const BROWSE: &str = "/browse";
+    /// The home of a Kids profile (netflix.com/Kids); Series, Films and genres use the normal /browse/genre addresses.
+    pub const KIDS: &str = "/kids";
     pub const LOGIN: &str = "/login";
     pub const HELP: &str = "/help";
     pub const PRIVACY: &str = "/privacy";

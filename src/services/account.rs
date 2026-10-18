@@ -133,6 +133,7 @@ pub async fn sign_in(email: &str, password: &str, remember: bool) -> Result<Sess
     if status == 200 {
         let session = session_from(&body).ok_or_else(|| AuthError::Other("unexpected answer".into()))?;
         save(&session, remember);
+        clear_resume();
         if let Some(old) = previous {
             end_old_session(&old).await;
         }
@@ -170,6 +171,7 @@ pub async fn resend_confirmation(email: &str) -> Result<(), AuthError> {
 }
 
 pub fn sign_out() {
+    // plain sign out: the session ends at once (a tab only session, or a browser that cannot seal the token, ends here too)
     if let Some(s) = session() {
         leptos::task::spawn_local(async move {
             let _ = post("/auth/v1/logout", &json!({}), Some(&s.access_token)).await;
@@ -180,6 +182,145 @@ pub fn sign_out() {
             let _ = st.remove_item(crate::keys::SESSION);
         }
     }
+}
+
+#[wasm_bindgen::prelude::wasm_bindgen(module = "/interop/dist/streams-interop.js")]
+extern "C" {
+    #[wasm_bindgen::prelude::wasm_bindgen(js_name = resumeSeal, catch)]
+    async fn resume_seal(plain: &str) -> Result<wasm_bindgen::JsValue, wasm_bindgen::JsValue>;
+    #[wasm_bindgen::prelude::wasm_bindgen(js_name = resumeOpen, catch)]
+    async fn resume_open(sealed: &str) -> Result<wasm_bindgen::JsValue, wasm_bindgen::JsValue>;
+    #[wasm_bindgen::prelude::wasm_bindgen(js_name = resumeForget, catch)]
+    async fn resume_forget() -> Result<wasm_bindgen::JsValue, wasm_bindgen::JsValue>;
+    #[wasm_bindgen::prelude::wasm_bindgen(js_name = resumeFingerprint, catch)]
+    async fn resume_fingerprint() -> Result<wasm_bindgen::JsValue, wasm_bindgen::JsValue>;
+}
+
+/// Signs out of this browser. A browser that stays signed in ("Remember me") keeps the session for a day, sealed on the device (see `interop/resume.ts`), so that typing the
+/// same address on the sign in page brings the person back without the password (`resume_sign_in`). The session at the account ends when the day is over
+/// (`end_expired_resume`), at once with "Sign out of all devices" or "Forget this browser", and as soon as the account refuses the token (password changed, signed out elsewhere).
+/// A tab only session, or one that cannot be sealed, ends at once.
+pub async fn sign_out_async() {
+    if let Some((s, true)) = stored_session() {
+        if !s.refresh_token.is_empty() {
+            let fp = resume_fingerprint().await.ok().and_then(|v| v.as_string()).unwrap_or_default();
+            let payload = json!({ "t": s.refresh_token, "f": s.first_name, "l": s.last_name, "p": fp }).to_string();
+            if let Some(sealed) = resume_seal(&payload).await.ok().and_then(|v| v.as_string()) {
+                let resume = Resume { email: s.email.trim().to_lowercase(), sealed, until: now_secs() + RESUME_SECONDS };
+                if let (Some(st), Ok(raw)) = (storage(true), serde_json::to_string(&resume)) {
+                    let _ = st.set_item(RESUME_KEY, &raw);
+                }
+                for persistent in [true, false] {
+                    if let Some(st) = storage(persistent) {
+                        let _ = st.remove_item(crate::keys::SESSION);
+                    }
+                }
+                return;
+            }
+        }
+    }
+    sign_out();
+}
+
+const RESUME_KEY: &str = "streams_resume";
+/// How long a signed out browser can come back with the address alone.
+const RESUME_SECONDS: u64 = 24 * 60 * 60;
+
+#[derive(serde::Serialize, serde::Deserialize)]
+struct Resume {
+    email: String,
+    sealed: String,
+    until: u64,
+}
+
+fn read_resume() -> Option<Resume> {
+    serde_json::from_str(&storage(true)?.get_item(RESUME_KEY).ok().flatten()?).ok()
+}
+
+fn clear_resume() {
+    if let Some(st) = storage(true) {
+        let _ = st.remove_item(RESUME_KEY);
+    }
+}
+
+/// The address this browser signed out with less than a day ago, when it can be resumed.
+pub fn resume_email() -> Option<String> {
+    read_resume().filter(|r| r.until > now_secs()).map(|r| r.email)
+}
+
+/// True when `email` is the address this browser signed out with less than a day ago.
+pub fn can_resume(email: &str) -> bool {
+    resume_email().is_some_and(|e| e == email.trim().to_lowercase())
+}
+
+/// What the sealed text holds: the refresh token, the names and the device fingerprint taken at sign out.
+struct Opened { token: String, first: String, last: String, fingerprint: String }
+
+async fn open_resume(r: &Resume) -> Option<Opened> {
+    let plain = resume_open(&r.sealed).await.ok()?.as_string().filter(|p| !p.is_empty())?;
+    let v: Value = serde_json::from_str(&plain).ok()?;
+    let g = |k: &str| v[k].as_str().unwrap_or_default().to_string();
+    Some(Opened { token: g("t"), first: g("f"), last: g("l"), fingerprint: g("p") })
+}
+
+/// Ends a kept session for good: the token is renewed once (it is single use) and that session is logged out.
+async fn end_kept_session(token: &str) {
+    if let Ok((200, body)) = post("/auth/v1/token?grant_type=refresh_token", &json!({ "refresh_token": token }), None).await {
+        if let Some(s) = session_from(&body) {
+            let _ = post("/auth/v1/logout?scope=local", &json!({}), Some(&s.access_token)).await;
+        }
+    }
+}
+
+/// Signs the person back in with the token kept at sign out, for the same address typed again (no password). It is refused, and the password asked, when the day is over, the
+/// sealed text cannot be opened (the device key is gone), the device does not look like the one that signed out, or the account no longer accepts the token. The token is single use
+/// (the account gives a new one with every renewal) and the kept copy is removed at once.
+pub async fn resume_sign_in(email: &str) -> Option<Session> {
+    let r = read_resume().filter(|r| r.until > now_secs() && r.email == email.trim().to_lowercase())?;
+    clear_resume();
+    let opened = open_resume(&r).await?;
+    let here = resume_fingerprint().await.ok().and_then(|v| v.as_string()).unwrap_or_default();
+    if opened.token.is_empty() || (!opened.fingerprint.is_empty() && opened.fingerprint != here) {
+        // not the device it was kept on: the kept session is ended and the password is asked
+        end_kept_session(&opened.token).await;
+        let _ = resume_forget().await;
+        return None;
+    }
+    match post("/auth/v1/token?grant_type=refresh_token", &json!({ "refresh_token": opened.token }), None).await {
+        Ok((200, body)) => {
+            let mut fresh = session_from(&body)?;
+            if fresh.first_name.is_empty() { fresh.first_name = opened.first; fresh.last_name = opened.last; }
+            save(&fresh, true);
+            let _ = resume_forget().await;
+            crate::services::device::register_in_background();
+            Some(fresh)
+        }
+        _ => None,
+    }
+}
+
+/// "Not you? Forget this browser": the kept session is ended and the key that sealed it is deleted.
+pub fn forget_this_browser() {
+    let Some(r) = read_resume() else { return };
+    clear_resume();
+    leptos::task::spawn_local(async move {
+        if let Some(o) = open_resume(&r).await {
+            end_kept_session(&o.token).await;
+        }
+        let _ = resume_forget().await;
+    });
+}
+
+/// When the day after sign out is over, the session that was kept is ended for good (best effort: it needs a connection).
+pub fn end_expired_resume() {
+    let Some(r) = read_resume().filter(|r| r.until <= now_secs()) else { return };
+    clear_resume();
+    leptos::task::spawn_local(async move {
+        if let Some(o) = open_resume(&r).await {
+            end_kept_session(&o.token).await;
+        }
+        let _ = resume_forget().await;
+    });
 }
 
 async fn put_user(body: &Value, token: &str) -> Result<(), AuthError> {
@@ -237,6 +378,7 @@ pub async fn ensure_fresh() -> Option<Session> {
 
 /// Keeps the session fresh while the page is open (every five minutes).
 pub fn keep_session_fresh() {
+    end_expired_resume();
     leptos::task::spawn_local(async { let _ = ensure_fresh().await; });
     leptos::leptos_dom::helpers::set_interval(|| { leptos::task::spawn_local(async { let _ = ensure_fresh().await; }); }, std::time::Duration::from_secs(300));
 }
@@ -302,6 +444,7 @@ pub async fn sign_out_everywhere() -> Result<(), AuthError> {
     if status != 204 && status != 200 {
         return Err(classify(status, &body));
     }
+    clear_resume();
     for persistent in [true, false] {
         if let Some(st) = storage(persistent) {
             let _ = st.remove_item(crate::keys::SESSION);

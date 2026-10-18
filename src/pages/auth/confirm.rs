@@ -16,7 +16,7 @@ enum State {
 
 #[component]
 pub fn ConfirmPage() -> impl IntoView {
-    Effect::new(move |_| crate::pages::help::set_page_title(&tr("auth-confirm-title")));
+    Effect::new(move |_| crate::pages::help::set_site_title(&tr("auth-confirm-title")));
     let query = use_query_map();
     let navigate = use_navigate();
     let profiles = crate::store::use_profile_store();

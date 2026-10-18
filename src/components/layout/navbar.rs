@@ -63,7 +63,7 @@ pub fn Navbar(
             "list"
         } else if p.starts_with("/browse/original-audio") || p.starts_with("/browse/language") {
             "language"
-        } else if p == "/browse" || p == "/" || p.is_empty() {
+        } else if p == "/browse" || p == "/kids" || p == "/" || p.is_empty() {
             "home"
         } else {
             ""
@@ -75,8 +75,10 @@ pub fn Navbar(
     let is_kids = Memo::new(move |_| kids_store.active_profile_id.with(|id| kids_store.profiles.with(|l| l.iter().any(|p| Some(&p.id) == id.as_ref() && p.is_kids))));
     let features = LocalResource::new(|| async { crate::services::ai_engine::fetch_features().await });
     let games_on = move || features.get().is_some_and(|f| f.get("games") == Some(&true));
+    let (browse_open, set_browse_open) = signal(false);
+    let home_path = if crate::pages::settings::prefs::active_is_kids() { "/kids" } else { "/browse" };
     let nav_items = vec![
-        ("home", "nav-home", "/browse"),
+        ("home", "nav-home", home_path),
         ("tv", "nav-series", "/browse/genre/83"),
         ("movies", "nav-films", "/browse/genre/34399"),
         ("games", "nav-games", "/browse/games"),
@@ -84,6 +86,7 @@ pub fn Navbar(
         ("list", "nav-my-list", "/browse/my-list"),
         ("language", "nav-browse-language", "/browse/original-audio"),
     ];
+    let browse_items = nav_items.clone();
 
     view! {
         <>
@@ -100,13 +103,24 @@ pub fn Navbar(
                         class="h-[28px] cursor-pointer flex-shrink-0"
                     />
                 </a>
-                // the Kids app and site put the word "kids" in its own lettering next to the logo
-                <Show when=move || is_kids.get()>
-                    <a href="/browse" class="ms-3 flex-shrink-0"><crate::components::profiles::kids_splash::KidsWordmark class="h-9 w-auto" /></a>
-                </Show>
 
                 // Nav links — exact spacing and typography (Task 086)
-                <ul class="flex items-center gap-[6px] ml-6 text-body-md font-normal text-ink">
+                // below 1024 px the tabs do not fit next to the search, bell and profile, so they sit in a Browse menu
+                <div class="relative ms-4 lg:hidden">
+                    <button type="button" on:click=move |_| set_browse_open.update(|o| *o = !*o) aria-haspopup="menu" aria-expanded=move || browse_open.get().to_string() class="inline-flex h-[40px] items-center gap-2 rounded-full px-4 text-body-md text-ink hover:bg-mute/40">
+                        {crate::i18n::t("nav-browse")}
+                        <i class="ph-fill ph-caret-down text-fine transition-transform duration-(--motion-base)" class=("rotate-180", move || browse_open.get())></i>
+                    </button>
+                    <Show when=move || browse_open.get()>
+                        <div class="fixed inset-0 z-40" on:click=move |_| set_browse_open.set(false)></div>
+                        <ul role="menu" class="absolute start-0 top-[calc(100%+8px)] z-50 w-60 rounded-modal bg-field py-2 shadow-popover">
+                            {browse_items.clone().into_iter().filter(|(id, _, _)| *id != "games" || games_on()).map(|(_, label, href)| view! {
+                                <li role="none"><a role="menuitem" href=href on:click=move |_| set_browse_open.set(false) class="block px-5 py-3 text-body-md text-ink hover:bg-ink/10">{crate::i18n::t(label)}</a></li>
+                            }).collect::<Vec<_>>()}
+                        </ul>
+                    </Show>
+                </div>
+                <ul class="hidden items-center gap-[6px] ml-6 text-body-md font-normal text-ink lg:flex">
                     {nav_items.into_iter().map(|(id, label, href)| {
                         let is_active = move || active_tab() == id;
                         view! {
@@ -140,7 +154,18 @@ pub fn Navbar(
                     let active_id = p_store.active_profile_id.get();
                     let is_kids = p_store.profiles.get().iter().any(|p| Some(&p.id) == active_id.as_ref() && p.is_kids);
                     if is_kids {
-                        view! { <span /> }.into_any()
+                        // Exit Kids: back to the main profile (the first profile that is not a Kids profile)
+                        view! {
+                            <button
+                                on:click=move |_| {
+                                    let list = p_store.profiles.get();
+                                    if let Some(main) = list.iter().find(|p| p.is_default == Some(true) && !p.is_kids).or_else(|| list.iter().find(|p| !p.is_kids)).cloned() {
+                                        crate::components::profiles::switch_overlay::begin_switch(main);
+                                    }
+                                }
+                                class="flex h-9 items-center rounded-control bg-ink px-4 text-label font-bold text-void select-none cursor-pointer hover:bg-ink/85 transition-colors"
+                            >{crate::i18n::t("nav-exit-kids")}</button>
+                        }.into_any()
                     } else if !p_store.profiles.get().iter().any(|p| p.is_kids) {
                         // no Kids profile (it was deleted): no Kids button
                         view! { <span /> }.into_any()
@@ -149,7 +174,7 @@ pub fn Navbar(
                             <button
                                 on:click=move |_| {
                                     if let Some(kids) = p_store.profiles.get().into_iter().find(|p| p.is_kids) {
-                                        crate::store::activate_profile(&kids.id);
+                                        crate::components::profiles::switch_overlay::begin_switch(kids);
                                     }
                                 }
                                 class="flex items-center gap-2 text-ink hover:text-ink transition-all select-none cursor-pointer group h-9 pl-0.5 pr-2 ml-1.5 rounded-field hover:bg-mute/40"

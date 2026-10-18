@@ -27,7 +27,7 @@ const MIN_PASSWORD: usize = crate::config::MIN_PASSWORD_LENGTH;
 
 #[component]
 pub fn SignupPage() -> impl IntoView {
-    Effect::new(move |_| crate::pages::help::set_page_title(&tr("auth-signup-title")));
+    Effect::new(move |_| crate::pages::help::set_site_title(&tr("auth-signup-title")));
     let query = use_query_map();
     let first = RwSignal::new(String::new());
     let last = RwSignal::new(String::new());

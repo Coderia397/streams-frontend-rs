@@ -28,6 +28,7 @@ pub fn App() -> impl IntoView {
     crate::store::provide_library_store();
     crate::store::provide_watch_store();
     crate::consent::provide_ui();
+    crate::components::profiles::switch_overlay::provide_switch();
     crate::pages::settings::provide_prefs();
     // a browser that starts already signed in tells the account it is still here
     crate::services::account::keep_session_fresh();
@@ -62,13 +63,15 @@ pub fn App() -> impl IntoView {
 
     view! {
         <crate::components::media::info_modal::InfoModal />
+        <crate::components::profiles::switch_overlay::GlobalSwitchOverlay />
         <Show when=has_no_profile>
             <crate::components::profiles::whos_watching::WhosWatchingGate />
         </Show>
         <Router>
             <HostGuard />
             <Routes fallback=crate::pages::not_found::NotFoundPage>
-                <Route path=path!("/browse") view=|| view! { <BrowseHome /> } />
+                <Route path=path!("/browse") view=|| view! { <HomeRoute kids=false /> } />
+                <Route path=path!("/kids") view=|| view! { <HomeRoute kids=true /> } />
                 // the developer pages exist only when the site is opened from this machine or its network (note 67 E8); anywhere else they are a page that is not found
                 <Route path=path!("/dev/badges") view=|| if is_local_host() { view! { <crate::pages::dev_badges::DevBadgesPage /> }.into_any() } else { view! { <crate::pages::not_found::NotFoundPage /> }.into_any() } />
                 <Route path=path!("/dev/logos") view=|| if is_local_host() { view! { <crate::components::media::collection_logo::LogoGalleryPage /> }.into_any() } else { view! { <crate::pages::not_found::NotFoundPage /> }.into_any() } />
@@ -178,4 +181,26 @@ fn HostGuard() -> impl IntoView {
             let _ = win.location().replace(&format!("{}{path}{search}", crate::config::SITE_URL));
         }
     });
+}
+
+/// The two homes. A Kids profile lives at `/kids` and the others at `/browse`; each address sends the other kind of profile where it belongs, and `/kids` opened by a
+/// profile that is not a Kids profile switches to the account's Kids profile (with the loading screen), as netflix.com/Kids does.
+#[component]
+fn HomeRoute(kids: bool) -> impl IntoView {
+    let kids_active = crate::pages::settings::prefs::active_is_kids();
+    let has_active = web_sys::window().and_then(|w| w.local_storage().ok().flatten()).and_then(|s| s.get_item(crate::keys::ACTIVE_PROFILE).ok().flatten()).is_some();
+    if kids && !kids_active {
+        let store = crate::store::use_profile_store();
+        return match store.profiles.get_untracked().into_iter().find(|p| p.is_kids) {
+            Some(k) if has_active => {
+                crate::components::profiles::switch_overlay::begin_switch(k);
+                view! { <span /> }.into_any()
+            }
+            _ => view! { <leptos_router::components::Redirect path="/browse" /> }.into_any(),
+        };
+    }
+    if !kids && kids_active {
+        return view! { <leptos_router::components::Redirect path="/kids" /> }.into_any();
+    }
+    view! { <BrowseHome /> }.into_any()
 }

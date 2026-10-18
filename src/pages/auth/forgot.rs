@@ -6,7 +6,7 @@ use leptos::prelude::*;
 
 #[component]
 pub fn ForgotPage() -> impl IntoView {
-    Effect::new(move |_| crate::pages::help::set_page_title(&tr("auth-forgot-title")));
+    Effect::new(move |_| crate::pages::help::set_site_title(&tr("auth-forgot-title")));
     let email = RwSignal::new(String::new());
     let (busy, set_busy) = signal(false);
     let (error, set_error) = signal(String::new());

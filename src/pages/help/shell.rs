@@ -2,6 +2,21 @@ use super::tr;
 use leptos::prelude::*;
 use wasm_bindgen::JsCast;
 
+/// Sets the browser tab title of a page of the app itself (sign in, sign up and so on) to "<page> | <brand>", and the canonical link of that page.
+pub fn set_site_title(page: &str) {
+    let full = if page.is_empty() { crate::brand::NAME.to_string() } else { format!("{page} | {}", crate::brand::NAME) };
+    if let Some(window) = web_sys::window() {
+        if let Some(doc) = window.document() {
+            doc.set_title(&full);
+            let path = window.location().pathname().unwrap_or_default();
+            set_attr(&doc, "link[rel=canonical]", "href", &format!("{}{path}", crate::config::SITE_URL));
+            set_attr(&doc, "meta[property='og:url']", "content", &format!("{}{path}", crate::config::SITE_URL));
+            set_attr(&doc, "meta[property='og:title']", "content", &full);
+            set_attr(&doc, "meta[name='twitter:title']", "content", &full);
+        }
+    }
+}
+
 /// Sets the browser tab title to "<page> | <brand> Help Center" and points the canonical link and the sharing title at this page.
 pub fn set_title(page: &str) {
     let suffix = tr("help-ui-doc-title");

@@ -50,6 +50,10 @@ pub fn art(slug: &str, part: &str) -> String {
     tr(&crate::data::help::key(slug, part))
 }
 
+pub fn set_site_title(page: &str) {
+    shell::set_site_title(page);
+}
+
 pub fn set_page_title(page: &str) {
     shell::set_title(page);
 }

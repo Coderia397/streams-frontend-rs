@@ -52,3 +52,32 @@ pub fn ProfileSwitchOverlay(
         </div>
     }.into_any()
 }
+
+/// The profile being switched to, for the screen shown at the app's root: any button that changes profile (the menu, the Kids and Exit Kids buttons) sets it, the screen
+/// plays for a moment and then the profile is opened afresh, as the Who's watching screen does.
+#[derive(Clone, Copy)]
+pub struct SwitchState(pub RwSignal<Option<Profile>>);
+
+pub fn provide_switch() {
+    provide_context(SwitchState(RwSignal::new(None)));
+}
+
+/// Starts the switch to `profile` with the loading screen.
+pub fn begin_switch(profile: Profile) {
+    if let Some(state) = use_context::<SwitchState>() {
+        state.0.set(Some(profile));
+    }
+}
+
+#[component]
+pub fn GlobalSwitchOverlay() -> impl IntoView {
+    let state = use_context::<SwitchState>();
+    view! {
+        {move || state.and_then(|s| s.0.get()).map(|p| {
+            let id = p.id.clone();
+            view! {
+                <ProfileSwitchOverlay profile=p on_finish=Callback::new(move |_| crate::store::activate_profile(&id)) />
+            }
+        })}
+    }
+}
