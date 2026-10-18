@@ -2,14 +2,14 @@
 use crate::i18n::t;
 use leptos::prelude::*;
 
-pub(super) const ROW: &str = "set-row flex min-h-settings-row w-full items-center border-b border-set-line px-1 py-3 text-start last:border-b-0 hover:bg-ink/5 focus-visible:bg-ink/5 focus-visible:outline-none lg:relative lg:min-h-[80px] lg:border-b-0 lg:px-6 lg:py-6 lg:before:absolute lg:before:inset-x-4 lg:before:top-0 lg:before:h-px lg:before:bg-set-line lg:first:before:hidden";
+pub(super) const ROW: &str = "set-row flex min-h-settings-row w-full items-center border-b border-set-line px-1 py-3 text-start last:border-b-0 hover:bg-ink/5 focus-visible:bg-ink/5 focus-visible:outline-none lg:relative lg:min-h-settings-nav-row lg:border-b-0 lg:px-6 lg:py-6 lg:before:absolute lg:before:inset-x-4 lg:before:top-0 lg:before:h-px lg:before:bg-set-line lg:first:before:hidden";
 pub(super) const CARD: &str = "set-card rounded-card border border-set-edge bg-set-card px-4 lg:rounded-card lg:px-1";
 
 #[component]
 pub fn Section(#[prop(optional, into)] title: Option<String>, children: Children) -> impl IntoView {
     view! {
         <section class="mb-8 lg:mb-[33px]">
-            {title.map(|t| view! { <h2 class="set-section-title mb-3 text-body-md leading-row text-ink/85 lg:mb-[17px] lg:text-[18px] lg:font-medium lg:leading-[27px] lg:text-ink">{t}</h2> })}
+            {title.map(|t| view! { <h2 class="set-section-title mb-3 text-body-md leading-row text-ink/85 lg:mb-[17px] lg:text-title-sm lg:font-medium lg:leading-[27px] lg:text-ink">{t}</h2> })}
             <div class=CARD>{children()}</div>
         </section>
     }
@@ -19,13 +19,13 @@ pub(super) fn row_body(icon: &'static str, title: String, hint: Option<String>, 
     view! {
         <i class=format!("ph ph-{icon} me-3 text-2xl text-ink/70 lg:me-4") aria-hidden="true"></i>
         <span class="min-w-0 flex-1">
-            <span class="block text-body-md font-semibold leading-row text-ink lg:text-[18px] lg:font-medium lg:leading-[27px]">{title}</span>
-            {hint.clone().map(|h| view! { <span class="block pt-0.5 text-label leading-normal text-ink/70 lg:pt-0 lg:text-[14px] lg:leading-[25px]">{h}</span> })}
+            <span class="block text-body-md font-semibold leading-row text-ink lg:text-title-sm lg:font-medium lg:leading-[27px]">{title}</span>
+            {hint.clone().map(|h| view! { <span class="block pt-0.5 text-label leading-normal text-ink/70 lg:pt-0 lg:text-body-sm lg:leading-[25px]">{h}</span> })}
             // on a phone the value sits under the title, as in the Android app, unless the row has a hint of its own
-            {hint.is_none().then(|| value.map(|v| view! { <span class="block truncate pt-0.5 text-label text-ink/70 lg:pt-0 lg:text-[14px] lg:leading-[25px]">{move || v.get()}</span> }))}
-            {verified.then(|| view! { <span class="mt-1 hidden items-center gap-1 text-[12px] font-medium text-ink lg:flex"><i class="ph-fill ph-check-circle text-[16px]" aria-hidden="true"></i>{t("set-verified")}</span> })}
+            {hint.is_none().then(|| value.map(|v| view! { <span class="block truncate pt-0.5 text-label text-ink/70 lg:pt-0 lg:text-body-sm lg:leading-[25px]">{move || v.get()}</span> }))}
+            {verified.then(|| view! { <span class="mt-1 hidden items-center gap-1 text-fine font-medium text-ink lg:flex"><i class="ph-fill ph-check-circle text-body-md" aria-hidden="true"></i>{t("set-verified")}</span> })}
         </span>
-        {chevron.then(|| view! { <i class="ph ph-caret-right ms-3 text-2xl text-ink/70 lg:text-[16px] rtl:-scale-x-100" aria-hidden="true"></i> })}
+        {chevron.then(|| view! { <i class="ph ph-caret-right ms-3 text-2xl text-ink/70 lg:text-body-md rtl:-scale-x-100" aria-hidden="true"></i> })}
     }
 }
 

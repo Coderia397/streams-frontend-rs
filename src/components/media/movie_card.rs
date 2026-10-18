@@ -203,7 +203,7 @@ pub fn MovieCard(
                 </picture>
 
                 {is_new.then(|| view! {
-                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap rounded-[3px] bg-brand px-2 py-[3px] text-[11px] md:text-[13px] font-bold leading-tight text-white pointer-events-none">
+                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap rounded-tick bg-brand px-2 py-[3px] text-caption md:text-label font-bold leading-tight text-chrome-ink pointer-events-none">
                         {crate::i18n::t("badge-recently-added")}
                     </span>
                 })}

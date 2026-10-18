@@ -82,7 +82,7 @@ pub fn CategorySubNavMobile(
                     <button
                         on:click=move |_| set_genre_menu_open.update(|o| *o = !*o)
                         aria-haspopup="listbox"
-                        class="flex items-center gap-3 h-[52px] ps-5 pe-4 rounded-[14px] border border-ink/35 bg-transparent text-[20px] font-medium leading-none whitespace-nowrap active:scale-95 transition-transform cursor-pointer text-ink"
+                        class="flex items-center gap-3 h-[52px] ps-5 pe-4 rounded-pill border border-ink/35 bg-transparent text-title font-medium leading-none whitespace-nowrap active:scale-95 transition-transform cursor-pointer text-ink"
                     >
                         <span>{move || active_genre_label.get()}</span>
                         <i class="ph-fill ph-caret-down text-base opacity-80"></i>
@@ -97,7 +97,7 @@ pub fn CategorySubNavMobile(
                     <div class=move || format!("absolute {} top-[calc(env(safe-area-inset-top)+8px)] w-[min(66vw,320px)] max-h-[calc(100dvh-24px)] overflow-y-auto rounded-2xl bg-raised py-2 shadow-2xl scrollbar-hide", if on_home() { "right-2" } else { "left-2" }) role="listbox">
                         <button
                             on:click=move |_| { set_genre_menu_open.set(false); on_genre_select.run(None); }
-                            class=move || if selected_genre.get().is_none() { "block w-full text-left px-4 py-3 text-[20px] font-bold text-ink cursor-pointer" } else { "block w-full text-left px-4 py-3 text-[20px] text-ink/85 cursor-pointer" }
+                            class=move || if selected_genre.get().is_none() { "block w-full text-left px-4 py-3 text-title font-bold text-ink cursor-pointer" } else { "block w-full text-left px-4 py-3 text-title text-ink/85 cursor-pointer" }
                         >
                             {crate::i18n::t("nav-all-categories")}
                         </button>
@@ -108,7 +108,7 @@ pub fn CategorySubNavMobile(
                             view! {
                                 <button
                                     on:click=move |_| { set_genre_menu_open.set(false); on_genre_select.run(Some(g.clone())); }
-                                    class=move || if is_sel() { "block w-full text-left px-4 py-3 text-[20px] font-bold text-ink cursor-pointer" } else { "block w-full text-left px-4 py-3 text-[20px] text-ink/85 cursor-pointer" }
+                                    class=move || if is_sel() { "block w-full text-left px-4 py-3 text-title font-bold text-ink cursor-pointer" } else { "block w-full text-left px-4 py-3 text-title text-ink/85 cursor-pointer" }
                                 >
                                     {crate::i18n::genre_label(&genre.name)}
                                 </button>

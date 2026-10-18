@@ -252,7 +252,7 @@ fn TopTenCard(
 
                 // "Recently Added" (the engine's `new` badge): a red tab at the bottom of the poster, centred, as in the app
                 {is_new.then(|| view! {
-                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap rounded-[1.2cqw] bg-brand px-[4.2cqw] py-[1.8cqw] text-[5.4cqw] font-bold leading-none text-white pointer-events-none">
+                    <span class="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap rounded-[1.2cqw] bg-brand px-[4.2cqw] py-[1.8cqw] text-[5.4cqw] font-bold leading-none text-chrome-ink pointer-events-none">
                         {crate::i18n::t("badge-recently-added")}
                     </span>
                 })}

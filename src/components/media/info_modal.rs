@@ -518,7 +518,7 @@ pub fn InfoModal() -> impl IntoView {
                                                         <div class="h-[3px] w-[310px] max-w-[70%] overflow-hidden rounded-full bg-ink/40">
                                                             <div class="h-full bg-brand" style=format!("width: {:.1}%;", pct) />
                                                         </div>
-                                                        <span class="text-ink-silver text-[16px] tabular-nums">{time_text}</span>
+                                                        <span class="text-ink-silver text-body-md tabular-nums">{time_text}</span>
                                                     </div>
                                                 }
                                             })}
@@ -608,7 +608,7 @@ pub fn InfoModal() -> impl IntoView {
                                                         None => format!("S{}:E{}", se, ep),
                                                     }),
                                                     _ => None,
-                                                }).map(|line| view! { <p class="text-ink font-bold text-[22px] leading-tight">{line}</p> })}
+                                                }).map(|line| view! { <p class="text-ink font-bold text-title-md leading-tight">{line}</p> })}
 
                                                 <p class="text-ink font-normal text-body-sm leading-6 pt-1">
                                                     {overview}

@@ -22,10 +22,10 @@ pub fn IconPicker(
         <div class="text-ink">
             <div class="px-[var(--app-x)] pt-[26px]">
                 <button type="button" on:click=move |_| on_back.run(()) aria-label=t("choose-icon-back") class="-ms-2 flex h-10 w-10 items-center justify-center rounded-full hover:bg-ink/10">
-                    <i class="ph ph-arrow-left text-[28px] rtl:-scale-x-100" aria-hidden="true"></i>
+                    <i class="ph ph-arrow-left text-heading-lg rtl:-scale-x-100" aria-hidden="true"></i>
                 </button>
-                <h1 class="mt-[30px] text-[36px] font-bold leading-[46px]">{t("profile-choose-icon")}</h1>
-                <p class="mt-1 flex items-center gap-3 text-[22px] text-ink/80">
+                <h1 class="mt-[30px] text-icon font-bold leading-[46px]">{t("profile-choose-icon")}</h1>
+                <p class="mt-1 flex items-center gap-3 text-title-md text-ink/80">
                     {move || crate::i18n::t_args("profile-icon-for", &[("name", name.get().into())])}
                     {move || current.get().map(|u| view! { <img src=u alt="" class="h-9 w-9 rounded-full object-cover" /> })}
                 </p>

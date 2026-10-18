@@ -63,9 +63,9 @@ fn SearchListRow(item: MediaItem) -> impl IntoView {
             <div class="relative w-[33%] flex-none aspect-video overflow-hidden rounded-field bg-card">
                 <img src=picture alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" draggable="false" />
             </div>
-            <span class="flex-1 min-w-0 text-[16px] font-bold leading-tight text-ink line-clamp-2">{title.clone()}</span>
+            <span class="flex-1 min-w-0 text-body-md font-bold leading-tight text-ink line-clamp-2">{title.clone()}</span>
             <button on:click=play aria-label=crate::i18n::t("media-play") class="flex-none w-[26px] h-[26px] rounded-full border-[1.5px] border-ink/70 flex items-center justify-center active:scale-95 transition-transform">
-                <i class="ph-fill ph-play text-ink text-[14px] ms-px"></i>
+                <i class="ph-fill ph-play text-ink text-body-sm ms-px"></i>
             </button>
         </div>
     }
@@ -164,7 +164,7 @@ pub fn SearchPage() -> impl IntoView {
             <div class="sm:hidden fixed top-0 inset-x-0 z-(--z-nav) bg-field pt-[env(safe-area-inset-top)]">
                 <div class="flex items-center h-[52px] ps-1 pe-1">
                     <button on:click=on_back aria-label=crate::i18n::t("navbar-mobile-back") class="w-12 h-12 flex items-center justify-center text-ink flex-none">
-                        <i class="ph ph-arrow-left text-[26px]"></i>
+                        <i class="ph ph-arrow-left text-heading-md"></i>
                     </button>
                     <input
                         node_ref=input_ref
@@ -178,18 +178,18 @@ pub fn SearchPage() -> impl IntoView {
                         aria-label=crate::i18n::t("search-bar-search-input")
                         prop:value=move || draft.get()
                         on:input=on_input.clone()
-                        class="flex-1 min-w-0 bg-transparent text-[22px] text-ink placeholder:text-ink/55 outline-none border-0 ps-3"
+                        class="flex-1 min-w-0 bg-transparent text-title-md text-ink placeholder:text-ink/55 outline-none border-0 ps-3"
                     />
                     {move || if draft.get().is_empty() {
                         can_listen().then(|| view! {
                             <button on:click=on_voice.clone() aria-label=crate::i18n::t("search-voice") class="w-12 h-12 flex items-center justify-center text-ink/90 flex-none">
-                                <i class="ph ph-microphone text-[26px]"></i>
+                                <i class="ph ph-microphone text-heading-md"></i>
                             </button>
                         }).into_any()
                     } else {
                         view! {
                             <button on:click=on_clear.clone() aria-label=crate::i18n::t("search-bar-clear-search") class="w-12 h-12 flex items-center justify-center text-ink/90 flex-none">
-                                <i class="ph ph-x text-[26px]"></i>
+                                <i class="ph ph-x text-heading-md"></i>
                             </button>
                         }.into_any().into()
                     }}
@@ -199,7 +199,7 @@ pub fn SearchPage() -> impl IntoView {
             <div class="pt-[calc(60px+env(safe-area-inset-top))] sm:pt-28 px-3 sm:px-[var(--app-x,56px)] pb-28 sm:pb-12 min-h-screen bg-void sm:bg-page">
                 // Nothing typed: the recommendations
                 <Show when=move || q().trim().is_empty()>
-                    <h1 class="text-[22px] font-bold text-ink mb-3 mt-1 ps-1">{crate::i18n::t("search-recommended")}</h1>
+                    <h1 class="text-title-md font-bold text-ink mb-3 mt-1 ps-1">{crate::i18n::t("search-recommended")}</h1>
                     <Suspense fallback=move || view! { <div class="space-y-3 animate-pulse">{(0..6).map(|_| view! { <div class="h-[84px] bg-card rounded-field"></div> }).collect::<Vec<_>>()}</div> }>
                         {move || recommended.get().map(|items| match items {
                             Some(items) if !items.is_empty() => view! {
@@ -227,7 +227,7 @@ pub fn SearchPage() -> impl IntoView {
                             if media.is_empty() {
                                 return view! {
                                     <div class="flex flex-col items-center justify-center mt-24 text-center px-6">
-                                        <div class="text-[22px] font-bold text-ink mb-2">{crate::i18n::t("search-no-matches")}</div>
+                                        <div class="text-title-md font-bold text-ink mb-2">{crate::i18n::t("search-no-matches")}</div>
                                         <div class="text-ink/60 text-base">{crate::i18n::t("search-try-another")}</div>
                                     </div>
                                 }.into_any();

@@ -134,8 +134,8 @@ pub fn AddProfile() -> impl IntoView {
     view! {
         <div class="px-5 pb-5 pt-2">
             <Show when=move || can_add_profile(store)>
-                <button type="button" on:click=move |_| adding.set(true) class="h-12 w-full rounded-control bg-[rgba(128,128,128,0.3)] text-[18px] font-medium hover:bg-[rgba(128,128,128,0.4)]">{t("set-add-profile-button")}</button>
-                <p class="mt-4 text-center text-[14px] text-black/70">{crate::i18n::t_args("set-add-profile-limit", &[("max", (MAX_PROFILES as i64).into())])}</p>
+                <button type="button" on:click=move |_| adding.set(true) class="h-12 w-full rounded-control bg-[rgba(128,128,128,0.3)] text-title-sm font-medium hover:bg-[rgba(128,128,128,0.4)]">{t("set-add-profile-button")}</button>
+                <p class="mt-4 text-center text-body-sm text-chrome/70">{crate::i18n::t_args("set-add-profile-limit", &[("max", (MAX_PROFILES as i64).into())])}</p>
             </Show>
             <Show when=move || adding.get()>
                 <AddEditProfileModal mode="add" initial=None on_save=on_save on_delete=None on_cancel=Callback::new(move |_| adding.set(false)) />
@@ -236,7 +236,7 @@ pub fn ProfileSheet(open: RwSignal<bool>) -> impl IntoView {
     view! {
         <Show when=move || open.get()>
             <div class="fixed inset-0 z-(--z-sheet-backdrop) lg:hidden" on:click=move |_| open.set(false)></div>
-            <div role="dialog" aria-label=t("set-profile-sheet") class="set-tiles theme-paper-wide fixed inset-x-0 bottom-0 top-[7vh] z-(--z-sheet) flex flex-col overflow-hidden rounded-t-[16px] bg-set-sheet text-ink shadow-popover lg:hidden">
+            <div role="dialog" aria-label=t("set-profile-sheet") class="set-tiles theme-paper-wide fixed inset-x-0 bottom-0 top-[7vh] z-(--z-sheet) flex flex-col overflow-hidden rounded-t-sheet bg-set-sheet text-ink shadow-popover lg:hidden">
                 <div class="relative flex h-14 shrink-0 items-center justify-center">
                     <span class="absolute left-1/2 top-2 h-1 w-9 -translate-x-1/2 rounded-full bg-ink/30" aria-hidden="true"></span>
                     <h2 class="text-heading font-bold text-ink/80">{t("set-profile-sheet")}</h2>

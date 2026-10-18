@@ -94,7 +94,7 @@ fn ProfilesSection() -> impl IntoView {
 fn delete_button() -> impl IntoView {
     view! {
         <div class="lg:hidden"><OutlineButton label=t("set-title-delete") danger=true on_click=Callback::new(|_| go(&Screen::Delete.path())) /></div>
-        <a href=Screen::Delete.path() class="hidden h-12 items-center rounded-control px-4 text-[18px] font-medium text-danger hover:bg-danger/10 lg:flex">{t("set-title-delete")}</a>
+        <a href=Screen::Delete.path() class="hidden h-12 items-center rounded-control px-4 text-title-sm font-medium text-danger hover:bg-danger/10 lg:flex">{t("set-title-delete")}</a>
     }
 }
 
@@ -172,7 +172,7 @@ pub fn ProfilesPage() -> impl IntoView {
                             <a href=Screen::Profile(p.id.clone()).path() class="flex items-center gap-4 px-5 py-3 hover:bg-ink/10">
                                 <img src=p.avatar_url.clone().unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string()) alt="" class="h-10 w-10 rounded-control object-cover" />
                                 <span class="min-w-0 flex-1 truncate text-body-md font-bold">{p.name.clone()}</span>
-                                {now.then(|| view! { <span class="rounded-control bg-[#bcd8ff] px-[8px] py-[2px] text-[14px] font-medium leading-[22px] text-black/70">{t("set-now-watching")}</span> })}
+                                {now.then(|| view! { <span class="rounded-control bg-[#bcd8ff] px-[8px] py-[2px] text-body-sm font-medium leading-[22px] text-chrome/70">{t("set-now-watching")}</span> })}
                                 <i class="ph-bold ph-caret-right text-xl text-ink/40 rtl:-scale-x-100" aria-hidden="true"></i>
                             </a>
                         }

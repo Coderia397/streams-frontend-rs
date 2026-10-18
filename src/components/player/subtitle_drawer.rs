@@ -19,7 +19,7 @@ pub fn SubtitleDrawer(
     on_change_delay: Callback<f64>,
     on_close: Callback<()>,
 ) -> impl IntoView {
-    let row = "flex h-[59px] w-full items-center px-[10px] text-start text-[21px] transition-colors duration-(--motion-quick) hover:bg-lift hover:text-ink focus-visible:outline-2 focus-visible:outline-ink";
+    let row = "flex h-[59px] w-full items-center px-[10px] text-start text-title-lg transition-colors duration-(--motion-quick) hover:bg-lift hover:text-ink focus-visible:outline-2 focus-visible:outline-ink";
     let has_audio = move || audio_tracks.get().len() > 1;
     view! {
         <Show when=move || is_open.get()>
@@ -30,27 +30,27 @@ pub fn SubtitleDrawer(
               <div class="flex min-h-0 flex-1">
                 <Show when=has_audio>
                     <div class="w-[40%] shrink-0 overflow-y-auto border-e border-line-strong px-[35px] pb-[20px] pt-[26px]">
-                        <h2 class="mb-[18px] text-[28px] font-medium leading-[34px] text-ink">{crate::i18n::t("player-audio")}</h2>
+                        <h2 class="mb-[18px] text-heading-lg font-medium leading-[34px] text-ink">{crate::i18n::t("player-audio")}</h2>
                         {move || audio_tracks.get().into_iter().map(|(i, label)| view! {
                             <button on:click=move |_| on_select_audio.run(i) class=move || format!("{row} {}", if audio_selected.get() == i { "text-ink" } else { "text-[#b3b3b3]" })>
-                                <i class=move || format!("ph ph-check me-[14px] w-[24px] text-[24px] {}", if audio_selected.get() == i { "" } else { "invisible" })></i>
+                                <i class=move || format!("ph ph-check me-[14px] w-[24px] text-heading {}", if audio_selected.get() == i { "" } else { "invisible" })></i>
                                 <span class="truncate">{label}</span>
                             </button>
                         }).collect::<Vec<_>>()}
                     </div>
                 </Show>
                 <div class="min-w-0 flex-1 overflow-y-auto px-[35px] pb-[20px] pt-[26px]">
-                    <h2 class="mb-[18px] text-[28px] font-medium leading-[34px] text-ink">{crate::i18n::t("subtitle-drawer-subtitles")}</h2>
+                    <h2 class="mb-[18px] text-heading-lg font-medium leading-[34px] text-ink">{crate::i18n::t("subtitle-drawer-subtitles")}</h2>
 
                     <button on:click=move |_| on_select_sub.run(None) class=move || format!("{row} {}", if selected_sub_url.get().is_none() { "text-ink" } else { "text-[#b3b3b3]" })>
-                        <i class=move || format!("ph ph-check me-[14px] w-[24px] text-[24px] {}", if selected_sub_url.get().is_none() { "" } else { "invisible" })></i>
+                        <i class=move || format!("ph ph-check me-[14px] w-[24px] text-heading {}", if selected_sub_url.get().is_none() { "" } else { "invisible" })></i>
                         <span>{crate::i18n::t("player-subs-off")}</span>
                     </button>
 
                     {move || {
                         let subs = subtitles.get();
                         if subs.is_empty() {
-                            view! { <p class="px-[10px] py-3 text-[18px] text-[#b3b3b3]">{crate::i18n::t("subtitle-drawer-no-subtitles-detected-for-this")}</p> }.into_any()
+                            view! { <p class="px-[10px] py-3 text-title-sm text-[#b3b3b3]">{crate::i18n::t("subtitle-drawer-no-subtitles-detected-for-this")}</p> }.into_any()
                         } else {
                             subs.into_iter().map(|s| {
                                 let url = s.url.clone();
@@ -60,7 +60,7 @@ pub fn SubtitleDrawer(
                                 let select_cb = on_select_sub;
                                 view! {
                                     <button on:click=move |_| select_cb.run(Some(url.clone())) class=move || format!("{row} {}", if selected_sub_url.get().as_deref() == Some(u_active.as_str()) { "text-ink" } else { "text-[#b3b3b3]" })>
-                                        <i class=move || format!("ph ph-check me-[14px] w-[24px] text-[24px] {}", if selected_sub_url.get().as_deref() == Some(u_icon.as_str()) { "" } else { "invisible" })></i>
+                                        <i class=move || format!("ph ph-check me-[14px] w-[24px] text-heading {}", if selected_sub_url.get().as_deref() == Some(u_icon.as_str()) { "" } else { "invisible" })></i>
                                         <span class="truncate">{label}</span>
                                     </button>
                                 }
@@ -69,7 +69,7 @@ pub fn SubtitleDrawer(
                     }}
 
                     <Show when=move || selected_sub_url.get().is_some()>
-                        <div class="mt-[14px] flex items-center justify-between border-t border-line-strong px-[10px] pt-[14px] text-[18px] text-[#b3b3b3]">
+                        <div class="mt-[14px] flex items-center justify-between border-t border-line-strong px-[10px] pt-[14px] text-title-sm text-[#b3b3b3]">
                             <span>{crate::i18n::t("subtitle-drawer-subtitle-timing-offset")}</span>
                             <span class="flex items-center gap-4 text-ink">
                                 <button on:click=move |_| on_change_delay.run(sub_delay.get() - 0.5) class="h-9 w-12 rounded-control hover:bg-lift">"-0.5s"</button>

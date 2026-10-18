@@ -76,7 +76,7 @@ pub fn IconRow(
     view! {
         <section class="group relative my-6" aria-label=aria>
             <div class="flex items-center justify-between px-[var(--app-x)]">
-                <h2 class="text-[24px] font-bold leading-[31px] text-ink">{title}</h2>
+                <h2 class="text-heading font-bold leading-[31px] text-ink">{title}</h2>
                 {move || position.get().map(|(index, pages)| view! {
                     <div class="hidden items-center gap-[3px] opacity-0 transition-opacity duration-(--motion-slow) group-hover:opacity-100 md:flex" aria-hidden="true">
                         {(0..pages).map(|i| view! { <div class=if i == index { "h-[2px] w-3 rounded-full bg-ink" } else { "h-[2px] w-3 rounded-full bg-ink/20" } /> }).collect_view()}

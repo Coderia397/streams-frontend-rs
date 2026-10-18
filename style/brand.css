@@ -75,6 +75,7 @@
   --spacing-settings-header: 4rem;
   --spacing-settings-menu-item: 2.5rem;
   --spacing-settings-tile: 3.5rem;
+  --spacing-settings-nav-row: 80px;
   --spacing-settings-hero-min: 70dvh;
   /* Consent sheet: about a fifth of the screen on a phone, a fixed width pop-up from the sm width */
   --spacing-sheet-min: 20dvh;
@@ -102,6 +103,7 @@
   --radius-modal: 0.75rem;
   --radius-chip-inner: 10px;
   --radius-chip: 20px;
+  --radius-pill: 14px;
   --radius-poster: 18px;
   --radius-billboard: 24px;
   --radius-sheet: 1rem;
@@ -129,6 +131,15 @@
   --text-heading-xl: 32px;
   --text-display-sm: 38px;
   --text-display: 40px;
+  --text-row: 23px;
+  --text-heading-2xl: 30px;
+  --text-icon-md: 34px;
+  --text-icon: 36px;
+  --text-icon-lg: 48px;
+  --text-icon-xl: 64px;
+  --text-select: 17.35px;
+  --text-page-title: 34.7px;
+  --text-pill: 14.5px;
 
   /* Shadows */
   --shadow-popover: 0 8px 30px rgba(0, 0, 0, 0.55);
@@ -138,6 +149,8 @@
   --shadow-vignette: 0 0 50px rgba(0, 0, 0, 0.8);
   --shadow-soft: 0 0 15px rgba(0, 0, 0, 0.5);
   --shadow-raise: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-rating: 0 6px 18px rgba(0, 0, 0, 0.55);
+  --shadow-menu: 0 2px 8px rgba(0, 0, 0, 0.4);
   --drop-shadow-title: 0 4px 14px rgba(0, 0, 0, 0.95);
   --drop-shadow-text-hard: 0 2px 8px rgba(0, 0, 0, 1);
   --drop-shadow-text: 0 2px 8px rgba(0, 0, 0, 0.8);

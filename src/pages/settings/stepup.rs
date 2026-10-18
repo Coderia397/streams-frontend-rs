@@ -115,7 +115,7 @@ pub fn Gate(account: bool, children: ChildrenFn) -> impl IntoView {
             <div class="lg:fixed lg:inset-x-0 lg:bottom-0 lg:top-settings-header lg:z-(--z-screen) lg:overflow-auto lg:bg-page">
             <div class="w-full max-w-[400px] max-lg:max-w-md max-lg:pt-8 lg:mx-auto lg:translate-x-4 lg:pt-[81px]">
                 <h2 class="mb-2 text-account-title-sm font-bold leading-[41px]">{move || if step.get() == Step::Code { t("set-code-title") } else { t("set-verify-title") }}</h2>
-                <p class="mb-7 text-body-md leading-5 text-ink/70 lg:text-[16px]" class=("lg:mb-9", move || step.get() == Step::Code)>
+                <p class="mb-7 text-body-md leading-5 text-ink/70 lg:text-body-md" class=("lg:mb-9", move || step.get() == Step::Code)>
                     {move || if step.get() == Step::Code {
                         view! { {t("set-code-body-1")}" "<strong class="font-bold">{email.get_value()}</strong>" "{t_args("set-code-body-2", &[("minutes", CODE_VALID_MINUTES.into())])} }.into_any()
                     } else { t("set-verify-body").into_any() }}
@@ -125,14 +125,14 @@ pub fn Gate(account: bool, children: ChildrenFn) -> impl IntoView {
                     Step::Choose => view! {
                         <div class="flex flex-col gap-5">
                             <button type="button" on:click=move |_| send_code.run(()) class="flex h-[69px] w-full items-center gap-[15px] rounded-card bg-ink/5 px-3 text-start hover:bg-ink/10">
-                                <i class="ph ph-envelope-simple shrink-0 text-[16px] text-ink" aria-hidden="true"></i>
-                                <span class="min-w-0 flex-1"><span class="block text-[18px] font-bold leading-6">{t("set-code-email")}</span><span class="block text-[14px] leading-[22px] text-ink/70">{email.get_value()}</span></span>
-                                <i class="ph-bold ph-caret-right shrink-0 text-[16px] text-ink rtl:-scale-x-100" aria-hidden="true"></i>
+                                <i class="ph ph-envelope-simple shrink-0 text-body-md text-ink" aria-hidden="true"></i>
+                                <span class="min-w-0 flex-1"><span class="block text-title-sm font-bold leading-6">{t("set-code-email")}</span><span class="block text-body-sm leading-[22px] text-ink/70">{email.get_value()}</span></span>
+                                <i class="ph-bold ph-caret-right shrink-0 text-body-md text-ink rtl:-scale-x-100" aria-hidden="true"></i>
                             </button>
                             <button type="button" on:click=move |_| { note.set(None); step.set(Step::Password) } class="flex h-[69px] w-full items-center gap-[15px] rounded-card bg-ink/5 px-3 text-start hover:bg-ink/10">
-                                <i class="ph ph-lock-simple shrink-0 text-[16px] text-ink" aria-hidden="true"></i>
-                                <span class="min-w-0 flex-1"><span class="block text-[18px] font-bold leading-6">{t("set-password-confirm")}</span></span>
-                                <i class="ph-bold ph-caret-right shrink-0 text-[16px] text-ink rtl:-scale-x-100" aria-hidden="true"></i>
+                                <i class="ph ph-lock-simple shrink-0 text-body-md text-ink" aria-hidden="true"></i>
+                                <span class="min-w-0 flex-1"><span class="block text-title-sm font-bold leading-6">{t("set-password-confirm")}</span></span>
+                                <i class="ph-bold ph-caret-right shrink-0 text-body-md text-ink rtl:-scale-x-100" aria-hidden="true"></i>
                             </button>
                         </div>
                     }.into_any(),
@@ -150,14 +150,14 @@ pub fn Gate(account: bool, children: ChildrenFn) -> impl IntoView {
                         <form on:submit=move |ev| { ev.prevent_default(); submit_code.run(()); }>
                             <DigitBoxes label=t("set-code-label") value=code length=CODE_LENGTH one_time_code=true plain=true />
                             <div class="flex flex-col gap-2">
-                                <button type="submit" disabled=move || busy.get() || code.with(|c| c.chars().count() != CODE_LENGTH) class="h-10 w-full rounded-control bg-ink px-4 text-[16px] font-medium text-void disabled:opacity-50">{t("set-code-submit")}</button>
-                                <button type="button" on:click=move |_| send_code.run(()) disabled=move || busy.get() class="h-10 w-full rounded-control bg-[rgba(128,128,128,0.3)] px-4 text-[16px] font-medium text-ink disabled:opacity-50">{t("set-code-resend")}</button>
-                                <button type="button" on:click=move |_| { note.set(None); step.set(Step::Choose) } class="h-10 w-full rounded-control px-4 text-[16px] font-medium text-ink">{t("set-try-another-way")}</button>
+                                <button type="submit" disabled=move || busy.get() || code.with(|c| c.chars().count() != CODE_LENGTH) class="h-10 w-full rounded-control bg-ink px-4 text-body-md font-medium text-void disabled:opacity-50">{t("set-code-submit")}</button>
+                                <button type="button" on:click=move |_| send_code.run(()) disabled=move || busy.get() class="h-10 w-full rounded-control bg-[rgba(128,128,128,0.3)] px-4 text-body-md font-medium text-ink disabled:opacity-50">{t("set-code-resend")}</button>
+                                <button type="button" on:click=move |_| { note.set(None); step.set(Step::Choose) } class="h-10 w-full rounded-control px-4 text-body-md font-medium text-ink">{t("set-try-another-way")}</button>
                             </div>
                         </form>
                     }.into_any(),
                 }}
-                <p class="mt-8 text-body-md text-ink/70 lg:text-[13px]" class=("lg:mt-4", move || step.get() == Step::Code) class=("lg:mt-[52px]", move || step.get() != Step::Code) class=("lg:text-[14px]", move || step.get() != Step::Code) class=("lg:text-ink", move || step.get() != Step::Code)>{t("set-need-help")}" "<a href=routes::HELP class="underline underline-offset-2 hover:text-ink">{t("set-visit-help")}</a></p>
+                <p class="mt-8 text-body-md text-ink/70 lg:text-label" class=("lg:mt-4", move || step.get() == Step::Code) class=("lg:mt-[52px]", move || step.get() != Step::Code) class=("lg:text-body-sm", move || step.get() != Step::Code) class=("lg:text-ink", move || step.get() != Step::Code)>{t("set-need-help")}" "<a href=routes::HELP class="underline underline-offset-2 hover:text-ink">{t("set-visit-help")}</a></p>
             </div>
             </div>
         }

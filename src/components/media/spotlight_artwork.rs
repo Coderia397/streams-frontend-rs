@@ -129,7 +129,7 @@ pub fn SpotlightArtwork(movie_id: u32, is_tv: bool, #[prop(into)] backdrop_src: 
             <Show when=move || overlay.get() && has_trailer()>
                 <div class="absolute inset-0 z-20 bg-void/25 flex items-center justify-center">
                     <button on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); set_paused.update(|p| *p = !*p); show_overlay(); } aria-label=crate::i18n::t("media-play") class="text-ink">
-                        <i class=move || if playing.get() { "ph-fill ph-pause text-[64px]" } else { "ph-fill ph-play text-[64px]" }></i>
+                        <i class=move || if playing.get() { "ph-fill ph-pause text-icon-xl" } else { "ph-fill ph-play text-icon-xl" }></i>
                     </button>
                     <div class="absolute left-4 right-4 bottom-3 flex items-center gap-3">
                         <div on:click=on_scrub class="relative flex-1 h-9 flex items-center cursor-pointer">
@@ -137,7 +137,7 @@ pub fn SpotlightArtwork(movie_id: u32, is_tv: bool, #[prop(into)] backdrop_src: 
                             <div class="absolute left-0 h-[3px] bg-brand rounded-full" style=move || format!("width:{}%", fraction() * 100.0)></div>
                             <div class="absolute w-[22px] h-[22px] -ml-[11px] rounded-full bg-brand" style=move || format!("left:{}%", fraction() * 100.0)></div>
                         </div>
-                        <span class="text-ink text-[17px] tabular-nums w-[58px] text-right">{move || mmss(duration.get() - time.get())}</span>
+                        <span class="text-ink text-body-lg tabular-nums w-[58px] text-right">{move || mmss(duration.get() - time.get())}</span>
                     </div>
                 </div>
             </Show>
@@ -149,7 +149,7 @@ pub fn SpotlightArtwork(movie_id: u32, is_tv: bool, #[prop(into)] backdrop_src: 
                     aria-label=move || if ui_store.preview_muted.get() { crate::i18n::t("media-unmute") } else { crate::i18n::t("media-mute") }
                     class="absolute right-2.5 bottom-2.5 z-30 w-[28px] h-[28px] rounded-full bg-void/70 flex items-center justify-center text-ink"
                 >
-                    <i class=move || if ui_store.preview_muted.get() { "ph-fill ph-speaker-slash text-[15px]" } else { "ph-fill ph-speaker-high text-[15px]" }></i>
+                    <i class=move || if ui_store.preview_muted.get() { "ph-fill ph-speaker-slash text-body" } else { "ph-fill ph-speaker-high text-body" }></i>
                 </button>
                 <div class="absolute left-0 bottom-0 z-30 h-[3px] bg-brand" style=move || format!("width:{}%", fraction() * 100.0)></div>
             </Show>

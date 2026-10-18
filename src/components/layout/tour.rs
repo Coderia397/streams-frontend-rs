@@ -133,9 +133,9 @@ pub fn TourHost() -> impl IntoView {
             let last = step.get() + 1 >= tour.steps.len();
             view! {
                 <div class="fixed inset-0" style="z-index: 9000;" on:click=move |_| close()>
-                    <div class="absolute inset-0 bg-black/60" />
+                    <div class="absolute inset-0 bg-chrome/60" />
                     <div
-                        class="absolute rounded-full ring-2 ring-white/80 pointer-events-none"
+                        class="absolute rounded-full ring-2 ring-chrome-ink/80 pointer-events-none"
                         style=format!("left:{}px;top:{}px;width:{}px;height:{}px;", l - 6.0, t - 4.0, r - l + 12.0, b - t + 8.0)
                     />
                     <div

@@ -113,11 +113,11 @@ pub fn CollectionRow(row: FeedRow) -> impl IntoView {
                 <div class="px-[var(--app-x,56px)] md:pe-0 md:w-[38%] md:flex-none flex flex-col items-center text-center">
                     <CollectionLogo text=heading hue=h design=design size=46.0 />
                     <div class="mt-5 w-[min(260px,70%)] border-y border-ink/40 py-1.5">
-                        <p class="text-[11px] md:text-xs font-semibold uppercase tracking-[0.3em] text-ink/85">{eyebrow_text}</p>
+                        <p class="text-caption md:text-xs font-semibold uppercase tracking-[0.3em] text-ink/85">{eyebrow_text}</p>
                     </div>
-                    {(!description.is_empty()).then(|| view! { <p class="mt-5 text-[15px] md:text-[18px] leading-snug text-ink max-w-[30ch]">{description}</p> })}
+                    {(!description.is_empty()).then(|| view! { <p class="mt-5 text-body md:text-title-sm leading-snug text-ink max-w-[30ch]">{description}</p> })}
                     {link.map(|href| view! {
-                        <a href=href class="mt-5 inline-flex h-11 items-center rounded-full bg-white px-6 text-[16px] font-semibold text-black hover:bg-white/85 transition-colors">
+                        <a href=href class="mt-5 inline-flex h-11 items-center rounded-full bg-chrome-ink px-6 text-body-md font-semibold text-chrome hover:bg-chrome-ink/85 transition-colors">
                             {crate::i18n::t("collection-explore-all")}
                         </a>
                     })}
@@ -165,8 +165,8 @@ pub fn CollectionHero(collection: crate::services::ai_engine::Collection) -> imp
             ></div>
             <div class="absolute inset-x-0 bottom-24 md:bottom-32 px-[var(--app-x,56px)] max-w-[820px]">
                 <div class="inline-block"><CollectionLogo text=heading hue=h design=design size=62.0 /></div>
-                <p class="mt-5 text-[11px] md:text-xs font-semibold uppercase tracking-[0.3em] text-ink/85">{eyebrow_text}</p>
-                {(!description.is_empty()).then(|| view! { <p class="mt-3 text-[17px] md:text-[22px] leading-snug text-ink max-w-[34ch]">{description}</p> })}
+                <p class="mt-5 text-caption md:text-xs font-semibold uppercase tracking-[0.3em] text-ink/85">{eyebrow_text}</p>
+                {(!description.is_empty()).then(|| view! { <p class="mt-3 text-body-lg md:text-title-md leading-snug text-ink max-w-[34ch]">{description}</p> })}
             </div>
         </section>
     }

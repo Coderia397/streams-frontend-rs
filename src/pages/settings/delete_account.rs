@@ -38,22 +38,22 @@ pub fn DeleteAccount() -> impl IntoView {
                 <a href=Screen::AccountSecurity.path() aria-label=t("set-back") class="hidden h-10 w-10 items-center justify-center rounded-full text-ink hover:bg-ink/10 lg:absolute lg:-left-[266px] lg:top-[19px] lg:flex">
                     <i class="ph-bold ph-arrow-left text-2xl rtl:-scale-x-100" aria-hidden="true"></i>
                 </a>
-                <h1 class="mb-2 hidden text-[32px] font-bold leading-[41px] text-ink/80 lg:block">{t("set-title-delete")}</h1>
-                <p class="mb-8 text-[18px] leading-[27px] text-ink/80">{crate::i18n::t_args("set-del-intro", &[("brand", brand.into())])}</p>
+                <h1 class="mb-2 hidden text-heading-xl font-bold leading-[41px] text-ink/80 lg:block">{t("set-title-delete")}</h1>
+                <p class="mb-8 text-title-sm leading-[27px] text-ink/80">{crate::i18n::t_args("set-del-intro", &[("brand", brand.into())])}</p>
                 <Message text=note />
                 <CollapsibleCard title=t("set-del-card") show_label=t("set-del-show") hide_label=t("set-del-hide")>
-                    <ul class="mt-4 list-disc ps-[18px] text-[16px] leading-5 text-ink/80">
+                    <ul class="mt-4 list-disc ps-[18px] text-body-md leading-5 text-ink/80">
                         <li class="mb-[5px]">{t("set-del-lose")}</li>
                         <li>{t("set-del-when")}</li>
                     </ul>
                     <hr class="mx-[18px] mb-[17px] mt-[16px] border-ink/20" />
-                    <label class="flex cursor-pointer items-start gap-[9px] text-[16px] leading-6">
+                    <label class="flex cursor-pointer items-start gap-[9px] text-body-md leading-6">
                         <input type="checkbox" prop:checked=move || agreed.get() on:change=move |ev| agreed.set(event_target_checked(&ev)) class="mt-0 h-6 w-6 shrink-0 cursor-pointer appearance-none rounded-hairline border border-ink/60 bg-page checked:border-ink checked:bg-ink" />
                         <span>{crate::i18n::t_args("set-del-check", &[("brand", brand.into())])}</span>
                     </label>
-                    <button type="button" disabled=move || !agreed.get() on:click=move |_| delete.run(()) class="mb-[10px] mt-4 h-10 w-full rounded-control border border-ink/30 bg-page px-4 text-[16px] font-medium text-[#c11119] disabled:cursor-not-allowed">{t("set-del-button")}</button>
+                    <button type="button" disabled=move || !agreed.get() on:click=move |_| delete.run(()) class="mb-[10px] mt-4 h-10 w-full rounded-control border border-ink/30 bg-page px-4 text-body-md font-medium text-[#c11119] disabled:cursor-not-allowed">{t("set-del-button")}</button>
                 </CollapsibleCard>
-                <p class="mt-9 text-[13px] text-ink/70">{t("set-del-questions")}" "<a href=routes::HELP class="text-[#0080ff]">{t("set-del-help")}</a>"."</p>
+                <p class="mt-9 text-label text-ink/70">{t("set-del-questions")}" "<a href=routes::HELP class="text-[#0080ff]">{t("set-del-help")}</a>"."</p>
             </div>
         </div>
     }

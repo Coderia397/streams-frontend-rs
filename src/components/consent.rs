@@ -176,7 +176,7 @@ pub fn CookieManager() -> impl IntoView {
                 role="dialog"
                 aria-modal="true"
                 aria-label=move || tr("cookie-center-title")
-                class=format!("fixed inset-x-0 bottom-0 z-(--z-consent) min-h-sheet-min w-full rounded-t-[20px] bg-paper px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3 font-sans text-paper-ink shadow-popover sm:w-sheet sm:max-w-[calc(100%-3rem)] sm:rounded-[20px] sm:p-6 {place}")
+                class=format!("fixed inset-x-0 bottom-0 z-(--z-consent) min-h-sheet-min w-full rounded-t-chip bg-paper px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3 font-sans text-paper-ink shadow-popover sm:w-sheet sm:max-w-[calc(100%-3rem)] sm:rounded-chip sm:p-6 {place}")
             >
                 <span class="mx-auto mb-3 block h-1 w-10 rounded-full bg-paper-line sm:hidden" aria-hidden="true"></span>
                 <div class="flex items-start gap-3">

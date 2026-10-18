@@ -95,7 +95,7 @@ pub fn PageHeading(screen: Memo<Screen>, gate_active: RwSignal<bool>, light_phon
             >
                 <i class="ph-bold ph-arrow-left text-2xl rtl:-scale-x-100" aria-hidden="true"></i>
             </a>
-            <h1 class="text-title font-bold lg:w-full lg:flex-1 lg:truncate lg:text-account-title" class=("max-lg:text-account-title-sm", move || light_phone.get()) class=("lg:text-[32px]!", move || screen.get().standalone()) class=("lg:leading-[40px]!", move || screen.get().standalone()) class=("lg:text-line!", move || screen.get().standalone()) class=("hidden", move || gate_active.get() || screen.get() == Screen::TransferSetting)>
+            <h1 class="text-title font-bold lg:w-full lg:flex-1 lg:truncate lg:text-account-title" class=("max-lg:text-account-title-sm", move || light_phone.get()) class=("lg:text-heading-xl!", move || screen.get().standalone()) class=("lg:leading-[40px]!", move || screen.get().standalone()) class=("lg:text-line!", move || screen.get().standalone()) class=("hidden", move || gate_active.get() || screen.get() == Screen::TransferSetting)>
                 <span class=("lg:hidden", move || matches!(screen.get(), Screen::Hub | Screen::Profile(_)))>{move || t(screen.get().title_key())}</span>
                 <span class="hidden" class=("lg:inline", move || matches!(screen.get(), Screen::Hub | Screen::Profile(_)))>{move || t(if screen.get() == Screen::Hub { Screen::Account.title_key() } else { "set-title-manage-profile" })}</span>
             </h1>
@@ -107,7 +107,7 @@ pub fn PageHeading(screen: Memo<Screen>, gate_active: RwSignal<bool>, light_phon
 #[component]
 pub fn StandaloneBar(screen: Memo<Screen>, avatar: Memo<String>, signout_open: RwSignal<bool>) -> impl IntoView {
     view! {
-        <header class=move || if screen.get().standalone() { "hidden h-settings-header items-center justify-between border-b border-black/10 set-gutter lg:flex" } else { "hidden" }>
+        <header class=move || if screen.get().standalone() { "hidden h-settings-header items-center justify-between border-b border-chrome/10 set-gutter lg:flex" } else { "hidden" }>
             <a href=routes::BROWSE aria-label=crate::brand::NAME><img src=crate::brand::LOGO_WORDMARK_PRIMARY alt=crate::brand::NAME class="h-7 w-auto" /></a>
             <AccountMenu avatar=avatar signout_open=signout_open />
         </header>
@@ -127,7 +127,7 @@ pub fn ForProfile(screen: Memo<Screen>) -> impl IntoView {
         let p = store.profiles.with(|l| id.and_then(|id| l.iter().find(|p| p.id == id).cloned()).or_else(|| l.first().cloned()))?;
         let pic = p.avatar_url.clone().unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string());
         Some(view! {
-            <p class="mb-[44px] mt-[10px] hidden items-center gap-3 text-[18px] leading-[27px] text-black/70 lg:flex">
+            <p class="mb-[44px] mt-[10px] hidden items-center gap-3 text-title-sm leading-[27px] text-chrome/70 lg:flex">
                 {crate::i18n::t_args("set-for-profile", &[("name", p.name.clone().into())])}
                 <img src=pic alt="" class="h-8 w-8 rounded-full object-cover" />
             </p>

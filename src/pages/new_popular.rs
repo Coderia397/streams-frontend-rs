@@ -53,12 +53,12 @@ fn NewHotGames() -> impl IntoView {
     view! {
         <section id="nh-games" class="space-y-6 scroll-mt-[150px]">
             {move || games.get().unwrap_or_default().into_iter().map(|g| view! {
-                <a href=g.url.clone() target="_blank" rel="noopener" class="block bg-void border border-ink/25 rounded-[14px] overflow-hidden">
+                <a href=g.url.clone() target="_blank" rel="noopener" class="block bg-void border border-ink/25 rounded-pill overflow-hidden">
                     <div class="aspect-video bg-card"><img src=g.image.clone() alt="" class="w-full h-full object-cover" loading="lazy" /></div>
                     <div class="px-5 pb-6 pt-4 flex flex-col gap-2">
-                        <h3 class="text-ink font-bold text-[20px] leading-tight">{g.title.clone()}</h3>
-                        <p class="text-[17px] text-ink-soft line-clamp-3">{g.description.clone()}</p>
-                        <span class="text-ink/60 text-[15px]">{g.genre.clone()}</span>
+                        <h3 class="text-ink font-bold text-title leading-tight">{g.title.clone()}</h3>
+                        <p class="text-body-lg text-ink-soft line-clamp-3">{g.description.clone()}</p>
+                        <span class="text-ink/60 text-body">{g.genre.clone()}</span>
                     </div>
                 </a>
             }).collect::<Vec<_>>()}

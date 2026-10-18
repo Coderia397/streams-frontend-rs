@@ -116,13 +116,13 @@ pub fn SpotlightCard(
     view! {
         <div class="spot-card relative overflow-visible py-3 group/spotlight z-10 w-full sm:max-w-[85vw] sm:mx-auto">
             // the shade the page lays over a card that is leaving or arriving (see new_popular.rs dim_cards)
-            <div class="absolute inset-0 z-30 pointer-events-none rounded-[14px] bg-void transition-opacity duration-150" style="opacity: var(--dim, 0)"></div>
+            <div class="absolute inset-0 z-30 pointer-events-none rounded-pill bg-void transition-opacity duration-(--motion-fast)" style="opacity: var(--dim, 0)"></div>
             // Top 10: a strip peeks out above the card with the numeral on it. It is a gradient of the colour of the artwork (the one the hero uses): left the colour at its own brightness,
             // right a little less bright and almost grey (`strip_style`). The numeral is outlined thin and its foot is hidden behind the card, as in the app.
             {formatted_rank.clone().map(|r_text| {
                 view! {
                     <div class="pointer-events-none select-none h-[62px]">
-                        <div class="absolute left-0 right-0 top-[47px] h-[40px] rounded-t-[14px] border border-b-0 border-ink/25" style=move || strip_style.get()></div>
+                        <div class="absolute left-0 right-0 top-[47px] h-[40px] rounded-t-pill border border-b-0 border-ink/25" style=move || strip_style.get()></div>
                         <svg viewBox="0 0 280 218" class="absolute left-[24px] top-[12px] w-[108px] h-[84px] overflow-visible">
                             <text x="0" y="215" fill="#000" stroke="#fff" stroke-width="3.4" stroke-linejoin="round" font-size="290" font-weight="900" font-family="'Inter', sans-serif" textLength="276" lengthAdjust="spacingAndGlyphs">
                                 {r_text}
@@ -134,7 +134,7 @@ pub fn SpotlightCard(
 
             // Spotlight card container
             <div
-                class="relative z-10 w-full min-h-[440px] flex flex-col bg-void border border-ink/25 rounded-[14px] overflow-hidden select-none"
+                class="relative z-10 w-full min-h-[440px] flex flex-col bg-void border border-ink/25 rounded-pill overflow-hidden select-none"
             >
                 // Picture area: the trailer plays by itself while the card is on screen (see SpotlightArtwork)
                 <div class="relative">
@@ -158,16 +158,16 @@ pub fn SpotlightCard(
                     })}
                     {if is_coming_soon && !coming_soon_label.is_empty() {
                         view! {
-                            <p class="text-ink font-bold text-[20px] leading-tight">
+                            <p class="text-ink font-bold text-title leading-tight">
                                 {crate::i18n::t_args("media-coming", &[("when", fluent_bundle::FluentValue::from(coming_soon_label.clone()))])}
                             </p>
                         }.into_any()
                     } else {
-                        view! { <h3 class="text-ink font-bold text-[20px] leading-tight">{crate::i18n::t(if is_tv { "new-hot-watch-series" } else { "new-hot-watch-film" })}</h3> }.into_any()
+                        view! { <h3 class="text-ink font-bold text-title leading-tight">{crate::i18n::t(if is_tv { "new-hot-watch-series" } else { "new-hot-watch-film" })}</h3> }.into_any()
                     }}
 
                     // Overview
-                    <p class="text-[17px] text-ink-soft font-normal leading-relaxed line-clamp-3 flex-1">
+                    <p class="text-body-lg text-ink-soft font-normal leading-relaxed line-clamp-3 flex-1">
                         {overview}
                     </p>
 
@@ -177,16 +177,16 @@ pub fn SpotlightCard(
                             view! {
                                 <button
                                     on:click=on_toggle_list
-                                    class="flex items-center justify-center h-[51px] px-5 rounded-control bg-[#e6e6e6] text-black text-[20px] font-semibold gap-2.5 transition-all active:scale-95 w-fit"
+                                    class="flex items-center justify-center h-[51px] px-5 rounded-control bg-[#e6e6e6] text-chrome text-title font-semibold gap-2.5 transition-all active:scale-95 w-fit"
                                 >
                                     {move || if is_in_my_list() {
                                         view! {
-                                            <i class="ph-bold ph-check text-xl text-black"></i>
+                                            <i class="ph-bold ph-check text-xl text-chrome"></i>
                                             <span>{crate::i18n::t("media-in-list")}</span>
                                         }.into_any()
                                     } else {
                                         view! {
-                                            <i class="ph-bold ph-plus text-xl text-black"></i>
+                                            <i class="ph-bold ph-plus text-xl text-chrome"></i>
                                             <span>{crate::i18n::t("media-add-to-list")}</span>
                                         }.into_any()
                                     }}
@@ -197,9 +197,9 @@ pub fn SpotlightCard(
                                 <div class="flex items-center gap-2">
                                     <button
                                         on:click=on_play_click
-                                        class="flex items-center justify-center h-[54px] px-5 rounded-control bg-[#e6e6e6] text-black text-[20px] font-semibold gap-2 transition-all active:scale-95"
+                                        class="flex items-center justify-center h-[54px] px-5 rounded-control bg-[#e6e6e6] text-chrome text-title font-semibold gap-2 transition-all active:scale-95"
                                     >
-                                        <i class="ph-fill ph-play text-xl text-black"></i>
+                                        <i class="ph-fill ph-play text-xl text-chrome"></i>
                                         <span>{move || {
                                             let watch_store = crate::store::use_watch_store();
                                             if let Some(rec) = watch_store.get_record(movie_id, is_tv) {
@@ -212,7 +212,7 @@ pub fn SpotlightCard(
                                     </button>
                                     <button
                                         on:click=on_toggle_list
-                                        class="flex items-center justify-center h-[54px] px-5 rounded-control bg-line text-ink text-[20px] font-semibold gap-2 transition-all active:scale-95"
+                                        class="flex items-center justify-center h-[54px] px-5 rounded-control bg-line text-ink text-title font-semibold gap-2 transition-all active:scale-95"
                                     >
                                         {move || if is_in_my_list() {
                                             view! {

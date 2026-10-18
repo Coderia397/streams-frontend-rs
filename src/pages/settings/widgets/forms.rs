@@ -116,7 +116,7 @@ pub fn DigitBoxes(#[prop(into)] label: String, value: RwSignal<String>, length: 
                 <div class="flex gap-2" aria-hidden="true">
                     {(0..length).map(|i| view! {
                         <span
-                            class=if plain { "flex h-[72px] w-10 items-center justify-center rounded-control border bg-page text-[24px] font-medium text-ink" } else { "flex h-14 w-11 items-center justify-center rounded-control border bg-ink/10 text-title font-bold text-ink" }
+                            class=if plain { "flex h-[72px] w-10 items-center justify-center rounded-control border bg-page text-heading font-medium text-ink" } else { "flex h-14 w-11 items-center justify-center rounded-control border bg-ink/10 text-title font-bold text-ink" }
                             class=("border-ink", move || focused.get() && value.with(|v| v.chars().count()) == i)
                             class=("border-ink/50", move || plain && !(focused.get() && value.with(|v| v.chars().count()) == i))
                             class=("border-ink/20", move || !plain && !(focused.get() && value.with(|v| v.chars().count()) == i))
@@ -239,15 +239,15 @@ pub fn FloatField(
 ) -> impl IntoView {
     view! {
         <label class="relative flex h-[56px] w-full cursor-text items-center gap-4 rounded-control border border-[rgba(128,128,128,0.7)] bg-page px-4 focus-within:border-ink">
-            {icon.map(|i| view! { <i class=format!("ph ph-{i} shrink-0 text-[24px]") aria-hidden="true"></i> })}
+            {icon.map(|i| view! { <i class=format!("ph ph-{i} shrink-0 text-heading") aria-hidden="true"></i> })}
             <span class="flex min-w-0 flex-1 flex-col">
-                <span class="text-[12px] leading-[14px] text-ink/70">{label}</span>
+                <span class="text-fine leading-[14px] text-ink/70">{label}</span>
                 <input
                     type="text"
                     maxlength=maxlength
                     prop:value=move || value.get()
                     on:input=move |ev| value.set(event_target_value(&ev))
-                    class="min-w-0 bg-transparent text-[16px] leading-[22px] text-ink focus:outline-none"
+                    class="min-w-0 bg-transparent text-body-md leading-[22px] text-ink focus:outline-none"
                 />
             </span>
         </label>

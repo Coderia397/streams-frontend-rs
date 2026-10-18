@@ -22,13 +22,13 @@ fn Shelf(
 ) -> impl IntoView {
     view! {
         <section class="mb-[42px]">
-            <h2 class="mb-[16px] px-[var(--app-x,56px)] text-[24px] font-bold leading-[31px] text-ink" class=("hidden", move || own_heading && has_items.get())>{title}</h2>
+            <h2 class="mb-[16px] px-[var(--app-x,56px)] text-heading font-bold leading-[31px] text-ink" class=("hidden", move || own_heading && has_items.get())>{title}</h2>
             <Show
                 when=move || has_items.get()
                 fallback=move || view! {
                     <div class="mx-[var(--app-x,56px)] flex h-[161px] flex-col items-center justify-center gap-4 rounded-modal bg-menu">
                         <ShelfPicture icon=icon />
-                        <p class="text-[16px] text-ink/70">{empty.clone()}</p>
+                        <p class="text-body-md text-ink/70">{empty.clone()}</p>
                     </div>
                 }
             >

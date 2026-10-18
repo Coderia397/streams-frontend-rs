@@ -120,7 +120,7 @@ pub fn TimelineScrubber(
                 if is_hovering.get() && duration.get() > 0.0 {
                     view! {
                         <div
-                            class="absolute bottom-8 px-2 py-1 bg-field text-ink text-[14px] font-medium rounded-control pointer-events-none -translate-x-1/2"
+                            class="absolute bottom-8 px-2 py-1 bg-field text-ink text-body-sm font-medium rounded-control pointer-events-none -translate-x-1/2"
                             style=move || format!("left: {}%;", hover_pct.get())
                         >
                             {hover_time_str.get()}

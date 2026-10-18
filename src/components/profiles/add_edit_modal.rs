@@ -145,7 +145,7 @@ pub fn AddEditProfileModal(
                             }
                             class="peer sr-only"
                         />
-                        <span class="relative h-[26px] w-[46px] shrink-0 rounded-full bg-ink/40 transition-colors peer-checked:bg-brand peer-focus-visible:outline-2 after:absolute after:start-[3px] after:top-[3px] after:h-5 after:w-5 after:rounded-full after:bg-white after:transition-transform peer-checked:after:translate-x-5 rtl:peer-checked:after:-translate-x-5" aria-hidden="true"></span>
+                        <span class="relative h-[26px] w-[46px] shrink-0 rounded-full bg-ink/40 transition-colors peer-checked:bg-brand peer-focus-visible:outline-2 after:absolute after:start-[3px] after:top-[3px] after:h-5 after:w-5 after:rounded-full after:bg-chrome-ink after:transition-transform peer-checked:after:translate-x-5 rtl:peer-checked:after:-translate-x-5" aria-hidden="true"></span>
                     </label>
                 </div>
 

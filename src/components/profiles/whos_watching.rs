@@ -117,7 +117,7 @@ pub fn WhosWatchingGate(
         <div class="fixed inset-0 z-(--z-screen) flex select-none flex-col items-center justify-center text-ink animate-in fade-in duration-(--motion-slower)" style="background: radial-gradient(ellipse 90% 100% at 50% 0%, #481a1a 0%, #1a0a0a 55%, #0b0405 100%);">
             <img src=crate::brand::LOGO_WORDMARK alt=crate::brand::NAME class="absolute left-[var(--app-x,56px)] top-[26px] h-[24px] w-auto" />
             {move || profile_store.notice.get().map(|m| view! { <p role="status" class="mb-8 max-w-[85vw] rounded-control border border-danger/50 bg-danger/10 px-4 py-3 text-center text-body-sm text-danger md:max-w-xl">{m}</p> })}
-            <h1 class="text-center text-[32px] font-bold leading-[38px] text-ink">
+            <h1 class="text-center text-heading-xl font-bold leading-[38px] text-ink">
                 {move || if edit_mode.get() { crate::i18n::t("profile-manage-title") } else { crate::i18n::t("profile-whos-watching") }}
             </h1>
 
@@ -138,12 +138,12 @@ pub fn WhosWatchingGate(
                                 }}
                                 // edit mode: a dark layer with a pencil
                                 {move || edit_mode.get().then(|| view! {
-                                    <div class="absolute inset-0 flex items-center justify-center bg-void/55"><i class="ph-bold ph-pencil-simple text-[40px] text-ink"></i></div>
+                                    <div class="absolute inset-0 flex items-center justify-center bg-void/55"><i class="ph-bold ph-pencil-simple text-display text-ink"></i></div>
                                 })}
                             </div>
-                            <span class="flex items-center gap-1.5 text-[18px] font-medium leading-[23px] text-ink/70 transition-colors group-hover:text-ink">
+                            <span class="flex items-center gap-1.5 text-title-sm font-medium leading-[23px] text-ink/70 transition-colors group-hover:text-ink">
                                 {name}
-                                {(has_pin && !edit_mode.get()).then(|| view! { <i class="ph ph-lock-key text-[16px]"></i> })}
+                                {(has_pin && !edit_mode.get()).then(|| view! { <i class="ph ph-lock-key text-body-md"></i> })}
                             </span>
                         </button>
                     }
@@ -153,9 +153,9 @@ pub fn WhosWatchingGate(
                 {move || (profiles_signal.get().len() < 5).then(|| view! {
                     <button type="button" on:click=move |_| set_modal_state.set(Some(("add".to_string(), None))) class="group flex w-[160px] cursor-pointer flex-col items-center gap-[10px] p-[16px] focus:outline-none">
                         <div class="flex h-[128px] w-[128px] items-center justify-center rounded-modal bg-[#3b2527] outline outline-[3px] outline-transparent transition-[outline-color] group-hover:outline-ink">
-                            <i class="ph ph-plus text-[48px] text-ink"></i>
+                            <i class="ph ph-plus text-icon-lg text-ink"></i>
                         </div>
-                        <span class="text-[18px] font-medium leading-[23px] text-ink/70 transition-colors group-hover:text-ink">{crate::i18n::t("whos-watching-add-profile")}</span>
+                        <span class="text-title-sm font-medium leading-[23px] text-ink/70 transition-colors group-hover:text-ink">{crate::i18n::t("whos-watching-add-profile")}</span>
                     </button>
                 })}
             </div>
@@ -165,9 +165,9 @@ pub fn WhosWatchingGate(
                 <button
                     type="button"
                     on:click={ let navigate = navigate.clone(); move |_| if manage { navigate("/browse", Default::default()) } else { set_edit_mode.update(|e| *e = !*e) } }
-                    class="flex h-10 cursor-pointer items-center gap-2 rounded-full border border-ink bg-void/70 px-5 text-[16px] font-medium text-ink transition-colors hover:bg-ink hover:text-void active:scale-95"
+                    class="flex h-10 cursor-pointer items-center gap-2 rounded-full border border-ink bg-void/70 px-5 text-body-md font-medium text-ink transition-colors hover:bg-ink hover:text-void active:scale-95"
                 >
-                    {move || if edit_mode.get() { view! { {crate::i18n::t("common-done")} }.into_any() } else { view! { <i class="ph ph-pencil-simple text-[18px]"></i>{crate::i18n::t("profile-manage")} }.into_any() }}
+                    {move || if edit_mode.get() { view! { {crate::i18n::t("common-done")} }.into_any() } else { view! { <i class="ph ph-pencil-simple text-title-sm"></i>{crate::i18n::t("profile-manage")} }.into_any() }}
                 </button>
             </div>
 

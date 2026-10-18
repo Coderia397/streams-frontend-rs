@@ -299,7 +299,7 @@ pub fn RatingPill(
                 }}
             </button>
             // the opened pill, centred on the button
-            <div class="rating-pill absolute left-1/2 top-1/2 z-50 flex items-center gap-1 rounded-full bg-field p-[3px] shadow-[0_6px_18px_rgba(0,0,0,0.55)]">
+            <div class="rating-pill absolute left-1/2 top-1/2 z-50 flex items-center gap-1 rounded-full bg-field p-[3px] shadow-rating">
                 {options.into_iter().map(|(option, label_key)| {
                     let is_set = move || rating.get() == Some(option);
                     view! {
@@ -320,7 +320,7 @@ pub fn RatingPill(
                                 }}
                             </button>
                             // the bubble over the option
-                            <span class="rating-bubble pointer-events-none absolute bottom-[calc(100%+10px)] left-1/2 -translate-x-1/2 whitespace-nowrap rounded-control bg-[#e6e6e6] px-3 py-1.5 text-[15px] font-semibold leading-none text-black opacity-0 transition-opacity duration-150 group-hover/opt:opacity-100">
+                            <span class="rating-bubble pointer-events-none absolute bottom-[calc(100%+10px)] left-1/2 -translate-x-1/2 whitespace-nowrap rounded-control bg-[#e6e6e6] px-3 py-1.5 text-body font-semibold leading-none text-chrome opacity-0 transition-opacity duration-(--motion-fast) group-hover/opt:opacity-100">
                                 {move || if is_set() { crate::i18n::t("rating-rated") } else { crate::i18n::t(label_key) }}
                                 <span class="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-[6px] border-t-[6px] border-x-transparent border-t-[#e6e6e6]"></span>
                             </span>

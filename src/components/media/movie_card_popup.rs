@@ -275,7 +275,7 @@ pub fn MovieCardPopup(
         <Portal>
             <div
                 data-popup="true"
-                class="absolute z-(--z-screen) pointer-events-auto rounded-[20px] overflow-hidden bg-raised text-ink shadow-chip animate-in fade-in zoom-in-95 duration-(--motion-base)"
+                class="absolute z-(--z-screen) pointer-events-auto rounded-chip overflow-hidden bg-raised text-ink shadow-chip animate-in fade-in zoom-in-95 duration-(--motion-base)"
                 style=format!(
                     "width: {}px; top: {}px; left: {}px; transform-origin: {};",
                     popup_w(hovered_rect.width()), top, left, transform_origin
@@ -445,12 +445,12 @@ pub fn MovieCardPopup(
                     {match resume.clone() {
                         Some(r) => view! {
                             <div class="mt-3 mb-1">
-                                <p class="text-ink text-[18px] font-bold leading-snug">{r.label.clone()}</p>
+                                <p class="text-ink text-title-sm font-bold leading-snug">{r.label.clone()}</p>
                                 <div class="mt-3 flex items-center gap-3">
                                     <div class="h-[3px] flex-1 overflow-hidden rounded-full bg-ink/40">
                                         <div class="h-full bg-brand" style=format!("width: {:.1}%;", r.percent.clamp(2.0, 100.0)) />
                                     </div>
-                                    <span class="text-ink-silver text-[16px] tabular-nums">{r.time_text.clone()}</span>
+                                    <span class="text-ink-silver text-body-md tabular-nums">{r.time_text.clone()}</span>
                                 </div>
                             </div>
                         }.into_any(),
