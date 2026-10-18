@@ -1693,5 +1693,6 @@
  "set-primary-cannot-delete": "기본 프로필은 삭제할 수 없습니다.",
  "set-edit-profile-page": "프로필 편집",
  "set-handle-lead": "핸들은 { $brand } 게임에서 다른 { $brand } 멤버와 함께 플레이할 때 사용되는 고유 이름입니다.",
- "set-learn-more": "자세히 알아보기"
+ "set-learn-more": "자세히 알아보기",
+ "set-overview-profiles": "{ $count ->\n   *[other] 프로필 { $count }개\n}"
 }

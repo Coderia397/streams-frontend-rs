@@ -1803,6 +1803,10 @@ set-overview-quick = 빠른 링크
 set-overview-update-password = 암호 업데이트
 set-overview-edit = 설정 편집
 set-overview-edit-hint = 언어, 자막, 자동 재생, 알림, 프라이버시 등
+set-overview-profiles =
+    { $count ->
+       *[other] 프로필 { $count }개
+    }
 set-security-access = 접근 및 프라이버시
 set-privacy-hint = 개인 정보 사용 관리
 set-profiles-parental = 부모 제어 및 권한
