@@ -3,7 +3,7 @@ use crate::services::ai_engine::{engine_text, FeedRow};
 use super::movie_card::MovieCard;
 use super::collection_logo::{design_of, CollectionLogo, LogoFilters};
 use super::row_scroll::{page_target, Edge, EdgeButton};
-use super::kids_banner::{KidsCollectionLogo, KidsConfetti};
+use super::kids_banner::{KidsBackdrop, KidsCollectionLogo};
 
 /// The page that lists a whole collection: the page of the genre the engine names (Halloween), or for a mood the numbered page of the collection (`/browse/genre/<n>?c=<id>`, the number
 /// is made from the id, as Netflix numbers its clusters).
@@ -40,7 +40,8 @@ pub fn CollectionRow(row: FeedRow) -> impl IntoView {
     let design = design_of(&c.id);
     // a Kids collection has its own look (Kids lettering, colour, confetti)
     let is_kids = c.label_key == "collection.kids";
-    let overlay = if is_kids { format!("hsl({h} 70% 36% / 0.5)") } else { format!("hsl({h} 55% 14% / 0.7)") };
+    // a Kids collection has a designed backdrop (colour scheme and flat shapes) in place of its dimmed artwork
+    let background = if is_kids { "none".to_string() } else { format!("linear-gradient(hsl({h} 55% 14% / 0.7), hsl({h} 55% 14% / 0.7)), url('{artwork}')") };
     let logo_text = heading.clone();
 
     // the row of titles pages like every other row
@@ -111,10 +112,9 @@ pub fn CollectionRow(row: FeedRow) -> impl IntoView {
             // the artwork: taller than the band and stretched past its sides, so that its edges fade into the page
             <div
                 class="absolute -inset-x-[6%] -inset-y-[18%] -z-10 bg-cover bg-center"
-                style=format!("background-image: linear-gradient({overlay}, {overlay}), url('{artwork}'); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 14%, #000 32%, #000 68%, rgba(0,0,0,0.55) 86%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 14%, #000 32%, #000 68%, rgba(0,0,0,0.55) 86%, transparent 100%);")
+                style=format!("background-image: {background}; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 14%, #000 32%, #000 68%, rgba(0,0,0,0.55) 86%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.55) 14%, #000 32%, #000 68%, rgba(0,0,0,0.55) 86%, transparent 100%);")
                 aria-hidden="true"
-            ></div>
-            {is_kids.then(|| view! { <KidsConfetti hue=h avoid=19.0 /> })}
+            >{is_kids.then(|| view! { <KidsBackdrop seed=h /> })}</div>
             <div class="relative flex flex-col md:flex-row md:items-center gap-5 md:gap-6 py-8 md:py-14 md:min-h-[430px]">
                 <div class="px-[var(--app-x,56px)] md:pe-0 md:w-[38%] md:flex-none flex flex-col items-center text-center">
                     {if is_kids {
@@ -168,16 +168,17 @@ pub fn CollectionHero(collection: crate::services::ai_engine::Collection) -> imp
     let design = design_of(&collection.id);
     let description = collection.description.clone();
     let is_kids = collection.label_key == "collection.kids";
-    let overlay = if is_kids { format!("hsl({h} 70% 36% / 0.4)") } else { format!("hsl({h} 55% 14% / 0.5)") };
+    let background = if is_kids { "none".to_string() } else { format!("linear-gradient(hsl({h} 55% 14% / 0.5), hsl({h} 55% 14% / 0.5)), url('{artwork}')") };
+    let frames: Vec<String> = collection.images.iter().take(3).map(|p| format!("{}/w780{}", crate::config::TMDB_IMAGE_URL, p)).collect();
     let logo_text = heading.clone();
     view! {
         <section class="collection-hero relative isolate w-full h-[78vh] md:h-[680px] -mb-24 md:-mb-32" aria-label=heading_label>
             <LogoFilters />
             <div
                 class="absolute -inset-x-[4%] -top-[6%] -bottom-[6%] -z-10 bg-cover bg-center"
-                style=format!("background-image: linear-gradient({overlay}, {overlay}), url('{artwork}'); -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 58%, rgba(0,0,0,0.5) 80%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 58%, rgba(0,0,0,0.5) 80%, transparent 100%);")
+                style=format!("background-image: {background}; -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 58%, rgba(0,0,0,0.5) 80%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 58%, rgba(0,0,0,0.5) 80%, transparent 100%);")
                 aria-hidden="true"
-            ></div>
+            >{is_kids.then(|| view! { <KidsBackdrop seed=h images=frames.clone() /> })}</div>
             <div class="absolute inset-x-0 bottom-24 md:bottom-32 px-[var(--app-x,56px)] max-w-[820px]">
                 {if is_kids {
                     view! { <div class="inline-block w-[min(460px,90%)]"><KidsCollectionLogo text=logo_text hue=h /></div><p class="mt-4 inline-block rounded-full bg-white px-4 py-1 text-caption md:text-xs font-bold uppercase tracking-[0.2em] text-[#e30b15] shadow-md">{eyebrow_text}</p> }.into_any()

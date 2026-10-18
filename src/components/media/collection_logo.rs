@@ -237,15 +237,18 @@ pub fn LogoGalleryPage() -> impl IntoView {
             <LogoFilters />
             <h1 class="mb-8 text-3xl font-bold">{GALLERY_TITLE}</h1>
             <h2 class="mb-4 text-xl font-bold">"Kids collections"</h2>
-            <div class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+            <div class="mb-12 grid grid-cols-1 gap-6 xl:grid-cols-2">
                 {[("Spooky Season", "Friendly ghosts and silly monsters, fun and not frightening", 28u32), ("Besties and Buddies", "Friends who stick together, in good times and silly ones", 200), ("Shh, Secrets and Mysteries", "Hidden doors, clues and gentle mysteries", 265), ("Christmas Magic", "Snow, presents and festive songs", 140), ("All the Animals", "Lions, pups, penguins and plenty more", 95), ("For Little Ones", "Gentle shows and songs for the youngest viewers", 330)].into_iter().map(|(name, sentence, hue)| view! {
-                    <div class="relative isolate overflow-hidden rounded-card py-10" style=format!("background: linear-gradient(hsl({hue} 70% 36% / 0.55), hsl({hue} 70% 30% / 0.75)), #222;")>
-                        <super::kids_banner::KidsConfetti hue=hue />
-                        <div class="flex flex-col items-center px-6 text-center">
+                    <div class="relative isolate flex min-h-[330px] items-center overflow-hidden rounded-card">
+                        <super::kids_banner::KidsBackdrop seed=hue />
+                        <div class="relative flex w-[40%] flex-none flex-col items-center px-5 text-center">
                             <super::kids_banner::KidsCollectionLogo text=name hue=hue />
                             <p class="mt-3 rounded-full bg-white px-4 py-1 text-caption font-bold uppercase tracking-[0.2em] text-[#e30b15] shadow-md">"Streams Kids"</p>
-                            <p class="mt-5 max-w-[30ch] text-body leading-snug text-ink" style="font-family: 'Logo Kids','Fredoka',ui-rounded,sans-serif; font-weight: 500;">{sentence}</p>
-                            <span class="mt-5 inline-flex h-11 items-center rounded-full bg-white px-7 text-body-md font-bold text-[#e30b15] shadow-lg">"Explore all"</span>
+                            <p class="mt-4 max-w-[26ch] text-body leading-snug text-ink" style="font-family: 'Logo Kids','Fredoka',ui-rounded,sans-serif; font-weight: 500;">{sentence}</p>
+                            <span class="mt-4 inline-flex h-10 items-center rounded-full bg-white px-6 text-body-md font-bold text-[#e30b15] shadow-lg">"Explore all"</span>
+                        </div>
+                        <div class="relative flex flex-1 gap-3 overflow-hidden pe-3">
+                            {(0..4).map(|i| view! { <div class="aspect-video w-[30%] flex-none rounded-tile bg-black/35" style=format!("opacity: {}", 1.0 - i as f32 * 0.12)></div> }).collect::<Vec<_>>()}
                         </div>
                     </div>
                 }).collect::<Vec<_>>()}
