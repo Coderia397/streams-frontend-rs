@@ -100,6 +100,10 @@ pub fn Navbar(
                         class="h-[28px] cursor-pointer flex-shrink-0"
                     />
                 </a>
+                // the Kids app and site put the word "kids" in its own lettering next to the logo
+                <Show when=move || is_kids.get()>
+                    <a href="/browse" class="ms-3 flex-shrink-0"><crate::components::profiles::kids_splash::KidsWordmark class="h-9 w-auto" /></a>
+                </Show>
 
                 // Nav links — exact spacing and typography (Task 086)
                 <ul class="flex items-center gap-[6px] ml-6 text-body-md font-normal text-ink">

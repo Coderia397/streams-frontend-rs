@@ -180,7 +180,7 @@ pub fn NavbarMobile(
                     {move || {
                         let p = location.pathname.get();
                         if is_kids.get() && (p == "/browse" || p == "/" || p.is_empty()) {
-                            view! { <crate::components::profiles::kids_splash::KidsWordmark class="ms-2 h-8 w-auto" /> }.into_any()
+                            view! { <crate::components::profiles::kids_splash::KidsWordmark class="-ms-1 h-8 w-auto" /> }.into_any()
                         } else {
                             view! { <span class="ms-1 truncate text-heading font-bold leading-none tracking-tight text-ink">{page_title()}</span> }.into_any()
                         }

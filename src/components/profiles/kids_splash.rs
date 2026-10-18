@@ -8,8 +8,8 @@ fn Lettering(cx: f64, base: f64, size: f64, edge: f64) -> impl IntoView {
     let font = "'Logo Kids', 'Fredoka', ui-rounded, 'Arial Rounded MT Bold', sans-serif";
     view! {
         // the edge first (white letters grown by a round stroke), then the red letters on top
-        <text x=cx y=base text-anchor="middle" font-family=font font-weight="700" font-size=size fill="#ffffff" stroke="#ffffff" stroke-width=edge stroke-linejoin="round" stroke-linecap="round" letter-spacing=size * 0.01>"kids"</text>
-        <text x=cx y=base text-anchor="middle" font-family=font font-weight="700" font-size=size fill="#d22f26" letter-spacing=size * 0.01>"kids"</text>
+        <text x=cx y=base text-anchor="middle" font-family=font font-weight="500" font-size=size fill="#ffffff" stroke="#ffffff" stroke-width=edge stroke-linejoin="round" stroke-linecap="round" letter-spacing=size * 0.03>"kids"</text>
+        <text x=cx y=base text-anchor="middle" font-family=font font-weight="500" font-size=size fill="#e30b15" stroke="#e30b15" stroke-width=size * 0.03 stroke-linejoin="round" letter-spacing=size * 0.03>"kids"</text>
     }
 }
 
@@ -26,7 +26,7 @@ pub fn KidsSplash(#[prop(optional, into)] class: String) -> impl IntoView {
             <rect x="446" y="0" width="428" height="1120" fill="url(#kids-orange)" />
             <rect x="874" y="0" width="632" height="1120" fill="#ed77c5" />
             <rect x="1506" y="0" width="494" height="1120" fill="url(#kids-blue)" />
-            <Lettering cx=1000.0 base=690.0 size=460.0 edge=64.0 />
+            <Lettering cx=1000.0 base=690.0 size=460.0 edge=120.0 />
         </svg>
     }
 }
@@ -36,7 +36,7 @@ pub fn KidsSplash(#[prop(optional, into)] class: String) -> impl IntoView {
 pub fn KidsWordmark(#[prop(optional, into)] class: String) -> impl IntoView {
     view! {
         <svg class=class viewBox="0 0 900 470" role="img" aria-label=crate::i18n::t("nav-kids") xmlns="http://www.w3.org/2000/svg">
-            <Lettering cx=450.0 base=345.0 size=430.0 edge=70.0 />
+            <Lettering cx=450.0 base=345.0 size=430.0 edge=112.0 />
         </svg>
     }
 }
