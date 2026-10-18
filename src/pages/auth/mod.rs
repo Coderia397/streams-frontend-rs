@@ -26,18 +26,18 @@ pub enum Look {
 #[component]
 pub fn AuthShell(children: Children, #[prop(default = Look::Dark)] look: Look, #[prop(optional)] right: Option<(&'static str, &'static str)>, #[prop(default = false)] back: bool) -> impl IntoView {
     let dark = look == Look::Dark;
-    let page = if dark { "bg-linear-to-b from-brand-deep/40 via-void to-void text-ink" } else { "bg-paper text-paper-ink" };
-    let header = if dark { "border-b border-ink/10" } else { "border-b border-paper-line bg-paper" };
+    let page = if dark { "bg-void text-ink sm:bg-linear-to-b sm:from-brand-deep/40 sm:via-void sm:to-void" } else { "bg-paper text-paper-ink" };
+    let header = if dark { "sm:border-b sm:border-ink/10" } else { "border-b border-paper-line bg-paper" };
     let main = if dark { "" } else { "bg-paper" };
     let logo = if dark { crate::brand::LOGO_WORDMARK } else { crate::brand::LOGO_WORDMARK_PRIMARY };
     let right_link = if dark { "text-ink" } else { "text-paper-ink" };
     view! {
         <div class=format!("flex min-h-screen flex-col font-sans {page}")>
             <header class=header>
-                <div class="mx-auto flex h-[90px] max-w-[1280px] items-center justify-between px-6 md:px-12">
+                <div class="mx-auto flex h-16 max-w-[1280px] sm:h-[90px] items-center justify-between px-6 md:px-12">
                     <div class="flex items-center gap-2">
                         {back.then(|| view! { <a href="/" aria-label=move || tr("auth-back") class="-ms-2 flex h-10 w-10 items-center justify-center text-title sm:hidden"><i class="ph-bold ph-arrow-left rtl:-scale-x-100"></i></a> })}
-                        <a href="/" aria-label=crate::brand::NAME><img src=logo alt=crate::brand::NAME class="h-8 w-auto md:h-10" /></a>
+                        <a href="/" aria-label=crate::brand::NAME><img src=logo alt=crate::brand::NAME class="h-6 w-auto sm:h-8 md:h-10" /></a>
                     </div>
                     {right.map(|(href, key)| view! { <a href=href class=format!("text-body-sm font-bold hover:underline {right_link}")>{tr(key)}</a> })}
                 </div>

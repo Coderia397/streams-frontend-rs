@@ -89,7 +89,7 @@ pub fn LoginPage() -> impl IntoView {
                     Step::Email => view! {
                         // the phone version asks the way the Netflix app does; wider screens use the web wording
                         <h1 class="text-heading-xl font-bold leading-tight sm:hidden">{tr("auth-login-app-title")}</h1>
-                        <p class="mb-6 mt-2 text-body-md text-ink-body sm:hidden">{tr("auth-login-app-subtitle")}</p>
+                        <p class="mb-6 mt-2 text-body-md text-ink-soft sm:hidden">{tr("auth-login-app-subtitle")}</p>
                         <h1 class="hidden text-heading-xl font-bold leading-tight sm:block">{tr("auth-login-title")}</h1>
                         <p class="mb-6 mt-2 hidden text-body-md text-ink-body sm:block">{tr("auth-login-subtitle")}</p>
                         <Notice text=error />
@@ -127,11 +127,11 @@ pub fn LoginPage() -> impl IntoView {
                     .into_any(),
                 }}
                 <details class="group mt-8">
-                    <summary class="flex cursor-pointer list-none items-center gap-1 text-body-md">
+                    <summary class="flex cursor-pointer list-none items-center gap-1 text-body-md font-bold sm:font-normal">
                         {tr("auth-get-help")}
                         <i class="ph-bold ph-caret-down text-body-sm transition-transform duration-(--motion-base) group-open:rotate-180" aria-hidden="true"></i>
                     </summary>
-                    <ul class="mt-3 space-y-2 text-body-sm text-ink-body">
+                    <ul class="mt-3 space-y-3 text-body-sm font-semibold text-ink sm:space-y-2 sm:font-normal sm:text-ink-body">
                         <li><a href="/help/article/sign-in" class="underline underline-offset-2 hover:text-ink">{tr("auth-forgot-email")}</a></li>
                         <li><a href="/forgot" class="underline underline-offset-2 hover:text-ink">{tr("auth-forgot-link")}</a></li>
                         <li><a href="/help/article/sign-in" class="underline underline-offset-2 hover:text-ink">{tr("auth-learn-signin")}</a></li>
