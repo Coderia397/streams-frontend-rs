@@ -176,7 +176,15 @@ pub fn NavbarMobile(
                             </a>
                         }.into_any()
                     }}
-                    <span class="ms-1 truncate text-heading font-bold leading-none tracking-tight text-ink">{page_title}</span>
+                    // the Kids app puts the word "kids" in its own lettering where Home says "Home"
+                    {move || {
+                        let p = location.pathname.get();
+                        if is_kids.get() && (p == "/browse" || p == "/" || p.is_empty()) {
+                            view! { <crate::components::profiles::kids_splash::KidsWordmark class="ms-2 h-8 w-auto" /> }.into_any()
+                        } else {
+                            view! { <span class="ms-1 truncate text-heading font-bold leading-none tracking-tight text-ink">{page_title()}</span> }.into_any()
+                        }
+                    }}
                 </div>
             </header>
 
