@@ -15,7 +15,7 @@ mod stepup;
 mod notifications;
 mod privacy;
 mod transfer;
-mod hub;
+pub mod hub;
 mod languages;
 pub(crate) mod prefs;
 mod profile;

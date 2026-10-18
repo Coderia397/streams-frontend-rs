@@ -14,13 +14,13 @@ pub fn SubtitleDrawer(
     on_change_delay: Callback<f64>,
     on_close: Callback<()>,
 ) -> impl IntoView {
-    let row = "flex h-[59px] w-full items-center px-[10px] text-start text-[21px] transition-colors duration-(--motion-quick) hover:bg-[#3a3a3a] hover:text-ink focus-visible:outline-2 focus-visible:outline-ink";
+    let row = "flex h-[59px] w-full items-center px-[10px] text-start text-[21px] transition-colors duration-(--motion-quick) hover:bg-lift hover:text-ink focus-visible:outline-2 focus-visible:outline-ink";
     view! {
         <Show when=move || is_open.get()>
             // a click anywhere else closes the panel (no dimming)
             <div on:click=move |_| on_close.run(()) class="fixed inset-0 z-40" />
 
-            <div class="fixed bottom-[94px] right-0 z-50 flex max-h-[calc(100vh-190px)] w-[min(681px,100vw)] flex-col overflow-hidden rounded-[8px] bg-[#262626] shadow-2xl">
+            <div class="fixed bottom-[94px] right-0 z-50 flex max-h-[calc(100vh-190px)] w-[min(681px,100vw)] flex-col overflow-hidden rounded-card bg-field shadow-2xl">
                 <div class="flex-1 overflow-y-auto px-[35px] pb-[20px] pt-[26px]">
                     <h2 class="mb-[18px] text-[28px] font-medium leading-[34px] text-ink">{crate::i18n::t("subtitle-drawer-subtitles")}</h2>
 
@@ -51,12 +51,12 @@ pub fn SubtitleDrawer(
                     }}
 
                     <Show when=move || selected_sub_url.get().is_some()>
-                        <div class="mt-[14px] flex items-center justify-between border-t border-[#4d4d4d] px-[10px] pt-[14px] text-[18px] text-[#b3b3b3]">
+                        <div class="mt-[14px] flex items-center justify-between border-t border-line-strong px-[10px] pt-[14px] text-[18px] text-[#b3b3b3]">
                             <span>{crate::i18n::t("subtitle-drawer-subtitle-timing-offset")}</span>
                             <span class="flex items-center gap-4 text-ink">
-                                <button on:click=move |_| on_change_delay.run(sub_delay.get() - 0.5) class="h-9 w-12 rounded-[4px] hover:bg-[#3a3a3a]">"-0.5s"</button>
+                                <button on:click=move |_| on_change_delay.run(sub_delay.get() - 0.5) class="h-9 w-12 rounded-control hover:bg-lift">"-0.5s"</button>
                                 <span class="w-14 text-center">{move || format!("{:+.1}s", sub_delay.get())}</span>
-                                <button on:click=move |_| on_change_delay.run(sub_delay.get() + 0.5) class="h-9 w-12 rounded-[4px] hover:bg-[#3a3a3a]">"+0.5s"</button>
+                                <button on:click=move |_| on_change_delay.run(sub_delay.get() + 0.5) class="h-9 w-12 rounded-control hover:bg-lift">"+0.5s"</button>
                             </span>
                         </div>
                     </Show>

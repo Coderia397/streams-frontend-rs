@@ -3,7 +3,7 @@ use crate::i18n::t;
 use leptos::prelude::*;
 
 pub(super) const ROW: &str = "set-row flex min-h-settings-row w-full items-center border-b border-set-line px-1 py-3 text-start last:border-b-0 hover:bg-ink/5 focus-visible:bg-ink/5 focus-visible:outline-none lg:relative lg:min-h-[80px] lg:border-b-0 lg:px-6 lg:py-6 lg:before:absolute lg:before:inset-x-4 lg:before:top-0 lg:before:h-px lg:before:bg-set-line lg:first:before:hidden";
-pub(super) const CARD: &str = "set-card rounded-card border border-set-edge bg-set-card px-4 lg:rounded-[8px] lg:px-1";
+pub(super) const CARD: &str = "set-card rounded-card border border-set-edge bg-set-card px-4 lg:rounded-card lg:px-1";
 
 #[component]
 pub fn Section(#[prop(optional, into)] title: Option<String>, children: Children) -> impl IntoView {

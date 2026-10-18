@@ -33,11 +33,11 @@ pub fn EpisodeDrawer(
             // a click anywhere else closes the panel (no dimming)
             <div on:click=move |_| on_close.run(()) class="fixed inset-0 z-40" />
 
-            <div class="fixed bottom-[94px] right-0 z-50 flex h-[calc(100vh-253px)] min-h-[320px] w-[min(760px,100vw)] flex-col overflow-hidden bg-[#262626] shadow-2xl">
+            <div class="fixed bottom-[94px] right-0 z-50 flex h-[calc(100vh-253px)] min-h-[320px] w-[min(760px,100vw)] flex-col overflow-hidden bg-field shadow-2xl">
                 // header: back arrow and the season
                 <button
                     on:click=move |_| if many_seasons() { set_show_seasons.update(|s| *s = !*s) }
-                    class="flex h-[74px] w-full shrink-0 items-center gap-[18px] px-[24px] text-start text-ink transition-colors duration-(--motion-quick) hover:bg-[#333333]"
+                    class="flex h-[74px] w-full shrink-0 items-center gap-[18px] px-[24px] text-start text-ink transition-colors duration-(--motion-quick) hover:bg-line"
                 >
                     <Show when=many_seasons><i class="ph ph-arrow-left text-[26px]"></i></Show>
                     <span class="text-[30px] font-medium leading-[36px]">
@@ -74,7 +74,7 @@ pub fn EpisodeDrawer(
                                     let percent = if is_current {
                                         watch_store.get_record(series_id, true).filter(|r| r.season == Some(s_num) && r.episode == Some(ep_num)).map(|r| r.percentage.clamp(0.0, 100.0)).unwrap_or(0.0)
                                     } else { 0.0 };
-                                    let open_class = if is_current { "bg-[#181818]" } else { "hover:bg-[#404040] focus-visible:bg-[#181818] focus-visible:outline-2 focus-visible:outline-ink" };
+                                    let open_class = if is_current { "bg-raised" } else { "hover:bg-[#404040] focus-visible:bg-raised focus-visible:outline-2 focus-visible:outline-ink" };
                                     view! {
                                         <button
                                             on:click=move |_| { on_select_episode.run((s_num, ep_num)); on_close.run(()); }
@@ -84,7 +84,7 @@ pub fn EpisodeDrawer(
                                             <span class=format!("flex w-full items-center gap-[24px] text-[23px] font-medium text-ink {}", if is_current { "pt-[22px]" } else { "h-[85px] group-focus-visible:pt-[22px] group-focus-visible:h-auto" })>
                                                 <span class="w-[26px] shrink-0 text-center">{ep_num}</span>
                                                 <span class="min-w-0 flex-1 truncate">{name.clone()}</span>
-                                                <span class="relative h-[2px] w-[131px] shrink-0 bg-[#808080]"><span class="absolute inset-y-0 left-0 bg-brand" style=format!("width:{percent}%")></span></span>
+                                                <span class="relative h-[2px] w-[131px] shrink-0 bg-mute"><span class="absolute inset-y-0 left-0 bg-brand" style=format!("width:{percent}%")></span></span>
                                             </span>
                                             // the open part: thumbnail and four lines of the summary
                                             <span class=format!("w-full gap-[26px] pb-[22px] pt-[12px] {}", if is_current { "flex" } else { "hidden group-focus-visible:flex" })>

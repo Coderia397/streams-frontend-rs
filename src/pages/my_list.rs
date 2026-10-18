@@ -26,7 +26,7 @@ fn Shelf(
             <Show
                 when=move || has_items.get()
                 fallback=move || view! {
-                    <div class="mx-[var(--app-x,56px)] flex h-[161px] flex-col items-center justify-center gap-4 rounded-[12px] bg-[#2a2a2a]">
+                    <div class="mx-[var(--app-x,56px)] flex h-[161px] flex-col items-center justify-center gap-4 rounded-modal bg-menu">
                         <ShelfPicture icon=icon />
                         <p class="text-[16px] text-ink/70">{empty.clone()}</p>
                     </div>
@@ -84,9 +84,26 @@ pub fn MyListPage() -> impl IntoView {
     let trailers_list = Signal::derive(move || trailers.get().unwrap_or_default());
     let liked_list = Signal::derive(move || liked.get().unwrap_or_default());
 
+    let profiles = crate::store::use_profile_store();
+    let sheet = RwSignal::new(false);
+    let active = Memo::new(move |_| profiles.profiles.with(|l| profiles.active_profile_id.with(|id| l.iter().find(|p| Some(&p.id) == id.as_ref()).or(l.first()).cloned())));
+
     view! {
         <Layout>
             <div class="relative min-h-screen pb-16 pt-28 md:pt-[110px]">
+                // On a phone the page opens with the profile in use and a caret; it opens the Profile sheet
+                <button type="button" on:click=move |_| sheet.set(true) class="mb-6 flex items-center gap-3 px-4 sm:hidden" aria-haspopup="dialog">
+                    <span class="h-8 w-8 overflow-hidden rounded-control">
+                        {move || match active.get() {
+                            Some(p) if p.is_kids && p.avatar_url.is_none() => view! { <crate::components::profiles::kids_avatar::KidsAvatar size=32.0 /> }.into_any(),
+                            Some(p) => view! { <img src=p.avatar_url.unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string()) alt="" class="h-full w-full object-cover" /> }.into_any(),
+                            None => view! { <span /> }.into_any(),
+                        }}
+                    </span>
+                    <span class="text-heading font-bold">{move || active.get().map(|p| p.name).unwrap_or_default()}</span>
+                    <i class="ph-fill ph-caret-down text-body-md text-ink-silver" aria-hidden="true"></i>
+                </button>
+                <crate::pages::settings::hub::ProfileSheet open=sheet />
                 <Shelf title=t("my-continue") icon=ShelfIcon::Clock empty=t("my-continue-empty") has_items=continuing own_heading=true>
                     <ContinueWatchingRow title=t("my-continue") />
                 </Shelf>

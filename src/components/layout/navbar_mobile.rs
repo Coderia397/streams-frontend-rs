@@ -81,11 +81,12 @@ pub fn NavbarMobile(
     };
 
     // Avatar of the active profile (first profile until the profile store knows better), used in the profile tab and the header
-    let current_avatar = move || {
-        profile_store.profiles.get().first()
-            .and_then(|p| p.avatar_url.clone())
-            .unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string())
+    let active_profile = move || {
+        let id = profile_store.active_profile_id.get();
+        profile_store.profiles.with(|l| l.iter().find(|p| Some(&p.id) == id.as_ref()).or(l.first()).cloned())
     };
+    let current_avatar = move || active_profile().and_then(|p| p.avatar_url).unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string());
+    let is_kids = Signal::derive(move || active_profile().is_some_and(|p| p.is_kids));
 
     let nav_to_browse = navigate.clone();
     let nav_to_latest = navigate.clone();
@@ -101,6 +102,7 @@ pub fn NavbarMobile(
                 set_active_bottom_nav.set("home");
                 nav_to_browse("/browse", Default::default());
             }),
+            shown: Signal::derive(|| true),
         },
         BottomNavItem {
             id: "clips",
@@ -110,6 +112,7 @@ pub fn NavbarMobile(
                 set_active_bottom_nav.set("clips");
                 nav_to_latest("/latest", Default::default());
             }),
+            shown: Signal::derive(move || !is_kids.get()),
         },
         BottomNavItem {
             id: "search",
@@ -119,12 +122,17 @@ pub fn NavbarMobile(
                 set_active_bottom_nav.set("search");
                 nav_to_search("/search", Default::default());
             }),
+            shown: Signal::derive(|| true),
         },
         BottomNavItem {
             id: "settings",
             icon: view! { 
                 <div class="w-6 h-6 rounded-control overflow-hidden flex items-center justify-center bg-brand text-ink font-bold text-micro">
-                    <img src=move || current_avatar() alt=crate::i18n::t("navbar-mobile-profile") class="w-full h-full object-cover" />
+                    {move || if active_profile().is_some_and(|p| p.is_kids && p.avatar_url.is_none()) {
+                        view! { <crate::components::profiles::kids_avatar::KidsAvatar size=24.0 /> }.into_any()
+                    } else {
+                        view! { <img src=current_avatar() alt=crate::i18n::t("navbar-mobile-profile") class="w-full h-full object-cover" /> }.into_any()
+                    }}
                 </div>
             }.into_any(),
             label: "nav-my-list",
@@ -132,6 +140,7 @@ pub fn NavbarMobile(
                 set_active_bottom_nav.set("settings");
                 nav_to_settings("/browse/my-list", Default::default());
             }),
+            shown: Signal::derive(|| true),
         },
     ];
 

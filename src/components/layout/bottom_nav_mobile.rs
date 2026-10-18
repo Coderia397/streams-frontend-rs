@@ -6,6 +6,8 @@ pub struct BottomNavItem {
     pub icon: AnyView,
     pub label: &'static str,
     pub on_click: Callback<()>,
+    /// False hides the tab (the Kids app has no Clips)
+    pub shown: Signal<bool>,
 }
 
 #[component]
@@ -24,13 +26,15 @@ pub fn BottomNavMobile(
                     let label = item.label;
                     let icon = item.icon;
                     let on_click = item.on_click;
-                    
+                    let shown = item.shown;
+
                     let is_active = move || active_id.get() == id;
 
                     view! {
                         <button
                             on:click=move |_| on_click.run(())
                             class="relative flex flex-col items-center justify-center gap-0.5 rounded-full w-[76px] h-12 select-none transition-colors duration-(--motion-base) active:scale-95"
+                            class=("hidden", move || !shown.get())
                             class=("bg-lift", move || is_active())
                             class=("text-ink", move || is_active())
                             class=("text-ink-silver-alt", move || !is_active())

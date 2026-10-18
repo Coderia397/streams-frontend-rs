@@ -95,7 +95,7 @@ pub fn PageHeading(screen: Memo<Screen>, gate_active: RwSignal<bool>, light_phon
             >
                 <i class="ph-bold ph-arrow-left text-2xl rtl:-scale-x-100" aria-hidden="true"></i>
             </a>
-            <h1 class="text-title font-bold lg:w-full lg:flex-1 lg:truncate lg:text-account-title" class=("max-lg:text-account-title-sm", move || light_phone.get()) class=("lg:text-[32px]!", move || screen.get().standalone()) class=("lg:leading-[40px]!", move || screen.get().standalone()) class=("lg:text-[#333]!", move || screen.get().standalone()) class=("hidden", move || gate_active.get() || screen.get() == Screen::TransferSetting)>
+            <h1 class="text-title font-bold lg:w-full lg:flex-1 lg:truncate lg:text-account-title" class=("max-lg:text-account-title-sm", move || light_phone.get()) class=("lg:text-[32px]!", move || screen.get().standalone()) class=("lg:leading-[40px]!", move || screen.get().standalone()) class=("lg:text-line!", move || screen.get().standalone()) class=("hidden", move || gate_active.get() || screen.get() == Screen::TransferSetting)>
                 <span class=("lg:hidden", move || matches!(screen.get(), Screen::Hub | Screen::Profile(_)))>{move || t(screen.get().title_key())}</span>
                 <span class="hidden" class=("lg:inline", move || matches!(screen.get(), Screen::Hub | Screen::Profile(_)))>{move || t(if screen.get() == Screen::Hub { Screen::Account.title_key() } else { "set-title-manage-profile" })}</span>
             </h1>

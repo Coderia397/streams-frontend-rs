@@ -1,4 +1,4 @@
-//! The screen shown while a Kids profile opens: four bands of colour (green, orange to red, pink, blue to lavender) behind the word "kids" in rounded red letters
+//! The screen shown while a Kids profile opens: four bands of colour (green, orange to red, pink, blue to lavender) behind the word "kids" in rounded-control red letters
 //! with a white edge. Everything is drawn here as vectors (no picture file), in a 2000 x 1120 box that fills the page.
 use leptos::prelude::*;
 

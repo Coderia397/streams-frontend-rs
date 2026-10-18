@@ -58,7 +58,7 @@ pub fn IconRow(
                 on:click=move |_| on_pick.run(pick_url.clone())
                 data-loop-first=(role == 1).then_some("1")
                 data-loop-clone=(role == 2).then_some("1")
-                class=format!("relative block h-[128px] w-[128px] flex-none cursor-pointer overflow-hidden rounded-[4px] outline-none transition-[outline-color] focus-visible:outline-[3px] focus-visible:outline-ink hover:outline-[3px] hover:outline-ink outline outline-[3px] outline-transparent{}", if role >= 2 { " max-md:hidden" } else { "" })
+                class=format!("relative block h-[128px] w-[128px] flex-none cursor-pointer overflow-hidden rounded-control outline-none transition-[outline-color] focus-visible:outline-[3px] focus-visible:outline-ink hover:outline-[3px] hover:outline-ink outline outline-[3px] outline-transparent{}", if role >= 2 { " max-md:hidden" } else { "" })
                 class=("!outline-ink", move || mark.get())
             >
                 <img src=url alt="" loading="lazy" class="h-full w-full object-cover" />

@@ -130,7 +130,7 @@ pub fn WhosWatchingGate(
                     let avatar = profile.avatar_url.clone().unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string());
                     view! {
                         <button type="button" on:click=move |_| on_select_tile(p_clone.clone()) class="group flex w-[160px] cursor-pointer flex-col items-center gap-[10px] p-[16px] focus:outline-none">
-                            <div class="relative h-[128px] w-[128px] overflow-hidden rounded-[12px] outline outline-[3px] outline-transparent transition-[outline-color] group-hover:outline-ink group-focus-visible:outline-ink">
+                            <div class="relative h-[128px] w-[128px] overflow-hidden rounded-modal outline outline-[3px] outline-transparent transition-[outline-color] group-hover:outline-ink group-focus-visible:outline-ink">
                                 {if is_kids && p_clone.avatar_url.is_none() {
                                     view! { <crate::components::profiles::kids_avatar::KidsAvatar size=128.0 /> }.into_any()
                                 } else {
@@ -152,7 +152,7 @@ pub fn WhosWatchingGate(
                 // Add Profile tile
                 {move || (profiles_signal.get().len() < 5).then(|| view! {
                     <button type="button" on:click=move |_| set_modal_state.set(Some(("add".to_string(), None))) class="group flex w-[160px] cursor-pointer flex-col items-center gap-[10px] p-[16px] focus:outline-none">
-                        <div class="flex h-[128px] w-[128px] items-center justify-center rounded-[12px] bg-[#3b2527] outline outline-[3px] outline-transparent transition-[outline-color] group-hover:outline-ink">
+                        <div class="flex h-[128px] w-[128px] items-center justify-center rounded-modal bg-[#3b2527] outline outline-[3px] outline-transparent transition-[outline-color] group-hover:outline-ink">
                             <i class="ph ph-plus text-[48px] text-ink"></i>
                         </div>
                         <span class="text-[18px] font-medium leading-[23px] text-ink/70 transition-colors group-hover:text-ink">{crate::i18n::t("whos-watching-add-profile")}</span>

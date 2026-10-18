@@ -43,7 +43,7 @@ pub fn ProfileSwitchOverlay(
                 <svg class="sw-arc absolute inset-0" width="188" height="188" viewBox="0 0 188 188" aria-hidden="true">
                     <circle cx="94" cy="94" r="90" fill="none" style="stroke: var(--color-brand)" stroke-width="7" stroke-linecap="round" stroke-dasharray="230 336" />
                 </svg>
-                <div class="absolute left-1/2 top-1/2 h-[67px] w-[67px] -translate-x-1/2 -translate-y-1/2 overflow-hidden bg-[#333]">
+                <div class="absolute left-1/2 top-1/2 h-[67px] w-[67px] -translate-x-1/2 -translate-y-1/2 overflow-hidden bg-line">
                     <div class="sw-picture h-full w-full">
                         <img src=avatar alt="" class="h-full w-full object-cover" />
                     </div>

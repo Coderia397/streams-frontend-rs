@@ -124,12 +124,12 @@ pub fn Gate(account: bool, children: ChildrenFn) -> impl IntoView {
                 {move || match step.get() {
                     Step::Choose => view! {
                         <div class="flex flex-col gap-5">
-                            <button type="button" on:click=move |_| send_code.run(()) class="flex h-[69px] w-full items-center gap-[15px] rounded-[8px] bg-ink/5 px-3 text-start hover:bg-ink/10">
+                            <button type="button" on:click=move |_| send_code.run(()) class="flex h-[69px] w-full items-center gap-[15px] rounded-card bg-ink/5 px-3 text-start hover:bg-ink/10">
                                 <i class="ph ph-envelope-simple shrink-0 text-[16px] text-ink" aria-hidden="true"></i>
                                 <span class="min-w-0 flex-1"><span class="block text-[18px] font-bold leading-6">{t("set-code-email")}</span><span class="block text-[14px] leading-[22px] text-ink/70">{email.get_value()}</span></span>
                                 <i class="ph-bold ph-caret-right shrink-0 text-[16px] text-ink rtl:-scale-x-100" aria-hidden="true"></i>
                             </button>
-                            <button type="button" on:click=move |_| { note.set(None); step.set(Step::Password) } class="flex h-[69px] w-full items-center gap-[15px] rounded-[8px] bg-ink/5 px-3 text-start hover:bg-ink/10">
+                            <button type="button" on:click=move |_| { note.set(None); step.set(Step::Password) } class="flex h-[69px] w-full items-center gap-[15px] rounded-card bg-ink/5 px-3 text-start hover:bg-ink/10">
                                 <i class="ph ph-lock-simple shrink-0 text-[16px] text-ink" aria-hidden="true"></i>
                                 <span class="min-w-0 flex-1"><span class="block text-[18px] font-bold leading-6">{t("set-password-confirm")}</span></span>
                                 <i class="ph-bold ph-caret-right shrink-0 text-[16px] text-ink rtl:-scale-x-100" aria-hidden="true"></i>
@@ -150,9 +150,9 @@ pub fn Gate(account: bool, children: ChildrenFn) -> impl IntoView {
                         <form on:submit=move |ev| { ev.prevent_default(); submit_code.run(()); }>
                             <DigitBoxes label=t("set-code-label") value=code length=CODE_LENGTH one_time_code=true plain=true />
                             <div class="flex flex-col gap-2">
-                                <button type="submit" disabled=move || busy.get() || code.with(|c| c.chars().count() != CODE_LENGTH) class="h-10 w-full rounded-[4px] bg-ink px-4 text-[16px] font-medium text-void disabled:opacity-50">{t("set-code-submit")}</button>
-                                <button type="button" on:click=move |_| send_code.run(()) disabled=move || busy.get() class="h-10 w-full rounded-[4px] bg-[rgba(128,128,128,0.3)] px-4 text-[16px] font-medium text-ink disabled:opacity-50">{t("set-code-resend")}</button>
-                                <button type="button" on:click=move |_| { note.set(None); step.set(Step::Choose) } class="h-10 w-full rounded-[4px] px-4 text-[16px] font-medium text-ink">{t("set-try-another-way")}</button>
+                                <button type="submit" disabled=move || busy.get() || code.with(|c| c.chars().count() != CODE_LENGTH) class="h-10 w-full rounded-control bg-ink px-4 text-[16px] font-medium text-void disabled:opacity-50">{t("set-code-submit")}</button>
+                                <button type="button" on:click=move |_| send_code.run(()) disabled=move || busy.get() class="h-10 w-full rounded-control bg-[rgba(128,128,128,0.3)] px-4 text-[16px] font-medium text-ink disabled:opacity-50">{t("set-code-resend")}</button>
+                                <button type="button" on:click=move |_| { note.set(None); step.set(Step::Choose) } class="h-10 w-full rounded-control px-4 text-[16px] font-medium text-ink">{t("set-try-another-way")}</button>
                             </div>
                         </form>
                     }.into_any(),

@@ -102,7 +102,7 @@ pub fn TimelineScrubber(
             class="relative w-full h-[23px] flex items-center cursor-pointer select-none"
         >
             // Track
-            <div class="relative w-full h-[4px] bg-[#808080] pointer-events-none">
+            <div class="relative w-full h-[4px] bg-mute pointer-events-none">
                 // Buffered range
                 <div class="absolute top-0 bottom-0 left-0 bg-[#b8b8b8]" style=move || format!("width: {}%;", buffer_pct()) />
                 // Played part
@@ -120,7 +120,7 @@ pub fn TimelineScrubber(
                 if is_hovering.get() && duration.get() > 0.0 {
                     view! {
                         <div
-                            class="absolute bottom-8 px-2 py-1 bg-[#262626] text-ink text-[14px] font-medium rounded-[4px] pointer-events-none -translate-x-1/2"
+                            class="absolute bottom-8 px-2 py-1 bg-field text-ink text-[14px] font-medium rounded-control pointer-events-none -translate-x-1/2"
                             style=move || format!("left: {}%;", hover_pct.get())
                         >
                             {hover_time_str.get()}

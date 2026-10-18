@@ -1675,6 +1675,7 @@ profile-default-kids = Kids
 
 # Settings and Account (routes under /settings)
 set-title = Settings
+set-profile-sheet = Profile
 set-back = Back
 set-cancel = Cancel
 set-save = Save

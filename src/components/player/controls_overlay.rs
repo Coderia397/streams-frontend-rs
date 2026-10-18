@@ -54,7 +54,7 @@ pub fn ControlsOverlay(
         )
     };
     // every button: 44 x 44, no plate
-    let btn = "flex h-11 relative w-11 shrink-0 items-center justify-center rounded-[2px] text-ink transition-transform duration-(--motion-quick) hover:scale-125 active:scale-95";
+    let btn = "flex h-11 relative w-11 shrink-0 items-center justify-center rounded-hairline text-ink transition-transform duration-(--motion-quick) hover:scale-125 active:scale-95";
 
     view! {
         <div class=overlay_class>
@@ -102,7 +102,7 @@ pub fn ControlsOverlay(
                             <button on:click=move |_| on_toggle_mute.run(()) class=btn title=move || if is_muted.get() { crate::i18n::t("player-unmute") } else { crate::i18n::t("player-mute") }>
                                 <i class=speaker_icon_class></i>
                             </button>
-                            <div class="absolute bottom-[44px] left-1/2 hidden h-[185px] w-[34px] -translate-x-1/2 items-center justify-center rounded-[4px] bg-[#262626] group-hover/vol:flex group-focus-within/vol:flex">
+                            <div class="absolute bottom-[44px] left-1/2 hidden h-[185px] w-[34px] -translate-x-1/2 items-center justify-center rounded-control bg-field group-hover/vol:flex group-focus-within/vol:flex">
                                 <input
                                     type="range" min="0" max="1" step="0.02"
                                     prop:value=move || if is_muted.get() { 0.0 } else { volume.get() }
@@ -130,8 +130,8 @@ pub fn ControlsOverlay(
                                 </button>
                                 // the card: "Next episode", the still, number and name, four lines of the summary
                                 {move || next_info.get().map(|(n, name, overview, still)| view! {
-                                    <div class="pointer-events-none fixed bottom-[94px] right-0 z-30 hidden w-[min(700px,100vw)] flex-col bg-[#262626] shadow-2xl group-hover/next:flex">
-                                        <span class="flex h-[73px] items-center px-[24px] text-[30px] font-medium text-ink bg-[#333333]">{crate::i18n::t("controls-overlay-next-episode")}</span>
+                                    <div class="pointer-events-none fixed bottom-[94px] right-0 z-30 hidden w-[min(700px,100vw)] flex-col bg-field shadow-2xl group-hover/next:flex">
+                                        <span class="flex h-[73px] items-center px-[24px] text-[30px] font-medium text-ink bg-line">{crate::i18n::t("controls-overlay-next-episode")}</span>
                                         <span class="flex gap-[26px] px-[35px] py-[24px]">
                                             <span class="relative h-[140px] w-[248px] shrink-0 overflow-hidden bg-[#1a1a1a]">
                                                 {still.map(|u| view! { <img src=u alt="" class="h-full w-full object-cover" /> })}

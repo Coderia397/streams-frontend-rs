@@ -96,7 +96,7 @@ pub fn Hub() -> impl IntoView {
                 <LinkRow icon="gear-six" title=t("set-nav-app") href=Screen::App.path() />
                 <LinkRow icon="user" title=t("set-nav-account") href=Screen::Account.path() />
                 <LinkRow icon="question" title=t("set-nav-help") href=crate::config::routes::HELP />
-                <ActionRow icon="sign-out" title=t("set-sign-out") on_click=Callback::new(move |_| if let Some(s) = signout { s.0.set(true) }) />
+                <ActionRow icon="sign-out" title=t("set-sign-out") on_click=Callback::new(move |_| match signout { Some(s) => s.0.set(true), None => sign_out_now() }) />
             </Section>
         </div>
     }
@@ -134,7 +134,7 @@ pub fn AddProfile() -> impl IntoView {
     view! {
         <div class="px-5 pb-5 pt-2">
             <Show when=move || can_add_profile(store)>
-                <button type="button" on:click=move |_| adding.set(true) class="h-12 w-full rounded-[4px] bg-[rgba(128,128,128,0.3)] text-[18px] font-medium hover:bg-[rgba(128,128,128,0.4)]">{t("set-add-profile-button")}</button>
+                <button type="button" on:click=move |_| adding.set(true) class="h-12 w-full rounded-control bg-[rgba(128,128,128,0.3)] text-[18px] font-medium hover:bg-[rgba(128,128,128,0.4)]">{t("set-add-profile-button")}</button>
                 <p class="mt-4 text-center text-[14px] text-black/70">{crate::i18n::t_args("set-add-profile-limit", &[("max", (MAX_PROFILES as i64).into())])}</p>
             </Show>
             <Show when=move || adding.get()>
@@ -227,5 +227,27 @@ fn ImportProfile() -> impl IntoView {
             </Section>
             <input node_ref=input type="file" accept=".json,application/json" class="hidden" on:change=on_pick />
         </div>
+    }
+}
+
+/// The Profile sheet of the phone app: a sheet rising from the bottom over the page, with a handle, the title "Profile", a close button and the same content as the settings hub.
+#[component]
+pub fn ProfileSheet(open: RwSignal<bool>) -> impl IntoView {
+    view! {
+        <Show when=move || open.get()>
+            <div class="fixed inset-0 z-(--z-sheet-backdrop) lg:hidden" on:click=move |_| open.set(false)></div>
+            <div role="dialog" aria-label=t("set-profile-sheet") class="set-tiles theme-paper-wide fixed inset-x-0 bottom-0 top-[7vh] z-(--z-sheet) flex flex-col overflow-hidden rounded-t-[16px] bg-set-sheet text-ink shadow-popover lg:hidden">
+                <div class="relative flex h-14 shrink-0 items-center justify-center">
+                    <span class="absolute left-1/2 top-2 h-1 w-9 -translate-x-1/2 rounded-full bg-ink/30" aria-hidden="true"></span>
+                    <h2 class="text-heading font-bold text-ink/80">{t("set-profile-sheet")}</h2>
+                    <button type="button" on:click=move |_| open.set(false) class="absolute end-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-ink/15" aria-label=t("action-buttons-close")>
+                        <i class="ph-bold ph-x text-body-lg" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="min-h-0 flex-1 overflow-y-auto px-4 pb-10">
+                    <Hub />
+                </div>
+            </div>
+        </Show>
     }
 }

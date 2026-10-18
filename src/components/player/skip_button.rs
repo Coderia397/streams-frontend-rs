@@ -29,7 +29,7 @@ pub fn SkipButton(
     };
     // "Watch credits" hides the end of episode offer for the rest of this play
     let (credits_dismissed, set_credits_dismissed) = signal(false);
-    let base = "flex h-[2.36vw] items-center justify-center gap-[0.6vw] rounded-[4px] px-[1.4vw] text-[1vw] font-medium select-none transition-colors duration-(--motion-fast)";
+    let base = "flex h-[2.36vw] items-center justify-center gap-[0.6vw] rounded-control px-[1.4vw] text-[1vw] font-medium select-none transition-colors duration-(--motion-fast)";
     let grey = "bg-[rgba(109,109,110,0.7)] text-ink hover:bg-[rgba(109,109,110,0.4)]";
 
     view! {
