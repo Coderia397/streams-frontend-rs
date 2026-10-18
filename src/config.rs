@@ -69,8 +69,8 @@ pub const DEVICES_SHOWN: usize = 5;
 /// Game handle length (profile_settings allows 3 to 16 letters and digits).
 pub const GAME_HANDLE_MIN: usize = 3;
 pub const GAME_HANDLE_MAX: usize = 16;
-/// Length of the code sent by email for the password check.
-pub const CODE_LENGTH: usize = 6;
+/// Length of the code sent by email for the password check. The Supabase project sends 8 digits (found 2026-10-18 when the 6 digit box refused the real code); if the project setting `mailer_otp_length` changes, change this too.
+pub const CODE_LENGTH: usize = 8;
 /// Minutes the emailed code stays valid (the Supabase default is one hour; the email template says the same number).
 pub const CODE_VALID_MINUTES: u32 = 10;
 /// Where the internet speed test downloads from, and how much. Override at build time with STREAMS_SPEED_TEST_URL.
