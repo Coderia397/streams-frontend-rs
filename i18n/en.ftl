@@ -2092,7 +2092,7 @@ email-recovery-title = Reset your password
 email-recovery-body = We received a request to reset the password of your account. Use the button to choose a new one. The link works once and expires soon.
 email-recovery-button = Choose a new password
 
-email-code-subject = Your { $brand } sign in code
+email-code-subject = Your { $brand } sign in code · { $code }
 email-code-title = Your sign in code
 email-code-body = Enter this code to continue. It works once and expires in { $minutes } minutes.
 email-code-or-link = Or use the button to sign in.
@@ -2108,7 +2108,7 @@ email-invite-title = You have been invited
 email-invite-body = Accept the invitation to create your account.
 email-invite-button = Accept invitation
 
-email-reauth-subject = Your { $brand } confirmation code
+email-reauth-subject = Your { $brand } confirmation code · { $code }
 email-reauth-title = Your confirmation code
 email-reauth-body = Enter this code to confirm that it is you. It works once and expires soon.
 
