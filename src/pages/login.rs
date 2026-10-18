@@ -437,9 +437,9 @@ fn MobileWelcome() -> impl IntoView {
     // art for each slide: None is the wall of posters
     let slides: [(Option<&'static str>, &'static str, &'static str); 4] = [
         (None, "login-unlimited-films-series-and-more", "auth-tick-free"),
-        (Some("/assets/landing/slide-2.webp"), "landing-slide-everyone", "auth-tick-profiles"),
-        (Some("/assets/landing/slide-3.webp"), "login-reason-screens-title", "auth-tick-devices"),
-        (Some("/assets/landing/slide-4.webp"), "login-reason-place-title", "landing-slide-place"),
+        (Some("/assets/landing/slide-2.svg"), "landing-slide-everyone", "auth-tick-profiles"),
+        (Some("/assets/landing/slide-3.svg"), "login-reason-screens-title", "auth-tick-devices"),
+        (Some("/assets/landing/slide-4.svg"), "login-reason-place-title", "landing-slide-place"),
     ];
     let on_scroll = move |_| {
         if let Some(el) = track.get_untracked() {
