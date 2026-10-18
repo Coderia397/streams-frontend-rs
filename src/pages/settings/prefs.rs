@@ -57,11 +57,13 @@ pub struct ProfilePrefs {
     pub max_rating: Option<String>,
     pub blocked_titles: Vec<String>,
     pub subtitle_style: SubtitleStyle,
+    /// When these settings last changed on this device, in milliseconds (0 never): the newer side wins when the account's copy is read.
+    pub updated_at: u64,
 }
 
 impl Default for ProfilePrefs {
     fn default() -> Self {
-        Self { autoplay_next: true, autoplay_previews: true, notifications: HashMap::new(), data_usage: "auto".into(), game_handle: None, gender: None, audio_language: None, subtitle_language: None, ui_language: None, max_rating: None, blocked_titles: Vec::new(), subtitle_style: SubtitleStyle::default() }
+        Self { autoplay_next: true, autoplay_previews: true, notifications: HashMap::new(), data_usage: "auto".into(), game_handle: None, gender: None, audio_language: None, subtitle_language: None, ui_language: None, max_rating: None, blocked_titles: Vec::new(), subtitle_style: SubtitleStyle::default(), updated_at: 0 }
     }
 }
 
@@ -135,8 +137,12 @@ pub fn now_secs() -> u64 {
 }
 
 pub fn provide_prefs() {
+    let mut saved: HashMap<String, ProfilePrefs> = read(crate::keys::PROFILE_PREFS).unwrap_or_default();
+    for p in saved.values_mut() {
+        if p.updated_at == 0 && *p != ProfilePrefs::default() { p.updated_at = js_sys::Date::now() as u64; }
+    }
     let prefs = Prefs {
-        profiles: RwSignal::new(read(crate::keys::PROFILE_PREFS).unwrap_or_default()),
+        profiles: RwSignal::new(saved),
         app: RwSignal::new(read(crate::keys::APP_PREFS).unwrap_or_default()),
         account: RwSignal::new(read(crate::keys::ACCOUNT_PREFS).unwrap_or_default()),
         verified_until: RwSignal::new(0),
@@ -157,7 +163,18 @@ impl Prefs {
     }
 
     pub fn update_profile(&self, id: &str, change: impl FnOnce(&mut ProfilePrefs)) {
-        self.profiles.update(|m| change(m.entry(id.to_string()).or_default()));
+        self.profiles.update(|m| {
+            let p = m.entry(id.to_string()).or_default();
+            change(p);
+            p.updated_at = js_sys::Date::now() as u64;
+        });
+        // the account is told a few seconds later
+        crate::services::sync::settings_changed(id);
+    }
+
+    /// Takes the account's copy of a profile's settings (no time change, no push back).
+    pub fn apply_remote(&self, id: &str, prefs: ProfilePrefs) {
+        self.profiles.update(|m| { m.insert(id.to_string(), prefs); });
     }
 
     pub fn forget_profile(&self, id: &str) {

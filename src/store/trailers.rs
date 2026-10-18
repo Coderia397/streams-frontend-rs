@@ -21,4 +21,13 @@ pub fn mark(id: u32, is_tv: bool) {
     if let (Some(storage), Ok(raw)) = (web_sys::window().and_then(|w| w.local_storage().ok().flatten()), serde_json::to_string(&list)) {
         let _ = storage.set_item(&crate::store::scoped::key(KEY), &raw);
     }
+    crate::services::sync::touch_settings();
+}
+
+/// Takes the account's copy of the shelf.
+pub fn replace(items: &[(u32, bool)]) {
+    let list: Vec<(u32, bool)> = items.iter().take(KEEP).cloned().collect();
+    if let (Some(storage), Ok(raw)) = (web_sys::window().and_then(|w| w.local_storage().ok().flatten()), serde_json::to_string(&list)) {
+        let _ = storage.set_item(&crate::store::scoped::key(KEY), &raw);
+    }
 }

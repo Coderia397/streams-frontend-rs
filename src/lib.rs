@@ -43,6 +43,7 @@ pub fn App() -> impl IntoView {
     let library_store = crate::store::use_library_store();
     let watch_store = crate::store::watch_store::use_watch_store();
     crate::services::sync::init(profile_store, library_store, watch_store);
+    crate::services::sync::init_prefs(crate::pages::settings::use_prefs());
     Effect::new(move |_| {
         let _active = profile_store.active_profile_id.get();
         watch_store.reload();

@@ -23,6 +23,13 @@ struct Stores {
 
 thread_local! {
     static STORES: std::cell::Cell<Option<Stores>> = const { std::cell::Cell::new(None) };
+    static PREFS: std::cell::Cell<Option<crate::pages::settings::prefs::Prefs>> = const { std::cell::Cell::new(None) };
+    static SETTINGS_TIMER: std::cell::Cell<Option<i32>> = const { std::cell::Cell::new(None) };
+}
+
+/// Hands the settings store over (called once by the app, after `init`).
+pub fn init_prefs(prefs: crate::pages::settings::prefs::Prefs) {
+    PREFS.with(|p| p.set(Some(prefs)));
 }
 
 /// Hands the stores to the sync (called once by the app, inside its reactive context).
@@ -234,6 +241,12 @@ fn signature(row: &Value) -> String {
     r.to_string()
 }
 
+/// Marks the settings of the profile in use as changed now (the trailers shelf lives in them) and sends them in a few seconds.
+pub fn touch_settings() {
+    let (Some(profile), Some(prefs)) = (active_account_profile(), PREFS.with(|p| p.get())) else { return };
+    prefs.update_profile(&profile, |_| {});
+}
+
 fn active_account_profile() -> Option<String> {
     let store = stores()?.profiles;
     store.active_profile_id.get_untracked().filter(|id| is_uuid(id)).filter(|_| account::has_account())
@@ -346,6 +359,7 @@ pub async fn pull_now() -> Result<(), AuthError> {
             });
             hydrate_watch_record(id, is_tv);
         }
+        if answer["settings"].is_object() { apply_remote_settings(&profile, &answer["settings"]); }
         cursor = answer["cursor"].as_str().unwrap_or(&cursor).to_string();
         write_storage(&cursor_key(&profile), &cursor);
         if answer["has_more"].as_bool() != Some(true) { break; }
@@ -358,6 +372,7 @@ pub async fn pull_now() -> Result<(), AuthError> {
     write_storage(&snapshot_key(&profile), &serde_json::to_string(&snap).unwrap_or_default());
     // anything this browser changed while it was away goes up now
     schedule_push();
+    settings_changed(&profile);
     Ok(())
 }
 
@@ -395,4 +410,76 @@ fn hydrate_watch_record(id: u32, is_tv: bool) {
 /// Called when a profile becomes the one in use, after a sign in and when the tab comes back: reads what changed in the account.
 pub fn sync_in_background() {
     leptos::task::spawn_local(async { let _ = pull_now().await; });
+}
+
+// ── what a profile chose (profile_settings) ────────────────────────────────────────────────────────────────────────────────────
+
+/// The row of `profile_settings` for a profile: every column the app has a setting for.
+fn settings_row(profile: &str, p: &crate::pages::settings::prefs::ProfilePrefs, kids: bool) -> Value {
+    let valid_handle = p.game_handle.as_deref().filter(|h| (3..=16).contains(&h.len()) && h.chars().all(|c| c.is_ascii_alphanumeric()));
+    let trailers: Vec<Value> = crate::store::trailers::all().into_iter().take(40).map(|(id, tv)| json!({ "id": id, "tv": tv })).collect();
+    json!({
+        "profile_id": profile,
+        "autoplay_next": p.autoplay_next,
+        "autoplay_previews": p.autoplay_previews,
+        "audio_language": p.audio_language,
+        "subtitle_language": p.subtitle_language,
+        "subtitle_style": serde_json::to_value(&p.subtitle_style).unwrap_or(Value::Null),
+        "ui_language": p.ui_language,
+        "data_usage": p.data_usage,
+        "notifications": p.notifications,
+        "blocked_titles": p.blocked_titles.iter().take(200).collect::<Vec<_>>(),
+        "game_handle": valid_handle,
+        "age_rating": p.rating_for(kids),
+        "gender": p.gender.as_deref().filter(|g| matches!(*g, "woman" | "man" | "none")),
+        "trailers_watched": trailers,
+        "client_updated_at": iso(p.updated_at.max(1)),
+    })
+}
+
+/// Asks for the profile's settings to be sent in a few seconds (a burst of changes is one call).
+pub fn settings_changed(profile: &str) {
+    if !is_uuid(profile) || !account::has_account() { return; }
+    let Some(win) = web_sys::window() else { return };
+    let profile = profile.to_string();
+    SETTINGS_TIMER.with(|t| {
+        if let Some(h) = t.get() { win.clear_timeout_with_handle(h); }
+        let cb = wasm_bindgen::closure::Closure::once_into_js(move || { leptos::task::spawn_local(async move { let _ = push_settings(&profile).await; }); });
+        t.set(win.set_timeout_with_callback_and_timeout_and_arguments_0(wasm_bindgen::JsCast::unchecked_ref(&cb), PUSH_DELAY_MS as i32).ok());
+    });
+}
+
+/// Writes the settings of a profile to the account (the database keeps the newer copy by `client_updated_at`).
+pub async fn push_settings(profile: &str) -> Result<(), AuthError> {
+    let Some(prefs) = PREFS.with(|p| p.get()) else { return Ok(()) };
+    let kids = stores().is_some_and(|s| s.profiles.profiles.with_untracked(|l| l.iter().any(|p| p.id == profile && p.is_kids)));
+    let row = settings_row(profile, &prefs.profile(profile), kids);
+    account::rest("POST", "/rest/v1/profile_settings?on_conflict=profile_id", Some(&row), "resolution=merge-duplicates,return=minimal").await.map(|_| ())
+}
+
+/// Takes the account's copy of a profile's settings when it is newer than this browser's.
+fn apply_remote_settings(profile: &str, row: &Value) {
+    let Some(prefs) = PREFS.with(|p| p.get()) else { return };
+    let at = row["client_updated_at"].as_str().map(from_iso).unwrap_or(0);
+    let mut local = prefs.profile(profile);
+    if at <= local.updated_at { return; }
+    let text = |k: &str| row[k].as_str().map(str::to_string);
+    local.autoplay_next = row["autoplay_next"].as_bool().unwrap_or(local.autoplay_next);
+    local.autoplay_previews = row["autoplay_previews"].as_bool().unwrap_or(local.autoplay_previews);
+    local.audio_language = text("audio_language");
+    local.subtitle_language = text("subtitle_language");
+    local.ui_language = text("ui_language");
+    if let Some(d) = text("data_usage") { local.data_usage = d; }
+    if let Some(n) = row["notifications"].as_object() { local.notifications = n.iter().filter_map(|(k, v)| v.as_bool().map(|b| (k.clone(), b))).collect(); }
+    if let Some(b) = row["blocked_titles"].as_array() { local.blocked_titles = b.iter().filter_map(|v| v.as_str().map(str::to_string)).collect(); }
+    local.game_handle = text("game_handle");
+    local.gender = text("gender");
+    if let Ok(style) = serde_json::from_value(row["subtitle_style"].clone()) { local.subtitle_style = style; }
+    if let Some(r) = text("age_rating") { local.max_rating = Some(r); }
+    local.updated_at = at;
+    prefs.apply_remote(profile, local);
+    if let Some(list) = row["trailers_watched"].as_array() {
+        let items: Vec<(u32, bool)> = list.iter().filter_map(|v| Some((v["id"].as_u64()? as u32, v["tv"].as_bool().unwrap_or(false)))).collect();
+        crate::store::trailers::replace(&items);
+    }
 }
