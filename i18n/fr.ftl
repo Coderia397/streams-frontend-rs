@@ -2031,6 +2031,7 @@ row-new-releases = Nouveautés
 collection-title = Collection { $label }
 collection-eyebrow-event = Collection
 collection-for-every-feeling = Pour chaque émotion
+collection-kids = Streams Kids
 collection-explore-all = Tout explorer
 badge-recently-added = Ajout récent
 event-autumn = Automne

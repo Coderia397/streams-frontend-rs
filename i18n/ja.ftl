@@ -2016,6 +2016,7 @@ row-new-releases = 新作
 collection-title = { $label } コレクション
 collection-eyebrow-event = コレクション
 collection-for-every-feeling = すべての感情に
+collection-kids = Streams Kids
 collection-explore-all = すべてを探索
 badge-recently-added = 最近追加
 event-autumn = 秋

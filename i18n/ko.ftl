@@ -2021,6 +2021,7 @@ row-new-releases = 새로 출시된 작품
 collection-title = { $label } 컬렉션
 collection-eyebrow-event = 컬렉션
 collection-for-every-feeling = 모든 감정에 맞는 컬렉션
+collection-kids = Streams Kids
 collection-explore-all = 모두 탐색
 badge-recently-added = 최근 추가됨
 event-autumn = 가을

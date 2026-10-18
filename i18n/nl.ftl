@@ -2027,6 +2027,7 @@ row-new-releases = Nieuwe releases
 collection-title = { $label } collectie
 collection-eyebrow-event = Collectie
 collection-for-every-feeling = Voor elke gevoel
+collection-kids = Streams Kids
 collection-explore-all = Verken alles
 badge-recently-added = Onlangs toegevoegd
 event-autumn = Herfst

@@ -2022,6 +2022,7 @@ row-new-releases = 新上架
 collection-title = { $label } 收藏
 collection-eyebrow-event = 收藏
 collection-for-every-feeling = 适合每种心情
+collection-kids = Streams Kids
 collection-explore-all = 探索全部
 badge-recently-added = 最近添加
 event-autumn = 秋季

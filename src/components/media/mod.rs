@@ -20,6 +20,7 @@ pub mod action_buttons;
 pub mod vibe_row;
 pub mod collection_logo;
 pub mod collection_row;
+pub mod kids_banner;
 pub mod feed_row;
 pub mod spotlight_artwork;
 pub mod chip_icons;

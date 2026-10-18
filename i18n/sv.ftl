@@ -2031,6 +2031,7 @@ row-new-releases = Nya utgivningar
 collection-title = { $label } samling
 collection-eyebrow-event = Samling
 collection-for-every-feeling = För varje känsla
+collection-kids = Streams Kids
 collection-explore-all = Utforska allt
 badge-recently-added = Nyligen tillagd
 event-autumn = Höst

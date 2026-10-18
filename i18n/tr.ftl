@@ -2031,6 +2031,7 @@ row-new-releases = Yeni Çıkışlar
 collection-title = { $label } Koleksiyonu
 collection-eyebrow-event = Koleksiyon
 collection-for-every-feeling = Her His İçin
+collection-kids = Streams Kids
 collection-explore-all = Tümünü keşfet
 badge-recently-added = Yeni Eklendi
 event-autumn = Kış

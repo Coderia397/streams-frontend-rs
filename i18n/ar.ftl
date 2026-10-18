@@ -2042,6 +2042,7 @@ row-new-releases = الإصدارات الجديدة
 collection-title = مجموعة { $label }
 collection-eyebrow-event = مجموعة
 collection-for-every-feeling = لكل شعور
+collection-kids = Streams Kids
 collection-explore-all = استكشف الكل
 badge-recently-added = أُضيف مؤخراً
 event-autumn = الخريف

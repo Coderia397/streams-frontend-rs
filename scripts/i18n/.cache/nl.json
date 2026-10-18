@@ -1694,5 +1694,6 @@
  "set-primary-cannot-delete": "Het primaire profiel kan niet worden verwijderd.",
  "set-edit-profile-page": "Profiel bewerken",
  "set-handle-lead": "Je handle is een unieke naam die wordt gebruikt om te spelen met andere { $brand }-leden in alle { $brand }-spellen.",
- "set-learn-more": "Meer weten"
+ "set-learn-more": "Meer weten",
+ "collection-kids": "Streams Kids"
 }
