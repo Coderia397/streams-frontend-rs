@@ -660,6 +660,7 @@ button,
 @font-face { font-family: 'Logo Casual'; src: url('/fonts/logo/gochi.woff2') format('woff2'); font-display: swap; }
 @font-face { font-family: 'Logo Hand'; src: url('/fonts/logo/kalam.woff2') format('woff2'); font-display: swap; }
 @font-face { font-family: 'Logo Playfair'; src: url('/fonts/logo/playfair-italic.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Logo Kids'; src: url('/fonts/logo/fredoka-bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
 @font-face { font-family: 'Logo Abril'; src: url('/fonts/logo/abril-fatface.woff2') format('woff2'); font-display: swap; }
 
 /* The rating pill (action_buttons.rs RatingPill): closed until the pointer rests on the round button, then it grows out of it. */

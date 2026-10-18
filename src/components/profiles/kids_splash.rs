@@ -1,11 +1,17 @@
-//! The screen shown while a Kids profile opens: four bands of colour (green, orange to red, pink, blue to lavender) behind the word "kids" in rounded-control red letters
-//! with a white edge. Everything is drawn here as vectors (no picture file), in a 2000 x 1120 box that fills the page.
+//! The screen shown while a Kids profile opens: four bands of colour (green, orange to red, pink, blue to lavender) behind the word "kids" in rounded red letters with a white
+//! edge. The bands are vectors in a 2000 x 1120 box that fills the page; the word is set in a real font (Fredoka Bold, see `style/input.css`), not drawn by hand.
 use leptos::prelude::*;
 
-/// The letters, as strokes with round ends: one description used twice, wide and white for the edge, then narrower and red.
-const LETTERS: &str = "M640 432 V685 M672 600 L765 514 M700 622 L772 690 M868 522 V690 M1132 432 V690 M1340 540 C1325 515 1235 505 1233 553 C1231 592 1362 580 1362 640 C1362 690 1262 695 1236 648";
-/// The bowl of the d.
-const BOWL: (f64, f64, f64, f64) = (1066.0, 601.0, 97.0, 87.0);
+/// The word "kids" as lettering: red letters, a white sticker edge around them (the stroke is painted under the fill). `cx` and `cy` give the middle of the baseline box, `size` the font size.
+#[component]
+fn Lettering(cx: f64, base: f64, size: f64, edge: f64) -> impl IntoView {
+    let font = "'Logo Kids', 'Fredoka', ui-rounded, 'Arial Rounded MT Bold', sans-serif";
+    view! {
+        // the edge first (white letters grown by a round stroke), then the red letters on top
+        <text x=cx y=base text-anchor="middle" font-family=font font-weight="700" font-size=size fill="#ffffff" stroke="#ffffff" stroke-width=edge stroke-linejoin="round" stroke-linecap="round" letter-spacing=size * 0.01>"kids"</text>
+        <text x=cx y=base text-anchor="middle" font-family=font font-weight="700" font-size=size fill="#d22f26" letter-spacing=size * 0.01>"kids"</text>
+    }
+}
 
 #[component]
 pub fn KidsSplash(#[prop(optional, into)] class: String) -> impl IntoView {
@@ -20,17 +26,7 @@ pub fn KidsSplash(#[prop(optional, into)] class: String) -> impl IntoView {
             <rect x="446" y="0" width="428" height="1120" fill="url(#kids-orange)" />
             <rect x="874" y="0" width="632" height="1120" fill="#ed77c5" />
             <rect x="1506" y="0" width="494" height="1120" fill="url(#kids-blue)" />
-            // the white edge, then the red letters
-            <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="170">
-                <path d=LETTERS />
-                <ellipse cx=BOWL.0 cy=BOWL.1 rx=BOWL.2 ry=BOWL.3 />
-                <circle cx="866" cy="428" r="89" fill="#ffffff" stroke="none" />
-            </g>
-            <g fill="none" stroke="#d22f26" stroke-linecap="round" stroke-linejoin="round" stroke-width="68">
-                <path d=LETTERS />
-                <ellipse cx=BOWL.0 cy=BOWL.1 rx=BOWL.2 ry=BOWL.3 />
-            </g>
-            <circle cx="866" cy="428" r="38" fill="#d22f26" />
+            <Lettering cx=1000.0 base=690.0 size=460.0 edge=64.0 />
         </svg>
     }
 }
@@ -39,17 +35,8 @@ pub fn KidsSplash(#[prop(optional, into)] class: String) -> impl IntoView {
 #[component]
 pub fn KidsWordmark(#[prop(optional, into)] class: String) -> impl IntoView {
     view! {
-        <svg class=class viewBox="552 342 896 448" role="img" aria-label=crate::i18n::t("nav-kids") xmlns="http://www.w3.org/2000/svg">
-            <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="170">
-                <path d=LETTERS />
-                <ellipse cx=BOWL.0 cy=BOWL.1 rx=BOWL.2 ry=BOWL.3 />
-                <circle cx="866" cy="428" r="89" fill="#ffffff" stroke="none" />
-            </g>
-            <g fill="none" stroke="#d22f26" stroke-linecap="round" stroke-linejoin="round" stroke-width="68">
-                <path d=LETTERS />
-                <ellipse cx=BOWL.0 cy=BOWL.1 rx=BOWL.2 ry=BOWL.3 />
-            </g>
-            <circle cx="866" cy="428" r="38" fill="#d22f26" />
+        <svg class=class viewBox="0 0 900 470" role="img" aria-label=crate::i18n::t("nav-kids") xmlns="http://www.w3.org/2000/svg">
+            <Lettering cx=450.0 base=345.0 size=430.0 edge=70.0 />
         </svg>
     }
 }
