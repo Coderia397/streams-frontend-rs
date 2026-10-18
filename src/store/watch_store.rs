@@ -3,9 +3,28 @@ use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 const WATCH_STORAGE_KEY: &str = "streams_watch_progress_v1";
+const EPISODE_STORAGE_KEY: &str = "streams_episode_progress_v1";
 
 fn storage_key() -> String {
     crate::store::scoped::key(WATCH_STORAGE_KEY)
+}
+
+/// How far one episode of a series was watched (the record of the series keeps only the episode watched last).
+#[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq)]
+pub struct EpisodeProgress {
+    pub position: f64,
+    pub duration: f64,
+    pub updated_at: u64,
+}
+
+impl EpisodeProgress {
+    pub fn percent(&self) -> f32 {
+        if self.duration > 0.0 { ((self.position / self.duration) * 100.0).clamp(0.0, 100.0) as f32 } else { 0.0 }
+    }
+}
+
+pub fn episode_key(series_id: u32, season: u32, episode: u32) -> String {
+    format!("tv_{series_id}_{season}_{episode}")
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
@@ -57,6 +76,24 @@ impl WatchRecord {
 #[derive(Clone, Copy)]
 pub struct WatchStore {
     pub records: RwSignal<HashMap<String, WatchRecord>>,
+    /// one entry per episode watched, key `tv_<series>_<season>_<episode>`
+    pub episodes: RwSignal<HashMap<String, EpisodeProgress>>,
+}
+
+fn load_episodes() -> HashMap<String, EpisodeProgress> {
+    let storage = web_sys::window().and_then(|w| w.local_storage().ok().flatten());
+    storage
+        .and_then(|s| s.get_item(&crate::store::scoped::key(EPISODE_STORAGE_KEY)).ok().flatten())
+        .and_then(|raw| serde_json::from_str(&raw).ok())
+        .unwrap_or_default()
+}
+
+fn save_episodes(map: &HashMap<String, EpisodeProgress>) {
+    if let Some(storage) = web_sys::window().and_then(|w| w.local_storage().ok().flatten()) {
+        if let Ok(raw) = serde_json::to_string(map) {
+            let _ = storage.set_item(&crate::store::scoped::key(EPISODE_STORAGE_KEY), &raw);
+        }
+    }
 }
 
 fn load_from_storage() -> HashMap<String, WatchRecord> {
@@ -82,6 +119,7 @@ pub fn provide_watch_store() {
 
     provide_context(WatchStore {
         records: records_signal,
+        episodes: RwSignal::new(load_episodes()),
     });
 }
 
@@ -93,6 +131,26 @@ impl WatchStore {
     /// Reads the records of the profile now in use (after the profile changed).
     pub fn reload(&self) {
         self.records.set(load_from_storage());
+        self.episodes.set(load_episodes());
+    }
+
+    /// How far an episode was watched, 0 to 100 (0 when never started).
+    pub fn episode_percent(&self, series_id: u32, season: u32, episode: u32) -> f32 {
+        let key = episode_key(series_id, season, episode);
+        self.episodes.with(|m| m.get(&key).map(|e| e.percent()).unwrap_or_else(|| {
+            // the series record also tells how far its last episode went (a copy made before episodes were kept one by one)
+            self.records.with(|r| r.get(&WatchRecord::composite_key(series_id, true)).filter(|r| r.season == Some(season) && r.episode == Some(episode)).map(|r| r.percentage).unwrap_or(0.0))
+        }))
+    }
+
+    /// An episode position that came from the account (kept here, not sent back).
+    pub fn insert_episode_remote(&self, series_id: u32, season: u32, episode: u32, progress: EpisodeProgress) {
+        let key = episode_key(series_id, season, episode);
+        self.episodes.update(|m| {
+            if m.get(&key).is_some_and(|e| e.updated_at >= progress.updated_at) { return; }
+            m.insert(key, progress);
+            save_episodes(m);
+        });
     }
 
     /// A record that came from the account: kept here, not sent back.
@@ -191,6 +249,12 @@ impl WatchStore {
             updated_at: now,
         };
 
+        if let (true, Some(s), Some(e)) = (is_tv, season, episode) {
+            self.episodes.update(|m| {
+                m.insert(episode_key(media_id, s, e), EpisodeProgress { position: current_time, duration, updated_at: now });
+                save_episodes(m);
+            });
+        }
         let key = record.key();
         self.records.update(|map| {
             map.insert(key, record);
@@ -204,6 +268,10 @@ impl WatchStore {
         self.records.update(|map| {
             map.clear();
             save_to_storage(map);
+        });
+        self.episodes.update(|m| {
+            m.clear();
+            save_episodes(m);
         });
     }
 

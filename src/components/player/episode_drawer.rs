@@ -71,9 +71,7 @@ pub fn EpisodeDrawer(
                                     let still_url = ep.still_url("w300");
                                     let name = ep.name.clone();
                                     let overview = ep.overview.clone();
-                                    let percent = if is_current {
-                                        watch_store.get_record(series_id, true).filter(|r| r.season == Some(s_num) && r.episode == Some(ep_num)).map(|r| r.percentage.clamp(0.0, 100.0)).unwrap_or(0.0)
-                                    } else { 0.0 };
+                                    let percent = watch_store.episode_percent(series_id, s_num, ep_num).clamp(0.0, 100.0);
                                     let open_class = if is_current { "bg-raised" } else { "hover:bg-[#404040] focus-visible:bg-raised focus-visible:outline-2 focus-visible:outline-ink" };
                                     view! {
                                         <button

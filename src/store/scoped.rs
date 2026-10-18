@@ -16,8 +16,9 @@ pub fn key(base: &str) -> String {
 }
 
 /// The bases of the keys above, so that signing out can remove every profile's copy.
-pub const BASES: [&str; 6] = [
+pub const BASES: [&str; 7] = [
     "streams_watch_progress_v1",
+    "streams_episode_progress_v1",
     "streams_my_list_v1",
     "streams_title_ratings_v1",
     "streams_title_ratings_ts_v1",

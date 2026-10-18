@@ -216,6 +216,19 @@ fn current_rows() -> (BTreeMap<String, Value>, BTreeMap<String, Value>) {
             }));
         }
     });
+    // one row for each episode watched (the row of the series above already covers the episode watched last)
+    watch.episodes.with_untracked(|m| {
+        for (key, e) in m {
+            let mut parts = key.split('_').skip(1);
+            let (Some(id), Some(season), Some(episode)) = (parts.next().and_then(|x| x.parse::<u32>().ok()), parts.next().and_then(|x| x.parse::<u32>().ok()), parts.next().and_then(|x| x.parse::<u32>().ok())) else { continue };
+            let covered = watch.records.with_untracked(|r| r.get(&WatchRecord::composite_key(id, true)).is_some_and(|r| r.season == Some(season) && r.episode == Some(episode)));
+            if covered { continue; }
+            progress.insert(key.clone(), json!({
+                "media_type": "tv", "tmdb_id": id, "season": season, "episode": episode,
+                "position_seconds": e.position as i64, "duration_seconds": e.duration as i64, "completed": e.percent() >= 95.0, "hidden": false, "client_updated_at": iso(e.updated_at),
+            }));
+        }
+    });
     (titles, progress)
 }
 
@@ -343,6 +356,11 @@ pub async fn pull_now() -> Result<(), AuthError> {
             let id = id as u32;
             let is_tv = kind == "tv";
             let at = p["client_updated_at"].as_str().map(from_iso).unwrap_or(0);
+            if is_tv && p["hidden"].as_bool() != Some(true) {
+                if let (Some(s), Some(e), Some(dur)) = (p["season"].as_u64().filter(|s| *s > 0), p["episode"].as_u64().filter(|e| *e > 0), p["duration_seconds"].as_f64().filter(|d| *d > 0.0)) {
+                    watch.insert_episode_remote(id, s as u32, e as u32, crate::store::watch_store::EpisodeProgress { position: p["position_seconds"].as_f64().unwrap_or(0.0), duration: dur, updated_at: at });
+                }
+            }
             let local = watch.get_record(id, is_tv);
             if local.as_ref().is_some_and(|l| l.updated_at >= at) { continue; }
             if p["hidden"].as_bool() == Some(true) {

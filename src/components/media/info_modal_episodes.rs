@@ -126,6 +126,7 @@ pub fn InfoModalEpisodes(
                                         };
                                         let runtime_str = ep.runtime.map(|r| format!("{}m", r)).unwrap_or_default();
                                         let still_url = ep.still_url("w300");
+                                        let watched = crate::store::use_watch_store().episode_percent(series_id, season_val, ep_num).clamp(0.0, 100.0);
 
                                         let on_click_ep = {
                                             let on_play_cb = on_play;
@@ -166,6 +167,9 @@ pub fn InfoModalEpisodes(
                                                             </div>
                                                         }.into_any()
                                                     }}
+                                                    {(watched > 0.0).then(|| view! {
+                                                        <div class="absolute inset-x-0 bottom-0 h-[3px] bg-mute"><div class="h-full bg-brand" style=format!("width:{watched}%")></div></div>
+                                                    })}
                                                     <div class="absolute inset-0 flex items-center justify-center">
                                                         <div class="w-9 h-9 rounded-full bg-void/30 border border-ink/60 flex items-center justify-center group-hover:bg-ink/20 group-hover:scale-110 transition-all duration-(--motion-base) shadow">
                                                             <div class="w-0 h-0 ml-0.5 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[10px] border-l-ink" />
