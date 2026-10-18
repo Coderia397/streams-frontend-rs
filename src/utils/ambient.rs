@@ -8,7 +8,7 @@ pub struct AmbientRGB {
     pub b: u8,
 }
 
-#[wasm_bindgen(module = "/interop/dist/index.js")]
+#[wasm_bindgen(module = "/interop/dist/streams-interop.js")]
 extern "C" {
     #[wasm_bindgen(js_name = getCachedAmbientColor)]
     fn js_get_cached_ambient_color(url: &str) -> String;

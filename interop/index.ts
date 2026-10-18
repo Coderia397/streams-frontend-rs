@@ -1,4 +1,4 @@
-// The only entry point Rust binds to (#[wasm_bindgen(module = "/interop/dist/index.js")]). Every export here has a matching
+// The only entry point Rust binds to (#[wasm_bindgen(module = "/interop/dist/streams-interop.js")]). Every export here has a matching
 // extern declaration in src/components/hls_adapter.rs or src/utils/ambient.rs; tsc checks the TypeScript side of the signatures.
 import * as ambient from './ambient';
 

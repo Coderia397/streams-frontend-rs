@@ -2,7 +2,7 @@
 use wasm_bindgen::prelude::*;
 use web_sys::HtmlVideoElement;
 
-#[wasm_bindgen(module = "/interop/dist/index.js")]
+#[wasm_bindgen(module = "/interop/dist/streams-interop.js")]
 extern "C" {
     #[wasm_bindgen(js_name = hlsAttach)]
     pub fn hls_attach(video_id: &str, stream_url: &str) -> String;
