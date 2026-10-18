@@ -202,5 +202,15 @@ fn HomeRoute(kids: bool) -> impl IntoView {
     if !kids && kids_active {
         return view! { <leptos_router::components::Redirect path="/kids" /> }.into_any();
     }
-    view! { <BrowseHome /> }.into_any()
+    // while Who's watching or the switch screen covers the page, the home page is not there at all: its banner video would go on playing (with sound) behind them
+    let profile_store = crate::store::use_profile_store();
+    let switching = use_context::<crate::components::profiles::switch_overlay::SwitchState>();
+    view! {
+        {move || if profile_store.active_profile_id.get().is_none() || switching.is_some_and(|s| s.0.get().is_some()) {
+            view! { <span /> }.into_any()
+        } else {
+            view! { <BrowseHome /> }.into_any()
+        }}
+    }
+    .into_any()
 }
