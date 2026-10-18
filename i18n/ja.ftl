@@ -36,7 +36,6 @@ controls-overlay-episode-selector = エピソードセレクター
 controls-overlay-forward-10-seconds-right-arrow = 10秒進める（右矢印）
 controls-overlay-fullscreen-f = フルスクリーン (F)
 controls-overlay-next-episode = 次のエピソード
-controls-overlay-playback-speed = 再生速度
 controls-overlay-rewind-10-seconds-left-arrow = 10秒戻す（左矢印）
 episode-drawer-no-episodes-available-for-this = このシーズンにはエピソードがありません。
 games-coming-soon = まもなく配信
@@ -53,13 +52,9 @@ login-unlimited-films-series-and-more = 無制限の映画、シリーズ、そ�
 mod-finding-optimal-stream = 最適なストリームを検索中...
 mod-retry = 再試行
 movie-card-popup-hd = HD
-navbar-exit-kids = キッズモードを終了
 navbar-menu-current-profile = 現在のプロフィール
 navbar-mobile-avatar = アバター
-navbar-mobile-cast = キャスト
-navbar-mobile-cast-to-tv = テレビにキャスト
 navbar-mobile-profile = プロフィール
-navbar-mobile-profile-menu = プロフィールメニュー
 navbar-switch-to-kids-profile = キッズプロフィールに切り替え
 new-popular-coming-to-the-collection-soon = コレクションに近日登場
 new-popular-new-and-acclaimed = 新作＆評判の高い作品
@@ -78,8 +73,6 @@ not-found-diagnostic-report = 診断レポート
 not-found-the-targeted-router-endpoint-has = ターゲットのルーターのエンドポイントが参照されなくなったか、またはCDNスペースから読み込めませんでした。再生を再開するには、安全なホームストリーミング環境に戻ってください。
 notifications-dropdown-notifications = 通知
 notifications-dropdown-youre-all-caught-up-new = すべて見終えました — 新しい到着はここに表示されます。
-notifications-notifications-arrivals = 通知と到着
-notifications-stay-up-to-date-with = 新作、トレンド、おすすめを常にチェック
 pin-prompt-profile-lock-is-currently-on = プロフィールロックは現在有効です。
 search-bar-clear-search = 検索をクリア
 search-bar-search = 検索
@@ -88,13 +81,13 @@ search-bar-titles-people-genres = タイトル、人物、ジャンル
 subtitle-drawer-no-subtitles-detected-for-this = このストリームにはサブタイトルが検出されませんでした。
 subtitle-drawer-subtitle-timing-offset = サブタイトルのタイミングオフセット
 subtitle-drawer-subtitles = 字幕
+player-audio = 音声
 vibe-row-scroll-left = 左にスクロール
 vibe-row-scroll-right = 右にスクロール
 video-player-forward-10s = 10秒進める
 video-player-fullscreen = フルスクリーン
 video-player-rewind-10s = 10秒戻る
 whos-watching-add-profile = プロフィールを追加
-whos-watching-kids = キッズ
 help-ui-center = ヘルプセンター
 help-ui-browse = ブラウズ
 help-ui-signin = サインイン
@@ -117,6 +110,10 @@ help-ui-tell-more = 不足していた部分を教えてください
 help-ui-recommended = あなたにおすすめ
 help-ui-additional = 追加の検索結果
 help-ui-read = 記事を読む
+help-ui-results-count =
+    { $count ->
+       *[other] “{ $query }”の検索結果 { $count } 件
+    }
 help-ui-account = アカウント
 help-ui-signout = { $brand } からログアウト
 help-ui-results-count-link = 「{ $query }」に関するすべての結果を見る
@@ -571,6 +568,17 @@ help-art-skip-intro-next-body =
 help-art-my-list-title = マイリストの使い方
 help-art-my-list-summary = 後で見るためにタイトルを保存し、また見つけることができます。
 help-art-my-list-keywords = my list add remove watchlist save later favorites plus
+help-art-my-list-body =
+    ## タイトルの追加
+    タイトルカード、詳細ウィンドウ、またはページ上部のヒーローセクションにある<b>+</b>ボタンを選択してください。
+
+    ## タイトルの削除
+    タイトルに表示されているチェックマークを選択すると、<b>+</b>に戻ります。
+
+    ## リストの表示
+    上部バーの<b>マイリスト</b>を開きます。スマートフォンでは下部バーに表示されます。
+
+    !! 注意: 現在、リストはページが開いている間のみ保持され、リロードするとクリアされます。プロファイルへの保存はアカウント機能の一部として対応予定です。詳細は<a=/help/article/list-missing>マイリストや視聴履歴が消えた場合</a>を参照してください。
 help-art-continue-watching-title = 続きを視聴する方法
 help-art-continue-watching-summary = 止まっていたところから再開し、行からタイトルを削除します。
 help-art-continue-watching-keywords = continue watching resume progress remove row stopped half watched
@@ -667,9 +675,25 @@ help-art-what-is-body = { $brand } は次に見る映画や番組をお手伝い
 help-art-getting-started-title =  { $brand } の始まり方
 help-art-getting-started-summary = 最初の5分間：プロフィール、タイトルの見つけ方、保存方法。
 help-art-getting-started-keywords = 始まり方 初心者 初めて ツアー 新しいユーザー 使い方ガイド 基本
+help-art-getting-started-body =
+    1. <b>プロファイルを選択または作成します。</b>詳細は<a=/help/article/profiles-manage>プロファイルの作成、編集、削除方法</a>を参照してください。
+    2. <b>ホームページを閲覧します。</b>行はテーマごとにグループ化され、上部の大見出しは変更されます。
+    3. <b>検索</b>は虫眼鏡アイコンから行います。詳細は<a=/help/article/search-browse>検索とブラウジングの方法</a>を参照してください。
+    4. <b>タイトルを選択</b>すると、詳細情報、トレーラーの視聴、再生開始が可能です。
+    5. <b>マイリストにタイトルを追加</b>するには、<b>+</b>ボタンを使用します。
+
+    視聴中に役立つキーを覚えましょう: <a=/help/article/shortcuts>キーボードショートカット</a>。
 help-art-sources-title = タイトルの出所
 help-art-sources-summary = { $brand } がストリームを見つける方法、タイトルが1日は動くが次の日は動かない理由。
 help-art-sources-keywords = ソース プロバイダー ホストリンク サードパーティ 出所 カタログ TMDB メタデータ 可用性
+help-art-sources-body =
+    詳細情報、ポスター、評価は公開されている映画・テレビ番組カタログから取得されます。動画自体は{ $brand }には存在しません。再生を押すと、プレイヤーが独立したサードパーティのソースにストリームを要求します。
+
+    - タイトルは、あるソースでは利用可能でも、別のソースでは利用できない場合があります。
+    - ソースは予告なしにオフラインになる場合があります。
+    - 画質、音声トラック、字幕はソースから提供されます。
+
+    これらのソースを管理・確認することはできません。<a=/disclaimer>免責事項</a>を参照してください。権利者の方は、<a=/help/article/copyright>著作権の問題を報告する方法</a>を参照してください。
 help-art-contribute-title = どうやって貢献できますか？
 help-art-contribute-summary = アイデア、修正、翻訳、バグ報告は歓迎します。
 help-art-contribute-keywords = 貢献 貢献する 志願者 翻訳 翻訳 コード GitHub 帮助 改善 建議
@@ -827,6 +851,10 @@ help-act-copied = コピー済み
 help-act-email = 結果をメール
 help-act-fix = どう修正するか
 help-act-summary-ok = このデバイスではすべて正常です。
+help-act-summary-issues =
+    { $count ->
+       *[other] 対応が必要な項目が { $count } 件あります。
+    }
 help-act-d-connection = インターネット接続
 help-act-d-browser = ブラウザ
 help-act-d-video = ビデオ再生
@@ -847,6 +875,14 @@ help-act-v-reachable = { $ms } msで到達可能
 help-act-v-unreachable = 到達不可
 help-act-v-timeout = { $s }秒以内に応答なし
 help-act-data-title = このデバイス上のあなたのデータ
+help-act-data-profiles =
+    { $count ->
+       *[other] プロフィール { $count } 件
+    }
+help-act-data-progress =
+    { $count ->
+       *[other] 視聴履歴が保存されている作品 { $count } 件
+    }
 help-act-data-lang = 言語: { $lang }
 help-act-clear-progress = 視聴進捗をクリア
 help-act-reset-recs = おすすめをリセット
@@ -881,13 +917,9 @@ nav-new-hot = 新着 & ホット
 nav-clips = クリップ
 nav-search = 検索
 nav-kids = キッズ
-nav-profiles-more = プロフィール & その他
-nav-account-settings = アカウント設定
 nav-genres = ジャンル
 nav-categories = カテゴリ
 tabs-everyone-watching = 誰もが見る
-tabs-just-landed = 新着
-tabs-top10-movies = トップ10映画
 tabs-top10-series = Top 10 シリーズ
 tabs-coming-soon = 今後公開
 footer-tv-shows = テレビ番組
@@ -902,6 +934,18 @@ footer-contact = お問い合わせ
 footer-help = ヘルプセンター
 footer-cookie-preferences = クッキーの設定
 notif-today = 今日
+notif-ago-days =
+    { $n ->
+       *[other] { $n } 日前
+    }
+notif-ago-weeks =
+    { $n ->
+       *[other] { $n } 週間前
+    }
+notif-ago-months =
+    { $n ->
+       *[other] { $n } か月前
+    }
 notif-h-trending = トレンド中
 notif-h-new-arrival = 新着
 notif-h-coming-soon = 今後公開
@@ -916,9 +960,11 @@ media-add-to-list = マイリストに追加
 media-in-list = マイリストにあります
 media-series = シリーズ
 media-film = 映画
-media-trending = トレンド
-media-popular = 人気
 media-genre-fallback = アクション
+media-seasons =
+    { $n ->
+       *[other] { $n } シーズン
+    }
 media-season-n = シーズン { $n }
 media-directed-by = { $name }監督
 media-created-by = { $name }制作
@@ -955,8 +1001,6 @@ login-reason-hd-body = HDおよびUltra HDストリームで、最高の画質�
 login-reason-subs-body = 40以上の言語から選べます。フォントサイズ、色、背景をあなたの好みにカスタマイズできます。
 login-reason-place-body = 「続きから視聴」は、すべての番組やシーズン、どのデバイスでも、あなたの最後に見た場所から続きます。
 login-ready = 視聴準備ができました。メールアドレスを入力してアカウントを作成またはログインしてください。
-mylist-empty = リストが空です
-mylist-empty-hint = 視聴したい番組や映画を追加して、お気に入りを管理してください。
 search-results-for = 「{ $query }」の結果
 search-no-matches = 一致するものがありません
 search-try-another = 別のキーワードを試してください。
@@ -980,7 +1024,6 @@ profile-transfer = プロフィールを移行
 profile-kids = キッズプロフィール
 profile-lock = プロフィールロック
 profile-choose-icon = アイコンを選択
-profile-choose-icon-hint = プロフィール用のアバターを選択してください
 common-done = 完了
 profile-pin-invalid = PINは正確に4桁の数字でなければなりません。
 login-reason-screens-body = スマートテレビ、ラップトップ、タブレット、または電話でストリーム。どこにいても、{ $brand }はあなたと共にあります。
@@ -989,7 +1032,6 @@ player-play = 再生（スペース）
 player-unmute = ミュート解除（M）
 player-mute = ミュート（M）
 player-error-no-source = ビデオのストリーミングができません。すべてのソースプロバイダーが利用不可またはブラウザでサポートされていません。
-player-episode = エピソード
 genre-action = アクション
 genre-anime = アニメ
 genre-black-stories = ブラックストーリー
@@ -1068,7 +1110,6 @@ profile-manage-title = プロフィールを管理:
 profile-whos-watching = 誰が見てる？
 profile-sign-out =  { $brand } からサインアウト
 profile-enter-pin = PINを入力して{ $name }のプロフィールにアクセスしてください。
-profile-add = プロフィールを追加
 profile-edit-title = プロフィールを編集
 profile-edit-hint = このプロフィールの名前、アイコン、ロックを更新してください。
 profile-add-hint = { $brand }を別の人が見るためのプロフィールを追加してください。
@@ -1294,6 +1335,16 @@ help-art-slow-pages-body =
 help-art-vpn-network-title = VPNs, school and work networks
 help-art-vpn-network-summary = Why some networks block titles or pictures, and what to try.
 help-art-vpn-network-keywords = vpn proxy school work network firewall dns filter blocked safedns restricted wifi
+help-art-vpn-network-body =
+    { $brand } は公開映画カタログから詳細や画像を読み込み、独立したソースからストリーミングします。一部のネットワークではこれらのサイトがブロックされ、一部のソースでは特定のアドレスが拒否される場合があります。
+
+    - <b>VPNまたはプロキシ。</b>一部のソースはVPNアドレスに応答しません。オフにするか、別の国を選択してください。
+    - <b>学校、職場、または公衆Wi-Fi。</b>フィルタによりストリーミングやカタログがブロックされることがあります。スマートフォンのモバイルデータ通信をお試しください。
+    - <b>DNSフィルタ。</b>フィルタリングDNSサービスによりカタログがブロックされ、行や画像が空になる場合があります。別のDNSを使用するか、このサイトに対してフィルタをオフにしてください。
+
+    デバイスチェックでは、ネットワークから到達できないサービスが表示されます。
+
+    @@ diagnostics
 help-art-is-down-title = { $brand }がダウンしていますか？
 help-art-is-down-summary = あなたのデバイスからどの部分が動作しているか確認してください。
 help-art-is-down-keywords = down outage status not working offline unavailable server maintenance error site
@@ -1545,6 +1596,7 @@ reads-empty = ライブラリにコミックはありません
 profile-default-main = メイン
 profile-default-kids = キッズ
 set-title = 設定
+set-profile-sheet = プロファイル
 set-back = 戻る
 set-cancel = キャンセル
 set-save = 保存
@@ -1582,6 +1634,7 @@ set-title-name = 名前
 set-title-app = アプリ設定
 set-title-account = アカウント
 set-title-password = パスワード
+set-title-change-password = パスワードを変更
 set-title-email = メール
 set-title-phone = 携帯電話
 set-title-devices = アクセスとデバイス
@@ -1591,6 +1644,10 @@ set-title-delete = アカウント削除
 set-ratings-hint = このプロフィールで表示されるタイトルは、選択した評価までのものに限られます。評価が設定されていないタイトルは、制限がなければ表示されます。
 set-blocked-hint = ブロックされたタイトルはこのプロフィールで表示されません。
 set-blocked-placeholder = シリーズまたは映画の名前を入力してください
+set-blocked-count =
+    { $count ->
+       *[other] { $count } 作品
+    }
 set-lock-on = オン
 set-lock-off = オフ
 set-lock-title-on = プロフィールロックがオン
@@ -1667,6 +1724,8 @@ set-account-profiles = プロフィール
 set-verify-title = まず、あなたであることを確認しましょう
 set-verify-body = 何らかの変更を行う前に、アカウントのパスワードを確認してください。
 set-password-current = 現在のパスワード
+set-password-forgot = パスワードをお忘れですか？
+set-password-current-required = 現在のパスワードを入力してください。
 set-forgot-password = パスワードを忘れた場合
 set-password-hint = アカウントを保護するため、{ $min }文字以上のユニークなパスワードを使用してください。
 set-password-new = 新しいパスワード
@@ -1696,8 +1755,6 @@ set-privacy-data = データ設定
 set-privacy-personalization = パーソナライズされたおすすめ
 set-privacy-personalization-hint = 視聴したものをもとにタイトルを提案します。オフの場合は一般的な選択肢を表示します。
 set-activity-clear-body = あなたの視聴履歴と再生位置はこのブラウザから削除されます。
-set-delete-account-body = アカウントを削除すると、プロフィール、設定、視聴履歴が永久に削除されます。
-set-delete-account-confirm = アカウントを削除し、その中にあるすべてのデータを削除しますか？これは取り消せません。
 set-err-invalid = そのパスワードは正しくありません。もう一度試してください。
 set-err-weak = そのパスワードは弱すぎます。文字と数字を含む長いパスワードを使用してください。
 set-err-rate = 試行回数が多すぎます。1分間待ってからもう一度試してください。
@@ -1741,11 +1798,21 @@ set-overview-quick = クイックリンク
 set-overview-update-password = パスワードを更新
 set-overview-edit = 設定を編集
 set-overview-edit-hint = 言語、字幕、オートプレイ、通知、プライバシーなど
+set-overview-profiles =
+    { $count ->
+       *[other] { $count } プロファイル
+    }
 set-security-access = アクセスとプライバシー
 set-privacy-hint = 個人情報をどのように使用するかを管理
 set-profiles-parental = 親の制御と権限
 set-profiles-parental-hint = 成熟度レベルを設定、タイトルをブロック
 set-profiles-settings = プロフィール設定
+set-profiles-transfer-hint = プロファイルを別のアカウントにコピー
+set-add-profile-button = プロファイルを追加
+set-add-profile-limit = 同居している人のために最大 { $max } 個のプロファイルを追加できます。
+set-profile-added = プロファイルを追加しました
+set-add-a-profile = プロファイルを追加
+set-profile-name-required = 名前を入力してください
 set-now-watching = 今視ている
 set-activity-episode = S{ $season }:E{ $episode }
 set-activity-title = { $title } · { $episode }
@@ -1760,6 +1827,8 @@ set-title-game-handle = ゲームハンドル
 set-title-personal-info = 個人情報のアクセス
 set-title-speed-test = インターネット速度テスト
 set-title-testing = テスト参加
+set-row-feature-testing = 機能テスト
+set-devices-account-access = アカウントへのアクセス
 set-title-transfer = プロフィールの移行
 set-title-transfer-profile = プロフィールを移行
 set-activity-for = { $name }のアクティビティ
@@ -1791,9 +1860,10 @@ set-handle-change = ゲームハンドルはいつでも変更できます。
 set-handle-create = ゲームハンドルを作成
 set-handle-suggest = 名前を提案
 set-handle-invalid = {$min}から{$max}文字と数字を使用し、スペースは使用しないでください。
-set-transfer-row-hint = プロフィールを他のアカウントにコピーを許可する
 set-transfer-on-title = プロフィール転送は有効
 set-transfer-on-body = このアカウントからプロフィールを保存し、他のアカウントに追加できます。オフにするとプロフィールがこのアカウントから離れなくなります。既にこのアカウントに追加されたプロフィールには影響しません。
+set-transfer-help-centre = ヘルプセンター
+set-transfer-go-home = ホームに戻る
 set-transfer-off-title = プロフィール転送は無効
 set-transfer-off-body = このアカウントからプロフィールをコピーできません。有効にすると許可します。
 set-transfer-profile-hint = このプロフィールを他のアカウントにコピー
@@ -1817,13 +1887,13 @@ set-personal-info-hint = 個人情報をコピーするリクエスト
 set-personal-info-body = アカウントに関する私たちが保持している個人情報をコピーするリクエストできます。ファイルには次の内容が含まれます:
 set-personal-info-done = ファイルが保存されました。
 set-personal-info-note = このファイルはデバイスに保存されます。個人情報が含まれている可能性があるため、安全に保管してください。
-set-testing-row-hint = テストとプレビューに参加する
 set-testing-body = たまに、すべてのユーザーが利用できる前に、一部のユーザーに新しい機能を試してもらいます。
 set-testing-switch = テストとプレビューに参加する
 set-testing-hint = この機能をオフにすると、すべての機能の現在のバージョンに留まります。
 set-code-email = コードをメールで送る
 set-code-title = 先ほど送ったコードを入力してください
-set-code-body = { $target }に送ったコードを入力してください。アカウントを保護するのに役立ちます。コードは{ $minutes }分後に期限切れになります。
+set-code-body-1 = 送信したコードを入力してください
+set-code-body-2 = アカウントの保護のためです。コードは送信から { $minutes } 分後に失効します。
 set-code-label = コード
 set-code-submit = 送信
 set-code-resend = コードを再送する
@@ -2078,7 +2148,6 @@ tour-new-title = 新作を見る
 tour-new-text = 新作と人気は、最新作、間もなく公開されるもの、そして誰もが見るものを紹介します。
 tour-list-title = タイトルをあとで見る
 tour-list-text = タイトルをマイリストに保存すると、ここに待っています。
-navbar-mobile-notifications = 通知
 media-play-series = シリーズを再生
 media-play-film = 映画を再生
 nav-all-categories = すべてのカテゴリ
@@ -2112,3 +2181,101 @@ row-np-top10-genre = 今日の{ $genre }上位10
 continue-watching-row-for = { $name }の続きを再生
 continue-watching-mark-watched = 視聴済みにマーク
 continue-watching-time-of = { $done }/{ $total }分
+collection-topic = Streamsコレクション
+rating-not-for-me = 興味なし
+rating-like = いいね
+rating-love = 大好き！
+rating-rated = 評価済み
+controls-overlay-report-problem = 問題を報告
+player-volume = 音量
+player-rating-label = 評価:
+player-watch-credits = クレジットを見る
+player-now-playing = 再生中
+player-skip-recap = あらすじをスキップ
+reason-sexual-violence = 性的暴力
+reason-strong-violence = 強い暴力
+reason-violence = 暴力
+reason-injury-detail = 怪我の詳細描写
+reason-horror = ホラー
+reason-threat = 脅迫
+reason-suicide = 自殺
+reason-self-harm = 自傷行為
+reason-child-abuse = 児童虐待
+reason-domestic-abuse = 家庭内暴力
+reason-discrimination = 差別
+reason-strong-language = 強い言葉
+reason-language = 言葉遣い
+reason-sex = 性的描写
+reason-sex-references = 性的な言及
+reason-nudity = ヌード
+reason-drug-misuse = 薬物乱用
+reason-drug-references = 薬物に関する言及
+reason-alcohol = アルコール
+reason-smoking = 喫煙
+reason-dangerous-behaviour = 危険な行動
+reason-rude-humour = 下品なユーモア
+reason-bullying = いじめ
+reason-animal-cruelty = 動物虐待
+reason-gambling = 賭け
+reason-eating-disorders = 摂食障害
+reason-mature-themes = 大人向けのテーマ
+reason-us-strong-violence = グロテスクな暴力
+reason-us-injury-detail = グロテスクな怪我
+reason-us-sex = 性的コンテンツ
+reason-us-sex-references = 性的な対話
+reason-us-drug-misuse = 物質の使用
+reason-us-alcohol = アルコールの使用
+reason-us-dangerous-behaviour = 危険な行動
+reason-us-rude-humour = 下品なユーモア
+set-title-manage-profile = プロフィールと設定の管理
+set-po-edit-hint = 個人情報と連絡先を編集
+set-po-lock-hint = このプロフィールへのアクセスにPINを必要とする
+set-po-preferences = 設定
+set-po-languages = 言語
+set-po-languages-hint = 表示と音声の言語を設定
+set-po-restrictions = ペアレンタルコントロールを調整
+set-po-restrictions-hint = 年齢レーティングとタイトルの制限を編集
+set-po-subtitles-hint = 字幕の表示方法をカスタマイズ
+set-po-playback-hint = 自動再生と音声、映像の品質を設定
+set-po-notifications-hint = メール、テキスト、プッシュ通知を管理
+set-po-activity-hint = 視聴履歴と評価を管理
+set-po-privacy-hint = 個人情報の利用を管理
+set-po-delete-profile = プロファイルを削除
+set-contact-info = 連絡先情報
+set-del-intro = アカウントの削除は取り消せません。{ $brand } のサービスを利用できなくなり、パーソナライズされたデータは失われます。
+set-del-card = 削除
+set-del-hide = オプションの内容を非表示にする
+set-del-show = オプションの内容を表示する
+set-del-lose = アカウントのアクティビティと設定へのアクセスが永久に失われます。
+set-del-when = アカウントとその中身はすぐに削除されます。
+set-del-check = はい、{ $brand } アカウントを永久に削除します。
+set-del-button = 永久に削除
+set-del-questions = ご質問がある場合は、こちらをご覧ください。
+set-del-help = ヘルプセンター
+set-verified = 認証済み
+set-menu-help = ヘルプセンター
+set-menu-switch = プロファイル切り替え
+profile-not-saved = その変更はアカウントに保存できなかったため、プロファイルは元に戻されました。
+profile-icon-for = { $name } 用
+profile-icon-history = 履歴
+profile-icon-current = 現在のアイコン
+my-continue = 続きを見る
+my-continue-empty = 視聴を開始した作品に戻りましょう。
+my-list = マイリスト
+my-list-empty = 保存したシリーズや映画を管理できます。
+my-trailers = 視聴したトレーラー
+my-trailers-empty = 視聴したトレーラーはここに保存されます。
+my-liked = いいね！したシリーズと映画
+my-liked-empty = いいね！した作品はここに表示されます。
+set-qlink-access = アクセスとデバイスを管理
+set-questions = ご質問は？
+set-gender = 性別
+set-gender-woman = 女性
+set-gender-man = 男性
+set-gender-none = 上記に該当しない、または回答を控える
+set-add-your-name = 名前を追加
+set-add-phone = 電話番号を追加
+set-primary-cannot-delete = プライマリプロファイルは削除できません。
+set-edit-profile-page = プロファイルを編集
+set-handle-lead = ハンドルは、{ $brand } ゲームで他の { $brand } メンバーと遊ぶ際に使用される、固有の名前です。
+set-learn-more = 詳しく見る

@@ -36,7 +36,6 @@ controls-overlay-episode-selector = Selecionador de Episódios
 controls-overlay-forward-10-seconds-right-arrow = Avançar 10 segundos (Seta para a Direita)
 controls-overlay-fullscreen-f = Ecrã inteiro (F)
 controls-overlay-next-episode = Próximo episódio
-controls-overlay-playback-speed = Velocidade de Reprodução
 controls-overlay-rewind-10-seconds-left-arrow = Retroceder 10 segundos (Seta para a Esquerda)
 episode-drawer-no-episodes-available-for-this = Nenhum episódio disponível para esta temporada.
 games-coming-soon = Brevemente
@@ -53,13 +52,9 @@ login-unlimited-films-series-and-more = Filmes, séries e muito mais ilimitados
 mod-finding-optimal-stream = Encontrando a melhor transmissão...
 mod-retry = Tentar novamente
 movie-card-popup-hd = HD
-navbar-exit-kids = Sair do Modo Criança
 navbar-menu-current-profile = Perfil Atual
 navbar-mobile-avatar = Avatar
-navbar-mobile-cast = Elenco
-navbar-mobile-cast-to-tv = Caster para TV
 navbar-mobile-profile = Perfil
-navbar-mobile-profile-menu = Menu do Perfil
 navbar-switch-to-kids-profile = Alternar para Perfil de Criança
 new-popular-coming-to-the-collection-soon = Chegando à Coleção em Breve
 new-popular-new-and-acclaimed = Novo e Reconhecido
@@ -78,8 +73,6 @@ not-found-diagnostic-report = Relatório diagnóstico
 not-found-the-targeted-router-endpoint-has = O endpoint do roteador alvo foi desreferenciado ou falhou em carregar do nosso espaço CDN. Por favor, redirecione de volta ao nosso ambiente de streaming seguro para retomar a reprodução.
 notifications-dropdown-notifications = Notificações
 notifications-dropdown-youre-all-caught-up-new = Você está tudo atualizado — novas chegadas aparecerão aqui.
-notifications-notifications-arrivals = Notificações & Chegadas
-notifications-stay-up-to-date-with = Fique atualizado com novos lançamentos, hits em alta e recomendações.
 pin-prompt-profile-lock-is-currently-on = Bloqueio de perfil está atualmente ativado.
 search-bar-clear-search = Limpar busca
 search-bar-search = Pesquisar
@@ -88,13 +81,13 @@ search-bar-titles-people-genres = Títulos, pessoas, gêneros
 subtitle-drawer-no-subtitles-detected-for-this = Nenhuma legenda detectada para este streaming.
 subtitle-drawer-subtitle-timing-offset = Offset de sincronização das legendas
 subtitle-drawer-subtitles = Legendas
+player-audio = Áudio
 vibe-row-scroll-left = Rolagem para a esquerda
 vibe-row-scroll-right = Rolagem para a direita
 video-player-forward-10s = Avançar 10 segundos
 video-player-fullscreen = Tela cheia
 video-player-rewind-10s = Recuar 10s
 whos-watching-add-profile = Adicionar perfil
-whos-watching-kids = CRIANÇAS
 help-ui-center = Centro de Ajuda
 help-ui-browse = Navegar
 help-ui-signin = Entrar
@@ -117,6 +110,12 @@ help-ui-tell-more = Diga-nos o que faltou
 help-ui-recommended = Recomendado para você
 help-ui-additional = Resultados de busca adicionais
 help-ui-read = Ler Artigo
+help-ui-results-count =
+    { $count ->
+        [one] 1 resultado para “{ $query }”
+        [many] { $count } resultados para “{ $query }”
+       *[other] { $count } resultados para “{ $query }”
+    }
 help-ui-account = Conta
 help-ui-signout = Sair da { $brand }
 help-ui-results-count-link = Ver todos os resultados para "{ $query }"
@@ -859,6 +858,12 @@ help-act-copied = Copiado
 help-act-email = Enviar resultados por e-mail
 help-act-fix = Como resolver
 help-act-summary-ok = Tudo parece estar bem neste dispositivo.
+help-act-summary-issues =
+    { $count ->
+        [one] 1 item precisa de atenção.
+        [many] { $count } itens precisam de atenção.
+       *[other] { $count } itens precisam de atenção.
+    }
 help-act-d-connection = Conexão com a internet
 help-act-d-browser = Navegador
 help-act-d-video = Reprodução de vídeo
@@ -879,6 +884,18 @@ help-act-v-reachable = Atingível em { $ms } ms
 help-act-v-unreachable = Não atingível
 help-act-v-timeout = Nenhuma resposta em { $s } segundos
 help-act-data-title = Seus dados neste dispositivo
+help-act-data-profiles =
+    { $count ->
+        [one] 1 perfil
+        [many] { $count } perfis
+       *[other] { $count } perfis
+    }
+help-act-data-progress =
+    { $count ->
+        [one] 1 título com progresso salvo
+        [many] { $count } títulos com progresso salvo
+       *[other] { $count } títulos com progresso salvo
+    }
 help-act-data-lang = Idioma: { $lang }
 help-act-clear-progress = Limpar progresso de visualização
 help-act-reset-recs = Reiniciar recomendações
@@ -913,13 +930,9 @@ nav-new-hot = Novos & Quentes
 nav-clips = Clips
 nav-search = Buscar
 nav-kids = Crianças
-nav-profiles-more = Perfis & Mais
-nav-account-settings = Configurações da Conta
 nav-genres = Gêneros
 nav-categories = Categorias
 tabs-everyone-watching = Todo mundo está assistindo
-tabs-just-landed = Acabou de chegar
-tabs-top10-movies = Top 10 Filmes
 tabs-top10-series = Top 10 Séries
 tabs-coming-soon = Em Breve
 footer-tv-shows = Séries
@@ -934,6 +947,24 @@ footer-contact = Contate-Nos
 footer-help = Centro de Ajuda
 footer-cookie-preferences = Preferências de Cookies
 notif-today = Hoje
+notif-ago-days =
+    { $n ->
+        [one] 1 dia atrás
+        [many] { $n } dias atrás
+       *[other] { $n } dias atrás
+    }
+notif-ago-weeks =
+    { $n ->
+        [one] 1 semana atrás
+        [many] { $n } semanas atrás
+       *[other] { $n } semanas atrás
+    }
+notif-ago-months =
+    { $n ->
+        [one] 1 mês atrás
+        [many] { $n } meses atrás
+       *[other] { $n } meses atrás
+    }
 notif-h-trending = Tendência Agora
 notif-h-new-arrival = Chegada Nova
 notif-h-coming-soon = Em Breve
@@ -948,9 +979,13 @@ media-add-to-list = Adicionar à Minha Lista
 media-in-list = Na Minha Lista
 media-series = Série
 media-film = Filme
-media-trending = Tendência
-media-popular = Popular
 media-genre-fallback = Ação
+media-seasons =
+    { $n ->
+        [one] 1 Temporada
+        [many] { $n } Temporadas
+       *[other] { $n } Temporadas
+    }
 media-season-n = Temporada { $n }
 media-directed-by = Dirigido por { $name }
 media-created-by = Criado por { $name }
@@ -987,8 +1022,6 @@ login-reason-hd-body = Aproveite a qualidade de imagem impressionante com transm
 login-reason-subs-body = Escolha entre 40+ idiomas. Personalize o tamanho da fonte, cor e fundo conforme seu gosto.
 login-reason-place-body = Continue Assistindo retoma exatamente onde você deixou — em qualquer show e temporada, em qualquer dispositivo.
 login-ready = Pronto para assistir? Insira seu e-mail para criar ou fazer login em sua conta.
-mylist-empty = Sua lista está vazia
-mylist-empty-hint = Adicione shows e filmes para acompanhar o que você quer assistir.
 search-results-for = Resultados para “{ $query }”
 search-no-matches = Nenhum resultado encontrado
 search-try-another = Tente uma palavra-chave diferente.
@@ -1012,7 +1045,6 @@ profile-transfer = Transferir Perfil
 profile-kids = Perfil para Crianças
 profile-lock = Bloqueio de Perfil
 profile-choose-icon = Escolher um Ícone
-profile-choose-icon-hint = Selecione um avatar para seu perfil
 common-done = Concluído
 profile-pin-invalid = O PIN deve ser exatamente 4 dígitos numéricos.
 login-reason-screens-body = Assista em sua TV inteligente, laptop, tablet ou celular. Onde quer que você esteja, { $brand } vem com você.
@@ -1021,7 +1053,6 @@ player-play = Tocar (Espaço)
 player-unmute = Desmutar (M)
 player-mute = Mutar (M)
 player-error-no-source = Não é possível transmitir vídeo. Todos os provedores de origem estavam indisponíveis ou não suportados pelo seu navegador.
-player-episode = Episódio
 genre-action = Ação
 genre-anime = Anime
 genre-black-stories = Histórias Negras
@@ -1100,7 +1131,6 @@ profile-manage-title = Gerenciar Perfis:
 profile-whos-watching = Quem está assistindo?
 profile-sign-out = Sair do { $brand }
 profile-enter-pin = Digite seu PIN para acessar o perfil de { $name }.
-profile-add = Adicionar Perfil
 profile-edit-title = Editar Perfil
 profile-edit-hint = Atualize o nome, o ícone e o bloqueio deste perfil.
 profile-add-hint = Adicione um perfil para outra pessoa assistindo { $brand }.
@@ -1587,6 +1617,7 @@ reads-empty = Nenhum cómic na biblioteca
 profile-default-main = Principal
 profile-default-kids = Crianças
 set-title = Configurações
+set-profile-sheet = Perfil
 set-back = Voltar
 set-cancel = Cancelar
 set-save = Salvar
@@ -1624,6 +1655,7 @@ set-title-name = Nome
 set-title-app = Configurações do app
 set-title-account = Conta
 set-title-password = Senha
+set-title-change-password = Alterar senha
 set-title-email = E-mail
 set-title-phone = Telefone móvel
 set-title-devices = Acesso e dispositivos
@@ -1633,6 +1665,12 @@ set-title-delete = Excluir conta
 set-ratings-hint = Apenas títulos até a classificação selecionada são exibidos neste perfil. Títulos sem classificação são exibidos apenas quando nada estiver limitado.
 set-blocked-hint = Títulos bloqueados não são exibidos neste perfil.
 set-blocked-placeholder = Digite o nome de uma série ou filme
+set-blocked-count =
+    { $count ->
+        [one] 1 título
+        [many] { $count } títulos
+       *[other] { $count } títulos
+    }
 set-lock-on = Ativado
 set-lock-off = Desativado
 set-lock-title-on = Bloqueio de perfil está ativado
@@ -1709,6 +1747,8 @@ set-account-profiles = Perfis
 set-verify-title = Primeiro, vamos garantir que é você
 set-verify-body = Antes de alterar algo, confirme a senha da sua conta.
 set-password-current = Senha atual
+set-password-forgot = Esqueceu a senha?
+set-password-current-required = Digite sua senha atual.
 set-forgot-password = Esqueceu a senha?
 set-password-hint = Proteja sua conta com uma senha única de pelo menos { $min } caracteres.
 set-password-new = Nova senha
@@ -1738,8 +1778,6 @@ set-privacy-data = Configurações de dados
 set-privacy-personalization = Recomendações personalizadas
 set-privacy-personalization-hint = Use o que você assiste para sugerir títulos. Quando desativado, você vê escolhas gerais.
 set-activity-clear-body = Seu histórico de assistência e pontos de resumo serão removidos deste navegador.
-set-delete-account-body = Excluir sua conta remove seus perfis, configurações e histórico de assistência permanentemente.
-set-delete-account-confirm = Excluir sua conta e tudo que está armazenado nela? Isso não pode ser desfeito.
 set-err-invalid = Essa senha não está certa. Tente novamente.
 set-err-weak = Essa senha é muito fraca. Use uma mais longa com letras e números.
 set-err-rate = Muitas tentativas. Aguarde um minuto e tente novamente.
@@ -1783,11 +1821,23 @@ set-overview-quick = Links rápidos
 set-overview-update-password = Atualizar senha
 set-overview-edit = Editar configurações
 set-overview-edit-hint = Idiomas, legendas, reprodução automática, notificações, privacidade e mais
+set-overview-profiles =
+    { $count ->
+        [one] 1 perfil
+        [many] { $count } perfis
+       *[other] { $count } perfis
+    }
 set-security-access = Acesso e privacidade
 set-privacy-hint = Gerencie o uso das suas informações pessoais
 set-profiles-parental = Controles parentais e permissões
 set-profiles-parental-hint = Defina o nível de maturidade e bloquee títulos
 set-profiles-settings = Configurações do perfil
+set-profiles-transfer-hint = Copiar um perfil para outra conta
+set-add-profile-button = Adicionar perfil
+set-add-profile-limit = Adicione até { $max } perfis para quem mora com você.
+set-profile-added = Perfil adicionado
+set-add-a-profile = Adicionar um perfil
+set-profile-name-required = Por favor, insira um nome
 set-now-watching = Agora assistindo
 set-activity-episode = S{ $season }:E{ $episode }
 set-activity-title = { $title } · { $episode }
@@ -1802,6 +1852,8 @@ set-title-game-handle = Nome de jogo
 set-title-personal-info = Acesso a informações pessoais
 set-title-speed-test = Teste de velocidade da internet
 set-title-testing = Participação no teste
+set-row-feature-testing = Teste de recursos
+set-devices-account-access = Acesso à conta
 set-title-transfer = Transferência de perfil
 set-title-transfer-profile = Transferir um perfil
 set-activity-for = Atividade de { $name }
@@ -1833,9 +1885,10 @@ set-handle-change = Você pode alterar seu nome de jogo a qualquer momento.
 set-handle-create = Crie seu nome de jogo
 set-handle-suggest = Sugira um nome
 set-handle-invalid = Use { $min } a { $max } letras e números, sem espaços.
-set-transfer-row-hint = Permitir cópia de um perfil para outra conta
 set-transfer-on-title = Transferência de perfil está ativada
 set-transfer-on-body = Perfis podem ser salvos desta conta e adicionados a outra. Desative para parar perfis de deixar sua conta. Perfis já adicionados a esta conta não são afetados.
+set-transfer-help-centre = central de ajuda
+set-transfer-go-home = Voltar para a Página Inicial
 set-transfer-off-title = Transferência de perfil está desativada
 set-transfer-off-body = Perfis não podem ser copiados desta conta. Ative para permitir.
 set-transfer-profile-hint = Copiar este perfil para outra conta
@@ -1859,13 +1912,13 @@ set-personal-info-hint = Solicitar uma cópia das informações pessoais
 set-personal-info-body = Você pode solicitar uma cópia das informações pessoais que possuímos sobre sua conta. O arquivo lista:
 set-personal-info-done = Seu arquivo foi salvo.
 set-personal-info-note = O arquivo fica no seu dispositivo. Ele pode conter informações pessoais, então mantenha-o seguro.
-set-testing-row-hint = Incluir-me em testes e pré-visualizações
 set-testing-body = De tempos em tempos, tentamos novas funcionalidades com um pequeno grupo antes que todos as recebam.
 set-testing-switch = Incluir-me em testes e pré-visualizações
 set-testing-hint = Desative isso para ficar na versão atual de cada funcionalidade.
 set-code-email = Enviar um código por e-mail
 set-code-title = Por favor, digite o código que acabamos de enviar
-set-code-body = Por favor, digite o código que enviamos para { $target } para nos ajudar a proteger sua conta. O código expira após { $minutes } minutos.
+set-code-body-1 = Por favor, insira o código que enviamos para
+set-code-body-2 = para ajudar a proteger sua conta. O código expira { $minutes } minutos após o envio.
 set-code-label = Código
 set-code-submit = Enviar
 set-code-resend = Reenviar código
@@ -2120,7 +2173,6 @@ tour-new-title = Veja o que é novo
 tour-new-text = Novo & Popular mostra o que chegou recentemente, o que vem em breve e o que todo mundo está assistindo.
 tour-list-title = Guarde títulos para depois
 tour-list-text = Salve um título na Minha Lista e ele espera por você aqui.
-navbar-mobile-notifications = Notificações
 media-play-series = Assistir Série
 media-play-film = Assistir Filme
 nav-all-categories = Todas as Categorias
@@ -2154,3 +2206,101 @@ row-np-top10-genre = Top 10 { $genre } Hoje
 continue-watching-row-for = Continuar assistindo para { $name }
 continue-watching-mark-watched = Marcar como assistido
 continue-watching-time-of = { $done } de { $total }m
+collection-topic = Coleção Streams
+rating-not-for-me = Não é para mim
+rating-like = Gosto disso
+rating-love = Adoro isso!
+rating-rated = Avaliado
+controls-overlay-report-problem = Reportar um problema
+player-volume = Volume
+player-rating-label = Classificação:
+player-watch-credits = Ver créditos
+player-now-playing = Reproduzindo agora
+player-skip-recap = Pular resumo
+reason-sexual-violence = violência sexual
+reason-strong-violence = violência intensa
+reason-violence = violência
+reason-injury-detail = detalhes de lesões
+reason-horror = horror
+reason-threat = ameaça
+reason-suicide = suicídio
+reason-self-harm = autolesão
+reason-child-abuse = abuso infantil
+reason-domestic-abuse = violência doméstica
+reason-discrimination = discriminação
+reason-strong-language = palavrões
+reason-language = linguagem
+reason-sex = sexo
+reason-sex-references = referências sexuais
+reason-nudity = nudez
+reason-drug-misuse = uso de drogas
+reason-drug-references = referências a drogas
+reason-alcohol = álcool
+reason-smoking = tabagismo
+reason-dangerous-behaviour = comportamento perigoso
+reason-rude-humour = humor grosseiro
+reason-bullying = bullying
+reason-animal-cruelty = crueldade animal
+reason-gambling = jogos de azar
+reason-eating-disorders = transtornos alimentares
+reason-mature-themes = temas para adultos
+reason-us-strong-violence = violência gráfica
+reason-us-injury-detail = lesões gráficas
+reason-us-sex = conteúdo sexual
+reason-us-sex-references = diálogo sugestivo
+reason-us-drug-misuse = uso de substâncias
+reason-us-alcohol = uso de álcool
+reason-us-dangerous-behaviour = comportamento perigoso
+reason-us-rude-humour = humor grosseiro
+set-title-manage-profile = Gerenciar perfil e preferências
+set-po-edit-hint = Editar informações pessoais e de contato
+set-po-lock-hint = Exigir PIN para acessar este perfil
+set-po-preferences = Preferências
+set-po-languages = Idiomas
+set-po-languages-hint = Definir idiomas para exibição e áudio
+set-po-restrictions = Ajustar controles parentais
+set-po-restrictions-hint = Editar classificação etária e restrições de títulos
+set-po-subtitles-hint = Personalizar a exibição das legendas
+set-po-playback-hint = Definir reprodução automática e qualidade de áudio e vídeo
+set-po-notifications-hint = Gerenciar notificações por e-mail, SMS e push
+set-po-activity-hint = Gerenciar histórico de visualização e avaliações
+set-po-privacy-hint = Gerenciar o uso de informações pessoais
+set-po-delete-profile = Excluir Perfil
+set-contact-info = Informações de contato
+set-del-intro = Excluir sua conta é permanente. Você não poderá mais usar nenhum serviço da { $brand } e seus dados personalizados serão perdidos.
+set-del-card = Excluir
+set-del-hide = Ocultar conteúdo da opção
+set-del-show = Mostrar conteúdo da opção
+set-del-lose = Você perderá permanentemente o acesso à atividade e às preferências da sua conta.
+set-del-when = Sua conta e todo o seu conteúdo serão excluídos imediatamente.
+set-del-check = Sim, quero excluir permanentemente minha conta da { $brand}.
+set-del-button = Excluir permanentemente
+set-del-questions = Se tiver alguma dúvida, visite nosso
+set-del-help = Central de Ajuda
+set-verified = Verificado
+set-menu-help = Central de Ajuda
+set-menu-switch = Trocar Perfil
+profile-not-saved = Não foi possível salvar essa alteração na sua conta, então os perfis foram restaurados.
+profile-icon-for = Para { $name }
+profile-icon-history = Histórico
+profile-icon-current = Ícone atual
+my-continue = Continuar Assistindo
+my-continue-empty = Volte para onde parou.
+my-list = Minha Lista
+my-list-empty = Acompanhe as séries e filmes que você salvou.
+my-trailers = Trailers Assistidos
+my-trailers-empty = Os trailers que você assistiu serão salvos aqui.
+my-liked = Séries e Filmes Curtidos
+my-liked-empty = Os títulos que você curtir aparecerão aqui.
+set-qlink-access = Gerenciar acesso e dispositivos
+set-questions = Dúvidas?
+set-gender = Gênero
+set-gender-woman = Mulher
+set-gender-man = Homem
+set-gender-none = Nenhum dos acima ou prefiro não dizer
+set-add-your-name = Adicionar seu nome
+set-add-phone = Adicionar um número de telefone
+set-primary-cannot-delete = O perfil principal não pode ser excluído.
+set-edit-profile-page = Editar perfil
+set-handle-lead = Seu nome de usuário é um nome exclusivo que será usado para jogar com outros membros do { $brand } em todos os { $brand } Games.
+set-learn-more = Saiba mais

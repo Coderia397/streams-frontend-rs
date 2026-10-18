@@ -36,7 +36,6 @@ controls-overlay-episode-selector = 에피소드 선택기
 controls-overlay-forward-10-seconds-right-arrow = 10초 앞으로 (오른쪽 화살표)
 controls-overlay-fullscreen-f = 전체 화면 (F)
 controls-overlay-next-episode = 다음 에피소드
-controls-overlay-playback-speed = 재생 속도
 controls-overlay-rewind-10-seconds-left-arrow = 10초 뒤로 (왼쪽 화살표)
 episode-drawer-no-episodes-available-for-this = 이 시즌에는 에피소드가 없습니다.
 games-coming-soon = 공개 예정
@@ -53,13 +52,9 @@ login-unlimited-films-series-and-more = 무한 영화, 시리즈 및 기타
 mod-finding-optimal-stream = 최적의 스트리밍을 찾고 있습니다...
 mod-retry = 재시도
 movie-card-popup-hd = HD
-navbar-exit-kids = 아이들 나가기
 navbar-menu-current-profile = 현재 프로필
 navbar-mobile-avatar = 아바타
-navbar-mobile-cast = 출연진
-navbar-mobile-cast-to-tv = TV로 캐스트
 navbar-mobile-profile = 프로필
-navbar-mobile-profile-menu = 프로필 메뉴
 navbar-switch-to-kids-profile = 아이들 프로필로 전환
 new-popular-coming-to-the-collection-soon = 곧 컬렉션에 추가될 예정
 new-popular-new-and-acclaimed = 새로운 및 찬譽받은
@@ -78,8 +73,6 @@ not-found-diagnostic-report = 진단 보고서
 not-found-the-targeted-router-endpoint-has = 목표한 라우터 엔드포인트가 CDN 공간에서 해제되거나 로드 실패했습니다. 재생을 계속하려면 안전한 홈 스트리밍 환경으로 돌아가 주세요.
 notifications-dropdown-notifications = 알림
 notifications-dropdown-youre-all-caught-up-new = 모두 시청 완료 — 새롭게 도착한 콘텐츠는 여기에 표시됩니다.
-notifications-notifications-arrivals = 알림 및 새 도착
-notifications-stay-up-to-date-with = 새로운 개봉작, 트렌딩 히트, 추천을 통해 최신 정보를 확인하세요.
 pin-prompt-profile-lock-is-currently-on = 프로필 잠금 기능이 현재 활성화되어 있습니다.
 search-bar-clear-search = 검색 초기화
 search-bar-search = 검색
@@ -88,13 +81,13 @@ search-bar-titles-people-genres = 제목, 인물, 장르
 subtitle-drawer-no-subtitles-detected-for-this = 이 스트리밍에 자막이 검출되지 않았습니다.
 subtitle-drawer-subtitle-timing-offset = 자막 타이밍 오프셋
 subtitle-drawer-subtitles = 자막
+player-audio = 오디오
 vibe-row-scroll-left = 왼쪽으로 스크롤
 vibe-row-scroll-right = 오른쪽으로 스크롤
 video-player-forward-10s = 앞으로 10초
 video-player-fullscreen = 전체 화면
 video-player-rewind-10s = 10초 뒤로
 whos-watching-add-profile = 프로필 추가
-whos-watching-kids = KIDS
 help-ui-center = 도움말 센터
 help-ui-browse = 검색
 help-ui-signin = 로그인
@@ -117,6 +110,10 @@ help-ui-tell-more = 결여된 내용을 알려주세요
 help-ui-recommended = 추천 기사
 help-ui-additional = 추가 검색 결과
 help-ui-read = 기사 읽기
+help-ui-results-count =
+    { $count ->
+       *[other] “{ $query }” 검색 결과 { $count }개
+    }
 help-ui-account = 계정
 help-ui-signout = { $brand }에서 로그아웃
 help-ui-results-count-link = "{ $query }"에 대한 모든 결과 보기
@@ -337,6 +334,19 @@ help-art-wont-play-body =
 help-art-playback-unavailable-title = { $brand }가 "Playback Unavailable"라고 표시함
 help-art-playback-unavailable-summary = 메시지의 의미와 다음 단계
 help-art-playback-unavailable-keywords = 재생 불가능 오류 메시지 스트리밍 불가능 제공업체 미지원
+help-art-playback-unavailable-body =
+    <b>재생 불가</b> 또는 <b>비디오 스트리밍을 사용할 수 없습니다. 모든 소스 제공자가 사용 불가능하거나 브라우저에서 지원되지 않습니다.</b>라는 메시지가 표시될 수 있습니다.
+
+    이는 플레이어가 해당 제목에 대해 알고 있는 모든 소스에 요청했지만, 브라우저에서 재생할 수 있는 스트림을 반환한 소스가 없음을 의미합니다.
+
+    1. 잠시 기다린 후 다시 재생을 눌러 보세요. 소스 상태는 변동될 수 있습니다.
+    2. 차단기를 끄세요. <a=/help/article/extensions-blockers>플레이어를 차단하는 확장 프로그램</a>을 확인하세요.
+    3. 다른 브라우저를 시도해 보세요. 일부 스트림은 구형 브라우저에 없는 기능이 필요할 수 있습니다.
+    4. 문제가 해당 제목에만 있는지를 확인하려면 다른 제목을 시도해 보세요.
+
+    같은 제목이 하루 종일 실패한다면, <a=/help/article/report-bug>알려 주세요</a>. 제목, 연도, 사용 중인 브라우저를 포함해 주세요.
+
+    @@ diagnostics
 help-art-black-screen-title = 검은 화면과 소리
 help-art-black-screen-summary = 화면이 보이지 않지만 제목을 들을 수 있습니다.
 help-art-black-screen-keywords = black screen no picture audio only video missing blank green screen
@@ -846,6 +856,10 @@ help-act-copied = 복사됨
 help-act-email = 결과를 이메일로 보내기
 help-act-fix = 수정 방법
 help-act-summary-ok = 이 기기에서 모든 것이 정상입니다.
+help-act-summary-issues =
+    { $count ->
+       *[other] { $count }개 항목에 대한 조치가 필요합니다.
+    }
 help-act-d-connection = 인터넷 연결
 help-act-d-browser = 브라우저
 help-act-d-video = 동영상 재생
@@ -866,6 +880,14 @@ help-act-v-reachable = { $ms } ms 내에 접근 가능
 help-act-v-unreachable = 접근 불가능
 help-act-v-timeout = { $s }초 내에 응답 없음
 help-act-data-title = 이 기기에서의 데이터
+help-act-data-profiles =
+    { $count ->
+       *[other] 프로필 { $count }개
+    }
+help-act-data-progress =
+    { $count ->
+       *[other] 진행 상황 저장된 타이틀 { $count }개
+    }
 help-act-data-lang = 언어: { $lang }
 help-act-clear-progress = 시청 진행 상황 삭제
 help-act-reset-recs = 추천 재설정
@@ -900,13 +922,9 @@ nav-new-hot = 새로운 & 핫한
 nav-clips = 클립
 nav-search = 검색
 nav-kids = 아이들
-nav-profiles-more = 프로필 & 기타
-nav-account-settings = 계정 설정
 nav-genres = 장르
 nav-categories = 카테고리
 tabs-everyone-watching = 모두가 보는 것
-tabs-just-landed = 최근 도착한 것
-tabs-top10-movies = 상위 10 영화
 tabs-top10-series = 상위 10 시리즈
 tabs-coming-soon = 곧 개봉
 footer-tv-shows = TV 쇼
@@ -921,6 +939,18 @@ footer-contact = 문의하기
 footer-help = 도움말 센터
 footer-cookie-preferences = 쿠키 선호도
 notif-today = 오늘
+notif-ago-days =
+    { $n ->
+       *[other] { $n }일 전
+    }
+notif-ago-weeks =
+    { $n ->
+       *[other] { $n }주 전
+    }
+notif-ago-months =
+    { $n ->
+       *[other] { $n }개월 전
+    }
 notif-h-trending = 트렌딩 중
 notif-h-new-arrival = 새로운 도착
 notif-h-coming-soon = 곧 개봉
@@ -935,9 +965,11 @@ media-add-to-list = 마이 리스트에 추가
 media-in-list = 마이 리스트에 있습니다
 media-series = 시리즈
 media-film = 영화
-media-trending = 트렌딩
-media-popular = 인기
 media-genre-fallback = 액션
+media-seasons =
+    { $n ->
+       *[other] 시즌 { $n }
+    }
 media-season-n = 시즌 { $n }
 media-directed-by = { $name } 감독
 media-created-by = { $name } 제작
@@ -974,8 +1006,6 @@ login-reason-hd-body = HD 및 초고해상도 스트리밍으로 놀라운 화�
 login-reason-subs-body = 40개 이상의 언어에서 선택할 수 있습니다. 폰트 크기, 색상, 배경을 개인의 취향에 맞게 맞춤화할 수 있습니다.
 login-reason-place-body = Continue Watching은 모든 쇼와 시즌, 모든 기기에서 마지막으로 둔 곳에서 계속됩니다.
 login-ready = 시청 준비됐나요? 이메일을 입력하여 계정을 생성하거나 로그인하세요.
-mylist-empty = 리스트가 비어 있습니다
-mylist-empty-hint = 시청하고 싶은 쇼와 영화를 추가하여 추적하세요.
 search-results-for = “{ $query }” 검색 결과
 search-no-matches = 일치하는 항목이 없습니다
 search-try-another = 다른 키워드를 시도하세요.
@@ -999,7 +1029,6 @@ profile-transfer = 프로필 이동
 profile-kids = 아이 프로필
 profile-lock = 프로필 잠금
 profile-choose-icon = 아이콘 선택
-profile-choose-icon-hint = 프로필에 사용할 애완동물 선택
 common-done = 완료
 profile-pin-invalid = PIN은 정확히 4자리 숫자여야 합니다.
 login-reason-screens-body = 스마트 TV, 랩탑, 태블릿 또는 폰에서 스트리밍하세요. 어디서든 { $brand }가 함께합니다.
@@ -1008,7 +1037,6 @@ player-play = 재생 (Space)
 player-unmute = 소리 키기 (M)
 player-mute = 소리 끄기 (M)
 player-error-no-source = 비디오 스트리밍이 불가능합니다. 모든 소스 제공업체가 사용 불가능하거나 브라우저에서 지원되지 않습니다.
-player-episode = 에피소드
 genre-action = 액션
 genre-anime = 애니메이션
 genre-black-stories = 블랙 스토리
@@ -1087,7 +1115,6 @@ profile-manage-title = 프로필 관리:
 profile-whos-watching = 누구가 보고 있나요?
 profile-sign-out =  { $brand }에서 로그아웃
 profile-enter-pin = PIN을 입력하여 { $name }의 프로필에 접근하세요.
-profile-add = 프로필 추가
 profile-edit-title = 프로필 편집
 profile-edit-hint = 이 프로필의 이름, 아이콘 및 잠금을 업데이트하세요.
 profile-add-hint = { $brand }를 시청하는 다른 사람을 위한 프로필을 추가하세요.
@@ -1348,6 +1375,11 @@ help-art-no-sound-body =
 help-art-autoplay-blocked-title = 영상이 음소거 상태로 시작되거나 자동으로 시작되지 않습니다
 help-art-autoplay-blocked-summary = 브라우저가 영상이 자동으로 시작될 때 소리가 작동하지 않는 이유와, { $brand }가 이를 어떻게 처리하는지 설명합니다.
 help-art-autoplay-blocked-keywords = autoplay blocked muted start policy browser sound auto play previews trailer
+help-art-autoplay-blocked-body =
+    브라우저는 사용자가 클릭하거나 탭하기 전까지 소리가 있는 비디오를 자동으로 시작하지 못하도록 합니다. { $brand }는 먼저 소리가 있게 시작을 시도합니다. 브라우저가 거부하면 음소거 상태로 시작하고 음소거 스피커 아이콘을 표시하며, <b>M</b> 키나 스피커 버튼으로 음소거를 해제할 수 있습니다.
+
+    - 예고편과 미리보기가 자동으로 시작되지 않도록 하려면 <b>설정</b>에서 <b>재생 설정</b> 아래 <b>자동 재생 미리보기</b>를 끄세요.
+    - 제목이 전혀 시작되지 않는 경우, <a=/help/article/wont-play>제목이 재생되지 않는 경우</a>를 확인하세요.
 help-art-clips-title = 클립 사용하기
 help-art-clips-summary = 짧은 미리보기를 스크롤하고, 좋아하는 것을 목록에 추가하세요.
 help-art-clips-keywords = 클립 짧은 미리보기 스크롤 수직 트레일러 스크린 톡 정보 내 목록
@@ -1569,6 +1601,7 @@ reads-empty = 라이브러리에 코믹스가 없습니다
 profile-default-main = 메인
 profile-default-kids = 아이들
 set-title = 설정
+set-profile-sheet = 프로필
 set-back = 뒤로
 set-cancel = 취소
 set-save = 저장
@@ -1606,6 +1639,7 @@ set-title-name = 이름
 set-title-app = 앱 설정
 set-title-account = 계정
 set-title-password = 비밀번호
+set-title-change-password = 비밀번호 변경
 set-title-email = 이메일
 set-title-phone = 휴대폰
 set-title-devices = 접근 및 기기
@@ -1615,6 +1649,10 @@ set-title-delete = 계정 삭제
 set-ratings-hint = 이 프로필에서 선택한 평가 이하의 제목만 표시됩니다. 평가가 없는 제목은 제한이 없을 때만 표시됩니다.
 set-blocked-hint = 차단된 제목은 이 프로필에서 표시되지 않습니다.
 set-blocked-placeholder = 시리즈 또는 영화 이름을 입력하세요
+set-blocked-count =
+    { $count ->
+       *[other] 타이틀 { $count }개
+    }
 set-lock-on = 켜짐
 set-lock-off = 꺼짐
 set-lock-title-on = 프로필 잠금이 켜짐
@@ -1691,6 +1729,8 @@ set-account-profiles = 프로필
 set-verify-title = 첫째로, 당신이 맞는지 확인해 주세요
 set-verify-body = 무언가를 변경하기 전에 계정 비밀번호를 확인해 주세요.
 set-password-current = 현재 비밀번호
+set-password-forgot = 비밀번호를 잊으셨나요?
+set-password-current-required = 현재 비밀번호를 입력해 주세요.
 set-forgot-password = 비밀번호를 잊으셨나요?
 set-password-hint = 계정을 보호하기 위해 최소 { $min }자 이상의 고유한 비밀번호를 사용하세요.
 set-password-new = 새로운 비밀번호
@@ -1720,8 +1760,6 @@ set-privacy-data = 데이터 설정
 set-privacy-personalization = 개인화 추천
 set-privacy-personalization-hint = 시청 내역을 바탕으로 제목을 추천해 드립니다. 꺼두면 일반적인 선택을 보게 됩니다.
 set-activity-clear-body = 이 브라우저에서 시청 이력과 재생 위치가 제거됩니다.
-set-delete-account-body = 계정을 삭제하면 프로필, 설정 및 시청 이력이 영구히 삭제됩니다.
-set-delete-account-confirm = 계정을 삭제하고 저장된 모든 데이터를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.
 set-err-invalid = 그 비밀번호는 올바르지 않습니다. 다시 시도해 주세요.
 set-err-weak = 그 비밀번호는 너무 약합니다. 문자와 숫자를 포함한 더 긴 비밀번호를 사용해 주세요.
 set-err-rate = 너무 많은 시도입니다. 잠시 후 다시 시도해 주세요.
@@ -1770,6 +1808,12 @@ set-privacy-hint = 개인 정보 사용 관리
 set-profiles-parental = 부모 제어 및 권한
 set-profiles-parental-hint = 성숙도 수준 설정, 제목 차단
 set-profiles-settings = 프로필 설정
+set-profiles-transfer-hint = 다른 계정으로 프로필 복사
+set-add-profile-button = 프로필 추가
+set-add-profile-limit = 함께 사는 사람을 위해 최대 { $max }개의 프로필을 추가할 수 있습니다.
+set-profile-added = 프로필이 추가되었습니다
+set-add-a-profile = 프로필 추가
+set-profile-name-required = 이름을 입력해 주세요
 set-now-watching = 지금 시청 중
 set-activity-episode = S{ $season }:E{ $episode }
 set-activity-title = { $title } · { $episode }
@@ -1784,6 +1828,8 @@ set-title-game-handle = 게임 핸들
 set-title-personal-info = 개인 정보 접근
 set-title-speed-test = 인터넷 속도 테스트
 set-title-testing = 테스트 참여
+set-row-feature-testing = 기능 테스트
+set-devices-account-access = 계정 액세스
 set-title-transfer = 프로필 이전
 set-title-transfer-profile = 프로필 이전
 set-activity-for = 활동 내역: { $name }
@@ -1815,9 +1861,10 @@ set-handle-change = 게임 핸들을 언제든지 변경할 수 있습니다.
 set-handle-create = 게임 핸들을 생성하세요
 set-handle-suggest = 이름을 제안하세요
 set-handle-invalid = 공백 없이 { $min }에서 { $max }자 이내의 문자와 숫자를 사용하세요.
-set-transfer-row-hint = 프로필을 다른 계정으로 복사할 수 있도록 허용합니다
 set-transfer-on-title = 프로필 전송이 켜짐
 set-transfer-on-body = 이 계정에서 프로필을 저장하고 다른 계정에 추가할 수 있습니다. 꺼져두면 프로필이 이 계정에서 이탈하지 않습니다. 이미 이 계정에 추가된 프로필은 영향을 받지 않습니다.
+set-transfer-help-centre = 도움말 센터
+set-transfer-go-home = 홈으로 돌아가기
 set-transfer-off-title = 프로필 전송이 꺼짐
 set-transfer-off-body = 이 계정에서 프로필을 복사할 수 없습니다. 켜두면 허용합니다.
 set-transfer-profile-hint = 이 프로필을 다른 계정으로 복사하세요
@@ -1841,13 +1888,13 @@ set-personal-info-hint = 개인 정보의 사본을 요청합니다
 set-personal-info-body = 당신은 저희가 보유한 계정에 대한 개인 정보의 사본을 요청할 수 있습니다. 파일에는 다음이 포함됩니다:
 set-personal-info-done = 파일이 저장되었습니다.
 set-personal-info-note = 이 파일은 기기에서만 존재합니다. 개인 정보가 포함될 수 있으므로 안전하게 보관하세요.
-set-testing-row-hint = 테스트 및 미리보기에서 나를 포함합니다
 set-testing-body = 우리는 모든 사용자가 새로운 기능을 사용하기 전에 소규모 그룹을 통해 새로운 기능을 시도합니다.
 set-testing-switch = 테스트 및 미리보기에서 나를 포함합니다
 set-testing-hint = 이 기능을 비활성화하여 모든 기능의 현재 버전을 유지합니다.
 set-code-email = 코드 이메일로 보내기
 set-code-title = 우리가 방금 보낸 코드를 입력해 주세요
-set-code-body = 계정을 보호하기 위해 { $target }으로 보낸 코드를 입력해 주세요. 코드는 { $minutes }분 후에 만료됩니다.
+set-code-body-1 = 다음으로 보낸 코드를 입력해 주세요
+set-code-body-2 = 계정을 보호하기 위한 코드입니다. 코드는 전송 후 { $minutes }분 후 만료됩니다.
 set-code-label = 코드
 set-code-submit = 제출
 set-code-resend = 코드 재전송
@@ -2102,7 +2149,6 @@ tour-new-title = 새로운 것을 확인하세요
 tour-new-text = 새로 나온 콘텐츠, 곧 개봉하는 콘텐츠, 그리고 사람들이 많이 시청하는 콘텐츠를 확인할 수 있습니다.
 tour-list-title = 나중에 보고 싶은 제목을 저장하세요
 tour-list-text = 제목을 '나의 목록'에 저장하면 여기서 기다려 줍니다.
-navbar-mobile-notifications = 알림
 media-play-series = 시리즈 재생
 media-play-film = 영화 재생
 nav-all-categories = 모든 카테고리
@@ -2136,3 +2182,101 @@ row-np-top10-genre = 오늘의 최고 { $genre } 10개
 continue-watching-row-for = { $name }을(를) 계속 시청
 continue-watching-mark-watched = 시청 완료로 표시
 continue-watching-time-of = { $done } of { $total }m
+collection-topic = Streams 컬렉션
+rating-not-for-me = 나에게 맞지 않음
+rating-like = 좋아요
+rating-love = 최고예요!
+rating-rated = 평점 완료
+controls-overlay-report-problem = 문제 신고
+player-volume = 음량
+player-rating-label = 등급:
+player-watch-credits = 크레딧 보기
+player-now-playing = 재생 중
+player-skip-recap = 요약 건너뛰기
+reason-sexual-violence = 성폭력
+reason-strong-violence = 강한 폭력
+reason-violence = 폭력
+reason-injury-detail = 부상 묘사
+reason-horror = 공포
+reason-threat = 위협
+reason-suicide = 자살
+reason-self-harm = 자해
+reason-child-abuse = 아동 학대
+reason-domestic-abuse = 가정 폭력
+reason-discrimination = 차별
+reason-strong-language = 강한 표현
+reason-language = 표현
+reason-sex = 성
+reason-sex-references = 성 언급
+reason-nudity = 노출
+reason-drug-misuse = 약물 오용
+reason-drug-references = 약물 언급
+reason-alcohol = 음주
+reason-smoking = 흡연
+reason-dangerous-behaviour = 위험한 행동
+reason-rude-humour = 무례한 유머
+reason-bullying = 따돌림
+reason-animal-cruelty = 동물 학대
+reason-gambling = 도박
+reason-eating-disorders = 식욕 장애
+reason-mature-themes = 성인 주제
+reason-us-strong-violence = 강력한 폭력
+reason-us-injury-detail = 상해 묘사
+reason-us-sex = 성적 콘텐츠
+reason-us-sex-references = 암시적 대사
+reason-us-drug-misuse = 약물 사용
+reason-us-alcohol = 음주
+reason-us-dangerous-behaviour = 위험한 행동
+reason-us-rude-humour = 저속한 유머
+set-title-manage-profile = 프로필 및 환경설정 관리
+set-po-edit-hint = 개인 및 연락처 정보 수정
+set-po-lock-hint = 이 프로필에 접근하려면 PIN 필요
+set-po-preferences = 환경설정
+set-po-languages = 언어
+set-po-languages-hint = 표시 및 오디오 언어 설정
+set-po-restrictions = 부모님 통제 조정
+set-po-restrictions-hint = 연령 등급 및 제목 제한 수정
+set-po-subtitles-hint = 자막 표시 방식 사용자 지정
+set-po-playback-hint = 자동 재생 및 오디오, 비디오 품질 설정
+set-po-notifications-hint = 이메일, 문자, 푸시 알림 관리
+set-po-activity-hint = 시청 기록 및 평점 관리
+set-po-privacy-hint = 개인정보 사용 관리
+set-po-delete-profile = 프로필 삭제
+set-contact-info = 연락처 정보
+set-del-intro = 계정을 삭제하면 되돌릴 수 없습니다. 더 이상 { $brand } 서비스를 사용할 수 없으며 개인화된 데이터가 손실됩니다.
+set-del-card = 삭제
+set-del-hide = 옵션 내용 숨기기
+set-del-show = 옵션 내용 표시
+set-del-lose = 계정 활동 및 환경설정에 대한 접근 권한이 영구적으로 상실됩니다.
+set-del-when = 계정과 그 안의 모든 내용이 즉시 삭제됩니다.
+set-del-check = 네, { $brand } 계정을 영구적으로 삭제하겠습니다.
+set-del-button = 영구 삭제
+set-del-questions = 질문이 있으시면 다음을 방문하세요
+set-del-help = 도움말 센터
+set-verified = 인증됨
+set-menu-help = 도움말 센터
+set-menu-switch = 프로필 전환
+profile-not-saved = 계정에 변경 사항을 저장할 수 없어 프로필이 이전 상태로 되돌려졌습니다.
+profile-icon-for = { $name }님용
+profile-icon-history = 이전 아이콘
+profile-icon-current = 현재 아이콘
+my-continue = 계속 시청
+my-continue-empty = 시작한 콘텐츠를 이어 보세요.
+my-list = 내 리스트
+my-list-empty = 저장한 시리즈와 영화를 관리하세요.
+my-trailers = 시청한 예고편
+my-trailers-empty = 시청한 예고편이 여기에 저장됩니다.
+my-liked = 좋아한 시리즈 & 영화
+my-liked-empty = 좋아요를 누른 작품이 여기에 표시됩니다.
+set-qlink-access = 접근 권한 및 기기 관리
+set-questions = 궁금한 점이 있나요?
+set-gender = 성별
+set-gender-woman = 여성
+set-gender-man = 남성
+set-gender-none = 해당 없음 또는 답변 원치 않음
+set-add-your-name = 이름 추가
+set-add-phone = 전화번호 추가
+set-primary-cannot-delete = 기본 프로필은 삭제할 수 없습니다.
+set-edit-profile-page = 프로필 편집
+set-handle-lead = 핸들은 { $brand } 게임에서 다른 { $brand } 멤버와 함께 플레이할 때 사용되는 고유 이름입니다.
+set-learn-more = 자세히 알아보기
