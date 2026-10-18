@@ -83,7 +83,7 @@ pub fn LoginPage() -> impl IntoView {
     };
 
     view! {
-        <AuthShell look=Look::Dark back=true>
+        <AuthShell look=Look::Dark back=true phone_footer=false>
             <div class="mx-auto w-full max-w-[440px] px-6 pb-24 pt-10">
                 {move || match step.get() {
                     Step::Email => view! {
@@ -97,7 +97,7 @@ pub fn LoginPage() -> impl IntoView {
                             <Field id="login-email" label="auth-email" value=email kind="email" autocomplete="email" invalid=email_bad />
                             <button type="submit" class=button_class(Look::Dark)>{tr("auth-continue")}</button>
                         </form>
-                        <p class="mt-4 text-body-md text-ink-body">
+                        <p class="mt-4 text-body-md text-ink-body max-sm:hidden">
                             {tr("auth-new-here")}" "
                             <a href=move || format!("/signup?email={}", crate::pages::help::encode(&email.get())) class="font-semibold text-ink underline underline-offset-2">{tr("auth-signup-link")}</a>
                         </p>
@@ -137,6 +137,13 @@ pub fn LoginPage() -> impl IntoView {
                         <li><a href="/help/article/sign-in" class="underline underline-offset-2 hover:text-ink">{tr("auth-learn-signin")}</a></li>
                     </ul>
                 </details>
+                // on a phone the sign up line sits under Get help, so Get help keeps the place it has in the app
+                {move || (step.get() == Step::Email).then(|| view! {
+                    <p class="mt-8 text-body-md text-ink-body sm:hidden">
+                        {tr("auth-new-here")}" "
+                        <a href=move || format!("/signup?email={}", crate::pages::help::encode(&email.get())) class="font-semibold text-ink underline underline-offset-2">{tr("auth-signup-link")}</a>
+                    </p>
+                })}
             </div>
         </AuthShell>
     }

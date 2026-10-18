@@ -24,9 +24,10 @@ pub enum Look {
 
 /// Header with the logo (and a link on the right), the page, and the footer with help links and the language picker.
 #[component]
-pub fn AuthShell(children: Children, #[prop(default = Look::Dark)] look: Look, #[prop(optional)] right: Option<(&'static str, &'static str)>, #[prop(default = false)] back: bool) -> impl IntoView {
+pub fn AuthShell(children: Children, #[prop(default = Look::Dark)] look: Look, #[prop(optional)] right: Option<(&'static str, &'static str)>, #[prop(default = false)] back: bool, /// false takes the footer off on a phone (the sign in page, as in the app)
+    #[prop(default = true)] phone_footer: bool) -> impl IntoView {
     let dark = look == Look::Dark;
-    let page = if dark { "bg-void text-ink sm:bg-linear-to-b sm:from-brand-deep/40 sm:via-void sm:to-void" } else { "bg-paper text-paper-ink" };
+    let page = if dark { "bg-linear-to-b from-brand-deep/40 via-void to-void text-ink" } else { "bg-paper text-paper-ink" };
     let header = if dark { "sm:border-b sm:border-ink/10" } else { "border-b border-paper-line bg-paper" };
     let main = if dark { "" } else { "bg-paper" };
     let logo = if dark { crate::brand::LOGO_WORDMARK } else { crate::brand::LOGO_WORDMARK_PRIMARY };
@@ -43,7 +44,7 @@ pub fn AuthShell(children: Children, #[prop(default = Look::Dark)] look: Look, #
                 </div>
             </header>
             <main class=format!("flex-1 {main}")>{children()}</main>
-            <AuthFooter look=look />
+            <div class=if phone_footer { "contents" } else { "contents max-sm:hidden" }><AuthFooter look=look /></div>
         </div>
     }
 }
