@@ -40,10 +40,10 @@ pub fn ProfilePinPrompt(
         }
     };
 
+    let profile_id = profile.id.clone();
+    let on_account = crate::services::account::session().is_some() && crate::services::sync::is_uuid(&profile.id);
     let verify_candidate = move |candidate: String| {
-        if candidate == profile_pin {
-            on_unlock.run(());
-        } else {
+        let fail = move || {
             set_shake.set(true);
             set_digits.set(vec!["".to_string(), "".to_string(), "".to_string(), "".to_string()]);
             focus_input(0);
@@ -56,6 +56,20 @@ pub fn ProfilePinPrompt(
                 let _ = win.set_timeout_with_callback_and_timeout_and_arguments_0(cb.as_ref().unchecked_ref(), 500);
                 cb.forget();
             }
+        };
+        if on_account {
+            // the account checks the PIN (and counts the wrong tries)
+            let pid = profile_id.clone();
+            leptos::task::spawn_local(async move {
+                match crate::services::account::pin_verify(&pid, &candidate).await {
+                    Ok(true) => on_unlock.run(()),
+                    _ => fail(),
+                }
+            });
+        } else if candidate == profile_pin {
+            on_unlock.run(());
+        } else {
+            fail();
         }
     };
 

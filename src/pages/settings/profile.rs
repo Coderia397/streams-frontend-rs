@@ -404,15 +404,38 @@ pub fn Lock(id: String) -> impl IntoView {
     // with a PIN already set the current one is asked first, like the database functions do
     let current_ok = move || find(&id.get_value()).and_then(|p| p.pin).is_none_or(|saved| saved == current.get_untracked());
 
+    // a profile of the account keeps its PIN in the database (hashed); a profile of this browser keeps it here
+    let on_account = move || signed_in && crate::services::sync::is_uuid(&id.get_value());
+    let lock_error = move |e: crate::services::account::AuthError| note.set(Some((Tone::Error, crate::pages::settings::account::error_text(&e))));
     let nav_save = navigate.clone();
     let save = Callback::new(move |_| {
-        if !current_ok() {
-            note.set(Some((Tone::Error, t("set-lock-wrong"))));
-            return;
-        }
         let value = pin.get_untracked();
         if !valid_pin(&value) {
             note.set(Some((Tone::Error, t_args("set-lock-invalid", &[("digits", PIN_LENGTH.into())]))));
+            return;
+        }
+        if on_account() {
+            let (pid, cur, had) = (id.get_value(), current.get_untracked(), has_pin.get_untracked());
+            if had && cur.is_empty() {
+                note.set(Some((Tone::Error, t("set-lock-wrong"))));
+                return;
+            }
+            let nav = nav_save.clone();
+            leptos::task::spawn_local(async move {
+                match crate::services::account::pin_set(&pid, &value, had.then_some(cur.as_str())).await {
+                    Ok(true) => {
+                        change(&pid, |p| p.pin = Some(String::new()));
+                        toast(t("set-saved"));
+                        nav(&back(), Default::default());
+                    }
+                    Ok(false) => note.set(Some((Tone::Error, t("set-lock-wrong")))),
+                    Err(e) => lock_error(e),
+                }
+            });
+            return;
+        }
+        if !current_ok() {
+            note.set(Some((Tone::Error, t("set-lock-wrong"))));
             return;
         }
         change(&id.get_value(), |p| p.pin = Some(value));
@@ -421,6 +444,21 @@ pub fn Lock(id: String) -> impl IntoView {
     });
     let nav_remove = navigate.clone();
     let remove = Callback::new(move |_| {
+        if on_account() {
+            let (pid, cur) = (id.get_value(), current.get_untracked());
+            let nav = nav_remove.clone();
+            leptos::task::spawn_local(async move {
+                match crate::services::account::pin_clear(&pid, &cur).await {
+                    Ok(true) => {
+                        change(&pid, |p| p.pin = None);
+                        nav(&back(), Default::default());
+                    }
+                    Ok(false) => note.set(Some((Tone::Error, t("set-lock-wrong")))),
+                    Err(e) => lock_error(e),
+                }
+            });
+            return;
+        }
         if !current_ok() {
             note.set(Some((Tone::Error, t("set-lock-wrong"))));
             return;
@@ -431,6 +469,20 @@ pub fn Lock(id: String) -> impl IntoView {
     // forgot the PIN: only for a signed in account, after the password check this screen already asked for
     let nav_reset = navigate;
     let reset = Callback::new(move |_| {
+        if on_account() {
+            let pid = id.get_value();
+            let nav = nav_reset.clone();
+            leptos::task::spawn_local(async move {
+                match crate::services::account::pin_reset(&pid).await {
+                    Ok(()) => {
+                        change(&pid, |p| p.pin = None);
+                        nav(&back(), Default::default());
+                    }
+                    Err(e) => lock_error(e),
+                }
+            });
+            return;
+        }
         change(&id.get_value(), |p| p.pin = None);
         nav_reset(&back(), Default::default());
     });

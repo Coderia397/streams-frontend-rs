@@ -554,3 +554,29 @@ mod tests {
         assert_eq!((s.first_name.as_str(), s.last_name.as_str(), s.user_id.as_str()), ("Ada", "Lovelace", "u1"));
     }
 }
+
+// ── profile lock (PIN), through the database functions: the PIN is hashed there and never leaves it ────────────────────────────
+
+fn answer_bool(v: Value) -> bool {
+    v.as_bool().unwrap_or(false)
+}
+
+/// Sets or changes the PIN of a profile (`set_profile_pin`). `current` is needed when the profile already has one. False when the current PIN was wrong.
+pub async fn pin_set(profile: &str, pin: &str, current: Option<&str>) -> Result<bool, AuthError> {
+    rpc("set_profile_pin", &json!({ "p_profile": profile, "p_pin": pin, "p_current": current })).await.map(answer_bool)
+}
+
+/// Removes the PIN (`clear_profile_pin`). False when the current PIN was wrong.
+pub async fn pin_clear(profile: &str, current: &str) -> Result<bool, AuthError> {
+    rpc("clear_profile_pin", &json!({ "p_profile": profile, "p_current": current })).await.map(answer_bool)
+}
+
+/// Checks a PIN (`verify_profile_pin`; the database counts the wrong tries and locks the profile for a while after too many).
+pub async fn pin_verify(profile: &str, pin: &str) -> Result<bool, AuthError> {
+    rpc("verify_profile_pin", &json!({ "p_profile": profile, "p_pin": pin })).await.map(answer_bool)
+}
+
+/// Removes the PIN without asking for it (`reset_profile_pin`; the screen asks for the password first).
+pub async fn pin_reset(profile: &str) -> Result<(), AuthError> {
+    rpc("reset_profile_pin", &json!({ "p_profile": profile })).await.map(|_| ())
+}
