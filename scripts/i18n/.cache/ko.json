@@ -1694,5 +1694,16 @@
  "set-edit-profile-page": "프로필 편집",
  "set-handle-lead": "핸들은 { $brand } 게임에서 다른 { $brand } 멤버와 함께 플레이할 때 사용되는 고유 이름입니다.",
  "set-learn-more": "자세히 알아보기",
- "set-overview-profiles": "{ $count ->\n   *[other] 프로필 { $count }개\n}"
+ "set-overview-profiles": "{ $count ->\n   *[other] 프로필 { $count }개\n}",
+ "nav-browse": "둘러보기",
+ "nav-exit-kids": "키즈 나가기",
+ "auth-resume-hint": "얼마 전 이 기기에서 로그아웃했습니다. { $email }(으)로 계속하면 비밀번호 없이 돌아올 수 있습니다.",
+ "auth-resume-forget": "본인이 아닌가요? 이 브라우저 잊기",
+ "hook-kids-top10-series": "키즈 시리즈 { $rank }위",
+ "hook-kids-top10-films": "키즈 영화 { $rank }위",
+ "hook-decade-favourite": "{ $decade } 인기작",
+ "hook-global-hit": "세계적인 히트작",
+ "hook-family-favourite": "온 가족이 좋아하는 작품",
+ "hook-little-ones": "어린이에게 딱 맞는 작품",
+ "hook-big-kids": "큰 아이들을 위한 작품"
 }

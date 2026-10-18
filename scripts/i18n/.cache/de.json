@@ -1756,5 +1756,16 @@
  "set-primary-cannot-delete": "Das Hauptprofil kann nicht gelöscht werden.",
  "set-edit-profile-page": "Profil bearbeiten",
  "set-handle-lead": "Ihr Benutzername ist ein eindeutiger Name, der für das Spielen mit anderen { $brand }-Mitgliedern in allen { $brand }-Spielen verwendet wird.",
- "set-learn-more": "Mehr erfahren"
+ "set-learn-more": "Mehr erfahren",
+ "nav-browse": "Stöbern",
+ "nav-exit-kids": "Kinderprofil verlassen",
+ "auth-resume-hint": "Du hast dich vor kurzem von diesem Gerät abgemeldet. Fahre mit { $email } fort, um ohne Passwort zurückzukehren.",
+ "auth-resume-forget": "Nicht du? Diesen Browser vergessen",
+ "hook-kids-top10-series": "Nr. { $rank } bei Kinderserien",
+ "hook-kids-top10-films": "Nr. { $rank } bei Kinderfilmen",
+ "hook-decade-favourite": "Ein Favorit der { $decade }",
+ "hook-global-hit": "Ein weltweiter Hit",
+ "hook-family-favourite": "Ein Familienliebling",
+ "hook-little-ones": "Perfekt für die Kleinen",
+ "hook-big-kids": "Für größere Kinder"
 }

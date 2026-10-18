@@ -1694,5 +1694,16 @@
  "set-primary-cannot-delete": "プライマリプロファイルは削除できません。",
  "set-edit-profile-page": "プロファイルを編集",
  "set-handle-lead": "ハンドルは、{ $brand } ゲームで他の { $brand } メンバーと遊ぶ際に使用される、固有の名前です。",
- "set-learn-more": "詳しく見る"
+ "set-learn-more": "詳しく見る",
+ "nav-browse": "探す",
+ "nav-exit-kids": "キッズを終了",
+ "auth-resume-hint": "少し前にこのデバイスからログアウトしました。{ $email } で続けると、パスワードなしで戻れます。",
+ "auth-resume-forget": "あなたではありませんか？このブラウザーを忘れる",
+ "hook-kids-top10-series": "キッズシリーズ { $rank } 位",
+ "hook-kids-top10-films": "キッズ映画 { $rank } 位",
+ "hook-decade-favourite": "{ $decade } のお気に入り",
+ "hook-global-hit": "世界的ヒット",
+ "hook-family-favourite": "家族みんなのお気に入り",
+ "hook-little-ones": "小さなお子さまにぴったり",
+ "hook-big-kids": "大きいお子さま向け"
 }

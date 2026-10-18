@@ -1694,5 +1694,16 @@
  "set-primary-cannot-delete": "Le profil principal ne peut pas être supprimé.",
  "set-edit-profile-page": "Modifier le profil",
  "set-handle-lead": "Votre identifiant est un nom unique qui sera utilisé pour jouer avec d'autres membres de { $brand } dans tous les jeux { $brand }.",
- "set-learn-more": "En savoir plus"
+ "set-learn-more": "En savoir plus",
+ "nav-browse": "Parcourir",
+ "nav-exit-kids": "Quitter Enfants",
+ "auth-resume-hint": "Vous vous êtes déconnecté de cet appareil il y a peu. Continuez avec { $email } pour revenir sans mot de passe.",
+ "auth-resume-forget": "Ce n'est pas vous ? Oublier ce navigateur",
+ "hook-kids-top10-series": "N° { $rank } des séries pour enfants",
+ "hook-kids-top10-films": "N° { $rank } des films pour enfants",
+ "hook-decade-favourite": "Un favori des { $decade }",
+ "hook-global-hit": "Un succès mondial",
+ "hook-family-favourite": "Un favori de la famille",
+ "hook-little-ones": "Idéal pour les tout-petits",
+ "hook-big-kids": "Conçu pour les plus grands"
 }

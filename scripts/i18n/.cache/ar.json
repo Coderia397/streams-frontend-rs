@@ -1756,5 +1756,16 @@
  "set-primary-cannot-delete": "لا يمكن حذف الملف الشخصي الأساسي.",
  "set-edit-profile-page": "تعديل الملف الشخصي",
  "set-handle-lead": "اسم المستخدم الخاص بك هو اسم فريد سيُستخدم للعب مع أعضاء { $brand } الآخرين في جميع ألعاب { $brand }.",
- "set-learn-more": "اعرف المزيد"
+ "set-learn-more": "اعرف المزيد",
+ "nav-browse": "تصفح",
+ "nav-exit-kids": "الخروج من وضع الأطفال",
+ "auth-resume-hint": "لقد سجلت الخروج من هذا الجهاز قبل قليل. تابع باستخدام { $email } للعودة دون كلمة المرور.",
+ "auth-resume-forget": "لست أنت؟ انسَ هذا المتصفح",
+ "hook-kids-top10-series": "رقم { $rank } في مسلسلات الأطفال",
+ "hook-kids-top10-films": "رقم { $rank } في أفلام الأطفال",
+ "hook-decade-favourite": "من مفضلات { $decade }",
+ "hook-global-hit": "نجاح عالمي",
+ "hook-family-favourite": "مفضل لدى العائلة",
+ "hook-little-ones": "رائع للصغار",
+ "hook-big-kids": "مصنوع للأطفال الأكبر"
 }

@@ -1694,5 +1694,16 @@
  "set-primary-cannot-delete": "Основной профиль нельзя удалить.",
  "set-edit-profile-page": "Редактировать профиль",
  "set-handle-lead": "Ваш ник — это уникальное имя, которое будет использоваться для игры с другими участниками { $brand } во всех играх { $brand}.",
- "set-learn-more": "Подробнее"
+ "set-learn-more": "Подробнее",
+ "nav-browse": "Обзор",
+ "nav-exit-kids": "Выйти из детского режима",
+ "auth-resume-hint": "Вы недавно вышли из аккаунта на этом устройстве. Продолжите с { $email }, чтобы вернуться без пароля.",
+ "auth-resume-forget": "Это не вы? Забыть этот браузер",
+ "hook-kids-top10-series": "№ { $rank } среди детских сериалов",
+ "hook-kids-top10-films": "№ { $rank } среди детских фильмов",
+ "hook-decade-favourite": "Любимец { $decade }",
+ "hook-global-hit": "Мировой хит",
+ "hook-family-favourite": "Любимец всей семьи",
+ "hook-little-ones": "Отлично для малышей",
+ "hook-big-kids": "Для детей постарше"
 }

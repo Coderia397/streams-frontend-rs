@@ -1694,5 +1694,16 @@
  "set-primary-cannot-delete": "Birincil profil silinemez.",
  "set-edit-profile-page": "Profili Düzenle",
  "set-handle-lead": "Kullanıcı adınız, tüm { $brand } Oyunlarında diğer { $brand } üyeleriyle oynarken kullanılacak benzersiz bir isimdir.",
- "set-learn-more": "Daha fazla bilgi edin"
+ "set-learn-more": "Daha fazla bilgi edin",
+ "nav-browse": "Göz at",
+ "nav-exit-kids": "Çocuk modundan çık",
+ "auth-resume-hint": "Bu cihazdan kısa süre önce çıkış yaptınız. Parolasız dönmek için { $email } ile devam edin.",
+ "auth-resume-forget": "Siz değil misiniz? Bu tarayıcıyı unutun",
+ "hook-kids-top10-series": "Çocuk Dizilerinde { $rank }. sırada",
+ "hook-kids-top10-films": "Çocuk Filmlerinde { $rank }. sırada",
+ "hook-decade-favourite": "{ $decade } favorisi",
+ "hook-global-hit": "Dünya çapında hit",
+ "hook-family-favourite": "Ailenin favorisi",
+ "hook-little-ones": "Küçükler için harika",
+ "hook-big-kids": "Büyük çocuklar için"
 }

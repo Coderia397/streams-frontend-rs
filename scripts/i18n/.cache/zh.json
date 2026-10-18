@@ -1756,5 +1756,16 @@
  "set-del-when": "你的账户及其中的所有内容将立即被删除。",
  "set-del-check": "是的，我要永久删除我的 { $brand } 账户。",
  "set-del-button": "永久删除",
- "set-del-questions": "如有任何疑问，请访问我们的"
+ "set-del-questions": "如有任何疑问，请访问我们的",
+ "nav-browse": "浏览",
+ "nav-exit-kids": "退出儿童模式",
+ "auth-resume-hint": "你不久前在此设备上退出了登录。使用 { $email } 继续，无需密码即可返回。",
+ "auth-resume-forget": "不是你？忘记此浏览器",
+ "hook-kids-top10-series": "儿童剧集第 { $rank } 名",
+ "hook-kids-top10-films": "儿童电影第 { $rank } 名",
+ "hook-decade-favourite": "{ $decade } 热门之选",
+ "hook-global-hit": "全球热门",
+ "hook-family-favourite": "全家人的最爱",
+ "hook-little-ones": "适合小朋友",
+ "hook-big-kids": "为大孩子打造"
 }

@@ -1694,5 +1694,16 @@
  "set-primary-cannot-delete": "Den primära profilen kan inte raderas.",
  "set-edit-profile-page": "Redigera profil",
  "set-handle-lead": "Ditt användarnamn är ett unikt namn som används när du spelar med andra { $brand }-medlemmar i alla { $brand }-spel.",
- "set-learn-more": "Läs mer"
+ "set-learn-more": "Läs mer",
+ "nav-browse": "Bläddra",
+ "nav-exit-kids": "Lämna Barn",
+ "auth-resume-hint": "Du loggade nyligen ut från den här enheten. Fortsätt med { $email } för att komma tillbaka utan lösenord.",
+ "auth-resume-forget": "Inte du? Glöm den här webbläsaren",
+ "hook-kids-top10-series": "Nr { $rank } bland barnserier",
+ "hook-kids-top10-films": "Nr { $rank } bland barnfilmer",
+ "hook-decade-favourite": "En favorit från { $decade }",
+ "hook-global-hit": "En global hit",
+ "hook-family-favourite": "En familjefavorit",
+ "hook-little-ones": "Perfekt för de minsta",
+ "hook-big-kids": "Gjord för lite större barn"
 }

@@ -1693,5 +1693,16 @@
  "set-primary-cannot-delete": "प्राथमिक प्रोफ़ाइल को हटाया नहीं जा सकता।",
  "set-edit-profile-page": "प्रोफ़ाइल संपादित करें",
  "set-handle-lead": "आपका हैंडल एक अद्वितीय नाम है जो { $brand } गेम में अन्य { $brand } सदस्यों के साथ खेलने के लिए उपयोग किया जाएगा।",
- "set-learn-more": "और जानें"
+ "set-learn-more": "और जानें",
+ "nav-browse": "ब्राउज़ करें",
+ "nav-exit-kids": "बच्चों का मोड छोड़ें",
+ "auth-resume-hint": "आपने कुछ समय पहले इस डिवाइस से साइन आउट किया था। पासवर्ड के बिना वापस आने के लिए { $email } के साथ जारी रखें।",
+ "auth-resume-forget": "आप नहीं हैं? इस ब्राउज़र को भूल जाएँ",
+ "hook-kids-top10-series": "बच्चों की सीरीज़ में नंबर { $rank }",
+ "hook-kids-top10-films": "बच्चों की फ़िल्मों में नंबर { $rank }",
+ "hook-decade-favourite": "{ $decade } का पसंदीदा",
+ "hook-global-hit": "दुनिया भर में हिट",
+ "hook-family-favourite": "परिवार का पसंदीदा",
+ "hook-little-ones": "छोटे बच्चों के लिए बढ़िया",
+ "hook-big-kids": "बड़े बच्चों के लिए"
 }
