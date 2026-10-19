@@ -87,6 +87,7 @@ vibe-row-scroll-right = Faire défiler vers la droite
 video-player-forward-10s = Avancer de 10 s
 video-player-fullscreen = Plein écran
 video-player-rewind-10s = Reculer de 10s
+whos-watching-choose = Choisissez votre profil
 whos-watching-add-profile = Ajouter un profil
 help-ui-center = Centre d'aide
 help-ui-browse = Parcourir

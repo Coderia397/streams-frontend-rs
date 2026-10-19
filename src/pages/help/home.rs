@@ -162,7 +162,7 @@ pub fn HelpPage() -> impl IntoView {
     // The search box stays pinned to the top once the page is scrolled past it, like the Netflix help home.
     let (stuck, set_stuck) = signal(false);
     let pin = NodeRef::<leptos::html::Div>::new();
-    window_event_listener(leptos::ev::scroll, move |_| {
+    crate::utils::listen::listen_window(leptos::ev::scroll, move |_| {
         if let Some(el) = pin.get_untracked() {
             set_stuck.set(el.get_bounding_client_rect().top() <= 0.5);
         }

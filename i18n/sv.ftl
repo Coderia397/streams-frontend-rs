@@ -87,6 +87,7 @@ vibe-row-scroll-right = Rulla till höger
 video-player-forward-10s = Framåt 10 sekunder
 video-player-fullscreen = Helskärmsläge
 video-player-rewind-10s = Spola tillbaka 10s
+whos-watching-choose = Välj din profil
 whos-watching-add-profile = Lägg till profil
 help-ui-center = Hjälpcenter
 help-ui-browse = Bläddra

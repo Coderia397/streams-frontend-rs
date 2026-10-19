@@ -87,6 +87,7 @@ vibe-row-scroll-right = تمرير لليمين
 video-player-forward-10s = تقديم 10 ثوانٍ
 video-player-fullscreen = ملء الشاشة
 video-player-rewind-10s = رجوع 10 ثوانٍ
+whos-watching-choose = اختر ملفك الشخصي
 whos-watching-add-profile = إضافة ملف شخصي
 help-ui-center = مركز المساعدة
 help-ui-browse = تصفح

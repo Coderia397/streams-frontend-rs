@@ -48,7 +48,8 @@ pub fn switch_to(store: ProfileStore, profile: &Profile) {
         return;
     }
     store.is_kids_mode.set(profile.is_kids);
-    crate::store::activate_profile(&profile.id);
+    // the same switch as everywhere else: the phone and tablet flight, the Kids screen, or the desktop screen
+    crate::components::profiles::switch_overlay::begin_switch(profile.clone());
 }
 
 fn avatar_of(p: &Profile) -> String {

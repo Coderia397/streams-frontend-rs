@@ -666,3 +666,8 @@ button,
 /* The rating pill (action_buttons.rs RatingPill): closed until the pointer rests on the round button, then it grows out of it. */
 .rating-pill { opacity: 0; pointer-events: none; transform: translate(-50%, -50%) scale(0.55); transition: opacity 0.14s ease, transform 0.16s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .rating-pill-wrap:hover .rating-pill, .rating-pill-wrap:focus-within .rating-pill { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+
+/* the phone and tablet profile switch (Netflix app): a red arc turning under the picture, and the picture's flight to its place in the bar */
+@keyframes sw-phone-spin { to { transform: rotate(360deg); } }
+.sw-phone-arc { animation: sw-phone-spin 0.95s linear infinite; }
+@keyframes pp-fade-in { from { opacity: 0; } to { opacity: 1; } }

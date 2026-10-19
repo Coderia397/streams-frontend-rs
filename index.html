@@ -39,6 +39,30 @@
         if (seen && Date.now() - seen < quiet) document.documentElement.classList.add("boot-skip");
       } catch (e) {}
     </script>
+    <script>
+      /* The profile switch on a phone or tablet continues across the reload that opens the profile: the page before it saved the picture, and this puts the same black screen, picture and
+         turning arc up at once, before the app has started; the app (switch_overlay.rs, resume_compact_switch) then flies the picture to its place in the bar and takes the screen away. */
+      (function () {
+        try {
+          var raw = sessionStorage.getItem("streams_sw_pending");
+          if (!raw) return;
+          sessionStorage.removeItem("streams_sw_pending");
+          var p = JSON.parse(raw);
+          if (!p || !p.a || Date.now() - p.t > 20000) return;
+          document.documentElement.classList.add("boot-skip");
+          var root = document.createElement("div");
+          root.id = "sw-boot"; root.setAttribute("role", "status");
+          root.setAttribute("style", "position:fixed;inset:0;z-index:2147483600;");
+          root.innerHTML =
+            '<div style="position:absolute;inset:0;background:#000;opacity:1;transition:opacity .42s ease-out .1s;"></div>' +
+            '<div style="position:absolute;left:50%;top:50%;width:min(46vw,280px);height:min(46vw,280px);transform:translate(-50%,calc(-50% + min(50vw,300px)));opacity:1;transition:opacity .2s;"><svg style="width:100%;height:100%;animation:swspin .95s linear infinite" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="sw-boot-g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e50914" stop-opacity="0"/><stop offset="1" stop-color="#e50914"/></linearGradient></defs><circle cx="50" cy="50" r="44" fill="none" stroke="url(#sw-boot-g)" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="190 276"/></svg></div>' +
+            '<div style="position:absolute;left:50%;top:44%;width:min(42vw,260px);height:min(42vw,260px);overflow:hidden;border-radius:10%;opacity:1;transform:translate(-50%,-50%);will-change:transform;"><img alt="" style="width:100%;height:100%;object-fit:cover;display:block;"></div>' +
+            '<style>@keyframes swspin{to{transform:rotate(360deg)}}</style>';
+          root.querySelector("img").setAttribute("src", p.a);
+          document.documentElement.appendChild(root);
+        } catch (e) {}
+      })();
+    </script>
     <style>
       html.boot-skip #boot{display:none}
       #boot{position:fixed;inset:0;width:100%;height:100vh;height:100dvh;z-index:2147483000;background:#0b0b0c;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;opacity:0;animation:bootin .25s ease 1.2s forwards}#boot.done{animation:bootout .2s ease forwards}@keyframes bootin{to{opacity:1}}@keyframes bootout{from{opacity:1}to{opacity:0}}

@@ -87,6 +87,7 @@ vibe-row-scroll-right = 右にスクロール
 video-player-forward-10s = 10秒進める
 video-player-fullscreen = フルスクリーン
 video-player-rewind-10s = 10秒戻る
+whos-watching-choose = プロフィールを選択
 whos-watching-add-profile = プロフィールを追加
 help-ui-center = ヘルプセンター
 help-ui-browse = ブラウズ

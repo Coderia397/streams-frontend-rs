@@ -3,7 +3,8 @@ use crate::models::profile::Profile;
 use crate::store::use_profile_store;
 use crate::components::profiles::pin_prompt::ProfilePinPrompt;
 use crate::components::profiles::add_edit_modal::{AddEditProfileModal, ProfileFormData};
-use crate::components::profiles::switch_overlay::ProfileSwitchOverlay;
+use crate::components::profiles::switch_overlay::{begin_switch, is_compact, ProfileSwitchOverlay};
+use crate::components::profiles::phone_picker::PhoneProfilePicker;
 
 fn save_profiles_to_storage(profiles: &[Profile], active_id: Option<&str>) {
     if let Some(storage) = web_sys::window().and_then(|w| w.local_storage().ok().flatten()) {
@@ -35,8 +36,9 @@ pub fn WhosWatchingGate(
     // Perform profile switch with overlay animation (Task 103)
     let perform_switch = move |p: Profile| {
         let pid = p.id.clone();
-        set_switching_target.set(Some(p));
         save_profiles_to_storage(&profiles_signal.get_untracked(), Some(&pid));
+        // a phone or a tablet: the switch is drawn at the root of the app and flies the picture to the bar (it outlives this screen); the others use the screen's own overlay
+        if is_compact() && !p.is_kids { begin_switch(p); } else { set_switching_target.set(Some(p)); }
     };
 
     let on_select_tile = move |p: Profile| {
@@ -115,6 +117,15 @@ pub fn WhosWatchingGate(
     view! {
         // the page on Netflix: a dark red glow at the top fading to black, the logo top left, the question centred, tiles 160 px wide (picture 128 px), a pill under them
         <div class="fixed inset-0 z-(--z-screen) flex select-none flex-col items-center justify-center text-ink animate-in fade-in duration-(--motion-slower)" style="background: radial-gradient(ellipse 90% 100% at 50% 0%, #481a1a 0%, #1a0a0a 55%, #0b0405 100%);">
+            <PhoneProfilePicker
+                profiles=profiles_signal
+                editing=edit_mode
+                manage=manage
+                on_select=Callback::new(move |p| on_select_tile(p))
+                on_add=Callback::new(move |_| set_modal_state.set(Some(("add".to_string(), None))))
+                on_manage=Callback::new({ let navigate = navigate.clone(); move |_| if manage { navigate("/browse", Default::default()) } else { set_edit_mode.update(|e| *e = !*e) } })
+            />
+            <div class="hidden md:flex md:h-full md:w-full md:flex-col md:items-center md:justify-center">
             <img src=crate::brand::LOGO_WORDMARK alt=crate::brand::NAME class="absolute left-[var(--app-x,56px)] top-[26px] h-[24px] w-auto" />
             {move || profile_store.notice.get().map(|m| view! { <p role="status" class="mb-8 max-w-[85vw] rounded-control border border-danger/50 bg-danger/10 px-4 py-3 text-center text-body-sm text-danger md:max-w-xl">{m}</p> })}
             <h1 class="text-center text-heading-xl font-bold leading-[38px] text-ink">
@@ -169,6 +180,7 @@ pub fn WhosWatchingGate(
                 >
                     {move || if edit_mode.get() { view! { {crate::i18n::t("common-done")} }.into_any() } else { view! { <i class="ph ph-pencil-simple text-title-sm"></i>{crate::i18n::t("profile-manage")} }.into_any() }}
                 </button>
+            </div>
             </div>
 
             // PIN prompt modal (Task 098)

@@ -60,7 +60,7 @@ pub fn NavbarProfileMenu() -> impl IntoView {
 
     // The menu opens and closes on click, and closes on a click elsewhere or Escape.
     let root = NodeRef::<leptos::html::Div>::new();
-    window_event_listener(leptos::ev::click, move |ev| {
+    crate::utils::listen::listen_window(leptos::ev::click, move |ev| {
         if !is_open.get_untracked() {
             return;
         }
@@ -70,7 +70,7 @@ pub fn NavbarProfileMenu() -> impl IntoView {
             set_is_open.set(false);
         }
     });
-    window_event_listener(leptos::ev::keydown, move |ev| {
+    crate::utils::listen::listen_window(leptos::ev::keydown, move |ev| {
         if ev.key() == "Escape" {
             set_is_open.set(false);
         }
@@ -88,7 +88,7 @@ pub fn NavbarProfileMenu() -> impl IntoView {
                 on:click=move |_| set_is_open.update(|o| *o = !*o)
                 class="flex cursor-pointer items-center"
             >
-                <div class="w-8 h-8 rounded-control overflow-hidden">
+                <div data-profile-avatar="1" class="w-8 h-8 rounded-control overflow-hidden">
                     {move || {
                         let p = active_profile();
                         if p.as_ref().map(|p| p.is_kids && p.avatar_url.is_none()).unwrap_or(false) {

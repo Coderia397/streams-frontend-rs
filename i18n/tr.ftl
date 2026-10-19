@@ -87,6 +87,7 @@ vibe-row-scroll-right = Sağa Kaydır
 video-player-forward-10s = İleri 10 Saniye
 video-player-fullscreen = Tam Ekran
 video-player-rewind-10s = 10s geri sar
+whos-watching-choose = Profilini seç
 whos-watching-add-profile = Profil Ekle
 help-ui-center = Yardım Merkezi
 help-ui-browse = Gez

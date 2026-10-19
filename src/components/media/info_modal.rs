@@ -199,7 +199,7 @@ pub fn InfoModal() -> impl IntoView {
     };
 
     // Task 083: Escape key dismiss
-    let _ = leptos::prelude::window_event_listener(leptos::ev::keydown, move |ev: web_sys::KeyboardEvent| {
+    crate::utils::listen::listen_window(leptos::ev::keydown, move |ev: web_sys::KeyboardEvent| {
         if is_open.get() && ev.key() == "Escape" {
             close_cb.run(());
         }

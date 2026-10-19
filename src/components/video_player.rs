@@ -113,7 +113,7 @@ pub fn VideoPlayer(
     };
 
     // Keyboard shortcuts
-    let _ = window_event_listener(leptos::ev::keydown, move |e: web_sys::KeyboardEvent| {
+    crate::utils::listen::listen_window(leptos::ev::keydown, move |e: web_sys::KeyboardEvent| {
         match e.key().as_str() {
             " " | "k" | "K" => {
                 e.prevent_default();

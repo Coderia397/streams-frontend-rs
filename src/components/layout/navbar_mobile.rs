@@ -127,7 +127,7 @@ pub fn NavbarMobile(
         BottomNavItem {
             id: "settings",
             icon: view! { 
-                <div class="w-6 h-6 rounded-control overflow-hidden flex items-center justify-center bg-brand text-ink font-bold text-micro">
+                <div data-profile-avatar="1" class="w-6 h-6 rounded-control overflow-hidden flex items-center justify-center bg-brand text-ink font-bold text-micro">
                     {move || if active_profile().is_some_and(|p| p.is_kids && p.avatar_url.is_none()) {
                         view! { <crate::components::profiles::kids_avatar::KidsAvatar size=24.0 /> }.into_any()
                     } else {

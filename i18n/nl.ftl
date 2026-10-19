@@ -87,6 +87,7 @@ vibe-row-scroll-right = Scroll naar rechts
 video-player-forward-10s = Vooruit 10 seconden
 video-player-fullscreen = Volledig scherm
 video-player-rewind-10s = 10s terugspoelen
+whos-watching-choose = Kies je profiel
 whos-watching-add-profile = Profiel toevoegen
 help-ui-center = Help Center
 help-ui-browse = Blader

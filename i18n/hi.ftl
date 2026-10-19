@@ -87,6 +87,7 @@ vibe-row-scroll-right = दाएँ बढ़ाएं
 video-player-forward-10s = आगे 10 सेकंड
 video-player-fullscreen = पूर्ण एक्रोस्टिक
 video-player-rewind-10s = 10 सेकंड पीछे
+whos-watching-choose = अपना प्रोफ़ाइल चुनें
 whos-watching-add-profile = प्रोफाइल जोड़ें
 help-ui-center = सहायता केंद्र
 help-ui-browse = खोजें

@@ -14,7 +14,7 @@ pub fn AccountMenu(avatar: Memo<String>, signout_open: RwSignal<bool>) -> impl I
     let root = NodeRef::<leptos::html::Div>::new();
     let navigate = use_navigate();
     let profiles = use_profile_store();
-    window_event_listener(leptos::ev::click, move |ev| {
+    crate::utils::listen::listen_window(leptos::ev::click, move |ev| {
         if !open.get_untracked() {
             return;
         }
@@ -24,7 +24,7 @@ pub fn AccountMenu(avatar: Memo<String>, signout_open: RwSignal<bool>) -> impl I
             open.set(false);
         }
     });
-    window_event_listener(leptos::ev::keydown, move |ev| {
+    crate::utils::listen::listen_window(leptos::ev::keydown, move |ev| {
         if ev.key() == "Escape" {
             open.set(false);
         }

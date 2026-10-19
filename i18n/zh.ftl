@@ -87,6 +87,7 @@ vibe-row-scroll-right = 向右滚动
 video-player-forward-10s = 快进10秒
 video-player-fullscreen = 全屏
 video-player-rewind-10s = 后退10秒
+whos-watching-choose = 选择你的个人资料
 whos-watching-add-profile = 添加个人资料
 help-ui-center = 帮助中心
 help-ui-browse = 浏览

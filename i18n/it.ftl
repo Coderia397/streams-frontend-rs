@@ -87,6 +87,7 @@ vibe-row-scroll-right = Scorri a Destra
 video-player-forward-10s = Avanti 10 Secondi
 video-player-fullscreen = Schermo Intero
 video-player-rewind-10s = Indietro 10s
+whos-watching-choose = Scegli il tuo profilo
 whos-watching-add-profile = Aggiungi Profilo
 help-ui-center = Centro Assistenza
 help-ui-browse = Esplora

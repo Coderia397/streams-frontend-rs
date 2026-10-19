@@ -87,6 +87,7 @@ vibe-row-scroll-right = 오른쪽으로 스크롤
 video-player-forward-10s = 앞으로 10초
 video-player-fullscreen = 전체 화면
 video-player-rewind-10s = 10초 뒤로
+whos-watching-choose = 프로필을 선택하세요
 whos-watching-add-profile = 프로필 추가
 help-ui-center = 도움말 센터
 help-ui-browse = 검색

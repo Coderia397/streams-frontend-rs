@@ -29,6 +29,7 @@ pub fn App() -> impl IntoView {
     crate::store::provide_watch_store();
     crate::consent::provide_ui();
     crate::components::profiles::switch_overlay::provide_switch();
+    crate::components::profiles::switch_overlay::resume_compact_switch();
     crate::pages::settings::provide_prefs();
     // a browser that starts already signed in tells the account it is still here
     crate::services::account::keep_session_fresh();
