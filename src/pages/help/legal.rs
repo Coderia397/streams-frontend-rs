@@ -59,7 +59,7 @@ pub fn LegalPage(doc: &'static str) -> impl IntoView {
                         <Toc items=toc title=tr("help-ui-on-this-page") />
                     </aside>
                     <article class="min-w-0 max-w-[720px]">
-                        <h1 class="text-heading-xl font-extrabold leading-tight text-paper-ink md:text-display-sm">{title}</h1>
+                        <h1 class="break-words hyphens-auto text-heading-xl font-extrabold leading-tight text-paper-ink md:text-display-sm">{title}</h1>
                         <p class="mb-10 mt-3 text-body-md font-semibold text-paper-mute">{legal_text(&format!("legal-{doc}-updated"))}</p>
                         <div class="space-y-10">{sections}</div>
                         <div class="mt-14 border-t border-paper-line pt-6">

@@ -84,7 +84,7 @@ fn article_view(a: &'static Article) -> impl IntoView {
     view! {
         <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
             <article class="min-w-0 max-w-[680px]">
-                <h1 class="mb-6 text-heading-xl font-extrabold leading-tight text-paper-ink md:text-display-sm">{title}</h1>
+                <h1 class="mb-6 break-words hyphens-auto text-heading-xl font-extrabold leading-tight text-paper-ink md:text-display-sm">{title}</h1>
                 {body}
                 <Feedback slug=a.slug />
             </article>
