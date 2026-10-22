@@ -738,17 +738,17 @@ help-art-search-browse-body =
     ## Navegar
     - <b>Séries</b> e <b>Filmes</b>, na barra de cima, abrem uma página para cada tipo de título. Use <b>Gêneros</b> ali para filtrar.
     - As fileiras da página inicial são agrupadas por tema. Veja <a=/help/article/recommendations>Como funcionam as recomendações</a>.
-    - <b>Navegar por idioma</b> encontra títulos por idioma original, dublagem ou legendas. Veja <a=/help/article/browse-language>Navegar por idioma</a>.
+    - <b>Navegar por idioma</b> encontra títulos pelo idioma original. Veja <a=/help/article/browse-language>Navegar por idioma</a>.
 
 help-art-browse-language-title = Navegar por idioma
-help-art-browse-language-summary = Encontre títulos por idioma original, dublagem ou legendas.
-help-art-browse-language-keywords = navegar por idioma original dublagem legendas estrangeiro internacional anime coreano espanhol
+help-art-browse-language-summary = Encontre títulos pelo idioma em que foram feitos.
+help-art-browse-language-keywords = navegar por idioma idioma original estrangeiro internacional cinema mundial anime coreano espanhol
 help-art-browse-language-body =
     1. Abra <b>Navegar por idioma</b> na barra superior.
-    2. Escolha o que deseja: <b>Idioma Original</b>, <b>Dublagem</b> ou <b>Legendas</b>.
-    3. Escolha um idioma para ver títulos correspondentes.
+    2. <b>Língua Original</b> já vem selecionada. Escolha um idioma para ver os títulos feitos originalmente nele.
 
-    !! Observação: A disponibilidade de dublagem e legendas depende da fonte. Um título listado aqui pode oferecer menos pistas quando você o assistir.
+    !! Observação: A página lista os títulos pelo idioma original. A dublagem e as legendas dependem da fonte de cada título e aparecem em <b>Áudio e legendas</b> durante a reprodução.
+
 help-art-new-popular-title = Novos & Populares
 help-art-new-popular-summary = Veja o que está chegando e o que as pessoas estão assistindo agora.
 help-art-new-popular-keywords = novo popular tendência mais recente top 10 em breve essa semana

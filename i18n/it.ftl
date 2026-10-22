@@ -742,17 +742,17 @@ help-art-search-browse-body =
     ## Sfogliare
     - <b>Serie</b> e <b>Film</b>, nella barra in alto, aprono una pagina per ogni tipo di titolo. Usa <b>Generi</b> per restringere la scelta.
     - Le righe della pagina iniziale sono raggruppate per tema. Vedi <a=/help/article/recommendations>Come funzionano i consigli</a>.
-    - <b>Scopri per lingua</b> trova titoli per lingua originale, doppiaggio o sottotitoli. Vedi <a=/help/article/browse-language>Scopri per lingua</a>.
+    - <b>Scopri per lingua</b> trova titoli in base alla lingua originale. Vedi <a=/help/article/browse-language>Esplora per lingua</a>.
 
 help-art-browse-language-title = Esplora per lingua
-help-art-browse-language-summary = Trova titoli per lingua originale, doppiaggio o sottotitoli.
-help-art-browse-language-keywords = esplora per lingua lingua originale doppiaggio sottotitoli straniero internazionale anime coreano spagnolo
+help-art-browse-language-summary = Trova titoli in base alla lingua in cui sono stati girati.
+help-art-browse-language-keywords = scopri per lingua lingua originale straniero internazionale cinema dal mondo anime coreano spagnolo
 help-art-browse-language-body =
-    1. Apri <b>Esplora per lingua</b> nella barra superiore.
-    2. Scegli cosa desideri: <b>Lingua originale</b>, <b>Doppiaggio</b> o <b>Sottotitoli</b>.
-    3. Scegli una lingua per visualizzare i titoli corrispondenti.
+    1. Apri <b>Scopri per lingua</b> nella barra in alto.
+    2. <b>Lingua originale</b> è già selezionata. Scegli una lingua per vedere i titoli girati originariamente in quella lingua.
 
-    !! Nota: La disponibilità del doppiaggio e dei sottotitoli dipende dalla fonte. Un titolo elencato qui potrebbe offrire meno tracce quando lo giochi.
+    !! Nota: La pagina elenca i titoli in base alla lingua originale. Il doppiaggio e i sottotitoli dipendono dalla fonte di ogni titolo e compaiono in <b>Audio & sottotitoli</b> durante la riproduzione.
+
 help-art-new-popular-title = Nuovi & Popolari
 help-art-new-popular-summary = Vedi cosa arriva e cosa le persone stanno guardando ora.
 help-art-new-popular-keywords = nuovo popolare tendenze più recente top 10 presto questa settimana

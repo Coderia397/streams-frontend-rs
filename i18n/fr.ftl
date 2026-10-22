@@ -735,17 +735,17 @@ help-art-search-browse-body =
     ## Parcourir
     - <b>Séries</b> et <b>Films</b>, dans la barre du haut, ouvrent une page pour chaque type de titre. Utilisez <b>Genres</b> pour affiner.
     - Les rangées de la page d'accueil sont groupées par thème. Consultez <a=/help/article/recommendations>Fonctionnement des recommandations</a>.
-    - <b>Parcourir par langue</b> trouve des titres par langue originale, doublage ou sous-titres. Consultez <a=/help/article/browse-language>Parcourir par langue</a>.
+    - <b>Parcourir par langue</b> trouve des titres selon leur langue originale. Consultez <a=/help/article/browse-language>Parcourir par langue</a>.
 
 help-art-browse-language-title = Parcourir par langue
-help-art-browse-language-summary = Trouver des titres par langue originale, doublage ou sous-titres.
-help-art-browse-language-keywords = parcourir par langue originale doublage sous-titres étranger international anime coréen espagnol
+help-art-browse-language-summary = Trouvez des titres selon la langue dans laquelle ils ont été tournés.
+help-art-browse-language-keywords = parcourir par langue langue originale étranger international cinéma du monde anime coréen espagnol
 help-art-browse-language-body =
-    1. Ouvrez <b>Parcourir par langue</b> dans la barre supérieure.
-    2. Choisissez ce que vous voulez : <b>Langue originale</b>, <b>Doublage</b> ou <b>Sous-titres</b>.
-    3. Choisissez une langue pour voir les titres correspondants.
+    1. Ouvrez <b>Parcourir par langue</b> dans la barre du haut.
+    2. <b>Langue originale</b> est déjà sélectionnée. Choisissez une langue pour voir les titres tournés à l'origine dans cette langue.
 
-    !! Remarque : La disponibilité des doublages et des sous-titres dépend de la source. Un titre répertorié ici peut offrir moins de pistes lors de la lecture.
+    !! Remarque : La page classe les titres selon leur langue originale. Le doublage et les sous-titres dépendent de la source de chaque titre et apparaissent dans <b>Audio & sous-titres</b> pendant la lecture.
+
 help-art-new-popular-title = Nouveautés et populaires
 help-art-new-popular-summary = Découvrez les nouveautés et ce que les gens regardent actuellement.
 help-art-new-popular-keywords = nouveau populaire tendance dernier top 10 bientôt cette semaine

@@ -743,17 +743,16 @@ help-art-search-browse-body =
     ## Göz atma
     - Üst çubuktaki <b>Diziler</b> ve <b>Filmler</b>, her başlık türü için bir sayfa açar. Daraltmak için orada <b>Türler</b>'i kullanın.
     - Ana sayfadaki sıralar temaya göre gruplanır. Bkz. <a=/help/article/recommendations>Öneriler nasıl çalışır</a>.
-    - <b>Dile göre göz at</b>, başlıkları orijinal dile, dublaja veya altyazıya göre bulur. Bkz. <a=/help/article/browse-language>Dile göre göz atma</a>.
+    - <b>Dile göre göz at</b>, başlıkları orijinal dillerine göre bulur. Bkz. <a=/help/article/browse-language>Dile göre göz atma</a>.
 
 help-art-browse-language-title = Dile göre göz atma
-help-art-browse-language-summary = Başlıkları orijinal dile, dublaja veya altyazıya göre bulun.
-help-art-browse-language-keywords = dil orijinal dil dublaj altyazı
+help-art-browse-language-summary = Başlıkları yapıldıkları dile göre bulun.
+help-art-browse-language-keywords = dile göre göz at orijinal dil yabancı uluslararası dünya sineması anime kore ispanyol
 help-art-browse-language-body =
-    1. Üst çubukta <b>Dile göre göz at</b>'ı açın.
-    2. Ne aradığınızı seçin: <b>Orijinal Dil</b>, <b>Dublaj</b> veya <b>Altyazı</b>.
-    3. Eşleşen başlıkları görmek için bir dil seçin.
+    1. Üst çubuktan <b>Dile göre göz at</b> bölümünü açın.
+    2. <b>Orijinal Dil</b> zaten seçilidir. O dilde çekilmiş başlıkları görmek için bir dil seçin.
 
-    !! Not: Dublaj ve altyazının olup olmadığı kaynağa bağlıdır. Bu listedeki bir başlık oynatıldığında daha az parça sunabilir.
+    !! Not: Sayfa başlıkları orijinal dillerine göre listeler. Dublaj ve altyazılar her başlığın kaynağına bağlıdır ve oynatma sırasında <b>Ses ve altyazı</b> bölümünde görünür.
 
 help-art-new-popular-title = Yeni ve Popüler
 help-art-new-popular-summary = Neyin geldiğini ve insanların şu anda ne izlediğini görün.

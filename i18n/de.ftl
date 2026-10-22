@@ -739,17 +739,17 @@ help-art-search-browse-body =
     ## Stöbern
     - <b>Serien</b> und <b>Filme</b> in der oberen Leiste öffnen je eine Seite für jede Art von Titel. Mit <b>Genres</b> grenzen Sie dort weiter ein.
     - Die Reihen auf der Startseite sind nach Themen gruppiert. Siehe <a=/help/article/recommendations>So funktionieren Empfehlungen</a>.
-    - <b>Nach Sprache stöbern</b> findet Titel nach Originalsprache, Synchronisation oder Untertiteln. Siehe <a=/help/article/browse-language>Nach Sprache stöbern</a>.
+    - <b>Nach Sprache stöbern</b> findet Titel nach ihrer Originalsprache. Siehe <a=/help/article/browse-language>Nach Sprache stöbern</a>.
 
 help-art-browse-language-title = Nach Sprache stöbern
-help-art-browse-language-summary = Titel nach Originalsprache, Synchronisation oder Untertiteln finden.
-help-art-browse-language-keywords = nach sprache stöbern original synchronisation untertitel fremdsprachig international anime koreanisch spanisch
+help-art-browse-language-summary = Finden Sie Titel nach der Sprache, in der sie gedreht wurden.
+help-art-browse-language-keywords = nach sprache stöbern originalsprache ausländisch international weltkino anime koreanisch spanisch
 help-art-browse-language-body =
     1. Öffnen Sie <b>Nach Sprache stöbern</b> in der oberen Leiste.
-    2. Wählen Sie, was Sie suchen: <b>Originalsprache</b>, <b>Synchronisation</b> oder <b>Untertitel</b>.
-    3. Wählen Sie eine Sprache, um passende Titel anzuzeigen.
+    2. <b>Originalsprache</b> ist bereits ausgewählt. Wählen Sie eine Sprache, um Titel zu sehen, die ursprünglich in dieser Sprache gedreht wurden.
 
-    !! Hinweis: Die Verfügbarkeit von Synchronisation und Untertiteln hängt von der Quelle ab. Ein hier aufgelisteter Titel kann beim Abspielen weniger Tonspuren anbieten.
+    !! Hinweis: Die Seite ordnet Titel nach ihrer Originalsprache. Synchronfassungen und Untertitel hängen von der Quelle des Titels ab und erscheinen während der Wiedergabe unter <b>Audio & Untertitel</b>.
+
 help-art-new-popular-title = Neu & Beliebt
 help-art-new-popular-summary = Sehen Sie, was neu ist und was gerade viele schauen.
 help-art-new-popular-keywords = neu beliebt trending neueste top 10 demnächst diese woche

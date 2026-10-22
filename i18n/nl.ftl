@@ -743,17 +743,16 @@ help-art-search-browse-body =
     ## Bladeren
     - <b>Series</b> en <b>Films</b> in de balk bovenaan openen een pagina per soort titel. Gebruik daar <b>Genres</b> om verder te filteren.
     - Rijen op de startpagina zijn op thema gegroepeerd. Zie <a=/help/article/recommendations>Hoe aanbevelingen werken</a>.
-    - <b>Bladeren op taal</b> vindt titels op originele taal, nasynchronisatie of ondertitels. Zie <a=/help/article/browse-language>Bladeren op taal</a>.
+    - <b>Bladeren op taal</b> vindt titels op hun originele taal. Zie <a=/help/article/browse-language>Bladeren op taal</a>.
 
 help-art-browse-language-title = Bladeren op taal
-help-art-browse-language-summary = Vind titels op originele taal, nasynchronisatie of ondertitels.
-help-art-browse-language-keywords = taal originele taal nasynchronisatie dubbing ondertitels
+help-art-browse-language-summary = Vind titels op de taal waarin ze zijn gemaakt.
+help-art-browse-language-keywords = bladeren op taal originele taal buitenlands internationaal wereldcinema anime koreaans spaans
 help-art-browse-language-body =
-    1. Open <b>Bladeren op taal</b> in de balk bovenaan.
-    2. Kies wat je zoekt: <b>Originele taal</b>, <b>Nasynchronisatie</b> of <b>Ondertitels</b>.
-    3. Kies een taal om de bijpassende titels te zien.
+    1. Open <b>Bladeren op taal</b> in de bovenste balk.
+    2. <b>Originele taal</b> is al gekozen. Kies een taal om titels te zien die oorspronkelijk in die taal zijn gemaakt.
 
-    !! Let op: Of er nasynchronisatie en ondertitels zijn, hangt af van de bron. Een titel in deze lijst kan bij het afspelen minder sporen hebben.
+    !! Let op: De pagina toont titels op hun originele taal. Nasynchronisatie en ondertitels hangen af van de bron van elke titel en staan tijdens het afspelen onder <b>Audio & ondertitels</b>.
 
 help-art-new-popular-title = Nieuw & Populair
 help-art-new-popular-summary = Zie wat er binnenkomt en waar mensen nu naar kijken.

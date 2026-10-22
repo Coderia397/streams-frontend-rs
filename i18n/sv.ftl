@@ -743,17 +743,16 @@ help-art-search-browse-body =
     ## Bläddra
     - <b>Serier</b> och <b>Filmer</b> i fältet högst upp öppnar en sida för varje sorts titel. Använd <b>Genrer</b> där för att smalna av.
     - Raderna på startsidan är grupperade efter tema. Se <a=/help/article/recommendations>Så fungerar rekommendationer</a>.
-    - <b>Bläddra efter språk</b> hittar titlar efter originalspråk, dubbning eller undertexter. Se <a=/help/article/browse-language>Bläddra efter språk</a>.
+    - <b>Bläddra efter språk</b> hittar titlar efter originalspråk. Se <a=/help/article/browse-language>Bläddra efter språk</a>.
 
 help-art-browse-language-title = Bläddra efter språk
-help-art-browse-language-summary = Hitta titlar efter originalspråk, dubbning eller undertexter.
-help-art-browse-language-keywords = språk originalspråk dubbning undertexter
+help-art-browse-language-summary = Hitta titlar efter språket de gjordes på.
+help-art-browse-language-keywords = bläddra efter språk originalspråk utländsk internationell världsfilm anime koreansk spansk
 help-art-browse-language-body =
     1. Öppna <b>Bläddra efter språk</b> i fältet högst upp.
-    2. Välj vad du letar efter: <b>Originalspråk</b>, <b>Dubbning</b> eller <b>Undertexter</b>.
-    3. Välj ett språk för att se titlar som passar.
+    2. <b>Originalspråk</b> är redan valt. Välj ett språk för att se titlar som ursprungligen gjordes på det språket.
 
-    !! Obs! Om det finns dubbning och undertexter beror på källan. En titel i den här listan kan ha färre spår när du spelar upp den.
+    !! Obs! Sidan visar titlar efter originalspråk. Dubbat ljud och undertexter beror på källan för varje titel och visas under <b>Ljud & undertexter</b> medan den spelas.
 
 help-art-new-popular-title = Nya & Populära
 help-art-new-popular-summary = Se vad som kommer och vad folk tittar på just nu.

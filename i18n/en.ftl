@@ -743,17 +743,16 @@ help-art-search-browse-body =
     ## Browse
     - <b>Series</b> and <b>Films</b> in the top bar open a page for each kind of title. Use <b>Genres</b> there to narrow it down.
     - Rows on the home page are grouped by theme. See <a=/help/article/recommendations>How recommendations work</a>.
-    - <b>Browse by language</b> finds titles by original language, dubbing or subtitles. See <a=/help/article/browse-language>Browse by language</a>.
+    - <b>Browse by language</b> finds titles by the language they were made in. See <a=/help/article/browse-language>Browse by language</a>.
 
 help-art-browse-language-title = Browse by language
-help-art-browse-language-summary = Find titles by original language, dubbing or subtitles.
-help-art-browse-language-keywords = browse by language original dubbing subtitles foreign international anime korean spanish
+help-art-browse-language-summary = Find titles by the language they were made in.
+help-art-browse-language-keywords = browse by language original language foreign international world cinema anime korean spanish
 help-art-browse-language-body =
     1. Open <b>Browse by language</b> in the top bar.
-    2. Choose what you want: <b>Original Language</b>, <b>Dubbing</b> or <b>Subtitles</b>.
-    3. Choose a language to see matching titles.
+    2. <b>Original Language</b> is already selected. Choose a language to see titles first made in it.
 
-    !! Note: Dubbing and subtitle availability depend on the source. A title listed here may offer fewer tracks when you play it.
+    !! Note: The page lists titles by their original language. Dubbed audio and subtitles depend on the source of each title and show in <b>Audio & Subtitles</b> while it plays.
 
 help-art-new-popular-title = New & Popular
 help-art-new-popular-summary = See what is arriving and what people are watching now.

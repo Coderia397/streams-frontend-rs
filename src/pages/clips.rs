@@ -140,7 +140,7 @@ pub fn ClipCard(
                             view! { <i class="ph-bold ph-plus text-xl text-ink"></i> }.into_any()
                         }}
                     </div>
-                    <span class="text-caption font-semibold drop-shadow">{crate::i18n::t("nav-my-list")}</span>
+                    <span class="text-caption font-semibold drop-shadow">{crate::i18n::t("my-list")}</span>
                 </button>
 
                 // Play Button

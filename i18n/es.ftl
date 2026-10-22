@@ -738,17 +738,17 @@ help-art-search-browse-body =
     ## Explorar
     - <b>Series</b> y <b>Películas</b>, en la barra superior, abren una página para cada tipo de título. Usa <b>Géneros</b> ahí para afinar la búsqueda.
     - Las filas de la página de inicio se agrupan por temas. Consulta <a=/help/article/recommendations>Cómo funcionan las recomendaciones</a>.
-    - <b>Explorar por idioma</b> encuentra títulos por idioma original, doblaje o subtítulos. Consulta <a=/help/article/browse-language>Explorar por idioma</a>.
+    - <b>Explorar por idioma</b> encuentra títulos según el idioma en que se hicieron. Consulta <a=/help/article/browse-language>Explorar por idioma</a>.
 
 help-art-browse-language-title = Explorar por idioma
-help-art-browse-language-summary = Encuentra títulos por idioma original, doblaje o subtítulos.
-help-art-browse-language-keywords = explorar por idioma original doblaje subtítulos extranjero internacional anime coreano español
+help-art-browse-language-summary = Encuentra títulos según el idioma en que se hicieron.
+help-art-browse-language-keywords = explorar por idioma idioma original extranjero internacional cine del mundo anime coreano español
 help-art-browse-language-body =
     1. Abre <b>Explorar por idioma</b> en la barra superior.
-    2. Elige lo que quieras: <b>Idioma original</b>, <b>Doblaje</b> o <b>Subtítulos</b>.
-    3. Elige un idioma para ver los títulos coincidentes.
+    2. <b>Idioma original</b> ya está seleccionado. Elige un idioma para ver los títulos hechos originalmente en él.
 
-    !! Nota: La disponibilidad de doblaje y subtítulos depende de la fuente. Un título listado aquí puede ofrecer menos pistas al reproducirlo.
+    !! Nota: La página muestra los títulos según su idioma original. El audio doblado y los subtítulos dependen de la fuente de cada título y aparecen en <b>Audio y subtítulos</b> mientras se reproduce.
+
 help-art-new-popular-title = Novedades y populares
 help-art-new-popular-summary = Mira lo que está llegando y lo que la gente está viendo ahora.
 help-art-new-popular-keywords = nuevo popular tendencia últimos top 10 próximamente esta semana

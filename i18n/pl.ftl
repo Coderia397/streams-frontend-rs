@@ -745,17 +745,16 @@ help-art-search-browse-body =
     ## Przeglądanie
     - <b>Seriale</b> i <b>Filmy</b> na górnym pasku otwierają osobną stronę dla każdego rodzaju tytułu. Tam użyj <b>Gatunki</b>, aby zawęzić wybór.
     - Rzędy na stronie głównej są pogrupowane tematycznie. Zobacz <a=/help/article/recommendations>Jak działają rekomendacje</a>.
-    - <b>Przeglądaj po języku</b> znajduje tytuły według języka oryginału, dubbingu lub napisów. Zobacz <a=/help/article/browse-language>Przeglądaj po języku</a>.
+    - <b>Przeglądaj po języku</b> znajduje tytuły według języka oryginalnego. Zobacz <a=/help/article/browse-language>Przeglądaj po języku</a>.
 
 help-art-browse-language-title = Przeglądaj po języku
-help-art-browse-language-summary = Znajdź tytuły według języka oryginału, dubbingu lub napisów.
-help-art-browse-language-keywords = język język oryginału dubbing napisy
+help-art-browse-language-summary = Znajdź tytuły według języka, w którym powstały.
+help-art-browse-language-keywords = przeglądaj po języku język oryginalny zagraniczne międzynarodowe kino światowe anime koreańskie hiszpańskie
 help-art-browse-language-body =
     1. Otwórz <b>Przeglądaj po języku</b> na górnym pasku.
-    2. Wybierz, czego szukasz: <b>Język oryginału</b>, <b>Dubbing</b> lub <b>Napisy</b>.
-    3. Wybierz język, aby zobaczyć pasujące tytuły.
+    2. <b>Język oryginalny</b> jest już wybrany. Wybierz język, aby zobaczyć tytuły, które powstały w tym języku.
 
-    !! Uwaga: Dostępność dubbingu i napisów zależy od źródła. Tytuł z tej listy może przy odtwarzaniu oferować mniej ścieżek.
+    !! Uwaga: Strona pokazuje tytuły według języka oryginalnego. Dubbing i napisy zależą od źródła danego tytułu i pojawiają się w <b>Audio i napisy</b> podczas odtwarzania.
 
 help-art-new-popular-title = Nowe i popularne
 help-art-new-popular-summary = Zobacz, co się pojawia i co ludzie oglądają teraz.

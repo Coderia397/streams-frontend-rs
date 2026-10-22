@@ -222,7 +222,7 @@ pub fn SpotlightCard(
                                         } else {
                                             view! {
                                                 <i class="ph-bold ph-plus text-xl text-ink"></i>
-                                                <span>{crate::i18n::t("nav-my-list")}</span>
+                                                <span>{crate::i18n::t("my-list")}</span>
                                             }.into_any()
                                         }}
                                     </button>
