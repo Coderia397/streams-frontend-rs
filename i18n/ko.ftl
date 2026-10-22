@@ -26,7 +26,7 @@ category-sub-nav-mobile-series = 시리즈
 choose-icon-back = 뒤로
 clips-clips = 클립
 continue-watching-options-sheet-cancel = 취소
-continue-watching-options-sheet-remove-from-continue-watching = '계속 시청'에서 삭제
+continue-watching-options-sheet-remove-from-continue-watching = '이어서 보기'에서 삭제
 continue-watching-row-continue-watching = 계속 시청
 continue-watching-row-scroll-left = 왼쪽으로 스크롤
 continue-watching-row-scroll-right = 오른쪽으로 스크롤
@@ -90,27 +90,27 @@ video-player-rewind-10s = 10초 뒤로
 whos-watching-choose = 프로필을 선택하세요
 whos-watching-add-profile = 프로필 추가
 help-ui-center = 도움말 센터
-help-ui-browse = 검색
+help-ui-browse = 둘러보기
 help-ui-signin = 로그인
 help-ui-hero-title = 어떻게 도와드릴까요?
 help-ui-search-label = 검색
 help-ui-search-placeholder = 질문, 주제 또는 문제를 입력하세요
 help-ui-popular = 인기 주제
-help-ui-explore = 주제 탐색
+help-ui-explore = 주제 둘러보기
 help-ui-quick-links = 빠른 링크
 help-ui-need-more = 더 많은 도움이 필요하세요?
 help-ui-contact-us = 문의하기
 help-ui-language-label = 선호하는 언어를 선택하세요:
 help-ui-back = 도움말 홈으로 돌아가기
-help-ui-related = 관련 기사
-help-ui-helpful = 이 기사가 도움이 되었나요?
+help-ui-related = 관련 도움말
+help-ui-helpful = 이 도움말이 도움이 되었나요?
 help-ui-yes = 네
 help-ui-no = 아니요
 help-ui-thanks = 피드백 감사합니다.
-help-ui-tell-more = 결여된 내용을 알려주세요
-help-ui-recommended = 추천 기사
+help-ui-tell-more = 부족했던 내용을 알려 주세요
+help-ui-recommended = 추천 도움말
 help-ui-additional = 추가 검색 결과
-help-ui-read = 기사 읽기
+help-ui-read = 도움말 읽기
 help-ui-results-count =
     { $count ->
        *[other] “{ $query }” 검색 결과 { $count }개
@@ -119,26 +119,26 @@ help-ui-account = 계정
 help-ui-signout = { $brand }에서 로그아웃
 help-ui-results-count-link = "{ $query }"에 대한 모든 결과 보기
 help-ui-results-none = "{ $query }"에 대한 결과가 없습니다.
-help-ui-results-hint = 맞춤법을 확인하거나 더 적은 단어를 사용하거나 주제를 둘러보세요.
+help-ui-results-hint = 맞춤법을 확인하거나, 검색어를 줄이거나, 주제를 둘러보세요.
 help-ui-results-empty = 도움말 센터를 검색하려면 몇 가지 단어를 입력하세요.
 help-ui-page-prev = 이전 페이지
 help-ui-page-next = 다음 페이지
-help-ui-page-n = 페이지 { $n }
-help-ui-suggestions = 추천 기사
+help-ui-page-n = { $n }페이지
+help-ui-suggestions = 추천 도움말
 help-ui-contact-title = 문의하기
-help-ui-contact-prompt = 더 많은 정보를 알려주시면 최선의 해결책을 찾아드겠습니다
-help-ui-describe = 문제를 설명해주세요
+help-ui-contact-prompt = 자세히 알려 주시면 가장 알맞은 해결 방법을 찾아 드릴게요
+help-ui-describe = 어떤 문제인지 설명해 주세요
 help-ui-mail-subject = 도움 요청
-help-ui-mail-intro = 여기서 문제를 설명해주세요:
+help-ui-mail-intro = 여기에 문제를 설명해 주세요:
 help-ui-mail-details = 자동으로 추가된 세부 정보
-help-ui-mail-feedback = 기사 피드백: { $title }
+help-ui-mail-feedback = 도움말 피드백: { $title }
 help-ui-ql-profiles = 프로필 관리
 help-ui-ql-language = 표시 언어 변경
 help-ui-ql-signin = 로그인
 help-ui-ql-copyright = 저작권 문제 신고
-help-ui-ql-title = { $brand }의 제목에 대한 피드백
-help-ui-ql-email = { $help_email }으로 이메일 보내기
-help-ui-not-found-title = 해당 기사를 찾을 수 없습니다
+help-ui-ql-title = { $brand }의 콘텐츠에 대한 의견
+help-ui-ql-email = { $help_email }로 이메일 보내기
+help-ui-not-found-title = 해당 도움말을 찾을 수 없어요
 help-ui-not-found-body = 이동했거나 링크가 잘못되었을 수 있습니다. 도움말 센터를 검색하거나 주제를 둘러보세요.
 help-ui-legal-terms = 이용 약관
 help-ui-legal-privacy = 개인정보
@@ -151,633 +151,776 @@ help-topic-fix = 문제 해결
 help-topic-watching = 시청
 help-topic-start = 시작하기
 help-group-profiles = 프로필
-help-group-account-data = 계정 및 데이터
-help-group-paying = { $brand }를 위한 결제
+help-group-account-data = 데이터와 개인정보
+help-group-paying = { $brand } 이용 요금
 help-group-playback-issues = 재생 문제
 help-group-device-issues = 브라우저 및 기기
 help-group-page-issues = 페이지 및 목록
 help-group-features = 기능 및 설정
-help-group-library = 내 목록 및 이력
-help-group-finding = 시청할 것이 무엇인지 찾기
+help-group-library = 내 목록과 기록
+help-group-finding = 볼 만한 콘텐츠 찾기
 help-group-about = { $brand }에 대해
 help-group-setup = 기기 설정
-help-group-reporting = 보고 및 법적 사항
-help-art-profiles-manage-title = 프로필을 생성, 편집 또는 삭제하는 방법
-help-art-profiles-manage-summary = 각 사람에게 프로필을 추가하고 이름이나 아이콘을 변경하거나, PIN을 켜거나 끄거나, 더 이상 필요하지 않은 프로필을 제거할 수 있습니다.
-help-art-profiles-manage-keywords = 프로필 프로필 추가 생성 편집 삭제 제거 이름 아이콘 애벌레 누가 시청 중인가
+help-group-reporting = 신고 및 법적 사항
+help-art-profiles-manage-title = 프로필을 만들고, 편집하고, 삭제하는 방법
+help-art-profiles-manage-summary = 가족마다 프로필을 추가하고, 이름이나 사진을 바꾸고, 프로필을 잠그거나 필요 없는 프로필을 삭제해요.
+help-art-profiles-manage-keywords = 프로필 추가 만들기 편집 삭제 이름 아이콘 아바타 누가 시청하나요
 help-art-profiles-manage-body =
-    이 기기에서 { $brand }를 사용하는 각 사람에게 이름, 아이콘, 목록 및 추천이 있는 프로필을 만들 수 있습니다.
+    집에 있는 사람마다 이름, 사진, 내 목록, 시청 기록, 추천이 따로 있는 프로필을 가질 수 있어요. 계정 하나에 프로필을 최대 5개까지 만들 수 있어요.
 
-    ## 프로필 추가
-    1. 상단 오른쪽의 프로필 메뉴를 열고 <b>프로필 관리</b>를 선택하거나, <b>누가 시청 중인가?</b> 화면을 열습니다.
-    2. <b>프로필 추가</b>를 선택합니다.
-    3. 이름을 입력하고, 아이콘을 선택한 후 <b>저장</b>을 선택합니다.
+    ## 프로필 추가하기
+    1. 오른쪽 위의 프로필 메뉴를 열고 <b>프로필 관리</b>를 선택하거나, <b>누가 시청하나요?</b> 화면에서 <b>프로필 관리</b>를 선택하세요.
+    2. <b>프로필 추가</b>를 선택하세요.
+    3. 이름을 입력하고 사진을 고르세요. 어린이용 프로필이라면 <b>키즈 프로필</b>을 켜세요.
+    4. <b>저장</b>을 선택하세요.
 
-    ## 프로필 편집 또는 삭제
-    1. <b>프로필 관리</b>를 엽니다.
-    2. 변경하려는 프로필을 선택합니다.
-    3. 이름이나 아이콘을 변경하거나, PIN 또는 Kids 설정을 켜거나 끄고, <b>저장</b>을 선택합니다. 프로필을 제거하려면 <b>프로필 삭제</b>를 선택합니다.
+    ## 프로필 편집 또는 삭제하기
+    1. <b>프로필 관리</b>를 열고 바꿀 프로필을 선택하세요.
+    2. 이름이나 사진을 바꾸거나 <b>키즈 프로필</b> 또는 <b>프로필 잠금</b>을 켜거나 끈 다음 <b>저장</b>을 선택하세요.
+    3. 프로필을 삭제하려면 <b>프로필 삭제</b>를 선택하세요. 시청 기록과 설정도 함께 삭제돼요.
 
-    !! 주의: 이 브라우저에서 이 기기에서 프로필이 저장됩니다. <a=/help/article/saved-data>프로필, 목록 및 진행 상황이 저장되는 위치</a>를 참조하십시오.
+    언어, 자막, 자녀 보호 설정 같은 프로필별 설정은 <b>계정</b>의 <b>프로필 관리</b>에 있어요.
 
-    @@ 프로필
+    !! 참고: 프로필은 계정에 저장되므로 로그인한 모든 기기에 나타나요.
 
-    >> 프로필을 삭제할 수 없음
-    최소한 하나의 프로필을 유지해야 합니다. 다른 하나를 먼저 생성한 후, 오래된 프로필을 삭제하십시오.
+    @@ profiles
+
+    >> 프로필을 삭제할 수 없어요
+    기본 프로필(내 이름이 붙은 프로필)은 삭제할 수 없고, 계정에는 항상 프로필이 하나 이상 있어야 해요. 그 밖의 프로필은 모두 삭제할 수 있어요.
+
 help-art-switch-profile-title = 프로필을 전환하는 방법
-help-art-switch-profile-summary = 페이지를 벗어나지 않고 누가 시청 중인지 변경합니다.
-help-art-switch-profile-keywords = 전환 변경 프로필 누가 시청 중인가 메뉴
+help-art-switch-profile-summary = 페이지를 떠나지 않고 시청하는 사람을 바꿔요.
+help-art-switch-profile-keywords = 전환 바꾸기 프로필 누가 시청하나요 메뉴
 help-art-switch-profile-body =
-    1. 페이지 오른쪽 상단의 프로필 메뉴를 열어주세요.
-    2. 사용할 프로필을 선택해주세요.
-    3. 프로필에 PIN이 있는 경우, 네 자릿수를 입력해 계속 진행해주세요.
+    1. 페이지 오른쪽 위의 프로필 메뉴를 여세요. 휴대폰에서는 아래쪽 바에 있는 프로필 사진을 탭하세요.
+    2. 사용할 프로필을 선택하세요.
+    3. 잠긴 프로필이라면 4자리 PIN을 입력하세요.
 
-    추천 콘텐츠, <b>내 리스트</b> 및 <b>계속 시청</b>은 선택한 프로필에 따라 달라집니다.
+    선택한 프로필에 따라 추천, <b>내 목록</b>, <b>이어서 보기</b>가 바뀌어요.
 
-    !! 주의: 프로필을 PIN으로 잠금할 수 있습니다. 자세한 내용은 <a=/help/article/profile-pin>프로필 PIN 추가, 수정 또는 삭제 방법</a>을 참조하세요.
+    !! 참고: 프로필은 PIN으로 잠글 수 있어요. <a=/help/article/profile-pin>프로필 PIN을 설정, 변경, 해제하는 방법</a>에서 확인하세요.
 
     @@ profiles
-help-art-profile-pin-title = 프로필 PIN 추가, 수정 또는 삭제 방법
-help-art-profile-pin-summary = 네 자릿수의 PIN으로 프로필을 잠금하여, 올바른 사람만 열 수 있도록 합니다.
-help-art-profile-pin-keywords = pin lock profile lock code passcode four digit secure
+
+help-art-profile-pin-title = 프로필 PIN을 설정, 변경, 해제하는 방법
+help-art-profile-pin-summary = 4자리 PIN으로 프로필을 잠가서 해당하는 사람만 열 수 있게 해요.
+help-art-profile-pin-keywords = pin 잠금 프로필 잠금 비밀번호 암호 비공개 보호 코드
 help-art-profile-pin-body =
-    프로필 PIN은 네 자릿수로 구성됩니다. 누군가 프로필을 선택하려면 이 PIN을 입력해야 합니다.
+    프로필 잠금을 설정하면 프로필을 열기 전에 4자리 PIN을 입력해야 해요. PIN은 계정에 저장되므로 로그인한 모든 기기에서 적용돼요.
 
-    ## PIN을 켜거나 변경
-    1. <b>프로필 관리</b>를 열고 프로필을 선택합니다.
-    2. <b>프로필 잠금</b>을 켜고 네 자릿수를 입력합니다.
-    3. <b>저장</b>을 선택합니다.
+    ## 프로필 잠금 켜기
+    1. 프로필 메뉴를 열고 <b>계정</b>, <b>프로필 관리</b>를 차례로 선택한 다음 프로필을 선택하세요.
+    2. <b>프로필 잠금</b>을 선택하고 본인 확인을 위해 계정 비밀번호를 입력하세요.
+    3. 숫자 4자리를 입력하고 <b>저장</b>을 선택하세요.
 
-    ## PIN 제거
-    1. <b>프로필 관리</b>를 열고 프로필을 선택한 후 현재 PIN을 입력합니다.
-    2. <b>프로필 잠금</b>을 끄고 <b>저장</b>을 선택합니다.
+    <b>프로필 관리</b>에서 프로필을 추가하거나 편집할 때도 <b>프로필 잠금</b>을 켤 수 있어요.
 
-    !! 주의: PIN은 이 기기에서 저장되며, 이 브라우저에서 다른 사람의 프로필 접근을 차단합니다. 그러나 브라우저 설정을 열 수 있는 사람에게는 강력한 보안이 아닙니다. PIN을 잊은 경우 <a=/help/article/forgot-pin>프로필 PIN을 잊었어요</a>을 참조하세요.
+    ## PIN 변경 또는 해제하기
+    1. 위의 방법으로 해당 프로필의 <b>프로필 잠금</b>을 여세요.
+    2. <b>PIN 변경</b>을 선택하거나, <b>프로필 잠금 해제</b>를 선택하고 현재 PIN을 입력하세요.
+
+    !! 참고: PIN을 여러 번 잘못 입력하면 프로필이 한동안 잠긴 상태로 유지돼요. PIN을 잊었다면 <a=/help/article/forgot-pin>프로필 PIN을 잊어버렸어요</a>에서 확인하세요.
 
     @@ profiles
-help-art-kids-profile-title = 아이용 프로필 생성 방법
-help-art-kids-profile-summary = Kids 프로필은 어린 시청자용으로 선택된 제목만 보여주고, 나머지는 접근이 어렵도록 합니다.
-help-art-kids-profile-keywords = kids children child family parental controls safe young profile
+
+help-art-kids-profile-title = 어린이용 프로필을 만드는 방법
+help-art-kids-profile-summary = 키즈 프로필에는 어린이용 콘텐츠만 보이고, 나머지 콘텐츠는 보이지 않아요.
+help-art-kids-profile-keywords = 키즈 어린이 아이 가족 자녀 보호 안전 프로필
 help-art-kids-profile-body =
-    Kids 프로필은 어린 시청자에게 적합한 제목만 표시되도록 제한하고, 페이지에서 성인용 항목을 제거합니다.
+    키즈 프로필에는 어린이에게 맞는 콘텐츠만 보이고, 홈 화면과 메뉴도 어린이용으로 바뀌어요.
 
-    1. <b>프로필 관리</b>를 열고 <b>프로필 추가</b>를 선택합니다.
-    2. 이 프로필에 <b>Kids 모드</b>를 켭니다.
-    3. 이름과 아이콘을 선택한 후 <b>저장</b>을 누릅니다.
+    1. <b>프로필 관리</b>를 열고 <b>프로필 추가</b>를 선택하세요.
+    2. 이름을 입력하고 <b>키즈 프로필</b>을 켜세요.
+    3. <b>저장</b>을 선택하세요.
 
-    아이가 다른 프로필로 전환하지 못하도록 하려면 모든 성인 프로필에 PIN을 설정해야 합니다. 자세한 내용은 <a=/help/article/profile-pin>프로필 PIN 추가, 수정 또는 삭제 방법</a>을 참조하세요.
+    기존 프로필을 키즈 프로필로 바꾸려면 프로필을 편집해서 <b>키즈 프로필</b>을 켜세요. 기본 프로필은 키즈 프로필로 만들 수 없어요.
 
-    !! 주의: 제목은 독립적인 출처에서 제공되며 모든 제목에 평가가 부여되지 않습니다. Kids 프로필은 아이가 찾을 수 있는 콘텐츠를 줄여주지만, 함께 시청하는 것을 대체하지 않습니다.
+    키즈 화면에서 나가려면 <b>키즈 나가기</b>를 선택하고 다른 프로필을 고르세요. 아이가 마음대로 프로필을 바꾸지 못하게 하려면 다른 프로필을 PIN으로 잠그세요. <a=/help/article/profile-pin>프로필 PIN을 설정, 변경, 해제하는 방법</a>에서 확인하세요.
+
+    조금 더 큰 아이라면 대신 어느 프로필에든 관람 등급을 설정할 수 있어요. <a=/help/article/parental-controls>자녀 보호 설정: 관람 등급과 콘텐츠 차단</a>에서 확인하세요.
+
+    !! 참고: 콘텐츠는 독립적인 소스에서 제공되며, 모든 콘텐츠에 관람 등급이 있는 것은 아니에요. 키즈 프로필은 아이가 찾을 수 있는 콘텐츠를 줄여 주지만, 함께 시청하는 것을 대신하지는 못해요.
 
     @@ profiles
-help-art-need-account-title = 계정이 필요합니까?
-help-art-need-account-summary = 계정 없이도 둘러보기 및 시청이 가능합니다. 계정이 추가로 제공하는 기능은 다음과 같습니다.
-help-art-need-account-keywords = 계정 가입 등록 로그인 필요 구독
+
+help-art-need-account-title = 계정이 필요한가요?
+help-art-need-account-summary = 네, 무료 계정이 필요해요. 계정에 저장되는 내용을 알려 드려요.
+help-art-need-account-keywords = 계정 가입 회원가입 로그인 필요 멤버십
 help-art-need-account-body =
-    브라우저나 검색, 시청을 위해 { $brand }에서 계정이 필요하지 않습니다.
+    네. { $brand }에서 시청하려면 무료 계정이 필요해요. 1분이면 만들 수 있고, 결제 정보는 묻지 않아요.
 
-    오늘은 이 브라우저에서 이 기기에서 프로필, 리스트 및 시청 진행 상황이 저장되어 있습니다. 여러 기기에서 프로필, 리스트 및 시청 진행 상황을 동기화하는 계정이 점차 구축되고 있습니다. 이러한 계정이 사용 가능할 때까지 로그인 페이지는 미리보기이며 실제 계정을 생성하지 않습니다.
+    1. { $brand } 홈페이지에서 이메일 주소를 입력하고 <b>시작하기</b>를 선택하세요.
+    2. 이름과 성을 입력하고 8자 이상의 비밀번호를 정하세요.
+    3. 이메일로 받은 링크를 열어 주소를 확인한 다음 로그인하세요.
 
-    !! 주의: { $brand }는 계정을 생성할 때 카드 번호를 요청하지 않습니다. <a=/help/article/free-to-use>{ $brand }는 무료입니까?</a>를 참조하세요.
-help-art-sign-in-title = 로그인 및 로그아웃
-help-art-sign-in-summary = 오늘 로그인 페이지가 수행하는 기능과 예상하지 못한 동작이 있을 때 해야 할 일
-help-art-sign-in-keywords = 로그인 로그인 로그아웃 로그아웃 비밀번호 이메일 로그인할 수 없음
+    계정에는 프로필, 내 목록, 평가, 시청 기록, 설정이 저장되므로 로그인한 모든 기기에서 똑같이 보여요. 성을 뺀 이름이 기본 프로필의 이름이 돼요.
+
+    !! 참고: { $brand }는 무료이며 카드 번호를 묻지 않아요. <a=/help/article/free-to-use>{ $brand }는 무료인가요?</a>에서 확인하세요.
+
+help-art-sign-in-title = 로그인과 로그아웃
+help-art-sign-in-summary = 이메일과 비밀번호로 로그인하고, 로그인 상태를 유지하거나 로그아웃해요.
+help-art-sign-in-keywords = 로그인 로그아웃 로그인 상태 유지 이메일 비밀번호 계정
 help-art-sign-in-body =
-    로그인 페이지는 점차 구축되는 계정의 미리보기입니다. 계속 선택하면 이 기기의 프로필로 이동합니다. 비밀번호나 이메일은 아직 검사되지 않았습니다.
+    ## 로그인하기
+    1. { $brand } 홈페이지 위쪽의 <b>로그인</b>을 선택하세요.
+    2. 이메일 주소와 비밀번호를 입력하고 <b>로그인</b>을 선택하세요.
 
-    ## 로그아웃
-    프로필 메뉴를 열고 <b>로그아웃</b>을 선택하세요. 저장된 프로필은 이 기기에서 유지됩니다.
+    이 기기에서 로그인 상태를 유지하려면 <b>로그인 상태 유지</b>를 켜 두세요. 조금 전에 이 기기에서 로그아웃했다면 비밀번호를 다시 입력하지 않고 계속할 수 있어요.
 
-    ## 로그인 기능이 작동하지 않음
-    - 페이지를 새로고침하고 다시 시도하세요.
-    - 브라우저가 이 사이트에 데이터를 저장할 수 있도록 허용했는지 확인하세요. <a=/help/article/saved-data>프로필, 리스트 및 진행 상황이 저장되는 위치</a>를 참조하세요.
-    - 문제가 지속된다면 <a=/help/contact>문의하기</a> 페이지에서 우리에게 문의하세요.
-help-art-saved-data-title = 프로필, 리스트 및 진행 상황이 저장되는 위치
-help-art-saved-data-summary = 프로필, PIN, 시청 진행 상황은 이 브라우저에서 이 기기에서 저장됩니다.
-help-art-saved-data-keywords = 저장된 데이터 저장소 로컬 브라우저 기기 잃어버리기 동기화 진행 상황 기록 프로필 쿠키
+    ## 로그아웃하기
+    프로필 메뉴를 열고 <b>{ $brand }에서 로그아웃</b>을 선택하세요. 모든 기기에서 한 번에 로그아웃하려면 <a=/help/article/devices-sign-out>한 기기 또는 모든 기기에서 로그아웃하기</a>에서 확인하세요.
+
+    ## 로그인이 안 될 때
+    - 이메일 주소에 오타가 없는지 확인하세요. 비밀번호는 대소문자를 구분해요.
+    - 방금 가입했다면 먼저 이메일로 받은 확인 링크를 여세요. <b>확인 이메일 다시 보내기</b>를 선택하면 새 이메일을 받을 수 있어요.
+    - 여러 번 실패했다면 1분 정도 기다린 다음 다시 시도하세요.
+    - 비밀번호를 잊으셨나요? <a=/help/article/forgot-password>비밀번호를 잊어버렸어요</a>에서 확인하세요.
+
+help-art-saved-data-title = 프로필, 목록, 시청 진행 상황이 저장되는 곳
+help-art-saved-data-summary = 계정에 저장되고, 페이지가 빨리 열리도록 브라우저마다 사본이 저장돼요.
+help-art-saved-data-keywords = 저장된 데이터 저장소 로컬 브라우저 기기 사라짐 동기화 진행 기록 프로필 쿠키
 help-art-saved-data-body =
-    { $brand }는 사용 중인 기기의 브라우저 로컬 저장소에 프로필, PIN 및 시청 진행 상황을 저장합니다. 아직은 이 데이터가 계정에 업로드되지 않았습니다.
+    프로필, 내 목록, 평가, 시청 기록, 설정은 계정에 저장돼요. 로그인한 브라우저마다 사본도 저장되어 페이지가 바로 열리고, 연결이 끊겨도 한동안 쓸 수 있어요. 변경 내용은 몇 초 안에 계정에 반영되고, 다른 기기에서는 { $brand }를 열 때 반영돼요.
 
-    ## 이 의미는
-    - 다른 브라우저나 기기에서는 프로필과 진행 상황이 없음
-    - 프라이빗 또는 인코그니토 창은 닫힐 때 모든 데이터를 잊음
-    - 브라우저에서 사이트 데이터를 지우면 프로필과 진행 상황이 삭제됨
-    - 페이지가 열려 있는 동안 리스트는 계정이 사용 가능할 때까지 유지됨
+    ## 이렇게 동작해요
+    - 다른 기기에서 로그인해도 모든 것이 그대로 있어요.
+    - 브라우저에서 사이트 데이터를 지우면 그 브라우저에서는 로그아웃되고 사본이 삭제돼요. 계정의 데이터는 모두 남아 있어요.
+    - 시크릿 창이나 비공개 창에서는 창을 닫으면 사본이 삭제돼요.
 
-    ## 우리 서버로 전송되는 데이터
-    제목을 열거나 시작할 때 앱은 추천 서비스에 이 제목이었음을 알리며, 이름과 연결되지 않은 무작위 세션 번호를 함께 전송합니다. 제목을 중단한 후 약 하루 동안 행렬이 조정됩니다. <a=/help/article/recommendations>추천 기능</a>을 참조하세요.
+    ## 서버로 전송되는 그 밖의 정보
+    콘텐츠 재생을 시작하면 추천 서비스가 어떤 콘텐츠인지 알게 되어, 취향에 맞는 줄을 보여 줄 수 있어요. <b>개인정보 및 데이터 설정</b>의 <b>맞춤 추천</b>에서 끌 수 있어요. <a=/help/article/recommendations>추천이 작동하는 방식</a>에서 확인하세요.
 
-    @@ 데이터
-help-art-clear-data-title = 저장된 데이터를 어떻게 지울 수 있나요
-help-art-clear-data-summary = 이 브라우저에서 저장된 프로필, PIN, 시청 기록을 제거합니다.
-help-art-clear-data-keywords = 지우기 삭제 재설정 제거 데이터 이력 캐시 저장소 쿠키 다시 시작
+    @@ data
+
+help-art-clear-data-title = 저장된 데이터를 지우는 방법
+help-art-clear-data-summary = 이 브라우저가 { $brand }를 위해 보관하는 데이터를 지우거나, 계정에서 데이터를 삭제해요.
+help-art-clear-data-keywords = 지우기 삭제 초기화 데이터 기록 캐시 저장소 쿠키 처음부터
 help-art-clear-data-body =
-    사이트 데이터를 제거하면 이 브라우저에서 { $brand }가 저장한 모든 프로필, PIN 및 시청 기록이 삭제됩니다. 이는 되돌릴 수 없습니다.
+    브라우저에서 사이트 데이터를 지우면 그 브라우저에서 로그아웃되고, 브라우저가 보관하던 프로필과 설정 사본이 삭제돼요. 모든 데이터는 계정에 남아 있다가 다시 로그인하면 돌아와요.
 
-    ## 크롬, 엣지 및 브레이브
-    1. 주소 표시줄의 사이트 정보 아이콘을 열고 <b>쿠키 및 사이트 데이터</b>를 선택한 다음 <b>장치에 저장된 사이트 데이터 관리</b>를 선택합니다.
-    2. 이 사이트에 대한 항목을 제거합니다.
+    ## Chrome, Edge, Brave
+    1. 주소창 왼쪽의 사이트 정보 아이콘을 선택하고 <b>쿠키 및 사이트 데이터</b>, <b>기기 내 사이트 데이터 관리</b>를 차례로 선택하세요.
+    2. 이 사이트의 항목을 삭제하세요.
 
-    ## 파이어폭스
-    1. 주소 표시줄의 잠금 아이콘을 열고 <b>쿠키 및 사이트 데이터 삭제</b>를 선택합니다.
+    ## Firefox
+    1. 주소창의 자물쇠 아이콘을 선택하고 <b>쿠키 및 사이트 데이터 지우기</b>를 선택하세요.
 
-    ## 사파리
-    1. <b>설정</b>을 열고 <b>개인정보</b>, 다음 <b>웹사이트 데이터 관리</b>를 선택합니다.
-    2. 이 사이트를 찾아 <b>제거</b>를 선택합니다.
+    ## Mac의 Safari
+    1. <b>Safari</b>, <b>설정</b>, <b>개인정보 보호</b>, <b>웹 사이트 데이터 관리</b>를 차례로 여세요.
+    2. 이 사이트를 찾아 <b>제거</b>를 선택하세요.
 
-    시청 이력만 제거하려면 <a=/help/article/viewing-history>시청 이력 관리 방법</a>을 참조하세요.
+    ## iPhone 및 iPad의 Safari
+    <b>설정</b> 앱을 열고 <b>앱</b>, <b>Safari</b>, <b>고급</b>, <b>웹 사이트 데이터</b>로 이동해 이 사이트를 삭제하세요.
 
-    @@ 데이터
-help-art-privacy-data-title = { $brand }가 수집하는 데이터는 무엇인가요
-help-art-privacy-data-summary = 저장된 내용, 전송되는 내용, 전체 정책을 읽을 수 있는 위치에 대한 간단한 요약입니다.
-help-art-privacy-data-keywords = 개인정보 수집 개인 정보 추적 판매 공유 쿠키 분석
+    ## 계정에서 데이터 삭제하기
+    - 시청 기록에서 콘텐츠를 지우려면 <a=/help/article/viewing-history>시청 기록을 관리하는 방법</a>에서 확인하세요.
+    - 프로필을 삭제하려면 <a=/help/article/profiles-manage>프로필을 만들고, 편집하고, 삭제하는 방법</a>에서 확인하세요.
+    - 모든 것을 삭제하려면 <a=/help/article/delete-account>계정 삭제하기</a>에서 확인하세요.
+
+    @@ data
+
+help-art-privacy-data-title = { $brand }는 어떤 데이터를 수집하나요?
+help-art-privacy-data-summary = 저장되는 정보와 전송되는 정보, 전체 정책을 볼 수 있는 곳을 간단히 정리했어요.
+help-art-privacy-data-keywords = 개인정보 데이터 수집 추적 판매 공유 쿠키 분석
 help-art-privacy-data-body =
-    우리는 개인 데이터를 판매하지 않습니다. 간단한 버전은 다음과 같습니다. <a=/privacy>개인정보 정책</a>에서 전체 텍스트를 확인할 수 있습니다.
+    개인 데이터를 판매하지 않으며 광고도 보여 주지 않아요. 핵심만 정리했어요. 전체 내용은 <a=/privacy>개인정보 처리방침</a>에 있어요.
 
-    ## 기기에서 저장된 데이터
-    프로필, PIN, 선택한 언어 및 시청 진행 상황입니다.
+    ## 계정에 저장되는 정보
+    이름, 이메일 주소, 선택 입력한 전화번호, 프로필, 내 목록, 평가, 시청 기록, 설정, 그리고 최근 로그인과 로그인한 기기 목록.
 
-    ## 앱을 사용할 때 전송되는 데이터
-    - 제목, 이미지 및 세부 정보 요청은 카탈로그 서비스와 추천 서비스로 전송됩니다.
-    - 제목을 열거나 시작할 때, 추천 서비스는 제목과 무작위 세션 번호를 받습니다. 약 하루 동안 메모리에 작은 선호도 프로필을 저장한 후 제거합니다.
-    - 재생 요청은 독립적인 제3자 소스로 전송되며, 이들은 방문하는 다른 웹사이트와 마찬가지로 IP 주소를 확인합니다.
+    ## 앱을 쓸 때 전송되는 정보
+    - 콘텐츠, 이미지, 상세 정보 요청은 공개 영화 카탈로그와 추천 서비스로 전송돼요.
+    - 콘텐츠 재생을 시작하면 추천 서비스가 어떤 콘텐츠인지 알게 되어, 취향에 맞는 줄을 보여 줘요. <b>개인정보 및 데이터 설정</b>의 <b>맞춤 추천</b>에서 끌 수 있어요.
+    - 동영상은 독립적인 외부 소스에서, 예고편은 YouTube에서 와요. 여느 웹사이트처럼 이들은 내 IP 주소를 볼 수 있어요.
 
-    쿠키에 대해서는 <a=/cookies>쿠키 정책</a>을 참조하세요. 기기에서 저장된 데이터를 제거하려면 <a=/help/article/clear-data>저장된 데이터를 어떻게 지울 수 있나요</a>를 참조하세요.
+    ## 선택할 수 있는 것
+    - 데이터 사본을 다운로드할 수 있어요. <a=/help/article/download-data>내 데이터 사본 다운로드하기</a>에서 확인하세요.
+    - 언제든 계정을 삭제할 수 있어요. <a=/help/article/delete-account>계정 삭제하기</a>에서 확인하세요.
 
-    @@ 쿠키
+    쿠키와 브라우저 저장소에 대해서는 <a=/cookies>쿠키 정책</a>에서 확인하세요.
 
-    @@ 데이터
-help-art-free-to-use-title = { $brand }는 무료인가요
-help-art-free-to-use-summary = { $brand }에서는 아무것도 지불할 필요가 없습니다.
-help-art-free-to-use-keywords = 무료 가격 비용 지불 결제 구독 청구 카드 신용 계획 체험
+    @@ cookies
+
+    @@ data
+
+help-art-free-to-use-title = { $brand }는 무료인가요?
+help-art-free-to-use-summary = { $brand }에서는 돈을 낼 일이 없어요.
+help-art-free-to-use-keywords = 무료 가격 요금 결제 구독 청구 카드 신용카드 요금제 체험
 help-art-free-to-use-body =
-    { $brand }는 수수료를 청구하지 않으며, 구독을 운영하지 않으며, 카드 정보를 요청하지 않습니다. 계획, 체험판, 결제 일정이 없습니다.
+    { $brand }는 요금을 받지 않고, 구독을 판매하지 않으며, 카드 정보를 묻지 않아요. 요금제, 무료 체험, 결제일도 없어요.
 
-    페이지, 이메일, 메시지가 { $brand }라고 주장하면서 결제를 요청한다면, 이는 우리에서 발송한 것이 아닙니다. 결제 정보를 입력하지 마세요. <a=mailto:{ $help_email }>{ $help_email }</a>로 전달해 주시고, 저희가 조사하겠습니다.
+    { $brand }라고 하면서 결제를 요구하는 페이지, 이메일, 메시지는 저희가 보낸 것이 아니에요. 결제 정보를 입력하지 마세요. <a=mailto:{ $help_email }>{ $help_email }</a>로 전달해 주시면 확인할게요.
 
-    { $brand }는 다른 서비스에서 호스팅하는 제목에 대한 링크 목록입니다. 각 서비스가 자체 콘텐츠에 대해 수수료를 청구하는지 여부는 해당 서비스에 달려 있습니다. <a=/help/article/sources>제목의 출처</a>를 확인해 주세요.
-help-art-wont-play-title = 제목이 재생되지 않습니다
-help-art-wont-play-summary = 플레이어가 오류를 표시하거나 검은 화면으로 유지되거나 시작되지 않는 경우 가장 빠른 해결 방법
-help-art-wont-play-keywords = 재생되지 않음 재생 실패 오류 비디오 재생 실패 로딩 실패 스피너 멈춤 플레이어
+    { $brand }는 다른 서비스에 올라와 있는 콘텐츠로 연결되는 링크 모음이에요. 그 서비스가 자기 콘텐츠에 요금을 받는지는 그 서비스가 정해요. <a=/help/article/sources>콘텐츠의 출처</a>에서 확인하세요.
+
+help-art-wont-play-title = 콘텐츠가 재생되지 않아요
+help-art-wont-play-summary = 플레이어에 오류가 나거나, 검은 화면이 계속되거나, 시작되지 않을 때 가장 빠른 해결 방법.
+help-art-wont-play-keywords = 재생 안 됨 재생 오류 동영상 실패 로딩 멈춤 플레이어
 help-art-wont-play-body =
-    다음 단계를 순서대로 시도해 보세요. 각 단계 후에 테스트해 보세요.
+    다음 단계를 순서대로 해 보세요. 하나씩 할 때마다 확인하세요.
 
-    1. 페이지를 새로고침하세요. 원인은 대부분 일시적인 오류입니다.
-    2. 다른 에피소드를 선택하거나, 제목의 상세 페이지에서 다시 시작하세요. 플레이어는 사용 가능한 소스를 차례로 시도합니다.
-    3. 이 사이트의 광고 차단기 및 프라이버시 확장 기능을 끄세요. <a=/help/article/extensions-blockers>플레이어를 차단하는 확장 기능</a>을 확인하세요.
-    4. Chrome, Edge, Firefox 또는 Safari의 최신 버전을 사용하세요. <a=/help/article/supported-browsers>지원되는 브라우저</a>를 확인하세요.
-    5. 네트워크를 변경하세요. 예를 들어 Wi-Fi에서 모바일 데이터로 전환하거나, VPN을 끄세요. 일부 소스는 특정 네트워크를 거부할 수 있습니다.
+    1. 페이지를 새로고침하세요. 소스의 일시적인 문제가 가장 흔한 원인이에요.
+    2. 다른 에피소드를 고르거나 상세 정보 페이지에서 콘텐츠를 다시 재생하세요. 플레이어는 사용할 수 있는 소스를 차례로 시도해요.
+    3. 이 사이트에서 광고 차단기와 개인정보 보호 확장 프로그램을 끄세요. <a=/help/article/extensions-blockers>플레이어를 막는 확장 프로그램</a>에서 확인하세요.
+    4. Chrome, Edge, Firefox, Safari의 최신 버전을 쓰세요. <a=/help/article/supported-browsers>지원되는 브라우저</a>에서 확인하세요.
+    5. Wi-Fi에서 모바일 데이터로 바꾸는 식으로 네트워크를 바꾸거나 VPN을 끄세요. 일부 네트워크를 받지 않는 소스도 있어요.
 
-    @@ 진단
+    @@ diagnostics
 
-    >> 여전히 재생되지 않음
-    일정한 시점에서 특정 제목이 모든 소스에서 이용할 수 없는 경우가 있습니다. 나중에 다시 시도해 보세요. 인기 있는 제목이 항상 재생되지 않는다면, <a=/help/article/report-bug>문제 신고</a> 페이지에서 해당 제목을 알려주세요.
-help-art-playback-unavailable-title = { $brand }가 "Playback Unavailable"라고 표시함
-help-art-playback-unavailable-summary = 메시지의 의미와 다음 단계
-help-art-playback-unavailable-keywords = 재생 불가능 오류 메시지 스트리밍 불가능 제공업체 미지원
+    >> 그래도 재생되지 않아요
+    어떤 콘텐츠는 그 순간 어느 소스에서도 볼 수 없어요. 나중에 다시 시도하세요. 인기 있는 콘텐츠가 계속 재생되지 않으면 <a=/help/article/report-bug>문제 신고하기</a> 페이지에서 어떤 콘텐츠인지 알려 주세요.
+
+help-art-playback-unavailable-title = { $brand }에 '재생할 수 없음'이 표시돼요
+help-art-playback-unavailable-summary = 이 메시지의 뜻과 다음에 할 일.
+help-art-playback-unavailable-keywords = 재생할 수 없음 오류 메시지 스트리밍 불가 소스 지원 안 됨
 help-art-playback-unavailable-body =
-    <b>재생 불가능</b> 또는 <b>비디오 스트리밍이 불가능합니다. 모든 소스 제공업체가 사용 불가능하거나 브라우저에서 지원되지 않습니다.</b>라는 메시지가 표시될 수 있습니다.
+    <b>재생할 수 없음</b> 또는 <b>동영상을 재생할 수 없어요. 사용할 수 있는 소스가 없거나 브라우저가 지원하지 않아요.</b>라는 메시지가 보일 수 있어요.
 
-    이는 플레이어가 해당 제목에 대해 알고 있는 모든 소스에 요청했지만, 브라우저에서 재생할 수 있는 스트림을 반환한 소스가 없음을 의미합니다.
+    플레이어가 알고 있는 모든 소스에 이 콘텐츠를 요청했지만, 브라우저에서 재생할 수 있는 스트림을 돌려준 곳이 없다는 뜻이에요.
 
-    1. 잠시 기다린 후 다시 재생을 눌러 보세요. 소스 상태는 변동될 수 있습니다.
-    2. 차단기를 끄세요. <a=/help/article/extensions-blockers>플레이어를 차단하는 확장 프로그램</a>을 확인하세요.
-    3. 다른 브라우저를 시도해 보세요. 일부 스트림은 구형 브라우저에 없는 기능이 필요할 수 있습니다.
-    4. 문제가 해당 제목에만 있는지를 확인하려면 다른 제목을 시도해 보세요.
+    1. 1분 정도 기다렸다가 다시 재생하세요. 소스는 멈췄다가 다시 살아나기도 해요.
+    2. 차단 프로그램을 끄세요. <a=/help/article/extensions-blockers>플레이어를 막는 확장 프로그램</a>에서 확인하세요.
+    3. 다른 브라우저를 써 보세요. 오래된 브라우저에 없는 기능이 필요한 스트림도 있어요.
+    4. 다른 콘텐츠를 재생해서 이 콘텐츠만의 문제인지 확인하세요.
 
-    같은 제목이 하루 종일 실패한다면, <a=/help/article/report-bug>알려 주세요</a>. 제목, 연도, 사용 중인 브라우저를 포함해 주세요.
+    같은 콘텐츠가 하루 동안 재생되지 않으면 <a=/help/article/report-bug>알려 주세요</a>. 콘텐츠 제목, 연도, 사용한 브라우저를 함께 적어 주세요.
 
     @@ diagnostics
 
-help-art-black-screen-title = 검은 화면과 소리
-help-art-black-screen-summary = 화면이 보이지 않지만 제목을 들을 수 있습니다.
-help-art-black-screen-keywords = black screen no picture audio only video missing blank green screen
+help-art-black-screen-title = 소리는 나는데 화면이 검은색이에요
+help-art-black-screen-summary = 소리는 들리는데 화면이 나오지 않아요.
+help-art-black-screen-keywords = 검은 화면 화면 안 나옴 소리만 영상 없음 빈 화면 초록 화면
 help-art-black-screen-body =
-    1. <b>F</b>를 눌러 전체 화면을 나가고 다시 들어가거나, <b>Esc</b>를 눌러 다시 재생해보세요.
+    1. <b>F</b> 키를 눌러 전체 화면을 나갔다가 다시 들어가거나, <b>Esc</b> 키를 누르고 다시 재생하세요.
     2. 페이지를 새로고침하세요.
-    3. 브라우저 설정에서 하드웨어 가속을 꺼주세요, 브라우저를 다시 시작하고 다시 시도해보세요.
+    3. 브라우저 설정에서 하드웨어 가속을 끄고 브라우저를 다시 시작한 다음 다시 시도하세요.
     4. 브라우저와 그래픽 드라이버를 업데이트하세요.
-    5. 다른 브라우저를 시도해보세요.
+    5. 다른 브라우저를 써 보세요.
 
-    !! 주의: 페이지 색상을 변경하거나 미디어를 차단하는 일부 브라우저 확장 프로그램도 화면을 숨길 수 있습니다. <a=/help/article/extensions-blockers>플레이어를 차단하는 확장 프로그램</a>을 확인하세요.
+    !! 참고: 페이지 색을 바꾸거나 미디어를 차단하는 확장 프로그램도 화면을 가릴 수 있어요. <a=/help/article/extensions-blockers>플레이어를 막는 확장 프로그램</a>에서 확인하세요.
 
     @@ diagnostics
-help-art-buffering-title = 버퍼링, 동결 또는 느린 시작
-help-art-buffering-summary = 스트리밍이 멈추어 데이터를 로드하는 것을 기다리는 문제를 개선하세요.
-help-art-buffering-keywords = buffering lag slow freezing stutter loading spinner connection speed quality
+
+help-art-buffering-title = 버퍼링, 멈춤, 느린 시작
+help-art-buffering-summary = 계속 멈추고 로딩하는 스트림을 개선해요.
+help-art-buffering-keywords = 버퍼링 렉 느림 멈춤 끊김 로딩 연결 속도 화질
 help-art-buffering-body =
-    인터넷 연결 속도가 비디오가 필요로 하는 속도보다 느릴 때 스트리밍이 일시 중단됩니다.
+    연결이 동영상에 필요한 속도보다 데이터를 느리게 보내면 스트림이 멈춰요.
 
-    - 같은 네트워크를 사용하는 다른 탭, 다운로드 및 기기들을 닫으세요.
-    - 라우터에 가까이 가거나 케이블을 사용하세요.
-    - 일분 정도 멈추어 플레이어가 앞서 로드할 수 있도록 하세요, 그런 다음 재생을 눌러보세요.
-    - VPN을 꺼주세요, 또는 VPN에서 더 가까운 서버를 선택하세요.
-    - 나중에 다시 시도해보세요. 소스는 바쁜 시간대에는 더 느립니다.
+    - 같은 네트워크를 쓰는 다른 탭, 다운로드, 기기를 닫으세요.
+    - 공유기 가까이 가거나 유선으로 연결하세요.
+    - 1분 정도 일시 정지해서 플레이어가 미리 불러오게 한 다음 재생하세요.
+    - VPN을 끄거나 VPN에서 더 가까운 서버를 고르세요.
+    - 나중에 다시 시도하세요. 사람이 몰리는 시간에는 소스가 느려져요.
 
-    소스가 제공하는 품질 수준을 결정하므로, 재생 중에 화면의 선명도가 바뀔 수 있습니다.
+    어떤 화질을 제공할지는 소스가 정하므로, 재생 중에 화질이 바뀔 수 있어요.
 
     @@ diagnostics
-help-art-subtitles-missing-title = 자막이 누락되거나 동기화되지 않음
-help-art-subtitles-missing-summary = 자막이 보이지 않거나 잘못된 언어로 표시되거나 말과 동기화되지 않은 경우를 고치세요.
-help-art-subtitles-missing-keywords = 자막 텍스트 누락 잘못된 언어 동기화 지연 cc 텍스트
+
+help-art-subtitles-missing-title = 자막이 안 나오거나 맞지 않아요
+help-art-subtitles-missing-summary = 자막이 나오지 않거나, 다른 언어로 나오거나, 대사보다 늦을 때 해결하는 방법.
+help-art-subtitles-missing-keywords = 자막 캡션 안 나옴 다른 언어 싱크 안 맞음 지연 cc 텍스트
 help-art-subtitles-missing-body =
     1. 플레이어에서 <b>오디오 및 자막</b>을 선택하고 자막 언어가 선택되어 있는지 확인하세요.
-    2. 목록에 다른 트랙이 제공된다면 선택하세요. 트랙은 원본에서 제공되며 제목별로 다릅니다.
-    3. <b>설정</b>에서 선호하는 자막 언어를 설정하세요. 자세한 내용은 <a=/help/article/language>언어 변경 방법</a>을 참조하세요.
-    4. 텍스트가 너무 빠르거나 늦다면, 다시 로드하고 다시 재생하세요. 시간은 원본에서 설정되며, 한 제목에 대해 조정할 수 없습니다.
+    2. 목록에 다른 트랙이 있으면 다른 트랙을 고르세요. 트랙은 소스에서 오며 콘텐츠마다 달라요.
+    3. 프로필에서 선호하는 자막 언어를 설정하세요. <a=/help/article/language>언어를 바꾸는 방법</a>에서 확인하세요.
+    4. 자막이 빠르거나 늦으면 <b>오디오 및 자막</b>의 <b>-0.5s</b> 또는 <b>+0.5s</b>로 대사에 맞을 때까지 조정하세요.
 
-    제목에 자막이 전혀 제공되지 않는 경우, 원본에서 제공되지 않았습니다.
+    자막이 전혀 없는 콘텐츠는 소스가 자막을 제공하지 않은 거예요.
 
     @@ language
+
 help-art-supported-browsers-title = 지원되는 브라우저
-help-art-supported-browsers-summary = 최적화된 브라우저 및 버전
-help-art-supported-browsers-keywords = 브라우저 크롬 파이어폭스 사파리 엣지 브레이브 오페라 인터넷 익스플로러 버전 업데이트 호환
+help-art-supported-browsers-summary = 가장 잘 작동하는 브라우저와 시스템.
+help-art-supported-browsers-keywords = 브라우저 chrome firefox safari edge brave opera internet explorer 버전 업데이트 호환
 help-art-supported-browsers-body =
-    { $brand }는 다음 브라우저의 최신 버전에서 최적화됩니다:
+    { $brand }는 다음 브라우저의 최신 버전에서 작동해요.
 
-    - 구글 크롬 및 다른 크로미움 브라우저인 엣지와 브레이브
-    - Mozilla 파이어폭스
-    - 맥OS, 아이폰 및 아이패드용 애플 사파리
+    - Windows, macOS, Linux, Android의 <b>Google Chrome</b>, <b>Microsoft Edge</b>, <b>Brave</b> 및 그 밖의 Chromium 브라우저
+    - Windows, macOS, Linux, Android의 <b>Mozilla Firefox</b>
+    - Mac, iPhone, iPad의 <b>Safari</b>
 
-    인터넷 익스플로러는 지원되지 않습니다. 브라우저를 최신 버전으로 유지하고 사이트가 자바스크립트와 로컬 저장소를 사용할 수 있도록 허용하세요.
+    Internet Explorer는 지원하지 않아요. 브라우저를 최신 상태로 유지하고 이 사이트에서 JavaScript와 사이트 데이터를 허용하세요.
 
-    @@ 진단
+    @@ diagnostics
 
-    >> 페이지가 로드되기 전에 브라우저가 오류를 표시
-    <b>Ctrl + Shift + R</b> (<b>Cmd + Shift + R</b> 맥에서)로 최신 버전의 앱을 가져오고 다시 시도하세요.
-help-art-fix-phone-title = 휴대폰 또는 태블릿에서 문제 해결
-help-art-fix-phone-summary = 아이폰, 아이패드 및 안드로이드 기기의 단계
-help-art-fix-phone-keywords = 휴대폰 태블릿 안드로이드 아이폰 아이패드 모바일 문제 해결 앱
+    >> 페이지가 열리기 전에 브라우저에 오류가 보여요
+    Windows와 Linux에서는 <b>Ctrl + Shift + R</b>, Mac에서는 <b>Cmd + Shift + R</b>로 새로고침해서 앱의 최신 버전을 받은 다음 다시 시도하세요.
+
+help-art-fix-phone-title = 휴대폰이나 태블릿 문제 해결하기
+help-art-fix-phone-summary = iPhone, iPad, Android에서 해 볼 것.
+help-art-fix-phone-keywords = 휴대폰 태블릿 android iphone ipad 모바일 문제 해결 앱
 help-art-fix-phone-body =
-    1. 탭을 닫고 { $brand }를 다시 열어주세요.
+    1. 탭을 닫고 { $brand }를 다시 여세요.
     2. 앱 스토어에서 브라우저를 업데이트하세요.
-    3. 시청 중에는 데이터 저장소나 저전력 모드를 끄세요.
-    4. 안정적인 연결이 있는지 확인하세요. 자세한 내용은 <a=/help/article/buffering>버퍼링, 동결 또는 느린 시작</a>을 참조하세요.
-    5. { $brand }를 홈 스크린에 추가했고 오래된 것처럼 보인다면, 제거하고 다시 추가하세요. 자세한 내용은 <a=/help/article/install-app>{ $brand }를 앱으로 설치하는 방법</a>을 참조하세요.
+    3. 시청하는 동안 데이터 절약 모드나 저전력 모드를 끄세요.
+    4. 연결이 안정적인지 확인하세요. <a=/help/article/buffering>버퍼링, 멈춤, 느린 시작</a>에서 확인하세요.
+    5. 홈 화면에 추가한 { $brand }가 예전 모습 그대로라면 지운 다음 다시 추가하세요. <a=/help/article/install-app>{ $brand }를 앱으로 설치하는 방법</a>에서 확인하세요.
 
-    @@ 진단
+    @@ diagnostics
 
-    @@ 새로고침
-help-art-fix-tv-title = TV에서 문제 해결
-help-art-fix-tv-summary = TV 브라우저나 캐스트를 통해 시청할 때의 단계
-help-art-fix-tv-keywords = TV 텔레비전 스마트 TV 크롬캐스트 캐스트 문제 해결 HDMI 스틱 브라우저
+    @@ refresh
+
+help-art-fix-tv-title = TV 문제 해결하기
+help-art-fix-tv-summary = TV 브라우저나 전송으로 볼 때 해 볼 것.
+help-art-fix-tv-keywords = tv 텔레비전 스마트 tv 크롬캐스트 전송 문제 해결 hdmi 스틱 브라우저
 help-art-fix-tv-body =
-    { $brand }는 TV 앱이 없습니다. TV의 웹 브라우저를 통해 시청하거나, 컴퓨터나 스마트폰의 브라우저 탭을 전송하여 시청할 수 있습니다.
+    { $brand }에는 TV 앱이 없어요. TV의 웹 브라우저로 보거나, 컴퓨터나 휴대폰에서 브라우저 탭을 전송해서 봐요.
 
-    - TV의 소프트웨어와 브라우저를 업데이트하세요.
-    - TV나 스트리밍 스틱을 재시작하세요.
-    - 탭을 캐스트하는 경우, 전송 장치가 같은 네트워크에 있고, 다른 탭은 닫아두세요.
-    - TV 브라우저가 느리다면, 대신 컴퓨터에서 탭을 전송하세요.
+    - TV 소프트웨어와 브라우저를 업데이트하세요.
+    - TV나 스트리밍 스틱을 다시 시작하세요.
+    - 탭을 전송한다면 보내는 기기를 같은 네트워크에 두고, 그 기기의 다른 탭을 닫으세요.
+    - TV 브라우저가 느리면 대신 컴퓨터에서 탭을 전송하세요.
 
-    <a=/help/article/watch-on-tv>TV에서 시청하는 방법</a>을 참조하세요.
+    <a=/help/article/watch-on-tv>TV에서 보는 방법</a>에서 확인하세요.
 
     @@ diagnostics
-help-art-extensions-blockers-title = 플레이어를 차단하는 확장 프로그램
-help-art-extensions-blockers-summary = 광고 차단기 및 프라이버시 도구는 스트리밍이 로드되지 않도록 할 수 있습니다.
-help-art-extensions-blockers-keywords = 확장 프로그램 광고차단 ublock ghostery 프라이버시 차단 스크립트 차단 vpn dns 필터
+
+help-art-extensions-blockers-title = 플레이어를 막는 확장 프로그램
+help-art-extensions-blockers-summary = 광고 차단기와 개인정보 보호 도구가 스트림 로딩을 막을 수 있어요.
+help-art-extensions-blockers-keywords = 확장 프로그램 광고 차단 adblock ublock ghostery 개인정보 차단기 스크립트 vpn dns 필터
 help-art-extensions-blockers-body =
-    플레이어는 제3자 소스에서 스트리밍을 로드합니다. 다른 사이트에서 스크립트, 프레임 또는 미디어를 차단하는 도구는 이 기능을 차단할 수 있습니다.
+    플레이어는 외부 소스에서 스트림을 불러와요. 다른 사이트의 스크립트, 프레임, 미디어를 막는 도구는 이를 방해할 수 있어요.
 
-    1. 확장 프로그램을 열고 이 사이트에 대해 일시 중지한 후 페이지를 새로고침하세요.
-    2. 네트워크 전체 필터를 사용하는 경우, 예를 들어 DNS 필터나 학교나 회사 네트워크를 사용하는 경우, 다른 네트워크를 시도하세요.
-    3. 재생이 정상적으로 작동하는 경우, { $brand }를 확장 프로그램의 허용 목록에 추가하세요.
+    1. 확장 프로그램을 열어 이 사이트에서 일시 중지한 다음 새로고침하세요.
+    2. DNS 필터나 학교 또는 회사 네트워크처럼 네트워크 전체에 적용되는 필터를 쓰고 있다면 다른 네트워크를 써 보세요.
+    3. 그 뒤 재생이 된다면 확장 프로그램의 허용 목록에 { $brand }를 추가하세요.
 
-    !! 주의: 스트리밍을 위해 브라우저 확장 프로그램이나 코드크를 설치하도록 요청하지 않습니다. 그런 페이지는 닫으세요.
+    !! 참고: 시청을 위해 브라우저 확장 프로그램이나 코덱을 설치하라고 요청하는 일은 절대 없어요. 그런 요청을 하는 페이지는 닫으세요.
 
     @@ diagnostics
-help-art-rows-wont-load-title = 행 또는 사진이 로드되지 않음
-help-art-rows-wont-load-summary = 페이지는 빈 행, 로딩 아이콘 또는 누락된 이미지를 표시합니다.
-help-art-rows-wont-load-keywords = 행 빈 로딩 빈 페이지 사진 이미지 포스터 로드되지 않음 홈 오류 추천 down
+
+help-art-rows-wont-load-title = 줄이나 이미지가 불러와지지 않아요
+help-art-rows-wont-load-summary = 페이지에 빈 줄, 로딩 표시, 빠진 이미지가 보여요.
+help-art-rows-wont-load-keywords = 줄 비어 있음 로딩 빈 페이지 이미지 포스터 안 나옴 홈 오류 추천 장애
 help-art-rows-wont-load-body =
-    홈 페이지의 행은 추천 서비스에서 가져옵니다. 포스터 및 세부 정보는 카탈로그 서비스에서 가져옵니다. 이 중 하나라도 연결이 되지 않으면 빈 행이나 로딩 아이콘을 볼 수 있습니다.
+    줄과 검색은 추천 서비스에서, 포스터와 상세 정보는 공개 영화 카탈로그에서 와요. 둘 중 하나에 연결할 수 없으면 빈 줄, 계속 도는 로딩 표시, 빠진 이미지가 보일 수 있어요.
 
     1. 페이지를 새로고침하세요.
-    2. 네트워크 연결을 확인하세요.
-    3. 이 사이트에 대한 블록기를 해제하세요. <a=/help/article/extensions-blockers>플레이어를 차단하는 확장 프로그램</a>을 참조하세요.
-    4. 몇 분 후 다시 시도하세요.
+    2. 인터넷 연결을 확인하세요.
+    3. 이 사이트에서 차단 프로그램을 끄세요. <a=/help/article/extensions-blockers>플레이어를 막는 확장 프로그램</a>에서 확인하세요.
+    4. 몇 분 뒤에 다시 시도하세요.
 
-    추천 서비스가 중단된 경우에도 검색 페이지와 저장한 항목은 여전히 작동합니다. 문제가 1시간 이상 지속되는 경우, <a=/help/article/report-bug>우리에게 알려주세요</a>.
+    그동안에도 프로필, 내 목록, 설정은 계정에 안전하게 저장되어 있어요. 문제가 한 시간 넘게 계속되면 <a=/help/article/report-bug>알려 주세요</a>.
 
     @@ diagnostics
 
     @@ refresh
-help-art-list-missing-title = 내 목록 또는 진행 상황이 사라짐
-help-art-list-missing-summary = 목록 또는 '계속 시청' 행이 비어 있을 수 있는 이유와 해결 방법
-help-art-list-missing-keywords = 내 목록 누락 사라짐 사라짐 비어짐 잃어버림 계속 시청 진행 상황 리셋
+
+help-art-list-missing-title = 내 목록이나 진행 상황이 사라졌어요
+help-art-list-missing-summary = 내 목록이나 이어서 보기가 비어 보이는 이유와 되찾는 방법.
+help-art-list-missing-keywords = 내 목록 사라짐 없어짐 비어 있음 분실 이어서 보기 진행 초기화
 help-art-list-missing-body =
-    { $brand }는 이 브라우저에서 프로필과 진행 상황을 저장합니다. 누락되는 경우는 다음과 같습니다:
+    내 목록과 시청 진행 상황은 프로필별로 계정에 저장돼요. 비어 보인다면 다음을 확인하세요.
 
-    - 다른 브라우저나 다른 기기에서 { $brand }를 열었을 때
-    - 프라이빗 또는 인코그니토 창을 사용했을 때
-    - 사이트 데이터나 쿠키를 지웠을 때
-    - 다른 프로필을 사용 중일 때
+    - 맞는 프로필인지 확인하세요. 목록은 프로필마다 따로 있어요. 프로필 메뉴에서 전환할 수 있어요.
+    - 전과 같은 계정으로 로그인했는지 확인하세요.
+    - 새 기기에서는 로그인한 뒤 계정을 불러올 때까지 몇 초 기다리거나 페이지를 새로고침하세요.
+    - 시청 기록에서 숨긴 콘텐츠는 이어서 보기에서도 사라져요.
 
-    현재 페이지가 열린 동안만 목록이 유지되며, 저장할 수 있는 계정이 아직 사용할 수 없습니다. 페이지를 새로고침하면 목록이 비워집니다.
-
-    이전에 사용했던 프로필로 프로필 메뉴에서 전환하세요. 자세한 내용은 <a=/help/article/saved-data>프로필, 목록 및 진행 상황이 저장되는 위치</a>를 참조하세요.
+    그래도 어떤 기기에서 무언가 보이지 않는다면 그 기기에서 로그아웃한 다음 다시 로그인하세요. <a=/help/article/saved-data>프로필, 목록, 시청 진행 상황이 저장되는 곳</a>에서 확인하세요.
 
     @@ profiles
 
-    @@ data
-help-art-forgot-pin-title = 프로필 PIN을 잊었어요
-help-art-forgot-pin-summary = 우리는 PIN을 재설정할 수 없으며, 다시 로그인하는 방법을 안내합니다.
-help-art-forgot-pin-keywords = PIN을 잊었음 재설정 잃어버린 패스코드 잠금 프로필 잠금
+help-art-forgot-pin-title = 프로필 PIN을 잊어버렸어요
+help-art-forgot-pin-summary = 계정 비밀번호로 PIN을 해제하고 새 PIN을 설정해요.
+help-art-forgot-pin-keywords = pin 잊음 재설정 분실 암호 잠김 프로필 잠금
 help-art-forgot-pin-body =
-    PIN은 단말기만에 저장되므로, 우리는 이를 찾거나 재설정할 수 없습니다.
+    1. 프로필 메뉴를 열고 <b>계정</b>, <b>프로필 관리</b>를 차례로 선택한 다음 잠긴 프로필을 선택하세요.
+    2. <b>프로필 잠금</b>을 선택하고 계정 비밀번호를 입력하세요.
+    3. <b>PIN을 잊으셨나요?</b>를 선택한 다음 <b>프로필 잠금 해제</b>를 선택하세요.
 
-    1. 박스 하나씩 입력하여 PIN을 다시 시도하세요.
-    2. PIN을 기억하지 못하는 경우, 이 사이트의 데이터를 브라우저에서 지우는 것이 다시 로그인하는 유일한 방법입니다. 이는 모든 프로필, PIN 및 시청 진행 상황을 제거합니다. 자세한 내용은 <a=/help/article/clear-data>저장된 데이터를 지우는 방법</a>을 참조하세요.
-    3. 프로필을 다시 생성하세요.
+    이제 PIN 없이 프로필이 열리고, 새 PIN을 설정할 수 있어요. <a=/help/article/profile-pin>프로필 PIN을 설정, 변경, 해제하는 방법</a>에서 확인하세요.
 
-    !! 주의: 기억할 수 있는 PIN을 선택하고, 다른 용도로 사용하지 마세요.
+    !! 참고: 계정 비밀번호를 아는 사람만 PIN을 해제할 수 있어요. 비밀번호도 잊었다면 <a=/help/article/forgot-password>비밀번호를 잊어버렸어요</a>에서 확인하세요.
 
     @@ profiles
 
-    @@ data
-help-art-page-not-found-title = 404 페이지를 보았어요
-help-art-page-not-found-summary = 링크가 잘못되었거나 페이지가 이동했습니다.
-help-art-page-not-found-keywords = 404 없음 페이지 누락된 링크 오류 비어 있음
-help-art-page-not-found-body =
-    { $brand }에서 404 페이지는 주소가 아무것도 지칭하지 않음을 의미합니다. 주소에 오타가 있는지 확인하거나, 메뉴와 검색을 사용하여 원하는 페이지를 찾으세요.
+help-art-forgot-password-title = 비밀번호를 잊어버렸어요
+help-art-forgot-password-summary = 새 비밀번호를 정할 수 있는 링크를 이메일로 받아요.
+help-art-forgot-password-keywords = 비밀번호 찾기 비밀번호 재설정 분실 로그인 불가 새 비밀번호 링크
+help-art-forgot-password-body =
+    1. 로그인 페이지에서 <b>비밀번호를 잊으셨나요?</b>를 선택하세요.
+    2. 계정 이메일 주소를 입력하고 <b>링크 보내기</b>를 선택하세요.
+    3. { $brand }에서 보낸 이메일을 열고 링크를 따라 새 비밀번호를 정하세요.
 
-    - 상단 바의 <b>홈</b>을 사용하여 시작 페이지로 돌아가세요.
-    - <a=/help>도움말 센터</a> 검색을 사용하여 기사 찾으세요.
-    - { $brand }의 링크가 여기로 이동시킨 경우, <a=/help/article/report-bug>이 링크를 알려주세요</a>.
+    링크는 한 번만, 정해진 시간 안에만 쓸 수 있어요. 몇 분이 지나도 이메일이 오지 않으면 스팸함을 확인한 다음 다시 시도하세요.
+
+    !! 참고: 이메일, 채팅, 전화로 비밀번호를 묻는 일은 절대 없어요. <a=/help/article/fake-sites>가짜 { $brand } 사이트와 메시지를 알아보는 방법</a>에서 확인하세요.
+
+help-art-change-email-password-title = 이메일, 비밀번호, 전화번호 변경하기
+help-art-change-email-password-summary = 로그인하고 계정을 되찾을 때 쓰는 정보를 바꿔요.
+help-art-change-email-password-keywords = 이메일 변경 비밀번호 변경 업데이트 전화번호 휴대폰 계정 정보 이름 보안
+help-art-change-email-password-body =
+    프로필 메뉴를 열고 <b>계정</b>을 선택하세요. 내 정보는 <b>계정 정보</b>에 있어요. 변경하기 전에 비밀번호나 이메일로 받은 코드로 본인 확인을 요청할 수 있어요.
+
+    ## 비밀번호
+    1. <b>비밀번호</b>를 선택하세요.
+    2. 현재 비밀번호를 입력한 다음 새 비밀번호를 두 번 입력하세요. 8자 이상이어야 해요.
+    3. 다른 사람이 예전 비밀번호를 알 수도 있다면 <b>모든 기기에서 로그아웃</b>을 켜고 <b>저장</b>을 선택하세요.
+
+    ## 이메일
+    1. <b>이메일</b>을 선택하고 새 주소를 입력하세요.
+    2. 새 주소로 받은 링크를 열면 변경이 끝나요.
+
+    ## 휴대폰과 이름
+    <b>휴대폰</b>에서는 계정을 되찾을 때 도움이 되는 번호를 추가하고, <b>이름</b>에서는 이름을 바꿀 수 있어요. 기본 프로필 이름은 성을 뺀 이름을 따라가요.
+
+help-art-devices-sign-out-title = 한 기기 또는 모든 기기에서 로그아웃하기
+help-art-devices-sign-out-summary = 계정이 로그인된 곳을 확인하고, 더 이상 쓰지 않는 기기에서 로그아웃해요.
+help-art-devices-sign-out-keywords = 로그아웃 모든 기기 로그인된 기기 세션 보안 새 기기 분실 휴대폰 공용 컴퓨터
+help-art-devices-sign-out-body =
+    1. 프로필 메뉴를 열고 <b>계정</b>을 선택하세요.
+    2. <b>접속 및 기기</b>를 선택하세요.
+    3. <b>이 기기에서 로그아웃</b>을 선택하세요. 지금 쓰는 브라우저를 포함해 계정이 열려 있는 모든 브라우저에서 로그아웃하려면 <b>모든 기기에서 로그아웃</b>을 선택하세요.
+
+    같은 페이지의 <b>최근 보안 활동</b>에서 최근 로그인과 계정 변경 내역을 볼 수 있어요. 새 기기에서 로그인하면 이메일로도 알려 드려요.
+
+    !! 참고: 기억에 없는 로그인이 보이면 모든 기기에서 로그아웃하고 비밀번호를 바꾸세요. <a=/help/article/change-email-password>이메일, 비밀번호, 전화번호 변경하기</a>에서 확인하세요.
+
+help-art-download-data-title = 내 데이터 사본 다운로드하기
+help-art-download-data-summary = 계정에 있는 개인정보를 파일로 받아요.
+help-art-download-data-keywords = 다운로드 내 데이터 개인정보 사본 내보내기 gdpr 열람 요청
+help-art-download-data-body =
+    1. 프로필 메뉴를 열고 <b>계정</b>을 선택하세요.
+    2. <b>개인정보 열람</b>을 선택하세요.
+    3. 안내에 따라 파일을 저장하세요.
+
+    파일에는 계정 정보, 프로필, 설정, 내 목록, 평가, 시청 기록이 들어 있어요. 파일은 기기에 저장되니 안전한 곳에 보관하세요.
+
+    한 프로필의 시청 기록을 스프레드시트로 받으려면 그 프로필의 <b>시청 기록</b>을 열고 <b>모두 다운로드</b>를 선택하세요.
+
+help-art-delete-account-title = 계정 삭제하기
+help-art-delete-account-summary = 계정과 그 안의 모든 데이터를 영구적으로 삭제해요.
+help-art-delete-account-keywords = 계정 삭제 탈퇴 회원 탈퇴 계정 해지 데이터 삭제
+help-art-delete-account-body =
+    계정을 삭제하면 모든 프로필, 목록, 평가, 설정, 시청 기록과 함께 바로 삭제돼요. 되돌릴 수 없어요.
+
+    1. 프로필 메뉴를 열고 <b>계정</b>을 선택하세요.
+    2. 페이지 맨 아래의 <b>계정 삭제</b>를 선택하세요.
+    3. 본인 확인을 한 다음 <b>영구 삭제</b>를 선택하세요.
+
+    한 사람만 지우고 싶다면 대신 그 사람의 프로필을 삭제하세요. <a=/help/article/profiles-manage>프로필을 만들고, 편집하고, 삭제하는 방법</a>에서 확인하세요.
+
+    !! 참고: 데이터 사본을 남기려면 먼저 다운로드하세요. <a=/help/article/download-data>내 데이터 사본 다운로드하기</a>에서 확인하세요.
+
+help-art-page-not-found-title = '404' 페이지가 보여요
+help-art-page-not-found-summary = 링크가 잘못되었거나 페이지가 이동했어요.
+help-art-page-not-found-keywords = 404 찾을 수 없음 페이지 없음 깨진 링크 오류
+help-art-page-not-found-body =
+    404 페이지는 그 주소가 { $brand } 어디로도 연결되지 않는다는 뜻이에요. 주소에 오타가 없는지 확인하거나 메뉴와 검색으로 원하는 것을 찾아보세요.
+
+    - 위쪽 바의 <b>홈</b>을 선택하면 처음 화면으로 돌아가요.
+    - <a=/help>도움말 센터</a> 검색으로 도움말을 찾아보세요.
+    - { $brand } 안의 링크를 눌러 여기로 왔다면 그 링크가 어디에 있었는지 <a=/help/article/report-bug>알려 주세요</a>.
 
     @@ refresh
-help-art-language-title = 언어를 변경하는 방법
-help-art-language-summary = 인터페이스 언어와 선호하는 자막 언어를 변경하세요.
-help-art-language-keywords = 언어 변경 번역 인터페이스 표시 자막 오디오 영어 스페인어 프랑스어 아랍어
+
+help-art-language-title = 언어를 바꾸는 방법
+help-art-language-summary = { $brand }의 언어와 시청할 때 쓰는 언어를 바꿔요.
+help-art-language-keywords = 언어 변경 번역 인터페이스 표시 자막 오디오 영어 한국어 스페인어 프랑스어
 help-art-language-body =
-    ## 인터페이스 언어
-    1. 도움말 센터 페이지의 하단으로 스크롤하고 <b>선호 언어 선택</b>에서 언어를 선택합니다.
-    2. 페이지가 선택한 언어로 다시 로드됩니다. 이 기기에서 선택한 언어는 기억됩니다.
+    ## 표시 언어
+    1. 프로필 메뉴를 열고 <b>계정</b>, <b>프로필 관리</b>를 차례로 선택한 다음 내 프로필을 선택하세요.
+    2. <b>언어</b>, <b>표시 언어</b>를 차례로 선택하고 언어를 고르세요.
 
-    또는 <b>설정</b>에서 <b>언어</b> 아래의 <b>디스플레이 언어</b>에서 변경할 수도 있습니다.
+    이 설정은 프로필에 저장되므로 어느 기기에서나 같은 언어로 보여요. 도움말 센터에서는 모든 페이지 아래쪽에서도 언어를 고를 수 있어요.
 
-    ## 자막 언어
-    1. <b>설정</b>을 열고 <b>언어</b>를 선택합니다.
-    2. <b>선호 자막 언어</b>에서 언어를 선택하고 <b>선호 설정 저장</b>을 선택합니다.
+    ## 오디오 및 자막 언어
+    1. 위의 방법으로 프로필의 <b>언어</b>를 열고 <b>오디오 및 자막</b>을 선택하세요.
+    2. <b>오디오 언어</b>와 <b>자막 언어</b>를 고르세요. <b>표시 언어와 같음</b>을 고르면 앱의 언어를 따라가요.
 
-    !! 주의: 완전히 번역된 언어만 목록에 나타납니다. 아직 번역되지 않은 텍스트는 영어로 표시됩니다.
+    콘텐츠에 해당 언어가 있으면 플레이어가 이 설정을 사용해요.
+
+    !! 참고: 번역이 완료된 언어만 목록에 보여요.
 
     @@ language
-help-art-subtitles-title = 자막, 자막, 또는 오디오 언어를 선택하는 방법
-help-art-subtitles-summary = 자막을 켜고, 트랙을 선택하고, 자막의 모습을 변경합니다.
-help-art-subtitles-keywords = 자막 자막 cc 오디오 언어 트랙 크기 색상 외관 배경
+
+help-art-subtitles-title = 자막 사용과 오디오 언어 선택 방법
+help-art-subtitles-summary = 자막을 켜고, 트랙을 고르고, 모양을 바꿔요.
+help-art-subtitles-keywords = 자막 캡션 cc 오디오 언어 트랙 크기 색상 모양 배경
 help-art-subtitles-body =
-    ## 자막을 켜거나 끄기
-    1. 제목을 시작하고, 플레이어 위로 커서를 이동하거나 화면을 터치합니다.
-    2. <b>오디오 및 자막</b>을 선택합니다.
-    3. 자막 언어를 선택하거나 <b>Off</b>를 선택합니다.
+    ## 자막 켜기 또는 끄기
+    1. 콘텐츠를 재생하고 포인터를 플레이어 위로 옮기거나 화면을 탭하세요.
+    2. <b>오디오 및 자막</b>을 선택하세요.
+    3. 자막 언어를 고르거나 <b>끄기</b>를 선택하세요.
 
-    ## 자막의 모습을 변경하기
-    1. <b>설정</b>을 열고 <b>자막 외관</b>을 선택합니다.
-    2. 크기와 색상을 선택합니다. 버튼 위의 미리보기는 결과를 보여줍니다.
-    3. <b>완료</b>를 선택합니다.
+    자막이 너무 빠르거나 늦으면 같은 패널의 <b>-0.5s</b>와 <b>+0.5s</b>로 맞출 수 있어요.
 
-    !! 주의: 자막 및 오디오 트랙이 존재하는지 여부는 제목의 출처에 따라 달라집니다. 자막이 누락되었거나 동기화되지 않은 경우 <a=/help/article/subtitles-missing>자막이 누락되었거나 동기화되지 않음</a>을 참조하십시오.
+    ## 자막 모양 바꾸기
+    1. 프로필 메뉴를 열고 <b>계정</b>, <b>프로필 관리</b>를 차례로 선택한 다음 내 프로필을 선택하세요.
+    2. <b>자막 모양</b>을 선택하세요.
+    3. 글자 크기, 글자 색, 테두리, 배경, 창 색을 고르세요. 미리보기에서 결과를 볼 수 있어요. <b>기본값으로 되돌리기</b>를 선택하면 변경 내용이 취소돼요.
+
+    !! 참고: 어떤 언어와 오디오 트랙이 있는지는 콘텐츠의 소스에 따라 달라요. <a=/help/article/subtitles-missing>자막이 안 나오거나 맞지 않아요</a>에서 확인하세요.
+
 help-art-shortcuts-title = 키보드 단축키
-help-art-shortcuts-summary = 마우스 없이 플레이어를 제어합니다.
+help-art-shortcuts-summary = 마우스 없이 플레이어를 조작해요.
 help-art-shortcuts-keywords = 키보드 단축키 키 스페이스 화살표 전체 화면 음소거 볼륨 건너뛰기 되감기 핫키
 help-art-shortcuts-body =
-    이 키들은 컴퓨터에서 제목이 재생 중일 때 작동합니다.
+    컴퓨터에서 콘텐츠를 재생하는 동안 다음 키를 쓸 수 있어요.
 
-    - <b>Space</b> 또는 <b>K</b>: 재생 또는 일시 중단
-    - <b>왼쪽 화살표</b> 또는 <b>J</b>: 10초 뒤로 가기
-    - <b>오른쪽 화살표</b> 또는 <b>L</b>: 10초 앞으로 가기
-    - <b>위 화살표</b>와 <b>아래 화살표</b>: 볼륨 높이기 및 낮추기
+    - <b>스페이스</b> 또는 <b>K</b>: 재생 또는 일시 정지
+    - <b>왼쪽 화살표</b> 또는 <b>J</b>: 10초 뒤로
+    - <b>오른쪽 화살표</b> 또는 <b>L</b>: 10초 앞으로
+    - <b>위쪽 화살표</b>와 <b>아래쪽 화살표</b>: 볼륨 높이기와 낮추기
     - <b>M</b>: 음소거 또는 음소거 해제
     - <b>F</b>: 전체 화면 켜기 또는 끄기
-help-art-skip-intro-next-title = 인트로 건너뛰기 및 다음 에피소드
-help-art-skip-intro-next-summary = 오프닝을 건너뛰거나 다음 에피소드로 이동합니다.
-help-art-skip-intro-next-keywords = skip intro next episode autoplay binge episodes season drawer
+
+help-art-skip-intro-next-title = 인트로 건너뛰기와 다음 에피소드
+help-art-skip-intro-next-summary = 오프닝을 건너뛰거나 다음 에피소드로 넘어가요.
+help-art-skip-intro-next-keywords = 인트로 건너뛰기 다음 에피소드 자동 재생 몰아보기 에피소드 시즌 목록
 help-art-skip-intro-next-body =
-    - <b>Skip Intro</b>는 에피소드 오프닝이 시작될 때 몇 초간 표시됩니다. 선택하면 이야기로 이동합니다.
-    - <b>Next Episode</b>는 플레이어 제어에서 다음 에피소드를 시작합니다.
-    - <b>Episodes</b>는 시즌의 목록을 열어 어떤 에피소드를 선택할 수 있습니다.
+    - 에피소드 오프닝이 시작되면 몇 초 동안 <b>인트로 건너뛰기</b>가 나타나요. 선택하면 본편으로 바로 넘어가요.
+    - 플레이어 컨트롤의 <b>다음 에피소드</b>를 선택하면 다음 에피소드가 시작돼요.
+    - <b>에피소드</b>를 선택하면 시즌 목록이 열려 원하는 에피소드를 고를 수 있어요.
 
-    에피소드가 끝났을 때 어떤 일이 발생하는지 제어하려면 <b>Settings</b>를 열고 <b>Playback Settings</b>를 선택한 다음 <b>Autoplay next episode</b>를 켜거나 끕니다.
-help-art-my-list-title = My List 사용 방법
-help-art-my-list-summary = 나중에 다시 찾을 수 있도록 제목을 저장합니다.
-help-art-my-list-keywords = my list add remove watchlist save later favorites plus
+    에피소드가 끝났을 때 어떻게 할지 정하려면 프로필의 <b>재생 설정</b>을 열고 <b>다음 에피소드 자동 재생</b>을 켜거나 끄세요.
+
+help-art-my-list-title = 내 목록 사용 방법
+help-art-my-list-summary = 콘텐츠를 저장해 두고 나중에 다시 찾아요.
+help-art-my-list-keywords = 내 목록 추가 삭제 찜 보관함 나중에 보기 즐겨찾기 저장 플러스
 help-art-my-list-body =
-    ## 제목 추가
-    제목 카드의 <b>+</b> 버튼을 선택하거나, 세부 정보 창 또는 페이지 상단의 허브에서 선택합니다.
+    ## 콘텐츠 추가하기
+    콘텐츠 카드, 상세 정보 창, 또는 페이지 위쪽의 큰 콘텐츠 화면에서 <b>+</b> 버튼을 선택하세요.
 
-    ## 제목 제거
-    제목의 확인 표시를 선택하면 다시 <b>+</b>으로 돌아갑니다.
+    ## 콘텐츠 삭제하기
+    콘텐츠의 체크 표시를 선택하세요. 다시 <b>+</b>로 바뀌어요.
 
-    ## 나의 목록 보기
-    상단 바에서 <b>My List</b>를 열어보세요. 휴대폰에서는 하단 바에 있습니다.
+    ## 내 목록 보기
+    위쪽 바(휴대폰에서는 아래쪽 바)의 <b>내 Streams</b>를 여세요. 목록은 <b>이어서 보기</b>, 좋아요를 누른 콘텐츠, 본 예고편과 함께 있어요.
 
-    !! 주의: 현재 목록은 페이지가 열려 있는 동안 유지되며 새로고침 시 초기화됩니다. 프로필에 저장하는 기능은 계정 작업의 일부입니다. <a=/help/article/list-missing>My List 또는 진행 상황이 사라졌습니다</a>를 참조하세요.
-help-art-continue-watching-title = Continue Watching 사용 방법
-help-art-continue-watching-summary = 중단한 곳에서 다시 시작하고 행에서 제목을 제거합니다.
-help-art-continue-watching-keywords = continue watching resume progress remove row stopped half watched
+    내 목록은 프로필별로 계정에 저장되므로 어느 기기에서나 똑같아요.
+
+help-art-continue-watching-title = 이어서 보기 사용 방법
+help-art-continue-watching-summary = 멈춘 곳부터 다시 보고, 줄에서 콘텐츠를 삭제해요.
+help-art-continue-watching-keywords = 이어서 보기 계속 시청 다시 보기 진행 삭제 줄 중단 보다 만
 help-art-continue-watching-body =
-    시작한 타이틀은 홈 화면의 <b>계속 시청</b> 행에 나타나며, 진행 상황을 보여주는 진행 막대가 있습니다.
+    보기 시작한 콘텐츠는 <b>이어서 보기</b> 줄에 나타나고, 얼마나 봤는지 막대로 보여 줘요. <b>내 Streams</b>에도 있어요.
 
-    ## 재생
-    타이틀을 선택하면 멈춘 지점에서 재생이 시작됩니다.
+    ## 다시 재생하기
+    콘텐츠를 선택하세요. 로그인한 어느 기기에서나 멈춘 곳부터 재생돼요.
 
-    ## 행에서 타이틀 제거
-    1. 타이틀 카드의 옵션 메뉴를 엽니다.
-    2. <b>계속 시청에서 제거</b>를 선택합니다.
+    ## 줄에서 콘텐츠 삭제하기
+    1. 콘텐츠 카드의 옵션 메뉴를 여세요.
+    2. <b>'이어서 보기'에서 삭제</b>를 선택하세요.
 
-    이 행은 이 브라우저에 저장된 진행 상황을 기반으로 만들어지므로 다른 기기에는 자체적인 행이 있습니다. 자세한 내용은 <a=/help/article/saved-data>프로필, 목록 및 진행 상황이 저장되는 위치</a>를 참조하세요.
+    시청 기록에서도 콘텐츠를 지우려면 <a=/help/article/viewing-history>시청 기록을 관리하는 방법</a>에서 확인하세요.
 
-    @@ data
-help-art-viewing-history-title = 시청 이력 관리 방법
-help-art-viewing-history-summary = 시청 시 기록되는 내용과 어떻게 제거할 수 있는지
-help-art-viewing-history-keywords = 시청 이력 시청 활동 삭제 클리어 제거 평가 추천
+help-art-viewing-history-title = 시청 기록을 관리하는 방법
+help-art-viewing-history-summary = 시청할 때 기록되는 내용과 지우는 방법.
+help-art-viewing-history-keywords = 시청 기록 본 콘텐츠 활동 삭제 지우기 평가 추천
 help-art-viewing-history-body =
-    { $brand }는 이 브라우저에서 시작한 타이틀과 시청한 정도를 기록하여 계속 시청 기능이 작동하고, 추천이 취향에 맞도록 합니다.
+    프로필마다 본 콘텐츠가 최신순으로 나오는 <b>시청 기록</b> 페이지가 있어요. { $brand }는 이 기록을 이어서 보기와 추천에 사용해요.
 
-    - 계속 시청 행에서 특정 타이틀을 숨기려면 <a=/help/article/continue-watching>계속 시청 사용 방법</a>을 참조하세요.
-    - 모든 내용을 제거하려면 <a=/help/article/clear-data>저장된 데이터 클리어 방법</a>을 참조하세요.
+    1. 프로필 메뉴를 열고 <b>계정</b>, <b>프로필 관리</b>를 차례로 선택한 다음 프로필을 선택하세요.
+    2. <b>시청 기록</b>을 선택하세요.
+    3. 콘텐츠 옆의 <b>이 콘텐츠 숨기기</b>를 선택하거나 <b>모두 숨기기</b>를 선택하세요.
 
-    !! 주의: <b>설정</b>의 <b>시청 활동</b> 페이지는 아직 타이틀을 목록으로 표시하지 않습니다.
+    숨긴 콘텐츠는 모든 기기에서 이어서 보기에서 사라지고, 더 이상 추천에 영향을 주지 않아요. <b>모두 다운로드</b>를 선택하면 목록을 스프레드시트로 저장해요.
 
     @@ data
+
 help-art-notifications-title = 알림
-help-art-notifications-summary = 상단 바의 종알음이 무엇을 보여주며, 항목이 읽힘으로 표시되는 방법
-help-art-notifications-keywords = 알림 종알음 경고 신규 도착 업데이트 읽음 읽지 않음
+help-art-notifications-summary = 위쪽 바의 종 아이콘에 나오는 것과 알림이 읽음으로 표시되는 방식.
+help-art-notifications-keywords = 알림 종 새 소식 신규 업데이트 읽음 안 읽음
 help-art-notifications-body =
-    상단 바의 종알음은 신규 도착 및 인기 선택 등 주목할 만한 타이틀을 목록으로 보여줍니다. 항목을 선택하면 해당 타이틀의 세부 정보를 열 수 있습니다.
+    위쪽 바의 종 아이콘에는 새로 추가된 콘텐츠나 인기 콘텐츠처럼 볼 만한 콘텐츠가 나와요. 항목을 선택하면 그 콘텐츠의 상세 정보가 열려요.
 
-    열린 항목은 읽음으로 표시됩니다. 이는 브라우저에서 기억됩니다. 종알음의 수는 아직 읽지 않은 항목 수를 보여줍니다.
+    연 항목은 읽음으로 표시되고, 종 아이콘의 숫자는 아직 읽지 않은 항목 수를 보여 줘요.
 
-    알림은 { $brand } 내부에서만 나타납니다. 타이틀에 대한 이메일이나 푸시 메시지는 보내지 않습니다.
-help-art-search-browse-title = 검색 및 브라우징 방법
-help-art-search-browse-summary = 이름, 장르 또는 분위기로 타이틀을 찾을 수 있습니다.
-help-art-search-browse-keywords = 검색 브라우징 찾기 장르 영화 시리즈 카테고리 타이틀 검색 배우 감독
+    프로필의 <b>알림 설정</b>에는 이메일과 푸시 알림 옵션이 있어요. 설정은 프로필에 저장되지만, { $brand }는 아직 콘텐츠에 관한 이메일이나 푸시 알림을 보내지 않아요. 로그인 링크처럼 계정에 관한 이메일은 항상 발송돼요.
+
+help-art-search-browse-title = 검색하고 둘러보는 방법
+help-art-search-browse-summary = 제목, 장르, 분위기로 콘텐츠를 찾아요.
+help-art-search-browse-keywords = 검색 둘러보기 찾기 장르 영화 시리즈 카테고리 제목 배우 감독
 help-art-search-browse-body =
     ## 검색
-    1. 상단 바의 빨간색 빛나는 글래스 아이콘을 선택합니다.
-    2. 제목, 배우 또는 감독을 입력합니다.
-    3. <b>Enter</b>를 누르면 모든 일치 항목을 볼 수 있습니다.
+    1. 위쪽 바의 돋보기를 선택하세요.
+    2. 제목, 배우, 감독을 입력하세요. 입력하는 동안 결과가 나오고, 작은 오타는 알아서 넘어가요.
 
-    ## 탐색
-    - 상단 바의 <b>시리즈</b> 및 <b>영화</b>는 각각의 제목 유형 페이지로 이동합니다. 그곳에서 <b>장르</b>를 사용하여 필터링할 수 있습니다.
-    - 홈 페이지의 행들은 주제별로 그룹화되어 있습니다. 예를 들어, 10년대와 장르, 또는 당신이 본 제목과 같은 것들입니다.
-    - <b>언어로 탐색</b>은 원래 언어, 자막 또는 중계 방송으로 제목을 찾습니다. <a=/help/article/browse-language>언어로 탐색</a>을 참조하세요.
-help-art-browse-language-title = 언어로 탐색
-help-art-browse-language-summary = 원래 언어, 자막 또는 중계 방송으로 제목을 찾습니다.
-help-art-browse-language-keywords = 언어로 탐색 원래 중계 자막 외국 국제 애니메이션 한국어 스페인어
+    ## 둘러보기
+    - 위쪽 바의 <b>시리즈</b>와 <b>영화</b>를 선택하면 종류별 페이지가 열려요. 거기서 <b>장르</b>로 좁힐 수 있어요.
+    - 홈 화면의 줄은 주제별로 묶여 있어요. <a=/help/article/recommendations>추천이 작동하는 방식</a>에서 확인하세요.
+    - <b>언어별로 찾아보기</b>에서는 콘텐츠가 만들어진 언어로 찾을 수 있어요. <a=/help/article/browse-language>언어별로 찾아보기</a>에서 확인하세요.
+
+help-art-browse-language-title = 언어별로 찾아보기
+help-art-browse-language-summary = 콘텐츠가 만들어진 언어로 콘텐츠를 찾아요.
+help-art-browse-language-keywords = 언어별로 찾아보기 원어 외국 해외 세계 영화 애니메이션 한국 스페인
 help-art-browse-language-body =
-    1. 상단 바의 <b>언어로 탐색</b>을 열어주세요.
-    2. 원하는 항목을 선택하세요: <b>원래 언어</b>, <b>중계 방송</b> 또는 <b>자막</b>.
-    3. 언어를 선택하여 일치하는 제목을 보세요.
+    1. 위쪽 바에서 <b>언어별로 찾아보기</b>를 여세요.
+    2. <b>원어</b>가 이미 선택되어 있어요. 언어를 고르면 그 언어로 만들어진 콘텐츠가 보여요.
 
-    !! 주의: 중계 방송과 자막의 사용 가능성은 원천에 따라 다릅니다. 여기에 나열된 제목은 재생 시 더 적은 트랙을 제공할 수 있습니다.
-help-art-new-popular-title = 새로운 & 인기 있는
-help-art-new-popular-summary = 어떤 것이 도착하고 있으며, 사람들이 지금 시청하고 있는 것을 확인하세요.
-help-art-new-popular-keywords = 새로운 인기 트렌딩 최신 상위 10개 곧 출시 이 주
+    !! 참고: 이 페이지는 콘텐츠를 원어 기준으로 보여 줘요. 더빙과 자막은 콘텐츠마다 소스에 따라 다르며, 재생 중에 <b>오디오 및 자막</b>에서 확인할 수 있어요.
+
+help-art-new-popular-title = 신규 & 인기
+help-art-new-popular-summary = 새로 들어온 콘텐츠와 지금 사람들이 보는 콘텐츠를 확인해요.
+help-art-new-popular-keywords = 신규 인기 트렌드 최신 top 10 공개 예정 이번 주
 help-art-new-popular-body =
-    <b>새로운 & 인기 있는</b> 상단 바는 최근 또는 트렌딩인 제목을 목록으로 보여줍니다. 제목을 열어 세부 정보를 확인하고, 나중에 찾기 위해 <b>내 목록</b>에 추가하세요.
+    위쪽 바의 <b>신규 & 인기</b>에는 최근에 나왔거나 화제인 콘텐츠가 나와요. 콘텐츠를 열어 상세 정보를 보고, <b>내 목록</b>에 추가해 두면 나중에 찾을 수 있어요.
 
-    목록은 카탈로그에서 새로고침되므로 하루하루 달라집니다.
-help-art-recommendations-title = 추천이 어떻게 작동하는지
-help-art-recommendations-summary = 행이 어떻게 선택되는지 그리고 어떻게 변경할 수 있는지 설명합니다.
-help-art-recommendations-keywords = 추천 행 제안 이유로 시청 했기 때문에 취향 알고리즘 당신을 위한 개인화 개인 맞춤
+    목록은 카탈로그에서 새로 고쳐지므로 날마다 바뀌어요.
+
+help-art-recommendations-title = 추천이 작동하는 방식
+help-art-recommendations-summary = 줄이 만들어지는 방식과 줄을 바꾸는 요인.
+help-art-recommendations-keywords = 추천 줄 제안 시청 후 추천 취향 알고리즘 맞춤 개인화
 help-art-recommendations-body =
-    홈 페이지의 행은 제목의 설명, 장르 및 크레딧에서 만들어집니다. 유사한 의미를 가진 제목들은 하나의 행으로 그룹화됩니다. 예를 들어, 10년대와 장르, 또는 <b>Like</b>를 통해 본 제목을 보여줍니다.
+    줄은 장르, 분위기, 소재, 국가, 연대처럼 콘텐츠 자체의 특징으로 만들어져요. 예를 들면 <b>기분 좋아지는 로맨틱 코미디</b>나 <b>한국 범죄 시리즈</b> 같은 줄이에요. 줄 안의 순서는 내 취향을 따라가요.
 
-    ## 행이 어떻게 변하는가
-    - 제목을 시작하는 것. 추천 서비스는 어떤 장르를 선택하는지 배우고, 행을 하루 정도에 따라 조정합니다.
-    - 사용하는 프로필. 어린이 프로필은 어린이를 위한 제목만 보여줍니다.
+    ## 줄을 바꾸는 요인
+    - 보기 시작하거나 끝까지 본 콘텐츠, 평가한 콘텐츠, 내 목록에 추가한 콘텐츠.
+    - <b>'○○' 시청 후 추천 콘텐츠</b>, <b>오늘의 추천 콘텐츠</b>, <b>다음에 볼 콘텐츠</b> 같은 줄은 최근에 본 콘텐츠로 만들어져요. 장르 페이지에서는 그 장르 안에서 골라요.
+    - 사용하는 프로필. 프로필마다 취향이 따로 있고, 키즈 프로필에는 어린이용 콘텐츠만 보여요.
+    - 날짜와 계절. 명절과 이벤트 줄은 그 시기에 나타나요.
 
-    ## 변하지 않는 것
-    행은 당신이 무엇을 지불하는지, 어디에 살고 있는지, 누구인지에 따라 형성되지 않습니다. 이름이나 이메일은 사용하지 않으며, 서비스는 무작위 세션 번호만 보게 됩니다. <a=/help/article/privacy-data>{ $brand }이 어떤 데이터를 수집하는지?</a>를 확인하세요.
+    ## 끄기
+    프로필의 <b>개인정보 및 데이터 설정</b>에서 <b>맞춤 추천</b>을 끄세요. 그러면 다른 사람들과 같은 추천을 보게 돼요.
+
+    이름이나 이메일은 콘텐츠를 고르는 데 절대 쓰지 않아요. <a=/help/article/privacy-data>{ $brand }는 어떤 데이터를 수집하나요?</a>에서 확인하세요.
 
     @@ data
-help-art-trailers-clips-title = 트레일러 및 클립
-help-art-trailers-clips-summary = 제목을 선택하기 전에 미리 보세요.
-help-art-trailers-clips-keywords = 트레일러 클립 미리보기 짧은 동영상 티저 음소거 자동재생 미리보기
+
+help-art-trailers-clips-title = 예고편과 클립
+help-art-trailers-clips-summary = 보기 전에 콘텐츠를 미리 봐요.
+help-art-trailers-clips-keywords = 예고편 트레일러 클립 미리보기 짧은 동영상 티저 음소거 소리 자동 재생
 help-art-trailers-clips-body =
-    - 컴퓨터에서 제목 카드를 마우스 호버하거나, 세부 정보를 열면 트레일러 미리보기를 볼 수 있습니다.
-    - <b>클립</b>은 스크롤할 수 있는 짧은 세로형 미리보기를 보여줍니다.
-    - 스피커 버튼을 사용하여 미리보기 음소거를 켜거나 끌 수 있습니다. 선택은 프로필에 기억됩니다.
+    - 컴퓨터에서는 콘텐츠 카드 위에 포인터를 올리거나 상세 정보를 열면 예고편 미리보기가 나와요.
+    - <b>클립</b>에서는 짧은 세로 미리보기를 스크롤하며 볼 수 있어요.
+    - 스피커 버튼으로 미리보기 소리를 켜거나 끄세요.
 
-    미리보기 자동 재생을 중지하려면 <b>설정</b>을 열고, <b>재생 설정</b>을 선택한 다음 <b>자동 재생 미리보기</b>를 끕니다.
-help-art-what-is-title = What is { $brand }?
-help-art-what-is-summary = { $brand }에 대한 짧은 설명 및 수행 및 수행하지 않는 일들
-help-art-what-is-keywords = what is about streams service explain index links catalog netflix like
+    예고편은 YouTube에서 재생돼요. 미리보기가 저절로 시작되지 않게 하려면 프로필의 <b>재생 설정</b>에서 <b>미리보기 자동 재생</b>을 끄세요.
+
+help-art-what-is-title = { $brand }란 무엇인가요?
+help-art-what-is-summary = { $brand }가 하는 일과 하지 않는 일을 간단히 소개해요.
+help-art-what-is-keywords = 소개 무엇 streams 서비스 설명 링크 모음 카탈로그 넷플릭스 같은
 help-art-what-is-body =
-    { $brand }는 다음 영화나 시리즈를 찾는 데 도움을 줍니다. 좋아하는 것을 배우고, 카탈로그를 페이지에 행으로 정리하여 제공합니다. 이는 알고 있는 스트리밍 서비스와 같은 느낌을 줍니다.
+    { $brand }는 다음에 볼 영화나 시리즈를 찾도록 도와줘요. 내 취향을 배워서, 익숙한 스트리밍 서비스 같은 페이지에 카탈로그를 줄로 정리해 보여 줘요.
 
-    { $brand }는 링크 인덱스입니다. 비디오를 호스팅하거나 업로드하지 않습니다. 플레이를 누르면 플레이어가 독립적인 출처에서 스트리밍을 요청하고, 가장 먼저 작동하는 것을 재생합니다. <a=/help/article/sources>제목이 어디에서 올까요?</a>를 확인하세요.
+    { $brand }는 링크 모음이에요. 동영상을 호스팅하거나 업로드하지 않아요. 재생을 누르면 플레이어가 독립적인 소스에 스트림을 요청하고, 처음으로 작동하는 것을 재생해요. <a=/help/article/sources>콘텐츠의 출처</a>에서 확인하세요.
 
-    구매할 것이 없고, 구독도 없습니다. <a=/help/article/free-to-use>{ $brand }는 무료인가요?</a>를 확인하세요.
-help-art-getting-started-title = Getting started with { $brand }
-help-art-getting-started-summary = 첫 번째 5분: 프로필, 제목 찾기 및 저장
-help-art-getting-started-keywords = getting started begin first time tour new user how to use guide basics
+    살 것도 없고 구독도 없어요. <a=/help/article/free-to-use>{ $brand }는 무료인가요?</a>에서 확인하세요.
+
+help-art-getting-started-title = { $brand } 시작하기
+help-art-getting-started-summary = 처음 5분: 계정, 프로필, 콘텐츠 찾기와 저장.
+help-art-getting-started-keywords = 시작하기 처음 둘러보기 새 사용자 사용법 가이드 기본
 help-art-getting-started-body =
-    1. <b>프로필을 선택하거나 생성하세요.</b> <a=/help/article/profiles-manage>프로필을 생성, 편집 또는 삭제하는 방법</a>을 참조하세요.
-    2. <b>홈 페이지를 살펴보세요.</b> 행은 테마별로 그룹화되어 있으며, 상단의 큰 제목은 바뀝니다.
-    3. <b>돋보기 아이콘</b>을 사용하여 제목을 검색하세요. <a=/help/article/search-browse>검색 및 브라우징 방법</a>을 참조하세요.
-    4. <b>제목을 선택</b>하여 정보를 읽거나 트레일러를 시청하고, 재생을 누르세요.
-    5. <b>My List에 제목을 추가</b>하려면 <b>+</b> 버튼을 사용하세요.
+    1. <b>무료 계정을 만드세요.</b> <a=/help/article/need-account>계정이 필요한가요?</a>에서 확인하세요.
+    2. <b>프로필을 고르거나 만드세요.</b> <a=/help/article/profiles-manage>프로필을 만들고, 편집하고, 삭제하는 방법</a>에서 확인하세요.
+    3. <b>홈 화면을 둘러보세요.</b> 줄은 주제별로 묶여 있고, 위쪽의 큰 콘텐츠는 바뀌어요.
+    4. 돋보기로 콘텐츠, 배우, 감독을 <b>검색</b>하세요. <a=/help/article/search-browse>검색하고 둘러보는 방법</a>에서 확인하세요.
+    5. <b>콘텐츠를 선택하면</b> 소개를 읽고, 예고편을 보고, 재생할 수 있어요.
+    6. <b>+</b> 버튼으로 <b>내 목록에 콘텐츠를 추가하세요</b>.
 
-    시청 중에 도움이 되는 키를 알아보세요: <a=/help/article/shortcuts>키보드 단축키</a>.
-help-art-sources-title = 제목이 어디에서 온가요
-help-art-sources-summary = { $brand }가 스트리밍을 찾는 방법과, 제목이 하루는 작동하고 다음 날은 작동하지 않는 이유.
-help-art-sources-keywords = sources providers hosted links third party where from catalog tmdb metadata availability
+    시청할 때 도움이 되는 키: <a=/help/article/shortcuts>키보드 단축키</a>.
+
+help-art-sources-title = 콘텐츠의 출처
+help-art-sources-summary = { $brand }가 스트림을 찾는 방식과, 어떤 날은 되던 콘텐츠가 다음 날 안 될 수 있는 이유.
+help-art-sources-keywords = 소스 출처 제공업체 호스팅 링크 제3자 카탈로그 tmdb 메타데이터 이용 가능
 help-art-sources-body =
-    포스터와 평점은 공개된 영화 및 TV 콘텐츠 카탈로그에서 가져옵니다. 비디오 자체는 { $brand }에 없습니다. 재생을 누르면 플레이어가 독립적인 제3자 소스에서 스트리밍을 요청합니다.
+    상세 정보, 포스터, 평점은 공개 영화 및 TV 카탈로그에서 와요. 동영상 자체는 { $brand }에 없어요. 재생을 누르면 플레이어가 독립적인 외부 소스에 스트림을 요청해요.
 
-    - 제목은 하나의 소스에서만 제공될 수 있고 다른 소스에서는 제공되지 않을 수 있습니다.
-    - 소스는 경고 없이 오프라인 상태가 될 수 있습니다.
-    - 품질, 오디오 트랙 및 자막은 소스에서 제공됩니다.
+    - 어떤 소스에서는 볼 수 있지만 다른 소스에서는 볼 수 없는 콘텐츠도 있어요.
+    - 소스는 예고 없이 멈출 수 있어요.
+    - 화질, 오디오 트랙, 자막은 소스에 따라 정해져요.
 
-    우리는 이러한 소스를 제어하거나 확인하지 않습니다. <a=/disclaimer>고지사항</a>을 참조하세요. 권리 소유자인 경우, <a=/help/article/copyright>저작권 문제 신고 방법</a>을 참조하세요.
-help-art-contribute-title = 어떻게 기여할 수 있나요
-help-art-contribute-summary = 아이디어, 수정 사항, 번역 및 버그 보고는 환영합니다.
-help-art-contribute-keywords = contribute contributing volunteer translate translation code github help improve suggestions
+    저희는 이 소스들을 관리하거나 확인하지 않아요. <a=/disclaimer>면책 조항</a>에서 확인하세요. 권리자라면 <a=/help/article/copyright>저작권 문제를 신고하는 방법</a>에서 확인하세요.
+
+help-art-contribute-title = 어떻게 기여할 수 있나요?
+help-art-contribute-summary = 아이디어, 수정, 번역, 버그 신고 모두 환영해요.
+help-art-contribute-keywords = 기여 참여 자원봉사 번역 코드 github 도움 개선 제안
 help-art-contribute-body =
-    { $brand }는 오픈소스로 개발됩니다. 여러 가지 방법으로 도움을 줄 수 있습니다:
+    { $brand }는 공개적으로 만들어지고 있어요. 여러 방법으로 도울 수 있어요.
 
-    - <b>번역.</b> 인터페이스 텍스트는 텍스트 파일에 저장되어 있으며, 언어별로 하나씩 있으므로 번역은 편집할 수 있는 텍스트 파일입니다.
-    - <b>버그 보고.</b> <a=/help/article/report-bug>문제 보고</a>를 참조하세요.
-    - <b>수정 사항 및 기능.</b> 설명이나 패치를 보내주세요.
-    - <b>아이디어.</b> 도움말 센터나 앱이 무엇을 더 할 수 있기를 원하는 것을 말해주세요.
+    - <b>번역.</b> 인터페이스 문구는 언어마다 하나씩 있는 일반 텍스트 파일에 있어서, 번역은 텍스트 파일을 고치는 일이에요.
+    - <b>버그 신고.</b> <a=/help/article/report-bug>문제 신고하기</a>에서 확인하세요.
+    - <b>수정과 기능.</b> 설명이나 패치를 보내 주세요.
+    - <b>아이디어.</b> 도움말 센터나 앱에 있었으면 하는 것을 알려 주세요.
 
-    <a=mailto:{ $contribute_email }>{ $contribute_email }</a>으로 몇 줄 정도의 메시지를 보내어 원하는 일을 알려주세요.
+    하고 싶은 일을 몇 줄로 적어 <a=mailto:{ $contribute_email }>{ $contribute_email }</a>로 보내 주세요.
+
 help-art-install-app-title = { $brand }를 앱으로 설치하는 방법
-help-art-install-app-summary = { $brand }를 홈 화면 또는 데스크톱에 추가하여 별도의 창에서 열 수 있도록 합니다.
-help-art-install-app-keywords = install app pwa add to home screen desktop shortcut icon web app
+help-art-install-app-summary = { $brand }를 홈 화면, Dock, 바탕화면에 추가해서 별도 창으로 열어요.
+help-art-install-app-keywords = 설치 앱 pwa 홈 화면에 추가 바탕화면 바로가기 아이콘 웹 앱
 help-art-install-app-body =
-    { $brand }는 웹 앱입니다. 스토어에서 다운로드할 수 없습니다. 브라우저에서 설치하여 자체 창에서 열고 자체 아이콘을 가질 수 있습니다.
+    { $brand }는 웹 앱이에요. 스토어에서 받을 필요가 없어요. 브라우저로 설치하면 자체 아이콘이 있는 별도 창에서 열려요.
 
-    ## 컴퓨터의 크롬과 에드지
-    주소 표시줄 오른쪽의 설치 아이콘을 선택하거나, 브라우저 메뉴를 열고 <b>{ $brand } 설치</b>를 선택합니다.
+    ## Windows, Mac, Linux의 Chrome과 Edge
+    주소창 오른쪽의 설치 아이콘을 선택하거나, 브라우저 메뉴를 열고 <b>{ $brand } 설치</b>를 선택하세요(Edge에서는 <b>앱</b>, <b>이 사이트를 앱으로 설치</b>를 차례로 선택).
 
-    ## 안드로이드
-    브라우저 메뉴를 열고 <b>앱 설치</b> 또는 <b>홈 화면에 추가</b>를 선택합니다.
+    ## Mac의 Safari
+    <b>파일</b> 메뉴를 열고 <b>Dock에 추가</b>를 선택하세요.
 
-    ## 아이폰과 아이패드
-    사파리에서 <b>공유</b> 버튼을 선택한 후 <b>홈 화면에 추가</b>를 선택합니다.
+    ## Android
+    브라우저 메뉴를 열고 <b>앱 설치</b> 또는 <b>홈 화면에 추가</b>를 선택하세요.
 
-    !! 주의: 설치된 앱은 같은 웹사이트입니다. 자동으로 업데이트되며 설치한 브라우저에서 저장된 프로필과 동일하게 사용됩니다.
-help-art-phone-tablet-title = 휴대폰 또는 태블릿에서 { $brand } 사용 방법
-help-art-phone-tablet-summary = 모바일 레이아웃, 하단 바 및 작은 화면용 팁.
-help-art-phone-tablet-keywords = 휴대폰 태블릿 모바일 안드로이드 아이폰 아이패드 터치 하단 바 앱 레이아웃
+    ## iPhone 및 iPad
+    Safari에서 <b>공유</b> 버튼을 선택한 다음 <b>홈 화면에 추가</b>를 선택하세요.
+
+    !! 참고: 컴퓨터용 Firefox는 사이트를 앱으로 설치할 수 없어요. 북마크를 쓰거나 Chrome, Edge, Safari에서 설치하세요. 설치한 앱도 같은 웹사이트라서 스스로 업데이트되고, 브라우저처럼 로그인 상태가 유지돼요.
+
+help-art-phone-tablet-title = 휴대폰이나 태블릿에서 { $brand } 사용하는 방법
+help-art-phone-tablet-summary = 모바일 화면 구성, 아래쪽 바, 작은 화면을 위한 팁.
+help-art-phone-tablet-keywords = 휴대폰 태블릿 모바일 android iphone ipad 터치 아래쪽 바 앱 화면
 help-art-phone-tablet-body =
-    휴대폰 브라우저에서 사이트를 열어 터치를 위한 레이아웃으로 전환되며, <b>홈</b>, <b>클립</b>, <b>검색</b> 및 <b>내 리스트</b>를 위한 하단 바가 있습니다.
+    휴대폰 브라우저에서 사이트를 여세요. 페이지가 터치에 맞는 화면으로 바뀌고, 아래쪽에 <b>홈</b>, <b>클립</b>, <b>검색</b>, <b>내 Streams</b> 바가 생겨요.
 
-    - 카드를 터치하여 세부 정보를 보고, 재생 버튼을 눌러 시작합니다.
-    - 화면을 가로로 회전하여 최고의 화질을 얻습니다.
-    - 앱처럼 느끼기 위해 <a=/help/article/install-app>{ $brand } 앱으로 설치 방법</a>을 참조하세요.
-help-art-watch-on-tv-title = TV에서 시청하는 방법
-help-art-watch-on-tv-summary = TV의 브라우저를 사용하거나, 컴퓨터 또는 휴대폰의 브라우저 탭을 전송하세요.
-help-art-watch-on-tv-keywords = TV 텔레비전 스마트 TV 캐스트 크롬캐스트 에어플레이 HDMI 파이 스틱 대형 화면
+    - 카드를 탭하면 상세 정보가 열리고, 재생 버튼을 누르면 시작돼요.
+    - 휴대폰을 가로로 돌리면 화면이 가장 잘 보여요.
+    - 앱처럼 쓰려면 <a=/help/article/install-app>{ $brand }를 앱으로 설치하는 방법</a>에서 확인하세요.
+
+help-art-watch-on-tv-title = TV에서 보는 방법
+help-art-watch-on-tv-summary = TV 브라우저를 쓰거나, 컴퓨터나 휴대폰에서 브라우저 탭을 전송해요.
+help-art-watch-on-tv-keywords = tv 텔레비전 스마트 tv 전송 크롬캐스트 airplay hdmi 파이어 스틱 큰 화면
 help-art-watch-on-tv-body =
-    { $brand } TV용 앱은 아직 출시되지 않았습니다. 다음 옵션은 오늘 사용할 수 있습니다:
+    아직 TV용 { $brand } 앱은 없어요. 지금 쓸 수 있는 방법은 다음과 같아요.
 
-    - <b>TV 브라우저.</b> TV에 제공된 브라우저에서 { $brand } 주소를 열어 주세요.
-    - <b>탭 캐스트.</b> 컴퓨터의 크롬 또는 에드지에서 브라우저 메뉴를 열고 <b>캐스트</b>를 선택한 후 TV 또는 스트리밍 스틱을 선택합니다.
-    - <b>케이블.</b> HDMI 케이블로 노트북을 TV에 연결하고 전체 화면을 사용합니다.
+    - <b>TV 브라우저.</b> TV에 들어 있는 브라우저에서 { $brand } 주소를 여세요.
+    - <b>탭 전송.</b> 컴퓨터의 Chrome이나 Edge에서 브라우저 메뉴를 열고 <b>전송</b>을 선택한 다음 TV나 스트리밍 스틱을 고르세요.
+    - <b>케이블.</b> HDMI 케이블로 노트북을 TV에 연결하고 전체 화면으로 보세요.
 
-    화면 또는 소리가 올바르지 않다면 <a=/help/article/fix-tv>TV에서 문제 해결</a>을 참조하세요.
+    화면이나 소리가 이상하면 <a=/help/article/fix-tv>TV 문제 해결하기</a>에서 확인하세요.
+
 help-art-copyright-title = 저작권 문제를 신고하는 방법
-help-art-copyright-summary = 권리자들은 링크를 제거하도록 요청할 수 있습니다.
-help-art-copyright-keywords = 저작권 DMCA 제거 요청 침해 권리자 제거 보고 통지 법적
+help-art-copyright-summary = 권리자는 링크 삭제를 요청할 수 있어요.
+help-art-copyright-keywords = 저작권 dmca 삭제 요청 침해 권리자 삭제 신고 통지 법적
 help-art-copyright-body =
-    { $brand }는 비디오 파일을 호스팅하지 않습니다. 다른 서비스에서 호스팅하는 제목에 대한 링크를 나열합니다. 제목의 저작권을 소유하고 있고, 링크가 저작권을 침해한다고 생각하는 경우, 우리에게 알리고 검토하겠습니다.
+    { $brand }는 동영상 파일을 호스팅하지 않아요. 다른 서비스에 올라와 있는 콘텐츠로 연결되는 링크를 보여 줘요. 콘텐츠의 권리를 갖고 있고 링크가 그 권리를 침해한다고 생각되면 통지를 보내 주세요. 검토할게요.
 
-    알림에는 다음이 포함되어야 합니다:
-    1. 귀하의 이름과 연락처 정보.
-    2. 귀하가 소유한 작품에 대한 설명.
-    3. { $brand }에서 해당 제목을 링크하는 페이지 주소.
-    4. 귀하가 저작권 소유자이거나 그들을 대신하여 행동할 수 있는지를 나타내는 진술.
+    통지에는 다음이 들어 있어야 해요.
+    1. 이름과 연락처.
+    2. 권리를 가진 저작물에 대한 설명.
+    3. 그 저작물로 연결되는 { $brand } 페이지의 주소.
+    4. 권리자 본인이거나 권리자를 대신할 권한이 있다는 진술.
 
-    알림은 <a=mailto:{ $help_email }>{ $help_email }</a>으로 보내고, 제목을 <b>DMCA notice</b>로 설정하십시오. 전체 과정은 <a=/dmca>DMCA 페이지</a>에 있습니다.
-help-art-title-feedback-title =  { $brand }에 있는 제목에 대한 피드백
-help-art-title-feedback-summary = 잘못된 설명, 누락된 제목 또는 재생되지 않는 제목을 보고합니다.
-help-art-title-feedback-keywords = 피드백 제목 잘못된 설명 누락 요청 영화 시리즈 추가 보고 오류 포스터
+    제목을 <b>DMCA 통지</b>로 해서 <a=mailto:{ $help_email }>{ $help_email }</a>로 보내 주세요. 전체 절차는 <a=/dmca>DMCA 페이지</a>에 있어요.
+
+help-art-title-feedback-title = { $brand }의 콘텐츠에 대한 의견
+help-art-title-feedback-summary = 잘못된 설명, 없는 콘텐츠, 재생되지 않는 콘텐츠를 알려 주세요.
+help-art-title-feedback-keywords = 의견 피드백 콘텐츠 잘못된 설명 없음 요청 영화 시리즈 추가 신고 포스터
 help-art-title-feedback-body =
-    <a=mailto:{ $help_email }>{ $help_email }</a>로 쓰고 다음을 포함하십시오:
+    <a=mailto:{ $help_email }>{ $help_email }</a>로 다음 내용을 적어 보내 주세요.
 
-    - 제목과 연도
-    - { $brand }에서 해당 제목의 페이지 주소
-    - 잘못된 점, 예를 들어 잘못된 포스터, 누락된 시즌, 또는 재생되지 않는 제목
+    - 콘텐츠 제목과 연도
+    - { $brand }에 있는 그 콘텐츠 페이지의 주소
+    - 무엇이 잘못되었는지(예: 잘못된 포스터, 빠진 시즌, 재생되지 않는 콘텐츠)
 
-    세부 정보는 공개된 카탈로그에서 오므로 잘못된 설명은 원본에서 수정하는 것이 가장 좋습니다. 우리가 받은 수정 사항을 전달할 수 있습니다.
-help-art-report-bug-title = 문제 보고
-help-art-report-bug-summary = 빠르게 버그를 찾고 수정할 수 있도록 포함해야 할 내용.
-help-art-report-bug-keywords = 보고 버그 문제 이슈 오류 충돌 고장 작동하지 않음 피드백 연락
+    상세 정보는 공개 카탈로그에서 오기 때문에, 잘못된 설명은 원래 카탈로그에서 고치는 것이 가장 좋아요. 받은 수정 사항은 저희가 전달할 수 있어요.
+
+help-art-report-bug-title = 문제 신고하기
+help-art-report-bug-summary = 버그를 빨리 찾아 고칠 수 있도록 알려 줄 내용.
+help-art-report-bug-keywords = 신고 버그 문제 오류 충돌 고장 작동 안 됨 피드백 문의
 help-art-report-bug-body =
-    우리가 알수록 더 빠르게 수정할 수 있습니다. 다음을 포함하십시오:
+    많이 알수록 빨리 고칠 수 있어요. 다음 내용을 알려 주세요.
 
-    1. 수행한 일과 기대했던 일.
-    2. 실제로 발생한 일과 보게 된 메시지.
-    3. 재생과 관련된 경우 제목.
-    4. 사용 중인 기기와 브라우저.
+    1. 무엇을 하고 있었고, 어떻게 될 거라고 생각했는지.
+    2. 대신 무슨 일이 일어났는지, 그리고 보인 메시지.
+    3. 재생 문제라면 콘텐츠 제목.
+    4. 사용하는 기기와 브라우저.
 
-    <a=/help/contact>Contact Us</a> 페이지에는 브라우저 정보가 자동으로 채워진 이메일을 열어주는 버튼이 있습니다.
+    <a=/help/contact>문의하기</a> 페이지에는 브라우저 정보가 미리 채워진 이메일을 여는 버튼이 있어요.
 
-    @@ 진단
+    @@ diagnostics
+
 cookie-sheet = <b>{ $brand }</b>는 프로필과 선호도를 유지하고, 허용하는 경우 추천을 개인화하기 위해 쿠키를 사용합니다.
 cookie-learn = 더 알아보기
 cookie-reject = 거부
@@ -828,26 +971,26 @@ cookie-third =
 
     <a=/help/article/sources>제목의 출처</a>를 참조하십시오.
 cookie-ads = 광고 쿠키, 추적기 또는 분석 도구를 사용하지 않습니다.
-help-ui-foryou = 이 기기에서 당신을 위한 도움
-help-ui-recommended-inline = 당신에게 추천되는 항목
+help-ui-foryou = 이 기기에 맞춘 도움말
+help-ui-recommended-inline = 추천 항목
 help-card-diagnostics-title = 이 기기 확인
-help-card-diagnostics-body = 인터넷 연결, 브라우저 및 우리의 서비스를 테스트해 보세요.
-help-card-profiles-title = 당신의 프로필
-help-card-profiles-body = PIN 또는 Kids Mode가 설정된 프로필을 확인하세요.
+help-card-diagnostics-body = 인터넷 연결, 브라우저, 저희 서비스를 테스트해요.
+help-card-profiles-title = 내 프로필
+help-card-profiles-body = PIN이나 키즈 모드가 설정된 프로필을 확인해요.
 help-card-data-title = 저장된 데이터
-help-card-data-body = 진행 상황을 지우고, 추천을 재설정하거나 다시 시작할 수 있습니다.
+help-card-data-body = 진행 상황을 지우거나, 추천을 초기화하거나, 처음부터 다시 시작해요.
 help-card-language-title = 언어
-help-card-language-body = 언어를 선택하거나 브라우저의 언어를 사용할 수 있습니다.
+help-card-language-body = 언어를 고르거나 브라우저 언어를 사용해요.
 help-card-cookies-title = 쿠키 선택
-help-card-cookies-body = 저장된 내용과 공유되는 내용을 검토할 수 있습니다.
+help-card-cookies-body = 저장되는 것과 공유되는 것을 확인해요.
 help-card-refresh-title = 최신 버전
-help-card-refresh-body = 가장 최신 버전을 받기 위해 다시 로드하세요.
-help-act-run = 확인을 실행하세요
+help-card-refresh-body = 새로고침해서 최신 버전을 받아요.
+help-act-run = 확인 시작
 help-act-running = 확인 중…
-help-act-copy = 결과를 복사
+help-act-copy = 결과 복사
 help-act-copied = 복사됨
 help-act-email = 결과를 이메일로 보내기
-help-act-fix = 수정 방법
+help-act-fix = 해결 방법
 help-act-summary-ok = 이 기기에서 모든 것이 정상입니다.
 help-act-summary-issues =
     { $count ->
@@ -868,40 +1011,41 @@ help-act-v-supported = 지원됨
 help-act-v-unsupported = 지원되지 않음
 help-act-v-hls-native = 내장된 HLS
 help-act-v-mse = 미디어 소스 확장
-help-act-v-blocked = 차단 또는 완전
-help-act-v-reachable = { $ms } ms 내에 접근 가능
-help-act-v-unreachable = 접근 불가능
+help-act-v-blocked = 차단됨 또는 공간 부족
+help-act-v-reachable = { $ms } ms 만에 응답
+help-act-v-unreachable = 연결할 수 없음
 help-act-v-timeout = { $s }초 내에 응답 없음
-help-act-data-title = 이 기기에서의 데이터
+help-act-data-title = 프로필과 시청 기록
 help-act-data-profiles =
     { $count ->
        *[other] 프로필 { $count }개
     }
 help-act-data-progress =
     { $count ->
-       *[other] 진행 상황 저장된 타이틀 { $count }개
+       *[other] 진행 상황이 저장된 콘텐츠 { $count }개
     }
+
 help-act-data-lang = 언어: { $lang }
-help-act-clear-progress = 시청 진행 상황 삭제
+help-act-clear-progress = 모든 시청 기록 숨기기
 help-act-reset-recs = 추천 재설정
-help-act-clear-all = 모든 저장 데이터 삭제
-help-act-confirm = 정말로 하시겠습니까? 이 작업은 되돌릴 수 없습니다.
+help-act-clear-all = 이 브라우저의 데이터를 지우고 로그아웃
+help-act-confirm = 정말 진행할까요? 되돌릴 수 없어요.
 help-act-yes = 네, 실행합니다
 help-act-cancel = 취소
 help-act-done = 완료.
 help-act-reloading = 완료. 새로고침 중…
-help-act-profiles-title = 귀하의 프로필
-help-act-profile-kids = 아이들
-help-act-profile-pin = PIN 활성화
-help-act-open-profiles = 누구가 보고 있는지 열기
+help-act-profiles-title = 내 프로필
+help-act-profile-kids = 키즈
+help-act-profile-pin = PIN 설정됨
+help-act-open-profiles = '누가 시청하나요?' 열기
 help-act-lang-current = 표시 중: { $lang }
 help-act-lang-browser = 브라우저가 선호하는 언어: { $lang }
 help-act-lang-use-browser = 브라우저 언어 사용
 help-act-cookies-none = 아직 선택하지 않았습니다.
 help-act-cookies-on = 개인화가 켜져 있습니다.
 help-act-cookies-off = 개인화가 꺼져 있습니다.
-help-act-cookies-open = 쿠키 선호도 열기
-help-act-refresh-body = 페이지가 잘못 보이거나 수정이 도달하지 않았다면, { $brand }의 최신 버전을 불러오기 위해 새로고침하세요.
+help-act-cookies-open = 쿠키 설정 열기
+help-act-refresh-body = 페이지가 이상하게 보이거나 수정 사항이 반영되지 않았다면, 새로고침해서 { $brand }의 최신 버전을 받으세요.
 help-act-refresh-now = 지금 새로고침
 help-act-version = 버전 { $version }
 nav-home = 홈
@@ -909,9 +1053,9 @@ nav-browse = 둘러보기
 nav-series = 시리즈
 nav-films = 영화
 nav-games = 게임
-nav-new-popular = 새로운 & 인기 있는
-nav-my-list = 내 목록
-nav-browse-language = 언어별 탐색
+nav-new-popular = 신규 & 인기
+nav-my-list = 내 Streams
+nav-browse-language = 언어별로 찾아보기
 nav-new-hot = 새로운 & 핫한
 nav-clips = 클립
 nav-search = 검색
@@ -951,7 +1095,7 @@ notif-h-new-arrival = 새로운 도착
 notif-h-coming-soon = 곧 개봉
 notif-title = 알림
 notif-desc-available = 지금 스트리밍 라이브러리에서 이용 가능합니다.
-notif-caught-up = 모두 시청 완료
+notif-caught-up = 새 알림이 없어요
 notif-caught-up-body = 새로운 알림 및 도착 항목이 여기에 나타납니다.
 media-resume = 재개
 media-play = 재생
@@ -983,7 +1127,7 @@ media-this-movie-is = 이 영화는:
 media-episodes = 에피소드
 media-no-description = 설명이 없습니다.
 media-no-episodes = 에피소드가 없습니다.
-media-more-like-this = 이런 것도 좋아요
+media-more-like-this = 비슷한 콘텐츠
 media-rating-aria = 연령 등급 { $rating }
 media-rating-nr = 등급 없음
 share-copied = 링크가 복사되었습니다
@@ -1017,11 +1161,11 @@ lang-no-titles = 이 언어에 대한 제목이 없습니다.
 player-skip-intro = 인트로 건너뛰기
 player-next-episode = 다음 에피소드
 player-subs-off = 오프
-player-unavailable = 재생 불가능
+player-unavailable = 재생할 수 없음
 player-back = 뒤로
 profile-manage = 프로필 관리
-profile-transfer = 프로필 이동
-profile-kids = 아이 프로필
+profile-transfer = 프로필 이전
+profile-kids = 키즈 프로필
 profile-lock = 프로필 잠금
 profile-choose-icon = 아이콘 선택
 common-done = 완료
@@ -1031,7 +1175,7 @@ player-pause = 일시 중단 (Space)
 player-play = 재생 (Space)
 player-unmute = 소리 키기 (M)
 player-mute = 소리 끄기 (M)
-player-error-no-source = 비디오 스트리밍이 불가능합니다. 모든 소스 제공업체가 사용 불가능하거나 브라우저에서 지원되지 않습니다.
+player-error-no-source = 동영상을 재생할 수 없어요. 사용할 수 있는 소스가 없거나 브라우저가 지원하지 않아요.
 genre-action = 액션
 genre-anime = 애니메이션
 genre-black-stories = 블랙 스토리
@@ -1107,7 +1251,7 @@ genre-talk = 토크
 genre-war-politics = 전쟁 & 정치
 genre-tv-movie = TV 영화
 profile-manage-title = 프로필 관리:
-profile-whos-watching = 누구가 보고 있나요?
+profile-whos-watching = 누가 시청하나요?
 profile-sign-out =  { $brand }에서 로그아웃
 profile-enter-pin = PIN을 입력하여 { $name }의 프로필에 접근하세요.
 profile-edit-title = 프로필 편집
@@ -1141,311 +1285,380 @@ nf-zone-4 = 아날로그 부패
 nf-zone-5 = 공허 감시자
 nf-zone-6 = 우주적 이동
 legal-privacy-title = 개인정보 처리방침
-legal-privacy-updated = 최종 업데이트: 2026년 8월
+legal-privacy-updated = 최종 업데이트: 2026년 10월
 legal-privacy-1-title = 1. 소개
-legal-privacy-1-body = { $brand }는 링크 집계 및 검색 엔진입니다. 이 개인정보 처리방침은 서비스를 이용할 때 개인 정보를 수집, 사용 및 보호하는 방식을 설명합니다.
+legal-privacy-1-body = { $brand }는 링크 모음이자 검색 엔진입니다. 이 개인정보 처리방침은 서비스를 이용할 때 개인정보를 어떻게 수집, 이용, 보호하는지 설명합니다.
 legal-privacy-2-title = 2. 수집하는 정보
-legal-privacy-2-body = 우리는 서비스 제공 및 개선을 위해 제한된 개인 정보만 수집합니다:
-legal-privacy-2-b1 = <strong>계정 정보:</strong> 계정을 생성할 때 이메일 주소 및 표시 이름
-legal-privacy-2-b2 = <strong>사용 데이터:</strong> 프로필 범위 내에서 익명화된 시청 이력 및 선호도
-legal-privacy-2-b3 = <strong>세션 쿠키:</strong> 안전하게 로그인 상태를 유지하기 위해 사용됩니다.
-legal-privacy-3-title = 3. 우리가 하지 않는 일
-legal-privacy-3-body = 우리는 프라이버시에 대한 약속을 지키고 있습니다:
-legal-privacy-3-b1 = <strong>데이터 공유:</strong> 광고주나 데이터 중개자와 개인 데이터를 공유하지 않습니다.
-legal-privacy-3-b2 = <strong>데이터 판매:</strong> 개인 데이터를 제3자에게 판매, 대여, 거래하지 않습니다.
-legal-privacy-3-b3 = <strong>브라우저 인식:</strong> 브라우저 지문 분석이나 어떤 형태의 장치 식별도 수행하지 않습니다.
-legal-privacy-4-title = 4. 처리의 법적 근거 (UK GDPR)
-legal-privacy-4-body = 영국 일반 데이터 보호 규정 (UK GDPR)에 따라, 이 정보를 처리하는 데 의존하는 법적 근거는 다음과 같습니다:
-legal-privacy-4-b1 = <strong>계약 필요성:</strong> 링크 집계 및 프로필 기능을 제공하기 위해 필요합니다.
-legal-privacy-4-b2 = <strong>정당한 이익:</strong> 일반적인 플랫폼 사용 분석 및 성능 개선을 위해 엄격히 익명화 및 집계된 데이터를 사용합니다.
+legal-privacy-2-body = 서비스를 제공하고 개선하기 위해 최소한의 개인정보를 수집합니다:
+legal-privacy-2-b1 = <strong>계정 정보:</strong> 이름과 성, 이메일 주소, 비밀번호(로그인 서비스 제공업체가 복원할 수 없는 형태로만 보관), 그리고 추가한 경우 휴대폰 번호.
+legal-privacy-2-b2 = <strong>프로필과 활동:</strong> 프로필과 프로필 설정, 내 목록, 평가, 시청 진행 상황, 시청 기록. 계정에 연결되어 있어 어느 기기에서나 그대로 이용할 수 있습니다.
+legal-privacy-2-b3 = <strong>보안 기록:</strong> 최근 로그인과 계정 변경 내역, 그리고 해당 브라우저, 운영체제, 국가. 기기 목록을 보여 드리고 새 로그인을 알려 드리기 위해 사용합니다.
+legal-privacy-2-b4 = <strong>기기에 저장되는 정보:</strong> 로그인 상태를 유지하는 정보, 페이지를 빠르게 열기 위한 프로필과 설정 사본, 쿠키 선택. 쿠키 정책을 참고하세요.
+legal-privacy-3-title = 3. 하지 않는 일
+legal-privacy-3-body = 저희는 개인정보를 소중히 여기며, 다음과 같은 일은 하지 않습니다:
+legal-privacy-3-b1 = <strong>데이터 공유:</strong> 광고주나 데이터 브로커와 개인정보를 공유하지 않습니다.
+legal-privacy-3-b2 = <strong>데이터 판매:</strong> 어떤 경우에도 개인정보를 제3자에게 판매, 대여, 거래하지 않습니다.
+legal-privacy-3-b3 = <strong>추적:</strong> 광고나 분석 쿠키를 사용하지 않고, 브라우저 핑거프린팅을 하지 않으며, 다른 웹사이트에서 이용자를 추적하지 않습니다.
+legal-privacy-4-title = 4. 처리의 법적 근거(영국 GDPR)
+legal-privacy-4-body = 영국 일반 개인정보 보호법(UK GDPR)에 따라, 이 정보를 처리하는 법적 근거는 다음과 같습니다:
+legal-privacy-4-b1 = <strong>계약:</strong> 계정, 프로필, 이용하는 기능을 제공하기 위해.
+legal-privacy-4-b2 = <strong>정당한 이익:</strong> 계정을 안전하게 지키고(로그인 기록), 서비스를 운영하고 개선하기 위해.
+legal-privacy-4-b3 = <strong>동의:</strong> 시청한 콘텐츠를 맞춤 추천에 사용하기 위해. 동의는 개인정보 및 데이터 설정에서 언제든 철회할 수 있습니다.
 legal-privacy-5-title = 5. 데이터 저장 방식
-legal-privacy-5-body = 귀하의 데이터는 Supabase(우리의 백엔드 인프라 제공업체)를 사용하여 안전하게 저장됩니다. 데이터에 대한 접근을 보장하기 위해 Row-Level Security(RLS) 정책을 사용합니다.
-legal-privacy-6-title = 6. 제3자 서비스
-legal-privacy-6-body = 우리는 TMDB(메타데이터를 위해) 및 Cloudflare Turnstile(로봇 보호를 위해)와 같은 제3자 API를 사용합니다. 이러한 서비스는 자체 프라이버시 정책에 따라 운영됩니다.
-legal-privacy-7-title = 7. 귀하의 데이터 보호 권리
-legal-privacy-7-body = 영국 GDPR에 따라 귀하는 다음 권리가 있습니다:
-legal-privacy-7-b1 = <strong>접근권:</strong> 우리가 보유한 귀하에 대한 개인 데이터의 사본을 요청할 수 있습니다.
-legal-privacy-7-b2 = <strong>삭제권:</strong> 귀하의 개인 데이터를 삭제하도록 요청할 수 있습니다("잊혀질 권리"). 귀하는 설정 페이지에서 직접 계정을 삭제할 수 있습니다.
-legal-privacy-7-b3 = <strong>정정권:</strong> 우리가 보유한 정확하지 않은 개인 데이터를 수정하도록 요청할 수 있습니다.
-legal-privacy-7-b4 = <strong>거부권:</strong> 우리가 합법적 이익에 의존하여 귀하의 개인 데이터를 처리하는 경우 거부할 수 있습니다.
+legal-privacy-5-body = 계정 데이터는 데이터베이스 제공업체인 Supabase에 저장되며, 행 수준 보안으로 본인 계정만 읽을 수 있습니다. 속도를 위해 로그인한 각 브라우저에도 사본이 저장됩니다. 계정을 삭제하면 데이터가 즉시 삭제됩니다.
+legal-privacy-6-title = 6. 외부 서비스
+legal-privacy-6-body = 다음 업체를 이용하며, 각 업체의 개인정보 처리방침이 적용됩니다: Supabase(계정 및 데이터 저장), Cloudflare(사이트 호스팅 및 이메일 전달), Hugging Face(추천 서비스 호스팅), Resend(계정 이메일 발송), TMDB(영화 및 시리즈 정보와 이미지), YouTube(예고편). 동영상 스트림은 독립적인 외부 소스에서 제공되며, 여느 웹사이트와 마찬가지로 이 소스들은 이용자의 IP 주소를 볼 수 있습니다.
+legal-privacy-7-title = 7. 개인정보 보호 권리
+legal-privacy-7-body = 영국 GDPR에 따라 다음과 같은 권리가 있습니다:
+legal-privacy-7-b1 = <strong>열람권:</strong> 계정의 개인정보 열람에서 언제든 데이터 사본을 다운로드할 수 있습니다.
+legal-privacy-7-b2 = <strong>삭제권:</strong> 계정의 계정 삭제에서 언제든 계정을 삭제할 수 있습니다. 계정 안의 모든 데이터가 즉시 삭제됩니다.
+legal-privacy-7-b3 = <strong>정정권:</strong> 계정에서 이름, 이메일 주소, 전화번호를 변경하거나, 그 밖의 정정을 요청할 수 있습니다.
+legal-privacy-7-b4 = <strong>반대권:</strong> 맞춤 추천을 끄거나, 정당한 이익에 근거한 처리에 반대한다는 의사를 저희에게 보낼 수 있습니다.
 legal-privacy-8-title = 8. 문의
-legal-privacy-8-body = 이 개인정보 보호 정책에 대한 질문이 있거나 데이터 권리가 실행하려는 경우, { $support_email }로 저장소 유지 관리자에게 문의해 주세요.
-legal-terms-title = 서비스 이용 약관
-legal-terms-updated = 최종 업데이트: 2026년 8월
-legal-terms-1-title = 1. 약관 수락
-legal-terms-1-body = { $brand }에 액세스하거나 사용함으로써, 이 서비스 이용 약관 및 우리의 개인정보 보호 정책에 묶여 있음을 동의합니다. 동의하지 않으시면 서비스를 사용하지 마세요.
+legal-privacy-8-body = 이 개인정보 처리방침에 관한 질문이나 권리 행사는 { $support_email }로 연락해 주세요.
+legal-terms-title = 이용 약관
+legal-terms-updated = 최종 업데이트: 2026년 10월
+legal-terms-1-title = 1. 약관 동의
+legal-terms-1-body = { $brand }에 접속하거나 이용하면 본 이용 약관과 개인정보 처리방침에 동의하는 것으로 간주됩니다. 동의하지 않는 경우 서비스를 이용하지 마세요.
 legal-terms-2-title = 2. 서비스의 성격
-legal-terms-2-body = { $brand }은 링크 집계기 및 검색 엔진입니다. 우리는 서버에 어떤 비디오 콘텐츠도 호스팅, 업로드, 전송하거나 제어하지 않습니다. 모든 미디어는 제3자 플랫폼에서 가져옵니다.
+legal-terms-2-body = { $brand }는 링크 모음이자 검색 엔진입니다. 저희 서버에서 동영상 콘텐츠를 호스팅, 업로드, 전송하거나 관리하지 않습니다. 모든 미디어는 외부 플랫폼에서 제공됩니다.
 legal-terms-3-title = 3. 사용자 계정
-legal-terms-3-body = 일부 기능(예: 감상 목록 저장 또는 진행 상황 동기화)에 액세스하려면 계정을 생성해야 합니다. 귀하는 계정 자격 증명의 보안을 책임집니다.
-legal-terms-4-title = 4. 수용 가능한 사용
-legal-terms-4-body = 귀하는 서비스를 다음과 같은 방식으로 사용하지 않기로 동의합니다:
-legal-terms-4-b1 = 서비스의 보안 관련 기능을 우회, 비활성화하거나 방해하는 행위.
-legal-terms-4-b2 = 자동 도구(예: 봇, 스크래퍼 또는 크롤러)를 사용하여 서비스에 액세스하거나 쿼리하는 속도가 성능에 영향을 줄 수 있는 경우.
-legal-terms-4-b3 = 서비스 인프라의 취약점을 조사, 스캔, 또는 테스트하려는 시도를 하지 마세요.
-legal-terms-4-b4 = 불법적이거나 해로우거나, 또는 우리가 부적절하다고 판단하는 모든 행위를 하지 마세요.
-legal-terms-5-title = 5. 지적 재산권
-legal-terms-5-body = { $brand } 브랜드, 인터페이스 디자인, 원래 소프트웨어 코드는 저작권 보호를 받고 있습니다. { $brand }를 통해 접근 가능한 모든 미디어 콘텐츠는 각각의 권리자에게 소유권이 있습니다.
-legal-terms-6-title = 6. 면책 조항 및 책임 제한
-legal-terms-6-body = 서비스는 어떠한 보증도 하지 않는 "있는 그대로" 및 "사용 가능한 상태"로 제공됩니다. { $brand }는 지속적인 가용성을 보장하지 않으며, 간접적 또는 부수적인 손해에 대해 책임을 지지 않습니다.
+legal-terms-3-body = { $brand }를 이용하려면 무료 계정이 필요합니다. 비밀번호를 안전하게 관리하고 계정에서 일어나는 일에 대한 책임은 이용자에게 있습니다. 다른 사람이 계정을 쓰고 있다고 생각되면 즉시 알려 주세요.
+legal-terms-4-title = 4. 이용 제한
+legal-terms-4-body = 다음과 같은 목적으로 서비스를 이용하지 않는 데 동의합니다:
+legal-terms-4-b1 = 서비스의 보안 기능을 우회하거나, 비활성화하거나, 방해하는 행위.
+legal-terms-4-b2 = 봇, 스크레이퍼, 크롤러 같은 자동화 도구로 성능을 떨어뜨릴 수 있는 빈도로 서비스에 접속하거나 요청하는 행위.
+legal-terms-4-b3 = 서비스 인프라의 취약점을 조사, 스캔, 테스트하려는 행위.
+legal-terms-4-b4 = 불법적이거나 해로운 행위, 또는 저희가 부적절하다고 판단하는 행위.
+legal-terms-5-title = 5. 지식재산권
+legal-terms-5-body = { $brand } 브랜드, 인터페이스 디자인, 자체 소프트웨어 코드는 저작권으로 보호됩니다. { $brand }를 통해 접근할 수 있는 모든 미디어 콘텐츠는 각 권리자의 소유입니다.
+legal-terms-6-title = 6. 면책 및 책임 제한
+legal-terms-6-body = 서비스는 어떠한 보증도 없이 '있는 그대로', '이용 가능한 상태로' 제공됩니다. { $brand }는 서비스가 중단 없이 제공됨을 보장하지 않으며, 간접적이거나 결과적인 손해에 대해 책임지지 않습니다.
 legal-terms-7-title = 7. 제3자 콘텐츠
-legal-terms-7-body = { $brand }는 독립적인 제3자 서버에 호스팅된 콘텐츠를 가리키는 링크에 접근을 제공합니다. 우리는 제3자 사이트의 콘텐츠, 프라이버시 정책, 또는 운영 방식에 대해 통제권을 가지지 않으며, 책임도 지지 않습니다.
-legal-terms-8-title = 8. 계약 종료
-legal-terms-8-body = 우리는 이러한 이용 약관을 위반하거나 다른 사용자, 우리, 또는 제3자에게 해로운 행위를 발견할 경우, 사전 통지 없이 계정 및 서비스에 대한 접근을 중단하거나 종료할 권리가 있습니다.
-legal-terms-9-title = 9. 적용 법률
-legal-terms-9-body = 이 이용 약관은 영국 왕국의 법률에 따라 해석되고 적용되며, 법적 충돌 규정은 고려하지 않습니다.
+legal-terms-7-body = { $brand }는 독립적인 제3자 서버에 호스팅된 콘텐츠로 연결되는 링크를 제공합니다. 제3자 사이트의 콘텐츠, 개인정보 처리방침, 운영 방식을 관리하지 않으며 이에 대해 책임지지 않습니다.
+legal-terms-8-title = 8. 이용 정지
+legal-terms-8-body = 본 약관을 위반하거나 다른 이용자, 저희 또는 제3자에게 해롭다고 판단되는 행위가 있는 경우, 저희는 단독 재량에 따라 사전 통지 없이 계정과 서비스 이용을 정지하거나 종료할 수 있습니다.
+legal-terms-9-title = 9. 준거법
+legal-terms-9-body = 본 이용 약관은 법률 충돌 원칙과 관계없이 잉글랜드 및 웨일스 법에 따라 규율되고 해석됩니다.
 legal-terms-10-title = 10. 문의
-legal-terms-10-body = 이 이용 약관에 대한 질문이 있으시면, 문의 페이지를 통해 문의해 주세요.
+legal-terms-10-body = 본 이용 약관에 관한 질문은 문의하기 페이지로 연락해 주세요.
 legal-cookie-policy-title = 쿠키 정책
-legal-cookie-policy-updated = 최종 수정일: 2026년 8월 16일
-legal-cookie-policy-1-title = 우리가 쿠키를 어떻게 사용하는가
-legal-cookie-policy-1-body = 우리는 서비스에서의 활동을 추적하고 특정 정보를 저장하기 위해 쿠키 및 유사한 추적 기술을 사용합니다. 쿠키는 소량의 데이터가 포함된 파일로, 익명의 고유 식별자를 포함할 수 있습니다.
-legal-dmca-title = DMCA 안전 요람 통지
-legal-dmca-updated = 최종 수정일: 2026년 8월
-legal-dmca-1-title = 1. 우리의 역할 — 링크 집계자, 호스팅자가 아님
-legal-dmca-1-body = { $brand }는 링크 집계 및 검색 엔진입니다. 우리는 비디오나 미디어 콘텐츠를 호스팅, 업로드, 저장, 전송하거나 제어하지 않습니다. 모든 콘텐츠는 완전히 우리의 통제 범위 외부에 있는 제3자 서버에서 제공됩니다.
+legal-cookie-policy-updated = 최종 업데이트: 2026년 10월
+legal-cookie-policy-1-title = 쿠키와 저장소 사용 방식
+legal-cookie-policy-1-body = { $brand }는 광고나 분석 쿠키를 사용하지 않습니다. 대신 이 사이트만 읽을 수 있는 기기 내 공간인 브라우저의 로컬 저장소를 다음 목적으로 사용합니다:
+legal-cookie-policy-1-b1 = <strong>로그인:</strong> 이 브라우저에서 로그인 상태를 유지하는 정보.
+legal-cookie-policy-1-b2 = <strong>속도:</strong> 페이지가 바로 열리도록 저장한 프로필, 설정, 시청 진행 상황 사본.
+legal-cookie-policy-1-b3 = <strong>이용자의 선택:</strong> 쿠키와 맞춤 설정 선택, 표시 언어.
+legal-cookie-policy-1-b4 = <strong>다른 사이트:</strong> 예고편은 YouTube에서 재생되며, 예고편이 재생될 때 YouTube가 자체 쿠키를 설정할 수 있습니다. 선택은 개인정보 및 데이터 설정에서 언제든 바꿀 수 있습니다. 브라우저에서 이 사이트의 데이터를 삭제하면 해당 브라우저에서 로그아웃되며, 계정에는 모든 데이터가 그대로 남습니다.
+legal-dmca-title = DMCA 세이프 하버 고지
+legal-dmca-updated = 최종 업데이트: 2026년 8월
+legal-dmca-1-title = 1. 저희의 역할: 호스트가 아닌 링크 모음
+legal-dmca-1-body = { $brand }는 링크 모음이자 검색 엔진입니다. 동영상이나 미디어 콘텐츠를 호스팅, 업로드, 저장, 전송하거나 관리하지 않습니다. 모든 콘텐츠는 저희가 전혀 관리하지 않는 제3자 서버에서 제공됩니다.
 legal-dmca-2-title = 2. 통지 및 삭제 절차
-legal-dmca-2-body = 당신이 저작권 소유자이거나, 저작권 소유자의 대리인으로서 그 대리인을 대리하여 행동할 권한이 있는 경우, 우리의 인덱스에 있는 링크가 당신의 저작권을 침해한다고 생각된다면, { $support_email }으로 서면 통지를 보내 주시기 바랍니다. 통지에는 다음 내용이 포함되어야 합니다:
-legal-dmca-2-b1 = <strong>저작권 소유자 또는 그 대리인의</strong> 물리적 또는 전자적 서명.
-legal-dmca-2-b2 = <strong>저작권이 침해된</strong> 작품을 식별하거나, 여러 작품이 단일 통지로 다루어진다면, 이러한 작품의 대표적인 목록을 제공해야 합니다.
-legal-dmca-2-b3 = <strong>소유된 자료</strong> (즉, 특정 { $brand } 링크 또는 URL)를 식별하고, 이를 찾을 수 있도록 충분한 정보를 제공해야 합니다.
-legal-dmca-3-title = 3. 추가로 필요한 요소
-legal-dmca-3-body = 당신의 DMCA 통지는 또한 다음 내용을 포함해야 합니다:
-legal-dmca-3-b1 = <strong>연락처 정보</strong> — 이름, 주소, 전화번호, 이메일 주소.
-legal-dmca-3-b2 = <strong>정당한 신념의 선언</strong> — 당신이 해당 자료를 통지된 방식으로 사용하는 것이 저작권 소유자, 그 대리인, 또는 법률에 의해 허락되지 않았다고 정당한 신념을 가지고 있다고 선언합니다.
-legal-dmca-3-b3 = <strong>정확성에 대한 선언</strong> — 통지에 포함된 정보가 정확하며, 위증으로 인한 법적 책임을 지게 될 것을 인정하며, 당신이 저작권 소유자의 대리인으로서 행동할 권한이 있다고 선언합니다.
-legal-dmca-3-b4 = <strong>통지를 보내는 대상:</strong> { $support_email }
-legal-dmca-3-b5 = 우리는 모든 통지를 검토하고, 위의 법적 요건을 충족하는 링크는 우리의 인덱스에서 제거합니다.
-legal-dmca-3-b6 = <strong>반대 통지:</strong> 당신이 링크가 오류로 인해 제거되었다고 생각된다면, 17 U.S.C. § 512(g)에 따라 반대 통지를 제출할 수 있습니다.
-legal-dmca-4-title = 4. 중요한 제한 — 우리는 오직 링크만 제거할 수 있습니다
-legal-dmca-4-body = 왜 { $brand }는 미디어 파일을 호스팅하지 않기 때문에, 우리는 검색 인덱스에서 링크만 제거할 수 있습니다. 우리는 서버에서 호스팅된 콘텐츠를 제거할 수 없습니다.
-legal-dmca-5-title = 5. 반복 위반자 정책
-legal-dmca-5-body = 적절한 상황에서, 그리고 우리의 독자적인 판단에 따라, { $brand }는 반복 위반자 사용자나 계정의 접근을 비활성화하거나 종료할 수 있습니다.
-legal-dmca-6-title = 6. 책임 부인
-legal-dmca-6-body = DMCA 통지에 따라 인덱스에서 링크를 제거하는 것은 { $brand }가 어떤 위반도 발생했음을 인정하는 것을 의미하지 않습니다.
-legal-disclaimer-title = 고지사항
+legal-dmca-2-body = 저작권자이거나 저작권자를 대리할 권한이 있는 대리인으로서, 저희 색인에 있는 링크가 저작권을 침해한다고 판단되면 다음 내용을 담은 서면 통지를 { $support_email }로 보내 주세요:
+legal-dmca-2-b1 = 저작권자 또는 그 정식 대리인의 <strong>자필 서명 또는 전자 서명</strong>.
+legal-dmca-2-b2 = 침해되었다고 주장하는 <strong>저작물의 특정</strong>. 한 통지에 여러 저작물이 포함되는 경우 해당 저작물의 대표 목록.
+legal-dmca-2-b3 = 침해한다고 주장하는 <strong>자료의 특정</strong>(구체적인 { $brand } 링크 또는 URL)과, 저희가 그 위치를 찾을 수 있을 만큼 충분한 정보.
+legal-dmca-3-title = 3. 추가 필수 사항
+legal-dmca-3-body = DMCA 통지에는 다음 내용도 포함되어야 합니다:
+legal-dmca-3-b1 = <strong>연락처</strong>: 이름, 주소, 전화번호, 이메일 주소.
+legal-dmca-3-b2 = <strong>선의의 진술</strong>: 문제가 된 방식의 자료 사용이 저작권자, 그 대리인 또는 법률에 의해 허락되지 않았다고 선의로 믿는다는 진술.
+legal-dmca-3-b3 = <strong>정확성 진술</strong>: 통지의 정보가 정확하며, 위증 시 처벌을 감수하고 저작권자를 대리할 권한이 있다는 진술.
+legal-dmca-3-b4 = <strong>통지 보낼 곳:</strong> { $support_email }
+legal-dmca-3-b5 = 모든 통지를 검토하고, 위 법정 요건을 충족하는 링크를 색인에서 삭제합니다.
+legal-dmca-3-b6 = <strong>반론 통지:</strong> 링크가 잘못 삭제되었다고 생각되면 17 U.S.C. § 512(g)에 따라 반론 통지를 제출할 수 있습니다.
+legal-dmca-4-title = 4. 중요한 제한: 링크만 삭제할 수 있습니다
+legal-dmca-4-body = { $brand }는 미디어 파일을 호스팅하지 않으므로 검색 색인에서 링크만 삭제할 수 있습니다. 콘텐츠가 호스팅된 서버에서 콘텐츠 자체를 삭제할 수는 없습니다.
+legal-dmca-5-title = 5. 반복 침해자 정책
+legal-dmca-5-body = { $brand }는 적절한 경우 단독 재량에 따라 반복적으로 침해하는 이용자나 계정의 이용을 차단하거나 종료합니다.
+legal-dmca-6-title = 6. 책임 인정이 아님
+legal-dmca-6-body = DMCA 통지에 따라 색인에서 링크를 삭제하더라도 { $brand }가 침해 사실을 인정하는 것은 아닙니다.
+legal-disclaimer-title = 면책 조항
 legal-disclaimer-updated = 최종 업데이트: 2026년 8월
-legal-disclaimer-1-title = 1. 콘텐츠 호스팅 없음
-legal-disclaimer-1-body = { $brand }는 공개적으로 이용 가능한 임베디드 미디어 링크를 수집하고 검색하는 링크 집계기 및 검색 엔진입니다. 우리는 서버에 비디오, 오디오, 또는 미디어 콘텐츠를 호스팅, 업로드, 저장, 전송하거나 제어하지 않습니다.
-legal-disclaimer-2-title = 2. 제3자 콘텐츠 — 책임 없음
-legal-disclaimer-2-body = { $brand }가 인덱싱한 링크를 통해 접근 가능한 모든 콘텐츠는 외부의 독립적인 제3자 소스에서 기원합니다. { $brand }는 이러한 콘텐츠의 법적성, 정확성, 품질, 또는 이용 가능성에 대해 통제권을 가지지 않으며, 책임도 지지 않습니다.
-legal-disclaimer-3-title = 3. 사용자 위험 수용
-legal-disclaimer-3-body = 당신은 { $brand }를 사용하고, 외부 임베디드 링크를 통해 콘텐츠에 접근하는 것이 전적으로 당신의 위험에 따른 것임을 인식하고 동의합니다. { $brand }는 모든 약속, 명시적 또는 암시적 약속을 명시적으로 부인합니다.
-legal-disclaimer-4-title = 4. 링크 이용 가능성
-legal-disclaimer-4-body = 인베딩된 { $brand }에 의해 인덱싱된 링크는 제3자 서버에 있는 자원을 가리키며, 링크된 콘텐츠의 지속적인 이용 가능성, 품질 또는 완전성을 보장할 수 없습니다. 링크가 예고 없이 깨지거나 사용할 수 없게 될 수 있습니다.
+legal-disclaimer-1-title = 1. 콘텐츠를 호스팅하지 않습니다
+legal-disclaimer-1-body = { $brand }는 공개적으로 이용 가능한 임베드 미디어 링크를 모은 링크 모음이자 검색 엔진입니다. 저희 서버에서 동영상, 오디오, 미디어 콘텐츠를 호스팅, 업로드, 저장, 전송하거나 관리하지 않습니다.
+legal-disclaimer-2-title = 2. 제3자 콘텐츠: 책임 없음
+legal-disclaimer-2-body = { $brand }가 색인한 링크로 접근할 수 있는 모든 콘텐츠는 독립적인 외부 제3자 소스에서 비롯됩니다. { $brand }는 그러한 콘텐츠의 적법성, 정확성, 품질, 이용 가능성을 관리하지 않으며 이에 대해 책임지지 않습니다.
+legal-disclaimer-3-title = 3. 이용자의 위험 부담
+legal-disclaimer-3-body = { $brand }의 이용과 외부 임베드 링크를 통한 콘텐츠 접근은 전적으로 이용자 본인의 책임임을 인정하고 동의합니다. { $brand }는 명시적이든 묵시적이든 모든 보증을 명시적으로 부인합니다.
+legal-disclaimer-4-title = 4. 링크의 이용 가능성
+legal-disclaimer-4-body = { $brand }가 색인한 임베드 링크는 제3자 서버의 자료를 가리킵니다. 링크된 콘텐츠의 지속적인 이용 가능성, 품질, 완전성을 보장할 수 없으며, 링크는 예고 없이 끊기거나 이용할 수 없게 될 수 있습니다.
 legal-disclaimer-5-title = 5. 정보의 정확성
-legal-disclaimer-5-body = { $brand }에 표시되는 메타데이터(제목, 설명, 평점 및 이미지 포함)는 TMDB와 같은 제3자 데이터 제공업체에서 가져옵니다. 이 메타데이터의 정확성 또는 완전성을 보장하지 않습니다.
+legal-disclaimer-5-body = { $brand }에 표시되는 메타데이터(제목, 설명, 평점, 이미지 등)는 TMDB 같은 외부 데이터 제공업체에서 가져옵니다. 이 메타데이터의 정확성이나 완전성을 보장하지 않습니다.
 help-ui-kind-policy = 정책
 help-ui-filter-all = 모두
 help-ui-filter-articles = 도움말 기사
 help-ui-filter-policies = 정책
 help-ui-recent = 최근 검색
 help-ui-clear = 지우기
-help-ui-did-you-mean =  "{ $query }" 의 뜻은 무엇인가요?
-help-ui-viewed = 최근 본 항목
-help-ui-on-this-page = 이 페이지에서
+help-ui-did-you-mean = 혹시 '{ $query }' 검색하셨나요?
+help-ui-viewed = 최근 본 도움말
+help-ui-on-this-page = 이 페이지의 내용
 help-ui-other-policies = 다른 정책
-help-ui-section-link = 이 섹션으로 이동
+help-ui-section-link = 이 섹션 링크
 help-ui-policy-questions = 이 정책에 대한 질문이 있나요?
 help-topic-legal = 법적 사항 및 정책
 help-group-policies = 정책
-help-art-fake-sites-title = 가짜 { $brand } 사이트 및 메시지 인식 방법
-help-art-fake-sites-summary = 공식 주소, 우리가 절대 요청하지 않는 것, 그리고 복제본에 대해 어떻게 해야 할지 설명합니다.
-help-art-fake-sites-keywords = 가짜 사기 피싱 복제본 모방 공식 주소 안전 다운로드 비밀번호 결제 이메일
+help-group-signing-in = 로그인 및 보안
+help-art-fake-sites-title = 가짜 { $brand } 사이트와 메시지를 알아보는 방법
+help-art-fake-sites-summary = 공식 주소, 저희가 절대 묻지 않는 것, 가짜를 발견했을 때 할 일.
+help-art-fake-sites-keywords = 가짜 사기 피싱 모방 사칭 공식 주소 안전 다운로드 비밀번호 결제 이메일
 help-art-fake-sites-body =
-    인기 있는 사이트의 복제본은 항상 나타납니다. 이는 { $brand }에 속하는 주소만 다음과 같습니다:
+    인기 사이트의 가짜는 늘 생겨나요. { $brand }의 주소는 다음뿐이에요.
 
-    - <b>streams.watch</b>, 앱
-    - <b>help.streams.watch</b>, 이 도움말 센터
-    - <b>@streams.watch</b> 이메일 주소, 예를 들어 <a=mailto:{ $help_email }>{ $help_email }</a>
+    - <b>streams.watch</b>: 앱
+    - <b>help.streams.watch</b>: 이 도움말 센터
+    - <b>@streams.watch</b> 이메일 주소(예: <a=mailto:{ $help_email }>{ $help_email }</a>)
 
-    ## 우리가 절대 요청하지 않는 것
-    - 카드 번호, 은행 정보 또는 어떤 결제도. { $brand }는 무료입니다. 자세한 내용은 <a=/help/article/free-to-use>{ $brand }는 무료입니까?</a>를 참조하십시오.
-    - 이메일, 채팅 또는 로그인 페이지 외부의 폼을 통해 비밀번호를 요청하는 것.
-    - 다운로드, 확장 프로그램, 코드크, 또는 시청을 위해 업데이트를 요청하는 것.
+    ## 저희가 절대 묻지 않는 것
+    - 카드 번호, 계좌 정보, 그 밖의 결제. { $brand }는 무료예요. <a=/help/article/free-to-use>{ $brand }는 무료인가요?</a>에서 확인하세요.
+    - 이메일, 채팅, 또는 로그인 페이지가 아닌 양식으로 비밀번호를 받는 것.
+    - 시청을 위한 다운로드, 확장 프로그램, 코덱, 업데이트.
 
-    ## 복제본을 찾은 경우
-    1. 페이지를 닫고 어떤 정보도 입력하지 마세요.
-    2. 비밀번호를 입력했다면 해당 사이트에서 비밀번호를 변경하세요.
-    3. 주소를 <a=mailto:{ $help_email }>{ $help_email }</a>로 보내주십시오. 그러면 보고할 수 있습니다.
-help-art-security-report-title = 보안 문제 신고
-help-art-security-report-summary = 우리에게 위험을 안전하게 알리는 방법
-help-art-security-report-keywords = 보안 취약점 버그 보상 책임 있는 공개 취약점 해킹 보고 약점
+    ## 가짜를 발견했다면
+    1. 페이지를 닫고 아무것도 입력하지 마세요.
+    2. 비밀번호를 입력했다면 그 비밀번호를 쓰는 사이트에서 바꾸세요.
+    3. 저희가 신고할 수 있도록 주소를 <a=mailto:{ $help_email }>{ $help_email }</a>로 보내 주세요.
+
+help-art-security-report-title = 보안 문제 신고하기
+help-art-security-report-summary = 취약점을 안전하게 알려 주는 방법.
+help-art-security-report-keywords = 보안 취약점 버그 바운티 책임 있는 공개 익스플로잇 해킹 신고 약점
 help-art-security-report-body =
-    다른 사람의 데이터를 읽을 수 있는 방법을 찾거나, 프로필 PIN을 우회하거나, 사이트를 손상시킬 수 있는 방법을 발견했다면, 다른 사람에게 말하기 전에 우리에게 알려주세요.
+    다른 사람의 데이터를 읽거나, 프로필 PIN을 우회하거나, 사이트를 망가뜨릴 방법을 찾았다면 다른 누구보다 먼저 저희에게 알려 주세요.
 
-    1. <a=mailto:{ $help_email }>{ $help_email }</a>으로 이메일을 보내고, 제목에 <b>보안</b>을 적으세요.
-    2. 발견한 내용, 반복할 수 있는 단계, 그리고 영향을 받는 페이지나 주소를 설명해 주세요.
-    3. 다른 사람의 데이터에 접근하지 마세요. 자동화된 요청의 폭격 테스트도 하지 마세요.
+    1. 제목을 <b>보안</b>으로 해서 <a=mailto:{ $help_email }>{ $help_email }</a>로 보내 주세요.
+    2. 찾은 내용, 재현 방법, 영향을 받는 페이지나 주소를 적어 주세요.
+    3. 다른 사람의 데이터에 접근하거나 자동화된 대량 요청으로 테스트하지 마세요.
 
-    우리는 모든 보고서를 읽습니다. 동일한 세부 정보는 <a=/.well-known/security.txt>/.well-known/security.txt</a>에서 기계가 읽을 수 있는 파일에 있습니다.
-help-art-translate-title = 도움을 주어 { $brand }를 번역해 주세요
-help-art-translate-summary = 인터페이스 텍스트는 평문 파일에 있으며, 언어별로 하나씩 있고 누구나 개선할 수 있습니다.
-help-art-translate-keywords = 번역 번역문 로컬라이제이션 언어 기여 ftl 유창한 문법 성별 복수형
+    모든 신고를 읽어요. 같은 정보가 기계가 읽을 수 있는 파일 <a=/.well-known/security.txt>/.well-known/security.txt</a>에도 있어요.
+
+help-art-translate-title = { $brand } 번역 돕기
+help-art-translate-summary = 인터페이스 문구는 언어마다 하나씩 있는 간단한 파일에 있고, 누구나 고칠 수 있어요.
+help-art-translate-keywords = 번역 현지화 로컬라이제이션 언어 기여 ftl fluent 문법 성별 복수형
 help-art-translate-body =
-    모든 인터페이스 텍스트는 언어별로 하나의 평문 파일에 저장되어 있습니다. 번역에는 프로그래밍이 필요하지 않습니다.
+    인터페이스 문구는 모두 언어마다 하나씩 있는 일반 텍스트 파일에 저장돼요. 번역에 프로그래밍은 필요 없어요.
 
-    ## 알아야 할 사항
-    - 메시지는 <b>key = text</b>처럼 보입니다. 등호 기호 뒤의 텍스트만 변경하세요.
-    - 괄호 안에 있는 단어, 예를 들어 <b>{ "{ $brand }" }</b>는 앱이 채웁니다. 그대로 두고, 언어에 따라 위치를 조정하세요.
-    - 일부 메시지는 단수와 복수 형태가 있습니다 (<b>1 시즌</b>, <b>2 시즌</b>). 두 가지 이상의 형태가 있는 언어는 모두 추가할 수 있습니다.
-    - 언어가 성별이나 문법에 따라 단어를 바꾸는 경우, 문장에 맞는 형태를 작성하세요.
+    ## 알아 둘 것
+    - 메시지는 <b>키 = 텍스트</b> 형태예요. 등호 뒤의 텍스트만 바꾸세요.
+    - <b>{ "{ $brand }" }</b>처럼 중괄호 안에 있는 단어는 앱이 채워 넣어요. 그대로 두고, 언어에 맞는 위치로 옮기세요.
+    - 하나일 때와 여러 개일 때 형태가 다른 메시지도 있어요(영어의 <b>1 season</b>, <b>2 seasons</b>). 형태가 세 가지 이상인 언어는 모두 추가할 수 있어요.
+    - 성이나 격에 따라 단어 형태가 바뀌는 언어라면 문장에 맞는 형태로 쓰세요.
 
-    ## 어떻게 보내는지
-    <a=mailto:{ $contribute_email }>{ $contribute_email }</a>으로 언어와 파일 또는 변경 사항의 링크를 보내주세요. 서로의 작업을 검토하는 원어민이 가장 좋은 검토자입니다.
-help-art-cookies-explained-title = 쿠키와 로컬 스토리지 설명
-help-art-cookies-explained-summary = { $brand }가 브라우저에 저장하는 데이터를 평문으로 설명합니다.
-help-art-cookies-explained-keywords = 쿠키 로컬 스토리지 브라우저 데이터 추적 동의 배너 선호도 세션 제3자
+    ## 보내는 방법
+    언어와 함께 파일이나 변경 내용 링크를 <a=mailto:{ $contribute_email }>{ $contribute_email }</a>로 보내 주세요. 원어민끼리 서로의 작업을 검토하는 것이 가장 좋은 확인 방법이에요.
+
+help-art-cookies-explained-title = 쿠키와 로컬 저장소 알아보기
+help-art-cookies-explained-summary = 브라우저가 { $brand }를 위해 보관하는 것을 쉽게 설명해요.
+help-art-cookies-explained-keywords = 쿠키 로컬 저장소 local storage 브라우저 데이터 추적 동의 배너 설정 세션 제3자
 help-art-cookies-explained-body =
-    <b>쿠키</b>는 웹사이트가 브라우저에 저장하도록 요청하는 작은 노트입니다. <b>로컬 스토리지</b>는 사이트만 읽을 수 있고, 요청마다 전송되지 않는 유사한 장소입니다.
+    <b>쿠키</b>는 웹사이트가 브라우저에 보관해 달라고 하는 작은 메모예요. <b>로컬 저장소</b>도 비슷한 공간이지만, 그 사이트만 읽을 수 있고 요청할 때마다 전송되지는 않아요.
 
-    { $brand }는 프로필, PIN, 시청 진행 상황 및 언어를 로컬 스토리지에 저장합니다. 이 데이터는 기기에서만 남습니다. 우리에게 이미지나 동영상을 제공하는 다른 웹사이트는 자체 쿠키를 설정할 수 있으며, 우리는 이를 제어할 수 없습니다. 자세한 내용은 <a=/help/article/sources>제목의 출처</a>를 참조하세요.
+    { $brand }는 광고나 추적용 쿠키 대신 로컬 저장소를 사용해요. 보관하는 것은 다음과 같아요.
+    - 로그인 상태를 유지하는 정보
+    - 페이지가 빨리 열리도록 저장한 프로필, 설정, 진행 상황 사본
+    - 쿠키와 맞춤 설정에 대한 선택
 
-    ## 선택 사항
-    - 처음 방문할 때, 추천이 시청 내역을 사용할 수 있는지 묻는 배너가 표시됩니다. 언제든지 선택을 변경할 수 있습니다.
-    - <b>거절</b>을 선택하면 사이트 사용에 필요한 모든 데이터를 유지하고 개인화 기능을 끕니다.
-    - 브라우저는 쿠키 및 사이트 데이터를 차단하거나 삭제할 수도 있습니다. 그렇게 하면 프로필과 진행 상황이 사라집니다.
+    예고편은 YouTube에서 재생되며 YouTube가 자체 쿠키를 설정할 수 있고, 이미지는 공개 영화 카탈로그에서 와요. 이것들은 저희가 관리하지 않아요. <a=/help/article/sources>콘텐츠의 출처</a>에서 확인하세요.
 
-    @@ 쿠키
-help-art-stuck-loading-title = 페이지가 로고나 빈 화면에 멈춰 있습니다
-help-art-stuck-loading-summary = { $brand }가 시작되지 않아 계속 멈춰 있는 경우 시도할 방법
-help-art-stuck-loading-keywords = stuck loading logo blank white screen splash not starting webassembly wasm frozen startup
+    ## 선택할 수 있는 것
+    - 처음 방문하면 시청한 콘텐츠를 추천에 써도 되는지 묻는 배너가 나와요. 언제든 <b>개인정보 및 데이터 설정</b>이나 아래 도구에서 바꿀 수 있어요.
+    - <b>거부</b>를 선택하면 사이트가 작동하는 데 필요한 것만 보관하고 맞춤 추천은 꺼져요.
+    - 브라우저가 사이트 데이터를 지우면 그 브라우저에서 로그아웃돼요. 계정의 데이터는 모두 남아 있어요.
+
+    @@ cookies
+
+help-art-stuck-loading-title = 로고나 빈 화면에서 넘어가지 않아요
+help-art-stuck-loading-summary = { $brand }가 시작을 마치지 못할 때 해 볼 것.
+help-art-stuck-loading-keywords = 멈춤 로딩 로고 빈 화면 흰 화면 시작 안 됨 webassembly wasm 시작
 help-art-stuck-loading-body =
-    While { $brand } starts you see the cube logo with a row of moving dots. It should take a few seconds. { $brand } runs as a WebAssembly app, so a browser or setting that switches WebAssembly off will leave you on that screen.
+    { $brand }가 시작되는 동안 큐브 로고와 움직이는 점이 보여요. 보통 몇 초면 끝나요. { $brand }는 WebAssembly 앱으로 실행되므로, WebAssembly를 끄는 브라우저나 설정에서는 이 화면에 머물러요.
 
-    1. Reload with <b>Ctrl + Shift + R</b> (<b>Cmd + Shift + R</b> on a Mac) to fetch the newest version.
-    2. Open the page in a private window. If it works there, an extension is in the way. See <a=/help/article/extensions-blockers>Extensions that block the player</a>.
-    3. Update your browser. See <a=/help/article/supported-browsers>Supported browsers</a>.
-    4. Turn off any mode that limits web features, such as a lockdown or strict security mode, for this site.
-    5. Clear this site's data. See <a=/help/article/clear-data>How to clear your saved data</a>.
+    1. <b>Ctrl + Shift + R</b>(Mac에서는 <b>Cmd + Shift + R</b>)로 새로고침해서 최신 버전을 받으세요.
+    2. 시크릿 창에서 페이지를 여세요. 거기서 된다면 확장 프로그램이 방해하고 있는 거예요. <a=/help/article/extensions-blockers>플레이어를 막는 확장 프로그램</a>에서 확인하세요.
+    3. 브라우저를 업데이트하세요. <a=/help/article/supported-browsers>지원되는 브라우저</a>에서 확인하세요.
+    4. Apple 기기의 차단 모드나 Edge의 엄격한 보안 설정처럼 웹 기능을 제한하는 모드를 이 사이트에서 끄세요.
+    5. 이 사이트의 데이터를 지운 다음 다시 로그인하세요. <a=/help/article/clear-data>저장된 데이터를 지우는 방법</a>에서 확인하세요.
 
     @@ refresh
-help-art-slow-pages-title = Pages load slowly
-help-art-slow-pages-summary = Make browsing faster on a slow connection or an older device.
-help-art-slow-pages-keywords = slow lag performance speed loading memory old phone laggy scrolling previews
+
+help-art-slow-pages-title = 페이지가 느리게 열려요
+help-art-slow-pages-summary = 느린 연결이나 오래된 기기에서도 더 빠르게 둘러보는 방법.
+help-art-slow-pages-keywords = 느림 렉 성능 속도 로딩 메모리 오래된 휴대폰 버벅임 스크롤 미리보기
 help-art-slow-pages-body =
-    The first visit downloads the app, about 3 MB. After that, most of the wait is pictures and previews.
+    처음 방문할 때 약 2 MB인 앱을 내려받아요. 그 뒤로는 기다리는 시간 대부분이 이미지와 미리보기 때문이에요.
 
-    - Turn off <b>Autoplay previews</b> in <b>Settings</b>, under <b>Playback Settings</b>. Trailers that start by themselves use data and memory.
-    - Close tabs and other apps that use the network or a lot of memory.
-    - Use a current browser. Older ones run the app more slowly.
-    - On mobile data, switch to Wi-Fi if you can.
+    - 프로필의 <b>재생 설정</b>에서 <b>미리보기 자동 재생</b>을 끄세요. 저절로 시작되는 미리보기는 데이터와 메모리를 써요.
+    - 네트워크나 메모리를 많이 쓰는 탭과 앱을 닫으세요.
+    - 최신 브라우저를 쓰세요. 오래된 브라우저에서는 앱이 더 느리게 돌아가요.
+    - 모바일 데이터를 쓰고 있다면 가능할 때 Wi-Fi로 바꾸세요.
 
     @@ diagnostics
-help-art-vpn-network-title = VPNs, school and work networks
-help-art-vpn-network-summary = Why some networks block titles or pictures, and what to try.
-help-art-vpn-network-keywords = vpn proxy school work network firewall dns filter blocked safedns restricted wifi
+
+help-art-vpn-network-title = VPN, 학교 및 회사 네트워크
+help-art-vpn-network-summary = 일부 네트워크에서 콘텐츠나 이미지가 막히는 이유와 해 볼 것.
+help-art-vpn-network-keywords = vpn 프록시 학교 회사 네트워크 방화벽 dns 필터 차단 safedns 제한 wifi
 help-art-vpn-network-body =
-    { $brand }는 공개 영화 카탈로그에서 세부 정보와 사진을 로드하고 독립적인 출처에서 스트리밍합니다. 일부 네트워크는 이러한 사이트를 차단하고, 일부 출처는 특정 주소를 거부합니다.
+    { $brand }는 상세 정보와 이미지를 공개 영화 카탈로그에서, 스트림을 독립적인 소스에서 불러와요. 이런 사이트를 막는 네트워크도 있고, 특정 주소를 받지 않는 소스도 있어요.
 
-    - <b>VPN 또는 프록시.</b> 일부 출처는 VPN 주소에 응답하지 않습니다. 꺼두거나 다른 국가를 선택하세요.
-    - <b>학교, 직장 또는 공공 와이파이.</b> 필터는 스트리밍이나 카탈로그를 차단하는 경우가 많습니다. 스마트폰의 모바일 데이터를 시도해 보세요.
-    - <b>DNS 필터.</b> 필터링 DNS 서비스는 카탈로그를 차단하고, 행이나 사진이 비어 있을 수 있습니다. 다른 DNS를 사용하거나 이 사이트에 대한 필터를 꺼주세요.
+    - <b>VPN 또는 프록시.</b> VPN 주소에 응답하지 않는 소스도 있어요. VPN을 끄거나 다른 국가를 고르세요.
+    - <b>학교, 회사, 공공 Wi-Fi.</b> 필터가 스트리밍이나 카탈로그를 막는 경우가 많아요. 휴대폰의 모바일 데이터를 써 보세요.
+    - <b>DNS 필터.</b> 필터링 DNS 서비스가 카탈로그를 막아서 줄이나 이미지가 비어 보일 수 있어요. 다른 DNS를 쓰거나 이 사이트에서 필터를 끄세요.
 
-    장치 검사는 네트워크가 어떤 서비스에 접근할 수 없는지 보여줍니다.
-
-    @@ 진단
-help-art-is-down-title = { $brand }가 작동하지 않나요?
-help-art-is-down-summary = 당신의 기기에서 작동하는 부분을 확인하세요.
-help-art-is-down-keywords = 작동하지 않음 중단 상태 작동 안됨 오프라인 사용 불가능 서버 유지보수 오류 사이트
-help-art-is-down-body =
-    { $brand }에는 세 가지 부분이 별도로 고장날 수 있습니다:
-
-    - <b>앱</b>, 지금 보고 계신 앱입니다.
-    - <b>영화 및 시리즈 카탈로그</b>, 상세 정보와 사진을 제공합니다.
-    - <b>스트리밍 소스</b>, 영상을 제공합니다.
-
-    확인을 실행하여 어떤 부분이 제대로 작동하지 않는지 확인하세요. 카탈로그나 소스가 모두 작동하지 않는다면, 몇 분 후 다시 시도해 보세요. 단일 소스가 특정 사용자만 작동하지 않는다면, <a=/help/article/vpn-network>VPN, 학교 및 직장 네트워크</a>를 참조하세요.
+    기기 확인으로 네트워크가 연결하지 못하는 서비스를 알 수 있어요.
 
     @@ diagnostics
-help-art-no-sound-title = 소리가 없습니다
-help-art-no-sound-summary = 오디오가 없는 타이틀을 고칩니다.
-help-art-no-sound-keywords = no sound audio muted silent volume speaker bluetooth headphones autoplay
+
+help-art-is-down-title = { $brand }에 장애가 있나요?
+help-art-is-down-summary = 내 기기에서 어떤 부분이 작동하는지 확인해요.
+help-art-is-down-keywords = 장애 먹통 상태 작동 안 됨 오프라인 이용 불가 서버 점검 오류 사이트
+help-art-is-down-body =
+    { $brand }는 따로따로 멈출 수 있는 세 부분으로 되어 있어요.
+
+    - 지금 보고 있는 <b>앱</b>.
+    - 상세 정보와 이미지를 주는 <b>영화 및 시리즈 카탈로그</b>.
+    - 동영상을 주는 <b>스트리밍 소스</b>.
+
+    확인을 실행하면 내 기기에서 어느 것이 응답하는지 볼 수 있어요. 카탈로그나 소스가 모두에게 응답하지 않는다면 몇 분 기다린 다음 다시 시도하세요. 나에게만 연결되지 않는다면 <a=/help/article/vpn-network>VPN, 학교 및 회사 네트워크</a>에서 확인하세요.
+
+    @@ diagnostics
+
+help-art-no-sound-title = 소리가 안 나요
+help-art-no-sound-summary = 소리 없이 재생되는 콘텐츠를 고쳐요.
+help-art-no-sound-keywords = 소리 안 남 오디오 음소거 무음 볼륨 스피커 블루투스 헤드폰 자동 재생
 help-art-no-sound-body =
-    1. <b>M</b>을 누르거나, 플레이어에서 스피커 버튼을 선택하여 음소거를 해제하세요. 브라우저는 자동 재생 시 영상이 음소거된 상태로 시작하는 경우가 많습니다. 자세한 내용은 <a=/help/article/autoplay-blocked>영상이 자동으로 음소거됩니다</a>를 참조하세요.
-    2. <b>위쪽 화살표</b>를 누르어 볼륨을 높이고, 기기의 볼륨을 확인하세요.
-    3. 브라우저 탭이 음소거되었는지 확인하세요. 탭을 우클릭하여 확인할 수 있습니다.
-    4. <b>오디오 및 자막</b>을 열고, 다른 오디오 트랙이 있는 경우 선택하세요.
-    5. 블루투스를 사용하는 경우, 이어폰을 연결하고 다시 연결하세요.
-help-art-autoplay-blocked-title = 영상이 음소거 상태로 시작되거나 자동으로 시작되지 않습니다
-help-art-autoplay-blocked-summary = 브라우저가 영상이 자동으로 시작될 때 소리가 작동하지 않는 이유와, { $brand }가 이를 어떻게 처리하는지 설명합니다.
-help-art-autoplay-blocked-keywords = autoplay blocked muted start policy browser sound auto play previews trailer
+    1. <b>M</b> 키를 누르거나 플레이어의 스피커 버튼을 선택해서 음소거를 해제하세요. 브라우저는 저절로 시작되는 동영상을 음소거로 재생하는 경우가 많아요. <a=/help/article/autoplay-blocked>동영상이 음소거로 시작되거나 저절로 시작되지 않아요</a>에서 확인하세요.
+    2. <b>위쪽 화살표</b> 키로 볼륨을 높이고 기기 볼륨도 확인하세요.
+    3. 브라우저 탭이 음소거되지 않았는지 확인하세요. 탭을 마우스 오른쪽 버튼으로 클릭하면 알 수 있어요.
+    4. <b>오디오 및 자막</b>을 열고 다른 오디오 트랙이 있으면 고르세요.
+    5. 블루투스를 쓴다면 헤드폰 연결을 끊었다가 다시 연결하세요.
+
+help-art-autoplay-blocked-title = 동영상이 음소거로 시작되거나 저절로 시작되지 않아요
+help-art-autoplay-blocked-summary = 브라우저가 소리 나는 자동 재생을 막는 이유와 { $brand }가 처리하는 방법.
+help-art-autoplay-blocked-keywords = 자동 재생 차단 음소거 정책 브라우저 소리 미리보기 예고편
 help-art-autoplay-blocked-body =
-    브라우저는 사용자가 클릭하거나 탭하기 전까지 소리가 있는 비디오를 자동으로 시작하지 못하도록 합니다. { $brand }는 먼저 소리가 있게 시작을 시도합니다. 브라우저가 거부하면 음소거 상태로 시작하고 음소거 스피커 아이콘을 표시하며, <b>M</b> 키나 스피커 버튼으로 음소거를 해제할 수 있습니다.
+    브라우저는 페이지를 클릭하거나 탭하기 전까지 소리가 나는 동영상을 자동으로 재생하지 못하게 해요. { $brand }는 먼저 소리와 함께 재생을 시도하고, 브라우저가 거부하면 음소거로 시작한 뒤 음소거된 스피커 아이콘을 보여 줘요. <b>M</b> 키나 스피커 버튼으로 음소거를 해제하세요.
 
-    - 예고편과 미리보기가 자동으로 시작되지 않도록 하려면 <b>설정</b>에서 <b>재생 설정</b> 아래 <b>자동 재생 미리보기</b>를 끄세요.
-    - 제목이 전혀 시작되지 않는 경우, <a=/help/article/wont-play>제목이 재생되지 않는 경우</a>를 확인하세요.
-help-art-clips-title = 클립 사용하기
-help-art-clips-summary = 짧은 미리보기를 스크롤하고, 좋아하는 것을 목록에 추가하세요.
-help-art-clips-keywords = 클립 짧은 미리보기 스크롤 수직 트레일러 스크린 톡 정보 내 목록
+    - 미리보기가 저절로 시작되지 않게 하려면 프로필의 <b>재생 설정</b>에서 <b>미리보기 자동 재생</b>을 끄세요.
+    - 콘텐츠가 아예 시작되지 않으면 <a=/help/article/wont-play>콘텐츠가 재생되지 않아요</a>에서 확인하세요.
+
+help-art-clips-title = 클립 사용 방법
+help-art-clips-summary = 짧은 미리보기를 넘겨 보고 마음에 드는 것을 목록에 추가해요.
+help-art-clips-keywords = 클립 쇼츠 미리보기 스크롤 세로 예고편 스와이프 음소거 정보 내 목록
 help-art-clips-body =
-    <b>클립</b>은 휴대폰의 하단 바에서 짧은 미리보기를 순서대로 보여줍니다.
+    <b>클립</b>에서는 짧은 미리보기가 하나씩 이어서 나와요. 휴대폰에서는 아래쪽 바에 있어요.
 
-    1. 다음 클립으로 스크롤하거나 스크린 톡을 해주세요.
-    2. 스피커 버튼을 선택하여 소리 켜기/끄기 합니다. 클립은 기본적으로 소리가 꺼져 있습니다.
-    3. <b>내 목록</b>을 선택하여 제목을 저장하거나, <b>재생</b>을 선택하여 시청하거나, <b>정보</b>를 선택하여 자세한 내용을 읽으세요.
-help-art-genres-title = 장르로 둘러보기
-help-art-genres-summary = 영화와 시리즈를 원하는 유형으로 좁히세요.
-help-art-genres-keywords = 장르 범주 코미디 드라마 공포 액션 필터 둘러보기 영화 시리즈 하위 메뉴
+    1. 스크롤하거나 스와이프해서 다음 클립으로 넘어가세요.
+    2. 스피커 버튼으로 소리를 켜거나 끄세요. 클립은 음소거로 시작돼요.
+    3. <b>내 목록</b>으로 콘텐츠를 저장하고, <b>재생</b>으로 시청하고, <b>정보</b>로 자세히 읽어 보세요.
+
+help-art-genres-title = 장르별로 둘러보기
+help-art-genres-summary = 영화와 시리즈를 원하는 종류로 좁혀요.
+help-art-genres-keywords = 장르 카테고리 코미디 드라마 공포 액션 필터 둘러보기 영화 시리즈 하위 메뉴
 help-art-genres-body =
-    1. 상단 바에서 <b>영화</b> 또는 <b>시리즈</b>를 열어주세요.
-    2. 페이지 제목 옆에 있는 <b>장르</b>를 선택하세요.
-    3. 장르를 선택하면 해당 장르만 보여주며, 해당 장르에 맞춘 행이 생성됩니다.
+    1. 위쪽 바에서 <b>영화</b> 또는 <b>시리즈</b>를 여세요.
+    2. 페이지 제목 옆의 <b>장르</b>를 선택하세요.
+    3. 장르를 고르세요. 그러면 페이지에 그 장르만, 그 장르에 맞춘 줄로 보여요.
 
-    모든 항목으로 다시 돌아가려면 <b>영화</b> 또는 <b>시리즈</b>를 다시 열어주세요. 휴대폰에서는 하단에서 시트 형태로 장르 목록이 열립니다.
-help-art-top-10-title = 상위 10개 행이란 무엇인가요?
-help-art-top-10-summary = 현재 사람들이 가장 많이 시청하는 10개 제목의 행입니다.
-help-art-top-10-keywords = 상위 10개 상위 십 개 인기 트렌딩 순위 숫자 행 가장 많이 시청
-help-art-top-10-body = <b>상위 10개</b> 행은 현재 가장 많이 시청된 10개 제목을 보여주며, 각각에 큰 숫자가 표시됩니다. 이는 카탈로그의 현재 인기 추이를 따라 하루하루 변하며, 누구에게나 동일하며 프로필 기반으로 하지 않습니다.
+    다시 전체를 보려면 <b>영화</b> 또는 <b>시리즈</b>를 다시 여세요. 휴대폰에서는 장르 목록이 아래에서 올라와요.
+
+help-art-top-10-title = TOP 10 줄이란?
+help-art-top-10-summary = 지금 가장 인기 있는 콘텐츠 10개를 보여 주는 줄이에요.
+help-art-top-10-keywords = top 10 탑텐 인기 트렌드 순위 숫자 줄 많이 본
+help-art-top-10-body = <b>TOP 10</b> 줄에는 지금 가장 인기 있는 영화나 시리즈 10개가 큰 숫자와 함께 나와요. 영화 카탈로그의 일일 인기도를 따르므로 날마다 바뀌어요. 모두에게 똑같이 보이며 프로필에 따라 달라지지 않아요.
 help-art-episodes-title = 시즌과 에피소드
-help-art-episodes-summary = 세부 창 또는 플레이어에서 시즌과 에피소드를 선택하세요.
-help-art-episodes-keywords = 시즌 에피소드 시리즈 목록 다음 에피소드 드로어 빈지 선택자 텔레비전 쇼
+help-art-episodes-summary = 상세 정보 창이나 플레이어에서 시즌과 에피소드를 골라요.
+help-art-episodes-keywords = 시즌 에피소드 시리즈 목록 다음 에피소드 몰아보기 선택 tv 프로그램
 help-art-episodes-body =
-    ## 플레이 버튼을 눌기 전에
-    시리즈를 열고 <b>에피소드</b>를 선택하세요. 시즌 메뉴를 사용하여 시즌을 변경한 후 에피소드를 선택하세요.
+    ## 재생하기 전에
+    시리즈를 열고 <b>에피소드</b>를 선택하세요. 시즌 메뉴에서 시즌을 바꾼 다음 에피소드를 고르세요.
 
-    ## 시청 중에
-    - 플레이어 제어에서 <b>에피소드</b>를 선택하여 화면을 벗어나지 않고 목록을 열 수 있습니다.
-    - <b>다음 에피소드</b>를 선택하거나 자동으로 시작하게 합니다. 자세한 내용은 <a=/help/article/skip-intro-next>Skip Intro and Next Episode</a>를 참조하세요.
-help-art-share-title = 제목을 공유하는 방법
-help-art-share-summary = 친구에게 제목의 링크를 보냅니다.
-help-art-share-keywords = 공유 링크 와츠앱 메시지 인스타그램 스냅챗 복사 보내 친구
+    ## 보는 동안
+    - 플레이어 컨트롤에서 <b>에피소드</b>를 선택하면 플레이어를 떠나지 않고 목록을 열 수 있어요.
+    - <b>다음 에피소드</b>를 선택하거나 저절로 시작되게 두세요. <a=/help/article/skip-intro-next>인트로 건너뛰기와 다음 에피소드</a>에서 확인하세요.
+
+help-art-share-title = 콘텐츠를 공유하는 방법
+help-art-share-summary = 친구에게 콘텐츠 링크를 보내요.
+help-art-share-keywords = 공유 링크 whatsapp 메시지 instagram snapchat 복사 보내기 친구
 help-art-share-body =
-    1. 제목의 세부 정보를 열고 <b>공유</b>를 선택하세요.
-    2. <b>와츠앱</b> 또는 <b>메시지</b>를 선택하여 링크를 보내거나, <b>링크 복사</b>를 선택하여 어디서든 붙여넣을 수 있습니다.
-    3. 인스타그램과 스냅챗의 경우 링크가 복사되고 앱에 붙여넣습니다.
+    1. 콘텐츠의 상세 정보를 열고 <b>공유</b>를 선택하세요.
+    2. <b>WhatsApp</b>이나 <b>메시지</b>를 선택해 링크를 보내거나, <b>링크 복사</b>를 선택해 원하는 곳에 붙여 넣으세요.
+    3. Instagram과 Snapchat에서는 링크가 복사되니 앱에 붙여 넣으세요.
 
-    링크는 { $brand }의 제목 페이지를 열고, 열린 사람에게는 로그인할 필요가 없습니다.
-help-art-title-details-title = 제목 세부 정보 창
-help-art-title-details-summary = 플레이 버튼을 눌기 전에 읽을 수 있는 정보와 할 수 있는 일들
-help-art-title-details-keywords = 더 많은 정보 세부 정보 모달 캐스트 장르 줄거리 유사한 더 많은 것 트레일러 평점 매칭
+    링크를 열면 { $brand }에서 그 콘텐츠가 열려요. 링크를 연 사람이 시청하려면 로그인하거나 무료 계정을 만들어야 해요.
+
+help-art-title-details-title = 콘텐츠 상세 정보 창
+help-art-title-details-summary = 재생하기 전에 읽고 할 수 있는 것.
+help-art-title-details-keywords = 상세 정보 자세히 출연진 장르 줄거리 비슷한 콘텐츠 예고편 평가
 help-art-title-details-body =
-    제목 카드를 선택하거나 <b>더 많은 정보</b>를 선택하여 세부 정보를 열 수 있습니다.
+    콘텐츠 카드나 <b>상세 정보</b>를 선택하면 상세 정보가 열려요.
 
-    - <b>재생</b> 또는 <b>재개</b>는 마지막에 멈춘 곳에서 제목을 시작합니다.
-    - <b>내 목록</b>은 제목을 저장하고, 썸네일로 평점을 매깁니다.
-    - 줄거리, 캐스트, 장르 및 감정을 설명하는 단어 몇 개는 선택에 도움이 됩니다.
-    - 시리즈의 경우 <b>에피소드</b>는 시즌 목록을 보여줍니다.
-    - <b>이와 유사한 것</b>은 의미가 비슷한 제목을 보여주며, 새로운 것을 찾는 데 좋은 방법입니다.
+    - <b>재생</b> 또는 <b>재개</b>를 선택하면 멈춘 곳부터 콘텐츠가 시작돼요.
+    - <b>내 목록</b>으로 저장하고, 엄지 아이콘으로 평가해요.
+    - 줄거리, 출연진, 장르, 분위기를 나타내는 몇 가지 단어가 고르는 데 도움이 돼요.
+    - 시리즈에서는 <b>에피소드</b>에 시즌이 나와요.
+    - <b>비슷한 콘텐츠</b>에는 내용이 가까운 콘텐츠가 나와서, 새로운 것을 찾기 좋아요.
+
 help-art-accessibility-title = { $brand }의 접근성
-help-art-accessibility-summary = 자막, 키보드 제어 및 화면 설정 등 도움이 되는 기능
-help-art-accessibility-keywords = 접근성 화면 독자 키보드 자막 자막 크기 대비 줌 감소된 움직임 장애
+help-art-accessibility-summary = 도움이 되는 자막, 키보드 조작, 화면 설정.
+help-art-accessibility-keywords = 접근성 스크린 리더 키보드 자막 캡션 크기 대비 확대 동작 줄이기 장애
 help-art-accessibility-body =
-    - <b>자막.</b> <b>설정</b>에서 언어, 크기, 색상 및 배경을 선택할 수 있습니다. <a=/help/article/subtitles>자막, 자막 또는 음성 언어를 선택하는 방법</a>을 참조하세요.
-    - <b>키보드.</b> <b>Tab</b>을 눌러 제어를 이동하고 <b>Esc</b>를 눌러 창을 닫을 수 있습니다. 플레이어에는 자체 키가 있으므로 <a=/help/article/shortcuts>키보드 단축키</a>를 참조하세요.
-    - <b>문자 크기.</b> 브라우저를 <b>Ctrl</b>과 <b>+</b> (<b>Cmd</b>과 <b>+</b>은 맥에서 사용)으로 확대할 수 있습니다. 레이아웃은 조정됩니다.
-    - <b>움직임.</b> 기기에서 움직임 감소를 요청하는 경우 애니메이션 로고는 정지 상태로 유지됩니다.
+    - <b>자막.</b> 프로필의 <b>언어</b>에서 언어를, <b>자막 모양</b>에서 크기, 색, 배경을 고르세요. <a=/help/article/subtitles>자막 사용과 오디오 언어 선택 방법</a>에서 확인하세요.
+    - <b>키보드.</b> <b>Tab</b> 키로 컨트롤 사이를 이동하고 <b>Esc</b> 키로 창을 닫으세요. 플레이어에는 전용 키가 있어요. <a=/help/article/shortcuts>키보드 단축키</a>에서 확인하세요.
+    - <b>글자 크기.</b> <b>Ctrl</b>과 <b>+</b>(Mac에서는 <b>Cmd</b>와 <b>+</b>)로 브라우저를 확대하세요. 화면 구성이 알아서 맞춰져요.
+    - <b>움직임.</b> 기기에서 동작 줄이기를 설정했다면 움직이는 로고가 멈춰 있어요.
 
-    사용하기 어려운 경우 <a=/help/article/report-bug>문제 보고</a> 페이지에서 우리에게 알려주세요. 이러한 보고서는 매우 중요하게 받아들입니다.
-help-art-profile-icons-title = 프로필 아이콘을 선택하는 방법
-help-art-profile-icons-summary = 프로필에 대한 애벌레를 선택하세요.
-help-art-profile-icons-keywords = 프로필 아이콘 애벌레 사진 이미지 변경 선택 캐릭터
+    사용하기 어려운 부분이 있다면 <a=/help/article/report-bug>문제 신고하기</a> 페이지에서 알려 주세요. 이런 신고는 꼭 챙겨 봐요.
+
+help-art-profile-icons-title = 프로필 사진을 고르는 방법
+help-art-profile-icons-summary = 프로필에 쓸 사진을 골라요.
+help-art-profile-icons-keywords = 프로필 아이콘 아바타 사진 이미지 변경 선택 캐릭터
 help-art-profile-icons-body =
-    1. <b>프로필 관리</b>를 열고 프로필을 선택합니다.
-    2. 아이콘을 선택합니다.
-    3. 그룹에서 하나를 선택한 후 <b>저장</b>을 선택합니다.
+    1. <b>프로필 관리</b>를 열고 프로필을 선택하세요.
+    2. 사진을 선택하세요.
+    3. 새 사진을 고른 다음 <b>저장</b>을 선택하세요.
 
-    아이디어 프로필은 다른 아이콘을 선택하지 않는 한 줄무늬 아이디어 아이콘을 사용합니다. 또한 <b>설정</b>에서 아이콘 선택기를 사용할 수도 있습니다.
+    <b>계정</b>의 <b>프로필 관리</b>에서도 바꿀 수 있어요. 프로필을 선택한 다음 사진을 선택하세요. 키즈 프로필은 다른 사진을 고르기 전까지 키즈용 사진을 사용해요.
+
+help-art-parental-controls-title = 자녀 보호 설정: 관람 등급과 콘텐츠 차단
+help-art-parental-controls-summary = 프로필에서 볼 수 있는 콘텐츠를 관람 등급으로 제한하거나, 제목으로 숨겨요.
+help-art-parental-controls-keywords = 자녀 보호 관람 등급 연령 제한 차단 콘텐츠 숨기기 키즈 청소년 12 15 18 청불
+help-art-parental-controls-body =
+    프로필마다 제한을 따로 둘 수 있어요. 프로필 메뉴를 열고 <b>계정</b>, <b>프로필 관리</b>를 차례로 선택한 다음, 프로필을 선택하고 <b>자녀 보호 설정 변경</b>을 선택하세요.
+
+    ## 관람 등급
+    1. <b>관람 등급</b>을 선택하세요.
+    2. 이 프로필에서 볼 수 있는 가장 높은 등급을 고르세요. 그 등급 이하의 콘텐츠만 보이고, 등급이 없는 콘텐츠도 숨겨져요.
+
+    <b>등급 표기</b>에서는 영국식(U, PG, 12, 15, 18)과 미국식(G, PG, PG-13, R, NC-17) 중 어떤 표기를 볼지 정해요. <b>자동</b>으로 두면 로그인한 국가에 맞춰져요.
+
+    ## 콘텐츠 차단
+    1. <b>콘텐츠 차단</b>을 선택하세요.
+    2. 시리즈나 영화 제목을 입력하고 <b>추가</b>를 선택하세요.
+
+    차단한 콘텐츠는 그 프로필에 보이지 않아요. 다시 보이게 하려면 <b>삭제</b>를 선택하세요.
+
+    !! 참고: 콘텐츠는 독립적인 소스에서 제공되며, 등급이 없는 콘텐츠도 있어요. 어린아이에게는 키즈 프로필이 더 안전해요. <a=/help/article/kids-profile>어린이용 프로필을 만드는 방법</a>에서 확인하세요.
+
+    @@ profiles
+
+help-art-transfer-profile-title = 프로필을 다른 계정으로 옮기기
+help-art-transfer-profile-summary = 프로필을 파일로 저장한 다음 기록과 설정을 그대로 다른 계정에 추가해요.
+help-art-transfer-profile-keywords = 프로필 이전 이동 복사 다른 계정 가져오기 내보내기 파일
+help-art-transfer-profile-body =
+    가족 중 누군가 독립할 때처럼, 프로필을 다른 계정으로 복사할 수 있어요. 복사본에는 이름, 사진, 설정, 시청 기록이 들어 있어요.
+
+    ## 프로필 저장하기
+    1. 프로필 메뉴를 열고 <b>프로필 이전</b>을 선택하세요.
+    2. 프로필을 선택하고 <b>프로필 파일 다운로드</b>를 선택하세요. 파일은 안전하게 보관하세요.
+
+    ## 다른 계정에 추가하기
+    1. 다른 계정으로 로그인하고 <b>프로필 관리</b>를 여세요.
+    2. <b>프로필 가져오기</b>를 선택하고 파일을 고르세요.
+
+    !! 참고: 파일에는 프로필 PIN이 들어 있지 않아요. 파일을 가진 사람은 누구나 그 프로필을 자기 계정에 추가할 수 있으니 공유하지 마세요.
+
+    <b>계정</b>의 <b>프로필 이전</b>에서 이 계정의 프로필을 복사해 가는 것을 켜거나 끌 수 있어요. 다른 계정에서 들어오는 프로필은 막지 않아요.
+
 auth-questions = 질문이 있나요?
 auth-email = 이메일 주소
 auth-password = 비밀번호
@@ -1460,12 +1673,12 @@ auth-signup-link = 지금 가입하기
 auth-welcome-back = 환영합니다
 auth-not-you = 당신이 아닙니까?
 auth-signing-in = 로그인 중…
-auth-remember = 나중에 다시 로그인
+auth-remember = 로그인 상태 유지
 auth-forgot-link = 비밀번호를 잊으셨나요?
 auth-get-help = 도움을 받으세요
 auth-resume-hint = 얼마 전 이 기기에서 로그아웃했습니다. { $email }(으)로 계속하면 비밀번호 없이 돌아올 수 있습니다.
 auth-resume-forget = 본인이 아닌가요? 이 브라우저 잊기
-auth-resend = 확인 이메일을 다시 보내기
+auth-resend = 확인 이메일 다시 보내기
 auth-resent = 우리는 { $email }으로 새 확인 이메일을 보냈습니다.
 auth-error-email = 유효한 이메일 주소를 입력하세요.
 auth-error-invalid = 잘못된 이메일 또는 비밀번호입니다. 다시 시도하거나 비밀번호를 재설정하세요.
@@ -1504,27 +1717,29 @@ landing-promo-body = 구독, 카드, 약속 없이.
 landing-learn-more = 자세히 알아보기
 landing-faq = 자주 묻는 질문
 landing-read-more = 全文 읽기
-legal-credits-title = 라이선스 및 출처
-legal-credits-updated = 마지막 업데이트: 2026년 10월
-legal-credits-1-title = 1. 폰트
-legal-credits-1-body = 로고의 텍스트는 픽셀 폰트로 설정되어 있으며, 다른 인터페이스 텍스트는 Inter 폰트로 설정되어 있습니다.
-legal-credits-1-b1 = <strong>Baby Blocks</strong> by Colorful Typhoon, { $brand } 로고를 위해 사용되며, 개인 및 비상업적 용도를 위한 링크웨어 조건에 따라 사용되었습니다. 자세한 내용은 <a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">Colorful Typhoon</a>을 참조하십시오.
-legal-credits-1-b2 = <strong>Inter</strong> by Rasmus Andersson, SIL Open Font License 1.1 하에 사용되었습니다.
+legal-credits-title = 라이선스 및 크레딧
+legal-credits-updated = 최종 업데이트: 2026년 10월
+legal-credits-1-title = 1. 글꼴
+legal-credits-1-body = 로고에는 픽셀 글꼴, 인터페이스에는 Inter, 컬렉션 제목에는 디스플레이 글꼴을 사용합니다:
+legal-credits-1-b1 = Colorful Typhoon의 <strong>Baby Blocks</strong>. 비상업적 사용을 위한 프리웨어 조건에 따라 { $brand } 로고에 사용합니다. <a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">FontSpace의 글꼴 페이지</a>를 참고하세요.
+legal-credits-1-b2 = Rasmus Andersson의 <strong>Inter</strong>. SIL Open Font License 1.1에 따라 사용합니다.
+legal-credits-1-b3 = Google Fonts의 <strong>Abril Fatface, Caveat Brush, DM Serif Display, Fredoka, Gochi Hand, Kalam, Londrina Solid, Playfair Display, Sedgwick Ave</strong>. SIL Open Font License 1.1에 따라 사용합니다.
+legal-credits-1-b4 = Google Fonts의 <strong>Permanent Marker</strong>와 <strong>Rock Salt</strong>. Apache License 2.0에 따라 사용합니다.
 legal-credits-2-title = 2. 아이콘
-legal-credits-2-body = 인터페이스 아이콘은 Phosphor Icons에서 가져왔으며, MIT 라이선스 하에 사용되었습니다.
+legal-credits-2-body = 인터페이스 아이콘은 Phosphor Icons의 것으로, MIT 라이선스에 따라 사용합니다.
 legal-credits-3-title = 3. 영화 및 시리즈 정보
-legal-credits-3-body = 이 제품은 TMDB API를 사용하지만, TMDB의 승인 또는 인증을 받지 않았습니다. 제목, 요약, 포스터, 평점 및 배우 정보는 <a href="https://www.themoviedb.org" target="_blank" rel="noopener">The Movie Database</a>에서 가져왔습니다.
+legal-credits-3-body = 이 제품은 TMDB API를 사용하지만 TMDB의 보증이나 인증을 받지 않았습니다. 제목, 줄거리, 포스터, 평점, 출연진 정보는 <a href="https://www.themoviedb.org" target="_blank" rel="noopener">The Movie Database</a>에서 가져옵니다.
 legal-credits-4-title = 4. 소프트웨어
-legal-credits-4-body = { $brand }는 오픈소스 소프트웨어로 구성되어 있으며, 각각의 라이선스 조건에 따라 사용되었습니다:
-legal-credits-4-b1 = <strong>Rust</strong> 및 <strong>Leptos</strong>를 애플리케이션에 사용했습니다 (MIT 및 Apache 2.0).
-legal-credits-4-b2 = <strong>Tailwind CSS</strong>를 스타일링에 사용했습니다 (MIT).
-legal-credits-4-b3 = <strong>hls.js</strong>를 적응형 비디오 재생에 사용했습니다 (Apache 2.0).
-legal-credits-4-b4 = <strong>Project Fluent</strong>를 번역된 인터페이스 텍스트에 사용했습니다 (Apache 2.0 및 MIT).
-legal-credits-5-title = 5. 상표 및 예술 작품
-legal-credits-5-body = { $brand }에서 표시된 영화, 시리즈 및 서비스의 이름, 로고, 포스터 및 예술 작품은 소유자에게 소유됩니다. 이는 제목을 식별하기 위한 것이며, 소유자가 { $brand }를 지원한다는 의미는 아닙니다.
+legal-credits-4-body = { $brand }는 오픈 소스 소프트웨어로 만들어졌으며, 각 소프트웨어는 해당 라이선스에 따라 사용합니다:
+legal-credits-4-b1 = 애플리케이션: <strong>Rust</strong>와 <strong>Leptos</strong>(MIT 및 Apache 2.0).
+legal-credits-4-b2 = 스타일: <strong>Tailwind CSS</strong>(MIT).
+legal-credits-4-b3 = 적응형 동영상 재생: <strong>hls.js</strong>(Apache 2.0).
+legal-credits-4-b4 = 인터페이스 번역: <strong>Project Fluent</strong>(Apache 2.0 및 MIT).
+legal-credits-5-title = 5. 상표와 아트워크
+legal-credits-5-body = { $brand }에 표시되는 영화, 시리즈, 서비스의 이름, 로고, 포스터, 아트워크는 각 소유자의 것입니다. 콘텐츠를 식별하기 위해 표시하는 것이며, 소유자가 { $brand }를 지지한다는 뜻이 아닙니다.
 legal-credits-6-title = 6. 문의
-legal-credits-6-body = 여기서 잘못 인용되었거나 수정이 필요한 사항이 있다면, { $support_email }으로 문의해 주세요.
-help-ui-legal-credits = 라이선스 및 출처
+legal-credits-6-body = 크레딧이 잘못되었거나 바뀌어야 할 부분이 있다면 { $support_email }로 알려 주세요.
+help-ui-legal-credits = 라이선스 및 크레딧
 landing-slide-everyone = 모두를 위한 장소
 landing-slide-place = 정확히 마지막에서 이어집니다.
 auth-login-app-title = 시청 준비됐나요?
@@ -1605,7 +1820,7 @@ set-save = 저장
 set-add = 추가
 set-remove = 삭제
 set-delete = 삭제
-set-reset = 기본값으로 재설정
+set-reset = 기본값으로 되돌리기
 set-continue = 계속
 set-none = 없음
 set-nav-profile = 프로필 편집
@@ -1626,11 +1841,11 @@ set-title-profiles = 프로필 관리
 set-title-edit-profile = 프로필 편집
 set-title-avatar = 프로필 사진 선택
 set-title-restrictions = 시청 제한
-set-title-ratings = 연령 등급
-set-title-blocked = 차단 제목
+set-title-ratings = 관람 등급
+set-title-blocked = 콘텐츠 차단
 set-title-lock = 프로필 잠금
 set-title-language = 표시 언어
-set-title-subtitles = 자막 표시
+set-title-subtitles = 자막 모양
 set-title-audio-subtitles = 오디오 및 자막
 set-title-name = 이름
 set-title-app = 앱 설정
@@ -1639,9 +1854,9 @@ set-title-password = 비밀번호
 set-title-change-password = 비밀번호 변경
 set-title-email = 이메일
 set-title-phone = 휴대폰
-set-title-devices = 접근 및 기기
+set-title-devices = 접속 및 기기
 set-title-privacy = 개인정보 및 데이터 설정
-set-title-activity = 시청 활동
+set-title-activity = 시청 기록
 set-title-delete = 계정 삭제
 set-ratings-hint = 이 프로필에서 선택한 평가 이하의 제목만 표시됩니다. 평가가 없는 제목은 제한이 없을 때만 표시됩니다.
 set-blocked-hint = 차단된 제목은 이 프로필에서 표시되지 않습니다.
@@ -1654,11 +1869,11 @@ set-lock-on = 켜짐
 set-lock-off = 꺼짐
 set-lock-title-on = 프로필 잠금이 켜짐
 set-lock-title-off = 프로필 잠금 생성
-set-lock-body = 이 프로필을 { $digits } 자리의 PIN을 입력하여 열 수 있도록 비공개로 설정합니다.
+set-lock-body = 이 프로필을 열 때 { $digits }자리 PIN을 입력하도록 해서 프로필을 비공개로 만들어요.
 set-lock-pin = 새 PIN
 set-lock-invalid = PIN은 { $digits } 자리 숫자로 입력해야 합니다.
 set-lock-change = PIN 변경
-set-lock-remove = 프로필 잠금 제거
+set-lock-remove = 프로필 잠금 해제
 set-lock-remove-body = 누구나 PIN 없이 이 프로필을 열 수 있습니다. 계속하려면 현재 PIN을 입력하세요.
 set-delete-profile = 프로필 삭제
 set-delete-profile-body = 이 프로필, 시청 이력 및 설정이 영구히 삭제됩니다. 이 작업은 되돌릴 수 없습니다.
@@ -1754,9 +1969,9 @@ set-privacy-viewing = 시청 프라이버시
 set-privacy-lock-hint = 이 프로필을 열기 위해 PIN이 필요합니다
 set-privacy-activity-hint = 시청 이력 관리
 set-privacy-data = 데이터 설정
-set-privacy-personalization = 개인화 추천
+set-privacy-personalization = 맞춤 추천
 set-privacy-personalization-hint = 시청 내역을 바탕으로 제목을 추천해 드립니다. 꺼두면 일반적인 선택을 보게 됩니다.
-set-activity-clear-body = 이 브라우저에서 시청 이력과 재생 위치가 제거됩니다.
+set-activity-clear-body = 이 콘텐츠들이 모든 기기에서 이 프로필의 시청 기록과 이어서 보기에서 삭제돼요.
 set-err-invalid = 그 비밀번호는 올바르지 않습니다. 다시 시도해 주세요.
 set-err-weak = 그 비밀번호는 너무 약합니다. 문자와 숫자를 포함한 더 긴 비밀번호를 사용해 주세요.
 set-err-rate = 너무 많은 시도입니다. 잠시 후 다시 시도해 주세요.
@@ -1783,15 +1998,22 @@ set-name-required = 이름과 성을 입력해 주세요.
 set-name-saved = 이름이 저장되었습니다.
 set-err-recent = 보안을 위해 계속하려면 비밀번호를 다시 입력해 주세요.
 set-events-title = 최근 보안 활동
+set-event-profile_created = 프로필이 만들어짐
+set-event-profile_deleted = 프로필이 삭제됨
+set-event-pin_set = 프로필 잠금이 설정됨
+set-event-pin_cleared = 프로필 잠금이 해제됨
+set-event-pin_locked = 시도 횟수 초과로 프로필 잠금이 잠김
+set-event-pin_reset = 프로필 잠금이 재설정됨
+set-event-main_profile_changed = 기본 프로필이 변경됨
 set-privacy-export = 내 데이터 다운로드
 set-nav-overview = 개요
 set-back-to-app =  { $brand }로 돌아가기
 set-title-playback = 재생 설정
 set-title-notifications = 알림 설정
-set-playback-hint = 자동 재생 및 미리보기 설정
+set-playback-hint = 자동 재생과 미리보기를 설정해요.
 set-playback-autoplay = 자동 재생 및 전환
-set-notifications-hint = 이메일 및 푸시 알림을 관리하세요.
-set-notifications-body = 이 프로필이 새 상품과 업데이트에 대해 어떻게 알리는지 선택하세요.
+set-notifications-hint = 이메일과 푸시 알림을 관리해요.
+set-notifications-body = 이 프로필이 새로 추가된 콘텐츠와 소식을 어떻게 받을지 선택하세요.
 set-notify-email = 이메일
 set-notify-push = 푸시 알림
 set-account-details = 계정 정보
@@ -1826,7 +2048,7 @@ set-need-help = 도움이 필요하세요?
 set-visit-help = 도움 센터 방문
 set-try-another-way = 다른 방법으로 시도
 set-title-game-handle = 게임 핸들
-set-title-personal-info = 개인 정보 접근
+set-title-personal-info = 개인정보 열람
 set-title-speed-test = 인터넷 속도 테스트
 set-title-testing = 테스트 참여
 set-row-feature-testing = 기능 테스트
@@ -1834,7 +2056,7 @@ set-devices-account-access = 계정 액세스
 set-title-transfer = 프로필 이전
 set-title-transfer-profile = 프로필 이전
 set-activity-for = 활동 내역: { $name }
-set-activity-hide = 이 제목 숨기기
+set-activity-hide = 이 콘텐츠 숨기기
 set-activity-hide-all = 모두 숨기기
 set-activity-hidden = 시청 활동에서 제거됨
 set-activity-download = 모두 다운로드
@@ -1846,6 +2068,14 @@ set-csv-date = 날짜
 set-notify-email-hint = 새 상품 및 업데이트에 대한 메시지
 set-notify-push-hint = 이 기기의 알림
 set-topics-title = 들리는 소식
+set-topic-new_arrivals = 신규 콘텐츠
+set-topic-new_arrivals-hint = 방금 추가된 시리즈와 영화.
+set-topic-recommendations = 추천
+set-topic-recommendations-hint = 이 프로필을 위해 고른 콘텐츠.
+set-topic-reminders = 리마인더
+set-topic-reminders-hint = 보기 시작한 콘텐츠와 시청 중인 시리즈의 새 에피소드.
+set-topic-news = { $brand } 소식
+set-topic-news-hint = 새 기능과 서비스 변경 사항.
 set-push-denied = 이 사이트에 대한 알림이 브라우저에서 차단되었습니다. 브라우저 설정에서 허용한 후 다시 시도해 주세요.
 set-push-unsupported = 이 브라우저는 알림을 표시할 수 없습니다.
 set-usage-title = 화면별 데이터 사용량
@@ -1889,6 +2119,12 @@ set-personal-info-hint = 개인 정보의 사본을 요청합니다
 set-personal-info-body = 당신은 저희가 보유한 계정에 대한 개인 정보의 사본을 요청할 수 있습니다. 파일에는 다음이 포함됩니다:
 set-personal-info-done = 파일이 저장되었습니다.
 set-personal-info-note = 이 파일은 기기에서만 존재합니다. 개인 정보가 포함될 수 있으므로 안전하게 보관하세요.
+set-personal-info-account = 계정 정보: 이름, 이메일 주소, 전화번호
+set-personal-info-profiles = 프로필과 프로필별 설정
+set-personal-info-lists = 프로필별 내 목록과 평가
+set-personal-info-history = 프로필별 시청 진행 상황과 기록
+set-personal-info-settings = 알림, 쿠키 같은 설정과 선택
+set-personal-info-security = 최근 로그인과 보안 활동
 set-testing-body = 우리는 모든 사용자가 새로운 기능을 사용하기 전에 소규모 그룹을 통해 새로운 기능을 시도합니다.
 set-testing-switch = 테스트 및 미리보기에서 나를 포함합니다
 set-testing-hint = 이 기능을 비활성화하여 모든 기능의 현재 버전을 유지합니다.
@@ -1955,6 +2191,13 @@ set-device-timezone = 시간대
 set-device-screen = 화면
 set-device-language = 언어
 set-device-countries-note = 이 기기는 여러 국가에서 연결되었습니다: { $countries }. VPN 또는 여행이 이 현상을 일으킬 수 있습니다. 기기는 브라우저로 식별되므로 연결 위치와는 무관합니다. 여전히 같은 기기입니다.
+set-device-type-desktop = 컴퓨터
+set-device-type-mobile = 휴대폰
+set-device-type-tablet = 태블릿
+set-device-type-other = 기타 기기
+set-event-new_device = 새 기기에서 로그인함
+set-event-device_new_country = 새로운 국가에서 기기가 접속함
+set-event-session_revoked = 기기가 로그아웃됨
 email-footer = { $brand }에서 발송되었습니다. 질문이 있나요? 도움말 센터를 읽거나 { $help_email }으로 이메일을 보내주세요.
 email-help-center = 도움말 센터
 email-ignore = 이메일을 요청하지 않았다면 이 이메일을 무시할 수 있습니다.
@@ -1991,22 +2234,22 @@ email-device-title = 새로운 장치가 로그인했습니다
 email-device-body = { $browser } on { $system }가 귀하의 계정 { $where }에서 { $time }에 로그인했습니다. 이 것이 귀하였다면 추가적인 조치는 필요하지 않습니다. 그렇지 않다면 비밀번호를 변경하고 모든 장치에서 로그아웃하세요.
 email-device-where = from { $country }
 email-device-button = 장치 확인
-help-breadcrumb-label = Breadcrumb
-help-pagination-label = Pagination
+help-breadcrumb-label = 이동 경로
+help-pagination-label = 페이지 이동
 age-badge-all = 모든 연령대
 age-aria-all = 모든 연령대에 적합
 age-aria-plus = 연령 { $age } 이상에 적합
-set-rating-system-title = 평점 라벨
+set-rating-system-title = 등급 표기
 set-rating-system-hint = 읽는 평점 라벨을 선택하세요. 자동으로 로그인한 장치의 국가에 따라 설정됩니다.
 set-rating-system-auto = 자동
 set-rating-system-uk = 영국 (U, PG, 12, 15, 18)
 set-rating-system-us = 미국 (G, PG, PG-13, R, NC-17)
 row-continue-watching = 계속 시청
-row-my-list = 내 리스트
-row-because-you-watched = 당신이 시청한 { $title }을(를) 기반으로
+row-my-list = 내 목록
+row-because-you-watched = '{ $title }' 시청 후 추천 콘텐츠
 row-more-like = { $title }과(와) 비슷한 것
-row-todays-top-picks = 오늘의 추천
-row-your-next-watch = 다음 시청할 것
+row-todays-top-picks = 오늘의 추천 콘텐츠
+row-your-next-watch = 다음에 볼 콘텐츠
 row-gems-for-you = 당신을 위한 보석
 row-we-think-youll-love = 당신이 좋아할 것들
 row-familiar-favourites = 익숙한 인기 작품
@@ -2243,7 +2486,7 @@ set-po-lock-hint = 이 프로필에 접근하려면 PIN 필요
 set-po-preferences = 환경설정
 set-po-languages = 언어
 set-po-languages-hint = 표시 및 오디오 언어 설정
-set-po-restrictions = 부모님 통제 조정
+set-po-restrictions = 자녀 보호 설정 변경
 set-po-restrictions-hint = 연령 등급 및 제목 제한 수정
 set-po-subtitles-hint = 자막 표시 방식 사용자 지정
 set-po-playback-hint = 자동 재생 및 오디오, 비디오 품질 설정
@@ -2269,9 +2512,9 @@ profile-not-saved = 계정에 변경 사항을 저장할 수 없어 프로필이
 profile-icon-for = { $name }님용
 profile-icon-history = 이전 아이콘
 profile-icon-current = 현재 아이콘
-my-continue = 계속 시청
+my-continue = 이어서 보기
 my-continue-empty = 시작한 콘텐츠를 이어 보세요.
-my-list = 내 리스트
+my-list = 내 목록
 my-list-empty = 저장한 시리즈와 영화를 관리하세요.
 my-trailers = 시청한 예고편
 my-trailers-empty = 시청한 예고편이 여기에 저장됩니다.
