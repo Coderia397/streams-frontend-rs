@@ -6,7 +6,7 @@ action-buttons-mute-trailer = 静音预告片
 action-buttons-rate = 评分
 action-buttons-replay-trailer = 重播预告片
 action-buttons-unmute-trailer = 取消静音预告片
-add-edit-modal-delete-profile = 删除配置文件
+add-edit-modal-delete-profile = 删除个人资料
 add-edit-modal-delete-this-profile-all-viewing = 确定要删除此配置文件吗？所有观看记录和片单项目将被永久删除。
 add-edit-modal-enter-4digit-pin = 输入4位PIN码
 add-edit-modal-name = 名称
@@ -26,7 +26,7 @@ category-sub-nav-mobile-series = 电视剧
 choose-icon-back = 返回
 clips-clips = 片段
 continue-watching-options-sheet-cancel = 取消
-continue-watching-options-sheet-remove-from-continue-watching = 从'继续观看'中删除
+continue-watching-options-sheet-remove-from-continue-watching = 从“继续观看”中移除
 continue-watching-row-continue-watching = 继续观看
 continue-watching-row-scroll-left = 向左滚动
 continue-watching-row-scroll-right = 向右滚动
@@ -92,57 +92,57 @@ whos-watching-add-profile = 添加个人资料
 help-ui-center = 帮助中心
 help-ui-browse = 浏览
 help-ui-signin = 登录
-help-ui-hero-title = 我们如何能帮到您？
+help-ui-hero-title = 需要什么帮助？
 help-ui-search-label = 搜索
-help-ui-search-placeholder = 输入问题、主题或故障
+help-ui-search-placeholder = 输入问题、主题或遇到的情况
 help-ui-popular = 热门主题
 help-ui-explore = 浏览主题
-help-ui-quick-links = 快捷链接
-help-ui-need-more = 需要更多帮助？
+help-ui-quick-links = 快速链接
+help-ui-need-more = 还需要帮助？
 help-ui-contact-us = 联系我们
-help-ui-language-label = 选择您首选的语言：
-help-ui-back = 返回帮助中心首页
+help-ui-language-label = 选择你想用的语言：
+help-ui-back = 返回帮助首页
 help-ui-related = 相关文章
-help-ui-helpful = 这篇文章对您有帮助吗？
+help-ui-helpful = 这篇文章有帮助吗？
 help-ui-yes = 是
 help-ui-no = 否
-help-ui-thanks = 感谢您的反馈。
+help-ui-thanks = 感谢你的反馈。
 help-ui-tell-more = 告诉我们缺少了什么
-help-ui-recommended = 为您推荐
+help-ui-recommended = 为你推荐
 help-ui-additional = 更多搜索结果
 help-ui-read = 阅读文章
 help-ui-results-count =
     { $count ->
-        [one] “{ $query }”的1个结果
-       *[other] “{ $query }”的{ $count }个结果
+       *[other] “{ $query }”的搜索结果：{ $count } 条
     }
+
 help-ui-account = 账户
-help-ui-signout = 退出 { $brand } 登录
+help-ui-signout = 退出 { $brand }
 help-ui-results-count-link = 查看“{ $query }”的所有结果
-help-ui-results-none = 未找到“{ $query }”的结果。
-help-ui-results-hint = 请检查拼写，尝试使用更少的词，或浏览主题。
-help-ui-results-empty = 输入几个词以搜索帮助中心。
+help-ui-results-none = 没有找到与“{ $query }”相关的结果。
+help-ui-results-hint = 请检查拼写、减少关键词，或浏览主题。
+help-ui-results-empty = 输入几个词来搜索帮助中心。
 help-ui-page-prev = 上一页
 help-ui-page-next = 下一页
 help-ui-page-n = 第 { $n } 页
 help-ui-suggestions = 推荐文章
 help-ui-contact-title = 联系我们
-help-ui-contact-prompt = 请告诉我们更多细节，我们将为您找到最佳解决方案
-help-ui-describe = 描述您的问题
+help-ui-contact-prompt = 告诉我们更多情况，我们会帮你找到最合适的解决办法
+help-ui-describe = 描述你遇到的问题
 help-ui-mail-subject = 帮助请求
-help-ui-mail-intro = 在此处描述问题：
-help-ui-mail-details = 自动添加的详细信息
-help-ui-mail-feedback = 关于文章《{ $title }》的反馈
+help-ui-mail-intro = 请在这里描述问题：
+help-ui-mail-details = 自动附加的详细信息
+help-ui-mail-feedback = 文章反馈：{ $title }
 help-ui-ql-profiles = 管理个人资料
 help-ui-ql-language = 更改显示语言
 help-ui-ql-signin = 登录
-help-ui-ql-copyright = 报告版权问题
-help-ui-ql-title = 关于 { $brand } 上某部作品的反馈
-help-ui-ql-email = 发送邮件至 { $help_email }
-help-ui-not-found-title = 未找到该文章
-help-ui-not-found-body = 文章可能已移动，或链接有误。请搜索帮助中心或浏览相关主题。
-help-ui-legal-terms = 使用条款
-help-ui-legal-privacy = 隐私政策
+help-ui-ql-copyright = 举报版权问题
+help-ui-ql-title = 关于 { $brand } 上作品的反馈
+help-ui-ql-email = 发邮件到 { $help_email }
+help-ui-not-found-title = 找不到这篇文章
+help-ui-not-found-body = 文章可能已移动，或链接有误。请搜索帮助中心或浏览主题。
+help-ui-legal-terms = 服务条款
+help-ui-legal-privacy = 隐私
 help-ui-legal-cookies = Cookie 政策
 help-ui-legal-dmca = DMCA
 help-ui-legal-disclaimer = 免责声明
@@ -150,635 +150,778 @@ help-ui-doc-title = { $brand } 帮助中心
 help-topic-account = 账户和个人资料
 help-topic-fix = 解决问题
 help-topic-watching = 观看
-help-topic-start = 入门指南
+help-topic-start = 入门
 help-group-profiles = 个人资料
-help-group-account-data = 账户和数据
-help-group-paying = { $brand } 支付
+help-group-account-data = 数据与隐私
+help-group-paying = { $brand } 的费用
 help-group-playback-issues = 播放问题
 help-group-device-issues = 浏览器和设备
 help-group-page-issues = 页面和列表
 help-group-features = 功能和设置
-help-group-library = 片单和观看历史
-help-group-finding = 寻找观看内容
+help-group-library = 我的片单和记录
+help-group-finding = 找点东西看
 help-group-about = 关于 { $brand }
 help-group-setup = 设备设置
-help-group-reporting = 举报和法律
+help-group-reporting = 举报与法律
 help-art-profiles-manage-title = 如何创建、编辑或删除个人资料
-help-art-profiles-manage-summary = 为每个人添加个人资料，更改名称或图标，开启 PIN 码，或删除不再需要的个人资料。
-help-art-profiles-manage-keywords = 个人资料 添加 创建 编辑 删除 移除 名称 图标 头像 谁在看
+help-art-profiles-manage-summary = 为每个人添加个人资料，更改名称或头像，锁定个人资料，或删除不再需要的个人资料。
+help-art-profiles-manage-keywords = 个人资料 添加 创建 编辑 删除 移除 名称 头像 谁在看
 help-art-profiles-manage-body =
-    在此设备上使用 { $brand } 的每个人都可以拥有自己的个人资料，包括专属的名称、图标、片单和推荐内容。
+    家里每个人都可以有自己的个人资料，包括名称、头像、我的片单、观看记录和推荐。一个账户最多可以有 5 个个人资料。
 
     ## 添加个人资料
-    1. 打开右上角的个人资料菜单，选择<b>管理个人资料</b>，或打开<b>谁在看？</b>页面。
+    1. 打开右上角的个人资料菜单，选择<b>管理个人资料</b>，或者在<b>谁在看？</b>页面选择<b>管理个人资料</b>。
     2. 选择<b>添加个人资料</b>。
-    3. 输入名称，选择图标，然后选择<b>保存</b>。
+    3. 输入名称并选择头像。如果是给孩子用的，打开<b>儿童个人资料</b>。
+    4. 选择<b>保存</b>。
 
     ## 编辑或删除个人资料
-    1. 打开<b>管理个人资料</b>。
-    2. 选择要修改的个人资料。
-    3. 更改名称或图标，开启或关闭 PIN 码或儿童模式设置，然后选择<b>保存</b>。若要删除个人资料，请选择<b>删除个人资料</b>。
+    1. 打开<b>管理个人资料</b>，选择要更改的个人资料。
+    2. 更改名称或头像，或者打开或关闭<b>儿童个人资料</b>或<b>个人资料锁</b>，然后选择<b>保存</b>。
+    3. 要删除这个个人资料，选择<b>删除个人资料</b>。它的观看记录和设置也会一起删除。
 
-    !! 注意：个人资料保存在此设备的此浏览器中。请参阅<a=/help/article/saved-data>个人资料、片单和观看进度保存在哪里</a>。
+    语言、字幕、家长控制等个人资料偏好在<b>账户</b>的<b>管理个人资料</b>中。
+
+    !! 注意：个人资料保存在你的账户中，因此会出现在你登录的每台设备上。
 
     @@ profiles
 
     >> 无法删除个人资料
-    您必须至少保留一个个人资料。请先创建另一个，然后再删除旧的。
+    主个人资料（以你的名字命名的那个）不能删除，而且账户中至少要保留一个个人资料。其他个人资料都可以删除。
+
 help-art-switch-profile-title = 如何切换个人资料
-help-art-switch-profile-summary = 无需离开页面即可更改观看者。
-help-art-switch-profile-keywords = 切换 更改 个人资料 谁在看 菜单
+help-art-switch-profile-summary = 不用离开当前页面就能换人观看。
+help-art-switch-profile-keywords = 切换 更换 个人资料 谁在看 菜单
 help-art-switch-profile-body =
-    1. 打开页面右上角的个人资料菜单。
+    1. 打开页面右上角的个人资料菜单。在手机上，点按底部栏中的个人资料头像。
     2. 选择要使用的个人资料。
-    3. 如果该个人资料设有 PIN 码，请输入四位数字以继续。
+    3. 如果个人资料已锁定，输入它的 4 位 PIN 码。
 
-    推荐内容、<b>我的片单</b>和<b>继续观看</b>会根据所选的个人资料而变化。
+    推荐、<b>我的片单</b>和<b>继续观看</b>会随你选择的个人资料而变化。
 
-    !! 注意：您可以使用 PIN 码锁定个人资料。请参阅<a=/help/article/profile-pin>如何添加、编辑或删除个人资料 PIN 码</a>。
+    !! 注意：你可以用 PIN 码锁定个人资料。请参阅<a=/help/article/profile-pin>如何添加、更改或移除个人资料 PIN 码</a>。
 
     @@ profiles
-help-art-profile-pin-title = 如何添加、编辑或删除个人资料 PIN 码
-help-art-profile-pin-summary = 使用四位数字 PIN 码锁定个人资料，确保只有正确的人才能打开它。
-help-art-profile-pin-keywords = PIN 码 锁定 个人资料 锁 密码 四位数字 安全
-help-art-profile-pin-body =
-    个人资料 PIN 码由四位数字组成。任何选择该个人资料的人都必须输入 PIN 码才能打开。
 
-    ## 开启或更改 PIN 码
-    1. 打开<b>管理个人资料</b>并选择该个人资料。
-    2. 开启<b>个人资料锁定</b>并输入四位数字。
+help-art-profile-pin-title = 如何添加、更改或移除个人资料 PIN 码
+help-art-profile-pin-summary = 用 4 位 PIN 码锁定个人资料，只有对的人才能打开。
+help-art-profile-pin-keywords = pin 码 锁 个人资料锁 密码 私密 保护
+help-art-profile-pin-body =
+    个人资料锁会在打开个人资料前要求输入 4 位 PIN 码。PIN 码属于你的账户，因此在你登录的每台设备上都有效。
+
+    ## 开启个人资料锁
+    1. 打开个人资料菜单，依次选择<b>账户</b>和<b>管理个人资料</b>，然后选择这个个人资料。
+    2. 选择<b>个人资料锁</b>，并输入账户密码确认是你本人。
+    3. 输入四位数字，然后选择<b>保存</b>。
+
+    在<b>管理个人资料</b>中添加或编辑个人资料时，也可以打开<b>个人资料锁</b>。
+
+    ## 更改或移除 PIN 码
+    1. 按上面的方法打开这个个人资料的<b>个人资料锁</b>。
+    2. 选择<b>更改 PIN 码</b>，或选择<b>移除个人资料锁</b>并输入当前 PIN 码。
+
+    !! 注意：输错次数过多后，个人资料会锁定一段时间。如果忘记了 PIN 码，请参阅<a=/help/article/forgot-pin>我忘记了个人资料 PIN 码</a>。
+
+    @@ profiles
+
+help-art-kids-profile-title = 如何创建儿童个人资料
+help-art-kids-profile-summary = 儿童个人资料只显示为孩子制作的作品，其他作品都看不到。
+help-art-kids-profile-keywords = 儿童 孩子 小孩 家庭 家长控制 安全 个人资料
+help-art-kids-profile-body =
+    儿童个人资料只显示适合孩子的作品，还有专为孩子设计的首页和菜单。
+
+    1. 打开<b>管理个人资料</b>，选择<b>添加个人资料</b>。
+    2. 输入名称，然后打开<b>儿童个人资料</b>。
     3. 选择<b>保存</b>。
 
-    ## 删除 PIN 码
-    1. 打开<b>管理个人资料</b>并选择该个人资料，然后输入当前 PIN 码。
-    2. 关闭<b>个人资料锁定</b>并选择<b>保存</b>。
+    要把已有的个人资料变成儿童个人资料，编辑它并打开<b>儿童个人资料</b>。主个人资料不能设为儿童个人资料。
 
-    !! 注意：PIN 码存储在此设备上，可防止他人在此浏览器中访问该个人资料。它不是针对能够打开浏览器设置的人的强效锁。如果忘记了，请参阅<a=/help/article/forgot-pin>我忘记了个人资料 PIN 码</a>。
+    要离开儿童页面，选择<b>退出儿童模式</b>，然后选择其他个人资料。为了防止孩子随意切换，可以用 PIN 码锁定其他个人资料。请参阅<a=/help/article/profile-pin>如何添加、更改或移除个人资料 PIN 码</a>。
 
-    @@ profiles
-help-art-kids-profile-title = 如何创建儿童配置文件
-help-art-kids-profile-summary = 儿童配置文件仅显示适合年轻观众的内容，并屏蔽其他内容。
-help-art-kids-profile-keywords = 儿童 孩子 小孩 家庭 家长控制 安全 年幼 配置文件
-help-art-kids-profile-body =
-    儿童配置文件会将显示内容限制为适合年轻观众的标题，并从页面中移除成人内容。
+    对于大一点的孩子，也可以给任何个人资料设置年龄分级。请参阅<a=/help/article/parental-controls>家长控制：年龄分级和屏蔽作品</a>。
 
-    1. 打开<b>管理配置文件</b>，选择<b>添加配置文件</b>。
-    2. 为此配置文件开启<b>儿童模式</b>。
-    3. 选择名称和图标，然后<b>保存</b>。
-
-    若要防止孩子切换到其他配置文件，请为每个成人配置文件设置PIN码。请参阅<a=/help/article/profile-pin>如何添加、编辑或删除配置文件PIN码</a>。
-
-    !! 注意：内容来自独立来源，并非所有内容都带有分级标识。儿童配置文件可以减少孩子发现的内容，但不能替代共同观看。
+    !! 注意：作品来自独立来源，并不是每部作品都有年龄分级。儿童个人资料能减少孩子可以找到的内容，但不能代替陪孩子一起看。
 
     @@ profiles
+
 help-art-need-account-title = 我需要账户吗？
-help-art-need-account-summary = 你可以无需账户即可浏览和观看。以下是账户能提供的功能。
-help-art-need-account-keywords = 账户 注册 登录 必需 会员
+help-art-need-account-summary = 需要，一个免费账户。下面说明它会为你保存什么。
+help-art-need-account-keywords = 账户 注册 登录 必须 会员
 help-art-need-account-body =
-    在 { $brand } 上浏览、搜索或观看无需账户。
+    需要。在 { $brand } 上观看需要一个免费账户。创建只要一分钟，也从不要求付款信息。
 
-    目前，你的配置文件、片单和观看进度保存在此设备的此浏览器中。跨设备同步这些数据的账户正在构建中。在可用之前，登录页面仅为预览，不会创建真实账户。
+    1. 在 { $brand } 首页输入你的电子邮件地址，然后选择<b>开始使用</b>。
+    2. 输入你的名字和姓氏，并设置至少 8 个字符的密码。
+    3. 打开我们发到你邮箱的链接确认地址，然后登录。
 
-    !! 注意：{ $brand } 创建账户时绝不会要求提供卡号。请参阅<a=/help/article/free-to-use>{ $brand } 是免费的吗？</a>
+    你的账户会保存个人资料、我的片单、评分、观看记录和设置，所以在你登录的每台设备上都一样。你的名字会成为主个人资料的名称。
+
+    !! 注意：{ $brand } 是免费的，从不会要求你提供银行卡号。请参阅<a=/help/article/free-to-use>{ $brand } 免费吗？</a>
+
 help-art-sign-in-title = 登录和退出
-help-art-sign-in-summary = 登录页面目前的功能，以及当它未按预期工作时该怎么办。
-help-art-sign-in-keywords = 登录 登入 登出 退出 密码 电子邮件 无法登录
+help-art-sign-in-summary = 用电子邮件和密码登录、保持登录状态，以及退出登录。
+help-art-sign-in-keywords = 登录 退出 注销 记住我 电子邮件 密码 账户
 help-art-sign-in-body =
-    登录页面是正在构建的账户功能的预览。选择继续将带你进入此设备上的配置文件。目前尚未检查密码或电子邮件。
+    ## 登录
+    1. 在 { $brand } 首页顶部选择<b>登录</b>。
+    2. 输入电子邮件地址和密码，然后选择<b>登录</b>。
 
-    ## 退出
-    打开配置文件菜单，选择<b>退出</b>。你保存的配置文件仍保留在此设备上。
+    保持<b>记住我</b>开启，就能在这台设备上保持登录。如果你不久前刚在这台设备上退出，可以不用重新输入密码就继续。
 
-    ## 登录不起作用
-    - 重新加载页面并重试。
-    - 确保浏览器允许此网站存储数据。请参阅<a=/help/article/saved-data>你的配置文件、片单和进度保存在哪里</a>。
-    - 如果问题持续存在，请通过<a=/help/contact>联系我们</a>页面写信给我们。
-help-art-saved-data-title = 个人资料、片单和观看进度的保存位置
-help-art-saved-data-summary = 个人资料、PIN 码和观看进度存储在此设备的此浏览器中。
-help-art-saved-data-keywords = 保存数据 存储 本地 浏览器 设备 丢失 同步 进度 历史记录 个人资料 Cookie
+    ## 退出登录
+    打开个人资料菜单，选择<b>退出 { $brand }</b>。要一次在所有设备上退出，请参阅<a=/help/article/devices-sign-out>在一台或所有设备上退出登录</a>。
+
+    ## 无法登录
+    - 检查电子邮件地址有没有打错。密码区分大小写。
+    - 如果刚注册，先打开我们发到你邮箱的确认链接。<b>重新发送确认邮件</b>会再发一封。
+    - 尝试次数过多时，等一分钟再试。
+    - 忘记密码了？请参阅<a=/help/article/forgot-password>我忘记了密码</a>。
+
+help-art-saved-data-title = 你的个人资料、片单和进度保存在哪里
+help-art-saved-data-summary = 保存在你的账户中，每个浏览器还会保留一份副本，让页面打开得更快。
+help-art-saved-data-keywords = 保存的数据 存储 本地 浏览器 设备 丢失 同步 进度 记录 个人资料 cookie
 help-art-saved-data-body =
-    { $brand } 将您的个人资料、PIN 码和观看进度保存在您正在使用的设备的浏览器本地存储中。目前尚未将这些信息上传到任何账户。
+    你的个人资料、我的片单、评分、观看记录和设置都保存在你的账户中。你登录的每个浏览器也会保留一份副本，所以页面能马上打开，没有网络时也能用一会儿。更改会在几秒内同步到你的账户，并在你其他设备上打开 { $brand } 时出现。
 
-    ## 这意味着什么
-    - 使用不同的浏览器或设备时，将没有个人资料和进度。
-    - 关闭隐私或无痕窗口后，所有数据都会被清除。
-    - 在浏览器中清除站点数据会删除您的个人资料和进度。
-    - 在账户功能可用之前，您的片单仅在页面保持打开期间有效。
+    ## 这意味着
+    - 在另一台设备上登录，所有内容都在。
+    - 在浏览器中清除网站数据，会在该浏览器上退出登录并删除那份副本。你的账户会保留所有内容。
+    - 在无痕或隐私窗口中，副本会在关闭窗口时删除。
 
-    ## 发送到我们服务器的内容
-    当您打开或开始播放某部作品时，应用会告知推荐服务该作品的名称，并附带一个与您的姓名无关的随机会话编号。在您停止观看后，列表内容会在大约一天内进行调整。请参阅 <a=/help/article/recommendations>推荐机制如何运作</a>。
+    ## 还会发送到我们服务器的内容
+    你开始播放某部作品时，推荐服务会知道是哪一部，这样你的内容行才能贴合你的口味。你可以在<b>隐私与数据设置</b>中关闭<b>个性化推荐</b>。请参阅<a=/help/article/recommendations>推荐是如何运作的</a>。
 
     @@ data
-help-art-clear-data-title = 如何清除已保存的数据
-help-art-clear-data-summary = 从此浏览器中删除您的个人资料、PIN 码和观看进度。
-help-art-clear-data-keywords = 清除 删除 重置 移除 数据 历史记录 缓存 存储 Cookie 重新开始
+
+help-art-clear-data-title = 如何清除保存的数据
+help-art-clear-data-summary = 删除这个浏览器为 { $brand } 保留的数据，或从你的账户中删除数据。
+help-art-clear-data-keywords = 清除 删除 重置 数据 记录 缓存 存储 cookie 重新开始
 help-art-clear-data-body =
-    删除站点数据将移除 { $brand } 在此浏览器中保存的所有个人资料、PIN 码和观看记录。此操作无法撤销。
+    在浏览器中清除网站数据，会在该浏览器上退出登录，并删除它保留的个人资料和设置副本。所有内容仍保存在你的账户中，重新登录后就会回来。
 
     ## Chrome、Edge 和 Brave
-    1. 点击地址栏中的站点信息图标，选择 <b>Cookie 和站点数据</b>，然后选择 <b>管理设备上的站点数据</b>。
-    2. 删除该站点的条目。
+    1. 选择地址栏左侧的网站信息图标，选择 <b>Cookie 和网站数据</b>，然后选择<b>管理设备上的网站数据</b>。
+    2. 删除这个网站的条目。
 
     ## Firefox
-    1. 点击地址栏中的挂锁图标，选择 <b>清除 Cookie 和站点数据</b>。
+    1. 选择地址栏中的锁形图标，然后选择<b>清除 Cookie 和网站数据</b>。
 
-    ## Safari
-    1. 打开 <b>设置</b>，然后选择 <b>隐私</b>，再选择 <b>管理网站数据</b>。
-    2. 找到该站点并选择 <b>移除</b>。
+    ## Mac 上的 Safari
+    1. 依次打开 <b>Safari 浏览器</b>、<b>设置</b>、<b>隐私</b>、<b>管理网站数据</b>。
+    2. 找到这个网站，选择<b>移除</b>。
 
-    如果只想删除观看历史记录，请参阅 <a=/help/article/viewing-history>如何管理您的观看历史记录</a>。
+    ## iPhone 和 iPad 上的 Safari
+    打开<b>设置</b> App，依次进入<b>App</b>、<b>Safari 浏览器</b>、<b>高级</b>、<b>网站数据</b>，然后删除这个网站。
+
+    ## 从你的账户中删除数据
+    - 要从观看记录中删除作品，请参阅<a=/help/article/viewing-history>如何管理观看记录</a>。
+    - 要删除个人资料，请参阅<a=/help/article/profiles-manage>如何创建、编辑或删除个人资料</a>。
+    - 要删除所有内容，请参阅<a=/help/article/delete-account>删除你的账户</a>。
 
     @@ data
-help-art-privacy-data-title = { $brand } 收集哪些数据？
-help-art-privacy-data-summary = 简要总结存储的内容、发送的内容以及查看完整政策的位置。
-help-art-privacy-data-keywords = 隐私 数据 收集 个人信息 跟踪 出售 共享 Cookie 分析
+
+help-art-privacy-data-title = { $brand } 会收集哪些数据？
+help-art-privacy-data-summary = 简单说明保存了什么、发送了什么，以及在哪里阅读完整政策。
+help-art-privacy-data-keywords = 隐私 数据 收集 个人信息 追踪 出售 分享 cookie 分析
 help-art-privacy-data-body =
-    我们不出售个人数据。以下是简要说明。<a=/privacy>隐私政策</a>包含完整文本。
+    我们不出售个人数据，也不展示广告。下面是简要版本，完整内容请看<a=/privacy>隐私政策</a>。
 
-    ## 存储在你的设备上
-    个人资料、PIN码、你选择的语言以及观看进度。
+    ## 保存在你的账户中
+    你的姓名、电子邮件地址、可选的手机号码、个人资料、我的片单、评分、观看记录和设置，以及最近的登录和它们所用设备的列表。
 
-    ## 使用应用时发送的数据
-    - 请求标题、图片和详情的请求会发送到目录服务和我们的推荐服务。
-    - 当你打开或开始播放某个标题时，推荐服务会接收该标题和一个随机会话编号。它会在内存中保留一个小型口味档案约一天，然后将其丢弃。
-    - 播放请求会发送到独立的第三方源，它们会像访问任何网站一样看到你的IP地址。
+    ## 使用应用时发送的内容
+    - 作品、图片和详情的请求会发送到公开的影视目录和我们的推荐服务。
+    - 你开始播放某部作品时，推荐服务会知道是哪一部，这样你的内容行才能贴合你的口味。你可以在<b>隐私与数据设置</b>中关闭<b>个性化推荐</b>。
+    - 视频来自独立的第三方来源，预告片来自 YouTube。和你访问的任何网站一样，它们能看到你的 IP 地址。
 
-    关于Cookie，请参阅<a=/cookies>Cookie政策</a>。要删除存储在你设备上的数据，请参阅<a=/help/article/clear-data>如何清除已保存的数据</a>。
+    ## 你的选择
+    - 下载你的数据副本。请参阅<a=/help/article/download-data>下载你的数据副本</a>。
+    - 随时删除你的账户。请参阅<a=/help/article/delete-account>删除你的账户</a>。
+
+    关于 Cookie 和浏览器存储，请参阅 <a=/cookies>Cookie 政策</a>。
 
     @@ cookies
 
     @@ data
-help-art-free-to-use-title = { $brand } 是免费的吗？
-help-art-free-to-use-summary = { $brand } 没有任何收费项目。
-help-art-free-to-use-keywords = 免费 价格 成本 支付 付款 订阅 账单 卡片 信用卡 计划 试用
+
+help-art-free-to-use-title = { $brand } 免费吗？
+help-art-free-to-use-summary = 在 { $brand } 上没有任何需要付费的东西。
+help-art-free-to-use-keywords = 免费 价格 费用 付费 支付 订阅 账单 银行卡 信用卡 套餐 试用
 help-art-free-to-use-body =
-    { $brand } 不收取费用，不运行订阅服务，也不要求提供卡片信息。没有计划、试用期或账单日期。
+    { $brand } 不收费，不卖订阅，也不要求银行卡信息。没有套餐、试用期或扣款日期。
 
-    如果某个页面、电子邮件或消息声称来自 { $brand } 并要求你付款，那并非来自我们。请勿输入付款信息。请将其转发至 <a=mailto:{ $help_email }>{ $help_email }</a>，我们会进行调查。
+    如果某个页面、邮件或消息自称是 { $brand } 并要求你付款，那不是我们发的。不要输入付款信息。请把它转发到 <a=mailto:{ $help_email }>{ $help_email }</a>，我们会处理。
 
-    { $brand } 是一个指向由其他服务托管的标题的链接索引。某个服务是否对其自身内容收费，由该服务自行决定。请参阅<a=/help/article/sources>标题来源</a>。
-help-art-wont-play-title = 标题无法播放
-help-art-wont-play-summary = 当播放器显示错误、保持黑屏或始终无法启动时的快速修复方法。
-help-art-wont-play-keywords = 无法播放 不能播放 错误 视频失败 加载 加载动画 卡住 播放器
+    { $brand } 是一个指向其他服务所托管作品的链接索引。某个服务是否对自己的内容收费，由那个服务决定。请参阅<a=/help/article/sources>作品从哪里来</a>。
+
+help-art-wont-play-title = 作品无法播放
+help-art-wont-play-summary = 播放器报错、一直黑屏或无法开始时，最快的解决办法。
+help-art-wont-play-keywords = 无法播放 播放不了 错误 视频 失败 加载 卡住 播放器
 help-art-wont-play-body =
-    请按顺序尝试以下步骤，每完成一步后测试一次。
+    按顺序试试这些步骤，每做一步都测试一下。
 
-    1. 重新加载页面。源站临时故障是最常见的原因。
-    2. 选择其他剧集，或从详情页重新开始播放该标题。播放器会依次尝试可用的源。
-    3. 针对此网站关闭广告拦截器和隐私扩展。参见 <a=/help/article/extensions-blockers>阻止播放器的扩展</a>。
-    4. 使用最新版本的 Chrome、Edge、Firefox 或 Safari。参见 <a=/help/article/supported-browsers>支持的浏览器</a>。
-    5. 切换网络，例如从 Wi-Fi 切换到移动数据，或关闭 VPN。某些源会拒绝部分网络。
+    1. 重新加载页面。来源的临时故障是最常见的原因。
+    2. 换一集，或从详情页面重新播放作品。播放器会依次尝试可用的来源。
+    3. 为这个网站关闭广告拦截器和隐私扩展程序。请参阅<a=/help/article/extensions-blockers>会拦截播放器的扩展程序</a>。
+    4. 使用新版 Chrome、Edge、Firefox 或 Safari。请参阅<a=/help/article/supported-browsers>支持的浏览器</a>。
+    5. 换个网络，例如从 Wi-Fi 换成移动数据，或关闭 VPN。有些来源会拒绝某些网络。
 
     @@ diagnostics
 
-    >> 仍然无法播放
-    某些标题在特定时刻可能无法从任何源获取。请稍后再试。如果热门标题始终无法播放，请在 <a=/help/article/report-bug>报告问题</a> 页面告诉我们具体是哪一部。
+    >> 还是无法播放
+    有些作品在某个时刻没有任何来源可用，请稍后再试。如果某部热门作品一直无法播放，请在<a=/help/article/report-bug>报告问题</a>页面告诉我们是哪一部。
+
 help-art-playback-unavailable-title = { $brand } 显示“无法播放”
-help-art-playback-unavailable-summary = 该消息的含义及后续操作。
-help-art-playback-unavailable-keywords = 无法播放 错误消息 无法流媒体 提供商 不支持
+help-art-playback-unavailable-summary = 这条消息是什么意思，接下来该怎么做。
+help-art-playback-unavailable-keywords = 无法播放 错误 消息 无法串流 来源 不支持
 help-art-playback-unavailable-body =
-    您可能会看到 <b>无法播放</b> 或 <b>无法流式传输视频。所有源提供商均不可用或不受您的浏览器支持。</b>
+    你可能会看到<b>无法播放</b>或<b>无法播放视频。所有来源都不可用，或你的浏览器不支持。</b>
 
-    这意味着播放器已向该标题的所有已知源发出请求，但没有一个返回您的浏览器可以播放的流。
+    这表示播放器向它知道的所有来源请求了这部作品，但没有一个返回你的浏览器能播放的视频流。
 
-    1. 等待一分钟，然后再次点击播放。源的可用性会波动。
-    2. 关闭拦截器。参见 <a=/help/article/extensions-blockers>阻止播放器的扩展</a>。
-    3. 尝试其他浏览器。某些流需要旧版浏览器中缺失的功能。
-    4. 尝试其他标题，以检查问题是否仅存在于当前标题。
+    1. 等一分钟再按播放。来源时好时坏。
+    2. 关闭拦截工具。请参阅<a=/help/article/extensions-blockers>会拦截播放器的扩展程序</a>。
+    3. 换一个浏览器试试。有些视频流需要旧浏览器没有的功能。
+    4. 换一部作品试试，看看是不是只有这一部有问题。
 
-    如果同一标题持续一天无法播放，请<a=/help/article/report-bug>告诉我们</a>。请包含标题、年份以及您使用的浏览器。
+    如果同一部作品一整天都无法播放，<a=/help/article/report-bug>请告诉我们</a>，并写上作品名、年份和你用的浏览器。
 
     @@ diagnostics
 
-help-art-black-screen-title = 有声音但黑屏
-help-art-black-screen-summary = 画面缺失，但您可以听到声音。
-help-art-black-screen-keywords = 黑屏 无画面 仅音频 视频缺失 空白 绿屏
+help-art-black-screen-title = 有声音但画面全黑
+help-art-black-screen-summary = 听得到声音，但看不到画面。
+help-art-black-screen-keywords = 黑屏 没有画面 只有声音 视频不见 空白 绿屏
 help-art-black-screen-body =
-    1. 按 <b>F</b> 退出并重新进入全屏，或按 <b>Esc</b> 后重新播放。
+    1. 按 <b>F</b> 退出再重新进入全屏，或按 <b>Esc</b> 后重新播放。
     2. 重新加载页面。
-    3. 在浏览器设置中关闭硬件加速，重启浏览器后重试。
-    4. 更新浏览器和显卡驱动。
-    5. 尝试使用其他浏览器。
+    3. 在浏览器设置中关闭硬件加速，重启浏览器后再试。
+    4. 更新浏览器和显卡驱动程序。
+    5. 换一个浏览器试试。
 
-    !! 注意：某些更改页面颜色或拦截媒体的浏览器扩展也可能导致画面消失。请参阅 <a=/help/article/extensions-blockers>拦截播放器的扩展</a>。
+    !! 注意：一些会改变页面颜色或拦截媒体的浏览器扩展程序也可能遮住画面。请参阅<a=/help/article/extensions-blockers>会拦截播放器的扩展程序</a>。
 
     @@ diagnostics
+
 help-art-buffering-title = 缓冲、卡顿或启动缓慢
-help-art-buffering-summary = 改善流媒体频繁暂停加载的问题。
-help-art-buffering-keywords = 缓冲 延迟 缓慢 冻结 卡顿 加载 转圈 连接速度 画质
+help-art-buffering-summary = 改善一直停下来加载的视频流。
+help-art-buffering-keywords = 缓冲 卡顿 慢 冻结 断断续续 加载 网络连接 速度 画质
 help-art-buffering-body =
-    当网络连接传输数据的速度低于视频需求时，流媒体会暂停。
+    当你的网络传送数据的速度跟不上视频所需时，视频流就会暂停。
 
-    - 关闭其他标签页、下载任务以及使用同一网络的其他设备。
-    - 靠近路由器或使用有线连接。
-    - 暂停一分钟让播放器预加载，然后按播放。
+    - 关闭使用同一网络的其他标签页、下载和设备。
+    - 靠近路由器，或改用网线。
+    - 暂停一分钟，让播放器提前缓冲，然后再播放。
     - 关闭 VPN，或在 VPN 中选择更近的服务器。
-    - 稍后再试。高峰时段源站速度较慢。
+    - 稍后再试。高峰时段来源会更慢。
 
-    源站决定提供的画质级别，因此播放过程中画面清晰度可能会变化。
+    提供哪种画质由来源决定，所以播放过程中清晰度可能会变化。
 
     @@ diagnostics
-help-art-subtitles-missing-title = 字幕缺失或不同步
-help-art-subtitles-missing-summary = 修复字幕不显示、语言错误或滞后于语音的问题。
-help-art-subtitles-missing-keywords = 字幕 缺失 错误语言 不同步 延迟 cc 文本
-help-art-subtitles-missing-body =
-    1. 在播放器中选择 <b>音频和字幕</b>，确保已选择一种字幕语言。
-    2. 如果列表中有其他轨道，请选择另一个。轨道来自源站，不同作品之间会有所不同。
-    3. 在 <b>偏好设置</b> 中设置您首选的字幕语言。请参阅 <a=/help/article/language>如何更改语言</a>。
-    4. 如果文字提前或滞后，请重新加载并再次播放。时间轴由源站设定，我们无法针对单个作品进行调整。
 
-    如果某作品完全没有字幕，说明源站未提供。
+help-art-subtitles-missing-title = 字幕缺失或不同步
+help-art-subtitles-missing-summary = 解决字幕不出现、语言不对或落后于台词的问题。
+help-art-subtitles-missing-keywords = 字幕 隐藏字幕 缺失 语言错误 不同步 延迟 cc 文字
+help-art-subtitles-missing-body =
+    1. 在播放器中选择<b>音频和字幕</b>，确认已选择一种字幕语言。
+    2. 如果列表中有其他轨道，换一个试试。轨道来自来源，不同作品各不相同。
+    3. 为个人资料设置首选字幕语言。请参阅<a=/help/article/language>如何更改语言</a>。
+    4. 如果字幕太早或太晚，在<b>音频和字幕</b>中用 <b>-0.5s</b> 或 <b>+0.5s</b> 调整，直到和台词对上。
+
+    如果某部作品完全没有字幕，说明来源没有提供。
 
     @@ language
+
 help-art-supported-browsers-title = 支持的浏览器
-help-art-supported-browsers-summary = 哪些浏览器和版本效果最佳。
-help-art-supported-browsers-keywords = 浏览器 Chrome Firefox Safari Edge Brave Opera Internet Explorer 版本 更新 兼容
+help-art-supported-browsers-summary = 哪些浏览器和系统效果最好。
+help-art-supported-browsers-keywords = 浏览器 chrome firefox safari edge brave opera internet explorer 版本 更新 兼容
 help-art-supported-browsers-body =
-    { $brand } 在以下浏览器的最新版本中运行效果最佳：
+    { $brand } 支持以下浏览器的最新版本：
 
-    - Google Chrome 及其他 Chromium 浏览器，如 Edge 和 Brave
-    - Mozilla Firefox
-    - macOS、iPhone 和 iPad 上的 Apple Safari
+    - Windows、macOS、Linux 和 Android 上的 <b>Google Chrome</b>、<b>Microsoft Edge</b>、<b>Brave</b> 及其他 Chromium 浏览器
+    - Windows、macOS、Linux 和 Android 上的 <b>Mozilla Firefox</b>
+    - Mac、iPhone 和 iPad 上的 <b>Safari</b>
 
-    不支持 Internet Explorer。请保持浏览器更新，并允许网站使用 JavaScript 和本地存储。
+    不支持 Internet Explorer。请保持浏览器为最新版本，并允许这个网站使用 JavaScript 和网站数据。
 
     @@ diagnostics
 
-    >> 浏览器在页面加载前显示错误
-    使用 <b>Ctrl + Shift + R</b>（Mac 上使用 <b>Cmd + Shift + R</b>）重新加载以获取应用程序的最新版本，然后重试。
-help-art-fix-phone-title = 修复手机或平板上的问题
-help-art-fix-phone-summary = 适用于 iPhone、iPad 和 Android 的步骤。
-help-art-fix-phone-keywords = 手机 平板 android iphone ipad 移动 修复 问题 应用
+    >> 页面加载前浏览器就显示错误
+    在 Windows 和 Linux 上按 <b>Ctrl + Shift + R</b>，在 Mac 上按 <b>Cmd + Shift + R</b> 重新加载，获取应用的最新版本，然后再试一次。
+
+help-art-fix-phone-title = 解决手机或平板上的问题
+help-art-fix-phone-summary = iPhone、iPad 和 Android 上的处理步骤。
+help-art-fix-phone-keywords = 手机 平板 android iphone ipad 移动 解决 问题 应用
 help-art-fix-phone-body =
-    1. 关闭标签页并重新打开 { $brand }。
-    2. 从应用商店更新你的浏览器。
-    3. 观看时关闭数据节省模式或低电量模式。
-    4. 检查网络连接是否稳定。参见 <a=/help/article/buffering>缓冲、卡顿或启动缓慢</a>。
-    5. 如果你已将 { $brand } 添加到主屏幕且看起来已过时，请将其移除并重新添加。参见 <a=/help/article/install-app>如何将 { $brand } 安装为应用</a>。
+    1. 关闭标签页，重新打开 { $brand }。
+    2. 从应用商店更新浏览器。
+    3. 观看时关闭省流量模式或低电量模式。
+    4. 确认网络连接稳定。请参阅<a=/help/article/buffering>缓冲、卡顿或启动缓慢</a>。
+    5. 如果你把 { $brand } 添加到了主屏幕，而它看起来是旧版本，把它删除后再重新添加。请参阅<a=/help/article/install-app>如何将 { $brand } 安装为应用</a>。
 
     @@ diagnostics
 
     @@ refresh
-help-art-fix-tv-title = 修复电视上的问题
-help-art-fix-tv-summary = 通过电视浏览器或投屏观看时的步骤。
-help-art-fix-tv-keywords = 电视 智能电视 chromecast 投屏 修复 问题 hdmi 棒 浏览器
+
+help-art-fix-tv-title = 解决电视上的问题
+help-art-fix-tv-summary = 通过电视浏览器或投屏观看时的处理步骤。
+help-art-fix-tv-keywords = 电视 智能电视 chromecast 投屏 解决 问题 hdmi 电视棒 浏览器
 help-art-fix-tv-body =
-    { $brand } 没有电视应用。你可以通过电视的网页浏览器观看，或从电脑或手机发送浏览器标签页。
+    { $brand } 没有电视应用。你可以用电视的网页浏览器观看，或从电脑或手机投放浏览器标签页。
 
-    - 更新电视的软件及其浏览器。
-    - 重启电视或流媒体棒。
-    - 如果你正在投屏标签页，请确保发送设备在同一网络上，并关闭该设备上的其他标签页。
-    - 如果电视浏览器运行缓慢，请改为从电脑发送标签页。
+    - 更新电视的系统软件和浏览器。
+    - 重启电视或电视棒。
+    - 如果是投放标签页，让投放设备连接同一网络，并关闭它上面的其他标签页。
+    - 如果电视浏览器很慢，改从电脑投放标签页。
 
-    参见 <a=/help/article/watch-on-tv>如何在电视上观看</a>。
+    请参阅<a=/help/article/watch-on-tv>如何在电视上观看</a>。
 
     @@ diagnostics
-help-art-extensions-blockers-title = 阻止播放器的扩展程序
-help-art-extensions-blockers-summary = 广告拦截器和隐私工具可能会阻止流媒体加载。
-help-art-extensions-blockers-keywords = 扩展程序 adblock ublock ghostery 隐私 拦截器 脚本拦截 vpn dns 过滤器
+
+help-art-extensions-blockers-title = 会拦截播放器的扩展程序
+help-art-extensions-blockers-summary = 广告拦截器和隐私工具可能会让视频流加载不了。
+help-art-extensions-blockers-keywords = 扩展程序 广告拦截 adblock ublock ghostery 隐私 拦截器 脚本拦截 vpn dns 过滤
 help-art-extensions-blockers-body =
-    播放器从第三方来源加载流媒体。阻止来自其他网站的脚本、框架或媒体的工具可能会中断播放。
+    播放器从第三方来源加载视频流。拦截其他网站脚本、框架或媒体的工具可能会让它无法运行。
 
-    1. 打开你的扩展程序，暂停其在此网站上的运行，然后重新加载页面。
-    2. 如果你使用的是网络级过滤器（如 DNS 过滤器或学校/工作网络），请尝试切换到其他网络。
-    3. 如果之后播放正常，请将 { $brand } 添加到扩展程序的允许列表中。
+    1. 打开你的扩展程序，暂停它在这个网站上的运行，然后重新加载。
+    2. 如果你使用的是整个网络的过滤，例如 DNS 过滤或学校、公司的网络，换一个网络试试。
+    3. 如果之后能播放了，把 { $brand } 加入扩展程序的允许列表。
 
-    !! 注意：我们绝不会要求你安装浏览器扩展或编解码器来观看内容。请关闭任何提出此类要求的页面。
+    !! 注意：我们从不要求你安装浏览器扩展程序或解码器才能观看。遇到这样要求的页面，请直接关闭。
 
     @@ diagnostics
-help-art-rows-wont-load-title = 行或图片无法加载
-help-art-rows-wont-load-summary = 页面显示空行、加载指示器或缺失的图片。
-help-art-rows-wont-load-keywords = rows empty loading blank page pictures images posters not loading home error recommendations down
+
+help-art-rows-wont-load-title = 内容行或图片无法加载
+help-art-rows-wont-load-summary = 页面显示空的内容行、加载图标或缺少图片。
+help-art-rows-wont-load-keywords = 内容行 空白 加载 空页面 图片 海报 无法加载 首页 错误 推荐 故障
 help-art-rows-wont-load-body =
-    首页的行来自推荐服务。海报和详情来自目录服务。如果其中任何一个无法访问，你可能会看到空行或加载指示器。
+    内容行和搜索来自我们的推荐服务，海报和详情来自公开的影视目录。如果其中一个连接不上，你可能会看到空的内容行、一直转的加载图标或缺失的图片。
 
     1. 重新加载页面。
     2. 检查你的网络连接。
-    3. 关闭此网站的拦截工具。参见 <a=/help/article/extensions-blockers>阻止播放器的扩展程序</a>。
-    4. 几分钟后重试。
+    3. 为这个网站关闭拦截工具。请参阅<a=/help/article/extensions-blockers>会拦截播放器的扩展程序</a>。
+    4. 过几分钟再试。
 
-    如果推荐服务宕机，搜索页面和你保存的项目仍然可用。如果问题持续超过一小时，请<a=/help/article/report-bug>告诉我们</a>。
+    在此期间，你的个人资料、我的片单和设置都安全地保存在账户中。如果问题持续超过一小时，<a=/help/article/report-bug>请告诉我们</a>。
 
     @@ diagnostics
 
     @@ refresh
-help-art-list-missing-title = 我的片单或进度消失了
-help-art-list-missing-summary = 为什么片单或“继续观看”行可能为空，以及该怎么办。
-help-art-list-missing-keywords = my list missing gone disappeared empty lost continue watching progress reset
+
+help-art-list-missing-title = 我的片单或进度不见了
+help-art-list-missing-summary = 我的片单或“继续观看”看起来是空的原因，以及怎样找回。
+help-art-list-missing-keywords = 我的片单 不见了 消失 空 丢失 继续观看 进度 重置
 help-art-list-missing-body =
-    { $brand } 在此浏览器中存储个人资料和进度。在以下情况下，它们可能会缺失：
+    我的片单和观看进度属于某个个人资料，并保存在你的账户中。如果它们看起来是空的：
 
-    - 你在不同的浏览器或另一台设备上打开了 { $brand }
-    - 你使用了隐私或无痕窗口
-    - 你清除了站点数据或 Cookie
-    - 你正在使用不同的个人资料
+    - 确认你用的是正确的个人资料。每个个人资料都有自己的片单。可以从个人资料菜单切换。
+    - 确认你登录的是之前那个账户。
+    - 在新设备上登录后，等几秒让账户加载，或者重新加载页面。
+    - 你从观看记录中隐藏的作品也会从“继续观看”中消失。
 
-    目前，由于尚未提供可保存数据的账户，你的片单仅在页面保持打开期间有效。重新加载页面会清空它。
-
-    从个人资料菜单切换到你之前使用的个人资料。参见 <a=/help/article/saved-data>你的个人资料、片单和进度保存在哪里</a>。
+    如果某台设备上仍然缺少内容，在那台设备上退出登录再重新登录。请参阅<a=/help/article/saved-data>你的个人资料、片单和进度保存在哪里</a>。
 
     @@ profiles
 
-    @@ data
 help-art-forgot-pin-title = 我忘记了个人资料 PIN 码
-help-art-forgot-pin-summary = 我们无法重置 PIN 码，以下是重新进入的方法。
-help-art-forgot-pin-keywords = forgot pin reset lost passcode locked out profile lock
+help-art-forgot-pin-summary = 用账户密码移除 PIN 码，再设置一个新的。
+help-art-forgot-pin-keywords = 忘记 pin 码 重置 丢失 密码 被锁 个人资料锁
 help-art-forgot-pin-body =
-    PIN 仅存储在你的设备上，因此我们无法查询或重置它。
+    1. 打开个人资料菜单，依次选择<b>账户</b>和<b>管理个人资料</b>，然后选择被锁定的个人资料。
+    2. 选择<b>个人资料锁</b>，输入账户密码。
+    3. 选择<b>忘记 PIN 码了？</b>，然后选择<b>移除个人资料锁</b>。
 
-    1. 请再次尝试输入 PIN，每个方格输入一位数字。
-    2. 如果你不记得 PIN，可以通过清除浏览器中本网站的数据来重新进入。这将删除所有个人资料、PIN 和观看进度。请参阅 <a=/help/article/clear-data>如何清除已保存的数据</a>。
-    3. 重新创建你的个人资料。
+    这个个人资料就可以不用 PIN 码打开了，你也可以设置新的 PIN 码。请参阅<a=/help/article/profile-pin>如何添加、更改或移除个人资料 PIN 码</a>。
 
-    !! 注意：请选择一个你能记住的 PIN，并且不要将其用于其他用途。
+    !! 注意：只有知道账户密码的人才能移除 PIN 码。如果密码也忘了，请参阅<a=/help/article/forgot-password>我忘记了密码</a>。
 
     @@ profiles
 
-    @@ data
-help-art-page-not-found-title = 我看到一个“404”页面
-help-art-page-not-found-summary = 链接错误或页面已移动。
-help-art-page-not-found-keywords = 404 未找到 页面 缺失 链接 错误 空白
-help-art-page-not-found-body =
-    404 页面表示该地址在 { $brand } 上没有指向任何内容。请检查地址是否有拼写错误，或使用菜单和搜索功能找到你想要的内容。
+help-art-forgot-password-title = 我忘记了密码
+help-art-forgot-password-summary = 通过邮件获取链接，设置新密码。
+help-art-forgot-password-keywords = 忘记密码 重置密码 找回密码 无法登录 新密码 链接
+help-art-forgot-password-body =
+    1. 在登录页面选择<b>忘记密码？</b>
+    2. 输入账户的电子邮件地址，然后选择<b>发送链接</b>。
+    3. 打开 { $brand } 发来的邮件，按链接设置新密码。
 
-    - 使用顶栏中的 <b>首页</b> 返回起始页面。
-    - 使用 <a=/help>帮助中心</a> 的搜索功能查找文章。
-    - 如果是 { $brand } 上的某个链接将你带到了这里，请 <a=/help/article/report-bug>告诉我们</a> 你是在哪里找到该链接的。
+    链接只能使用一次，并且有时间限制。如果几分钟后还没收到邮件，先看看垃圾邮件文件夹，再重新试一次。
+
+    !! 注意：我们绝不会通过邮件、聊天或电话索要你的密码。请参阅<a=/help/article/fake-sites>如何识别假冒 { $brand } 网站和信息</a>。
+
+help-art-change-email-password-title = 更改电子邮件、密码或手机号码
+help-art-change-email-password-summary = 更新你用来登录和找回账户的信息。
+help-art-change-email-password-keywords = 更改邮箱 更改密码 修改密码 手机号码 账户详情 姓名 安全
+help-art-change-email-password-body =
+    打开个人资料菜单，选择<b>账户</b>。你的信息在<b>账户详情</b>中。更改前，我们可能会用你的密码或发到邮箱的验证码确认是你本人。
+
+    ## 密码
+    1. 选择<b>密码</b>。
+    2. 输入当前密码，再输入两次新密码。新密码至少需要 8 个字符。
+    3. 如果别人可能知道旧密码，打开<b>在所有设备上退出登录</b>，然后选择<b>保存</b>。
+
+    ## 电子邮件
+    1. 选择<b>电子邮件</b>，输入新地址。
+    2. 打开我们发到新地址的链接，完成更改。
+
+    ## 手机号码和姓名
+    选择<b>手机号码</b>可以添加一个帮你找回账户的号码，选择<b>姓名</b>可以更改你的名字。主个人资料的名称会跟随你的名字。
+
+help-art-devices-sign-out-title = 在一台或所有设备上退出登录
+help-art-devices-sign-out-summary = 查看你的账户在哪里登录，并从不再使用的设备上退出。
+help-art-devices-sign-out-keywords = 退出登录 所有设备 已登录设备 会话 安全 新设备 手机丢失 公共电脑
+help-art-devices-sign-out-body =
+    1. 打开个人资料菜单，选择<b>账户</b>。
+    2. 选择<b>访问与设备</b>。
+    3. 选择<b>在此设备上退出登录</b>，或选择<b>在所有设备上退出登录</b>，退出所有打开了你账户的浏览器（包括当前这个）。
+
+    同一页面上的<b>最近的安全活动</b>会列出最近的登录和账户变更。有新设备登录时，我们也会发邮件通知你。
+
+    !! 注意：如果看到你不认识的登录，请在所有设备上退出登录并更改密码。请参阅<a=/help/article/change-email-password>更改电子邮件、密码或手机号码</a>。
+
+help-art-download-data-title = 下载你的数据副本
+help-art-download-data-summary = 获取一份包含你账户中个人信息的文件。
+help-art-download-data-keywords = 下载 我的数据 个人信息 副本 导出 gdpr 数据请求 访问
+help-art-download-data-body =
+    1. 打开个人资料菜单，选择<b>账户</b>。
+    2. 选择<b>个人信息访问</b>。
+    3. 按步骤保存文件。
+
+    文件包含你的账户详情、个人资料、设置、我的片单、评分和观看记录。文件保存在你的设备上，请放在安全的地方。
+
+    要把某个个人资料的观看记录下载为表格，打开这个个人资料的<b>观看记录</b>，然后选择<b>全部下载</b>。
+
+help-art-delete-account-title = 删除你的账户
+help-art-delete-account-summary = 永久删除你的账户及其中的一切。
+help-art-delete-account-keywords = 删除账户 注销账户 关闭账户 清除数据 取消账户
+help-art-delete-account-body =
+    删除账户后，账户会立即被删除，连同所有个人资料、片单、评分、设置和全部观看记录。此操作无法撤销。
+
+    1. 打开个人资料菜单，选择<b>账户</b>。
+    2. 选择页面底部的<b>删除账户</b>。
+    3. 确认是你本人，然后选择<b>永久删除</b>。
+
+    如果只想移除一个人，删除他的个人资料就行。请参阅<a=/help/article/profiles-manage>如何创建、编辑或删除个人资料</a>。
+
+    !! 注意：如果想保留数据副本，请先下载。请参阅<a=/help/article/download-data>下载你的数据副本</a>。
+
+help-art-page-not-found-title = 我看到了“404”页面
+help-art-page-not-found-summary = 链接有误，或页面已经移动。
+help-art-page-not-found-keywords = 404 未找到 页面不存在 链接失效 错误
+help-art-page-not-found-body =
+    404 页面表示这个地址在 { $brand } 上不指向任何内容。检查地址有没有打错，或用菜单和搜索找到你想要的内容。
+
+    - 用顶部栏的<b>首页</b>回到起点。
+    - 用<a=/help>帮助中心</a>的搜索查找文章。
+    - 如果是 { $brand } 上的某个链接把你带到这里，<a=/help/article/report-bug>请告诉我们</a>你是在哪里找到它的。
 
     @@ refresh
+
 help-art-language-title = 如何更改语言
-help-art-language-summary = 更改界面语言和你首选的字幕语言。
-help-art-language-keywords = 语言 更改 翻译 界面 显示 字幕 音频 英语 西班牙语 法语 阿拉伯语
+help-art-language-summary = 更改 { $brand } 的语言以及你观看时使用的语言。
+help-art-language-keywords = 语言 更改 翻译 界面 显示 字幕 音频 英语 中文 西班牙语 法语
 help-art-language-body =
-    ## 界面语言
-    1. 滚动到任何帮助中心页面的底部，在 <b>选择你首选的语言</b> 中选择一种语言。
-    2. 页面将以该语言重新加载。你的选择将在此设备上记住。
+    ## 显示语言
+    1. 打开个人资料菜单，依次选择<b>账户</b>和<b>管理个人资料</b>，然后选择你的个人资料。
+    2. 依次选择<b>语言</b>和<b>显示语言</b>，然后选择一种语言。
 
-    你也可以在 <b>设置</b> 中，通过 <b>语言</b> 下的 <b>显示语言</b> 进行更改。
+    这个选择属于个人资料，所以在每台设备上都一样。在帮助中心，你也可以在任意页面底部选择语言。
 
-    ## 字幕语言
-    1. 打开 <b>设置</b> 并选择 <b>语言</b>。
-    2. 在 <b>首选字幕语言</b> 下选择一种语言，然后选择 <b>保存偏好设置</b>。
+    ## 音频和字幕语言
+    1. 按上面的方法打开你个人资料的<b>语言</b>，然后选择<b>音频和字幕</b>。
+    2. 选择<b>音频语言</b>和<b>字幕语言</b>。<b>与显示语言相同</b>会跟随应用的语言。
 
-    !! 注意：列表中仅显示已完全翻译的语言。尚未翻译的文本将以英语显示。
+    只要作品提供这些语言，播放器就会使用它们。
+
+    !! 注意：只有完整翻译的语言才会出现在列表中。
 
     @@ language
-help-art-subtitles-title = 如何使用字幕、闭路字幕或选择音频语言
-help-art-subtitles-summary = 开启字幕，选择音轨，并更改其外观。
-help-art-subtitles-keywords = 字幕 闭路字幕 cc 音频 语言 音轨 大小 颜色 外观 背景
+
+help-art-subtitles-title = 如何使用字幕或选择音频语言
+help-art-subtitles-summary = 打开字幕、选择字幕轨道，并更改字幕的样子。
+help-art-subtitles-keywords = 字幕 隐藏字幕 cc 音频 语言 轨道 大小 颜色 外观 背景
 help-art-subtitles-body =
-    ## 开启或关闭字幕
-    1. 开始播放内容，将指针悬停在播放器上，或轻触屏幕。
+    ## 打开或关闭字幕
+    1. 播放作品，把指针移到播放器上，或点按屏幕。
     2. 选择<b>音频和字幕</b>。
-    3. 选择字幕语言，或选择<b>关闭</b>。
+    3. 选择一种字幕语言，或选择<b>关闭</b>。
+
+    如果字幕出现得太早或太晚，可以在同一面板中用 <b>-0.5s</b> 和 <b>+0.5s</b> 调整。
 
     ## 更改字幕外观
-    1. 打开<b>设置</b>，选择<b>字幕外观</b>。
-    2. 选择大小和颜色。按钮上方的预览会显示效果。
-    3. 选择<b>完成</b>。
+    1. 打开个人资料菜单，依次选择<b>账户</b>和<b>管理个人资料</b>，然后选择你的个人资料。
+    2. 选择<b>字幕外观</b>。
+    3. 选择文字大小、文字颜色、描边、背景和窗口颜色。预览会显示效果。<b>恢复默认</b>会撤销你的更改。
 
-    !! 注意：可用的语言和音轨取决于内容来源。请参阅<a=/help/article/subtitles-missing>字幕缺失或不同步</a>。
+    !! 注意：有哪些语言和音轨取决于作品的来源。请参阅<a=/help/article/subtitles-missing>字幕缺失或不同步</a>。
+
 help-art-shortcuts-title = 键盘快捷键
-help-art-shortcuts-summary = 无需鼠标即可控制播放器。
-help-art-shortcuts-keywords = 键盘 快捷键 按键 空格 方向键 全屏 静音 音量 跳过 后退 热键
+help-art-shortcuts-summary = 不用鼠标也能控制播放器。
+help-art-shortcuts-keywords = 键盘 快捷键 按键 空格 方向键 全屏 静音 音量 快进 快退 热键
 help-art-shortcuts-body =
-    在电脑上播放内容时，以下按键有效。
+    在电脑上播放作品时，这些按键可以使用。
 
-    - <b>Space</b> 或 <b>K</b>：播放或暂停
-    - <b>Left arrow</b> 或 <b>J</b>：后退10秒
-    - <b>Right arrow</b> 或 <b>L</b>：前进10秒
-    - <b>Up arrow</b> 和 <b>Down arrow</b>：音量和音量减小
+    - <b>空格键</b>或 <b>K</b>：播放或暂停
+    - <b>左方向键</b>或 <b>J</b>：后退 10 秒
+    - <b>右方向键</b>或 <b>L</b>：前进 10 秒
+    - <b>上方向键</b>和<b>下方向键</b>：调高和调低音量
     - <b>M</b>：静音或取消静音
-    - <b>F</b>：开启或关闭全屏
+    - <b>F</b>：打开或关闭全屏
+
 help-art-skip-intro-next-title = 跳过片头和下一集
-help-art-skip-intro-next-summary = 跳过片头或继续观看下一集。
-help-art-skip-intro-next-keywords = 跳过片头 下一集 自动播放 连续观看 剧集 季 抽屉
+help-art-skip-intro-next-summary = 跳过开头，或直接看下一集。
+help-art-skip-intro-next-keywords = 跳过片头 下一集 自动播放 追剧 剧集 季 列表
 help-art-skip-intro-next-body =
-    - 当剧集片头开始播放时，<b>跳过片头</b> 会显示几秒钟。选择它即可跳转到正片。
-    - 播放器控件中的<b>下一集</b> 可开始播放下一集。
-    - <b>剧集</b> 会打开该季的剧集列表，你可以选择任意一集。
+    - 每集片头开始时，<b>跳过片头</b>会出现几秒钟。选择它可以直接进入正片。
+    - 播放器控件中的<b>下一集</b>会开始播放下一集。
+    - <b>剧集</b>会打开本季的列表，你可以选任意一集。
 
-    要控制剧集结束后的行为，请打开<b>设置</b>，然后选择<b>播放设置</b>，并开启或关闭<b>自动播放下一集</b>。
-help-art-my-list-title = 如何使用片单
-help-art-my-list-summary = 保存内容以便稍后观看并再次找到它们。
-help-art-my-list-keywords = 片单 添加 移除 观看列表 保存 稍后 收藏 加号
+    要设置一集播完后怎么做，打开个人资料的<b>播放设置</b>，打开或关闭<b>自动播放下一集</b>。
+
+help-art-my-list-title = 如何使用我的片单
+help-art-my-list-summary = 把作品存起来，之后再找。
+help-art-my-list-keywords = 我的片单 添加 移除 想看 稍后观看 收藏 加号
 help-art-my-list-body =
-    ## 添加片目
-    点击片目卡片、详情窗口或页面顶部横幅上的 <b>+</b> 按钮。
+    ## 添加作品
+    在作品卡片、详情窗口或页面顶部的大幅作品上选择 <b>+</b> 按钮。
 
-    ## 移除片目
-    点击片目上的对勾，它会变回 <b>+</b>。
+    ## 移除作品
+    选择作品上的勾号，它会变回 <b>+</b>。
 
-    ## 查看片单
-    在顶栏打开 <b>我的片单</b>。在手机上，它位于底栏。
+    ## 查看你的片单
+    打开顶部栏中的<b>我的 Streams</b>（手机上在底部栏中）。你的片单就在那里，旁边还有<b>继续观看</b>、你点赞的作品和你看过的预告片。
 
-    !! 注意：目前，只要页面保持打开，片单就会保留；重新加载页面后会被清除。将其保存到个人资料是账户功能的一部分。请参阅 <a=/help/article/list-missing>我的片单或进度消失了</a>。
+    我的片单属于个人资料，并保存在你的账户中，所以在每台设备上都一样。
+
 help-art-continue-watching-title = 如何使用“继续观看”
-help-art-continue-watching-summary = 从停止的地方继续观看，并从该行中移除片目。
-help-art-continue-watching-keywords = 继续观看 恢复 进度 移除 行 停止 观看一半
+help-art-continue-watching-summary = 从上次停下的地方继续看，并从这一行中移除作品。
+help-art-continue-watching-keywords = 继续观看 接着看 进度 移除 内容行 中断 看了一半
 help-art-continue-watching-body =
-    你开始观看的片目会出现在首页的 <b>继续观看</b> 行中，并带有显示观看进度的进度条。
+    你开始看的作品会出现在<b>继续观看</b>这一行，进度条显示你看到了哪里。它也在<b>我的 Streams</b>中。
 
-    ## 恢复观看
-    点击片目。播放将从你停止的地方开始。
+    ## 接着看
+    选择这部作品。在你登录的任何设备上，都会从上次停下的地方开始播放。
 
-    ## 从该行中移除片目
-    1. 打开片目卡片上的选项菜单。
-    2. 选择 <b>从“继续观看”中删除</b>。
+    ## 从这一行中移除作品
+    1. 打开作品卡片上的选项菜单。
+    2. 选择<b>从“继续观看”中移除</b>。
 
-    该行基于此浏览器中保存的进度生成，因此其他设备会有自己的行。请参阅 <a=/help/article/saved-data>你的个人资料、片单和进度保存在哪里</a>。
+    如果还想从观看记录中删除这部作品，请参阅<a=/help/article/viewing-history>如何管理观看记录</a>。
 
-    @@ data
-help-art-viewing-history-title = 如何管理你的观看历史
-help-art-viewing-history-summary = 观看时记录了什么，以及如何删除。
-help-art-viewing-history-keywords = 观看历史 已观看 活动 删除 清除 移除 评分 推荐
+help-art-viewing-history-title = 如何管理观看记录
+help-art-viewing-history-summary = 观看时会记录什么，以及如何删除。
+help-art-viewing-history-keywords = 观看记录 看过 活动 删除 清除 移除 评分 推荐
 help-art-viewing-history-body =
-    { $brand } 会在此浏览器中记录你开始观看的片目及观看进度，以便“继续观看”功能正常工作，并让推荐符合你的口味。
+    每个个人资料都有一个<b>观看记录</b>页面，按从新到旧列出看过的作品。{ $brand } 用它来生成“继续观看”和推荐。
 
-    - 若要隐藏“继续观看”行中的某个片目，请参阅 <a=/help/article/continue-watching>如何使用“继续观看”</a>。
-    - 若要删除所有内容，请参阅 <a=/help/article/clear-data>如何清除你的保存数据</a>。
+    1. 打开个人资料菜单，依次选择<b>账户</b>和<b>管理个人资料</b>，然后选择这个个人资料。
+    2. 选择<b>观看记录</b>。
+    3. 选择作品旁边的<b>隐藏此作品</b>，或选择<b>全部隐藏</b>。
 
-    !! 注意：<b>设置</b> 中的 <b>观看活动</b> 页面目前尚未列出片目。
+    被隐藏的作品会在所有设备上从“继续观看”中消失，也不再影响推荐。<b>全部下载</b>会把列表保存为表格。
 
     @@ data
+
 help-art-notifications-title = 通知
-help-art-notifications-summary = 顶栏中的铃铛显示什么，以及项目如何标记为已读。
-help-art-notifications-keywords = 通知 铃铛 警报 新上线 更新 已读 未读
+help-art-notifications-summary = 顶部栏的铃铛会显示什么，以及项目如何标记为已读。
+help-art-notifications-keywords = 通知 铃铛 提醒 新上线 更新 已读 未读
 help-art-notifications-body =
-    顶部的铃铛图标会列出值得关注的影片，例如新上线的内容和热门推荐。点击任意条目即可查看该影片的详细信息。
+    顶部栏的铃铛会列出值得一看的作品，例如新上线和热门推荐。选择一项即可打开该作品的详情。
 
-    已打开的条目会标记为已读。此状态保存在您的浏览器中。铃铛上的数字显示未读条目的数量。
+    你打开过的项目会标记为已读，铃铛上的数字显示还有几项未读。
 
-    通知仅在 { $brand } 内显示。我们不会通过电子邮件或推送消息发送影片相关信息。
+    个人资料中的<b>通知设置</b>有邮件和推送消息的选项。这些设置会保存在个人资料中，但 { $brand } 目前还不会发送关于作品的邮件或推送消息。关于账户的邮件（例如登录链接）始终会发送。
+
 help-art-search-browse-title = 如何搜索和浏览
-help-art-search-browse-summary = 按名称、类型或心情查找影片。
-help-art-search-browse-keywords = 搜索 浏览 查找 类型 电影 电视剧 分类 寻找 影片 演员 导演
+help-art-search-browse-summary = 按名称、类型或氛围找作品。
+help-art-search-browse-keywords = 搜索 浏览 查找 类型 电影 剧集 分类 作品 演员 导演
 help-art-search-browse-body =
     ## 搜索
-    1. 点击顶部的放大镜图标。
-    2. 输入影片名称、演员或导演。
-    3. 按 <b>Enter</b> 查看所有匹配结果。
+    1. 选择顶部栏中的放大镜。
+    2. 输入作品名、演员或导演。结果会边输入边出现，小的拼写错误也没关系。
 
     ## 浏览
-    - 顶部的 <b>电视剧</b> 和 <b>电影</b> 会打开对应类型的页面。在那里使用 <b>类型</b> 进行筛选。
-    - 首页的列表按主题分组，例如年代和类型，或与您观看过的影片相似的内容。
-    - <b>按语言浏览</b> 可按原声语言、配音或字幕查找影片。请参阅 <a=/help/article/browse-language>按语言浏览</a>。
+    - 顶部栏的<b>电视剧</b>和<b>电影</b>会打开对应类别的页面。在那里用<b>类型</b>进一步筛选。
+    - 首页的内容行按主题分组。请参阅<a=/help/article/recommendations>推荐是如何运作的</a>。
+    - <b>按语言浏览</b>可以按作品的原始语言找作品。请参阅<a=/help/article/browse-language>按语言浏览</a>。
+
 help-art-browse-language-title = 按语言浏览
-help-art-browse-language-summary = 按原声语言、配音或字幕查找影片。
-help-art-browse-language-keywords = 按语言浏览 原声 配音 字幕 外语 国际 动漫 韩语 西班牙语
+help-art-browse-language-summary = 按作品制作时使用的语言找作品。
+help-art-browse-language-keywords = 按语言浏览 原始语言 外国 国际 世界电影 动漫 韩国 西班牙
 help-art-browse-language-body =
-    1. 打开顶部的 <b>按语言浏览</b>。
-    2. 选择您需要的选项：<b>原声语言</b>、<b>配音</b> 或 <b>字幕</b>。
-    3. 选择一种语言以查看匹配的影片。
+    1. 打开顶部栏中的<b>按语言浏览</b>。
+    2. <b>原始语言</b>已经选好。选择一种语言，就能看到最初用这种语言制作的作品。
 
-    !! 注意：配音和字幕的可用性取决于片源。此处列出的影片在播放时可能提供的音轨较少。
+    !! 注意：这个页面按作品的原始语言列出作品。配音和字幕取决于每部作品的来源，播放时可以在<b>音频和字幕</b>中查看。
+
 help-art-new-popular-title = 新片与热门
-help-art-new-popular-summary = 查看新上线的内容以及大家正在观看的影片。
-help-art-new-popular-keywords = 新片 热门 趋势 最新 前十名 即将上线 本周
+help-art-new-popular-summary = 看看有什么新上线，以及大家现在在看什么。
+help-art-new-popular-keywords = 新片 热门 趋势 最新 top 10 即将上线 本周
 help-art-new-popular-body =
-    顶部的 <b>新片与热门</b> 列出了近期上线或正在流行的影片。点击影片查看详情，然后将其 <b>加入片单</b> 以便稍后查找。
+    顶部栏中的<b>新片与热门</b>列出最近上线或正在流行的作品。打开作品查看详情，再把它加入<b>我的片单</b>，方便以后找到。
 
-    这些列表会根据目录更新，因此每天可能会有所变化。
-help-art-recommendations-title = 推荐机制如何运作
-help-art-recommendations-summary = 列表是如何选择的，以及您可以如何更改它们。
-help-art-recommendations-keywords = 推荐 行 建议 因为你看过 口味 算法 为你 个性化 定制化
+    这些列表会根据目录更新，所以每天都会变化。
+
+help-art-recommendations-title = 推荐是如何运作的
+help-art-recommendations-summary = 内容行是怎样生成的，以及什么会改变它们。
+help-art-recommendations-keywords = 推荐 内容行 建议 因为你看过 口味 算法 为你 个性化
 help-art-recommendations-body =
-    首页上的行是根据标题的描述、类型和演职员信息生成的。含义相近的标题会被归入同一行，例如某个年代和类型，或者在你看过的标题前加上<b>类似</b>。
+    内容行根据作品本身生成：类型、氛围、题材、国家和年代，例如<b>暖心浪漫喜剧</b>或<b>韩国犯罪剧集</b>。在一行内部，排序会跟随你的口味。
 
-    ## 什么会改变你的行
-    - 开始观看某个标题。推荐服务会学习你偏好的类型，并在大约一天内调整行。
-    - 你使用的配置文件。儿童配置文件仅显示适合年轻观众的内容。
+    ## 什么会改变你的内容行
+    - 你开始看和看完的作品、你的评分，以及你加入我的片单的作品。
+    - <b>因为你看过《…》</b>、<b>今日为你精选</b>和<b>接下来看什么</b>这类内容行来自你最近看的作品。在类型页面中，它们只会在该类型里挑选。
+    - 你使用的个人资料。每个个人资料都有自己的口味，儿童个人资料只显示适合孩子的作品。
+    - 日期和季节。节日和活动的内容行会在对应的时候出现。
 
-    ## 什么不会
-    行不受你支付的费用、居住地或身份影响。我们不会使用你的姓名或电子邮件，因为该服务仅看到一个随机会话编号。参见<a=/help/article/privacy-data>{ $brand }收集哪些数据？</a>
+    ## 关闭
+    在个人资料的<b>隐私与数据设置</b>中关闭<b>个性化推荐</b>。之后你会看到和其他人一样的推荐。
+
+    我们从不用你的姓名或电子邮件来挑选作品。请参阅<a=/help/article/privacy-data>{ $brand } 会收集哪些数据？</a>
 
     @@ data
-help-art-trailers-clips-title = 预告片与片段
-help-art-trailers-clips-summary = 在决定观看前预览标题。
-help-art-trailers-clips-keywords = 预告片 片段 预览 短视频 预告 静音 声音 自动播放 预览
+
+help-art-trailers-clips-title = 预告片和片段
+help-art-trailers-clips-summary = 决定看之前先预览一下。
+help-art-trailers-clips-keywords = 预告片 片段 预览 短视频 先导片 静音 声音 自动播放
 help-art-trailers-clips-body =
-    - 在电脑上将鼠标悬停在标题卡片上，或打开其详情，以查看预告片预览。
-    - <b>片段</b>显示可滚动的短竖屏预览。
-    - 使用扬声器按钮开启或关闭预览声音。你的选择将针对该配置文件保存。
+    - 在电脑上把指针悬停在作品卡片上，或打开详情，就能看到预告片预览。
+    - <b>片段</b>展示可以滑动浏览的竖屏短预览。
+    - 用扬声器按钮打开或关闭预览的声音。
 
-    要停止预览自动开始，请打开<b>设置</b>，然后打开<b>播放设置</b>，并关闭<b>自动播放预览</b>。
-help-art-what-is-title = { $brand } 是什么？
-help-art-what-is-summary = 简要介绍 { $brand } 及其功能与限制。
-help-art-what-is-keywords = 什么是 关于 streams 服务 解释 索引 链接 目录 类似 netflix
+    预告片从 YouTube 播放。要让预览不再自动开始，在个人资料的<b>播放设置</b>中关闭<b>自动播放预览</b>。
+
+help-art-what-is-title = 什么是 { $brand }？
+help-art-what-is-summary = 简单介绍 { $brand } 能做什么、不做什么。
+help-art-what-is-keywords = 什么是 关于 streams 服务 介绍 索引 链接 目录 类似 netflix
 help-art-what-is-body =
-    { $brand } 帮助你找到下一部想看的电影或电视剧。它会学习你的喜好，并将目录整理成行，呈现一个类似你熟悉的流媒体服务的页面。
+    { $brand } 帮你找到下一部想看的电影或剧集。它会了解你的喜好，把目录整理成一行行内容，页面感觉就像你熟悉的流媒体服务。
 
-    { $brand } 是一个链接索引。它不托管或上传视频。当你按下播放时，播放器会向独立源请求流媒体并播放第一个可用的源。参见<a=/help/article/sources>标题来源</a>。
+    { $brand } 是一个链接索引。它不托管也不上传视频。你按下播放时，播放器会向独立来源请求视频流，并播放第一个能用的。请参阅<a=/help/article/sources>作品从哪里来</a>。
 
-    无需购买，也没有订阅。参见<a=/help/article/free-to-use>{ $brand } 免费吗？</a>
-help-art-getting-started-title = 开始使用 { $brand }
-help-art-getting-started-summary = 你的前五分钟：配置文件、查找标题并保存。
-help-art-getting-started-keywords = 入门 开始 首次使用 导览 新用户 如何使用 指南 基础
+    这里没有需要购买的东西，也没有订阅。请参阅<a=/help/article/free-to-use>{ $brand } 免费吗？</a>
+
+help-art-getting-started-title = { $brand } 入门
+help-art-getting-started-summary = 最初的五分钟：账户、个人资料、找作品和收藏作品。
+help-art-getting-started-keywords = 入门 开始 第一次 导览 新用户 使用方法 指南 基础
 help-art-getting-started-body =
-    1. <b>选择或创建个人资料。</b>查看<a=/help/article/profiles-manage>如何创建、编辑或删除个人资料</a>。
-    2. <b>浏览首页。</b>内容按主题分组，顶部的大标题会变化。
-    3. 使用放大镜<b>搜索</b>标题。查看<a=/help/article/search-browse>如何搜索和浏览</a>。
-    4. <b>选择一个标题</b>以阅读介绍、观看预告片并播放。
-    5. 使用<b>+</b>按钮<b>将标题加入片单</b>。
+    1. <b>创建免费账户。</b>请参阅<a=/help/article/need-account>我需要账户吗？</a>
+    2. <b>选择或创建个人资料。</b>请参阅<a=/help/article/profiles-manage>如何创建、编辑或删除个人资料</a>。
+    3. <b>逛逛首页。</b>内容行按主题分组，顶部的大幅作品会轮换。
+    4. 用放大镜<b>搜索</b>作品、演员或导演。请参阅<a=/help/article/search-browse>如何搜索和浏览</a>。
+    5. <b>选择一部作品</b>，可以阅读介绍、观看预告片，然后开始播放。
+    6. 用 <b>+</b> 按钮<b>把作品加入我的片单</b>。
 
-    了解观看时有帮助的按键：<a=/help/article/shortcuts>键盘快捷键</a>。
-help-art-sources-title = 影片来源
-help-art-sources-summary = { $brand } 如何查找流媒体，以及为什么某部影片今天能看明天却不行。
+    了解观看时好用的按键：<a=/help/article/shortcuts>键盘快捷键</a>。
+
+help-art-sources-title = 作品从哪里来
+help-art-sources-summary = { $brand } 如何找到视频流，以及为什么一部作品今天能播、明天可能就不行。
 help-art-sources-keywords = 来源 提供商 托管 链接 第三方 从哪里来 目录 tmdb 元数据 可用性
 help-art-sources-body =
-    详情、海报和评分来自公开的影视目录。视频本身并不存储在 { $brand } 上。当你按下播放时，播放器会向独立的第三方源请求流媒体。
+    详情、海报和评分来自公开的影视目录。视频本身不在 { $brand } 上。你按下播放时，播放器会向独立的第三方来源请求视频流。
 
-    - 某部影片可能在一个源上可用，但在另一个源上不可用。
-    - 源可能会在没有预警的情况下离线。
-    - 画质、音轨和字幕取决于源。
+    - 一部作品可能在一个来源可以播放，在另一个来源不行。
+    - 来源可能会毫无预兆地下线。
+    - 画质、音轨和字幕都取决于来源。
 
-    我们不控制或检查这些源。请参阅<a=/disclaimer>免责声明</a>。如果您是版权持有者，请参阅<a=/help/article/copyright>如何报告版权问题</a>。
-help-art-contribute-title = 我如何参与贡献？
-help-art-contribute-summary = 欢迎提出想法、修复问题、翻译和报告错误。
-help-art-contribute-keywords = 贡献 参与 志愿者 翻译 代码 github 帮助 改进 建议
+    我们不控制也不检查这些来源。请参阅<a=/disclaimer>免责声明</a>。如果你是权利人，请参阅<a=/help/article/copyright>如何举报版权问题</a>。
+
+help-art-contribute-title = 我可以怎样参与？
+help-art-contribute-summary = 欢迎提供想法、修复、翻译和问题报告。
+help-art-contribute-keywords = 参与 贡献 志愿者 翻译 代码 github 帮助 改进 建议
 help-art-contribute-body =
-    { $brand } 是开源构建的。你可以通过多种方式提供帮助：
+    { $brand } 是公开开发的。你可以通过几种方式帮忙：
 
-    - <b>翻译。</b> 界面文本存储在纯文本文件中，每种语言一个文件，因此翻译就是编辑一个文本文件。
-    - <b>错误报告。</b> 查看<a=/help/article/report-bug>报告问题</a>。
-    - <b>修复和功能。</b> 发送描述或补丁。
-    - <b>想法。</b> 告诉我们你希望帮助中心或应用具备什么功能。
+    - <b>翻译。</b>界面文字保存在纯文本文件中，每种语言一个文件，所以翻译就是编辑一个文本文件。
+    - <b>问题报告。</b>请参阅<a=/help/article/report-bug>报告问题</a>。
+    - <b>修复和功能。</b>发送说明或补丁。
+    - <b>想法。</b>告诉我们你希望帮助中心或应用能做什么。
 
-    写几行关于你想做什么的内容，发送至 <a=mailto:{ $contribute_email }>{ $contribute_email }</a>。
+    写几句话说明你想做什么，发送到 <a=mailto:{ $contribute_email }>{ $contribute_email }</a>。
+
 help-art-install-app-title = 如何将 { $brand } 安装为应用
-help-art-install-app-summary = 将 { $brand } 添加到主屏幕或桌面，以便它在独立窗口中打开。
-help-art-install-app-keywords = 安装应用 pwa 添加到主屏幕 桌面 快捷方式 图标 网页应用
+help-art-install-app-summary = 把 { $brand } 添加到主屏幕、程序坞或桌面，让它在单独的窗口中打开。
+help-art-install-app-keywords = 安装 应用 pwa 添加到主屏幕 桌面 快捷方式 图标 网页应用
 help-art-install-app-body =
-    { $brand } 是一个网页应用。没有应用商店下载。你的浏览器可以安装它，使其在独立窗口中打开并拥有自己的图标。
+    { $brand } 是一个网页应用，不需要从应用商店下载。你的浏览器可以安装它，让它带着自己的图标在单独的窗口中打开。
 
-    ## 电脑上的 Chrome 和 Edge
-    选择地址栏右侧的安装图标，或者打开浏览器菜单并选择 <b>安装 { $brand }</b>。
+    ## Windows、Mac 和 Linux 上的 Chrome 和 Edge
+    选择地址栏右侧的安装图标，或打开浏览器菜单并选择<b>安装 { $brand }</b>（在 Edge 中：<b>应用</b>，然后选择<b>将此站点作为应用安装</b>）。
+
+    ## Mac 上的 Safari
+    打开<b>文件</b>菜单，选择<b>添加到程序坞</b>。
 
     ## Android
-    打开浏览器菜单并选择 <b>安装应用</b> 或 <b>添加到主屏幕</b>。
+    打开浏览器菜单，选择<b>安装应用</b>或<b>添加到主屏幕</b>。
 
     ## iPhone 和 iPad
-    在 Safari 中，选择 <b>分享</b> 按钮，然后选择 <b>添加到主屏幕</b>。
+    在 Safari 中选择<b>分享</b>按钮，然后选择<b>添加到主屏幕</b>。
 
-    !! 注意：已安装的应用就是同一个网站。它会自动更新，并使用从浏览器安装时保存的相同个人资料。
+    !! 注意：电脑上的 Firefox 无法把网站安装为应用。可以使用书签，或从 Chrome、Edge 或 Safari 安装。安装后的应用就是同一个网站：它会自动更新，也会像浏览器一样保持登录。
+
 help-art-phone-tablet-title = 如何在手机或平板上使用 { $brand }
-help-art-phone-tablet-summary = 移动布局、底部栏以及小屏幕使用技巧。
+help-art-phone-tablet-summary = 移动版布局、底部栏和小屏幕使用技巧。
 help-art-phone-tablet-keywords = 手机 平板 移动 android iphone ipad 触摸 底部栏 应用 布局
 help-art-phone-tablet-body =
-    在手机浏览器中打开网站。页面会切换为专为触摸设计的布局，底部有一个包含 <b>首页</b>、<b>短片</b>、<b>搜索</b> 和 <b>我的片单</b> 的栏。
+    用手机浏览器打开网站。页面会切换为适合触摸的布局，底部有一个包含<b>首页</b>、<b>片段</b>、<b>搜索</b>和<b>我的 Streams</b>的栏。
 
-    - 轻点卡片查看详情，然后按播放按钮开始观看。
-    - 将手机旋转至横屏以获得最佳画质。
-    - 要获得类似应用的感觉，请参阅 <a=/help/article/install-app>如何将 { $brand } 安装为应用</a>。
+    - 点按卡片查看详情，再点按播放按钮开始观看。
+    - 把手机横过来，画面效果最好。
+    - 想让它用起来像应用，请参阅<a=/help/article/install-app>如何将 { $brand } 安装为应用</a>。
+
 help-art-watch-on-tv-title = 如何在电视上观看
-help-art-watch-on-tv-summary = 使用电视浏览器，或从电脑或手机发送浏览器标签页。
-help-art-watch-on-tv-keywords = 电视 智能电视 投屏 chromecast airplay hdmi fire stick 大屏幕
+help-art-watch-on-tv-summary = 使用电视的浏览器，或从电脑、手机投放浏览器标签页。
+help-art-watch-on-tv-keywords = 电视 智能电视 投屏 chromecast airplay hdmi 电视棒 大屏幕
 help-art-watch-on-tv-body =
-    目前还没有 { $brand } 的电视应用。以下选项现在可用：
+    { $brand } 暂时还没有电视应用。下面这些方法现在就能用：
 
-    - <b>电视浏览器。</b> 在电视自带的浏览器中打开 { $brand } 地址。
-    - <b>投屏标签页。</b> 在电脑上的 Chrome 或 Edge 中，打开浏览器菜单并选择 <b>投屏</b>，然后选择你的电视或流媒体棒。
-    - <b>线缆。</b> 使用 HDMI 线将笔记本电脑连接到电视并使用全屏模式。
+    - <b>电视浏览器。</b>在电视自带的浏览器中打开 { $brand } 的网址。
+    - <b>投放标签页。</b>在电脑上的 Chrome 或 Edge 中打开浏览器菜单，选择<b>投放</b>，然后选择你的电视或电视棒。
+    - <b>线缆。</b>用 HDMI 线把笔记本电脑连接到电视，并使用全屏。
 
-    如果画面或声音不正确，请参阅 <a=/help/article/fix-tv>修复电视上的问题</a>。
-help-art-copyright-title = 如何报告版权问题
-help-art-copyright-summary = 版权持有人可以要求删除链接。
-help-art-copyright-keywords = 版权 dmca 下架 侵权 版权持有人 删除 报告 通知 法律
+    如果画面或声音不对，请参阅<a=/help/article/fix-tv>解决电视上的问题</a>。
+
+help-art-copyright-title = 如何举报版权问题
+help-art-copyright-summary = 权利人可以要求删除链接。
+help-art-copyright-keywords = 版权 dmca 删除 侵权 权利人 移除 举报 通知 法律
 help-art-copyright-body =
-    { $brand } 不托管视频文件。我们仅列出由其他服务托管的标题链接。如果您拥有某标题的版权，并认为某个链接侵犯了您的权利，请向我们发送通知，我们将予以审查。
+    { $brand } 不托管视频文件，它列出指向其他服务所托管作品的链接。如果你拥有某部作品的权利，并认为某个链接侵犯了这些权利，请给我们发送通知，我们会审查。
 
-    通知应包含：
-    1. 您的姓名和联系方式。
-    2. 您拥有的作品描述。
+    通知应包括：
+    1. 你的姓名和联系方式。
+    2. 对你拥有的作品的说明。
     3. { $brand } 上链接到该作品的页面地址。
-    4. 声明您是版权持有人或有权代表版权持有人行事。
+    4. 一份声明，说明你是权利人或有权代表权利人行事。
 
-    请将通知发送至 <a=mailto:{ $help_email }>{ $help_email }</a>，主题设为 <b>DMCA 通知</b>。完整流程请参阅 <a=/dmca>DMCA 页面</a>。
-help-art-title-feedback-title = 关于 { $brand } 上某标题的反馈
-help-art-title-feedback-summary = 报告描述错误、缺失的标题或无法播放的标题。
-help-art-title-feedback-keywords = 反馈 标题 描述错误 缺失 请求 电影 电视剧 添加 报告 海报错误
+    请发送到 <a=mailto:{ $help_email }>{ $help_email }</a>，邮件主题写<b>DMCA 通知</b>。完整流程见 <a=/dmca>DMCA 页面</a>。
+
+help-art-title-feedback-title = 关于 { $brand } 上作品的反馈
+help-art-title-feedback-summary = 报告错误的简介、缺少的作品，或一直无法播放的作品。
+help-art-title-feedback-keywords = 反馈 作品 错误 简介 缺少 请求 电影 剧集 添加 报告 海报
 help-art-title-feedback-body =
-    请写信至 <a=mailto:{ $help_email }>{ $help_email }</a>，并包含：
+    请写信到 <a=mailto:{ $help_email }>{ $help_email }</a>，并写上：
 
-    - 标题名称和年份
-    - 该标题在 { $brand } 上的页面地址
-    - 具体问题，例如海报错误、缺失的季数或标题无法播放
+    - 作品名和年份
+    - 它在 { $brand } 上的页面地址
+    - 哪里有问题，例如海报错误、缺少某一季，或作品一直无法播放
 
-    详情来自公共目录，因此描述错误最好在源头修正。我们可以转达我们收到的更正信息。
+    详情来自公开的目录，所以错误的简介最好在源头修正。我们可以帮忙转达收到的更正。
+
 help-art-report-bug-title = 报告问题
-help-art-report-bug-summary = 为了让我们能快速找到并修复错误，请提供以下信息。
-help-art-report-bug-keywords = 报告 错误 问题 故障 崩溃 损坏 无法工作 反馈 联系
+help-art-report-bug-summary = 写清楚哪些信息，我们才能快速找到并修复问题。
+help-art-report-bug-keywords = 报告 问题 故障 错误 崩溃 坏了 不工作 反馈 联系
 help-art-report-bug-body =
-    我们了解得越多，修复速度就越快。请包含：
+    我们知道得越多，修得越快。请写上：
 
-    1. 您当时在做什么以及预期结果。
-    2. 实际发生了什么，以及您看到的任何提示信息。
-    3. 如果与播放有关，请提供标题名称。
-    4. 您的设备和浏览器。
+    1. 你当时在做什么，以及你原本期望发生什么。
+    2. 实际发生了什么，以及看到的任何消息。
+    3. 如果是播放问题，写上作品名。
+    4. 你的设备和浏览器。
 
-    <a=/help/contact>联系我们</a> 页面有一个按钮，可打开一封已填入您浏览器详情的邮件。
+    <a=/help/contact>联系我们</a>页面有一个按钮，会打开一封已经填好浏览器信息的邮件。
 
     @@ diagnostics
+
 cookie-sheet = <b>{ $brand }</b> 使用 Cookie 来保存您的个人资料和偏好设置，并在您允许的情况下个性化推荐内容。
 cookie-learn = 了解更多
 cookie-reject = 拒绝
@@ -829,80 +972,83 @@ cookie-third =
 
     查看<a=/help/article/sources>片源来自哪里</a>。
 cookie-ads = 我们不使用广告 Cookie、追踪器或分析工具。
-help-ui-foryou = 此设备上的帮助
+help-ui-foryou = 适合这台设备的帮助
 help-ui-recommended-inline = 为你推荐
-help-card-diagnostics-title = 检查此设备
-help-card-diagnostics-body = 测试你的连接、浏览器和我们的服务。
+help-card-diagnostics-title = 检查这台设备
+help-card-diagnostics-body = 测试你的网络连接、浏览器和我们的服务。
 help-card-profiles-title = 你的个人资料
 help-card-profiles-body = 查看哪些个人资料设置了 PIN 码或儿童模式。
-help-card-data-title = 你的已保存数据
-help-card-data-body = 清除进度、重置推荐或重新开始。
+help-card-data-title = 你保存的数据
+help-card-data-body = 清除进度、重置推荐或从头开始。
 help-card-language-title = 语言
-help-card-language-body = 选择语言或使用浏览器的语言。
+help-card-language-body = 选择一种语言，或使用浏览器的语言。
 help-card-cookies-title = Cookie 选择
-help-card-cookies-body = 查看存储和共享的内容。
+help-card-cookies-body = 查看保存了什么、分享了什么。
 help-card-refresh-title = 最新版本
 help-card-refresh-body = 重新加载以获取最新版本。
-help-act-run = 运行检查
+help-act-run = 开始检查
 help-act-running = 检查中…
 help-act-copy = 复制结果
 help-act-copied = 已复制
-help-act-email = 通过电子邮件发送结果
-help-act-fix = 如何修复
-help-act-summary-ok = 此设备一切正常。
+help-act-email = 通过邮件发送结果
+help-act-fix = 解决方法
+help-act-summary-ok = 这台设备一切正常。
 help-act-summary-issues =
     { $count ->
-       *[other] { $count } 项需要关注。
+       *[other] 有 { $count } 项需要注意。
     }
-help-act-d-connection = 互联网连接
+
+help-act-d-connection = 网络连接
 help-act-d-browser = 浏览器
 help-act-d-video = 视频播放
-help-act-d-storage = 已保存数据
+help-act-d-storage = 保存的数据
 help-act-d-fullscreen = 全屏
 help-act-d-engine = 推荐服务
-help-act-d-sources = 流媒体来源
-help-act-d-catalog = 电影和电视剧目录
+help-act-d-sources = 视频来源
+help-act-d-catalog = 影视目录
 help-act-v-online = 在线
 help-act-v-offline = 离线
 help-act-v-speed = { $type }，约 { $mbps } Mbps
 help-act-v-supported = 支持
 help-act-v-unsupported = 不支持
-help-act-v-hls-native = 内置HLS
-help-act-v-mse = 媒体源扩展
+help-act-v-hls-native = 内置 HLS
+help-act-v-mse = Media Source Extensions
 help-act-v-blocked = 被阻止或已满
-help-act-v-reachable = 在 { $ms } 毫秒内可达
-help-act-v-unreachable = 无法连接
+help-act-v-reachable = { $ms } 毫秒内可访问
+help-act-v-unreachable = 无法访问
 help-act-v-timeout = { $s } 秒内无响应
-help-act-data-title = 此设备上的数据
+help-act-data-title = 你的个人资料和观看记录
 help-act-data-profiles =
     { $count ->
-       *[other] { $count } 个配置文件
+       *[other] { $count } 个个人资料
     }
+
 help-act-data-progress =
     { $count ->
-       *[other] { $count } 个标题有保存的进度
+       *[other] { $count } 部作品保存了进度
     }
+
 help-act-data-lang = 语言：{ $lang }
-help-act-clear-progress = 清除观看进度
+help-act-clear-progress = 隐藏全部观看记录
 help-act-reset-recs = 重置推荐
-help-act-clear-all = 清除所有已保存的数据
+help-act-clear-all = 清除此浏览器的数据并退出登录
 help-act-confirm = 确定吗？此操作无法撤销。
-help-act-yes = 确定，执行
+help-act-yes = 是的，继续
 help-act-cancel = 取消
-help-act-done = 完成。
-help-act-reloading = 完成。正在重新加载…
-help-act-profiles-title = 你的配置文件
+help-act-done = 已完成。
+help-act-reloading = 已完成，正在重新加载…
+help-act-profiles-title = 你的个人资料
 help-act-profile-kids = 儿童
-help-act-profile-pin = PIN 已开启
+help-act-profile-pin = 已设 PIN 码
 help-act-open-profiles = 打开“谁在看？”
 help-act-lang-current = 当前显示：{ $lang }
-help-act-lang-browser = 你的浏览器偏好：{ $lang }
-help-act-lang-use-browser = 使用我的浏览器语言
-help-act-cookies-none = 你尚未选择。
+help-act-lang-browser = 浏览器偏好的语言：{ $lang }
+help-act-lang-use-browser = 使用浏览器语言
+help-act-cookies-none = 你还没有做出选择。
 help-act-cookies-on = 个性化已开启。
 help-act-cookies-off = 个性化已关闭。
 help-act-cookies-open = 打开 Cookie 偏好设置
-help-act-refresh-body = 如果页面显示异常或修复尚未生效，请重新加载以获取 { $brand } 的最新版本。
+help-act-refresh-body = 如果页面显示不正常，或某个修复还没生效，请重新加载以获取最新版本的 { $brand }。
 help-act-refresh-now = 立即重新加载
 help-act-version = 版本 { $version }
 nav-home = 首页
@@ -911,7 +1057,7 @@ nav-series = 电视剧
 nav-films = 电影
 nav-games = 游戏
 nav-new-popular = 新片与热门
-nav-my-list = 我的片单
+nav-my-list = 我的 Streams
 nav-browse-language = 按语言浏览
 nav-new-hot = 新片与热门
 nav-clips = 片段
@@ -952,9 +1098,9 @@ notif-h-new-arrival = 新上线
 notif-h-coming-soon = 即将上线
 notif-title = 通知
 notif-desc-available = 现已在你的片库中上线。
-notif-caught-up = 你已看完所有内容
+notif-caught-up = 没有新通知了
 notif-caught-up-body = 新的通知和上线内容将显示在这里。
-media-resume = 继续观看
+media-resume = 继续播放
 media-play = 播放
 media-remove-from-list = 从片单中移除
 media-add-to-list = 加入片单
@@ -1012,18 +1158,18 @@ player-not-found = 未找到媒体
 player-not-found-hint = 无法定位作品信息。
 clips-muted = 静音
 clips-sound = 声音
-clips-info = 信息
-lang-original = 原声
+clips-info = 详情
+lang-original = 原始语言
 lang-no-titles = 该语言下暂无可用作品。
 player-skip-intro = 跳过片头
 player-next-episode = 下一集
 player-subs-off = 关闭
 player-unavailable = 无法播放
 player-back = 返回
-profile-manage = 管理配置文件
-profile-transfer = 转移配置文件
-profile-kids = 儿童配置文件
-profile-lock = 配置文件锁定
+profile-manage = 管理个人资料
+profile-transfer = 转移个人资料
+profile-kids = 儿童个人资料
+profile-lock = 个人资料锁
 profile-choose-icon = 选择图标
 common-done = 完成
 profile-pin-invalid = PIN 必须恰好为 4 位数字。
@@ -1032,7 +1178,7 @@ player-pause = 暂停 (Space)
 player-play = 播放 (Space)
 player-unmute = 取消静音 (M)
 player-mute = 静音 (M)
-player-error-no-source = 无法流式传输视频。所有源提供商均不可用或不受您的浏览器支持。
+player-error-no-source = 无法播放视频。所有来源都不可用，或你的浏览器不支持。
 genre-action = 动作
 genre-anime = 动漫
 genre-black-stories = 黑人故事
@@ -1142,311 +1288,380 @@ nf-zone-4 = 模拟信号损坏
 nf-zone-5 = 虚空哨兵
 nf-zone-6 = 宇宙漂移
 legal-privacy-title = 隐私政策
-legal-privacy-updated = 最后更新：2026年8月
-legal-privacy-1-title = 1. 引言
-legal-privacy-1-body = { $brand } 是一个链接聚合器和搜索引擎。本隐私政策说明了当您使用我们的服务时，我们如何收集、使用和保护您的个人信息。
+legal-privacy-updated = 最后更新：2026 年 10 月
+legal-privacy-1-title = 1. 简介
+legal-privacy-1-body = { $brand } 是一个链接聚合和搜索引擎。本隐私政策说明你使用我们的服务时，我们如何收集、使用和保护你的个人信息。
 legal-privacy-2-title = 2. 我们收集的信息
-legal-privacy-2-body = 我们收集有限的个人信息以提供和改进服务：
-legal-privacy-2-b1 = <strong>账户信息：</strong>创建账户时的电子邮件地址和显示名称。
-legal-privacy-2-b2 = <strong>使用数据：</strong>匿名化的观看历史和偏好设置，范围限定于您的个人资料。
-legal-privacy-2-b3 = <strong>会话 Cookie：</strong>用于安全地保持您的登录状态。
-legal-privacy-3-title = 3. 我们不会做的事
-legal-privacy-3-body = 我们致力于保护您的隐私：
-legal-privacy-3-b1 = <strong>共享您的数据：</strong>我们不会与广告商或数据经纪商共享个人数据。
-legal-privacy-3-b2 = <strong>出售您的数据：</strong>我们永远不会向第三方出售、出租或交易任何个人数据。
-legal-privacy-3-b3 = <strong>浏览器指纹识别：</strong>我们不会进行浏览器指纹识别或任何形式的设备识别。
-legal-privacy-4-title = 4. 处理数据的法律依据（英国 GDPR）
-legal-privacy-4-body = 根据《英国通用数据保护条例》（UK GDPR），我们处理此信息的法律依据如下：
-legal-privacy-4-b1 = <strong>合同必要性：</strong>为您提供您注册使用的链接聚合和个人资料功能。
-legal-privacy-4-b2 = <strong>合法利益：</strong>分析平台整体使用情况并提升性能，仅使用严格匿名化的聚合数据。
-legal-privacy-5-title = 5. 我们如何存储您的数据
-legal-privacy-5-body = 您的数据通过 Supabase（我们的后端基础设施提供商）安全存储。我们使用行级安全（RLS）策略，确保只有您能访问您的数据。
+legal-privacy-2-body = 为了提供和改进服务，我们只收集有限的个人信息：
+legal-privacy-2-b1 = <strong>账户信息：</strong>你的姓名、电子邮件地址和密码（我们的登录服务商只以无法还原的形式保存），以及你添加的手机号码。
+legal-privacy-2-b2 = <strong>个人资料和活动：</strong>你的个人资料及其设置、我的片单、评分、观看进度和观看记录。它们与你的账户关联，因此在每台设备上都一样。
+legal-privacy-2-b3 = <strong>安全记录：</strong>最近的登录和账户变更，以及对应的浏览器、系统和国家/地区，用于向你显示你的设备，并在有新的登录时提醒你。
+legal-privacy-2-b4 = <strong>设备上的存储：</strong>保持你登录状态的信息、让页面快速打开的个人资料和设置副本，以及你的 Cookie 选择。请参阅 Cookie 政策。
+legal-privacy-3-title = 3. 我们不做的事
+legal-privacy-3-body = 我们重视你的隐私，绝不会：
+legal-privacy-3-b1 = <strong>分享你的数据：</strong>我们不会与广告商或数据经纪商分享个人数据。
+legal-privacy-3-b2 = <strong>出售你的数据：</strong>我们绝不会向第三方出售、出租或交易任何个人数据。
+legal-privacy-3-b3 = <strong>追踪你：</strong>我们不使用广告或分析 Cookie，不对浏览器进行指纹识别，也不会在其他网站上追踪你。
+legal-privacy-4-title = 4. 处理的法律依据（英国 GDPR）
+legal-privacy-4-body = 根据英国《通用数据保护条例》（UK GDPR），我们处理这些信息所依据的法律基础如下：
+legal-privacy-4-b1 = <strong>合同：</strong>为你提供账户、个人资料和你使用的功能。
+legal-privacy-4-b2 = <strong>合法利益：</strong>保障账户安全（登录记录），并让服务持续运行和改进。
+legal-privacy-4-b3 = <strong>同意：</strong>将你观看的内容用于个性化推荐。你可以随时在“隐私与数据设置”中撤回同意。
+legal-privacy-5-title = 5. 我们如何存储你的数据
+legal-privacy-5-body = 你的账户数据存储在我们的数据库服务商 Supabase，并启用行级安全，只有你的账户才能读取。为了加快速度，你登录的每个浏览器也会保存一份副本。删除账户后，其数据会立即删除。
 legal-privacy-6-title = 6. 第三方服务
-legal-privacy-6-body = 我们使用包括 TMDB（用于元数据）和 Cloudflare Turnstile（用于机器人防护）在内的第三方 API。这些服务受其各自的隐私政策约束。
-legal-privacy-7-title = 7. 您的数据保护权利
-legal-privacy-7-body = 根据 UK GDPR，您享有以下权利：
-legal-privacy-7-b1 = <strong>访问权：</strong>请求获取我们持有的关于您的个人数据的副本。
-legal-privacy-7-b2 = <strong>删除权：</strong>请求删除您的个人数据（即“被遗忘权”）。您可以直接从设置页面删除您的账户。
-legal-privacy-7-b3 = <strong>更正权：</strong>请求更正我们持有的任何不准确的个人数据。
-legal-privacy-7-b4 = <strong>反对权：</strong>在我们依据合法利益处理您的个人数据时，您有权提出反对。
+legal-privacy-6-body = 我们使用以下服务商，各自适用其隐私政策：Supabase（账户和数据存储）、Cloudflare（网站托管和邮件转发）、Hugging Face（托管推荐服务）、Resend（发送账户邮件）、TMDB（影视信息和图片）以及 YouTube（预告片）。视频流来自独立的第三方来源，和你访问的任何网站一样，它们能看到你的 IP 地址。
+legal-privacy-7-title = 7. 你的数据保护权利
+legal-privacy-7-body = 根据英国 GDPR，你享有以下权利：
+legal-privacy-7-b1 = <strong>访问权：</strong>随时在“账户”的“个人信息访问”中下载你的数据副本。
+legal-privacy-7-b2 = <strong>删除权：</strong>随时在“账户”的“删除账户”中删除你的账户。账户中的所有内容都会立即删除。
+legal-privacy-7-b3 = <strong>更正权：</strong>在“账户”中更改你的姓名、电子邮件地址和电话号码，或请我们更正其他信息。
+legal-privacy-7-b4 = <strong>反对权：</strong>关闭个性化推荐，或写信给我们，反对基于合法利益的处理。
 legal-privacy-8-title = 8. 联系方式
-legal-privacy-8-body = 如果您对本隐私政策有任何疑问，或希望行使您的数据权利，请联系仓库维护者：{ $support_email }。
+legal-privacy-8-body = 如果你对本隐私政策有疑问，或想行使你的权利，请发邮件至 { $support_email }。
 legal-terms-title = 服务条款
-legal-terms-updated = 最后更新：2026年8月
+legal-terms-updated = 最后更新：2026 年 10 月
 legal-terms-1-title = 1. 接受条款
-legal-terms-1-body = 访问或使用 { $brand } 即表示您同意遵守本服务条款和我们的隐私政策。如果您不同意，请勿使用该服务。
+legal-terms-1-body = 访问或使用 { $brand }，即表示你同意受本服务条款和我们的隐私政策约束。如果你不同意，请不要使用本服务。
 legal-terms-2-title = 2. 服务性质
-legal-terms-2-body = { $brand } 是一个链接聚合器和搜索引擎。我们不在服务器上托管、上传、传输或控制任何视频内容。所有媒体内容均来自第三方平台。
+legal-terms-2-body = { $brand } 是一个链接聚合和搜索引擎。我们不在服务器上托管、上传、传输或控制任何视频内容。所有媒体均来自第三方平台。
 legal-terms-3-title = 3. 用户账户
-legal-terms-3-body = 要访问某些功能（例如保存片单或同步进度），您必须创建一个账户。您有责任维护账户凭据的安全性。
+legal-terms-3-body = 使用 { $brand } 需要一个免费账户。你有责任保管好自己的密码，并对账户中发生的事情负责。如果你认为有人在使用你的账户，请立即告诉我们。
 legal-terms-4-title = 4. 可接受的使用
-legal-terms-4-body = 您同意不将服务用于以下用途：
-legal-terms-4-b1 = 绕过、禁用或干扰服务的安全相关功能。
-legal-terms-4-b2 = 使用自动化工具（如机器人、爬虫或抓取器）以可能影响性能的速率访问或查询服务。
-legal-terms-4-b3 = 尝试探测、扫描或测试服务基础设施的漏洞。
-legal-terms-4-b4 = 从事任何非法、有害或我们认定为不适当的行为。
+legal-terms-4-body = 你同意不将本服务用于：
+legal-terms-4-b1 = 规避、禁用或干扰服务的安全相关功能。
+legal-terms-4-b2 = 使用自动化工具（如机器人、爬虫或抓取程序）以可能影响性能的频率访问或查询服务。
+legal-terms-4-b3 = 试图探测、扫描或测试服务基础设施的漏洞。
+legal-terms-4-b4 = 从事任何违法、有害或我们认为不当的行为。
 legal-terms-5-title = 5. 知识产权
-legal-terms-5-body = { $brand } 品牌、界面设计和原创软件代码受版权保护。通过 { $brand } 可访问的所有媒体内容仍归其各自的版权所有者所有。
+legal-terms-5-body = { $brand } 品牌、界面设计和原创软件代码受版权保护。通过 { $brand } 访问的所有媒体内容仍归其各自的权利人所有。
 legal-terms-6-title = 6. 免责声明和责任限制
-legal-terms-6-body = 服务按“原样”和“可用”状态提供，不提供任何形式的保证。{ $brand } 不保证持续可用性，且不对任何间接或后果性损害承担责任。
+legal-terms-6-body = 本服务按“现状”和“现有”提供，不附带任何形式的保证。{ $brand } 不保证服务持续可用，也不对任何间接或后果性损失负责。
 legal-terms-7-title = 7. 第三方内容
-legal-terms-7-body = { $brand } 提供指向托管在独立第三方服务器上的内容的链接。我们对任何第三方网站的内容、隐私政策或做法没有控制权，也不承担责任。
+legal-terms-7-body = { $brand } 提供指向托管在独立第三方服务器上的内容的链接。我们无法控制任何第三方网站的内容、隐私政策或做法，也不承担任何责任。
 legal-terms-8-title = 8. 终止
-legal-terms-8-body = 我们保留自行决定权，可在不事先通知的情况下，暂停或终止您的账户及服务访问权限，针对我们认为违反本条款或对其他用户、我们或第三方有害的行为。
-legal-terms-9-title = 9. 管辖法律
-legal-terms-9-body = 本服务条款应受英格兰和威尔士法律管辖，并据此解释，不考虑法律冲突规定。
+legal-terms-8-body = 对于我们认为违反本条款，或对其他用户、我们或第三方有害的行为，我们保留自行决定在不事先通知的情况下暂停或终止你的账户和服务访问的权利。
+legal-terms-9-title = 9. 适用法律
+legal-terms-9-body = 本服务条款受英格兰和威尔士法律管辖并据其解释，不考虑法律冲突规则。
 legal-terms-10-title = 10. 联系方式
-legal-terms-10-body = 如有任何关于本服务条款的问题，请通过“联系我们”页面与我们联系。
+legal-terms-10-body = 如对本服务条款有任何疑问，请通过“联系我们”页面与我们联系。
 legal-cookie-policy-title = Cookie 政策
-legal-cookie-policy-updated = 最后更新：2026年8月16日
-legal-cookie-policy-1-title = 我们如何使用 Cookie
-legal-cookie-policy-1-body = 我们使用 Cookie 和类似的跟踪技术来跟踪我们在服务上的活动并保存某些信息。Cookie 是包含少量数据的文件，可能包括匿名唯一标识符。
-legal-dmca-title = DMCA 安全港通知
-legal-dmca-updated = 最后更新：2026年8月
-legal-dmca-1-title = 1. 我们的角色——链接聚合器，而非托管方
-legal-dmca-1-body = { $brand } 是一个链接聚合器和搜索引擎。我们不托管、上传、存储、传输或控制任何视频或媒体内容。所有内容均由完全不受我们控制的第三方服务器提供。
-legal-dmca-2-title = 2. 通知与删除程序
-legal-dmca-2-body = 如果您是版权所有者，或受版权所有者授权行事的代理人，并且您认为我们索引中的某个链接侵犯了您的版权，请向 { $support_email } 发送书面通知，其中包含：
-legal-dmca-2-b1 = <strong>版权所有者或其授权代理人的实体或电子签名</strong>。
-legal-dmca-2-b2 = <strong>您声称被侵犯的版权作品的识别信息</strong>，或者如果单一通知涵盖多项作品，则提供此类作品的代表性列表。
-legal-dmca-2-b3 = <strong>您声称侵权的材料（即特定的 { $brand } 链接或 URL）的识别信息</strong>，并提供足以让我们定位该材料的信息。
-legal-dmca-3-title = 3. 其他必需要素
-legal-dmca-3-body = 您的 DMCA 通知还必须包含：
-legal-dmca-3-b1 = <strong>您的联系方式</strong> — 姓名、地址、电话号码和电子邮件地址。
-legal-dmca-3-b2 = <strong>善意声明</strong> — 您善意地认为，所投诉的使用方式未获得版权所有者、其代理人或法律的授权。
-legal-dmca-3-b3 = <strong>准确性声明</strong> — 通知中的信息准确无误，且您有权代表版权所有者采取行动（如有虚假陈述，将承担伪证罪责）。
-legal-dmca-3-b4 = <strong>请将通知发送至：</strong> { $support_email }
-legal-dmca-3-b5 = 我们将审查所有通知，并移除符合上述法定要求的索引链接。
-legal-dmca-3-b6 = <strong>反通知：</strong> 如果您认为您的链接被错误移除，您可以依据 17 U.S.C. § 512(g) 提交反通知。
-legal-dmca-4-title = 4. 重要限制 — 我们只能移除链接
-legal-dmca-4-body = 由于 { $brand } 不托管任何媒体文件，我们只能从搜索索引中移除链接。我们无法从托管该内容的服务器上移除底层内容。
+legal-cookie-policy-updated = 最后更新：2026 年 10 月
+legal-cookie-policy-1-title = 我们如何使用 Cookie 和存储
+legal-cookie-policy-1-body = { $brand } 不使用广告或分析 Cookie。我们使用浏览器的本地存储（设备上只有本网站能读取的空间）来保存：
+legal-cookie-policy-1-b1 = <strong>登录：</strong>让你在这个浏览器上保持登录的信息。
+legal-cookie-policy-1-b2 = <strong>速度：</strong>你的个人资料、设置和观看进度的副本，让页面立刻打开。
+legal-cookie-policy-1-b3 = <strong>你的选择：</strong>你的 Cookie 和个性化选择，以及显示语言。
+legal-cookie-policy-1-b4 = <strong>其他网站：</strong>预告片从 YouTube 播放，播放时 YouTube 可能会设置自己的 Cookie。你可以随时在“隐私与数据设置”中更改选择。在浏览器中删除本网站的数据会让你在该浏览器上退出登录；你的账户会保留所有内容。
+legal-dmca-title = DMCA 安全港声明
+legal-dmca-updated = 最后更新：2026 年 8 月
+legal-dmca-1-title = 1. 我们的角色：链接聚合，而非托管方
+legal-dmca-1-body = { $brand } 是一个链接聚合和搜索引擎。我们不托管、上传、存储、传输或控制任何视频或媒体内容。所有内容均由完全不受我们控制的第三方服务器提供。
+legal-dmca-2-title = 2. 通知和删除程序
+legal-dmca-2-body = 如果你是版权所有者，或经授权代表版权所有者行事的代理人，并认为我们索引中的某个链接侵犯了你的版权，请向 { $support_email } 发送书面通知，内容包括：
+legal-dmca-2-b1 = 版权所有者或其授权代理人的<strong>亲笔签名或电子签名</strong>。
+legal-dmca-2-b2 = 你声称被侵权的<strong>作品的说明</strong>；如果一份通知涉及多部作品，请提供这些作品的代表性清单。
+legal-dmca-2-b3 = 你声称构成侵权的<strong>材料的说明</strong>（即具体的 { $brand } 链接或网址），以及足以让我们找到它的信息。
+legal-dmca-3-title = 3. 其他必要内容
+legal-dmca-3-body = 你的 DMCA 通知还必须包括：
+legal-dmca-3-b1 = <strong>你的联系方式</strong>：姓名、地址、电话号码和电子邮件地址。
+legal-dmca-3-b2 = <strong>善意声明</strong>：说明你善意地相信，以投诉的方式使用该材料未经版权所有者、其代理人或法律授权。
+legal-dmca-3-b3 = <strong>准确性声明</strong>：说明通知中的信息准确无误，并在伪证处罚的前提下声明你有权代表版权所有者行事。
+legal-dmca-3-b4 = <strong>通知发送至：</strong>{ $support_email }
+legal-dmca-3-b5 = 我们会审查所有通知，并从索引中删除符合上述法定要求的链接。
+legal-dmca-3-b6 = <strong>反通知：</strong>如果你认为你的链接被错误删除，可以根据 17 U.S.C. § 512(g) 提交反通知。
+legal-dmca-4-title = 4. 重要限制：我们只能删除链接
+legal-dmca-4-body = 由于 { $brand } 不托管任何媒体文件，我们只能从搜索索引中删除链接，无法从托管内容的服务器上删除内容本身。
 legal-dmca-5-title = 5. 重复侵权者政策
-legal-dmca-5-body = 在适当情况下，且由我们自行决定，{ $brand } 将禁用或终止重复侵权用户或账户的访问权限。
+legal-dmca-5-body = 在适当情况下，{ $brand } 会自行决定停用或终止重复侵权的用户或账户的访问权限。
 legal-dmca-6-title = 6. 不构成责任承认
-legal-dmca-6-body = 响应 DMCA 通知而从我们的索引中移除链接，并不构成 { $brand } 对任何侵权行为发生的承认。
+legal-dmca-6-body = 根据 DMCA 通知从索引中删除链接，并不代表 { $brand } 承认发生了任何侵权行为。
 legal-disclaimer-title = 免责声明
-legal-disclaimer-updated = 最后更新：2026年8月
+legal-disclaimer-updated = 最后更新：2026 年 8 月
 legal-disclaimer-1-title = 1. 不托管内容
-legal-disclaimer-1-body = { $brand } 是一个针对公开可用的嵌入式媒体链接的链接聚合器和搜索引擎。我们不在服务器上托管、上传、存储、传输或控制任何视频、音频或媒体内容。
-legal-disclaimer-2-title = 2. 第三方内容 — 不承担责任
-legal-disclaimer-2-body = 通过 { $brand } 索引的链接访问的所有内容均来自外部独立的第三方来源。{ $brand } 无法控制此类内容，也不对其合法性、准确性、质量或可用性承担任何责任。
-legal-disclaimer-3-title = 3. 用户风险承担
-legal-disclaimer-3-body = 您确认并同意，您使用 { $brand } 以及通过外部嵌入链接访问任何内容均完全由您自行承担风险。{ $brand } 明确声明不保证任何明示或暗示的担保。
+legal-disclaimer-1-body = { $brand } 是一个针对公开可用的嵌入式媒体链接的链接聚合和搜索引擎。我们不在服务器上托管、上传、存储、传输或控制任何视频、音频或媒体内容。
+legal-disclaimer-2-title = 2. 第三方内容：不承担责任
+legal-disclaimer-2-body = 通过 { $brand } 索引的链接可访问的所有内容均来自外部独立的第三方来源。{ $brand } 无法控制此类内容的合法性、准确性、质量或可用性，也不承担任何责任。
+legal-disclaimer-3-title = 3. 用户自担风险
+legal-disclaimer-3-body = 你承认并同意，使用 { $brand } 以及通过外部嵌入链接访问任何内容，风险完全由你自行承担。{ $brand } 明确否认一切明示或暗示的保证。
 legal-disclaimer-4-title = 4. 链接可用性
-legal-disclaimer-4-body = 由 { $brand } 索引的嵌入链接指向第三方服务器上的资源。我们无法保证任何链接内容的持续可用性、质量或完整性，且链接可能会失效或变得不可用，恕不另行通知。
+legal-disclaimer-4-body = { $brand } 索引的嵌入链接指向第三方服务器上的资源。我们无法保证任何链接内容持续可用、质量或完整，链接可能会在没有通知的情况下失效或无法使用。
 legal-disclaimer-5-title = 5. 信息准确性
-legal-disclaimer-5-body = 显示在 { $brand } 上的元数据（包括标题、描述、评分和图片）来源于 TMDB 等第三方数据提供商。我们不保证这些元数据的准确性或完整性。
+legal-disclaimer-5-body = { $brand } 上显示的元数据（包括标题、简介、评分和图片）来自 TMDB 等第三方数据提供商。我们不保证这些元数据准确或完整。
 help-ui-kind-policy = 政策
 help-ui-filter-all = 全部
 help-ui-filter-articles = 帮助文章
 help-ui-filter-policies = 政策
 help-ui-recent = 最近搜索
 help-ui-clear = 清除
-help-ui-did-you-mean = 您是想搜“{ $query }”吗？
-help-ui-viewed = 最近浏览
+help-ui-did-you-mean = 你是不是要找“{ $query }”？
+help-ui-viewed = 最近看过
 help-ui-on-this-page = 本页内容
 help-ui-other-policies = 其他政策
 help-ui-section-link = 链接到此部分
-help-ui-policy-questions = 关于此政策有疑问？
+help-ui-policy-questions = 对这项政策有疑问？
 help-topic-legal = 法律与政策
 help-group-policies = 政策
-help-art-fake-sites-title = 如何识别假冒的 { $brand } 网站和消息
-help-art-fake-sites-summary = 官方地址、我们绝不会索取的内容，以及发现仿冒网站时的应对措施。
-help-art-fake-sites-keywords = 假冒 诈骗 钓鱼 仿冒 模仿 官方地址 安全下载 密码 支付 电子邮件
+help-group-signing-in = 登录与安全
+help-art-fake-sites-title = 如何识别假冒 { $brand } 网站和信息
+help-art-fake-sites-summary = 官方地址、我们从不索要的东西，以及发现仿冒时该怎么做。
+help-art-fake-sites-keywords = 假冒 诈骗 钓鱼 仿冒 山寨 官方地址 安全 下载 密码 付款 邮件
 help-art-fake-sites-body =
-    热门网站的仿冒品层出不穷。以下是属于 { $brand } 的唯一地址：
+    热门网站的仿冒品层出不穷。只有下面这些地址属于 { $brand }：
 
-    - <b>streams.watch</b>，应用程序
-    - <b>help.streams.watch</b>，本帮助中心
-    - <b>@streams.watch</b> 电子邮件地址，例如 <a=mailto:{ $help_email }>{ $help_email }</a>
+    - <b>streams.watch</b>：应用
+    - <b>help.streams.watch</b>：这个帮助中心
+    - <b>@streams.watch</b> 邮箱地址，例如 <a=mailto:{ $help_email }>{ $help_email }</a>
 
-    ## 我们绝不会索要
-    - 银行卡号、银行信息或任何付款。{ $brand } 是免费的。参见 <a=/help/article/free-to-use>{ $brand } 免费吗？</a>
-    - 通过电子邮件、聊天或登录页面之外的表单索要您的密码。
-    - 要求下载、扩展程序、编解码器或更新才能观看。
+    ## 我们从不索要
+    - 银行卡号、银行信息或任何付款。{ $brand } 是免费的。请参阅<a=/help/article/free-to-use>{ $brand } 免费吗？</a>
+    - 通过邮件、聊天或登录页面以外的表单提供你的密码。
+    - 为了观看而下载的文件、扩展程序、解码器或更新。
 
-    ## 如果您发现仿冒网站
+    ## 如果你发现了仿冒
     1. 关闭页面，不要输入任何信息。
-    2. 如果您已经输入了密码，请在该密码所属的网站更改它。
-    3. 将地址发送至 <a=mailto:{ $help_email }>{ $help_email }</a>，以便我们进行举报。
+    2. 如果已经输入了密码，到这个密码所属的网站修改它。
+    3. 把地址发送到 <a=mailto:{ $help_email }>{ $help_email }</a>，我们会去举报。
+
 help-art-security-report-title = 报告安全问题
-help-art-security-report-summary = 如何安全地告知我们安全漏洞。
-help-art-security-report-keywords = security vulnerability bug bounty responsible disclosure exploit hack report weakness
+help-art-security-report-summary = 如何安全地告诉我们一个漏洞。
+help-art-security-report-keywords = 安全 漏洞 漏洞赏金 负责任的披露 利用 黑客 报告 弱点
 help-art-security-report-body =
-    如果您发现了一种读取他人数据、绕过个人资料 PIN 码或破坏网站的方法，请在告知其他人之前先告诉我们。
+    如果你发现了读取别人数据、绕过个人资料 PIN 码或破坏网站的方法，请在告诉任何人之前先告诉我们。
 
-    1. 以 <b>Security</b> 为主题写信至 <a=mailto:{ $help_email }>{ $help_email }</a>。
-    2. 描述您发现的问题、复现步骤以及受影响的页面或地址。
-    3. 请勿访问他人的数据，也不要使用自动化请求洪水进行测试。
+    1. 写信到 <a=mailto:{ $help_email }>{ $help_email }</a>，邮件主题写<b>安全</b>。
+    2. 说明你发现了什么、复现步骤，以及涉及的页面或地址。
+    3. 不要访问别人的数据，也不要用大量自动请求进行测试。
 
-    我们会阅读每一份报告。相同的详细信息位于机器可读文件 <a=/.well-known/security.txt>/.well-known/security.txt</a> 中。
+    我们会阅读每一份报告。同样的信息也在机器可读的文件 <a=/.well-known/security.txt>/.well-known/security.txt</a> 中。
+
 help-art-translate-title = 帮助翻译 { $brand }
-help-art-translate-summary = 界面文本存储在纯文本文件中，每种语言一个文件，任何人都可以改进。
-help-art-translate-keywords = translate translation localisation localization language contribute ftl fluent grammar gender plural
+help-art-translate-summary = 界面文字保存在简单的文件中，每种语言一个，任何人都可以改进。
+help-art-translate-keywords = 翻译 本地化 语言 参与 贡献 ftl fluent 语法 性别 复数
 help-art-translate-body =
-    所有界面文本都按语言分别存储在一个纯文本文件中。翻译不需要编程知识。
+    所有界面文字都保存在每种语言一个的纯文本文件中。翻译不需要会编程。
 
-    ## 需要了解的内容
-    - 消息格式为 <b>键 = 文本</b>。只需修改等号后面的文本。
-    - 花括号中的词，例如 <b>{ "{ $brand }" }</b>，由应用自动填充。请保持原样，并根据语言习惯调整位置。
-    - 部分消息有单数和复数形式（如 <b>1 季</b>、<b>2 季</b>）。如果语言中有更多形式，可以全部添加。
-    - 如果语言中因性别或格变化而改变词形，请写出符合句子的形式。
+    ## 需要了解的
+    - 消息的格式是<b>键 = 文字</b>。只修改等号后面的文字。
+    - 大括号里的词，例如 <b>{ "{ $brand }" }</b>，由应用自动填入。保持原样，并把它们放到你的语言需要的位置。
+    - 有些消息分单数和复数形式（例如英语的 <b>1 season</b> 和 <b>2 seasons</b>）。形式超过两种的语言可以全部加上。
+    - 如果你的语言会因性别或格变化词形，请写出适合句子的形式。
 
     ## 如何提交
-    请将语言名称以及文件或修改链接发送至 <a=mailto:{ $contribute_email }>{ $contribute_email }</a>。母语者互相审核作品是我们最好的检查方式。
-help-art-cookies-explained-title = Cookie 和本地存储详解
-help-art-cookies-explained-summary = 用通俗的语言解释您的浏览器为 { $brand } 保留了哪些数据。
-help-art-cookies-explained-keywords = cookie 本地存储 浏览器数据 追踪 同意横幅 偏好设置 会话 第三方
+    发送到 <a=mailto:{ $contribute_email }>{ $contribute_email }</a>，写明语言，并附上文件或你修改内容的链接。母语者互相审阅，是我们最好的检查方式。
+
+help-art-cookies-explained-title = Cookie 和本地存储说明
+help-art-cookies-explained-summary = 用简单的话说明你的浏览器为 { $brand } 保留了什么。
+help-art-cookies-explained-keywords = cookie 本地存储 浏览器 数据 追踪 同意 横幅 偏好 会话 第三方
 help-art-cookies-explained-body =
-    <b>Cookie</b> 是网站要求您的浏览器保存的小笔记。<b>本地存储</b> 是一个类似的地方，只有该网站可以读取，且不会随每次请求发送。
+    <b>Cookie</b> 是网站请浏览器保存的小纸条。<b>本地存储</b>是类似的地方，只有网站自己能读取，也不会随每个请求一起发送。
 
-    { $brand } 使用本地存储来保存您的个人资料、PIN 码、观看进度和语言设置。这些数据保留在您的设备上。为我们提供图片或视频的其他网站可能会设置它们自己的 Cookie，我们无法控制这些 Cookie。请参阅 <a=/help/article/sources>标题来源</a>。
+    { $brand } 使用本地存储，不使用广告或追踪 Cookie。它保存：
+    - 让你保持登录的信息，
+    - 你的个人资料、设置和进度的副本，让页面快速打开，
+    - 你的 Cookie 和个性化选择。
 
-    ## 您的选择
-    - 首次访问时，横幅会询问是否允许推荐功能使用您的观看记录。您可以随时更改决定。
-    - 选择 <b>拒绝</b> 将保留使用网站所需的所有功能，并关闭个性化推荐。
-    - 您的浏览器也可以阻止或删除 Cookie 和站点数据。如果这样做，您的个人资料和进度将会丢失。
+    预告片从 YouTube 播放，YouTube 可能会设置自己的 Cookie；图片来自公开的影视目录。这些不由我们控制。请参阅<a=/help/article/sources>作品从哪里来</a>。
+
+    ## 你的选择
+    - 第一次访问时，会有横幅询问推荐是否可以使用你观看的内容。你可以随时在<b>隐私与数据设置</b>或下面的工具中改变主意。
+    - <b>拒绝</b>只保留网站运行所需的内容，并关闭个性化。
+    - 如果浏览器清除了网站数据，你会在该浏览器上退出登录。你的账户会保留所有内容。
 
     @@ cookies
-help-art-stuck-loading-title = 页面停留在 Logo 或空白屏幕上
-help-art-stuck-loading-summary = 当 { $brand } 始终无法完成启动时，可以尝试以下方法。
-help-art-stuck-loading-keywords = 卡住 加载 Logo 空白 白屏 启动画面 未启动 WebAssembly wasm 冻结 启动
-help-art-stuck-loading-body =
-    在 { $brand } 启动时，你会看到立方体标志和一排移动的圆点。这通常只需几秒钟。{ $brand } 以 WebAssembly 应用的形式运行，因此如果浏览器或设置禁用了 WebAssembly，你将停留在该屏幕上。
 
-    1. 按 <b>Ctrl + Shift + R</b>（Mac 上按 <b>Cmd + Shift + R</b>）重新加载以获取最新版本。
-    2. 在隐私窗口中打开页面。如果在那里可以正常工作，说明是扩展程序在作怪。请参阅 <a=/help/article/extensions-blockers>阻止播放器的扩展程序</a>。
-    3. 更新你的浏览器。请参阅 <a=/help/article/supported-browsers>支持的浏览器</a>。
-    4. 针对此网站，关闭任何限制网络功能的模式，例如锁定模式或严格安全模式。
-    5. 清除此网站的数据。请参阅 <a=/help/article/clear-data>如何清除已保存的数据</a>。
+help-art-stuck-loading-title = 页面停在标志或空白屏幕
+help-art-stuck-loading-summary = { $brand } 一直启动不完时可以试试这些。
+help-art-stuck-loading-keywords = 卡住 加载 标志 空白 白屏 启动页 无法启动 webassembly wasm 冻结
+help-art-stuck-loading-body =
+    { $brand } 启动时，你会看到立方体标志和一排移动的圆点，通常只需要几秒。{ $brand } 是一个 WebAssembly 应用，所以如果浏览器或某项设置关闭了 WebAssembly，就会一直停在这个画面。
+
+    1. 按 <b>Ctrl + Shift + R</b>（Mac 上按 <b>Cmd + Shift + R</b>）重新加载，获取最新版本。
+    2. 在无痕窗口中打开页面。如果在那里能用，说明是某个扩展程序在干扰。请参阅<a=/help/article/extensions-blockers>会拦截播放器的扩展程序</a>。
+    3. 更新浏览器。请参阅<a=/help/article/supported-browsers>支持的浏览器</a>。
+    4. 为这个网站关闭限制网页功能的模式，例如 Apple 设备上的锁定模式或 Edge 中严格的安全设置。
+    5. 清除这个网站的数据，然后重新登录。请参阅<a=/help/article/clear-data>如何清除保存的数据</a>。
 
     @@ refresh
+
 help-art-slow-pages-title = 页面加载缓慢
-help-art-slow-pages-summary = 在慢速连接或旧设备上加快浏览速度。
-help-art-slow-pages-keywords = 慢 卡顿 性能 速度 加载 内存 旧手机 滚动卡顿 预览
+help-art-slow-pages-summary = 在网速慢或设备旧的情况下让浏览更快。
+help-art-slow-pages-keywords = 慢 卡 性能 速度 加载 内存 旧手机 卡顿 滚动 预览
 help-art-slow-pages-body =
-    首次访问时会下载应用，大小约为 3 MB。之后，大部分等待时间都花在加载图片和预览上。
+    第一次访问会下载应用，大约 2 MB。之后大部分等待时间都花在图片和预览上。
 
-    - 在 <b>设置</b> 的 <b>播放设置</b> 下，关闭 <b>自动播放预览</b>。自动启动的预告片会消耗数据和内存。
-    - 关闭使用网络或占用大量内存的其他标签页和应用。
-    - 使用最新版本的浏览器。旧版本运行应用的速度较慢。
-    - 如果使用移动数据，请尽量切换到 Wi-Fi。
+    - 在个人资料的<b>播放设置</b>中关闭<b>自动播放预览</b>。自动开始的预览会占用流量和内存。
+    - 关闭占用网络或大量内存的标签页和其他应用。
+    - 使用新版浏览器。旧版浏览器运行应用会更慢。
+    - 使用移动数据时，尽量换成 Wi-Fi。
 
     @@ diagnostics
-help-art-vpn-network-title = VPN、学校和办公网络
-help-art-vpn-network-summary = 为什么某些网络会阻止标题或图片，以及可以尝试的方法。
-help-art-vpn-network-keywords = vpn 代理 学校 办公 网络 防火墙 dns 过滤 被阻止 safedns 受限 wifi
+
+help-art-vpn-network-title = VPN、学校和公司网络
+help-art-vpn-network-summary = 为什么有些网络会拦截作品或图片，以及可以试试什么。
+help-art-vpn-network-keywords = vpn 代理 学校 公司 网络 防火墙 dns 过滤 被拦截 safedns 限制 wifi
 help-art-vpn-network-body =
-    { $brand } 从公共电影目录加载详细信息和图片，并从独立来源进行流媒体传输。某些网络会阻止这些网站，某些来源也会拒绝特定的地址。
+    { $brand } 从公开的影视目录加载详情和图片，从独立来源加载视频流。有些网络会拦截这些网站，有些来源会拒绝某些地址。
 
-    - <b>VPN 或代理。</b> 某些来源不响应 VPN 地址。请关闭它，或选择另一个国家/地区。
-    - <b>学校、办公或公共 Wi-Fi。</b> 过滤器通常会阻止流媒体或目录。请尝试使用手机的移动数据。
-    - <b>DNS 过滤器。</b> 过滤 DNS 服务可能会阻止目录，导致行或图片为空。请使用不同的 DNS，或针对此网站关闭过滤器。
+    - <b>VPN 或代理。</b>有些来源不响应 VPN 地址。关闭它，或选择其他国家/地区。
+    - <b>学校、公司或公共 Wi-Fi。</b>过滤规则经常会拦截流媒体或目录。试试手机的移动数据。
+    - <b>DNS 过滤。</b>带过滤功能的 DNS 服务可能会拦截目录，让内容行或图片变成空白。换一个 DNS，或为这个网站关闭过滤。
 
-    设备检查将显示你的网络无法访问哪个服务。
+    设备检查会显示你的网络连不上哪项服务。
 
     @@ diagnostics
-help-art-is-down-title = { $brand } 宕机了吗？
-help-art-is-down-summary = 检查哪些部分在你的设备上正常运行。
-help-art-is-down-keywords = 宕机 故障 状态 无法使用 离线 不可用 服务器 维护 错误 网站
+
+help-art-is-down-title = { $brand } 出故障了吗？
+help-art-is-down-summary = 从你的设备检查哪些部分在正常工作。
+help-art-is-down-keywords = 故障 宕机 状态 无法使用 离线 不可用 服务器 维护 错误 网站
 help-art-is-down-body =
-    { $brand } 有三个可能独立故障的部分：
+    { $brand } 由三部分组成，它们可能各自出问题：
 
-    - <b>应用程序</b>，即你当前正在查看的部分。
-    - <b>电影和电视剧目录</b>，提供详细信息和图片。
-    - <b>流媒体源</b>，提供视频内容。
+    - <b>应用</b>，就是你现在看到的。
+    - <b>影视目录</b>，提供详情和图片。
+    - <b>视频来源</b>，提供视频。
 
-    运行检查以查看哪些部分能从你的设备响应。如果目录或流媒体源对所有人都无响应，请等待几分钟后再试。如果只有你无法访问某一部分，请参阅 <a=/help/article/vpn-network>VPN、学校和工作网络</a>。
+    运行检查，看看从你的设备能连上哪些。如果目录或来源对所有人都没有响应，等几分钟再试。如果只有你连不上，请参阅<a=/help/article/vpn-network>VPN、学校和公司网络</a>。
 
     @@ diagnostics
+
 help-art-no-sound-title = 没有声音
-help-art-no-sound-summary = 修复播放时没有音频的问题。
-help-art-no-sound-keywords = 无声 音频 静音 音量 扬声器 蓝牙耳机 自动播放
+help-art-no-sound-summary = 解决作品播放时没有声音的问题。
+help-art-no-sound-keywords = 没有声音 音频 静音 无声 音量 扬声器 蓝牙 耳机 自动播放
 help-art-no-sound-body =
-    1. 按 <b>M</b> 键，或在播放器中选择扬声器按钮以取消静音。浏览器在视频自动开始时通常会将其设为静音，请参阅 <a=/help/article/autoplay-blocked>视频以静音状态开始</a>。
-    2. 按 <b>向上箭头</b> 键提高音量，并检查你设备的音量。
+    1. 按 <b>M</b>，或选择播放器中的扬声器按钮取消静音。视频自动开始时，浏览器经常会让它静音，请参阅<a=/help/article/autoplay-blocked>视频静音开始或不会自动播放</a>。
+    2. 按<b>上方向键</b>调高音量，并检查设备的音量。
     3. 检查浏览器标签页是否被静音。右键点击标签页即可查看。
-    4. 打开 <b>音频和字幕</b>，如果有其他音轨，请选择另一个。
-    5. 如果你使用蓝牙，请断开并重新连接你的耳机。
-help-art-autoplay-blocked-title = 视频以静音状态开始或无法自动播放
-help-art-autoplay-blocked-summary = 为什么浏览器阻止声音自动启动，以及 { $brand } 如何处理此问题。
-help-art-autoplay-blocked-keywords = 自动播放 被阻止 静音 启动 策略 浏览器 声音 自动 播放 预告片 预告
+    4. 打开<b>音频和字幕</b>，如果有其他音轨，换一个试试。
+    5. 如果使用蓝牙，断开耳机再重新连接。
+
+help-art-autoplay-blocked-title = 视频静音开始或不会自动播放
+help-art-autoplay-blocked-summary = 浏览器为什么不让声音自动播放，以及 { $brand } 如何处理。
+help-art-autoplay-blocked-keywords = 自动播放 被阻止 静音 播放策略 浏览器 声音 预览 预告片
 help-art-autoplay-blocked-body =
-    在点击或轻触页面之前，浏览器不允许页面以有声状态启动视频。{ $brand } 首先尝试以有声状态启动。如果浏览器拒绝，它将以静音状态启动并显示静音扬声器图标，你可以按 <b>M</b> 键或点击扬声器按钮取消静音。
+    在你点击或点按页面之前，浏览器不允许页面自动播放有声音的视频。{ $brand } 会先尝试有声播放；如果浏览器拒绝，就静音开始，并显示静音的扬声器图标。按 <b>M</b> 或选择扬声器按钮即可取消静音。
 
-    - 若要停止预告片和预览自动播放，请在 <b>设置</b> 中的 <b>播放设置</b> 下关闭 <b>自动播放预览</b>。
-    - 如果某个标题始终无法启动，请参阅 <a=/help/article/wont-play>标题无法播放</a>。
-help-art-clips-title = 使用短片
-help-art-clips-summary = 滚动浏览短预览，并将喜欢的内容添加到你的片单。
-help-art-clips-keywords = 片段 短片 预告片 滚动 垂直 预告片 滑动 静音 信息 片单
+    - 要让预览不再自动开始，在个人资料的<b>播放设置</b>中关闭<b>自动播放预览</b>。
+    - 如果作品一直不开始播放，请参阅<a=/help/article/wont-play>作品无法播放</a>。
+
+help-art-clips-title = 使用片段
+help-art-clips-summary = 滑动浏览短预览，并把喜欢的加入片单。
+help-art-clips-keywords = 片段 短视频 预览 滑动 竖屏 预告片 静音 详情 我的片单
 help-art-clips-body =
-    <b>片段</b>会连续播放简短的预览，位于手机底部的栏中。
+    <b>片段</b>会一个接一个地显示短预览，在手机上位于底部栏中。
 
-    1. 滚动或滑动以查看下一个片段。
-    2. 点击扬声器按钮以开启或关闭声音。片段默认静音。
-    3. 点击<b>片单</b>以保存该标题，点击<b>播放</b>以观看，或点击<b>信息</b>以了解详情。
+    1. 滚动或滑动到下一个片段。
+    2. 选择扬声器按钮打开或关闭声音。片段开始时是静音的。
+    3. 选择<b>我的片单</b>收藏作品，选择<b>播放</b>观看，或选择<b>详情</b>了解更多。
+
 help-art-genres-title = 按类型浏览
-help-art-genres-summary = 将电影和电视剧缩小到您想要的标题类型。
+help-art-genres-summary = 把电影和电视剧缩小到你想看的类型。
 help-art-genres-keywords = 类型 分类 喜剧 剧情 恐怖 动作 筛选 浏览 电影 电视剧 子菜单
 help-art-genres-body =
-    1. 在顶部栏中打开<b>电影</b>或<b>电视剧</b>。
-    2. 点击页面标题旁的<b>类型</b>。
-    3. 选择一个类型。页面随后仅显示该类型，并展示为其制作的行。
+    1. 打开顶部栏中的<b>电影</b>或<b>电视剧</b>。
+    2. 选择页面标题旁边的<b>类型</b>。
+    3. 选择一种类型。页面就会只显示这个类型，并配上为它生成的内容行。
 
-    若要返回所有内容，请再次打开<b>电影</b>或<b>电视剧</b>。在手机上，类型列表会从底部以表单形式打开。
-help-art-top-10-title = 什么是“Top 10”行？
-help-art-top-10-summary = 一行显示当前人们观看最多的十个标题。
-help-art-top-10-keywords = Top 10 前十 热门 趋势 排名 数字 行 观看最多
-help-art-top-10-body = <b>Top 10</b>行显示当前观看最多的十个标题，每个标题旁都有一个大数字。它跟随目录中的当前热度，并逐日变化。它对所有人相同，不基于您的个人资料。
+    要回到全部内容，再次打开<b>电影</b>或<b>电视剧</b>。在手机上，类型列表会从底部弹出。
+
+help-art-top-10-title = 什么是 Top 10 内容行？
+help-art-top-10-summary = 一行当下最受欢迎的十部作品。
+help-art-top-10-keywords = top 10 前十 热门 趋势 排行 数字 内容行 最多观看
+help-art-top-10-body = <b>Top 10</b> 内容行展示当下最受欢迎的十部电影或剧集，每部都带着一个大数字。它跟随影视目录中每天的热度变化，所以每天都不一样。所有人看到的都相同，不受你的个人资料影响。
 help-art-episodes-title = 季和集
-help-art-episodes-summary = 从详情窗口或播放器中选择一季和一集。
-help-art-episodes-keywords = 季 集 电视剧 列表 下一集 抽屉 连续观看 选择器 电视节目
+help-art-episodes-summary = 在详情窗口或播放器中选择季和集。
+help-art-episodes-keywords = 季 集 剧集 列表 下一集 追剧 选集 电视剧
 help-art-episodes-body =
-    ## 播放前
-    打开一部电视剧并选择<b>集</b>。使用季菜单更改季，然后选择一集。
+    ## 播放之前
+    打开一部剧集，选择<b>剧集</b>。用季菜单切换季，然后选择一集。
 
     ## 观看时
-    - 在播放器控件中选择<b>集</b>，无需离开即可打开列表。
-    - 选择<b>下一集</b>，或让它自动开始。参见<a=/help/article/skip-intro-next>跳过片头和下一集</a>。
-help-art-share-title = 如何分享标题
-help-art-share-summary = 将标题的链接发送给朋友。
-help-art-share-keywords = 分享 链接 WhatsApp 消息 Instagram Snapchat 复制 发送 朋友
+    - 在播放器控件中选择<b>剧集</b>，不用离开播放器就能打开列表。
+    - 选择<b>下一集</b>，或等它自动开始。请参阅<a=/help/article/skip-intro-next>跳过片头和下一集</a>。
+
+help-art-share-title = 如何分享作品
+help-art-share-summary = 把作品链接发给朋友。
+help-art-share-keywords = 分享 链接 whatsapp 信息 instagram snapchat 复制 发送 朋友
 help-art-share-body =
-    1. 打开某部作品的详情页，选择<b>分享</b>。
-    2. 选择<b>WhatsApp</b>或<b>信息</b>发送链接，或选择<b>复制链接</b>将其粘贴到任何位置。
-    3. 对于Instagram和Snapchat，链接会被复制，你需要将其粘贴到应用中。
+    1. 打开作品详情，选择<b>分享</b>。
+    2. 选择 <b>WhatsApp</b> 或<b>消息</b>发送链接，或选择<b>复制链接</b>粘贴到任何地方。
+    3. 对于 Instagram 和 Snapchat，链接会被复制，你再把它粘贴到应用里。
 
-    该链接将在 { $brand } 上打开该作品的页面。打开链接的人无需登录。
+    链接会在 { $brand } 上打开这部作品。打开链接的人需要登录或创建免费账户才能观看。
+
 help-art-title-details-title = 作品详情窗口
-help-art-title-details-summary = 在按下播放之前，你可以阅读和进行的操作。
-help-art-title-details-keywords = 更多信息 详情 弹窗 演职人员 类型 剧情简介 相似 更多类似 预告片 评分 匹配度
+help-art-title-details-summary = 按播放之前，你可以看到和做些什么。
+help-art-title-details-keywords = 更多信息 详情 弹窗 演员 类型 简介 相似 更多类似内容 预告片 评分
 help-art-title-details-body =
-    选择一张作品卡片或<b>更多信息</b>以打开其详情。
+    选择作品卡片或<b>更多信息</b>，打开它的详情。
 
-    - <b>播放</b>或<b>继续观看</b>将从你上次停止的位置开始播放。
-    - <b>我的片单</b>用于保存，拇指图标用于评分。
-    - 剧情简介、演职人员、类型以及描述氛围的关键词可帮助你做出决定。
-    - 对于电视剧，<b>剧集</b>会列出所有季。
-    - <b>更多类似</b>展示意义相近的作品，这是发现新内容的好方法。
+    - <b>播放</b>或<b>继续播放</b>会从你上次停下的地方开始。
+    - <b>我的片单</b>可以收藏它，大拇指可以给它评分。
+    - 简介、演员、类型和几个描述氛围的词能帮你做决定。
+    - 对于剧集，<b>剧集</b>会列出各季。
+    - <b>更多类似内容</b>显示内容相近的作品，是发现新作品的好办法。
+
 help-art-accessibility-title = { $brand } 的无障碍功能
-help-art-accessibility-summary = 字幕、键盘控制和显示设置，助你更好地使用。
-help-art-accessibility-keywords = 无障碍 屏幕阅读器 键盘 字幕 字幕大小 对比度 缩放 减少动态效果 残障
+help-art-accessibility-summary = 有帮助的字幕、键盘操作和显示设置。
+help-art-accessibility-keywords = 无障碍 屏幕阅读器 键盘 字幕 隐藏字幕 大小 对比度 缩放 减弱动态效果 残障
 help-art-accessibility-body =
-    - <b>字幕。</b>在<b>设置</b>中选择语言、大小、颜色和背景。参见<a=/help/article/subtitles>如何使用字幕、闭合字幕或选择音频语言</a>。
-    - <b>键盘。</b>使用<b>Tab</b>键在控件之间移动，使用<b>Esc</b>键关闭窗口。播放器有专用按键，参见<a=/help/article/shortcuts>键盘快捷键</a>。
-    - <b>文字大小。</b>使用<b>Ctrl</b>和<b>+</b>（Mac 上使用<b>Cmd</b>和<b>+</b>）缩放浏览器。布局会自动调整。
-    - <b>动态效果。</b>如果你的设备请求减少动态效果，动画标志将保持静止。
+    - <b>字幕。</b>在个人资料的<b>语言</b>中选择语言，在<b>字幕外观</b>中选择大小、颜色和背景。请参阅<a=/help/article/subtitles>如何使用字幕或选择音频语言</a>。
+    - <b>键盘。</b>用 <b>Tab</b> 在控件之间移动，用 <b>Esc</b> 关闭窗口。播放器有自己的按键，请参阅<a=/help/article/shortcuts>键盘快捷键</a>。
+    - <b>文字大小。</b>用 <b>Ctrl</b> 和 <b>+</b>（Mac 上用 <b>Cmd</b> 和 <b>+</b>）放大浏览器，布局会自动调整。
+    - <b>动态效果。</b>如果你的设备开启了减弱动态效果，动画标志会保持静止。
 
-    如果某些功能难以使用，请在<a=/help/article/report-bug>报告问题</a>页面告诉我们。我们非常重视这些反馈。
-help-art-profile-icons-title = 如何选择个人资料图标
-help-art-profile-icons-summary = 为个人资料选择一个头像。
-help-art-profile-icons-keywords = 个人资料 图标 头像 图片 图像 更改 选择 角色
+    如果有什么地方不好用，请在<a=/help/article/report-bug>报告问题</a>页面告诉我们。我们会认真对待这些反馈。
+
+help-art-profile-icons-title = 如何选择个人资料头像
+help-art-profile-icons-summary = 为个人资料选一个头像。
+help-art-profile-icons-keywords = 个人资料 图标 头像 图片 更换 选择 角色
 help-art-profile-icons-body =
-    1. 打开<b>管理配置文件</b>并选择配置文件。
-    2. 选择图标。
-    3. 从组中选择一个，然后选择<b>保存</b>。
+    1. 打开<b>管理个人资料</b>，选择个人资料。
+    2. 选择头像。
+    3. 选一个新的，然后选择<b>保存</b>。
 
-    儿童配置文件默认使用条纹儿童图标，除非您选择了其他图标。您也可以从<b>偏好设置</b>中访问图标选择器。
+    你也可以在<b>账户</b>的<b>管理个人资料</b>中更改：选择个人资料，再选择它的头像。儿童个人资料会一直使用儿童头像，直到你选择别的。
+
+help-art-parental-controls-title = 家长控制：年龄分级和屏蔽作品
+help-art-parental-controls-summary = 把个人资料限制在某个年龄分级以内，或按名称隐藏作品。
+help-art-parental-controls-keywords = 家长控制 年龄分级 限制 屏蔽 作品 隐藏 儿童 青少年 pg 12 15 18
+help-art-parental-controls-body =
+    每个个人资料都可以有自己的限制。打开个人资料菜单，依次选择<b>账户</b>和<b>管理个人资料</b>，选择个人资料，然后选择<b>调整家长控制</b>。
+
+    ## 年龄分级
+    1. 选择<b>年龄分级</b>。
+    2. 选择这个个人资料可以观看的最高分级。只会显示不高于这个分级的作品，没有分级的作品也会被隐藏。
+
+    <b>分级标识</b>决定你看到哪套标识：英国（U、PG、12、15、18）或美国（G、PG、PG-13、R、NC-17）。<b>自动</b>会跟随你登录所在的国家/地区。
+
+    ## 屏蔽作品
+    1. 选择<b>屏蔽作品</b>。
+    2. 输入剧集或电影的名称，然后选择<b>添加</b>。
+
+    被屏蔽的作品不会在这个个人资料中显示。选择<b>移除</b>可以让它重新显示。
+
+    !! 注意：作品来自独立来源，有些作品没有分级。对于年幼的孩子，儿童个人资料更稳妥。请参阅<a=/help/article/kids-profile>如何创建儿童个人资料</a>。
+
+    @@ profiles
+
+help-art-transfer-profile-title = 把个人资料转移到另一个账户
+help-art-transfer-profile-summary = 把个人资料保存为文件，连同记录和设置一起添加到另一个账户。
+help-art-transfer-profile-keywords = 转移 个人资料 移动 复制 另一个账户 导入 导出 文件
+help-art-transfer-profile-body =
+    个人资料可以复制到另一个账户，比如家里有人搬出去时。副本会保留名称、头像、设置和观看记录。
+
+    ## 保存个人资料
+    1. 打开个人资料菜单，选择<b>转移个人资料</b>。
+    2. 选择个人资料，然后选择<b>下载个人资料文件</b>。请妥善保管这个文件。
+
+    ## 添加到另一个账户
+    1. 登录另一个账户，打开<b>管理个人资料</b>。
+    2. 选择<b>导入个人资料</b>，然后选择文件。
+
+    !! 注意：文件中不包含个人资料的 PIN 码。任何拿到文件的人都能把这个个人资料添加到自己的账户，所以不要分享它。
+
+    <b>账户</b>中的<b>个人资料转移</b>可以开启或关闭从你的账户复制出去。它从不阻止个人资料转入。
+
 auth-questions = 有问题？
 auth-email = 电子邮件地址
 auth-password = 密码
@@ -1505,27 +1720,29 @@ landing-promo-body = 无订阅，无信用卡，无长期承诺。
 landing-learn-more = 了解更多
 landing-faq = 常见问题
 landing-read-more = 阅读完整文章
-legal-credits-title = 许可证和致谢
-legal-credits-updated = 最后更新：2026年10月
+legal-credits-title = 许可与鸣谢
+legal-credits-updated = 最后更新：2026 年 10 月
 legal-credits-1-title = 1. 字体
-legal-credits-1-body = Logo 中的文字使用像素字体。其他所有界面文字使用 Inter。
-legal-credits-1-b1 = <strong>Baby Blocks</strong> 由 Colorful Typhoon 制作，根据链接软件条款用于个人、非商业用途的 { $brand } Logo。参见 <a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">Colorful Typhoon</a>。
-legal-credits-1-b2 = <strong>Inter</strong> 由 Rasmus Andersson 制作，根据 SIL Open Font License 1.1 使用。
+legal-credits-1-body = 标志使用像素字体，界面使用 Inter，合集标题使用展示字体：
+legal-credits-1-b1 = <strong>Baby Blocks</strong>，作者 Colorful Typhoon，依据其非商业免费使用条款用于 { $brand } 标志。见<a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">FontSpace 上的字体页面</a>。
+legal-credits-1-b2 = <strong>Inter</strong>，作者 Rasmus Andersson，依据 SIL Open Font License 1.1 使用。
+legal-credits-1-b3 = 来自 Google Fonts 的 <strong>Abril Fatface、Caveat Brush、DM Serif Display、Fredoka、Gochi Hand、Kalam、Londrina Solid、Playfair Display 和 Sedgwick Ave</strong>，依据 SIL Open Font License 1.1 使用。
+legal-credits-1-b4 = 来自 Google Fonts 的 <strong>Permanent Marker</strong> 和 <strong>Rock Salt</strong>，依据 Apache License 2.0 使用。
 legal-credits-2-title = 2. 图标
-legal-credits-2-body = 界面图标来自 Phosphor Icons，根据 MIT 许可证使用。
-legal-credits-3-title = 3. 电影和电视剧信息
-legal-credits-3-body = 本产品使用 TMDB API，但未获得 TMDB 的认可或认证。片名、简介、海报、评分和演职人员信息来自 <a href="https://www.themoviedb.org" target="_blank" rel="noopener">The Movie Database</a>。
+legal-credits-2-body = 界面图标来自 Phosphor Icons，依据 MIT 许可证使用。
+legal-credits-3-title = 3. 影视信息
+legal-credits-3-body = 本产品使用 TMDB API，但未经 TMDB 认可或认证。标题、简介、海报、评分和演员信息来自 <a href="https://www.themoviedb.org" target="_blank" rel="noopener">The Movie Database</a>。
 legal-credits-4-title = 4. 软件
-legal-credits-4-body = { $brand } 由开源软件构建，每项软件均在其各自的许可证下使用：
-legal-credits-4-b1 = <strong>Rust</strong> 和 <strong>Leptos</strong> 用于应用程序（MIT 和 Apache 2.0）。
-legal-credits-4-b2 = <strong>Tailwind CSS</strong> 用于样式设置（MIT）。
-legal-credits-4-b3 = <strong>hls.js</strong> 用于自适应视频播放（Apache 2.0）。
-legal-credits-4-b4 = <strong>Project Fluent</strong> 用于翻译界面文本（Apache 2.0 和 MIT）。
-legal-credits-5-title = 5. 商标和艺术作品
-legal-credits-5-body = 在 { $brand } 上展示的电影、电视剧和服务的名称、标志、海报和艺术作品归其所有者所有。展示这些内容是为了识别片名，并不代表所有者支持 { $brand }。
+legal-credits-4-body = { $brand } 使用开源软件构建，各自依据其许可证使用：
+legal-credits-4-b1 = 应用程序使用 <strong>Rust</strong> 和 <strong>Leptos</strong>（MIT 和 Apache 2.0）。
+legal-credits-4-b2 = 样式使用 <strong>Tailwind CSS</strong>（MIT）。
+legal-credits-4-b3 = 自适应视频播放使用 <strong>hls.js</strong>（Apache 2.0）。
+legal-credits-4-b4 = 界面翻译使用 <strong>Project Fluent</strong>（Apache 2.0 和 MIT）。
+legal-credits-5-title = 5. 商标和图片
+legal-credits-5-body = { $brand } 上显示的电影、剧集和服务的名称、标志、海报和图片归其所有者所有。展示它们是为了标识作品，并不代表所有者支持 { $brand }。
 legal-credits-6-title = 6. 联系方式
-legal-credits-6-body = 如果您认为此处有任何署名错误或需要修改，请写信至 { $support_email }。
-help-ui-legal-credits = 许可证和致谢
+legal-credits-6-body = 如果你认为这里的鸣谢有误或需要更改，请发邮件至 { $support_email }。
+help-ui-legal-credits = 许可与鸣谢
 landing-slide-everyone = 属于每个人的空间
 landing-slide-place = 从上次停下的地方继续观看。
 auth-login-app-title = 准备好观看了吗？
@@ -1628,12 +1845,12 @@ set-title-edit-profile = 编辑个人资料
 set-title-avatar = 选择头像
 set-title-restrictions = 观看限制
 set-title-ratings = 年龄分级
-set-title-blocked = 屏蔽标题
-set-title-lock = 个人资料锁定
+set-title-blocked = 屏蔽作品
+set-title-lock = 个人资料锁
 set-title-language = 显示语言
 set-title-subtitles = 字幕外观
-set-title-audio-subtitles = 音频与字幕
-set-title-name = 名称
+set-title-audio-subtitles = 音频和字幕
+set-title-name = 姓名
 set-title-app = 应用设置
 set-title-account = 账户
 set-title-password = 密码
@@ -1655,7 +1872,7 @@ set-lock-on = 开启
 set-lock-off = 关闭
 set-lock-title-on = 已开启个人资料锁
 set-lock-title-off = 创建个人资料锁
-set-lock-body = 使用 { $digits } 位 PIN 码将此个人资料设为私密，打开时需输入该 PIN 码。
+set-lock-body = 设置 { $digits } 位 PIN 码，打开此个人资料时需要输入，让它保持私密。
 set-lock-pin = 新 PIN 码
 set-lock-invalid = PIN 码需要 { $digits } 位数字。
 set-lock-change = 更改 PIN 码
@@ -1667,7 +1884,7 @@ set-language-hint = 选择您在应用中看到的文本语言。这将应用于
 set-subtitles-hint = 更改字幕的外观。
 set-autoplay-next = 自动播放下一集
 set-autoplay-next-hint = 一集结束后自动开始播放下一集。
-set-autoplay-previews = 自动播放预告片
+set-autoplay-previews = 自动播放预览
 set-autoplay-previews-hint = 浏览时自动播放预告片。
 set-sub-preview = 这是您的字幕显示效果。
 set-sub-size = 文字大小
@@ -1733,7 +1950,7 @@ set-forgot-password = 忘记密码？
 set-password-hint = 使用至少 { $min } 个字符的唯一密码来保护您的账户。
 set-password-new = 新密码
 set-password-again = 重新输入新密码
-set-password-signout-all = 退出所有设备
+set-password-signout-all = 在所有设备上退出登录
 set-password-short = 密码至少需要 { $min } 个字符。
 set-password-mismatch = 两个密码不匹配。
 set-password-saved = 您的密码已更改。
@@ -1748,7 +1965,7 @@ set-phone-saved = 您的号码已保存。
 set-devices-hint = 从此浏览器或所有已登录您账户的浏览器中退出。
 set-devices-current = 此设备
 set-devices-note = 其他浏览器未列出。退出所有设备将关闭所有打开的会话，包括当前会话。
-set-devices-signout-all = 退出所有设备
+set-devices-signout-all = 在所有设备上退出登录
 set-devices-signout-body = 所有已登录您账户的浏览器都将退出，包括当前浏览器。
 set-for-profile = 用于 { $name }
 set-privacy-viewing = 观看隐私
@@ -1757,7 +1974,7 @@ set-privacy-activity-hint = 管理您的观看历史
 set-privacy-data = 数据设置
 set-privacy-personalization = 个性化推荐
 set-privacy-personalization-hint = 根据你的观看记录推荐内容。关闭后，将显示通用推荐。
-set-activity-clear-body = 你的观看历史和续播进度将从此浏览器中删除。
+set-activity-clear-body = 这些作品会从此个人资料在你所有设备上的观看记录和“继续观看”中移除。
 set-err-invalid = 密码不正确，请重试。
 set-err-weak = 密码强度太弱。请使用包含字母和数字的更长密码。
 set-err-rate = 尝试次数过多。请等待一分钟后再试。
@@ -1775,7 +1992,7 @@ set-main-profile-body = { $name } 将成为此账户的主资料。主资料无�
 set-lock-create = 创建资料锁
 set-lock-current = 当前 PIN
 set-lock-wrong = PIN 不正确。
-set-lock-forgot = 忘记 PIN 了？
+set-lock-forgot = 忘记 PIN 码了？
 set-lock-reset-body = 此资料的 PIN 将被移除。之后你可以设置新的 PIN。
 set-name-hint = 账户持有人的姓名。主资料将跟随名字。
 set-name-first = 名字
@@ -1784,6 +2001,13 @@ set-name-required = 请输入名字和姓氏。
 set-name-saved = 姓名已保存。
 set-err-recent = 为了安全起见，请重新输入密码以继续。
 set-events-title = 最近的安全活动
+set-event-profile_created = 个人资料已创建
+set-event-profile_deleted = 个人资料已删除
+set-event-pin_set = 个人资料锁已设置
+set-event-pin_cleared = 个人资料锁已移除
+set-event-pin_locked = 尝试次数过多，个人资料锁已锁定
+set-event-pin_reset = 个人资料锁已重置
+set-event-main_profile_changed = 主个人资料已更改
 set-privacy-export = 下载我的数据
 set-nav-overview = 概览
 set-back-to-app = 返回 { $brand }
@@ -1791,8 +2015,8 @@ set-title-playback = 播放设置
 set-title-notifications = 通知设置
 set-playback-hint = 设置自动播放和预览。
 set-playback-autoplay = 自动播放和过渡
-set-notifications-hint = 管理电子邮件和推送通知。
-set-notifications-body = 选择此配置文件接收新内容上线和更新通知的方式。
+set-notifications-hint = 管理邮件和推送通知。
+set-notifications-body = 选择此个人资料如何接收新上线作品和更新的通知。
 set-notify-email = 电子邮件
 set-notify-push = 推送通知
 set-account-details = 账户详情
@@ -1832,10 +2056,10 @@ set-title-speed-test = 网速测试
 set-title-testing = 测试参与
 set-row-feature-testing = 功能测试
 set-devices-account-access = 账户访问
-set-title-transfer = 配置文件转移
+set-title-transfer = 个人资料转移
 set-title-transfer-profile = 转移配置文件
 set-activity-for = { $name } 的活动
-set-activity-hide = 隐藏此标题
+set-activity-hide = 隐藏此作品
 set-activity-hide-all = 全部隐藏
 set-activity-hidden = 已从您的观看活动中移除
 set-activity-download = 全部下载
@@ -1847,6 +2071,14 @@ set-csv-date = 日期
 set-notify-email-hint = 新内容上线及更新通知
 set-notify-push-hint = 此设备上的通知
 set-topics-title = 你关注的话题
+set-topic-new_arrivals = 新上线
+set-topic-new_arrivals-hint = 刚刚添加的剧集和电影。
+set-topic-recommendations = 推荐
+set-topic-recommendations-hint = 为此个人资料挑选的作品。
+set-topic-reminders = 提醒
+set-topic-reminders-hint = 你开始看的作品，以及你在看的剧集的新一集。
+set-topic-news = 来自 { $brand } 的消息
+set-topic-news-hint = 新功能和服务变化。
 set-push-denied = 浏览器已阻止此网站的通知。请在浏览器设置中允许通知，然后重试。
 set-push-unsupported = 此浏览器不支持显示通知。
 set-usage-title = 各屏幕的数据用量
@@ -1874,12 +2106,12 @@ set-transfer-profile-body = 将此配置文件保存为文件并添加到另一�
 set-transfer-step-1 = 选择“下载配置文件”并妥善保管该文件。
 set-transfer-step-2 = 登录另一个账户并打开“管理配置文件”。
 set-transfer-step-3 = 选择“导入配置文件”并选中该文件。
-set-transfer-download = 下载配置文件
+set-transfer-download = 下载个人资料文件
 set-transfer-saved = 配置文件已保存
 set-transfer-note = 该文件不包含配置文件锁定 PIN。任何拥有此文件的人都可以将该配置文件添加到其账户中，因此请勿分享。
 set-transfer-blocked-body = 此账户已关闭配置文件传输功能，因此无法复制出该配置文件。
 set-transfer-open-setting = 打开配置文件传输设置
-set-import-title = 导入配置文件
+set-import-title = 导入个人资料
 set-import-hint = 添加从其他账户保存的配置文件。
 set-import-done = 已添加 { $name }
 set-import-invalid = 该文件不是已保存的配置文件。
@@ -1890,6 +2122,12 @@ set-personal-info-hint = 请求获取您的个人信息副本
 set-personal-info-body = 您可以请求获取我们持有的关于您账户的个人信息副本。文件列表包括：
 set-personal-info-done = 您的文件已保存。
 set-personal-info-note = 文件保留在您的设备上。其中可能包含个人信息，请妥善保管。
+set-personal-info-account = 你的账户信息：姓名、电子邮件地址和电话号码
+set-personal-info-profiles = 你的个人资料及其偏好
+set-personal-info-lists = 每个个人资料的我的片单和评分
+set-personal-info-history = 每个个人资料的观看进度和记录
+set-personal-info-settings = 你的设置和选择，例如通知和 Cookie
+set-personal-info-security = 最近的登录和安全活动
 set-testing-body = 我们有时会先让一小部分用户试用新功能，然后再向所有人开放。
 set-testing-switch = 让我参与测试和预览
 set-testing-hint = 关闭此选项可继续使用当前版本的所有功能。
@@ -1907,7 +2145,7 @@ set-password-hide = 隐藏密码
 set-device-name = { $system } 上的 { $browser }
 set-device-unknown = 未知设备
 set-device-last = 最近活跃于 { $time }
-set-device-sign-out = 退出此设备
+set-device-sign-out = 在此设备上退出登录
 set-device-sign-out-body = 此浏览器将从你的账户中退出。
 set-device-signed-out = 设备已退出
 set-devices-list-note = 此列表可能不完整。部分设备可能未显示，且某些设备活动可能未显示。
@@ -1956,6 +2194,13 @@ set-device-timezone = 时区
 set-device-screen = 屏幕
 set-device-language = 语言
 set-device-countries-note = 此设备曾从多个国家连接：{ $countries }。使用 VPN 或旅行可能会导致这种情况。设备通过浏览器识别，而非连接地点，因此它仍然是同一台设备。
+set-device-type-desktop = 电脑
+set-device-type-mobile = 手机
+set-device-type-tablet = 平板
+set-device-type-other = 其他设备
+set-event-new_device = 新设备已登录
+set-event-device_new_country = 有设备从新的国家/地区连接
+set-event-session_revoked = 一台设备已退出登录
 email-footer = 由 { $brand } 发送。有问题？请阅读帮助中心或致信 { $help_email }。
 email-help-center = 帮助中心
 email-ignore = 如果您未请求此操作，可以忽略此邮件。
@@ -1997,17 +2242,17 @@ help-pagination-label = 分页
 age-badge-all = 全年龄
 age-aria-all = 适合所有年龄段
 age-aria-plus = 适合 { $age } 岁及以上
-set-rating-system-title = 分级标签
+set-rating-system-title = 分级标识
 set-rating-system-hint = 你阅读的年龄分级标签。自动模式将跟随你登录设备的国家/地区。
 set-rating-system-auto = 自动
 set-rating-system-uk = 英国 (U, PG, 12, 15, 18)
 set-rating-system-us = 美国 (G, PG, PG-13, R, NC-17)
 row-continue-watching = 继续观看
-row-my-list = 我的列表
-row-because-you-watched = 因为你看了 { $title }
+row-my-list = 我的片单
+row-because-you-watched = 因为你看过《{ $title }》
 row-more-like = 类似 { $title }
 row-todays-top-picks = 今日为你精选
-row-your-next-watch = 你下一部要看的
+row-your-next-watch = 接下来看什么
 row-gems-for-you = 为你精选的珍品
 row-we-think-youll-love = 我们认为你会喜欢这些
 row-familiar-favourites = 熟悉的好物
