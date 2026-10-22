@@ -336,7 +336,7 @@ help-art-playback-unavailable-title = { $brand }が「Playback Unavailable（再
 help-art-playback-unavailable-summary = メッセージの意味と次に何をすべきか
 help-art-playback-unavailable-keywords = 再生不可 エラーメッセージ ストリーミングができない プロバイダーがサポートされていない
 help-art-playback-unavailable-body =
-    You may see <b>Playback Unavailable</b> or <b>Unable to stream video. All source providers were unavailable or unsupported by your browser.</b>
+    You may see <b>再生不可</b> or <b>ビデオのストリーミングができません。すべてのソースプロバイダーが利用不可またはブラウザでサポートされていません。</b>
 
     It means the player asked every source it knows for this title and none returned a stream your browser can play.
 
@@ -348,6 +348,7 @@ help-art-playback-unavailable-body =
     If the same title fails for a day, <a=/help/article/report-bug>tell us</a>. Include the title, the year and the browser you used.
 
     @@ diagnostics
+
 help-art-black-screen-title = 黒い画面で音が聞こえる
 help-art-black-screen-summary = 画像が表示されていませんが、タイトルの音が聞こえます。
 help-art-black-screen-keywords = 黒い画面 画像がない 音のみ ビデオが表示されない 空白 グリーン画面
@@ -536,15 +537,6 @@ help-art-subtitles-body =
     3. <b>完了</b>を選択します。
 
     !! 注意: 言語とオーディオトラックはタイトルのソースによって異なります。 <a=/help/article/subtitles-missing>字幕が表示されないか同期していない</a> を参照してください。
-help-art-playback-speed-title = 再生速度を変更する方法
-help-art-playback-speed-summary = プレイヤーのコントロールから速くまたは遅く再生します。
-help-art-playback-speed-keywords = 速度 速く 遅く 2x 1.5x 再生速度
-help-art-playback-speed-body =
-    1. タイトルを開始し、プレイヤーのコントロールを表示します。
-    2. 右下の速度ボタンを選択します。
-    3. メニューから速度を選択します。
-
-    選択した速度は現在視聴しているタイトルに適用され、次のタイトルでは通常の速度に戻ります。
 help-art-shortcuts-title = キーボードショートカット
 help-art-shortcuts-summary = マウスを使わずにプレイヤーを制御します。
 help-art-shortcuts-keywords = キーボード ショートカット キー スペース アロー フルスクリーン ミュート ボリューム スキップ リワインド ホットキー
@@ -1511,7 +1503,7 @@ legal-credits-title = ライセンスとクレジット
 legal-credits-updated = 最終更新日: 2026年10月
 legal-credits-1-title = 1. フォント
 legal-credits-1-body = ロゴのテキストはピクセルフォントで設定されています。すべての他のインターフェーステキストはInterで設定されています。
-legal-credits-1-b1 = <strong>Baby Blocks</strong> by Colorful Typhoon、{ $brand }ロゴのためにそのリンクウェア条項に基づき個人的、非営利的な使用に使用されています。詳しくは<a href="http://www.geocities.jp/kitschlabo/" target="_blank" rel="noopener">Colorful Typhoon</a>をご覧ください。
+legal-credits-1-b1 = <strong>Baby Blocks</strong> by Colorful Typhoon、{ $brand }ロゴのためにそのリンクウェア条項に基づき個人的、非営利的な使用に使用されています。詳しくは<a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">Colorful Typhoon</a>をご覧ください。
 legal-credits-1-b2 = <strong>Inter</strong> by Rasmus Andersson、SIL Open Font License 1.1に基づき使用されています。
 legal-credits-2-title = 2. イコン
 legal-credits-2-body = インターフェースアイコンはPhosphor Iconsから使用され、MITライセンスに基づいています。
@@ -1973,7 +1965,7 @@ email-recovery-subject = { $brand } のパスワードをリセット
 email-recovery-title = パスワードをリセット
 email-recovery-body = アカウントのパスワードリセットのリクエストを受け取りました。新しいパスワードを選択するには、ボタンを使用してください。リンクは一度しか有効ではありませんし、すぐに期限切れになります。
 email-recovery-button = 新しいパスワードを選択
-email-code-subject = あなたの { $brand } サインインコード
+email-code-subject = あなたの { $brand } サインインコード · { $code }
 email-code-title = あなたのサインインコード
 email-code-body = 続行するにはこのコードを入力してください。一度しか有効ではありませんし、{ $minutes } 分後に期限切れになります。
 email-code-or-link = または、ボタンを使用してサインインしてください。
@@ -1986,7 +1978,7 @@ email-invite-subject = { $brand }に招待されました
 email-invite-title = 招待されました
 email-invite-body = アカウントを作成するため招待を受け入れてください。
 email-invite-button = 招待を受け入れる
-email-reauth-subject = あなたの{ $brand }確認コード
+email-reauth-subject = あなたの{ $brand }確認コード · { $code }
 email-reauth-title = あなたの確認コード
 email-reauth-body = このコードを入力して、それが本当にあなたであることを確認してください。一度しか有効ではありませんが、すぐに期限切れになります。
 email-device-subject = あなたの { $brand } アカウントに新しいデバイスがサインインしました

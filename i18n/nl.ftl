@@ -26,7 +26,7 @@ category-sub-nav-mobile-series = Serie
 choose-icon-back = Terug
 clips-clips = Clips
 continue-watching-options-sheet-cancel = Annuleren
-continue-watching-options-sheet-remove-from-continue-watching = Verwijder uit 'Verder kijken'
+continue-watching-options-sheet-remove-from-continue-watching = Verwijderen uit Verder kijken
 continue-watching-row-continue-watching = Doorgaan met bekijken
 continue-watching-row-scroll-left = Scroll links
 continue-watching-row-scroll-right = Scroll rechts
@@ -92,7 +92,7 @@ whos-watching-add-profile = Profiel toevoegen
 help-ui-center = Help Center
 help-ui-browse = Blader
 help-ui-signin = Aanmelden
-help-ui-hero-title = Hoe kunnen we u helpen?
+help-ui-hero-title = Waarmee kunnen we je helpen?
 help-ui-search-label = Zoeken
 help-ui-search-placeholder = Typ een vraag, onderwerp of probleem
 help-ui-popular = Populaire onderwerpen
@@ -100,15 +100,15 @@ help-ui-explore = Blader onderwerpen
 help-ui-quick-links = Snelkoppelingen
 help-ui-need-more = Nog meer hulp nodig?
 help-ui-contact-us = Neem contact op
-help-ui-language-label = Selecteer uw voorkeurstaal:
+help-ui-language-label = Kies je taal:
 help-ui-back = Terug naar Help Home
 help-ui-related = Gerelateerde artikelen
 help-ui-helpful = Was dit artikel nuttig?
 help-ui-yes = Ja
 help-ui-no = Nee
-help-ui-thanks = Bedankt voor uw feedback.
+help-ui-thanks = Bedankt voor je feedback.
 help-ui-tell-more = Vertel ons wat ontbreekt
-help-ui-recommended = Aanbevolen voor u
+help-ui-recommended = Aanbevolen voor jou
 help-ui-additional = Extra zoekresultaten
 help-ui-read = Artikel lezen
 help-ui-results-count =
@@ -127,8 +127,8 @@ help-ui-page-next = Volgende pagina
 help-ui-page-n = Pagina { $n }
 help-ui-suggestions = Aanbevolen artikelen
 help-ui-contact-title = Neem contact op
-help-ui-contact-prompt = Vertel ons meer en we vinden de beste oplossing voor u
-help-ui-describe = Beschrijf uw probleem
+help-ui-contact-prompt = Vertel ons meer en we zoeken de beste oplossing voor je
+help-ui-describe = Beschrijf je probleem
 help-ui-mail-subject = Helpverzoek
 help-ui-mail-intro = Beschrijf het probleem hier:
 help-ui-mail-details = Details worden automatisch toegevoegd
@@ -152,7 +152,7 @@ help-topic-fix = Een probleem oplossen
 help-topic-watching = Beeldbellen
 help-topic-start = Beginnen
 help-group-profiles = Profielen
-help-group-account-data = Account en Gegevens
+help-group-account-data = Je gegevens en privacy
 help-group-paying = Betalen voor { $brand }
 help-group-playback-issues = Afspelproblemen
 help-group-device-issues = Browsers en Apparaten
@@ -163,630 +163,766 @@ help-group-finding = Iets om te bekijken vinden
 help-group-about = Over { $brand }
 help-group-setup = Apparaat instellen
 help-group-reporting = Melden en Juridisch
-help-art-profiles-manage-title = Hoe profielen te maken, bewerken of verwijderen
-help-art-profiles-manage-summary = Voeg een profiel toe voor iedereen, verander een naam of icoon, zet een PIN aan of verwijder een profiel dat je niet meer nodig hebt.
-help-art-profiles-manage-keywords = profiel profielen toevoegen maken bewerken verwijderen naam icoon avatar wie bekeekt
+help-art-profiles-manage-title = Profielen maken, bewerken of verwijderen
+help-art-profiles-manage-summary = Voeg een profiel toe voor iedereen, verander een naam of afbeelding, vergrendel een profiel of verwijder er een die je niet meer nodig hebt.
+help-art-profiles-manage-keywords = profiel maken profiel bewerken profiel verwijderen profielen beheren naam afbeelding
 help-art-profiles-manage-body =
-    Iedereen die { $brand } op dit apparaat gebruikt, kan een profiel hebben met een eigen naam, icoon, lijst en aanbevelingen.
+    Iedereen in huis kan een eigen profiel hebben, met een eigen naam, afbeelding, Mijn lijst, kijkactiviteit en aanbevelingen. Een account heeft ruimte voor maximaal 5 profielen.
 
     ## Een profiel toevoegen
-    1. Open het profielmenu in de bovenhoek en kies <b>Profielen beheren</b>, of open het <b>Wie bekeekt?</b>-scherm.
+    1. Open rechtsboven het profielmenu en kies <b>Profielen beheren</b>, of kies <b>Profielen beheren</b> op het scherm <b>Wie kijkt?</b>.
     2. Kies <b>Profiel toevoegen</b>.
-    3. Typ een naam, kies een icoon en kies <b>Opslaan</b>.
+    3. Typ een naam en kies een afbeelding. Zet <b>Kinderprofiel</b> aan als het profiel voor een kind is.
+    4. Kies <b>Opslaan</b>.
 
     ## Een profiel bewerken of verwijderen
-    1. Open <b>Profielen beheren</b>.
-    2. Kies het profiel dat je wilt wijzigen.
-    3. Verander de naam of het icoon, zet de PIN of de Kinderprofielinstelling aan of uit, en kies daarna <b>Opslaan</b>. Om een profiel te verwijderen, kies <b>Profiel verwijderen</b>.
+    1. Open <b>Profielen beheren</b> en kies het profiel dat je wilt aanpassen.
+    2. Verander de naam of de afbeelding, of zet <b>Kinderprofiel</b> of <b>Profielvergrendeling</b> aan of uit, en kies <b>Opslaan</b>.
+    3. Kies <b>Profiel verwijderen</b> om het profiel te verwijderen. De kijkactiviteit en instellingen van het profiel worden ook verwijderd.
 
-    !! Opmerking: Profielen worden opgeslagen in deze browser, op dit apparaat. Zie <a=/help/article/saved-data>Waar je profielen, lijst en voortgang worden opgeslagen</a>.
+    Talen, ondertitels, ouderlijk toezicht en de andere voorkeuren van een profiel vind je bij <b>Account</b>, onder <b>Profielen beheren</b>.
 
-    @@ profielen
+    !! Let op: Profielen worden opgeslagen in je account, dus je ziet ze op elk apparaat waarop je inlogt.
 
-    >> Kan geen profiel verwijderen
-    Je moet minstens één profiel behouden. Maak eerst een ander profiel aan, en verwijder daarna het oude profiel.
-help-art-switch-profile-title = Hoe je profielen kunt wisselen
-help-art-switch-profile-summary = Verander wie bekeekt zonder van de pagina te verlaten.
-help-art-switch-profile-keywords = wisselen verander profiel wie bekeekt menu
+    @@ profiles
+
+    >> Ik kan een profiel niet verwijderen
+    Het hoofdprofiel, dat jouw voornaam draagt, kan niet worden verwijderd, en een account houdt altijd minstens één profiel. Alle andere profielen kun je verwijderen.
+
+help-art-switch-profile-title = Van profiel wisselen
+help-art-switch-profile-summary = Verander wie er kijkt zonder de pagina te verlaten.
+help-art-switch-profile-keywords = profiel wisselen ander profiel wie kijkt profielmenu
 help-art-switch-profile-body =
-    1. Open het profielenmenu in de bovenhoek van de pagina.
+    1. Open rechtsboven op de pagina het profielmenu. Tik op je telefoon op je profielafbeelding in de balk onderaan.
     2. Kies het profiel dat je wilt gebruiken.
-    3. Als het profiel een PIN heeft, typ dan de vier cijfers om verder te gaan.
+    3. Is het profiel vergrendeld, typ dan de pincode van 4 cijfers.
 
-    Aanbevelingen, <b>Mijn lijst</b> en <b>Verder bekijken</b> veranderen afhankelijk van het profiel dat je kiest.
+    Aanbevelingen, <b>Mijn lijst</b> en <b>Verder kijken</b> passen zich aan het gekozen profiel aan.
 
-    !! Opmerking: Je kunt een profiel met een PIN vergrendelen. Zie <a=/help/article/profile-pin>Hoe je een profiel-PIN toevoegt, bewerkt of verwijdert</a>.
+    !! Let op: Je kunt een profiel vergrendelen met een pincode. Zie <a=/help/article/profile-pin>Een profielpincode toevoegen, wijzigen of verwijderen</a>.
 
-    @@ profielen
-help-art-profile-pin-title = Hoe je een profiel-PIN toevoegt, bewerkt of verwijdert
-help-art-profile-pin-summary = Vergrendel een profiel met een viercijferige PIN zodat alleen de juiste persoon het kan openen.
-help-art-profile-pin-keywords = pin vergrendeling profiel vergrendeling code wachtwoord vier cijfers veilig
+    @@ profiles
+
+help-art-profile-pin-title = Een profielpincode toevoegen, wijzigen of verwijderen
+help-art-profile-pin-summary = Vergrendel een profiel met een pincode van 4 cijfers, zodat alleen de juiste persoon het kan openen.
+help-art-profile-pin-keywords = pincode pin vergrendeling profielvergrendeling code privé profiel beveiligen
 help-art-profile-pin-body =
-    Een profiel-PIN bestaat uit vier cijfers. Iedereen die het profiel kiest moet de PIN invoeren voordat het open gaat.
+    Een profielvergrendeling vraagt om een pincode van 4 cijfers voordat het profiel opent. De pincode hoort bij je account en werkt dus op elk apparaat waarop je inlogt.
 
-    ## Schakel een PIN in of wijzig deze
-    1. Open <b>Profielen beheren</b> en kies het profiel.
-    2. Schakel <b>Profielvergrendeling</b> in en typ vier cijfers.
-    3. Kies <b>Opslaan</b>.
+    ## Profielvergrendeling aanzetten
+    1. Open het profielmenu, kies <b>Account</b>, dan <b>Profielen beheren</b>, en kies het profiel.
+    2. Kies <b>Profielvergrendeling</b> en typ het wachtwoord van je account om te bevestigen dat jij het bent.
+    3. Typ vier cijfers en kies <b>Opslaan</b>.
 
-    ## Verwijder een PIN
-    1. Open <b>Profielen beheren</b> en kies het profiel, typ daarna de huidige PIN.
-    2. Schakel <b>Profielvergrendeling</b> uit en kies <b>Opslaan</b>.
+    Je kunt <b>Profielvergrendeling</b> ook aanzetten wanneer je een profiel toevoegt of bewerkt in <b>Profielen beheren</b>.
 
-    !! Opmerking: De PIN wordt opgeslagen op dit apparaat en houdt anderen buiten een profiel op deze browser. Het is geen sterke vergrendeling tegen iemand die je browser-instellingen kan openen. Als je hem vergeten bent, zie <a=/help/article/forgot-pin>Ik heb mijn profiel-PIN vergeten</a>.
+    ## De pincode wijzigen of verwijderen
+    1. Open <b>Profielvergrendeling</b> van het profiel, zoals hierboven.
+    2. Kies <b>PIN wijzigen</b>, of <b>Profielvergrendeling verwijderen</b> en typ de huidige pincode.
 
-    @@ profielen
-help-art-kids-profile-title = Hoe je een profiel voor kinderen maakt
-help-art-kids-profile-summary = Een Kids-profiel toont titels die zijn gekozen voor jongere kijkers en houdt de rest buiten bereik.
-help-art-kids-profile-keywords = kinderen kinderen kind familie ouderlijke controle veilig jong profiel
+    !! Let op: Na te veel verkeerde pogingen blijft het profiel een tijdje vergrendeld. Ben je de pincode vergeten, zie dan <a=/help/article/forgot-pin>Ik ben de pincode van mijn profiel vergeten</a>.
+
+    @@ profiles
+
+help-art-kids-profile-title = Een profiel voor kinderen maken
+help-art-kids-profile-summary = Een kinderprofiel toont titels voor kinderen en houdt al het andere buiten bereik.
+help-art-kids-profile-keywords = kinderprofiel kinderen kids veilig leeftijd ouders
 help-art-kids-profile-body =
-    Een Kids-profiel beperkt wat wordt getoond tot titels die geschikt zijn voor jongere kijkers en verwijdert rijen met volwassen inhoud van de pagina's.
+    Een kinderprofiel toont alleen titels die geschikt zijn voor kinderen, met een eigen startpagina en menu's voor kinderen.
 
     1. Open <b>Profielen beheren</b> en kies <b>Profiel toevoegen</b>.
-    2. Schakel <b>Kids-modus</b> in voor dit profiel.
-    3. Kies een naam en icoon, daarna <b>Opslaan</b>.
+    2. Typ een naam en zet <b>Kinderprofiel</b> aan.
+    3. Kies <b>Opslaan</b>.
 
-    Om een kind te voorkomen dat het overgaat naar een ander profiel, zet een PIN op elk volwassen profiel. Zie <a=/help/article/profile-pin>Hoe je een profiel-PIN toevoegt, bewerkt of verwijdert</a>.
+    Wil je van een bestaand profiel een kinderprofiel maken, bewerk het dan en zet <b>Kinderprofiel</b> aan. Het hoofdprofiel kan geen kinderprofiel zijn.
 
-    !! Opmerking: Titels komen van onafhankelijke bronnen en niet elke titel heeft een beoordeling. Een Kids-profiel beperkt wat een kind kan vinden. Het vervangt niet het samen kijken.
+    Kies <b>Kids verlaten</b> en daarna een ander profiel om de kinderpagina's te verlaten. Wil je niet dat een kind van profiel wisselt, vergrendel de andere profielen dan met een pincode. Zie <a=/help/article/profile-pin>Een profielpincode toevoegen, wijzigen of verwijderen</a>.
 
-    @@ profielen
+    Voor oudere kinderen kun je in plaats daarvan op elk profiel een leeftijdsclassificatie instellen. Zie <a=/help/article/parental-controls>Ouderlijk toezicht: leeftijdsclassificaties en geblokkeerde titels</a>.
+
+    !! Let op: Titels komen van onafhankelijke bronnen en niet elke titel heeft een leeftijdsclassificatie. Een kinderprofiel beperkt wat een kind kan vinden, maar is geen vervanging voor samen kijken.
+
+    @@ profiles
+
 help-art-need-account-title = Heb ik een account nodig?
-help-art-need-account-summary = Je kunt bladeren en kijken zonder er een te hebben. Hier is wat een account toevoegt.
-help-art-need-account-keywords = account aanmelden registreren inloggen vereist lidmaatschap
+help-art-need-account-summary = Ja, een gratis account. Dit bewaart het voor je.
+help-art-need-account-keywords = account nodig gratis aanmelden registreren account maken
 help-art-need-account-body =
-    Je hoeft geen account te hebben om te bladeren, te zoeken of te bekijken op { $brand }.
+    Ja. Je hebt een gratis account nodig om op { $brand } te kijken. Je maakt het in een minuut aan en er wordt nooit om betaalgegevens gevraagd.
 
-    Vandaag worden je profielen, lijst en beeldschermverloop opgeslagen in deze browser op dit apparaat. Accounts die ze op verschillende apparaten in synk houden worden opgebouwd. Tot die beschikbaar zijn, is de inlogpagina een voorbeeld en maakt ze geen echte account aan.
+    1. Vul op de startpagina van { $brand } je e-mailadres in en kies <b>Aan de slag</b>.
+    2. Vul je voor- en achternaam in en kies een wachtwoord van minstens 8 tekens.
+    3. Open de link die we je mailen om je adres te bevestigen en log daarna in.
 
-    !! Opmerking: { $brand } vraagt nooit een kaartnummer om een account aan te maken. Zie <a=/help/article/free-to-use>Is { $brand } gratis?</a>
+    Je account bewaart je profielen, Mijn lijst, je beoordelingen, je kijkactiviteit en je instellingen, zodat alles hetzelfde is op elk apparaat waarop je inlogt. Je voornaam wordt de naam van je hoofdprofiel.
+
+    !! Let op: { $brand } is gratis en vraagt nooit om een kaartnummer. Zie <a=/help/article/free-to-use>Is { $brand } gratis?</a>
+
 help-art-sign-in-title = Inloggen en uitloggen
-help-art-sign-in-summary = Wat de inlogpagina doet en wat je moet doen als het niet werkt zoals verwacht.
-help-art-sign-in-keywords = inloggen aanmelden inloggen uitloggen wachtwoord e-mail kan niet inloggen
+help-art-sign-in-summary = Inloggen met je e-mailadres en wachtwoord, ingelogd blijven en uitloggen.
+help-art-sign-in-keywords = inloggen uitloggen aanmelden afmelden onthoud mij wachtwoord account
 help-art-sign-in-body =
-    De inlogpagina is een voorbeeld van de accounts die opgebouwd worden. Kiezen om door te gaan brengt je naar je profielen op dit apparaat. Een wachtwoord of e-mail wordt nog niet gecontroleerd.
+    ## Inloggen
+    1. Kies <b>Inloggen</b> bovenaan de startpagina van { $brand }.
+    2. Vul je e-mailadres en wachtwoord in en kies <b>Inloggen</b>.
+
+    Laat <b>Onthoud mij</b> aan staan om op dit apparaat ingelogd te blijven. Ben je kort geleden uitgelogd op dit apparaat, dan kun je verder zonder je wachtwoord opnieuw te typen.
 
     ## Uitloggen
-    Open het profielmenu en kies <b>Uitloggen</b>. Je opgeslagen profielen blijven op dit apparaat.
+    Open het profielmenu en kies <b>Uitloggen bij { $brand }</b>. Wil je overal tegelijk uitloggen, zie dan <a=/help/article/devices-sign-out>Uitloggen op één apparaat of op alle apparaten</a>.
 
-    ## Inloggen werkt niet
-    - Ververs de pagina en probeer opnieuw.
-    - Zorg ervoor dat de browser toestaat dat deze site gegevens opslaat. Zie <a=/help/article/saved-data>Waar je profielen, lijst en vooruitgang worden opgeslagen</a>.
-    - Als het probleem doorgaat, schrijf ons vanaf de <a=/help/contact>Contact Us</a> pagina.
-help-art-saved-data-title = Waar je profielen, lijst en vooruitgang worden opgeslagen
-help-art-saved-data-summary = Profielen, PINs en beeldschermverloop leven in deze browser, op dit apparaat.
-help-art-saved-data-keywords = opgeslagen gegevens opslag lokale browser apparaat verloren synchroon vooruitgang geschiedenis profielen cookies
+    ## Inloggen lukt niet
+    - Controleer of je e-mailadres goed gespeld is. Het wachtwoord is hoofdlettergevoelig.
+    - Heb je je net aangemeld, open dan eerst de bevestigingslink die we je mailden. <b>Bevestigingsmail opnieuw sturen</b> stuurt een nieuwe.
+    - Wacht na te veel pogingen een minuut en probeer het opnieuw.
+    - Wachtwoord vergeten? Zie <a=/help/article/forgot-password>Ik ben mijn wachtwoord vergeten</a>.
+
+help-art-saved-data-title = Waar je profielen, lijst en voortgang worden opgeslagen
+help-art-saved-data-summary = Je account bewaart ze, en elke browser houdt een kopie zodat pagina's snel openen.
+help-art-saved-data-keywords = opgeslagen gegevens account synchroniseren apparaten browser kopie voortgang lijst
 help-art-saved-data-body =
-    { $brand } houdt je profielen, PINs en beeldschermverloop opgeslagen in de lokale opslag van je browser op het apparaat dat je gebruikt. Niets van dit alles wordt nog op een account geupload.
+    Je profielen, Mijn lijst, je beoordelingen, je kijkactiviteit en je instellingen worden opgeslagen in je account. Elke browser waarin je inlogt houdt een kopie, zodat pagina's meteen openen en een tijdje zonder verbinding werken. Wijzigingen komen binnen een paar seconden in je account en op je andere apparaten zodra je { $brand } daar opent.
 
     ## Wat dit betekent
-    - Een andere browser of apparaat begint zonder profielen en zonder vooruitgang.
-    - Privé of incognito vensters vergeten alles als ze worden gesloten.
-    - Het wissen van sitegegevens in je browser verwijdert je profielen en vooruitgang.
-    - Je lijst blijft bestaan tot de pagina open is totdat accounts beschikbaar zijn.
+    - Log in op een ander apparaat en alles staat er.
+    - Wis je de sitegegevens in een browser, dan ben je daar uitgelogd en is die kopie weg. Je account bewaart alles.
+    - In een privévenster wordt de kopie verwijderd zodra je het venster sluit.
 
-    ## Wat wordt gestuurd naar onze servers
-    Wanneer je een titel opent of start, vertelt de app aan het aanbevelingsdienst welke titel het was, met een willekeurige sessie nummer dat niet gekoppeld is aan je naam. Rijen passen zich aan voor ongeveer een dag na je stop. Zie <a=/help/article/recommendations>Hoe aanbevelingen werken</a>.
+    ## Wat er verder naar onze servers gaat
+    Als je een titel start, weet de aanbevelingsdienst welke, zodat je rijen je smaak volgen. Je kunt dit uitzetten met <b>Persoonlijke aanbevelingen</b> in <b>Privacy- en gegevensinstellingen</b>. Zie <a=/help/article/recommendations>Hoe aanbevelingen werken</a>.
 
     @@ data
-help-art-clear-data-title = Hoe je je opgeslagen gegevens kunt wissen
-help-art-clear-data-summary = Verwijder je profielen, PINs en bekeken items van deze browser.
-help-art-clear-data-keywords = verwijderen wissen resetten verwijderen gegevens geschiedenis cache opslag cookies opnieuw beginnen
+
+help-art-clear-data-title = Je opgeslagen gegevens wissen
+help-art-clear-data-summary = Verwijder wat deze browser voor { $brand } bewaart, of wis gegevens uit je account.
+help-art-clear-data-keywords = gegevens wissen sitegegevens cookies verwijderen browser uitloggen
 help-art-clear-data-body =
-    Het verwijderen van sitegegevens verwijdert elke profiel, PIN en bekeken item dat { $brand } opgeslagen heeft in deze browser. Dit kan niet ongedaan worden gemaakt.
+    Wis je de sitegegevens in een browser, dan ben je daar uitgelogd en verdwijnt de kopie van je profielen en instellingen die die browser bewaart. Alles blijft in je account en komt terug als je opnieuw inlogt.
 
     ## Chrome, Edge en Brave
-    1. Open het informatieicoon van de site in de adresbalk en kies <b>Cookies en sitegegevens</b>, dan <b>Beheren op-apparaat sitegegevens</b>.
-    2. Verwijder de ingang voor deze site.
+    1. Kies het pictogram met site-informatie links in de adresbalk en kies <b>Cookies en sitegegevens</b>, daarna <b>Sitegegevens op het apparaat beheren</b>.
+    2. Verwijder de items van deze site.
 
     ## Firefox
-    1. Open het sloticoon in de adresbalk en kies <b>Wissen van cookies en sitegegevens</b>.
+    1. Kies het slotje in de adresbalk en kies <b>Cookies en websitegegevens wissen</b>.
 
-    ## Safari
-    1. Open <b>Instellingen</b>, dan <b>Privacy</b>, dan <b>Beheren websitegegevens</b>.
-    2. Zoek deze site en kies <b>Verwijderen</b>.
+    ## Safari op een Mac
+    1. Open <b>Safari</b>, dan <b>Instellingen</b>, <b>Privacy</b> en <b>Beheer websitegegevens</b>.
+    2. Zoek deze site en kies <b>Verwijder</b>.
 
-    Om alleen de bekeken geschiedenis te verwijderen, zie <a=/help/article/viewing-history>Hoe je je bekeken geschiedenis kunt beheren</a>.
+    ## Safari op iPhone en iPad
+    Open de app <b>Instellingen</b>, dan <b>Apps</b>, <b>Safari</b>, <b>Geavanceerd</b>, <b>Websitedata</b>, en verwijder deze site.
+
+    ## Gegevens uit je account wissen
+    - Om titels uit je kijkactiviteit te halen, zie <a=/help/article/viewing-history>Je kijkgeschiedenis beheren</a>.
+    - Om een profiel te verwijderen, zie <a=/help/article/profiles-manage>Profielen maken, bewerken of verwijderen</a>.
+    - Om alles te verwijderen, zie <a=/help/article/delete-account>Je account verwijderen</a>.
 
     @@ data
+
 help-art-privacy-data-title = Welke gegevens verzamelt { $brand }?
-help-art-privacy-data-summary = Een korte samenvatting van wat opgeslagen wordt, wat verzonden wordt en waar je de volledige beleid kunt lezen.
-help-art-privacy-data-keywords = privacy gegevens verzamelen persoonlijke informatie volgen verkopen delen cookies analyses
+help-art-privacy-data-summary = Een korte samenvatting van wat we bewaren, wat er wordt verstuurd en waar je het volledige beleid leest.
+help-art-privacy-data-keywords = privacy gegevens verzamelen persoonsgegevens beleid wat bewaren jullie
 help-art-privacy-data-body =
-    We verkopen geen persoonlijke gegevens. Hier is de kortere versie. De <a=/privacy>Privacybeleid</a> bevat de volledige tekst.
+    We verkopen geen persoonsgegevens en tonen geen advertenties. Hier is de korte versie. Het <a=/privacy>privacybeleid</a> heeft de volledige tekst.
 
-    ## Opgeslagen op je apparaat
-    Profielen, PINs, je gekozen taal en bekeken vooruitgang.
+    ## Wat je account bewaart
+    Je naam, je e-mailadres, een telefoonnummer als je dat toevoegt, je profielen, Mijn lijst, je beoordelingen, je kijkactiviteit en je instellingen, plus een lijst van recente inlogs en de apparaten waar die vandaan kwamen.
 
-    ## Verzonden wanneer je de app gebruikt
-    - Aanvragen voor titels, afbeeldingen en details gaan naar een catalogusdienst en naar onze aanbevelingsdienst.
-    - Wanneer je een titel opent of start, ontvangt de aanbevelingsdienst de titel en een willekeurige sessiecode. Het houdt een klein smaakproefprofiel in geheugen voor ongeveer een dag en gooit het dan weg.
-    - Afspelingsaanvragen gaan naar onafhankelijke derde partijen, die je IP-adres zien zoals elk website dat je bezoekt.
+    ## Wat er wordt verstuurd als je de app gebruikt
+    - Verzoeken om titels, afbeeldingen en details gaan naar een openbare filmcatalogus en naar onze aanbevelingsdienst.
+    - Als je een titel start, weet de aanbevelingsdienst welke, zodat je rijen je smaak volgen. Zet dit uit met <b>Persoonlijke aanbevelingen</b> in <b>Privacy- en gegevensinstellingen</b>.
+    - Video komt van onafhankelijke externe bronnen en trailers van YouTube. Zij zien je IP-adres, zoals elke website die je bezoekt.
 
-    Voor cookies, zie de <a=/cookies>Cookiebeleid</a>. Om te verwijderen wat opgeslagen is op je apparaat, zie <a=/help/article/clear-data>Hoe je je opgeslagen gegevens kunt wissen</a>.
+    ## Je keuzes
+    - Download een kopie van je gegevens. Zie <a=/help/article/download-data>Een kopie van je gegevens downloaden</a>.
+    - Verwijder je account wanneer je wilt. Zie <a=/help/article/delete-account>Je account verwijderen</a>.
+
+    Over cookies en browseropslag lees je meer in het <a=/cookies>cookiebeleid</a>.
 
     @@ cookies
 
     @@ data
+
 help-art-free-to-use-title = Is { $brand } gratis?
-help-art-free-to-use-summary = Er is niets om te betalen in { $brand }.
-help-art-free-to-use-keywords = gratis prijs kosten betalen betaling abonnement facturering kaart credit plan proefperiode
+help-art-free-to-use-summary = Bij { $brand } hoef je nergens voor te betalen.
+help-art-free-to-use-keywords = gratis kosten betalen abonnement prijs creditcard
 help-art-free-to-use-body =
-    { $brand } berekent geen kosten, draait geen abonnementen of vraagt om kaartgegevens. Er zijn geen abonnementen, proefperiodes of factureringstermijnen.
+    { $brand } rekent geen kosten, heeft geen abonnement en vraagt niet om kaartgegevens. Er zijn geen pakketten, proefperiodes of factuurdata.
 
-    Als een pagina, e-mail of bericht beweert dat het van { $brand } is en je om te betalen vraagt, is het niet van ons. Geef geen betalingsgegevens op. Stuur het naar <a=mailto:{ $help_email }>{ $help_email }</a> en we zullen het onderzoeken.
+    Doet een pagina, e-mail of bericht zich voor als { $brand } en vraagt het je te betalen, dan komt het niet van ons. Vul geen betaalgegevens in. Stuur het door naar <a=mailto:{ $help_email }>{ $help_email }</a>, dan zoeken we het uit.
 
-    { $brand } is een index van links naar titels die worden gehost door andere diensten. Of een dienst kosten inwerkt voor zijn eigen inhoud, is aan die dienst overgelaten. Zie <a=/help/article/sources>Van waar komen de titels</a>.
+    { $brand } is een overzicht van links naar titels die andere diensten aanbieden. Of een dienst geld vraagt voor zijn eigen inhoud, bepaalt die dienst zelf. Zie <a=/help/article/sources>Waar de titels vandaan komen</a>.
+
 help-art-wont-play-title = Een titel speelt niet af
-help-art-wont-play-summary = De snelste oplossingen wanneer de speler een fout toont, zwart blijft of nooit start.
-help-art-wont-play-keywords = niet afspelen niet af te spelen fout kan niet afspelen video mislukt laden spinner vast speler
+help-art-wont-play-summary = De snelste oplossingen als de speler een fout toont, zwart blijft of niet start.
+help-art-wont-play-keywords = speelt niet af werkt niet fout zwart scherm start niet
 help-art-wont-play-body =
     Probeer deze stappen op volgorde. Test na elke stap.
 
-    1. Herlaad de pagina. Een tijdelijke fout op de bron is de meest voorkomende oorzaak.
-    2. Kies een ander aflevering of start de titel opnieuw vanaf de detailspagina. De speler probeert de beschikbare bronnen één na één.
-    3. Schakel adblockers en privacyextensies uit voor deze site. Zie <a=/help/article/extensions-blockers>Extensies die de speler blokkeren</a>.
+    1. Laad de pagina opnieuw. Een tijdelijke storing bij de bron is de meest voorkomende oorzaak.
+    2. Kies een andere aflevering, of start de titel opnieuw vanuit het detailvenster. De speler probeert de beschikbare bronnen een voor een.
+    3. Zet adblockers en privacy-extensies uit voor deze site. Zie <a=/help/article/extensions-blockers>Extensies die de speler blokkeren</a>.
     4. Gebruik een actuele versie van Chrome, Edge, Firefox of Safari. Zie <a=/help/article/supported-browsers>Ondersteunde browsers</a>.
-    5. Verander van netwerk, bijvoorbeeld van Wi-Fi naar mobiele data, of schakel een VPN uit. Sommige bronnen weigeren bepaalde netwerken.
+    5. Wissel van netwerk, bijvoorbeeld van wifi naar mobiele data, of zet een VPN uit. Sommige bronnen weigeren bepaalde netwerken.
 
     @@ diagnostics
 
-    >> Nog steeds niet afspelen
-    Somme titels zijn niet beschikbaar vanaf welke bron dan ook op een gegeven moment. Probeer het later opnieuw. Als een populaire titel nooit afspelt, vertel ons welke titel op de <a=/help/article/report-bug>Probleem melden</a> pagina.
-help-art-playback-unavailable-title = { $brand } zegt "Playback Unavailable"
-help-art-playback-unavailable-summary = Wat het bericht betekent en wat je daarna moet doen.
-help-art-playback-unavailable-keywords = afspelen niet beschikbaar foutmelding niet mogelijk streamen providers niet ondersteund
+    >> Speelt nog steeds niet af
+    Sommige titels zijn op een bepaald moment bij geen enkele bron beschikbaar. Probeer het later opnieuw. Speelt een populaire titel nooit af, laat ons dan weten welke op de pagina <a=/help/article/report-bug>Een probleem melden</a>.
+
+help-art-playback-unavailable-title = { $brand } meldt "Afspelen niet beschikbaar"
+help-art-playback-unavailable-summary = Wat de melding betekent en wat je nu kunt doen.
+help-art-playback-unavailable-keywords = afspelen niet beschikbaar foutmelding bron geen stream
 help-art-playback-unavailable-body =
-    Je kunt <b>Playback Unavailable</b> of <b>Unable to stream video. All source providers were unavailable or unsupported by your browser.</b>
+    Je ziet misschien <b>Afspelen niet beschikbaar</b> of <b>Kan video niet streamen. Alle bronnen waren niet beschikbaar of worden niet ondersteund door je browser.</b>
 
-    Het betekent dat de speler elke bron heeft gevraagd die het kent voor deze titel en geen van hen heeft een stream geleverd die je browser kan afspelen.
+    Het betekent dat de speler elke bron die hij kent om deze titel heeft gevraagd, en dat geen enkele een stream gaf die je browser kan afspelen.
 
-    1. Wacht een minuut en druk op play opnieuw. Bronnen gaan omhoog en omlaag.
-    2. Zet blokkers uit. Zie <a=/help/article/extensions-blockers>Extensions die de speler blokkeren</a>.
-    3. Probeer een andere browser. Sommige streams hebben functies die ontbreken in oudere browsers.
-    4. Probeer een andere titel om te controleren of het probleem alleen deze titel is.
+    1. Wacht een minuut en druk opnieuw op afspelen. Bronnen gaan soms even plat.
+    2. Zet blokkeerders uit. Zie <a=/help/article/extensions-blockers>Extensies die de speler blokkeren</a>.
+    3. Probeer een andere browser. Sommige streams hebben functies nodig die oudere browsers missen.
+    4. Probeer een andere titel om te zien of het probleem alleen bij deze titel speelt.
 
-    Als dezelfde titel een dag lang mislukt, <a=/help/article/report-bug>vertel ons</a>. Voeg de titel, het jaar en de browser die je hebt gebruikt toe.
+    Mislukt dezelfde titel een hele dag, <a=/help/article/report-bug>Een probleem melden</a>. Vermeld de titel, het jaar en de browser die je gebruikte.
 
     @@ diagnostics
-help-art-black-screen-title = Zwarte scherm met geluid
-help-art-black-screen-summary = Het beeld is weg, maar je kunt de titel horen.
-help-art-black-screen-keywords = zwarte scherm geen beeld audio alleen video weg leeg groene scherm
+
+help-art-black-screen-title = Zwart beeld met geluid
+help-art-black-screen-summary = Het beeld ontbreekt, maar je hoort de titel wel.
+help-art-black-screen-keywords = zwart beeld zwart scherm geluid wel beeld niet hardwareversnelling
 help-art-black-screen-body =
-    1. Druk op <b>F</b> om het volledig scherm te verlaten en opnieuw in te gaan, of druk op <b>Esc</b> en speel opnieuw.
-    2. Herlaad de pagina.
-    3. Schakel hardwareversnelling uit in je browserinstellingen, start de browser opnieuw op en probeer het opnieuw.
-    4. Update je browser en grafische driver.
+    1. Druk op <b>F</b> om volledig scherm te verlaten en weer te openen, of druk op <b>Esc</b> en speel opnieuw af.
+    2. Laad de pagina opnieuw.
+    3. Zet hardwareversnelling uit in de instellingen van je browser, start de browser opnieuw en probeer het nog eens.
+    4. Werk je browser en je grafische driver bij.
     5. Probeer een andere browser.
 
-    !! Opmerking: Sommige browseruitbreidingen die de kleur van de pagina veranderen of media blokkeren, kunnen het beeld ook verbergen. Zie <a=/help/article/extensions-blockers>Extensions die de speler blokkeren</a>.
+    !! Let op: Sommige browserextensies die paginakleuren aanpassen of media blokkeren, kunnen het beeld ook verbergen. Zie <a=/help/article/extensions-blockers>Extensies die de speler blokkeren</a>.
 
     @@ diagnostics
-help-art-buffering-title = Bufferen, bevriezen of langzaam starten
-help-art-buffering-summary = Verbeter een stream die blijft pauzeren om te laden.
-help-art-buffering-keywords = bufferen lag langzaam bevriezen stotteren laden spinner verbindingssnelheid kwaliteit
+
+help-art-buffering-title = Bufferen, haperen of traag starten
+help-art-buffering-summary = Verbeter een stream die steeds stopt om te laden.
+help-art-buffering-keywords = bufferen haperen traag laden langzaam verbinding snelheid kwaliteit
 help-art-buffering-body =
-    Een stream pauzeert wanneer je verbinding data langzamer levert dan het video nodig heeft.
+    Een stream pauzeert als je verbinding de gegevens trager aanlevert dan de video nodig heeft.
 
     - Sluit andere tabbladen, downloads en apparaten die hetzelfde netwerk gebruiken.
-    - Ga dichter bij de router of gebruik een kabel.
-    - Pauzeer een minuut zodat de speler verder kan laden, dan druk je op play.
-    - Schakel een VPN uit, of kies een dichtere server in de VPN.
-    - Probeer het later opnieuw. Bronnen zijn langzamer tijdens drukke uren.
+    - Ga dichter bij de router zitten of gebruik een kabel.
+    - Pauzeer een minuut zodat de speler vooruit kan laden, en druk dan op afspelen.
+    - Zet een VPN uit, of kies een server die dichterbij is.
+    - Probeer het later opnieuw. Bronnen zijn op drukke momenten trager.
 
-    De bron bepaalt welke kwaliteitsniveau wordt aangeboden, dus het scherpheid van het beeld kan veranderen tijdens het afspelen.
+    De bron bepaalt welke kwaliteit er wordt aangeboden, dus de scherpte van het beeld kan tijdens het afspelen veranderen.
 
     @@ diagnostics
-help-art-subtitles-missing-title = Tekstversies ontbreken of niet in sync
-help-art-subtitles-missing-summary = Herstel tekstversies die niet verschijnen, het verkeerde taal of achter de spreker aan lopen.
-help-art-subtitles-missing-keywords = onderliggende tekst onjuiste taal niet synchroon vertraging cc tekst
-help-art-subtitles-missing-body =
-    1. Kies <b>Audio & Onderliggende tekst</b> in de speler en zorg ervoor dat een taal voor onderliggende tekst is geselecteerd.
-    2. Kies een ander track indien dit beschikbaar is. Tracks komen van de bron en verschillen per titel.
-    3. Stel je voorkeurstaal voor onderliggende tekst in <b>Instellingen</b>. Zie <a=/help/article/language>Hoe je de taal kunt veranderen</a>.
-    4. Indien de tekst te vroeg of te laat is, herlaad en speel opnieuw. Timing is ingesteld door de bron en wij kunnen dit niet aanpassen voor één titel.
 
-    Indien een titel helemaal geen onderliggende tekst heeft, heeft de bron geen onderliggende tekst geleverd.
+help-art-subtitles-missing-title = Ondertitels ontbreken of lopen niet gelijk
+help-art-subtitles-missing-summary = Los ondertitels op die niet verschijnen, in de verkeerde taal staan of achterlopen op wat er gezegd wordt.
+help-art-subtitles-missing-keywords = ondertitels ontbreken verkeerde taal niet synchroon vertraging
+help-art-subtitles-missing-body =
+    1. Kies <b>Audio & ondertitels</b> in de speler en controleer of er een ondertiteltaal is gekozen.
+    2. Kies een ander spoor als de lijst er een biedt. Sporen komen van de bron en verschillen per titel.
+    3. Stel de voorkeurstaal voor ondertitels van het profiel in. Zie <a=/help/article/language>De taal veranderen</a>.
+    4. Lopen de ondertitels voor of achter, gebruik dan <b>-0.5s</b> of <b>+0.5s</b> in <b>Audio & ondertitels</b> tot ze gelijklopen met wat er gezegd wordt.
+
+    Heeft een titel helemaal geen ondertitels, dan levert de bron ze niet.
 
     @@ language
+
 help-art-supported-browsers-title = Ondersteunde browsers
-help-art-supported-browsers-summary = Welke browsers en versies werken het beste.
-help-art-supported-browsers-keywords = browser chrome firefox safari edge brave opera internet explorer versie update compatibel
+help-art-supported-browsers-summary = Welke browsers en systemen het best werken.
+help-art-supported-browsers-keywords = browser chrome firefox safari edge brave opera internet explorer versie bijwerken
 help-art-supported-browsers-body =
-    { $brand } werkt het beste in de huidige versies van deze browsers:
+    { $brand } werkt in actuele versies van deze browsers:
 
-    - Google Chrome en andere Chromium browsers zoals Edge en Brave
-    - Mozilla Firefox
-    - Apple Safari op macOS, iPhone en iPad
+    - <b>Google Chrome</b>, <b>Microsoft Edge</b>, <b>Brave</b> en andere Chromium-browsers op Windows, macOS, Linux en Android
+    - <b>Mozilla Firefox</b> op Windows, macOS, Linux en Android
+    - <b>Safari</b> op Mac, iPhone en iPad
 
-    Internet Explorer wordt niet ondersteund. Houd je browser up-to-date en stel in dat de site JavaScript en lokale opslag mag gebruiken.
+    Internet Explorer wordt niet ondersteund. Houd je browser up-to-date en sta de site JavaScript en sitegegevens toe.
 
     @@ diagnostics
 
-    >> De browser toont een fout voorafgaand aan het laden van de pagina
-    Herlaad met <b>Ctrl + Shift + R</b> (<b>Cmd + Shift + R</b> op een Mac) om de nieuwste versie van de app op te halen, en probeer het opnieuw.
-help-art-fix-phone-title = Een probleem oplossen op je telefoon of tablet
+    >> De browser toont een fout voordat de pagina laadt
+    Laad opnieuw met <b>Ctrl + Shift + R</b> op Windows en Linux, of <b>Cmd + Shift + R</b> op een Mac, om de nieuwste versie van de app op te halen, en probeer het opnieuw.
+
+help-art-fix-phone-title = Een probleem op je telefoon of tablet oplossen
 help-art-fix-phone-summary = Stappen voor iPhone, iPad en Android.
-help-art-fix-phone-keywords = telefoon tablet android iphone ipad mobiel probleem app
+help-art-fix-phone-keywords = telefoon tablet iphone ipad android mobiel probleem
 help-art-fix-phone-body =
-    1. Sluit de tab in en open { $brand } opnieuw.
-    2. Update je browser vanuit de app store.
-    3. Schakel data-saver of laag vermogen modus uit terwijl je kijkt.
-    4. Controleer dat je een stabiele verbinding hebt. Zie <a=/help/article/buffering>Buffering, bevriezen of langzaam starten</a>.
-    5. Indien je { $brand } hebt toegevoegd aan je startscherm en het eruitziet alsof het verouderd is, verwijder het en voeg het opnieuw toe. Zie <a=/help/article/install-app>Hoe je { $brand } kunt installeren als een app</a>.
+    1. Sluit het tabblad en open { $brand } opnieuw.
+    2. Werk je browser bij via de appwinkel.
+    3. Zet databesparing of de energiebesparingsmodus uit tijdens het kijken.
+    4. Controleer of je een stabiele verbinding hebt. Zie <a=/help/article/buffering>Bufferen, haperen of traag starten</a>.
+    5. Heb je { $brand } op je beginscherm gezet en ziet het er verouderd uit, verwijder het dan en zet het er opnieuw op. Zie <a=/help/article/install-app>{ $brand } als app installeren</a>.
 
     @@ diagnostics
 
     @@ refresh
-help-art-fix-tv-title = Een probleem oplossen op je TV
-help-art-fix-tv-summary = Stappen bij het kijken via een TV browser of cast.
-help-art-fix-tv-keywords = tv televisie smart tv chromecast cast probleem hdmi stick browser
+
+help-art-fix-tv-title = Een probleem op je tv oplossen
+help-art-fix-tv-summary = Stappen als je kijkt via de browser van je tv of door een tabblad te casten.
+help-art-fix-tv-keywords = tv televisie smart tv casten chromecast browser probleem
 help-art-fix-tv-body =
-    { $brand } heeft geen TV-app. Je kunt kijken via de webbrowser van je TV of door een browser-tab van een computer of telefoon te sturen.
+    { $brand } heeft geen tv-app. Je kijkt via de webbrowser van je tv, of door een browsertabblad vanaf een computer of telefoon te casten.
 
-    - Werk de software van de TV en de browser van de TV up-to-date.
-    - Herstart de TV of de streaming-stick.
-    - Als je een tab cast, houd het sturende apparaat op hetzelfde netwerk en sluit andere tabs daarop.
-    - Als de browser van de TV langzaam is, stuur de tab dan vanaf een computer in plaats daarvan.
+    - Werk de software van de tv en de browser bij.
+    - Start de tv of streamingstick opnieuw.
+    - Cast je een tabblad, houd het verzendende apparaat dan op hetzelfde netwerk en sluit daar andere tabbladen.
+    - Is de browser van de tv traag, cast het tabblad dan liever vanaf een computer.
 
-    Zie <a=/help/article/watch-on-tv>Hoe je kunt kijken op je TV</a>.
+    Zie <a=/help/article/watch-on-tv>Kijken op je tv</a>.
 
     @@ diagnostics
+
 help-art-extensions-blockers-title = Extensies die de speler blokkeren
-help-art-extensions-blockers-summary = Adblockers en privacytools kunnen een stream voorkomen dat laadt.
-help-art-extensions-blockers-keywords = extensie adblock ublock ghostery privacy blocker script blokkering vpn dns filter
+help-art-extensions-blockers-summary = Adblockers en privacytools kunnen voorkomen dat een stream laadt.
+help-art-extensions-blockers-keywords = extensie adblocker ublock ghostery privacy script blokkeren vpn dns filter
 help-art-extensions-blockers-body =
-    De speler laadt streams van derde partijen. Tools die scripts, frames of media van andere sites blokkeren, kunnen dit voorkomen.
+    De speler laadt streams van externe bronnen. Tools die scripts, frames of media van andere sites blokkeren, kunnen hem tegenhouden.
 
-    1. Open je extensie en pauzeer deze voor deze site, daarna herlaad je de pagina.
-    2. Als je een netwerkbrede filter gebruikt, zoals een DNS filter of een school- of werknetwerk, probeer dan een ander netwerk.
-    3. Als de afspeling daarna werkt, voeg { $brand } toe aan de toestaanlijst van de extensie.
+    1. Open je extensie en pauzeer haar voor deze site, en laad daarna opnieuw.
+    2. Gebruik je een filter voor het hele netwerk, zoals een DNS-filter of een school- of werknetwerk, probeer dan een ander netwerk.
+    3. Werkt afspelen daarna wel, zet { $brand } dan op de lijst met toegestane sites van de extensie.
 
-    !! Opmerking: We vragen nooit om een browser-extensie of codec te installeren om te kijken. Sluit elke pagina die dit doet.
+    !! Let op: We vragen je nooit om een browserextensie of codec te installeren om te kunnen kijken. Sluit elke pagina die dat wel doet.
 
     @@ diagnostics
+
 help-art-rows-wont-load-title = Rijen of afbeeldingen laden niet
-help-art-rows-wont-load-summary = De pagina toont lege rijen, een spinner of ontbrekende afbeeldingen.
-help-art-rows-wont-load-keywords = rijen leeg laden lege pagina afbeeldingen beelden posters niet laden home fout aanbevelingen down
+help-art-rows-wont-load-summary = De pagina toont lege rijen, een laadicoon of ontbrekende afbeeldingen.
+help-art-rows-wont-load-keywords = rijen leeg laden blanco pagina afbeeldingen posters laden niet startpagina fout aanbevelingen
 help-art-rows-wont-load-body =
-    De rijen op de startpagina komen van een aanbevelingsdienst. Posterbeelden en details komen van een catalogusdienst. Als een van beide niet bereikbaar is, zie je misschien lege rijen of een laden-spinner.
+    De rijen en het zoeken komen van onze aanbevelingsdienst. Posters en details komen uit een openbare filmcatalogus. Is een van beide onbereikbaar, dan zie je misschien lege rijen, een laadicoon of ontbrekende afbeeldingen.
 
-    1. Herlaad de pagina.
+    1. Laad de pagina opnieuw.
     2. Controleer je verbinding.
-    3. Schakel blokkers voor deze site uit. Zie <a=/help/article/extensions-blockers>Extensies die de speler blokkeren</a>.
-    4. Probeer het weer in een paar minuten.
+    3. Zet blokkeerders uit voor deze site. Zie <a=/help/article/extensions-blockers>Extensies die de speler blokkeren</a>.
+    4. Probeer het over een paar minuten opnieuw.
 
-    De zoekpagina en je opgeslagen items werken nog steeds als de aanbevelingsdienst niet werkt. Als het probleem langer dan een uur aanhoudt, <a=/help/article/report-bug>vertel ons</a>.
+    Je profielen, Mijn lijst en je instellingen zijn intussen veilig in je account. Duurt het probleem langer dan een uur, <a=/help/article/report-bug>Probleem melden</a>.
 
     @@ diagnostics
 
     @@ refresh
-help-art-list-missing-title = Mijn lijst of vooruitgang is verdwenen
-help-art-list-missing-summary = Waarom een lijst of de rij 'Verder kijken' leeg kan zijn en wat je kunt doen.
-help-art-list-missing-keywords = mijn lijst verdwenen weg leeg verloren verder kijken vooruitgang reset
+
+help-art-list-missing-title = Mijn lijst of voortgang is verdwenen
+help-art-list-missing-summary = Waarom Mijn lijst of Verder kijken leeg kan lijken, en hoe je ze terugkrijgt.
+help-art-list-missing-keywords = mijn lijst kwijt verdwenen leeg verder kijken voortgang
 help-art-list-missing-body =
-    { $brand } slaat profielen en vooruitgang op in deze browser. Ze zijn verloren wanneer:
+    Mijn lijst en je voortgang horen bij een profiel en worden opgeslagen in je account. Lijken ze leeg:
 
-    - je { $brand } opende in een andere browser of op een ander apparaat
-    - je een privé- of incognito-venster gebruikte
-    - je sitegegevens of cookies verwijderde
-    - je een ander profiel gebruikt
+    - Controleer of je in het juiste profiel zit. Elk profiel heeft een eigen lijst. Wissel via het profielmenu.
+    - Controleer of je bent ingelogd met hetzelfde account als eerst.
+    - Geef een nieuw apparaat na het inloggen een paar seconden om je account te laden, of laad de pagina opnieuw.
+    - Titels die je hebt verborgen in je kijkactiviteit verdwijnen ook uit Verder kijken.
 
-    Je lijst blijft alleen voor de tijd dat de pagina open is, omdat accounts die het opslaan nog niet beschikbaar zijn. Vernieuwen van de pagina leegt het.
+    Ontbreekt er op één apparaat nog steeds iets, log daar dan uit en weer in. Zie <a=/help/article/saved-data>Waar je profielen, lijst en voortgang worden opgeslagen</a>.
 
-    Switch naar het profiel dat je eerder gebruikte via het profielmenu. Zie <a=/help/article/saved-data>Waar je profielen, lijst en vooruitgang worden opgeslagen</a>.
+    @@ profiles
 
-    @@ profielen
-
-    @@ data
-help-art-forgot-pin-title = Ik heb mijn profiel-PIN vergeten
-help-art-forgot-pin-summary = PINs kunnen niet worden hersteld door ons, hier is hoe je terug kunt komen.
-help-art-forgot-pin-keywords = vergeten pin herstel verloren passcode vergrendeld profiel vergrendeling
+help-art-forgot-pin-title = Ik ben de pincode van mijn profiel vergeten
+help-art-forgot-pin-summary = Verwijder de pincode met het wachtwoord van je account en stel een nieuwe in.
+help-art-forgot-pin-keywords = pincode vergeten pin kwijt profielvergrendeling verwijderen
 help-art-forgot-pin-body =
-    Een PIN wordt alleen opgeslagen op je apparaat, dus wij kunnen het niet opzoeken of herstellen.
+    1. Open het profielmenu, kies <b>Account</b>, dan <b>Profielen beheren</b>, en kies het vergrendelde profiel.
+    2. Kies <b>Profielvergrendeling</b> en typ het wachtwoord van je account.
+    3. Kies <b>Heb je je PIN vergeten?</b> en daarna <b>Profielvergrendeling verwijderen</b>.
 
-    1. Probeer de PIN opnieuw, één cijfer per vakje.
-    2. Als je het niet meer weet, is de manier om terug te komen het verwijderen van de sitegegevens in je browser. Dit verwijdert alle profielen, PINs en kijkvooruitgang. Zie <a=/help/article/clear-data>Hoe je je opgeslagen gegevens kunt wissen</a>.
-    3. Maak je profielen opnieuw aan.
+    Het profiel opent weer zonder pincode en je kunt een nieuwe instellen. Zie <a=/help/article/profile-pin>Een profielpincode toevoegen, wijzigen of verwijderen</a>.
 
-    !! Opmerking: Kies een PIN die je kunt onthouden en gebruik deze niet voor iets anders.
+    !! Let op: Alleen wie het wachtwoord van het account kent, kan een pincode verwijderen. Ben je ook het wachtwoord vergeten, zie dan <a=/help/article/forgot-password>Ik ben mijn wachtwoord vergeten</a>.
 
-    @@ profielen
+    @@ profiles
 
-    @@ data
-help-art-page-not-found-title = Ik zie een "404" pagina
-help-art-page-not-found-summary = De link is fout of de pagina is verplaatst.
-help-art-page-not-found-keywords = 404 niet gevonden pagina ontbrekend gebroken link fout leeg
+help-art-forgot-password-title = Ik ben mijn wachtwoord vergeten
+help-art-forgot-password-summary = Krijg per e-mail een link om een nieuw wachtwoord te kiezen.
+help-art-forgot-password-keywords = wachtwoord vergeten wachtwoord resetten kwijt kan niet inloggen nieuw wachtwoord link
+help-art-forgot-password-body =
+    1. Kies op de inlogpagina <b>Wachtwoord vergeten?</b>
+    2. Vul het e-mailadres van je account in en kies <b>De link sturen</b>.
+    3. Open de e-mail van { $brand } en volg de link om een nieuw wachtwoord te kiezen.
+
+    De link werkt één keer en maar een beperkte tijd. Komt er na een paar minuten geen e-mail, kijk dan in je spammap en probeer het daarna opnieuw.
+
+    !! Let op: We vragen nooit om je wachtwoord via e-mail, chat of telefoon. Zie <a=/help/article/fake-sites>Nep-sites en nepberichten van { $brand } herkennen</a>.
+
+help-art-change-email-password-title = Je e-mailadres, wachtwoord of telefoonnummer wijzigen
+help-art-change-email-password-summary = Werk de gegevens bij waarmee je inlogt en je account terugkrijgt.
+help-art-change-email-password-keywords = e-mail wijzigen wachtwoord wijzigen wachtwoord bijwerken telefoonnummer mobiel accountgegevens naam beveiliging
+help-art-change-email-password-body =
+    Open het profielmenu en kies <b>Account</b>. Je gegevens staan onder <b>Accountgegevens</b>. Voor een wijziging vragen we je misschien om te bevestigen dat jij het bent, met je wachtwoord of met een code die we je mailen.
+
+    ## Wachtwoord
+    1. Kies <b>Wachtwoord</b>.
+    2. Typ je huidige wachtwoord en daarna twee keer het nieuwe. Het moet minstens 8 tekens hebben.
+    3. Zet <b>Uitloggen op alle apparaten</b> aan als iemand anders het oude wachtwoord kan kennen, en kies <b>Opslaan</b>.
+
+    ## E-mail
+    1. Kies <b>E-mail</b> en typ het nieuwe adres.
+    2. Open de link die we naar het nieuwe adres sturen om de wijziging af te ronden.
+
+    ## Mobiele telefoon en naam
+    Kies <b>Mobiele telefoon</b> om een nummer toe te voegen waarmee je weer in je account komt, of <b>Naam</b> om je naam te wijzigen. Het hoofdprofiel draagt je voornaam.
+
+help-art-devices-sign-out-title = Uitloggen op één apparaat of op alle apparaten
+help-art-devices-sign-out-summary = Zie waar je account is ingelogd en log uit op apparaten die je niet meer gebruikt.
+help-art-devices-sign-out-keywords = uitloggen alle apparaten ingelogde apparaten sessies beveiliging nieuw apparaat telefoon kwijt openbare computer
+help-art-devices-sign-out-body =
+    1. Open het profielmenu en kies <b>Account</b>.
+    2. Kies <b>Toegang en apparaten</b>.
+    3. Kies <b>Uitloggen op dit apparaat</b>, of <b>Uitloggen op alle apparaten</b> om uit te loggen in elke browser waarin je account open staat, ook deze.
+
+    <b>Recente beveiligingsactiviteit</b> op dezelfde pagina toont recente inlogpogingen en wijzigingen van je account. We mailen je ook als er op een nieuw apparaat wordt ingelogd.
+
+    !! Let op: Zie je een inlog die je niet herkent, log dan uit op alle apparaten en wijzig je wachtwoord. Zie <a=/help/article/change-email-password>Je e-mailadres, wachtwoord of telefoonnummer wijzigen</a>.
+
+help-art-download-data-title = Een kopie van je gegevens downloaden
+help-art-download-data-summary = Krijg een bestand met de persoonsgegevens die je account bewaart.
+help-art-download-data-keywords = mijn gegevens downloaden persoonsgegevens kopie exporteren avg inzageverzoek
+help-art-download-data-body =
+    1. Open het profielmenu en kies <b>Account</b>.
+    2. Kies <b>Toegang tot persoonlijke informatie</b>.
+    3. Volg de stappen om het bestand op te slaan.
+
+    Het bestand bevat je accountgegevens, profielen, instellingen, Mijn lijst, beoordelingen en kijkactiviteit. Het wordt op je apparaat opgeslagen, dus bewaar het op een veilige plek.
+
+    Wil je de kijkactiviteit van één profiel als spreadsheet downloaden, open dan <b>Kijkactiviteit</b> van dat profiel en kies <b>Alles downloaden</b>.
+
+help-art-delete-account-title = Je account verwijderen
+help-art-delete-account-summary = Verwijder je account en alles erin voorgoed.
+help-art-delete-account-keywords = account verwijderen account opzeggen account wissen gegevens wissen account sluiten
+help-art-delete-account-body =
+    Als je je account verwijdert, is het meteen weg, met alle profielen, lijsten, beoordelingen, instellingen en alle kijkactiviteit. Dit kan niet ongedaan worden gemaakt.
+
+    1. Open het profielmenu en kies <b>Account</b>.
+    2. Kies <b>Account verwijderen</b> onderaan de pagina.
+    3. Bevestig dat jij het bent en kies <b>Permanent verwijderen</b>.
+
+    Wil je maar één persoon weghalen, verwijder dan alleen diens profiel. Zie <a=/help/article/profiles-manage>Profielen maken, bewerken of verwijderen</a>.
+
+    !! Let op: Wil je een kopie van je gegevens houden, download die dan eerst. Zie <a=/help/article/download-data>Een kopie van je gegevens downloaden</a>.
+
+help-art-page-not-found-title = Ik zie een "404"-pagina
+help-art-page-not-found-summary = De link klopt niet of de pagina is verplaatst.
+help-art-page-not-found-keywords = 404 niet gevonden pagina bestaat niet kapotte link fout
 help-art-page-not-found-body =
-    Een 404-pagina betekent dat de adres niet ergens leidt op { $brand }. Controleer het adres op typfouten of gebruik het menu en de zoekfunctie om te zoeken naar wat je wilde.
+    Een 404-pagina betekent dat het adres nergens naartoe leidt op { $brand }. Controleer het adres op typfouten, of gebruik het menu en de zoekfunctie om te vinden wat je zocht.
 
-    - Gebruik <b>Home</b> in de bovenbalk om terug te gaan naar het begin.
-    - Gebruik de zoekfunctie van <a=/help>het Help Center</a> om een artikel te vinden.
-    - Als een link op { $brand } je hierheen leidde, <a=/help/article/report-bug>vertel ons</a> waar je het vond.
+    - Gebruik <b>Home</b> in de balk bovenaan om terug naar het begin te gaan.
+    - Gebruik de zoekfunctie van het <a=/help>Helpcentrum</a> om een artikel te vinden.
+    - Bracht een link op { $brand } je hier, <a=/help/article/report-bug>Een probleem melden</a> waar je die vond.
 
-    @@ vernieuwen
-help-art-language-title = Hoe je de taal kunt veranderen
-help-art-language-summary = Verander de taal van de interface en je voorkeur voor de taal van de onderliggende tekst.
-help-art-language-keywords = taal veranderen vertalen interface weergave onderliggende tekst audio engels spaans frans Arabisch
+    @@ refresh
+
+help-art-language-title = De taal veranderen
+help-art-language-summary = Verander de taal van { $brand } en de talen waarin je kijkt.
+help-art-language-keywords = taal veranderen weergavetaal ondertiteltaal audiotaal
 help-art-language-body =
-    ## Taal van de interface
-    1. Scroll naar de onderkant van elke Help Center-pagina en kies een taal in <b>Je voorkeurstaal selecteren</b>.
-    2. De pagina herlaadt in die taal. Je keuze wordt opgeslagen op dit apparaat.
+    ## Weergavetaal
+    1. Open het profielmenu, kies <b>Account</b>, dan <b>Profielen beheren</b>, en kies je profiel.
+    2. Kies <b>Talen</b>, dan <b>Weergavetaal</b>, en kies een taal.
 
-    Je kunt het ook wijzigen in <b>Instellingen</b>, onder <b>Talen</b>, dan <b>Toon taal</b>.
+    De keuze hoort bij het profiel en geldt dus op al je apparaten. In het Helpcentrum kun je ook onderaan elke pagina een taal kiezen.
 
-    ## Taal van de onder字
-    1. Open <b>Instellingen</b> en kies <b>Talen</b>.
-    2. Onder <b>Voorkeurstaal voor onder字</b> kies je een taal en kies <b>Voorkeuren opslaan</b>.
+    ## Audio- en ondertiteltaal
+    1. Open <b>Talen</b> van je profiel, zoals hierboven, en daarna <b>Audio en ondertitels</b>.
+    2. Kies een <b>Audiotaal</b> en een <b>Ondertiteltaal</b>. <b>Hetzelfde als de weergavetaal</b> volgt de taal van de app.
 
-    !! Opmerking: Alleen talen die volledig vertaald zijn, verschijnen in de lijst. Niet vertaalde tekst verschijnt in het Engels.
+    De speler gebruikt ze telkens als een titel ze aanbiedt.
 
-    @@ taal
-help-art-subtitles-title = Hoe je onder字, captions of de audio-taal kunt gebruiken
-help-art-subtitles-summary = Zet onder字 aan, kies een track en verander de uitstraling ervan.
-help-art-subtitles-keywords = onder字 captions cc audio-taal track grootte kleur uitstraling achtergrond
+    !! Let op: Alleen volledig vertaalde talen staan in de lijst.
+
+    @@ language
+
+help-art-subtitles-title = Ondertitels gebruiken of de audiotaal kiezen
+help-art-subtitles-summary = Zet ondertitels aan, kies een spoor en verander hoe ze eruitzien.
+help-art-subtitles-keywords = ondertitels aanzetten uitzetten taal grootte kleur weergave
 help-art-subtitles-body =
-    ## Zet onder字 aan of uit
-    1. Start een titel en beweeg de cursor over de speler, of tik op het scherm.
-    2. Kies <b>Audio & Onder字</b>.
-    3. Kies een onder字-taal of <b>Uit</b>.
+    ## Ondertitels aan- of uitzetten
+    1. Start een titel en beweeg de muis over de speler, of tik op het scherm.
+    2. Kies <b>Audio & ondertitels</b>.
+    3. Kies een ondertiteltaal, of <b>Uit</b>.
 
-    ## Verander de uitstraling van onder字
-    1. Open <b>Instellingen</b> en kies <b>Onder字-uitstraling</b>.
-    2. Kies een grootte en een kleur. De voorbeeldbalk boven de knoppen toont het resultaat.
-    3. Kies <b>Klaar</b>.
+    Komen de ondertitels te vroeg of te laat, gebruik dan <b>-0.5s</b> en <b>+0.5s</b> in hetzelfde paneel om ze te verschuiven.
 
-    !! Opmerking: Welke talen en audio-tracks beschikbaar zijn, hangt af van de bron van de titel. Zie <a=/help/article/subtitles-missing>Onder字 ontbreken of zijn uit de sync</a>.
-help-art-playback-speed-title = Hoe je de afspel-snelheid kunt veranderen
-help-art-playback-speed-summary = Kijk sneller of langzamer via de afspel-controles.
-help-art-playback-speed-keywords = snelheid sneller langzamer 2x 1.5x afspel-snelheid
-help-art-playback-speed-body =
-    1. Start een titel en laat de afspel-controles zien.
-    2. Kies de snelheid-knop in de onderste rechterhoek.
-    3. Kies een snelheid uit het menu.
+    ## Het uiterlijk van ondertitels veranderen
+    1. Open het profielmenu, kies <b>Account</b>, dan <b>Profielen beheren</b>, en kies je profiel.
+    2. Kies <b>Weergave van ondertitels</b>.
+    3. Kies de tekstgrootte, tekstkleur, rand, achtergrond en vensterkleur. Het voorbeeld laat het resultaat zien. <b>Standaard herstellen</b> maakt je wijzigingen ongedaan.
 
-    De snelheid geldt voor de titel die je aan het bekijken bent en gaat terug naar normaal voor de volgende.
-help-art-shortcuts-title = Toetsenbord sneltoetsen
-help-art-shortcuts-summary = Stuur de speler zonder muis.
-help-art-shortcuts-keywords = toetsenbord sneltoetsen toetsen space pijl volledig scherm stilstand volume overslaan terugspoelen sneltoetsen
+    !! Let op: Welke talen en audiosporen er zijn, hangt af van de bron van de titel. Zie <a=/help/article/subtitles-missing>Ondertitels ontbreken of lopen niet gelijk</a>.
+
+help-art-shortcuts-title = Sneltoetsen
+help-art-shortcuts-summary = Bedien de speler zonder muis.
+help-art-shortcuts-keywords = sneltoetsen toetsenbord spatie pauze volume volledig scherm
 help-art-shortcuts-body =
-    Deze toetsen werken terwijl een titel op een computer speelt.
+    Deze toetsen werken op een computer terwijl een titel speelt.
 
-    - <b>Space</b> of <b>K</b>: afspelen of pauzeren
-    - <b>Linkerpijl</b> of <b>J</b>: 10 seconden terug
-    - <b>Rechterpijl</b> of <b>L</b>: 10 seconden vooruit
-    - <b>Omhoogpijl</b> en <b>Nederspijl</b>: geluid hoger of lager
-    - <b>M</b>: geluid uitschakelen of inschakelen
+    - <b>Spatiebalk</b> of <b>K</b>: afspelen of pauzeren
+    - <b>Pijl links</b> of <b>J</b>: 10 seconden terug
+    - <b>Pijl rechts</b> of <b>L</b>: 10 seconden vooruit
+    - <b>Pijl omhoog</b> en <b>Pijl omlaag</b>: volume harder en zachter
+    - <b>M</b>: geluid uit of weer aan
     - <b>F</b>: volledig scherm aan of uit
-help-art-skip-intro-next-title = Intro overslaan en volgende aflevering
-help-art-skip-intro-next-summary = Spring over de openingssequentie of ga naar de volgende aflevering.
-help-art-skip-intro-next-keywords = skip intro next episode autoplay binge episodes season drawer
-help-art-skip-intro-next-body =
-    - <b>Skip Intro</b> verschijnt een paar seconden als de openingssequentie van een aflevering begint. Kies ervoor om naar de verhaallijn te springen.
-    - <b>Next Episode</b> in de spelercontroles start de volgende aflevering.
-    - <b>Episodes</b> opent een lijst van de seizoen, zodat je elke aflevering kunt kiezen.
 
-    Om te bepalen wat er gebeurt als een aflevering eindigt, open <b>Instellingen</b>, dan <b>Spelinstellingen</b>, en zet <b>Autoplay volgende aflevering</b> aan of uit.
-help-art-my-list-title = Hoe je My List kunt gebruiken
-help-art-my-list-summary = Sla titels op voor later en vind ze opnieuw.
-help-art-my-list-keywords = my list add remove watchlist save later favorites plus
+help-art-skip-intro-next-title = "Intro overslaan" en "Volgende aflevering"
+help-art-skip-intro-next-summary = Sla de intro over of ga door naar de volgende aflevering.
+help-art-skip-intro-next-keywords = intro overslaan volgende aflevering automatisch afspelen bingewatchen afleveringen seizoen
+help-art-skip-intro-next-body =
+    - <b>Intro overslaan</b> verschijnt een paar seconden als de intro van een aflevering begint. Kies het om meteen naar het verhaal te gaan.
+    - <b>Volgende aflevering</b> in de bediening van de speler start de volgende aflevering.
+    - <b>Afleveringen</b> opent een lijst van het seizoen, zodat je elke aflevering kunt kiezen.
+
+    Wil je bepalen wat er gebeurt als een aflevering afloopt, open dan de <b>Afspeelinstellingen</b> van je profiel en zet <b>Volgende aflevering automatisch afspelen</b> aan of uit.
+
+help-art-my-list-title = Mijn lijst gebruiken
+help-art-my-list-summary = Bewaar titels voor later en vind ze makkelijk terug.
+help-art-my-list-keywords = mijn lijst toevoegen verwijderen kijklijst bewaren later favorieten plus
 help-art-my-list-body =
     ## Een titel toevoegen
-    Kies de <b>+</b> knop op een titelkaart, in het detailvenster of in de hero bovenaan de pagina.
+    Kies de knop <b>+</b> op een titelkaart, in het detailvenster of bij de grote titel bovenaan de pagina.
 
     ## Een titel verwijderen
-    Kies het checkteken op de titel, wat het weer verandert in <b>+</b>.
+    Kies het vinkje bij de titel. Het wordt weer een <b>+</b>.
 
     ## Je lijst bekijken
-    Open <b>My List</b> in de bovenbalk. Op een telefoon is het in de onderbalk.
+    Open <b>Mijn Streams</b> in de balk bovenaan, of op je telefoon in de balk onderaan. Daar staat je lijst, naast <b>Verder kijken</b>, de titels die je leuk vond en de trailers die je hebt bekeken.
 
-    !! Opmerking: Voor nu blijft je lijst bestaan terwijl de pagina open is en wordt gereset bij een herladen. Het opslaan van je lijst in je profiel is onderdeel van de accounts werk. Zie <a=/help/article/list-missing>My List of progress is missing</a>.
-help-art-continue-watching-title = Hoe je Continue Watching kunt gebruiken
-help-art-continue-watching-summary = Ga verder waar je opgehouden hebt en verwijder titels uit de rij.
-help-art-continue-watching-keywords = continue watching resume progress remove row stopped half watched
+    Mijn lijst hoort bij het profiel en wordt in je account opgeslagen, dus hij is op elk apparaat hetzelfde.
+
+help-art-continue-watching-title = Verder kijken gebruiken
+help-art-continue-watching-summary = Ga verder waar je was gebleven en haal titels uit de rij.
+help-art-continue-watching-keywords = verder kijken hervatten voortgang verwijderen rij gestopt half gekeken
 help-art-continue-watching-body =
-    Titels die je begint, verschijnen in de <b>Verder kijken</b>-rij op de startpagina, met een voortgangsbalk die aangeeft hoe ver je bent gekomen.
+    Titels die je hebt gestart, staan in de rij <b>Verder kijken</b>, met een balk die laat zien hoe ver je bent. Je vindt de rij ook bij <b>Mijn Streams</b>.
 
-    ## Verderkijken
-    Selecteer de titel. Afspelen begint waar je opgehouden hebt.
+    ## Verder kijken
+    Kies de titel. Hij speelt verder waar je gebleven was, op elk apparaat waarop je inlogt.
 
-    ## Een titel uit de rij verwijderen
-    1. Open het optiesmenu op de titelkaart.
+    ## Een titel uit de rij halen
+    1. Open het optiemenu op de titelkaart.
     2. Kies <b>Verwijderen uit Verder kijken</b>.
 
-    De rij wordt gebouwd uit voortgang die opgeslagen is in deze browser, dus een ander apparaat heeft zijn eigen rij. Zie <a=/help/article/saved-data>Waar je profielen, lijst en voortgang opgeslagen worden</a>.
+    Wil je een titel ook uit je kijkactiviteit halen, zie dan <a=/help/article/viewing-history>Je kijkgeschiedenis beheren</a>.
 
-    @@ data
-help-art-viewing-history-title = Hoe je je bekeken geschiedenis beheert
-help-art-viewing-history-summary = Wat wordt opgenomen wanneer je kijkt en hoe je dat kunt verwijderen.
-help-art-viewing-history-keywords = bekeken geschiedenis bekeken activiteit verwijderen duiden duiden afbeelden beoordelingen aanbevelingen
+help-art-viewing-history-title = Je kijkgeschiedenis beheren
+help-art-viewing-history-summary = Wat er wordt bijgehouden als je kijkt en hoe je het verwijdert.
+help-art-viewing-history-keywords = kijkgeschiedenis kijkactiviteit verbergen verwijderen downloaden
 help-art-viewing-history-body =
-    { $brand } noteert de titels die je begint en hoe ver je hebt bekeken, in deze browser, zodat Verder kijken werkt en aanbevelingen je smaak kunnen volgen.
+    Elk profiel heeft een pagina <b>Kijkactiviteit</b> met de titels die het heeft bekeken, de nieuwste bovenaan. { $brand } gebruikt die voor Verder kijken en voor aanbevelingen.
 
-    - Om één titel uit de Verder kijken-rij te verbergen, zie <a=/help/article/continue-watching>Hoe je Verder kijken gebruikt</a>.
-    - Om alles te verwijderen, zie <a=/help/article/clear-data>Hoe je je opgeslagen gegevens kunt wissen</a>.
+    1. Open het profielmenu, kies <b>Account</b>, dan <b>Profielen beheren</b>, en kies het profiel.
+    2. Kies <b>Kijkactiviteit</b>.
+    3. Kies <b>Verberg deze titel</b> naast een titel, of <b>Alles verbergen</b>.
 
-    !! Opmerking: De <b>Bekeken activiteit</b>-pagina in <b>Instellingen</b> lijst nog geen titels.
+    Een verborgen titel verdwijnt uit Verder kijken en telt niet meer mee voor aanbevelingen, op al je apparaten. <b>Alles downloaden</b> bewaart de lijst als spreadsheet.
 
     @@ data
-help-art-notifications-title = Notificaties
-help-art-notifications-summary = Wat het belteken in de bovenste balk toont en hoe items als gelezen worden gemarkeerd.
-help-art-notifications-keywords = notificaties bel waarschuwingen nieuwe aankomende updates gelezen ongelezen
+
+help-art-notifications-title = Meldingen
+help-art-notifications-summary = Wat de bel in de balk bovenaan toont en hoe items als gelezen worden gemarkeerd.
+help-art-notifications-keywords = meldingen bel nieuw notificaties e-mail push
 help-art-notifications-body =
-    Het belteken in de bovenste balk lijst titels die waard zijn om te bekijken, zoals nieuwe aankomenden en populaire keuzes. Kies een item om de details van de titel te openen.
+    De bel in de balk bovenaan toont titels die de moeite waard zijn, zoals nieuwe en populaire titels. Kies een item om de details van de titel te openen.
 
-    Items die je hebt geopend worden als gelezen gemarkeerd. Dit wordt herinnerd in je browser. Het aantal op het belteken toont hoeveel items nog ongelezen zijn.
+    Items die je opent worden als gelezen gemarkeerd, en het getal op de bel laat zien hoeveel er nog ongelezen zijn.
 
-    Notificaties verschijnen alleen binnen { $brand }. We sturen geen e-mail of pushberichten over titels.
-help-art-search-browse-title = Hoe je zoekt en bladert
-help-art-search-browse-summary = Zoek een titel op naam, genre of stemming.
-help-art-search-browse-keywords = zoeken bladeren vinden genre films series categorie opzoeken titel acteur regisseur
+    De <b>Meldingsinstellingen</b> van je profiel hebben opties voor e-mail en pushmeldingen. Die worden met het profiel opgeslagen, maar { $brand } stuurt nog geen e-mails of pushmeldingen over titels. E-mails over je account, zoals inloglinks, komen altijd aan.
+
+help-art-search-browse-title = Zoeken en bladeren
+help-art-search-browse-summary = Vind een titel op naam, genre of sfeer.
+help-art-search-browse-keywords = zoeken bladeren titel acteur regisseur genre
 help-art-search-browse-body =
     ## Zoeken
-    1. Kies het vergrotensteken in de bovenbalk.
-    2. Typ een titel, een acteur of een regisseur.
-    3. Druk op <b>Enter</b> om alle overeenkomsten te zien.
+    1. Kies het vergrootglas in de balk bovenaan.
+    2. Typ een titel, acteur of regisseur. Resultaten verschijnen terwijl je typt, en kleine tikfouten zijn geen probleem.
 
     ## Bladeren
-    - <b>Reeksen</b> en <b>Films</b> in de bovenbalk openen een pagina voor elk soort titel. Gebruik <b>Genres</b> daar om het te verfijnen.
-    - Rijen op de startpagina zijn ingedeeld per thema, zoals een decennium en genre, of titels zoals een die je hebt bekeken.
-    - <b>Bladeren per taal</b> vindt titels op basis van de originele taal, dubbelzinnigheid of ondertiteling. Zie <a=/help/article/browse-language>Bladeren per taal</a>.
-help-art-browse-language-title = Bladeren per taal
-help-art-browse-language-summary = Zoek titels op basis van de originele taal, dubbelzinnigheid of ondertiteling.
-help-art-browse-language-keywords = bladeren per taal originele taal dubbelzinnigheid ondertiteling buitenlandse internationale anime koreaans Spaans
+    - <b>Series</b> en <b>Films</b> in de balk bovenaan openen een pagina per soort titel. Gebruik daar <b>Genres</b> om verder te filteren.
+    - Rijen op de startpagina zijn op thema gegroepeerd. Zie <a=/help/article/recommendations>Hoe aanbevelingen werken</a>.
+    - <b>Bladeren op taal</b> vindt titels op originele taal, nasynchronisatie of ondertitels. Zie <a=/help/article/browse-language>Bladeren op taal</a>.
+
+help-art-browse-language-title = Bladeren op taal
+help-art-browse-language-summary = Vind titels op originele taal, nasynchronisatie of ondertitels.
+help-art-browse-language-keywords = taal originele taal nasynchronisatie dubbing ondertitels
 help-art-browse-language-body =
-    1. Open <b>Bladeren per taal</b> in de bovenbalk.
-    2. Kies wat je wilt: <b>Originele taal</b>, <b>Dubbelzinnigheid</b> of <b>Ondertiteling</b>.
-    3. Kies een taal om overeenkomende titels te zien.
+    1. Open <b>Bladeren op taal</b> in de balk bovenaan.
+    2. Kies wat je zoekt: <b>Originele taal</b>, <b>Nasynchronisatie</b> of <b>Ondertitels</b>.
+    3. Kies een taal om de bijpassende titels te zien.
 
-    !! Opmerking: Beschikbaarheid van dubbelzinnigheid en ondertiteling hangt af van de bron. Een titel die hier wordt gelijst, kan minder tracks bieden wanneer je het speelt.
+    !! Let op: Of er nasynchronisatie en ondertitels zijn, hangt af van de bron. Een titel in deze lijst kan bij het afspelen minder sporen hebben.
+
 help-art-new-popular-title = Nieuw & Populair
-help-art-new-popular-summary = Zie wat er arriveert en wat mensen nu bekijken.
-help-art-new-popular-keywords = nieuw populair trending nieuwste top 10 binnenkort deze week
+help-art-new-popular-summary = Zie wat er binnenkomt en waar mensen nu naar kijken.
+help-art-new-popular-keywords = nieuw populair binnenkort trending nieuwe titels
 help-art-new-popular-body =
-    <b>Nieuw & Populair</b> in de bovenbalk lijst titels die recent of populair zijn. Open een titel voor zijn details, dan voeg je het toe aan <b>Mijn lijst</b> om het later te vinden.
+    <b>Nieuw & Populair</b> in de balk bovenaan toont recente en populaire titels. Open een titel voor de details en voeg hem toe aan <b>Mijn lijst</b> om hem later terug te vinden.
 
-    De lijsten worden vernieuwd vanuit het catalogus, dus ze veranderen dagelijks.
+    De lijsten worden ververst vanuit de catalogus en veranderen dus van dag tot dag.
+
 help-art-recommendations-title = Hoe aanbevelingen werken
-help-art-recommendations-summary = Hoe rijen worden gekozen en wat je kunt doen om ze te veranderen.
-help-art-recommendations-keywords = aanbevelingen rijen suggesties omdat je hebt bekeken smaak algoritme voor je persoonlijk persoonlijk
+help-art-recommendations-summary = Hoe de rijen ontstaan en wat ze verandert.
+help-art-recommendations-keywords = aanbevelingen rijen suggesties omdat je hebt bekeken smaak persoonlijk
 help-art-recommendations-body =
-    Rijen op de startpagina worden opgebouwd uit beschrijvingen, genres en credits van titels. Titels die dicht bij elkaar in betekenis staan, worden samengevoegd tot één rij, bijvoorbeeld een decennium en genre, of <b>Like</b> gevolgd door een titel die je hebt bekeken.
+    De rijen ontstaan uit wat titels zijn: hun genres, sfeer, onderwerpen, land en decennium, bijvoorbeeld <b>Feelgood romantische komedies</b> of <b>Koreaanse misdaadseries</b>. Binnen een rij volgt de volgorde jouw smaak.
 
-    ## Wat verandert je rijen
-    - Het starten van een titel. Het aanbevelingsdienst leert welke genres je gebruikt en aanpast de rijen voor ongeveer een dag.
-    - De profiel die je gebruikt. Een Kids-profiel toont alleen titels voor jongere kijkers.
+    ## Wat je rijen verandert
+    - Wat je start en afkijkt, wat je beoordeelt en wat je aan Mijn lijst toevoegt.
+    - Rijen zoals <b>Omdat je … hebt bekeken</b>, <b>Topkeuzes van vandaag voor jou</b> en <b>Om hierna te kijken</b> komen voort uit je recente titels. Op de pagina van een genre blijven ze binnen dat genre.
+    - Het profiel dat je gebruikt. Elk profiel heeft een eigen smaak, en een kinderprofiel toont alleen titels voor kinderen.
+    - De dag en het seizoen. Rijen voor feestdagen en evenementen verschijnen in hun seizoen.
 
-    ## Wat niet
-    Rijen worden niet beïnvloed door wat je betaalt, waar je woont of wie je bent. We gebruiken je naam of e-mail niet, omdat de service alleen een willekeurige sessie-nummer ziet. Zie <a=/help/article/privacy-data>Wat verzamelt { $brand }?</a>
+    ## Uitzetten
+    Zet <b>Persoonlijke aanbevelingen</b> uit in de <b>Privacy- en gegevensinstellingen</b> van je profiel. Dan zie je dezelfde suggesties als iedereen.
+
+    We gebruiken nooit je naam of e-mailadres om titels te kiezen. Zie <a=/help/article/privacy-data>Welke gegevens verzamelt { $brand }?</a>
 
     @@ data
+
 help-art-trailers-clips-title = Trailers en clips
-help-art-trailers-clips-summary = Een voorbeeld van een titel voordat je het kiest.
-help-art-trailers-clips-keywords = trailers clips voorbeeld korte video teaser geluid automatisch afspelen voorbeeld
+help-art-trailers-clips-summary = Bekijk een voorproefje voordat je begint.
+help-art-trailers-clips-keywords = trailers clips voorbeeld kort geluid automatisch afspelen
 help-art-trailers-clips-body =
-    - Beweeg de muis over een titelkaart op een computer, of open de details, om een trailervoorbeeld te zien.
-    - <b>Clips</b> toont korte verticale voorbeelden die je kunt scrollen.
-    - Gebruik de speaker-knop om het voorbeeldgeluid aan of uit te zetten. Je keuze wordt opgeslagen voor het profiel.
+    - Beweeg op een computer de muis over een titelkaart, of open de details, om een trailer te zien.
+    - <b>Clips</b> toont korte verticale voorbeelden waar je doorheen scrolt.
+    - Zet met de luidsprekerknop het geluid van voorbeelden aan of uit.
 
-    Om voorbeelden te stoppen die automatisch starten, open <b>Instellingen</b>, dan <b>Spelinstellingen</b>, en zet <b>Automatisch afspelen voorbeelden</b> uit.
+    Trailers worden afgespeeld via YouTube. Wil je niet dat voorbeelden vanzelf starten, zet dan <b>Voorbeelden automatisch afspelen</b> uit in de <b>Afspeelinstellingen</b> van je profiel.
+
 help-art-what-is-title = Wat is { $brand }?
-help-art-what-is-summary = Een korte beschrijving van { $brand } en wat het doet en niet doet.
-help-art-what-is-keywords = wat is over streams service uitleg index links catalogus netflix gelijk
+help-art-what-is-summary = Een korte beschrijving van { $brand }: wat het wel en niet doet.
+help-art-what-is-keywords = wat is streams dienst uitleg links catalogus
 help-art-what-is-body =
-    { $brand } helpt je om je volgende film of serie te vinden. Het leert wat je leuk vindt en organiseert het catalogus in rijen voor je, op een pagina die het voelt als de streamingdiensten die je kent.
+    { $brand } helpt je je volgende film of serie te vinden. Het leert wat je leuk vindt en zet de catalogus voor je in rijen, op een pagina die aanvoelt als de streamingdiensten die je kent.
 
-    { $brand } is een index van links. Het hostt of uploadt geen video. Wanneer je op speel drukt, vraagt de speler onafhankelijke bronnen om een stream en speelt de eerste die werkt. Zie <a=/help/article/sources>Van waar komen de titels?</a>.
+    { $brand } is een overzicht van links. Het host en uploadt geen video's. Druk je op afspelen, dan vraagt de speler onafhankelijke bronnen om een stream en speelt hij de eerste die werkt. Zie <a=/help/article/sources>Waar de titels vandaan komen</a>.
 
-    Er is niets te kopen en geen abonnement. Zie <a=/help/article/free-to-use>Is { $brand } gratis?</a>
-help-art-getting-started-title = Beginnen met { $brand }
-help-art-getting-started-summary = Je eerste vijf minuten: profielen, een titel vinden en het opslaan.
-help-art-getting-started-keywords = beginnen met beginnen eerste keer toer nieuwe gebruiker hoe te gebruiken handleiding basis
+    Er valt niets te kopen en er is geen abonnement. Zie <a=/help/article/free-to-use>Is { $brand } gratis?</a>
+
+help-art-getting-started-title = Aan de slag met { $brand }
+help-art-getting-started-summary = Je eerste vijf minuten: account, profielen, een titel vinden en bewaren.
+help-art-getting-started-keywords = aan de slag beginnen eerste keer uitleg nieuwe gebruiker basis
 help-art-getting-started-body =
-    1. <b>Kies of maak een profiel.</b> Zie <a=/help/article/profiles-manage>Hoe je profielen kunt maken, bewerken of verwijderen</a>.
-    2. <b>Blader door de startpagina.</b> Rijen zijn ingedeeld per thema, en het grote titel op de top verandert.
-    3. <b>Zoek</b> naar een titel met de vergrotingstool. Zie <a=/help/article/search-browse>Hoe je kunt zoeken en bladeren</a>.
-    4. <b>Kies een titel</b> om erover te lezen, de trailer te bekijken en speel te drukken.
-    5. <b>Voeg titels toe aan Mijn Lijst</b> met de <b>+</b> knop.
+    1. <b>Maak je gratis account aan.</b> Zie <a=/help/article/need-account>Heb ik een account nodig?</a>
+    2. <b>Kies of maak een profiel.</b> Zie <a=/help/article/profiles-manage>Profielen maken, bewerken of verwijderen</a>.
+    3. <b>Kijk rond op de startpagina.</b> Rijen zijn op thema gegroepeerd en de grote titel bovenaan wisselt.
+    4. <b>Zoek</b> met het vergrootglas naar een titel, acteur of regisseur. Zie <a=/help/article/search-browse>Zoeken en bladeren</a>.
+    5. <b>Kies een titel</b> om erover te lezen, de trailer te bekijken en af te spelen.
+    6. <b>Voeg titels toe aan Mijn lijst</b> met de knop <b>+</b>.
 
-    Leer de toetsen die je tijdens het kijken kunnen helpen: <a=/help/article/shortcuts>Toetsencombinaties</a>.
-help-art-sources-title = Van waar komen de titels?
-help-art-sources-summary = Hoe { $brand } streams vindt, en waarom een titel een dag werkt en de volgende niet.
-help-art-sources-keywords = bronnen leveranciers gehost links derde partij waarvan catalogus tmdb metadata beschikbaarheid
+    Leer de toetsen die helpen tijdens het kijken: <a=/help/article/shortcuts>Sneltoetsen</a>.
+
+help-art-sources-title = Waar de titels vandaan komen
+help-art-sources-summary = Hoe { $brand } streams vindt, en waarom een titel de ene dag werkt en de volgende niet.
+help-art-sources-keywords = bronnen waar komen titels vandaan stream werkt niet
 help-art-sources-body =
-    Details, posters en beoordelingen komen uit een openbare film- en tv-catalogus. Het video zelf zit niet op { $brand }. Wanneer je speelt, vraagt de speler onafhankelijke derde partijen om een stream.
+    Details, posters en beoordelingen komen uit een openbare film- en tv-catalogus. De video zelf staat niet op { $brand }. Druk je op afspelen, dan vraagt de speler onafhankelijke externe bronnen om een stream.
 
-    - Een titel kan beschikbaar zijn van één bron en niet van een andere.
-    - Een bron kan offline gaan zonder waarschuwing.
-    - Kwaliteit, audio-kanalen en ondertitels komen van de bron.
+    - Een titel kan bij de ene bron beschikbaar zijn en bij de andere niet.
+    - Een bron kan zonder waarschuwing offline gaan.
+    - Kwaliteit, audiosporen en ondertitels komen van de bron.
 
-    We controleren of checken die bronnen niet. Zie de <a=/disclaimer>Verklaring</a>. Als je een rechthebbende bent, zie <a=/help/article/copyright>Hoe je een auteursrechtprobleem kunt melden</a>.
+    We hebben geen controle over die bronnen en controleren ze niet. Zie de <a=/disclaimer>Disclaimer</a>. Ben je rechthebbende, zie dan <a=/help/article/copyright>Een auteursrechtprobleem melden</a>.
+
 help-art-contribute-title = Hoe kan ik bijdragen?
-help-art-contribute-summary = Ideas, fixes, translations and bug reports are welcome.
-help-art-contribute-keywords = bijdragen bijdragen vrijwilliger vertalen vertaling code github help verbeteren suggesties
+help-art-contribute-summary = Ideeën, verbeteringen, vertalingen en foutmeldingen zijn welkom.
+help-art-contribute-keywords = bijdragen helpen vertalen fouten melden ideeën
 help-art-contribute-body =
-    { $brand } is gebouwd in de open. Je kunt op verschillende manieren helpen:
+    { $brand } wordt in het openbaar gebouwd. Je kunt op verschillende manieren helpen:
 
-    - <b>Vertalingen.</b> Interface tekst leeft in platte tekst bestanden, één per taal, dus een vertaling is een tekstbestand dat je kunt bewerken.
-    - <b>Probleemmeldingen.</b> Zie <a=/help/article/report-bug>Een probleem melden</a>.
-    - <b>Fixes en functies.</b> Stuur een beschrijving of een patch.
-    - <b>Ideas.</b> Vertel ons wat je wenst dat de Help Center of de app zou doen.
+    - <b>Vertalingen.</b> De teksten van de interface staan in gewone tekstbestanden, één per taal. Een vertaling is dus een tekstbestand dat je kunt bewerken.
+    - <b>Foutmeldingen.</b> Zie <a=/help/article/report-bug>Een probleem melden</a>.
+    - <b>Verbeteringen en functies.</b> Stuur een beschrijving of een patch.
+    - <b>Ideeën.</b> Vertel ons wat je zou willen dat het Helpcentrum of de app deed.
 
-    Schrijf naar <a=mailto:{ $contribute_email }>{ $contribute_email }</a> met een paar regels over wat je wilt doen.
-help-art-install-app-title = Hoe installeer ik { $brand } als een app
-help-art-install-app-summary = Voeg { $brand } toe aan je startscherm of bureaublad zodat het opent in zijn eigen venster.
-help-art-install-app-keywords = installeren app pwa toevoegen aan startscherm bureaublad snelkoppeling icoon web app
+    Mail naar <a=mailto:{ $contribute_email }>{ $contribute_email }</a> met een paar regels over wat je wilt doen.
+
+help-art-install-app-title = { $brand } als app installeren
+help-art-install-app-summary = Zet { $brand } op je beginscherm, in het Dock of op je bureaublad, zodat het in een eigen venster opent.
+help-art-install-app-keywords = app installeren beginscherm dock bureaublad pwa
 help-art-install-app-body =
-    { $brand } is een webapp. Er is geen store download. Je browser kan het installeren zodat het opent in zijn eigen venster en een eigen icoon heeft.
+    { $brand } is een webapp. Je hoeft niets uit een winkel te downloaden. Je browser kan de app installeren, zodat hij in een eigen venster met een eigen pictogram opent.
 
-    ## Chrome en Edge op een computer
-    Kies het installatie icoon rechts van de adresbalk, of open het browser menu en kies <b>Installeer { $brand }</b>.
+    ## Chrome en Edge op Windows, Mac en Linux
+    Kies het installatiepictogram rechts in de adresbalk, of open het browsermenu en kies <b>{ $brand } installeren</b> (in Edge: <b>Apps</b> en dan <b>Deze site als app installeren</b>).
+
+    ## Safari op een Mac
+    Open het menu <b>Archief</b> en kies <b>Voeg toe aan Dock</b>.
 
     ## Android
-    Open het browser menu en kies <b>App installeren</b> of <b>Toevoegen aan Startscherm</b>.
+    Open het browsermenu en kies <b>App installeren</b> of <b>Toevoegen aan startscherm</b>.
 
     ## iPhone en iPad
-    In Safari, kies het <b>Deel</b> knopje, dan <b>Toevoegen aan Startscherm</b>.
+    Kies in Safari de knop <b>Deel</b> en daarna <b>Zet op beginscherm</b>.
 
-    !! Opmerking: Een geïnstalleerde app is hetzelfde website. Het update zichzelf en gebruikt dezelfde opgeslagen profielen als de browser waaruit het is geïnstalleerd.
-help-art-phone-tablet-title = Hoe { $brand } te gebruiken op je telefoon of tablet
-help-art-phone-tablet-summary = De mobiele lay-out, de onderste balk en tips voor kleine schermen.
-help-art-phone-tablet-keywords = telefoon tablet mobiel android iphone ipad touch onderste balk app lay-out
+    !! Let op: Firefox op een computer kan sites niet als app installeren. Gebruik een bladwijzer, of installeer via Chrome, Edge of Safari. Een geïnstalleerde app is dezelfde website: hij werkt zichzelf bij en houdt je ingelogd, net als de browser.
+
+help-art-phone-tablet-title = { $brand } gebruiken op je telefoon of tablet
+help-art-phone-tablet-summary = De mobiele indeling, de balk onderaan en tips voor kleine schermen.
+help-art-phone-tablet-keywords = telefoon tablet mobiel balk onderaan
 help-art-phone-tablet-body =
-    Open de site in je telefoonbrowser. De pagina schakelt over naar een lay-out die geschikt is voor touch, met een balk onderaan voor <b>Home</b>, <b>Clips</b>, <b>Zoeken</b> en <b>Mijn lijst</b>.
+    Open de site in de browser van je telefoon. De pagina schakelt over op een indeling voor aanraken, met onderaan een balk voor <b>Home</b>, <b>Clips</b>, <b>Zoeken</b> en <b>Mijn Streams</b>.
 
-    - Tik op een kaart voor de details, dan op de afspelknop om te starten.
-    - Draai de telefoon naar landschap voor het beste beeld.
-    - Om het te laten voelen als een app, zie <a=/help/article/install-app>Hoe { $brand } als app te installeren</a>.
-help-art-watch-on-tv-title = Hoe te kijken op je TV
-help-art-watch-on-tv-summary = Gebruik de browser van je TV, of stuur een browser-tab van een computer of telefoon.
-help-art-watch-on-tv-keywords = TV televisie slimme TV cast chromecast airplay hdmi fire stick grote scherm
+    - Tik op een kaart voor de details en dan op de afspeelknop om te starten.
+    - Draai je telefoon liggend voor het beste beeld.
+    - Wil je dat het als een app voelt, zie dan <a=/help/article/install-app>{ $brand } als app installeren</a>.
+
+help-art-watch-on-tv-title = Kijken op je tv
+help-art-watch-on-tv-summary = Gebruik de browser van je tv, of stuur een tabblad vanaf een computer of telefoon.
+help-art-watch-on-tv-keywords = tv kijken casten hdmi televisie browser
 help-art-watch-on-tv-body =
-    Er is nog geen { $brand } app voor TVs. Deze opties werken vandaag:
+    Er is nog geen { $brand }-app voor tv's. Deze opties werken nu al:
 
-    - <b>TV browser.</b> Open de { $brand } adres in de browser die bij je TV hoort.
-    - <b>Cast een tab.</b> In Chrome of Edge op een computer, open het browser menu en kies <b>Cast</b>, dan kies je je TV of streaming stick.
-    - <b>Kabel.</b> Verbind een laptop met de TV via een HDMI kabel en gebruik volledig scherm.
+    - <b>Browser van de tv.</b> Open het { $brand }-adres in de browser die op je tv staat.
+    - <b>Een tabblad casten.</b> Open in Chrome of Edge op een computer het browsermenu, kies <b>Casten</b> en kies dan je tv of streamingstick.
+    - <b>Kabel.</b> Sluit een laptop met een HDMI-kabel aan op de tv en gebruik volledig scherm.
 
-    Als het beeld of geluid niet goed is, zie <a=/help/article/fix-tv>Probleem oplossen op je TV</a>.
-help-art-copyright-title = Hoe een auteursrechtprobleem te melden
+    Klopt het beeld of geluid niet, zie dan <a=/help/article/fix-tv>Een probleem op je tv oplossen</a>.
+
+help-art-copyright-title = Een auteursrechtprobleem melden
 help-art-copyright-summary = Rechthebbenden kunnen vragen om een link te verwijderen.
-help-art-copyright-keywords = auteursrecht dmca takedown schending rechthebbende verwijderen melden notitie juridisch
+help-art-copyright-keywords = auteursrecht dmca verwijderen rechthebbende melding
 help-art-copyright-body =
-    { $brand } hostt geen video-bestanden. Het lijst links naar titels die worden gehost door andere services. Als je de rechten hebt aan een titel en je denkt dat een link deze rechten schendt, stuur dan een melding en we zullen dit onderzoeken.
+    { $brand } host geen videobestanden. Het toont links naar titels die bij andere diensten staan. Heb je de rechten op een titel en denk je dat een link daar inbreuk op maakt, stuur ons dan een melding, dan bekijken we die.
 
-    Een melding moet bevatten:
+    Een melding bevat:
     1. Je naam en contactgegevens.
-    2. Een beschrijving van het werk dat je bezit.
-    3. De URL van de pagina op { $brand } die naar het item leidt.
-    4. Een verklaring dat je de rechthebbende bent of dat je ermee wordt belast.
+    2. Een beschrijving van het werk waarop jij de rechten hebt.
+    3. Het adres van de pagina op { $brand } die ernaar linkt.
+    4. Een verklaring dat jij de rechthebbende bent of namens die mag optreden.
 
-    Stuur het naar <a=mailto:{ $help_email }>{ $help_email }</a> met onderwerp <b>DMCA melding</b>. Het volledige proces staat beschreven op de <a=/dmca>DMCA pagina</a>.
+    Stuur hem naar <a=mailto:{ $help_email }>{ $help_email }</a> met als onderwerp <b>DMCA-melding</b>. De volledige procedure staat op de <a=/dmca>DMCA-pagina</a>.
+
 help-art-title-feedback-title = Feedback over een titel op { $brand }
-help-art-title-feedback-summary = Meld een foutieve beschrijving, een ontbrekende titel of een titel die nooit speelt.
-help-art-title-feedback-keywords = feedback titel foutieve beschrijving ontbrekend aanvraag film serie toevoegen melden incorrect poster
+help-art-title-feedback-summary = Meld een verkeerde beschrijving, een ontbrekende titel of een titel die nooit afspeelt.
+help-art-title-feedback-keywords = feedback titel fout beschrijving ontbrekend seizoen
 help-art-title-feedback-body =
-    Schrijf naar <a=mailto:{ $help_email }>{ $help_email }</a> en voeg toe:
+    Mail naar <a=mailto:{ $help_email }>{ $help_email }</a> en vermeld:
 
     - de titel en het jaar
-    - de URL van de pagina op { $brand }
-    - wat fout is, bijvoorbeeld een foutieve afbeelding, een ontbrekende seizoen of een titel die nooit speelt
+    - het adres van de pagina op { $brand }
+    - wat er niet klopt, bijvoorbeeld een verkeerde poster, een ontbrekend seizoen of een titel die nooit afspeelt
 
-    De details komen uit een openbaar catalogus, dus een foutieve beschrijving is het beste gecorrigeerd aan de bron. We kunnen correcties doorgeven die we ontvangen.
-help-art-report-bug-title = Probleem melden
-help-art-report-bug-summary = Wat we moeten weten om een fout snel te vinden en te verhelpen.
-help-art-report-bug-keywords = melden fout probleem issue foutmelding crash gebroken niet werkt feedback contact
+    De details komen uit een openbare catalogus, dus een verkeerde beschrijving kun je het best bij de bron laten verbeteren. Correcties die we krijgen, geven we door.
+
+help-art-report-bug-title = Een probleem melden
+help-art-report-bug-summary = Wat je meestuurt zodat we een fout snel vinden en oplossen.
+help-art-report-bug-keywords = probleem melden fout bug contact
 help-art-report-bug-body =
-    Hoe meer we weten, hoe sneller kunnen we het verhelpen. Voeg het volgende toe:
+    Hoe meer we weten, hoe sneller we het oplossen. Vermeld:
 
     1. Wat je deed en wat je verwachtte.
-    2. Wat er in plaats daarvan gebeurde, en eventuele meldingen die je zag.
-    3. De titel, als het gaat om afspelen.
+    2. Wat er in plaats daarvan gebeurde, en welke melding je zag.
+    3. De titel, als het om afspelen gaat.
     4. Je apparaat en browser.
 
-    De <a=/help/contact>Contact Us</a> pagina heeft een knop die een e-mail openmaakt met je browsergegevens ingevuld.
+    Op de pagina <a=/help/contact>Contact</a> staat een knop die een e-mail opent met de gegevens van je browser al ingevuld.
 
     @@ diagnostics
+
 cookie-sheet = <b>{ $brand }</b> gebruikt cookies om je profielen en voorkeuren op te slaan en, als je dat toestaat, om aanbevelingen te personaliseren.
 cookie-learn = Leer meer
 cookie-reject = Afwijzen
@@ -882,7 +1018,7 @@ help-act-v-blocked = Geblokkeerd of vol
 help-act-v-reachable = Bereikbaar in { $ms } ms
 help-act-v-unreachable = Niet bereikbaar
 help-act-v-timeout = Geen antwoord in { $s } seconden
-help-act-data-title = Je gegevens op dit apparaat
+help-act-data-title = Je profielen en je kijkactiviteit
 help-act-data-profiles =
     { $count ->
         [one] 1 profiel
@@ -894,39 +1030,41 @@ help-act-data-progress =
        *[other] { $count } titels met opgeslagen voortgang
     }
 help-act-data-lang = Taal: { $lang }
-help-act-clear-progress = Voortgang wissen
+help-act-clear-progress = Alle kijkactiviteit verbergen
 help-act-reset-recs = Aanbevelingen resetten
-help-act-clear-all = Alle opgeslagen gegevens wissen
-help-act-confirm = Weet u het zeker? Dit kan niet ongedaan worden gemaakt.
+help-act-clear-all = Gegevens van deze browser wissen en uitloggen
+help-act-confirm = Weet je het zeker? Dit kan niet ongedaan worden gemaakt.
 help-act-yes = Ja, doe het
 help-act-cancel = Annuleren
 help-act-done = Klaar.
 help-act-reloading = Klaar. Herladen…
-help-act-profiles-title = Uw profielen
+help-act-profiles-title = Je profielen
 help-act-profile-kids = Kinderen
 help-act-profile-pin = PIN aan
 help-act-open-profiles = Open Wie kijkt wat?
 help-act-lang-current = Weergegeven: { $lang }
-help-act-lang-browser = Uw browser voorkeurt: { $lang }
+help-act-lang-browser = Je browser geeft de voorkeur aan: { $lang }
 help-act-lang-use-browser = Gebruik mijn browser-taal
-help-act-cookies-none = U heeft nog niet gekozen.
+help-act-cookies-none = Je hebt nog geen keuze gemaakt.
 help-act-cookies-on = Personalisatie is aan.
 help-act-cookies-off = Personalisatie is uit.
 help-act-cookies-open = Cookievoorkeuren openen
-help-act-refresh-body = Als een pagina verkeerd uit ziet of een fix nog niet bij u is gekomen, herlaad om de nieuwste versie van { $brand } op te halen.
+help-act-refresh-body = Ziet een pagina er verkeerd uit of is een oplossing nog niet bij je aangekomen? Laad dan opnieuw om de nieuwste versie van { $brand } op te halen.
 help-act-refresh-now = Nu herladen
 help-act-version = Versie { $version }
 nav-home = Home
-nav-series = Reeksen
+nav-browse = Bladeren
+nav-series = Series
 nav-films = Films
 nav-games = Spellen
 nav-new-popular = Nieuw & Populair
-nav-my-list = Mijn Lijst
-nav-browse-language = Blader per taal
+nav-my-list = Mijn Streams
+nav-browse-language = Bladeren op taal
 nav-new-hot = Nieuw & Hot
 nav-clips = Clips
 nav-search = Zoeken
 nav-kids = Kinderen
+nav-exit-kids = Kids verlaten
 nav-genres = Genres
 nav-categories = Categorieën
 tabs-everyone-watching = Iedereen kijkt
@@ -994,7 +1132,7 @@ media-cast = Cast:
 media-genres = Genres:
 media-this-show-is = Dit programma is:
 media-this-movie-is = Dit film is:
-media-episodes = Episodes
+media-episodes = Afleveringen
 media-no-description = Geen beschrijving beschikbaar.
 media-no-episodes = Geen episodes beschikbaar.
 media-more-like-this = Meer zoals dit
@@ -1014,7 +1152,7 @@ login-reason-place-title = Je plek nooit verliezen
 login-reason-hd-body = Geniet van schitterende beeldkwaliteit met HD en Ultra HD streams, aangedreven door de beste beschikbare bronnen.
 login-reason-subs-body = Kies uit 40+ talen. Stel lettergrootte, kleur en achtergrond aan je smaak aan.
 login-reason-place-body = Continue Watching neemt precies waar je gebleven bent — over elke show en seizoen, op elk apparaat.
-login-ready = Ready to watch? Enter your email to create or log in to your account.
+login-ready = Klaar om te kijken? Vul je e-mailadres in om een account aan te maken of in te loggen.
 search-results-for = Resultaten voor “{ $query }”
 search-no-matches = Geen overeenkomsten gevonden
 search-try-another = Probeer een ander zoekwoord.
@@ -1036,7 +1174,7 @@ player-back = Terug
 profile-manage = Profielen beheren
 profile-transfer = Profiel overbrengen
 profile-kids = Kinderprofiel
-profile-lock = Profiel vergrendelen
+profile-lock = Profielvergrendeling
 profile-choose-icon = Kies een icoon
 common-done = Klaar
 profile-pin-invalid = PIN moet exact 4 cijfers zijn.
@@ -1045,7 +1183,7 @@ player-pause = Pauseren (Space)
 player-play = Afspelen (Space)
 player-unmute = Uitschakelen (M)
 player-mute = Uitschakelen (M)
-player-error-no-source = Video kan niet worden gestreamd. Alle bronproviders waren onbeschikbaar of niet ondersteund door je browser.
+player-error-no-source = Kan video niet streamen. Alle bronnen waren niet beschikbaar of worden niet ondersteund door je browser.
 genre-action = Actie
 genre-anime = Anime
 genre-black-stories = Black Stories
@@ -1080,7 +1218,7 @@ genre-reality = Realiteit
 genre-sci-fi-fantasy = Sci-Fi & Fantasie
 genre-science-nature = Wetenschap & Natuur
 genre-sport = Sport
-genre-stand-up-chat-shows = Stand-up & Chat Shows
+genre-stand-up-chat-shows = Stand-up & talkshows
 genre-teen = Teen
 genre-us = VS
 genre-astrology = Astrologie
@@ -1122,7 +1260,7 @@ genre-war-politics = Oorlog & Politiek
 genre-tv-movie = TV-film
 profile-manage-title = Profielen beheren:
 profile-whos-watching = Wie kijkt?
-profile-sign-out = Afmelden bij { $brand }
+profile-sign-out = Uitloggen bij { $brand }
 profile-enter-pin = Voer je PIN in om toegang te krijgen tot { $name }'s profiel.
 profile-edit-title = Profiel bewerken
 profile-edit-hint = Vernieuw de naam, icoon en slot van dit profiel.
@@ -1155,43 +1293,45 @@ nf-zone-4 = Analog Corruptie
 nf-zone-5 = Lege Wachters
 nf-zone-6 = Cosmische Drift
 legal-privacy-title = Privacybeleid
-legal-privacy-updated = Laatst bijgewerkt: Augustus 2026
+legal-privacy-updated = Laatst bijgewerkt: oktober 2026
 legal-privacy-1-title = 1. Inleiding
-legal-privacy-1-body = { $brand } is een linkaggregator en zoekmachine. Dit Privacybeleid verklaart hoe we gegevens verzamelen, gebruiken en beschermen wanneer u onze service gebruikt.
+legal-privacy-1-body = { $brand } is een linkverzamelaar en zoekmachine. Dit privacybeleid legt uit hoe we je persoonsgegevens verzamelen, gebruiken en beschermen wanneer je onze dienst gebruikt.
 legal-privacy-2-title = 2. Wat We Verzamelen
 legal-privacy-2-body = We verzamelen beperkt persoonlijk informatie om de service te bieden en te verbeteren:
-legal-privacy-2-b1 = <strong>Accountinformatie:</strong> E-mailadres en weergave naam wanneer u een account aanmaakt.
-legal-privacy-2-b2 = <strong>Gebruiksinformatie:</strong> Anonieme kijkgeschiedenis en voorkeuren, beperkt tot uw profiel.
-legal-privacy-2-b3 = <strong>Sessiecookies:</strong> Gebruikt om u veilig ingelogd te houden.
+legal-privacy-2-b1 = <strong>Accountgegevens:</strong> je voor- en achternaam, je e-mailadres en je wachtwoord (door onze inlogdienst alleen versleuteld bewaard), en een mobiel nummer als je dat toevoegt.
+legal-privacy-2-b2 = <strong>Profielen en activiteit:</strong> je profielen en hun instellingen, Mijn lijst, je beoordelingen, je voortgang en je kijkactiviteit. Ze zijn aan je account gekoppeld, zodat ze je naar elk apparaat volgen.
+legal-privacy-2-b3 = <strong>Beveiligingslogboeken:</strong> recente inlogs en wijzigingen van je account, met de browser, het systeem en het land waar ze vandaan kwamen, zodat we je je apparaten kunnen tonen en je kunnen waarschuwen bij een nieuwe inlog.
+legal-privacy-2-b4 = <strong>Opslag op je apparaat:</strong> wat je ingelogd houdt, een kopie van je profielen en instellingen zodat pagina's snel openen, en je keuzes over cookies. Zie het cookiebeleid.
 legal-privacy-3-title = 3. Wat We Niet Doen
-legal-privacy-3-body = We zijn verplicht tot uw privacy:
-legal-privacy-3-b1 = <strong>Uw Gegevens Delen:</strong> We delen geen persoonlijke gegevens met advertentiebedrijven of data brokers.
-legal-privacy-3-b2 = <strong>Uw Gegevens Verkopen:</strong> We verkopen, lenen of handelen nooit persoonlijke gegevens aan derden.
-legal-privacy-3-b3 = <strong>Uw Browser Fingerprinten:</strong> We voeren geen browserfingerprinting of enige vorm van apparatenherkenning uit.
+legal-privacy-3-body = Je privacy is ons belangrijk:
+legal-privacy-3-b1 = <strong>Je gegevens delen:</strong> We delen geen persoonsgegevens met adverteerders of databrokers.
+legal-privacy-3-b2 = <strong>Je gegevens verkopen:</strong> We verkopen, verhuren of verhandelen nooit persoonsgegevens aan derden.
+legal-privacy-3-b3 = <strong>Je volgen:</strong> We gebruiken geen advertentie- of analysecookies, maken geen browser-fingerprints en volgen je niet op andere websites.
 legal-privacy-4-title = 4. Wetgevend Grondslag voor Verwerking (UK GDPR)
 legal-privacy-4-body = Onder de UK General Data Protection Regulation (UK GDPR) zijn de wetgevende grondslagen die we gebruiken voor het verwerken van deze informatie:
-legal-privacy-4-b1 = <strong>Contractueel Noodzakelijk:</strong> Om u de linkaggregatie en profielfuncties te geven die u hebt aangemeld.
-legal-privacy-4-b2 = <strong>Legitieme Interesses:</strong> Om algemene platformgebruik te analyseren en prestaties te verbeteren, met strikt anonieme, geaggregeerde gegevens.
-legal-privacy-5-title = 5. Hoe We Uw Gegevens Opslaan
-legal-privacy-5-body = Uw gegevens worden veilig opgeslagen met Supabase (onze backendinfrastructuurprovider). We gebruiken Row-Level Security (RLS) beleid om te zorgen dat alleen u toegang heeft tot uw gegevens.
+legal-privacy-4-b1 = <strong>Overeenkomst:</strong> om je account, je profielen en de functies die je gebruikt te leveren.
+legal-privacy-4-b2 = <strong>Gerechtvaardigd belang:</strong> om accounts te beveiligen (inloglogboeken) en de dienst te laten werken en te verbeteren.
+legal-privacy-4-b3 = <strong>Toestemming:</strong> om wat je kijkt te gebruiken voor persoonlijke aanbevelingen. Je kunt je toestemming altijd intrekken in Privacy- en gegevensinstellingen.
+legal-privacy-5-title = 5. Hoe we je gegevens opslaan
+legal-privacy-5-body = Je accountgegevens worden opgeslagen bij Supabase, onze databaseleverancier, met beveiliging per rij, zodat alleen jouw account ze kan lezen. Elke browser waarin je inlogt bewaart een kopie voor de snelheid. Verwijder je je account, dan worden de gegevens meteen verwijderd.
 legal-privacy-6-title = 6. Derden
-legal-privacy-6-body = We gebruiken derde partij API's, waaronder TMDB (voor metadata) en Cloudflare Turnstile (voor botbescherming). Deze diensten werken onder hun eigen privacybeleid.
+legal-privacy-6-body = We werken met deze leveranciers, elk met een eigen privacybeleid: Supabase (accounts en gegevensopslag), Cloudflare (hosting van de site en doorsturen van e-mail), Hugging Face (hosting van de aanbevelingsdienst), Resend (versturen van accountmails), TMDB (informatie en afbeeldingen van films en series) en YouTube (trailers). Video komt van onafhankelijke externe bronnen, die je IP-adres zien zoals elke website die je bezoekt.
 legal-privacy-7-title = 7. Je gegevensbeschermingsrechten
 legal-privacy-7-body = Onder UK GDPR heb je de volgende rechten:
-legal-privacy-7-b1 = <strong>Recht op toegang:</strong> Vraag een kopie aan van de persoonlijke gegevens die wij over je beschikken.
-legal-privacy-7-b2 = <strong>Recht op vergeten:</strong> Vraag het verwijderen van je persoonlijke gegevens (het "Recht op vergeten"). Je kunt je account direct verwijderen via de Instellingenpagina.
-legal-privacy-7-b3 = <strong>Recht op herstel:</strong> Vraag de correctie van enige onnauwkeurige persoonlijke gegevens die wij beschikken.
-legal-privacy-7-b4 = <strong>Recht op bezwaar:</strong> Bezig met het verwerken van je persoonlijke gegevens waar wij op legitieme belangen vertrouwen.
+legal-privacy-7-b1 = <strong>Recht op inzage:</strong> download op elk moment een kopie van je gegevens bij Account, onder Toegang tot persoonlijke informatie.
+legal-privacy-7-b2 = <strong>Recht op verwijdering:</strong> verwijder je account op elk moment bij Account, onder Account verwijderen. Alles erin wordt meteen verwijderd.
+legal-privacy-7-b3 = <strong>Recht op rectificatie:</strong> wijzig je naam, e-mailadres en telefoonnummer bij Account, of vraag ons om iets anders te corrigeren.
+legal-privacy-7-b4 = <strong>Recht van bezwaar:</strong> zet persoonlijke aanbevelingen uit, of schrijf ons om bezwaar te maken tegen verwerking op basis van gerechtvaardigd belang.
 legal-privacy-8-title = 8. Contact
-legal-privacy-8-body = Als je vragen hebt over deze Privacybeleid of wenst je je gegevensrechten uit te oefenen, neem dan contact op met de repository maintainer via { $support_email }.
+legal-privacy-8-body = Heb je vragen over dit privacybeleid of wil je je rechten gebruiken? Schrijf ons dan op { $support_email }.
 legal-terms-title = Gebruiksvoorwaarden
-legal-terms-updated = Laatst bijgewerkt: Augustus 2026
+legal-terms-updated = Laatst bijgewerkt: oktober 2026
 legal-terms-1-title = 1. Acceptatie van voorwaarden
 legal-terms-1-body = Door toegang te krijgen of te gebruiken tot { $brand }, stem je in met deze Gebruiksvoorwaarden en ons Privacybeleid. Als je het niet eens bent, gebruik dan niet de service.
 legal-terms-2-title = 2. Aard van de service
 legal-terms-2-body = { $brand } is een linkaggregator en zoekmachine. Wij hosten, uploaden, verzenden of beheren geen videocontent op onze servers. Alle media komt van derde partijplatforms.
 legal-terms-3-title = 3. Gebruikersaccounts
-legal-terms-3-body = Om bepaalde functies (zoals een watchlist opslaan of voortgang synchroniseren) te gebruiken, moet je een account aanmaken. Je bent verantwoordelijk voor de beveiliging van je accountgegevens.
+legal-terms-3-body = Je hebt een gratis account nodig om { $brand } te gebruiken. Jij bent verantwoordelijk voor een veilig wachtwoord en voor wat er met je account gebeurt. Laat het ons meteen weten als je denkt dat iemand anders het gebruikt.
 legal-terms-4-title = 4. Acceptabele Gebruik
 legal-terms-4-body = Je stemt ermee in niet te gebruiken de service voor:
 legal-terms-4-b1 = Om te omzeilen, uitschakelen of te storen met beveiligingsgerelateerde functies van de service.
@@ -1205,32 +1345,36 @@ legal-terms-6-body = De service wordt aangeboden "zoals is" en "zoals beschikbaa
 legal-terms-7-title = 7. Derdeninhoud
 legal-terms-7-body = { $brand } biedt toegang aan links naar inhoud die op onafhankelijke derde-partij servers wordt gehost. Wij hebben geen controle over en nemen geen verantwoordelijkheid voor de inhoud, privacybeleid of praktijken van enige derde-partij sites.
 legal-terms-8-title = 8. Beëindiging
-legal-terms-8-body = Wij behouden ons het recht voor om uw account en toegang tot de service op ons eigen initiatief te onderbreken of te beëindigen zonder voorafgaande kennisgeving, voor gedrag dat wij geloven dat het deze Voorwaarden overtreedt of schadelijk is voor andere gebruikers, ons of derde partijen.
+legal-terms-8-body = We kunnen je account en je toegang tot de dienst naar eigen inzicht en zonder voorafgaande melding opschorten of beëindigen bij gedrag dat volgens ons deze voorwaarden schendt of schadelijk is voor andere gebruikers, voor ons of voor derden.
 legal-terms-9-title = 9. Toepassende wet
 legal-terms-9-body = Deze Voorwaarden van Service worden beheerst en geïnterpreteerd volgens de wetten van Engeland en Wales, zonder rekening te houden met conflictwetgeving.
 legal-terms-10-title = 10. Contact
 legal-terms-10-body = Voor vragen over deze Voorwaarden van Service, neem dan contact met ons op via de Contactpagina.
 legal-cookie-policy-title = Cookiebeleid
-legal-cookie-policy-updated = Laatst gewijzigd: 16 augustus 2026
-legal-cookie-policy-1-title = Hoe we cookies gebruiken
-legal-cookie-policy-1-body = We gebruiken cookies en vergelijkbare trackingtechnologieën om de activiteit op onze service te volgen en bepaalde informatie op te slaan. Cookies zijn bestanden met een klein aantal gegevens die kunnen bevatten een anonieme unieke identificatiecode.
+legal-cookie-policy-updated = Laatst bijgewerkt: oktober 2026
+legal-cookie-policy-1-title = Hoe we cookies en opslag gebruiken
+legal-cookie-policy-1-body = { $brand } gebruikt geen advertentie- of analysecookies. We gebruiken de lokale opslag van je browser, een plek op je apparaat die alleen deze site kan lezen, voor:
+legal-cookie-policy-1-b1 = <strong>Inloggen:</strong> wat je in deze browser ingelogd houdt.
+legal-cookie-policy-1-b2 = <strong>Snelheid:</strong> een kopie van je profielen, instellingen en voortgang, zodat pagina's meteen openen.
+legal-cookie-policy-1-b3 = <strong>Je keuzes:</strong> je keuzes over cookies en personalisatie, en je weergavetaal.
+legal-cookie-policy-1-b4 = <strong>Andere sites:</strong> trailers worden afgespeeld via YouTube, dat tijdens het afspelen eigen cookies kan plaatsen. Je kunt je keuzes altijd veranderen in Privacy- en gegevensinstellingen. Wis je de gegevens van deze site in je browser, dan ben je in die browser uitgelogd; je account bewaart alles.
 legal-dmca-title = DMCA Safe Harbor Verklaring
 legal-dmca-updated = Laatst gewijzigd: Augustus 2026
 legal-dmca-1-title = 1. Onze rol — Link Aggregator, geen host
 legal-dmca-1-body = { $brand } is een linkaggregator en zoekmachine. We hosten, uploaden, opslaan, verzenden of beheren geen video- of media-inhoud. Alles wordt geserveerd vanaf servers van derden die volledig buiten onze controle vallen.
 legal-dmca-2-title = 2. Meldings- en verwijderingsprocedure
-legal-dmca-2-body = Als u een auteursrechtshouder bent, of een vertegenwoordiger die mag handelen in naam van een auteursrechtshouder, en u denkt dat een link in onze index uw auteursrecht schendt, stuur dan een schriftelijke melding naar { $support_email } met daarin:
+legal-dmca-2-body = Ben je eigenaar van een auteursrecht, of een vertegenwoordiger die namens een eigenaar mag optreden, en denk je dat een link in onze index inbreuk maakt op dat auteursrecht? Stuur dan een schriftelijke melding naar { $support_email } met daarin:
 legal-dmca-2-b1 = <strong>Fysieke of elektronische handtekening</strong> van de auteursrechtshouder of hun geautoriseerde vertegenwoordiger.
-legal-dmca-2-b2 = <strong>Identificatie van het gecopyrighteerd werk</strong> dat u beweert is geschonden, of als meerdere werken worden bedekt door één melding, een representatieve lijst van dergelijke werken.
-legal-dmca-2-b3 = <strong>Identificatie van het materiaal</strong> (d.w.z. de specifieke { $brand } link of URL) dat u beweert schendt, met voldoende informatie om ons in staat te stellen het te lokaliseren.
+legal-dmca-2-b2 = <strong>Een omschrijving van het beschermde werk</strong> waarop volgens jou inbreuk is gemaakt, of, als één melding meerdere werken betreft, een representatieve lijst van die werken.
+legal-dmca-2-b3 = <strong>Een omschrijving van het materiaal</strong> (de specifieke { $brand }-link of URL) dat volgens jou inbreuk maakt, met genoeg informatie zodat we het kunnen vinden.
 legal-dmca-3-title = 3. Extra vereiste elementen
-legal-dmca-3-body = Uw DMCA-melding moet ook bevatten:
-legal-dmca-3-b1 = <strong>Uw contactgegevens</strong> — naam, adres, telefoonnummer en e-mailadres.
-legal-dmca-3-b2 = <strong>Een verklaring van goede trouw</strong> — dat u een goede trouw geloof heeft dat het gebruik van het materiaal op de manier die wordt gemeld niet is toegestaan door de auteursrechtshouder, hun vertegenwoordiger of de wet.
-legal-dmca-3-b3 = <strong>Een verklaring van nauwkeurigheid</strong> — dat de informatie in de melding accuraat is en dat u onder straf van perjury is geautoriseerd om in naam van de auteursrechtshouder te handelen.
+legal-dmca-3-body = Je DMCA-melding moet ook bevatten:
+legal-dmca-3-b1 = <strong>Je contactgegevens</strong>: naam, adres, telefoonnummer en e-mailadres.
+legal-dmca-3-b2 = <strong>Een verklaring te goeder trouw</strong>: dat je te goeder trouw gelooft dat het gebruik van het materiaal op de gemelde manier niet is toegestaan door de eigenaar van het auteursrecht, diens vertegenwoordiger of de wet.
+legal-dmca-3-b3 = <strong>Een verklaring van juistheid</strong>: dat de informatie in de melding klopt en, op straffe van meineed, dat je bevoegd bent namens de eigenaar van het auteursrecht op te treden.
 legal-dmca-3-b4 = <strong>Stuur meldingen naar:</strong> { $support_email }
 legal-dmca-3-b5 = We zullen alle meldingen beoordelen en links uit onze index verwijderen die de bovenstaande wetgevingsvereisten voldoen.
-legal-dmca-3-b6 = <strong>Counter-Notification:</strong> Als u denkt dat uw link onjuist is verwijderd, kunt u een counter-notification indienen onder 17 U.S.C. § 512(g).
+legal-dmca-3-b6 = <strong>Tegenmelding:</strong> Denk je dat je link ten onrechte is verwijderd, dan kun je een tegenmelding indienen op grond van 17 U.S.C. § 512(g).
 legal-dmca-4-title = 4. Belangrijke beperking — We kunnen alleen links verwijderen
 legal-dmca-4-body = Omdat { $brand } geen media-bestanden host, kunnen we alleen de link uit onze zoekindex verwijderen. We kunnen de onderliggende inhoud niet verwijderen van de server waarop deze wordt gehost.
 legal-dmca-5-title = 5. Beleid voor herhaalde overtreders
@@ -1244,7 +1388,7 @@ legal-disclaimer-1-body = { $brand } is een linkaggregator en zoekmachine voor o
 legal-disclaimer-2-title = 2. Derdeninhoud — Geen aansprakelijkheid
 legal-disclaimer-2-body = Alle inhoud die via links die zijn geregistreerd door { $brand } toegankelijk is, komt van externe, onafhankelijke derde partijen. { $brand } heeft geen controle over en accepteert geen aansprakelijkheid voor de legaalheid, nauwkeurigheid, kwaliteit of beschikbaarheid van deze inhoud.
 legal-disclaimer-3-title = 3. Gebruiker accepteert risico
-legal-disclaimer-3-body = U erkent en gaat akkoord dat uw gebruik van { $brand } en uw toegang tot enige inhoud via externe ingebedde links volledig op uw eigen risico is. { $brand } verklaart expliciet alle garanties, zowel uitdrukkelijk als onuitdrukkelijk, te ontkennen.
+legal-disclaimer-3-body = Je erkent en gaat ermee akkoord dat je gebruik van { $brand } en je toegang tot inhoud via externe ingesloten links volledig voor eigen risico is. { $brand } wijst uitdrukkelijk alle garanties af, zowel uitdrukkelijke als stilzwijgende.
 legal-disclaimer-4-title = 4. Beschikbaarheid van links
 legal-disclaimer-4-body = Ingebedde links die zijn geregistreerd door { $brand } wijzen naar bronnen op servers van derde partijen. We kunnen de voortdurende beschikbaarheid, kwaliteit of volledigheid van enige gelinkte inhoud niet garanderen, en links kunnen breken of onbeschikbaar worden zonder waarschuwing.
 legal-disclaimer-5-title = 5. Nauwkeurigheid van informatie
@@ -1255,7 +1399,7 @@ help-ui-filter-articles = Helpartikelen
 help-ui-filter-policies = Beleid
 help-ui-recent = Recente zoekopdrachten
 help-ui-clear = Wissen
-help-ui-did-you-mean = Bedoelt u "{ $query }"?
+help-ui-did-you-mean = Bedoelde je “{ $query }”?
 help-ui-viewed = Onlangs bekeken
 help-ui-on-this-page = Op deze pagina
 help-ui-other-policies = Andere beleid
@@ -1263,203 +1407,266 @@ help-ui-section-link = Link naar deze sectie
 help-ui-policy-questions = Vragen over dit beleid?
 help-topic-legal = Juridisch en beleid
 help-group-policies = Beleid
-help-art-fake-sites-title = Hoe u vals { $brand }-sites en berichten kunt herkennen
-help-art-fake-sites-summary = De officiële adressen, wat we nooit vragen, en wat u moet doen bij een kopie.
-help-art-fake-sites-keywords = vals fraude phishing kopie imitatie officieel adres veilig download wachtwoord betaling e-mail
+help-group-signing-in = Inloggen en beveiliging
+help-art-fake-sites-title = Nep-sites en nepberichten van { $brand } herkennen
+help-art-fake-sites-summary = De officiële adressen, wat we nooit vragen en wat je doet als je een kopie vindt.
+help-art-fake-sites-keywords = nep site oplichting phishing officieel adres
 help-art-fake-sites-body =
-    Kopieën van populaire sites verschijnen altijd. Deze zijn de enige adressen die behoren tot { $brand }:
+    Kopieën van populaire sites duiken steeds weer op. Dit zijn de enige adressen die bij { $brand } horen:
 
     - <b>streams.watch</b>, de app
-    - <b>help.streams.watch</b>, deze Help Center
-    - <b>@streams.watch</b> e-mailadressen, zoals <a=mailto:{ $help_email }>{ $help_email }</a>
+    - <b>help.streams.watch</b>, dit Helpcentrum
+    - e-mailadressen op <b>@streams.watch</b>, zoals <a=mailto:{ $help_email }>{ $help_email }</a>
 
     ## Wat we nooit vragen
-    - Een kaartnummer, bankgegevens of elke betaling. { $brand } is gratis. Zie <a=/help/article/free-to-use>Is { $brand } gratis?</a>
-    - Uw wachtwoord per e-mail, chat of een formulier buiten de inlogpagina.
-    - Een download, een extensie, een codec of een update om te kijken.
+    - Een kaartnummer, bankgegevens of een betaling. { $brand } is gratis. Zie <a=/help/article/free-to-use>Is { $brand } gratis?</a>
+    - Je wachtwoord via e-mail, chat of een formulier buiten de inlogpagina.
+    - Een download, een extensie, een codec of een update om te kunnen kijken.
 
-    ## Als u een kopie vindt
-    1. Sluit de pagina en geef geen gegevens in.
-    2. Als u al een wachtwoord hebt ingevoerd, verander het op de site waar het voor staat.
-    3. Stuur het adres naar <a=mailto:{ $help_email }>{ $help_email }</a> zodat we het kunnen melden.
-help-art-security-report-title = Meld een veiligheidsprobleem
-help-art-security-report-summary = Hoe u ons veilig kunt vertellen over een zwakte.
-help-art-security-report-keywords = veiligheid kwetsbaarheid bug bounty verantwoordelijke openbaarmaking exploit hack rapport zwakte
+    ## Als je een kopie vindt
+    1. Sluit de pagina en vul niets in.
+    2. Heb je al een wachtwoord ingevuld, verander het dan op de site waar het bij hoort.
+    3. Stuur het adres naar <a=mailto:{ $help_email }>{ $help_email }</a>, dan melden wij het.
+
+help-art-security-report-title = Een beveiligingsprobleem melden
+help-art-security-report-summary = Hoe je ons veilig vertelt over een zwakke plek.
+help-art-security-report-keywords = beveiliging kwetsbaarheid zwakke plek melden
 help-art-security-report-body =
-    Als u een manier hebt gevonden om iemands gegevens te lezen, een profielpin te omzeilen of de site te breken, meld het ons voordat u het iemand anders vertelt.
+    Heb je een manier gevonden om gegevens van iemand anders te lezen, een profielpincode te omzeilen of de site te breken? Vertel het ons dan voordat je het aan iemand anders vertelt.
 
-    1. Stuur een e-mail naar <a=mailto:{ $help_email }>{ $help_email }</a> met onderwerp <b>Veiligheid</b>.
-    2. Beschrijf wat u hebt gevonden, de stappen om het te herhalen en de pagina of adres dat het beïnvloedt.
-    3. Gebruik geen automatische stroom van aanvragen om andere mensen gegevens te testen.
+    1. Mail naar <a=mailto:{ $help_email }>{ $help_email }</a> met als onderwerp <b>Beveiliging</b>.
+    2. Beschrijf wat je hebt gevonden, de stappen om het te herhalen en de pagina of het adres waar het om gaat.
+    3. Bekijk geen gegevens van anderen en test niet met automatische stromen verzoeken.
 
-    We lezen elke melding. Dezelfde details staan in het machine-leesbare bestand op <a=/.well-known/security.txt>/.well-known/security.txt</a>.
-help-art-translate-title = Help vertalen { $brand }
-help-art-translate-summary = Interface tekst bestaat uit eenvoudige bestanden, één per taal, en iedereen kan er één verbeteren.
-help-art-translate-keywords = vertalen vertaling lokaliseren lokaliseer taal bijdragen ftl vloeiend grammatica geslacht meervoud
+    We lezen elke melding. Dezelfde gegevens staan in het machineleesbare bestand op <a=/.well-known/security.txt>/.well-known/security.txt</a>.
+
+help-art-translate-title = Help { $brand } vertalen
+help-art-translate-summary = De teksten van de interface staan in eenvoudige bestanden, één per taal, en iedereen kan ze verbeteren.
+help-art-translate-keywords = vertalen vertaling taal bijdragen ftl fluent
 help-art-translate-body =
-    Alle interface tekst is opgeslagen in één platte tekstbestand per taal. Een vertaling vereist geen programmeren.
+    Alle teksten van de interface staan in één gewoon tekstbestand per taal. Je hoeft niet te kunnen programmeren om te vertalen.
 
-    ## Wat je moet weten
-    - Berichten zien eruit als <b>key = tekst</b>. Verander alleen de tekst na het gelijkteken.
-    - Woorden in accolades, zoals <b>{ "{ $brand }" }</b>, worden ingevuld door de app. Houd ze zoals ze zijn en verplaats ze waar je taal het nodig heeft.
-    - Sommige berichten hebben vormen voor één en voor veel (<b>1 seizoen</b>, <b>2 seizoenen</b>). Talen met meer dan twee vormen kunnen allemaal toevoegen.
-    - Wanneer je taal een woord verandert voor geslacht of geval, schrijf de vorm die past in de zin.
+    ## Goed om te weten
+    - Meldingen zien eruit als <b>sleutel = tekst</b>. Verander alleen de tekst na het isgelijkteken.
+    - Woorden tussen accolades, zoals <b>{ "{ $brand }" }</b>, worden door de app ingevuld. Laat ze zoals ze zijn en zet ze waar je taal ze nodig heeft.
+    - Sommige meldingen hebben vormen voor één en voor meer (<b>1 seizoen</b>, <b>2 seizoenen</b>). Talen met meer dan twee vormen kunnen ze allemaal toevoegen.
+    - Verandert je taal een woord naar geslacht of naamval, schrijf dan de vorm die in de zin past.
 
-    ## Hoe je er één stuurt
-    Schrijf naar <a=mailto:{ $contribute_email }>{ $contribute_email }</a> met de taal en of het bestand of een link naar je wijziging. Nativestalkers die elkaar controleren zijn de beste check die we hebben.
-help-art-cookies-explained-title = Cookies en lokale opslag verklaard
-help-art-cookies-explained-summary = Wat je browser voor { $brand } opslaat, in eenvoudige taal.
-help-art-cookies-explained-keywords = cookies lokale opslag browser data tracking consent banner voorkeuren sessie derde partij
+    ## Zo stuur je een vertaling
+    Mail naar <a=mailto:{ $contribute_email }>{ $contribute_email }</a> met de taal en het bestand of een link naar je wijziging. Moedertaalsprekers die elkaars werk nakijken, zijn de beste controle die we hebben.
+
+help-art-cookies-explained-title = Cookies en lokale opslag uitgelegd
+help-art-cookies-explained-summary = Wat je browser voor { $brand } bewaart, in gewone woorden.
+help-art-cookies-explained-keywords = cookies lokale opslag toestemming personalisatie youtube
 help-art-cookies-explained-body =
-    <b>Cookies</b> zijn kleine notities die een website vraagt aan je browser om op te slaan. <b>Lokale opslag</b> is een vergelijkbare plek die alleen de site kan lezen en die niet mee wordt gestuurd met elke aanvraag.
+    <b>Cookies</b> zijn kleine notities die een website door je browser laat bewaren. <b>Lokale opslag</b> is een vergelijkbare plek die alleen de site zelf kan lezen en die niet bij elk verzoek wordt meegestuurd.
 
-    { $brand } gebruikt lokale opslag voor je profielen, PINs, beeldschermvoortgang en taal. Die blijven op je apparaat. Andere websites die ons afbeeldingen of video's tonen kunnen hun eigen cookies instellen, wat we niet kunnen controleren. Zie <a=/help/article/sources>Waar titels vandaan komen</a>.
+    { $brand } gebruikt lokale opslag, geen advertentie- of trackingcookies. Daarin staat:
+    - wat je ingelogd houdt,
+    - een kopie van je profielen, instellingen en voortgang, zodat pagina's snel openen,
+    - je keuzes over cookies en personalisatie.
+
+    Trailers worden afgespeeld via YouTube, dat eigen cookies kan plaatsen, en afbeeldingen komen uit een openbare filmcatalogus. Daar hebben wij geen invloed op. Zie <a=/help/article/sources>Waar de titels vandaan komen</a>.
 
     ## Je keuzes
-    - De eerste keer dat je bezoekt, vraagt een banner of aanbevelingen mogen gebruiken wat je kijkt. Je kunt je besluit altijd veranderen.
-    - Het kiezen van <b>Afwijzen</b> houdt alles wat nodig is om de site te gebruiken en zet persoonlijke aanpassingen uit.
-    - Je browser kan cookies en sitegegevens blokkeren of verwijderen. Als dat gebeurt, verlies je je profielen en voortgang.
+    - Bij je eerste bezoek vraagt een melding of aanbevelingen mogen gebruiken wat je kijkt. Je kunt je keuze altijd veranderen in <b>Privacy- en gegevensinstellingen</b> of met de tool hieronder.
+    - <b>Afwijzen</b> houdt alleen wat de site nodig heeft om te werken en zet personalisatie uit.
+    - Wist je browser de sitegegevens, dan ben je in die browser uitgelogd. Je account bewaart alles.
 
     @@ cookies
-help-art-stuck-loading-title = De pagina blijft op het logo of een leeg scherm
-help-art-stuck-loading-summary = Wat je kunt proberen als { $brand } nooit klaar komt met starten.
-help-art-stuck-loading-keywords = stuck loading logo blank white screen splash not starting webassembly wasm frozen startup
-help-art-stuck-loading-body =
-    Terwijl { $brand } start zie je het kubuslogo met een rij bewegende stippen. Dat duurt meestal een paar seconden. { $brand } draait als een WebAssembly-app, dus een browser of instelling die WebAssembly uitschakelt, laat je op dat scherm staan.
 
-    1. Herlaad met <b>Ctrl + Shift + R</b> (<b>Cmd + Shift + R</b> op een Mac) om de nieuwste versie op te halen.
-    2. Open de pagina in een privévenster. Als het daar werkt, is een uitbreiding de oorzaak. Zie <a=/help/article/extensions-blockers>Uitbreidingen die de speler blokkeren</a>.
-    3. Update je browser. Zie <a=/help/article/supported-browsers>Ondersteunde browsers</a>.
-    4. Schakel elke modus uit die webfuncties beperkt, zoals een lockdown of strikte beveiligingsmodus, voor deze site.
-    5. Verwijder de gegevens van deze site. Zie <a=/help/article/clear-data>Hoe je je opgeslagen gegevens kunt wissen</a>.
+help-art-stuck-loading-title = De pagina blijft hangen op het logo of een leeg scherm
+help-art-stuck-loading-summary = Wat je kunt proberen als { $brand } niet klaar raakt met opstarten.
+help-art-stuck-loading-keywords = blijft hangen laden logo leeg wit scherm start niet webassembly wasm bevroren opstarten
+help-art-stuck-loading-body =
+    Terwijl { $brand } opstart zie je het kubuslogo met een rij bewegende stipjes. Dat hoort een paar seconden te duren. { $brand } draait als WebAssembly-app, dus een browser of instelling die WebAssembly uitzet, laat je op dat scherm hangen.
+
+    1. Laad opnieuw met <b>Ctrl + Shift + R</b> (<b>Cmd + Shift + R</b> op een Mac) om de nieuwste versie op te halen.
+    2. Open de pagina in een privévenster. Werkt het daar wel, dan zit een extensie in de weg. Zie <a=/help/article/extensions-blockers>Extensies die de speler blokkeren</a>.
+    3. Werk je browser bij. Zie <a=/help/article/supported-browsers>Ondersteunde browsers</a>.
+    4. Zet voor deze site elke modus uit die webfuncties beperkt, zoals de isolatiemodus op Apple-apparaten of de strikte beveiliging in Edge.
+    5. Wis de gegevens van deze site en log opnieuw in. Zie <a=/help/article/clear-data>Je opgeslagen gegevens wissen</a>.
 
     @@ refresh
-help-art-slow-pages-title = Pagina's laden langzaam
-help-art-slow-pages-summary = Maak het surfen sneller op een langzaam netwerk of een oudere computer.
-help-art-slow-pages-keywords = langzaam lagere prestaties snelheid laden geheugen oude telefoon lagge scrollen voorbeeldbeelden
+
+help-art-slow-pages-title = Pagina's laden traag
+help-art-slow-pages-summary = Maak bladeren sneller op een trage verbinding of een ouder apparaat.
+help-art-slow-pages-keywords = traag langzaam laden snelheid pagina's
 help-art-slow-pages-body =
-    De eerste bezoeking downloadt de app, ongeveer 3 MB. Daarna is de wachttijd vooral voor afbeeldingen en voorbeeldbeelden.
+    Bij je eerste bezoek wordt de app gedownload, ongeveer 2 MB. Daarna komt het wachten vooral door afbeeldingen en voorbeelden.
 
-    - Schakel <b>Automatisch afspelen van voorbeeldbeelden</b> uit in <b>Instellingen</b>, onder <b>Spelinstellingen</b>. Trailers die automatisch starten gebruiken geheugen en data.
+    - Zet <b>Voorbeelden automatisch afspelen</b> uit in de <b>Afspeelinstellingen</b> van je profiel. Voorbeelden die vanzelf starten, kosten data en geheugen.
     - Sluit tabbladen en andere apps die het netwerk of veel geheugen gebruiken.
-    - Gebruik een actuele browser. Oudere browsers lopen de app langzamer.
-    - Op mobiele data, schakel over naar Wi-Fi als dat mogelijk is.
+    - Gebruik een actuele browser. Oudere browsers draaien de app langzamer.
+    - Schakel bij mobiele data als het kan over naar wifi.
 
     @@ diagnostics
-help-art-vpn-network-title = VPN, school- en werknetwerken
+
+help-art-vpn-network-title = VPN's, school- en werknetwerken
 help-art-vpn-network-summary = Waarom sommige netwerken titels of afbeeldingen blokkeren, en wat je kunt proberen.
-help-art-vpn-network-keywords = vpn proxy school werk netwerk firewall dns filter geblokkeerd safedns beperkt wifi
+help-art-vpn-network-keywords = vpn proxy school werk netwerk geblokkeerd dns
 help-art-vpn-network-body =
-    { $brand } laadt details en afbeeldingen op van een openbare filmcatalogus en stroomt van onafhankelijke bronnen. Sommige netwerken blokkeren deze sites, en sommige bronnen weigeren bepaalde adressen.
+    { $brand } haalt details en afbeeldingen uit een openbare filmcatalogus en streams van onafhankelijke bronnen. Sommige netwerken blokkeren die sites, en sommige bronnen weigeren bepaalde adressen.
 
-    - <b>VPN of proxy.</b> Sommige bronnen reageren niet op VPN-adressen. Schakel het uit, of kies een ander land.
-    - <b>School, werk of openbare Wi-Fi.</b> Filters blokkeren vaak streaming of de catalogus. Probeer de mobiele data van je telefoon.
-    - <b>DNS-filters.</b> Een filterend DNS-service kan de catalogus blokkeren en lege rijen of afbeeldingen laten staan. Gebruik een ander DNS of schakel de filter uit voor deze site.
+    - <b>VPN of proxy.</b> Sommige bronnen reageren niet op VPN-adressen. Zet de VPN uit of kies een ander land.
+    - <b>Wifi op school, op het werk of in het openbaar.</b> Filters blokkeren vaak streaming of de catalogus. Probeer de mobiele data van je telefoon.
+    - <b>DNS-filters.</b> Een filterende DNS-dienst kan de catalogus blokkeren, waardoor rijen of afbeeldingen leeg blijven. Gebruik een andere DNS of zet het filter uit voor deze site.
 
-    Het apparaatcontrole toont welke service je netwerk niet bereikt.
+    De apparaatcontrole laat zien welke dienst je netwerk niet kan bereiken.
 
     @@ diagnostics
-help-art-is-down-title = Is { $brand } uitgevallen?
-help-art-is-down-summary = Controleer welke delen werken vanaf je apparaat.
-help-art-is-down-keywords = uitgevallen storing status niet werken offline niet beschikbaar server onderhoud fout site
-help-art-is-down-body =
-    { $brand } heeft drie onderdelen die apart kunnen falen:
 
-    - <b>De app</b>, die je nu bekijkt.
-    - <b>De film- en seriecatalogus</b>, die details en afbeeldingen geeft.
+help-art-is-down-title = Is { $brand } onbereikbaar?
+help-art-is-down-summary = Controleer welke onderdelen werken vanaf je apparaat.
+help-art-is-down-keywords = onbereikbaar storing status werkt niet offline
+help-art-is-down-body =
+    { $brand } bestaat uit drie onderdelen die los van elkaar kunnen uitvallen:
+
+    - <b>De app</b>, waar je nu naar kijkt.
+    - <b>De film- en seriecatalogus</b>, die details en afbeeldingen levert.
     - <b>De streambronnen</b>, die de video leveren.
 
-    Voer de controle uit om te zien welke ervan antwoordt vanaf je apparaat. Als de catalogus of de bronnen niet antwoorden voor iedereen, wacht een paar minuten en probeer opnieuw. Als één ervan alleen voor jou onbereikbaar is, zie <a=/help/article/vpn-network>VPN, school en werknetwerken</a>.
+    Doe de controle om te zien welke ervan reageren vanaf je apparaat. Reageren de catalogus of de bronnen voor niemand, wacht dan een paar minuten en probeer het opnieuw. Is er een alleen voor jou onbereikbaar, zie dan <a=/help/article/vpn-network>VPN's, school- en werknetwerken</a>.
 
     @@ diagnostics
+
 help-art-no-sound-title = Er is geen geluid
-help-art-no-sound-summary = Herstel een titel die speelt zonder audio.
-help-art-no-sound-keywords = geen geluid audio gemuteerd stil volume luidspreker bluetooth hoofdtelefoons autoplay
+help-art-no-sound-summary = Los het op als een titel zonder geluid afspeelt.
+help-art-no-sound-keywords = geen geluid stil volume luidspreker bluetooth koptelefoon
 help-art-no-sound-body =
-    1. Druk op <b>M</b>, of selecteer de luidsprekerknop in de speler, om te dempen. Browsers starten vaak een video gemuteerd als het automatisch begint, zie <a=/help/article/autoplay-blocked>Video begint gemuteerd</a>.
-    2. Druk op de <b>Op naar boven pijl</b> om het volume te verhogen, en controleer het volume van je apparaat.
-    3. Controleer of de browser-tab niet gemuteerd is. Klik met de rechtermuisknop op de tab om dit te zien.
-    4. Open <b>Audio & Ondertitels</b> en kies een andere audio-track als er een beschikbaar is.
-    5. Als je Bluetooth gebruikt, verbind je hoofdtelefoons los en verbind ze opnieuw.
-help-art-autoplay-blocked-title = Video begint gemuteerd of start niet automatisch
-help-art-autoplay-blocked-summary = Waarom browsers geluid stoppen bij automatisch starten, en hoe { $brand } dit aanpakt.
-help-art-autoplay-blocked-keywords = autoplay geblokkeerd gemuteerd start beleid browser geluid automatisch afspelen voorvertoningen trailer
+    1. Druk op <b>M</b>, of kies de luidsprekerknop in de speler, om het geluid aan te zetten. Browsers starten een video die vanzelf begint vaak zonder geluid, zie <a=/help/article/autoplay-blocked>De video start zonder geluid of start niet vanzelf</a>.
+    2. Druk op <b>Pijl omhoog</b> om het volume hoger te zetten, en controleer het volume van je apparaat.
+    3. Controleer of het browsertabblad niet gedempt is. Klik met de rechtermuisknop op het tabblad om het te zien.
+    4. Open <b>Audio & ondertitels</b> en kies een ander audiospoor als dat er is.
+    5. Gebruik je bluetooth, verbreek dan de verbinding met je koptelefoon en maak hem opnieuw.
+
+help-art-autoplay-blocked-title = De video start zonder geluid of start niet vanzelf
+help-art-autoplay-blocked-summary = Waarom browsers geluid niet vanzelf laten starten, en hoe { $brand } daarmee omgaat.
+help-art-autoplay-blocked-keywords = automatisch afspelen geblokkeerd zonder geluid browser voorbeelden
 help-art-autoplay-blocked-body =
-    Browsers laten een pagina niet beginnen met video met geluid totdat je op het hebt geklikt of getast. { $brand } probeert eerst met geluid te starten. Als de browser dit weigert, start het geluidloos en toont het het geluidloze speakericoon, en je kunt het met <b>M</b> of het speakericoon weer inschakelen.
+    Browsers laten een pagina pas video met geluid starten als je erop hebt geklikt of getikt. { $brand } probeert eerst met geluid te starten. Weigert de browser dat, dan start de video zonder geluid en zie je de doorgestreepte luidspreker. Zet het geluid aan met <b>M</b> of de luidsprekerknop.
 
-    - Om trailers en voorbeelden niet meer automatisch te laten starten, zet <b>Autoplay voorbeelden</b> uit in <b>Instellingen</b>, onder <b>Speelinstellingen</b>.
-    - Als een titel nooit start, zie <a=/help/article/wont-play>Een titel speelt niet</a>.
-help-art-clips-title = Gebruik van Clips
-help-art-clips-summary = Scroll korte voorbeelden en voeg wat je leuk vindt toe aan je lijst.
-help-art-clips-keywords = clips shorts voorbeelden scroll verticaal trailers swipe geluid info mijn lijst
+    - Wil je niet dat voorbeelden vanzelf starten, zet dan <b>Voorbeelden automatisch afspelen</b> uit in de <b>Afspeelinstellingen</b> van je profiel.
+    - Start een titel nooit, zie dan <a=/help/article/wont-play>Een titel speelt niet af</a>.
+
+help-art-clips-title = Clips gebruiken
+help-art-clips-summary = Scrol door korte voorbeelden en voeg wat je leuk vindt toe aan je lijst.
+help-art-clips-keywords = clips korte video's scrollen verticaal trailers geluid
 help-art-clips-body =
-    <b>Clips</b> toont korte voorbeelden op elkaar volgordelijk in de onderste balk op een telefoon.
+    <b>Clips</b> toont korte voorbeelden na elkaar, op een telefoon in de balk onderaan.
 
-    1. Scroll of swipen naar het volgende clip.
-    2. Kies het speakericoon om geluid aan of uit te zetten. Clips starten geluidloos.
-    3. Kies <b>Mijn lijst</b> om de titel op te slaan, <b>Speel</b> om het te bekijken of <b>Info</b> om er meer over te lezen.
-help-art-genres-title = Blader per genre
-help-art-genres-summary = Verfijn Films en Series naar het soort titel dat je wilt.
-help-art-genres-keywords = genres categorieën komedie drama horror actie filter blader films series sub menu
+    1. Scrol of veeg naar de volgende clip.
+    2. Kies de luidsprekerknop om het geluid aan of uit te zetten. Clips starten zonder geluid.
+    3. Kies <b>Mijn lijst</b> om de titel te bewaren, <b>Afspelen</b> om hem te bekijken, of <b>Info</b> om erover te lezen.
+
+help-art-genres-title = Bladeren op genre
+help-art-genres-summary = Beperk Films en Series tot het soort titel dat je zoekt.
+help-art-genres-keywords = genres categorieën komedie drama horror actie filteren
 help-art-genres-body =
-    1. Open <b>Films</b> of <b>Series</b> in de bovenste balk.
+    1. Open <b>Films</b> of <b>Series</b> in de balk bovenaan.
     2. Kies <b>Genres</b> naast de paginatitel.
-    3. Kies een genre. De pagina toont dan alleen dat genre, met rijen die daarvoor zijn gemaakt.
+    3. Kies een genre. De pagina toont dan alleen dat genre, met rijen die ervoor gemaakt zijn.
 
-    Om terug te gaan naar alles, open <b>Films</b> of <b>Series</b> opnieuw. Op een telefoon opent de genrelijst als een scherm vanaf de onderkant.
-help-art-top-10-title = Wat zijn de Top 10 rijen?
-help-art-top-10-summary = Een rij met de tien titels die mensen nu het meest bekijken.
-help-art-top-10-keywords = top 10 top tien populaar trendend rangschikking getallen rij meest bekeken
-help-art-top-10-body = Een <b>Top 10</b> rij toont de tien meest bekeken titels van het moment, met een groot getal op elk. Het volgt de huidige populariteit in het catalogus en verandert dagelijks. Het is hetzelfde voor iedereen en is niet gebaseerd op je profiel.
-help-art-episodes-title = Sessies en afleveringen
-help-art-episodes-summary = Kies een sessie en een aflevering uit het detailsvenster of de speler.
-help-art-episodes-keywords = sessies afleveringen series lijst volgende aflevering venster binge selectie tv programma's
+    Open <b>Films</b> of <b>Series</b> opnieuw om weer alles te zien. Op een telefoon schuift de genrelijst van onderen omhoog.
+
+help-art-top-10-title = Wat zijn de Top 10-rijen?
+help-art-top-10-summary = Een rij met de tien populairste titels van dit moment.
+help-art-top-10-keywords = top 10 populair ranglijst nummers rij
+help-art-top-10-body = Een <b>Top 10</b>-rij toont de tien populairste films of series van dit moment, elk met een groot nummer. De rij volgt de dagelijkse populariteit van titels in de filmcatalogus en verandert dus van dag tot dag. Hij is voor iedereen hetzelfde en hangt niet af van je profiel.
+help-art-episodes-title = Seizoenen en afleveringen
+help-art-episodes-summary = Kies een seizoen en een aflevering in het detailvenster of in de speler.
+help-art-episodes-keywords = afleveringen seizoenen serie lijst volgende aflevering
 help-art-episodes-body =
-    ## Voordat je speelt
-    Open een serie en selecteer <b>Episodes</b>. Gebruik het seizoenmenu om het seizoen te veranderen, dan selecteer je een episode.
+    ## Voordat je begint
+    Open een serie en kies <b>Afleveringen</b>. Wissel met het seizoensmenu van seizoen en kies dan een aflevering.
 
-    ## Terwijl je kijkt
-    - Selecteer <b>Episodes</b> in de spelercontroles om de lijst te openen zonder te verlaten.
-    - Selecteer <b>Volgende Episode</b>, of laat het automatisch starten. Zie <a=/help/article/skip-intro-next>Skip Intro en Volgende Episode</a>.
-help-art-share-title = Hoe je een titel kunt delen
+    ## Tijdens het kijken
+    - Kies <b>Afleveringen</b> in de bediening van de speler om de lijst te openen zonder de speler te verlaten.
+    - Kies <b>Volgende aflevering</b>, of laat hem vanzelf starten. Zie <a=/help/article/skip-intro-next>"Intro overslaan" en "Volgende aflevering"</a>.
+
+help-art-share-title = Een titel delen
 help-art-share-summary = Stuur een link naar een titel naar een vriend.
-help-art-share-keywords = deel link whatsapp berichten instagram snapchat kopieer sturen vriend
+help-art-share-keywords = delen link whatsapp berichten kopiëren
 help-art-share-body =
-    1. Open de details van een titel en selecteer <b>Deel</b>.
-    2. Kies <b>WhatsApp</b> of <b>Berichten</b> om de link te sturen, of <b>Kopieer link</b> om deze ergens te plakken.
-    3. Voor Instagram en Snapchat wordt de link gekopieerd en je plakt deze in de app.
+    1. Open de details van een titel en kies <b>Delen</b>.
+    2. Kies <b>WhatsApp</b> of <b>Berichten</b> om de link te sturen, of <b>Link kopiëren</b> om hem ergens te plakken.
+    3. Bij Instagram en Snapchat wordt de link gekopieerd en plak je hem in de app.
 
-    De link opent de pagina van de titel op { $brand }. De persoon die deze opent hoeft niet ingelogd te zijn.
-help-art-title-details-title = Het venster met titelgegevens
-help-art-title-details-summary = Wat je kunt lezen en doen voordat je speelt.
-help-art-title-details-keywords = meer info gegevens modaal acteurs genres samenvatting gelijksoortig meer zoals trailer beoordeling match
+    De link opent de titel op { $brand }. Wie hem opent, moet inloggen of een gratis account aanmaken om te kijken.
+
+help-art-title-details-title = Het detailvenster van een titel
+help-art-title-details-summary = Wat je kunt lezen en doen voordat je op afspelen drukt.
+help-art-title-details-keywords = details titel meer info afspelen beoordelen
 help-art-title-details-body =
-    Selecteer een titelkaart of <b>Meer Info</b> om de gegevens te openen.
+    Kies een titelkaart of <b>Meer info</b> om de details te openen.
 
-    - <b>Speel</b> of <b>Herhaling</b> start de titel waar je mee gestopt bent.
-    - <b>Mijn Lijst</b> slaat het op, en de vinger beoordeelt het.
-    - De samenvatting, acteurs, genres en een paar woorden die de stemming beschrijven helpen je te beslissen.
-    - Voor series, <b>Episodes</b> lijst de seizoenen.
-    - <b>Meer Zoals Dit</b> toont titels die dicht bij elkaar in betekenis staan, wat een goede manier is om iets nieuws te vinden.
+    - <b>Afspelen</b> of <b>Hervatten</b> start de titel waar je gebleven was.
+    - <b>Mijn lijst</b> bewaart hem, en met het duimpje geef je een beoordeling.
+    - De samenvatting, de cast, de genres en een paar woorden over de sfeer helpen je kiezen.
+    - Bij series toont <b>Afleveringen</b> de seizoenen.
+    - <b>Meer zoals dit</b> toont vergelijkbare titels, een goede manier om iets nieuws te ontdekken.
+
 help-art-accessibility-title = Toegankelijkheid op { $brand }
-help-art-accessibility-summary = Onderdelen zoals ondertitels, toetscontrole en weergaveinstellingen die helpen.
-help-art-accessibility-keywords = toegankelijkheid schermlezer toets ondertitels captions grootte contrast zoom verminderde beweging beperking
+help-art-accessibility-summary = Ondertitels, bediening met het toetsenbord en weergave-instellingen die helpen.
+help-art-accessibility-keywords = toegankelijkheid ondertitels toetsenbord zoomen beweging
 help-art-accessibility-body =
-    - <b>Onbekende woorden.</b> Kies de taal, grootte, kleur en achtergrond in <b>Instellingen</b>. Zie <a=/help/article/subtitles>Hoofdletters, onbekende woorden of kies de audio-taal</a>.
-    - <b>Toetsenbord.</b> Gebruik <b>Tab</b> om tussen controles te switchen en <b>Esc</b> om vensters te sluiten. De speler heeft zijn eigen toetsen, zie <a=/help/article/shortcuts>Toetsenkortsluitingen</a>.
-    - <b>Textgrootte.</b> Verder zoomen in je browser met <b>Ctrl</b> en <b>+</b> (<b>Cmd</b> en <b>+</b> op een Mac). De lay-out aanpassen.
-    - <b>Beeldbeweging.</b> Als je apparaat vraagt om verminderde beweging, blijft het animatie-logo stil.
+    - <b>Ondertitels.</b> Kies de taal bij <b>Talen</b> van je profiel, en de grootte, kleur en achtergrond bij <b>Weergave van ondertitels</b>. Zie <a=/help/article/subtitles>Ondertitels gebruiken of de audiotaal kiezen</a>.
+    - <b>Toetsenbord.</b> Ga met <b>Tab</b> van knop naar knop en sluit vensters met <b>Esc</b>. De speler heeft eigen toetsen, zie <a=/help/article/shortcuts>Sneltoetsen</a>.
+    - <b>Tekstgrootte.</b> Zoom in je browser in met <b>Ctrl</b> en <b>+</b> (<b>Cmd</b> en <b>+</b> op een Mac). De indeling past zich aan.
+    - <b>Beweging.</b> Vraagt je apparaat om minder beweging, dan blijft het bewegende logo stil staan.
 
-    Als iets moeilijk is om te gebruiken, vertel ons op de <a=/help/article/report-bug>Probleem melden</a> pagina. We nemen deze rapporten serieus.
-help-art-profile-icons-title = Hoe je een profielicoon kiest
-help-art-profile-icons-summary = Kies een avatar voor een profiel.
-help-art-profile-icons-keywords = profielicoon avatar afbeelding beeld verander kiezen karakter
+    Is iets lastig te gebruiken, laat het ons weten op de pagina <a=/help/article/report-bug>Een probleem melden</a>. We nemen deze meldingen serieus.
+
+help-art-profile-icons-title = Een profielafbeelding kiezen
+help-art-profile-icons-summary = Kies een afbeelding voor een profiel.
+help-art-profile-icons-keywords = profielafbeelding afbeelding avatar icoon kiezen
 help-art-profile-icons-body =
-    1. Open <b>Profielen beheren</b> en selecteer het profiel.
-    2. Kies het icoon.
-    3. Kies er één uit de groepen, dan kies je <b>Opslaan</b>.
+    1. Open <b>Profielen beheren</b> en kies het profiel.
+    2. Kies de afbeelding.
+    3. Kies een nieuwe en daarna <b>Opslaan</b>.
 
-    Een Kids-profiel gebruikt het gestreepte Kids-icoon tenzij je een ander kiest. Je kunt ook het icoonkiezer bereiken via <b>Instellingen</b>.
+    Je kunt hem ook veranderen bij <b>Account</b>, onder <b>Profielen beheren</b>: kies het profiel en dan de afbeelding. Een kinderprofiel gebruikt de kinderafbeelding tot je een andere kiest.
+
+help-art-parental-controls-title = Ouderlijk toezicht: leeftijdsclassificaties en geblokkeerde titels
+help-art-parental-controls-summary = Beperk een profiel tot titels tot een bepaalde leeftijd, of verberg titels op naam.
+help-art-parental-controls-keywords = ouderlijk toezicht leeftijdsclassificatie kijkwijzer beperkingen titel blokkeren verbergen kinderen tieners 12 16 18
+help-art-parental-controls-body =
+    Elk profiel kan eigen grenzen hebben. Open het profielmenu, kies <b>Account</b>, dan <b>Profielen beheren</b>, kies het profiel en kies <b>Ouderlijk toezicht aanpassen</b>.
+
+    ## Leeftijdsclassificaties
+    1. Kies <b>Leeftijdsclassificaties</b>.
+    2. Kies de hoogste classificatie die het profiel mag zien. Alleen titels tot die classificatie worden getoond, en titels zonder classificatie worden ook verborgen.
+
+    <b>Classificatiesysteem</b> bepaalt welke labels je ziet: Britse (U, PG, 12, 15, 18) of Amerikaanse (G, PG, PG-13, R, NC-17). <b>Automatisch</b> volgt het land van waaruit je inlogt.
+
+    ## Titels blokkeren
+    1. Kies <b>Titels blokkeren</b>.
+    2. Typ de naam van een serie of film en kies <b>Toevoegen</b>.
+
+    Geblokkeerde titels worden op dat profiel niet getoond. Kies <b>Verwijderen</b> om er weer een te tonen.
+
+    !! Let op: Titels komen van onafhankelijke bronnen en sommige hebben geen classificatie. Voor jonge kinderen is een kinderprofiel de veiligere keuze. Zie <a=/help/article/kids-profile>Een profiel voor kinderen maken</a>.
+
+    @@ profiles
+
+help-art-transfer-profile-title = Een profiel naar een ander account verplaatsen
+help-art-transfer-profile-summary = Bewaar een profiel als bestand en voeg het met geschiedenis en instellingen toe aan een ander account.
+help-art-transfer-profile-keywords = profiel overzetten verplaatsen kopiëren ander account importeren exporteren profielbestand
+help-art-transfer-profile-body =
+    Je kunt een profiel naar een ander account kopiëren, bijvoorbeeld als iemand op zichzelf gaat wonen. De kopie houdt de naam, de afbeelding, de instellingen en de kijkactiviteit.
+
+    ## Het profiel bewaren
+    1. Open het profielmenu en kies <b>Profiel overbrengen</b>.
+    2. Kies het profiel en kies <b>Profielbestand downloaden</b>. Bewaar het bestand op een veilige plek.
+
+    ## Toevoegen aan het andere account
+    1. Log in op het andere account en open <b>Profielen beheren</b>.
+    2. Kies <b>Een profiel importeren</b> en kies het bestand.
+
+    !! Let op: Het bestand bevat de pincode van het profiel niet. Iedereen met het bestand kan het profiel aan zijn account toevoegen, dus deel het niet.
+
+    <b>Profieloverdracht</b> bij <b>Account</b> zet het kopiëren van profielen uit je account aan of uit. Profielen die binnenkomen worden nooit geblokkeerd.
+
 auth-questions = Vragen?
 auth-email = E-mailadres
 auth-password = Wachtwoord
@@ -1474,10 +1681,12 @@ auth-signup-link = Registreren
 auth-welcome-back = Welkom terug
 auth-not-you = Niet jij?
 auth-signing-in = Inloggen…
-auth-remember = Onthoud me
+auth-remember = Onthoud mij
 auth-forgot-link = Wachtwoord vergeten?
 auth-get-help = Hulp verkrijgen
-auth-resend = Stuur het bevestigingsemail opnieuw
+auth-resume-hint = Je bent kort geleden uitgelogd op dit apparaat. Ga verder met { $email } om zonder wachtwoord terug te komen.
+auth-resume-forget = Ben jij dit niet? Vergeet deze browser
+auth-resend = Bevestigingsmail opnieuw sturen
 auth-resent = We hebben een nieuwe bevestigingsemail gestuurd naar { $email }.
 auth-error-email = Voer een geldig e-mailadres in.
 auth-error-invalid = Ongeldig e-mail of wachtwoord. Probeer opnieuw of reset je wachtwoord.
@@ -1519,9 +1728,11 @@ landing-read-more = Lees het volledige artikel
 legal-credits-title = Licenties en credits
 legal-credits-updated = Laatst bijgewerkt: oktober 2026
 legal-credits-1-title = 1. Lettertypen
-legal-credits-1-body = De tekst in het logo is in een pixellettertype. Al het andere interface-tekst is in Inter.
-legal-credits-1-b1 = <strong>Baby Blocks</strong> door Colorful Typhoon, gebruikt voor het { $brand }-logo onder zijn linkware-voorwaarden voor persoonlijk, niet-commerciële gebruik. Zie <a href="http://www.geocities.jp/kitschlabo/" target="_blank" rel="noopener">Colorful Typhoon</a>.
+legal-credits-1-body = Het logo is gezet in een pixellettertype, de interface in Inter en de titels van collecties in sierletters:
+legal-credits-1-b1 = <strong>Baby Blocks</strong> van Colorful Typhoon, gebruikt voor het { $brand }-logo onder de freewarevoorwaarden voor niet-commercieel gebruik. Zie <a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">het lettertype op FontSpace</a>.
 legal-credits-1-b2 = <strong>Inter</strong> door Rasmus Andersson, gebruikt onder de SIL Open Font License 1.1.
+legal-credits-1-b3 = <strong>Abril Fatface, Caveat Brush, DM Serif Display, Fredoka, Gochi Hand, Kalam, Londrina Solid, Playfair Display en Sedgwick Ave</strong> van Google Fonts, gebruikt onder de SIL Open Font License 1.1.
+legal-credits-1-b4 = <strong>Permanent Marker</strong> en <strong>Rock Salt</strong> van Google Fonts, gebruikt onder de Apache License 2.0.
 legal-credits-2-title = 2. Icoons
 legal-credits-2-body = Interface-icoons komen van Phosphor Icons, gebruikt onder de MIT License.
 legal-credits-3-title = 3. Film- en serieinformatie
@@ -1535,7 +1746,7 @@ legal-credits-4-b4 = <strong>Project Fluent</strong> voor vertaalde interface-te
 legal-credits-5-title = 5. Merken en kunstwerk
 legal-credits-5-body = Naam, logo's, posters en kunstwerk van films, series en diensten die op { $brand } worden getoond, behoren aan hun eigen eigenaren. Ze worden getoond om de titel te identificeren en betekenen niet dat de eigenaar { $brand } steunt.
 legal-credits-6-title = 6. Contact
-legal-credits-6-body = Als u denkt dat iets hier verkeerd is gecrediteerd of moet veranderen, schrijf dan naar { $support_email }.
+legal-credits-6-body = Denk je dat hier iets verkeerd vermeld staat of moet veranderen? Schrijf dan naar { $support_email }.
 help-ui-legal-credits = Licenties en credits
 landing-slide-everyone = Een plek voor iedereen
 landing-slide-place = Ga verder waar je opgezet hebt.
@@ -1617,7 +1828,7 @@ set-save = Opslaan
 set-add = Toevoegen
 set-remove = Verwijderen
 set-delete = Verwijderen
-set-reset = Resetten naar standaard
+set-reset = Standaard herstellen
 set-continue = Doorgaan
 set-none = Geen
 set-nav-profile = Profiel bewerken
@@ -1638,11 +1849,11 @@ set-title-profiles = Profielen beheren
 set-title-edit-profile = Profiel bewerken
 set-title-avatar = Kies een profielafbeelding
 set-title-restrictions = Beperkingen voor het bekijken
-set-title-ratings = Leeftijdsevaluatie
+set-title-ratings = Leeftijdsclassificaties
 set-title-blocked = Titels blokkeren
-set-title-lock = Profiel vergrendelen
-set-title-language = Taal weergeven
-set-title-subtitles = Lettertype voor ondertitels
+set-title-lock = Profielvergrendeling
+set-title-language = Weergavetaal
+set-title-subtitles = Weergave van ondertitels
 set-title-audio-subtitles = Audio en ondertitels
 set-title-name = Naam
 set-title-app = App instellingen
@@ -1652,8 +1863,8 @@ set-title-change-password = Wachtwoord wijzigen
 set-title-email = E-mail
 set-title-phone = Mobiele telefoon
 set-title-devices = Toegang en apparaten
-set-title-privacy = Privacy en gegevens instellingen
-set-title-activity = Beeldbouwactiviteit
+set-title-privacy = Privacy- en gegevensinstellingen
+set-title-activity = Kijkactiviteit
 set-title-delete = Account verwijderen
 set-ratings-hint = Alleen titels tot de geselecteerde beoordeling worden op dit profiel getoond. Titels zonder beoordeling worden alleen getoond als er niets is beperkt.
 set-blocked-hint = Geblokkeerde titels worden niet getoond op dit profiel.
@@ -1671,7 +1882,7 @@ set-lock-body = Maak dit profiel privé met een { $digits } cijferige PIN die mo
 set-lock-pin = Nieuwe PIN
 set-lock-invalid = De PIN moet { $digits } cijfers bevatten.
 set-lock-change = PIN wijzigen
-set-lock-remove = Profiel vergrendeling verwijderen
+set-lock-remove = Profielvergrendeling verwijderen
 set-lock-remove-body = Iedereen kan dit profiel openen zonder PIN. Voer de huidige PIN in om door te gaan.
 set-delete-profile = Profiel verwijderen
 set-delete-profile-body = Dit profiel, de beeldbouwgeschiedenis en de instellingen worden verwijderd. Dit kan niet ongedaan worden gemaakt.
@@ -1745,7 +1956,7 @@ set-forgot-password = Wachtwoord vergeten?
 set-password-hint = Bescherm je account met een uniek wachtwoord van minstens { $min } tekens.
 set-password-new = Nieuw wachtwoord
 set-password-again = Nieuw wachtwoord opnieuw invoeren
-set-password-signout-all = Afmelden van alle toestellen
+set-password-signout-all = Uitloggen op alle apparaten
 set-password-short = Het wachtwoord moet minstens { $min } tekens bevatten.
 set-password-mismatch = De twee wachtwoorden komen niet overeen.
 set-password-saved = Je wachtwoord is gewijzigd.
@@ -1760,7 +1971,7 @@ set-phone-saved = Je nummer is opgeslagen.
 set-devices-hint = Afmelden van deze browser of van elke browser waarin je account open is.
 set-devices-current = Dit toestel
 set-devices-note = Andere browsers worden niet gelijst. Afmelden van alle toestellen sluit elke open sessie, inclusief deze.
-set-devices-signout-all = Afmelden van alle toestellen
+set-devices-signout-all = Uitloggen op alle apparaten
 set-devices-signout-body = Elke browser waarin je account open is, wordt afgemeld, inclusief deze.
 set-for-profile = Voor { $name }
 set-privacy-viewing = Bezichtigingsprivacy
@@ -1769,16 +1980,16 @@ set-privacy-activity-hint = Beheer je bekeken geschiedenis
 set-privacy-data = Data-instellingen
 set-privacy-personalization = Persoonlijke aanbevelingen
 set-privacy-personalization-hint = Gebruik wat je kijkt om titels te suggereren. Wanneer uitgeschakeld, zie je algemene keuzes.
-set-activity-clear-body = Je kijkgeschiedenis en herhalingspunten worden verwijderd vanuit deze browser.
+set-activity-clear-body = De titels worden op al je apparaten verwijderd uit de kijkactiviteit van dit profiel en uit Verder kijken.
 set-err-invalid = Dat wachtwoord is niet correct. Probeer opnieuw.
 set-err-weak = Dat wachtwoord is te zwak. Gebruik een langer wachtwoord met letters en cijfers.
 set-err-rate = Te veel pogingen. Wacht een minuut en probeer opnieuw.
 set-err-network = De verbinding is mislukt. Controleer je netwerk en probeer opnieuw.
 set-err-other = Er is iets fout gegaan. Probeer opnieuw in een ogenblik.
 set-audio-subtitles-hint = Kies de talen die je graag wil gebruiken om series en films te bekijken. Zonder keuze wordt de weergavetaal gebruikt.
-set-audio-language = Audio-taal
-set-subtitle-language = Ondertitel-taal
-set-lang-follow = Hetzelfde als weergavetaal
+set-audio-language = Audiotaal
+set-subtitle-language = Ondertiteltaal
+set-lang-follow = Hetzelfde als de weergavetaal
 set-subtitles-off = Uit
 set-name-taken = Een ander profiel heeft al dit naam.
 set-main-profile = Maak dit het hoofdprofiel
@@ -1796,11 +2007,18 @@ set-name-required = Voer een voornaam en achternaam in.
 set-name-saved = Je naam is opgeslagen.
 set-err-recent = Voor je veiligheid, voer je wachtwoord opnieuw in om verder te gaan.
 set-events-title = Recente beveiligingsactiviteit
+set-event-profile_created = Profiel gemaakt
+set-event-profile_deleted = Profiel verwijderd
+set-event-pin_set = Profielvergrendeling ingesteld
+set-event-pin_cleared = Profielvergrendeling verwijderd
+set-event-pin_locked = Profielvergrendeling geblokkeerd na te veel pogingen
+set-event-pin_reset = Profielvergrendeling hersteld
+set-event-main_profile_changed = Hoofdprofiel gewijzigd
 set-privacy-export = Mijn gegevens downloaden
 set-nav-overview = Overzicht
 set-back-to-app = Terug naar { $brand }
 set-title-playback = Afspelinstellingen
-set-title-notifications = Notificatieinstellingen
+set-title-notifications = Meldingsinstellingen
 set-playback-hint = Automatisch afspelen en voorbeeldbeelden instellen.
 set-playback-autoplay = Automatisch afspelen en overgangen
 set-notifications-hint = Beheer notificaties voor e-mail en push.
@@ -1819,7 +2037,7 @@ set-overview-profiles =
     *[other] { $count } profielen
 }
 set-security-access = Toegang en privacy
-set-privacy-hint = Beheer de gebruiksvoorwaarden van uw persoonlijke informatie
+set-privacy-hint = Beheer hoe je persoonlijke gegevens worden gebruikt
 set-profiles-parental = Beperkende instellingen en toestemmingen
 set-profiles-parental-hint = Stel de rijpheid, blokkeer titels
 set-profiles-settings = Profielinstellingen
@@ -1845,12 +2063,12 @@ set-title-speed-test = Internet snelheidstest
 set-title-testing = Deelname aan testen
 set-row-feature-testing = Functietests
 set-devices-account-access = Accounttoegang
-set-title-transfer = Profiel overbrengen
+set-title-transfer = Profieloverdracht
 set-title-transfer-profile = Een profiel overbrengen
 set-activity-for = Activiteit voor { $name }
 set-activity-hide = Verberg deze titel
 set-activity-hide-all = Alles verbergen
-set-activity-hidden = Verwijderd uit uw bekeken activiteit
+set-activity-hidden = Verwijderd uit je kijkactiviteit
 set-activity-download = Alles downloaden
 set-activity-report = Probleem melden
 set-csv-title = Titel
@@ -1860,6 +2078,14 @@ set-csv-date = Datum
 set-notify-email-hint = Berichten over nieuwe aankomsten en updates
 set-notify-push-hint = Notificaties op dit apparaat
 set-topics-title = Wat je hoort over
+set-topic-new_arrivals = Nieuw binnen
+set-topic-new_arrivals-hint = Series en films die net zijn toegevoegd.
+set-topic-recommendations = Aanbevelingen
+set-topic-recommendations-hint = Suggesties die voor dit profiel zijn gekozen.
+set-topic-reminders = Herinneringen
+set-topic-reminders-hint = Titels die je hebt gestart en nieuwe afleveringen van series die je kijkt.
+set-topic-news = Nieuws van { $brand }
+set-topic-news-hint = Nieuwe functies en veranderingen in de dienst.
 set-push-denied = Notificaties zijn geblokkeerd voor deze site in je browser. Stel ze in de browser instellingen in, dan probeer het opnieuw.
 set-push-unsupported = Deze browser kan geen notificaties tonen.
 set-usage-title = Gebruik van data per scherm
@@ -1903,6 +2129,12 @@ set-personal-info-hint = Vraag een kopie van je persoonlijke informatie aan
 set-personal-info-body = Je kunt vragen om een kopie van de persoonlijke informatie die we over je account bewaren. Het bestand bevat:
 set-personal-info-done = Je bestand is opgeslagen.
 set-personal-info-note = Het bestand blijft op je apparaat. Het kan persoonlijke informatie bevatten, dus houd het veilig.
+set-personal-info-account = Je accountgegevens: naam, e-mailadres en telefoonnummer
+set-personal-info-profiles = Je profielen en hun voorkeuren
+set-personal-info-lists = Mijn lijst en de beoordelingen van elk profiel
+set-personal-info-history = Voortgang en kijkactiviteit van elk profiel
+set-personal-info-settings = Je instellingen en keuzes, zoals meldingen en cookies
+set-personal-info-security = Recente inlogs en beveiligingsactiviteit
 set-testing-body = Soms testen we nieuwe functies met een klein groepje voordat iedereen ze krijgt.
 set-testing-switch = Voeg me toe aan tests en voorbeelden
 set-testing-hint = Schakel dit uit om op de huidige versie van elke functie te blijven.
@@ -1920,11 +2152,11 @@ set-password-hide = Wachtwoord verbergen
 set-device-name = { $browser } op { $system }
 set-device-unknown = Onbekend apparaat
 set-device-last = Laatst actief { $time }
-set-device-sign-out = Afmelden van deze device
-set-device-sign-out-body = Deze browser wordt afgemeld van uw account.
+set-device-sign-out = Uitloggen op dit apparaat
+set-device-sign-out-body = Deze browser wordt uitgelogd van je account.
 set-device-signed-out = Device afgemeld
 set-devices-list-note = Deze lijst kan onvolledig zijn. Sommige devices worden niet getoond en bepaalde deviceactiviteit kan niet worden getoond.
-set-check-intro = Test uw internetverbinding op problemen die u kunnen belemmeren bij het gebruik van { $brand }.
+set-check-intro = Test je internetverbinding op problemen die je kunnen hinderen bij het gebruik van { $brand }.
 set-check-start = Test starten
 set-check-internet = Internetverbinding
 set-check-service = Streamingservice
@@ -1932,16 +2164,16 @@ set-check-images = Beeldmateriaal en posters
 set-check-engine = Aanbevelingen
 set-check-ms = { $ms } ms
 set-check-all-ok = Alles werkt goed.
-set-check-some-failed = Enkele controles zijn mislukt. Probeer opnieuw of controleer uw verbinding.
+set-check-some-failed = Sommige controles zijn mislukt. Probeer het opnieuw of controleer je verbinding.
 set-spec-drm-title = Digitale rechtenbeheer
 set-spec-playback-title = Afspelen
 set-spec-resolution = Maximale afspelresolutie
 set-spec-help = Help Center
-set-speed-intro = Deze test downloadt een bestand en meet hoe snel uw verbinding het levert.
+set-speed-intro = Deze test downloadt een bestand en meet hoe snel je verbinding het binnenhaalt.
 set-speed-unit = Mbps
 set-speed-running = Testen…
 set-speed-again = Opnieuw testen
-set-speed-failed = De test kon niet voltooien. Controleer uw verbinding en probeer opnieuw.
+set-speed-failed = De test kon niet worden afgerond. Controleer je verbinding en probeer het opnieuw.
 set-licences-search = Zoek pakketten of licenties
 set-transfer-turn-off = Profieloverdracht uitschakelen
 set-transfer-turn-on = Profieloverdracht inschakelen
@@ -1969,6 +2201,13 @@ set-device-timezone = Tijdzone
 set-device-screen = Scherm
 set-device-language = Taal
 set-device-countries-note = Dit apparaat is verbonden vanuit meer dan één land: { $countries }. Een VPN of reis kan dit veroorzaken. Een apparaat wordt herkend door zijn browser, niet door waar het vanaf verbonden is, dus het is nog steeds hetzelfde apparaat.
+set-device-type-desktop = Computer
+set-device-type-mobile = Telefoon
+set-device-type-tablet = Tablet
+set-device-type-other = Ander apparaat
+set-event-new_device = Nieuw apparaat ingelogd
+set-event-device_new_country = Een apparaat maakte verbinding vanuit een nieuw land
+set-event-session_revoked = Een apparaat is uitgelogd
 email-footer = Verzonden door { $brand }. Vragen? Lees het Help Center of schrijf naar { $help_email }.
 email-help-center = Help Center
 email-ignore = Als je deze niet hebt aangevraagd, kun je deze e-mail negeren.
@@ -1984,7 +2223,7 @@ email-recovery-subject = Wachtwoord opnieuw instellen voor { $brand }
 email-recovery-title = Wachtwoord opnieuw instellen
 email-recovery-body = We kregen een aanvraag om het wachtwoord van je account opnieuw in te stellen. Gebruik de knop om een nieuw wachtwoord te kiezen. De link werkt één keer en verloopt snel.
 email-recovery-button = Kies een nieuw wachtwoord
-email-code-subject = Je { $brand } inlogcode
+email-code-subject = Je { $brand } inlogcode · { $code }
 email-code-title = Je inlogcode
 email-code-body = Voer deze code in om door te gaan. De code werkt één keer en verloopt in { $minutes } minuten.
 email-code-or-link = Of gebruik de knop om in te loggen.
@@ -1997,7 +2236,7 @@ email-invite-subject = Je bent uitgenodigd voor { $brand }
 email-invite-title = Je bent uitgenodigd
 email-invite-body = Accepteer de uitnodiging om je account te maken.
 email-invite-button = Uitnodiging accepteren
-email-reauth-subject = Je { $brand } bevestigingscode
+email-reauth-subject = Je { $brand } bevestigingscode · { $code }
 email-reauth-title = Je bevestigingscode
 email-reauth-body = Voer deze code in om te bevestigen dat het jouw bent. Het werkt slechts één keer en verloopt snel.
 email-device-subject = Nieuw apparaat ingelogd op je { $brand } account
@@ -2010,7 +2249,7 @@ help-pagination-label = Paginatie
 age-badge-all = Allemaal
 age-aria-all = Toegankelijk voor alle leeftijden
 age-aria-plus = Toegankelijk voor leeftijden { $age } en ouder
-set-rating-system-title = Beoordelingslabels
+set-rating-system-title = Classificatiesysteem
 set-rating-system-hint = Welke leeftijdsbeoordelingslabels je leest. Automatisch volgt het land van het apparaat waarvan je ingelogd bent.
 set-rating-system-auto = Automatisch
 set-rating-system-uk = Verenigd Koninkrijk (U, PG, 12, 15, 18)
@@ -2019,8 +2258,8 @@ row-continue-watching = Doorgaan met bekijken
 row-my-list = Mijn lijst
 row-because-you-watched = Omdat je { $title } hebt bekeken
 row-more-like = Meer zoals { $title }
-row-todays-top-picks = Vandaag's topkeuzes voor jou
-row-your-next-watch = Je volgende aflevering
+row-todays-top-picks = Topkeuzes van vandaag voor jou
+row-your-next-watch = Om hierna te kijken
 row-gems-for-you = Perlen voor jou
 row-we-think-youll-love = We denken dat je deze zult houden
 row-familiar-favourites = Vertrouwde favorieten
@@ -2077,6 +2316,13 @@ hook-in-the-mood-for = In de stemming voor { $mood }?
 hook-late-night = Gemaakt voor late nachten
 hook-for-season = Perfect voor { $label }
 hook-family = Zoek met de hele familie
+hook-kids-top10-series = Nr. { $rank } in Series voor kinderen
+hook-kids-top10-films = Nr. { $rank } in Films voor kinderen
+hook-decade-favourite = Een favoriet uit de { $decade }
+hook-global-hit = Een wereldwijde hit
+hook-family-favourite = Een favoriet voor het hele gezin
+hook-little-ones = Leuk voor de kleintjes
+hook-big-kids = Voor grotere kinderen
 hook-emmy-winner = Emmy winnaar
 hook-emmy-nominee = Emmy genomineerd
 hook-oscar-winner = Oscar winnaar
@@ -2165,7 +2411,7 @@ tour-new-title = Zie wat er nieuw is
 tour-new-text = Nieuw & Populair toont wat net aangekomen is, wat er snel komt en wat iedereen kijkt.
 tour-list-title = Titels opslaan voor later
 tour-list-text = Sla een titel op in Mijn Lijst en het wacht op je hier.
-media-play-series = Reeks afspelen
+media-play-series = Serie afspelen
 media-play-film = Film afspelen
 nav-all-categories = Alle categorieën
 navbar-mobile-back = Terug
@@ -2250,7 +2496,7 @@ set-po-lock-hint = PIN vereist om toegang te krijgen tot dit profiel
 set-po-preferences = Voorkeuren
 set-po-languages = Talen
 set-po-languages-hint = Talen instellen voor weergave en audio
-set-po-restrictions = Ouderschapscontroles aanpassen
+set-po-restrictions = Ouderlijk toezicht aanpassen
 set-po-restrictions-hint = Leeftijdsclassificatie en titelbeperkingen bewerken
 set-po-subtitles-hint = Pas de weergave van ondertiteling aan
 set-po-playback-hint = Stel autoplay en audio- en videokwaliteit in

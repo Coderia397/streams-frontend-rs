@@ -171,6 +171,35 @@ for lang in [ONLY] if ONLY else LANGS:
     for k, p in broken[:40]:
         problem(f"{lang} structure", f"{k}: {p[:160]}")
 
+print("== link texts match the titles they point to")
+for lang in ["en"] + ([ONLY] if ONLY else LANGS):
+    d = load(lang)
+    bad = 0
+    for k, v in d.items():
+        if not k.startswith("help-art-") or not k.endswith("-body"):
+            continue
+        for slug, text in re.findall(r"<a=/help/article/([a-z0-9-]+)>([^<]*)</a>", v):
+            title = d.get(f"help-art-{slug}-title", en.get(f"help-art-{slug}-title", ""))
+            # a link may be a short phrase (\"tell us\"); only a text that looks like a title (four words or more) must be the title
+            if len(text.split()) >= 4 and text.strip() != title.strip():
+                bad += 1
+                problem(f"{lang} link text", f"{k}: '{text}' links {slug} titled '{title}'")
+    print(f"  {lang}: {bad} link texts differ from the title")
+
+print("== quoted interface text and scripts")
+SCRIPTS = {"cjk": r"[\u4e00-\u9fff]", "kana": r"[\u3040-\u30ff]", "hangul": r"[\uac00-\ud7af]", "cyrillic": r"[\u0400-\u04ff]", "arabic": r"[\u0600-\u06ff]", "devanagari": r"[\u0900-\u097f]"}
+OWN = {"ja": {"cjk", "kana"}, "zh": {"cjk"}, "ko": {"hangul", "cjk"}, "ru": {"cyrillic"}, "ar": {"arabic"}, "hi": {"devanagari"}}
+for lang in ["en"] + ([ONLY] if ONLY else LANGS):
+    d = load(lang)
+    body = d.get("help-art-playback-unavailable-body", "")
+    for key in ("player-unavailable", "player-error-no-source"):
+        if d.get(key) and d[key] not in body:
+            problem(f"{lang} quote", f"help-art-playback-unavailable-body does not quote {key} as the player shows it")
+    for k, v in d.items():
+        for name, rx in SCRIPTS.items():
+            if name not in OWN.get(lang, set()) and re.search(rx, v):
+                problem(f"{lang} script", f"{k}: {name} characters in a {lang} message")
+
 print("== old names")
 for f in sorted((ROOT / "i18n").glob("*.ftl")):
     for n, line in enumerate(f.read_text().split("\n"), 1):

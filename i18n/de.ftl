@@ -26,7 +26,7 @@ category-sub-nav-mobile-series = Serien
 choose-icon-back = Zurück
 clips-clips = Clips
 continue-watching-options-sheet-cancel = Abbrechen
-continue-watching-options-sheet-remove-from-continue-watching = Aus 'Weiterschauen' entfernen
+continue-watching-options-sheet-remove-from-continue-watching = Aus „Weiterschauen“ entfernen
 continue-watching-row-continue-watching = Weiterschauen
 continue-watching-row-scroll-left = Nach links scrollen
 continue-watching-row-scroll-right = Nach rechts scrollen
@@ -47,7 +47,7 @@ login-email-address = E-Mail-Adresse
 login-get-started = Loslegen
 login-password = Passwort
 login-ready-to-watch-enter-your = Bereit zum Schauen? E-Mail-Adresse eingeben, um ein Konto zu erstellen oder zu starten.
-login-sign-in = Einloggen
+login-sign-in = Anmelden
 login-unlimited-films-series-and-more = Unbegrenzte Filme, Serien und mehr
 mod-finding-optimal-stream = Optimalen Stream wird gesucht...
 mod-retry = Erneut versuchen
@@ -152,7 +152,7 @@ help-topic-fix = Problem beheben
 help-topic-watching = Schauen
 help-topic-start = Erste Schritte
 help-group-profiles = Profile
-help-group-account-data = Konto und Daten
+help-group-account-data = Ihre Daten und Ihr Datenschutz
 help-group-paying = Zahlung für { $brand }
 help-group-playback-issues = Wiedergabeprobleme
 help-group-device-issues = Browser und Geräte
@@ -164,159 +164,196 @@ help-group-about = Über { $brand }
 help-group-setup = Geräteeinrichtung
 help-group-reporting = Meldungen und Rechtliches
 help-art-profiles-manage-title = Profile erstellen, bearbeiten oder löschen
-help-art-profiles-manage-summary = Fügen Sie für jede Person ein Profil hinzu, ändern Sie einen Namen oder ein Icon, aktivieren Sie eine PIN oder entfernen Sie ein Profil, das Sie nicht mehr benötigen.
+help-art-profiles-manage-summary = Legen Sie für jede Person ein Profil an, ändern Sie Namen oder Bild, sperren Sie ein Profil oder löschen Sie eines, das Sie nicht mehr brauchen.
 help-art-profiles-manage-keywords = profil profile hinzufügen erstellen bearbeiten löschen entfernen name icon avatar wer schaut
 help-art-profiles-manage-body =
-    Jede Person, die { $brand } auf diesem Gerät nutzt, kann ein eigenes Profil mit eigenem Namen, Icon, Liste und Empfehlungen anlegen.
+    Jede Person in Ihrem Haushalt kann ein Profil mit eigenem Namen, Bild, eigener Meine Liste, Wiedergabeaktivität und eigenen Empfehlungen haben. Ein Konto bietet Platz für bis zu 5 Profile.
 
     ## Profil hinzufügen
-    1. Öffnen Sie das Profilmenü oben rechts und wählen Sie <b>Profile verwalten</b> aus, oder öffnen Sie den Bildschirm <b>Wer schaut?</b>.
+    1. Öffnen Sie oben rechts das Profilmenü und wählen Sie <b>Profile verwalten</b>, oder wählen Sie <b>Profile verwalten</b> auf dem Bildschirm <b>Wer schaut?</b>.
     2. Wählen Sie <b>Profil hinzufügen</b>.
-    3. Geben Sie einen Namen ein, wählen Sie ein Icon und klicken Sie auf <b>Speichern</b>.
+    3. Geben Sie einen Namen ein und wählen Sie ein Bild. Schalten Sie <b>Kinderprofil</b> ein, wenn das Profil für ein Kind ist.
+    4. Wählen Sie <b>Speichern</b>.
 
     ## Profil bearbeiten oder löschen
-    1. Öffnen Sie <b>Profile verwalten</b>.
-    2. Wählen Sie das Profil aus, das Sie ändern möchten.
-    3. Ändern Sie den Namen oder das Icon, aktivieren oder deaktivieren Sie die PIN- oder Kindereinstellung und wählen Sie <b>Speichern</b>. Um das Profil zu entfernen, wählen Sie <b>Profil löschen</b>.
+    1. Öffnen Sie <b>Profile verwalten</b> und wählen Sie das Profil, das Sie ändern möchten.
+    2. Ändern Sie Namen oder Bild, oder schalten Sie <b>Kinderprofil</b> oder <b>Profil-Sperre</b> ein oder aus, und wählen Sie dann <b>Speichern</b>.
+    3. Um das Profil zu entfernen, wählen Sie <b>Profil löschen</b>. Seine Wiedergabeaktivität und seine Einstellungen werden mit gelöscht.
 
-    !! Hinweis: Profile werden in diesem Browser auf diesem Gerät gespeichert. Siehe <a=/help/article/saved-data>Wo Ihre Profile, Liste und der Fortschritt gespeichert werden</a>.
+    Sprachen, Untertitel, Kindersicherung und die übrigen Einstellungen eines Profils finden Sie unter <b>Konto</b> und dort unter <b>Profile verwalten</b>.
+
+    !! Hinweis: Profile werden in Ihrem Konto gespeichert. Sie erscheinen also auf jedem Gerät, auf dem Sie sich anmelden.
 
     @@ profiles
 
-    >> Profil kann nicht gelöscht werden
-    Sie müssen mindestens ein Profil behalten. Erstellen Sie zuerst ein anderes und löschen Sie dann das alte.
+    >> Ein Profil lässt sich nicht löschen
+    Das Hauptprofil, das Ihren Vornamen trägt, kann nicht gelöscht werden, und ein Konto behält immer mindestens ein Profil. Alle anderen Profile lassen sich löschen.
+
 help-art-switch-profile-title = So wechseln Sie das Profil
 help-art-switch-profile-summary = Ändern Sie, wer gerade schaut, ohne die Seite zu verlassen.
 help-art-switch-profile-keywords = wechseln ändern profil wer schaut menü
 help-art-switch-profile-body =
-    1. Öffnen Sie das Profilmenü oben rechts auf der Seite.
-    2. Wählen Sie das Profil aus, das Sie verwenden möchten.
-    3. Wenn das Profil eine PIN hat, geben Sie die vier Ziffern ein, um fortzufahren.
+    1. Öffnen Sie oben rechts auf der Seite das Profilmenü. Auf dem Smartphone tippen Sie unten in der Leiste auf Ihr Profilbild.
+    2. Wählen Sie das Profil, das Sie verwenden möchten.
+    3. Ist das Profil gesperrt, geben Sie seine 4-stellige PIN ein.
 
-    Empfehlungen, <b>Meine Liste</b> und <b>Weiterschauen</b> ändern sich je nach gewähltem Profil.
+    Empfehlungen, <b>Meine Liste</b> und <b>Weiterschauen</b> richten sich nach dem gewählten Profil.
 
-    !! Hinweis: Sie können ein Profil mit einer PIN sperren. Siehe <a=/help/article/profile-pin>So fügen Sie eine Profil-PIN hinzu, bearbeiten oder entfernen Sie sie</a>.
+    !! Hinweis: Sie können ein Profil mit einer PIN sperren. Siehe <a=/help/article/profile-pin>Profil-PIN hinzufügen, ändern oder entfernen</a>.
 
     @@ profiles
-help-art-profile-pin-title = So fügen Sie eine Profil-PIN hinzu, bearbeiten oder entfernen Sie sie
-help-art-profile-pin-summary = Sperren Sie ein Profil mit einer vierstelligen PIN, damit nur die richtige Person es öffnen kann.
-help-art-profile-pin-keywords = pin sperren profil sperrcode passwort vierstellig sicher
+
+help-art-profile-pin-title = Profil-PIN hinzufügen, ändern oder entfernen
+help-art-profile-pin-summary = Sperren Sie ein Profil mit einer 4-stelligen PIN, damit nur die richtige Person es öffnen kann.
+help-art-profile-pin-keywords = pin sperre profil-sperre code privat schützen profil kennwort
 help-art-profile-pin-body =
-    Eine Profil-PIN besteht aus vier Ziffern. Jeder, der das Profil auswählt, muss die PIN eingeben, bevor es geöffnet wird.
+    Eine Profil-Sperre fragt nach einer 4-stelligen PIN, bevor sich das Profil öffnet. Die PIN gehört zu Ihrem Konto und gilt deshalb auf jedem Gerät, auf dem Sie sich anmelden.
 
-    ## PIN aktivieren oder ändern
-    1. Öffnen Sie <b>Profile verwalten</b> und wählen Sie das Profil aus.
-    2. Aktivieren Sie <b>Profil-Sperre</b> und geben Sie vier Ziffern ein.
-    3. Wählen Sie <b>Speichern</b>.
+    ## Profil-Sperre einschalten
+    1. Öffnen Sie das Profilmenü, wählen Sie <b>Konto</b>, dann <b>Profile verwalten</b>, und wählen Sie das Profil.
+    2. Wählen Sie <b>Profil-Sperre</b> und geben Sie zur Bestätigung Ihr Kontopasswort ein.
+    3. Geben Sie vier Ziffern ein und wählen Sie <b>Speichern</b>.
 
-    ## PIN entfernen
-    1. Öffnen Sie <b>Profile verwalten</b>, wählen Sie das Profil aus und geben Sie die aktuelle PIN ein.
-    2. Deaktivieren Sie <b>Profil-Sperre</b> und wählen Sie <b>Speichern</b>.
+    Sie können die <b>Profil-Sperre</b> auch einschalten, wenn Sie in <b>Profile verwalten</b> ein Profil hinzufügen oder bearbeiten.
 
-    !! Hinweis: Die PIN wird auf diesem Gerät gespeichert und schützt das Profil in diesem Browser vor anderen Personen. Es ist keine starke Sperre gegen jemanden, der die Einstellungen Ihres Browsers öffnen kann. Wenn Sie sie vergessen haben, siehe <a=/help/article/forgot-pin>Ich habe meine Profil-PIN vergessen</a>.
+    ## PIN ändern oder entfernen
+    1. Öffnen Sie die <b>Profil-Sperre</b> des Profils wie oben beschrieben.
+    2. Wählen Sie <b>PIN ändern</b>, oder <b>Profil-Sperre entfernen</b> und geben Sie die aktuelle PIN ein.
+
+    !! Hinweis: Nach zu vielen Fehlversuchen bleibt das Profil eine Weile gesperrt. Wenn Sie die PIN vergessen haben, siehe <a=/help/article/forgot-pin>Ich habe meine Profil-PIN vergessen</a>.
 
     @@ profiles
-help-art-kids-profile-title = So erstellt man ein Kinderprofil
-help-art-kids-profile-summary = Ein Kinderprofil zeigt Titel für jüngere Zuschauer und hält den Rest fern.
+
+help-art-kids-profile-title = Ein Kinderprofil erstellen
+help-art-kids-profile-summary = Ein Kinderprofil zeigt Titel für Kinder und hält alles andere fern.
 help-art-kids-profile-keywords = Kinder Kinder Kind Familie Elternsteuerung sicher jung Profil
 help-art-kids-profile-body =
-    Ein Kinderprofil begrenzt die angezeigten Titel auf solche, die für jüngere Zuschauer geeignet sind, und entfernt erwachsene Reihen von den Seiten.
+    Ein Kinderprofil zeigt nur Titel, die für Kinder geeignet sind, mit einer eigenen Startseite und eigenen Menüs für Kinder.
 
     1. Öffnen Sie <b>Profile verwalten</b> und wählen Sie <b>Profil hinzufügen</b>.
-    2. Aktivieren Sie für dieses Profil den <b>Kindermodus</b>.
-    3. Wählen Sie einen Namen und ein Icon aus und klicken Sie auf <b>Speichern</b>.
+    2. Geben Sie einen Namen ein und schalten Sie <b>Kinderprofil</b> ein.
+    3. Wählen Sie <b>Speichern</b>.
 
-    Um zu verhindern, dass ein Kind zu einem anderen Profil wechselt, setzen Sie eine PIN auf jedes erwachsene Profil. Siehe <a=/help/article/profile-pin>So fügen Sie eine Profil-PIN hinzu, bearbeiten oder entfernen Sie sie</a>.
+    Um ein vorhandenes Profil in ein Kinderprofil umzuwandeln, bearbeiten Sie es und schalten Sie <b>Kinderprofil</b> ein. Das Hauptprofil kann kein Kinderprofil sein.
 
-    !! Hinweis: Titel stammen aus unabhängigen Quellen und nicht jeder Titel trägt eine Altersfreigabe. Ein Kinderprofil reduziert, was ein Kind finden kann. Es ersetzt nicht das gemeinsame Schauen.
+    Um die Kinderseiten zu verlassen, wählen Sie <b>Kinderprofil verlassen</b> und dann ein anderes Profil. Damit ein Kind nicht wechseln kann, sperren Sie die anderen Profile mit einer PIN. Siehe <a=/help/article/profile-pin>Profil-PIN hinzufügen, ändern oder entfernen</a>.
+
+    Für ältere Kinder können Sie stattdessen bei jedem Profil eine Altersfreigabe festlegen. Siehe <a=/help/article/parental-controls>Kindersicherung: Altersfreigaben und gesperrte Titel</a>.
+
+    !! Hinweis: Die Titel stammen aus unabhängigen Quellen, und nicht jeder Titel hat eine Altersfreigabe. Ein Kinderprofil schränkt ein, was ein Kind finden kann. Gemeinsames Schauen ersetzt es nicht.
 
     @@ profiles
+
 help-art-need-account-title = Brauche ich ein Konto?
-help-art-need-account-summary = Man kann stöbern und schauen, ohne eines zu haben. Hier ist, was ein Konto dazu beiträgt.
+help-art-need-account-summary = Ja, ein kostenloses Konto. Das speichert es für Sie.
 help-art-need-account-keywords = Konto registrieren anmelden Login erforderlich Mitgliedschaft
 help-art-need-account-body =
-    Man braucht kein Konto, um auf { $brand } zu stöbern, zu suchen oder zu schauen.
+    Ja. Sie brauchen ein kostenloses Konto, um auf { $brand } zu schauen. Es ist in einer Minute angelegt und fragt nie nach Zahlungsdaten.
 
-    Heute werden Ihre Profile, Ihre Liste und Ihr Fortschritt in diesem Browser auf diesem Gerät gespeichert. Konten, die sie über Ihre Geräte hinweg synchronisieren, werden gerade erstellt. Bis sie verfügbar sind, ist die Anmeldeseite eine Vorschau und erstellt kein echtes Konto.
+    1. Geben Sie auf der Startseite von { $brand } Ihre E-Mail-Adresse ein und wählen Sie <b>Loslegen</b>.
+    2. Geben Sie Vor- und Nachnamen ein und wählen Sie ein Passwort mit mindestens 8 Zeichen.
+    3. Öffnen Sie den Link aus unserer E-Mail, um Ihre Adresse zu bestätigen, und melden Sie sich dann an.
 
-    !! Hinweis: { $brand } fragt niemals nach einer Kartenummer, um ein Konto zu erstellen. Siehe <a=/help/article/free-to-use>Ist { $brand } kostenlos?</a>
-help-art-sign-in-title = Ein- und Ausloggen
-help-art-sign-in-summary = Was die Anmeldeseite heute tut und was zu tun ist, wenn sie nicht wie erwartet funktioniert.
-help-art-sign-in-keywords = einloggen anmelden abmelden Passwort E-Mail kann mich nicht anmelden
+    Ihr Konto speichert Ihre Profile, Meine Liste, Ihre Bewertungen, Ihre Wiedergabeaktivität und Ihre Einstellungen, sodass sie auf jedem Gerät gleich sind, auf dem Sie sich anmelden. Ihr Vorname wird zum Namen Ihres Hauptprofils.
+
+    !! Hinweis: { $brand } ist kostenlos und fragt nie nach einer Kartennummer. Siehe <a=/help/article/free-to-use>Ist { $brand } kostenlos?</a>
+
+help-art-sign-in-title = An- und Abmelden
+help-art-sign-in-summary = Mit E-Mail und Passwort anmelden, angemeldet bleiben und abmelden.
+help-art-sign-in-keywords = anmelden einloggen login abmelden ausloggen angemeldet bleiben e-mail passwort konto
 help-art-sign-in-body =
-    Die Anmeldeseite ist eine Vorschau der Konten, die gerade erstellt werden. Wenn Sie fortfahren, gelangen Sie zu Ihren Profilen auf diesem Gerät. Es wird noch kein Passwort oder keine E-Mail-Adresse überprüft.
+    ## Anmelden
+    1. Wählen Sie oben auf der Startseite von { $brand } <b>Anmelden</b>.
+    2. Geben Sie Ihre E-Mail-Adresse und Ihr Passwort ein und wählen Sie <b>Anmelden</b>.
 
-    ## Ausloggen
-    Öffnen Sie das Profilmenü und wählen Sie <b>Ausloggen</b>. Ihre gespeicherten Profile bleiben auf diesem Gerät.
+    Lassen Sie <b>Angemeldet bleiben</b> eingeschaltet, um auf diesem Gerät angemeldet zu bleiben. Wenn Sie sich vor Kurzem von diesem Gerät abgemeldet haben, können Sie fortfahren, ohne Ihr Passwort erneut einzugeben.
 
-    ## Einloggen funktioniert nicht
-    - Laden Sie die Seite neu und versuchen Sie es erneut.
-    - Stellen Sie sicher, dass der Browser es dieser Seite erlaubt, Daten zu speichern. Siehe <a=/help/article/saved-data>Wo Ihre Profile, Liste und Ihr Fortschritt gespeichert werden</a>.
-    - Wenn das Problem weiterhin besteht, schreiben Sie uns über die Seite <a=/help/contact>Kontakt</a>.
-help-art-saved-data-title = Wo Profile, Liste und Fortschritt gespeichert werden
-help-art-saved-data-summary = Profile, PINs und Sehfortschritt werden in diesem Browser auf diesem Gerät gespeichert.
+    ## Abmelden
+    Öffnen Sie das Profilmenü und wählen Sie <b>Abmelden von { $brand }</b>. Um sich überall auf einmal abzumelden, siehe <a=/help/article/devices-sign-out>Von einem Gerät oder allen Geräten abmelden</a>.
+
+    ## Die Anmeldung funktioniert nicht
+    - Prüfen Sie die E-Mail-Adresse auf Tippfehler. Beim Passwort wird zwischen Groß- und Kleinschreibung unterschieden.
+    - Wenn Sie sich gerade registriert haben, öffnen Sie zuerst den Bestätigungslink aus unserer E-Mail. <b>Bestätigungs-E-Mail erneut senden</b> schickt einen neuen.
+    - Warten Sie nach zu vielen Versuchen eine Minute und versuchen Sie es erneut.
+    - Passwort vergessen? Siehe <a=/help/article/forgot-password>Ich habe mein Passwort vergessen</a>.
+
+help-art-saved-data-title = Wo Ihre Profile, Ihre Liste und Ihr Fortschritt gespeichert sind
+help-art-saved-data-summary = Ihr Konto speichert sie, und jeder Browser behält eine Kopie, damit Seiten schnell öffnen.
 help-art-saved-data-keywords = gespeicherte Daten Speicherung lokaler Browser Gerät verloren Synchronisierung Fortschritt Verlauf Profile Cookies
 help-art-saved-data-body =
-    { $brand } speichert Profile, PINs und Sehfortschritt im lokalen Speicher des Browsers auf dem verwendeten Gerät. Noch wird nichts davon auf ein Konto hochgeladen.
+    Ihre Profile, Meine Liste, Ihre Bewertungen, Ihre Wiedergabeaktivität und Ihre Einstellungen werden in Ihrem Konto gespeichert. Jeder Browser, in dem Sie angemeldet sind, behält eine Kopie. So öffnen sich Seiten sofort und funktionieren eine Weile auch ohne Verbindung. Änderungen erreichen Ihr Konto innerhalb weniger Sekunden und Ihre anderen Geräte, sobald Sie { $brand } dort öffnen.
 
     ## Was das bedeutet
-    - Ein anderer Browser oder ein anderes Gerät startet ohne Profile und ohne Fortschritt.
-    - Private oder Inkognito-Fenster vergessen alles, wenn sie geschlossen werden.
-    - Das Löschen der Seitendaten im Browser entfernt Profile und Fortschritt.
-    - Die Liste bleibt so lange erhalten, bis Konten verfügbar sind.
+    - Melden Sie sich auf einem anderen Gerät an, und alles ist da.
+    - Wenn Sie die Websitedaten in einem Browser löschen, werden Sie dort abgemeldet und diese Kopie wird entfernt. Ihr Konto behält alles.
+    - In einem privaten Fenster wird die Kopie beim Schließen des Fensters entfernt.
 
-    ## Was an unsere Server gesendet wird
-    Wenn ein Titel geöffnet oder gestartet wird, teilt die App dem Empfehlungsdienst mit, um welchen Titel es sich handelt, zusammen mit einer zufälligen Sitzungsnummer, die nicht mit dem Namen verknüpft ist. Zeilen passen sich etwa einen Tag lang an, nachdem die Nutzung gestoppt wurde. Siehe <a=/help/article/recommendations>So funktionieren Empfehlungen</a>.
+    ## Was sonst noch an unsere Server geht
+    Wenn Sie einen Titel starten, erfährt der Empfehlungsdienst, welcher es war, damit Ihre Reihen Ihrem Geschmack folgen. Sie können das unter <b>Datenschutz- und Dateneinstellungen</b> mit <b>Personalisierte Empfehlungen</b> ausschalten. Siehe <a=/help/article/recommendations>So funktionieren Empfehlungen</a>.
 
     @@ data
-help-art-clear-data-title = So werden gespeicherte Daten gelöscht
-help-art-clear-data-summary = Profile, PINs und Sehfortschritt aus diesem Browser entfernen.
+
+help-art-clear-data-title = Gespeicherte Daten löschen
+help-art-clear-data-summary = Entfernen Sie, was dieser Browser für { $brand } speichert, oder löschen Sie Daten aus Ihrem Konto.
 help-art-clear-data-keywords = löschen entfernen zurücksetzen Daten Verlauf Cache Speicherung Cookies neu starten
 help-art-clear-data-body =
-    Das Löschen der Seitendaten entfernt jedes Profil, jede PIN und jeden Sehverlauf, den { $brand } in diesem Browser gespeichert hat. Das kann nicht rückgängig gemacht werden.
+    Wenn Sie die Websitedaten in einem Browser löschen, werden Sie dort abgemeldet und die Kopie Ihrer Profile und Einstellungen in diesem Browser wird entfernt. In Ihrem Konto bleibt alles erhalten und kommt zurück, wenn Sie sich wieder anmelden.
 
     ## Chrome, Edge und Brave
-    1. Das Informations-Symbol der Website in der Adressleiste öffnen und <b>Cookies und Seitendaten</b> wählen, dann <b>Seitendaten auf dem Gerät verwalten</b>.
-    2. Den Eintrag für diese Website entfernen.
+    1. Wählen Sie links in der Adressleiste das Symbol für Websiteinformationen und dann <b>Cookies und Websitedaten</b>, danach <b>Websitedaten auf dem Gerät verwalten</b>.
+    2. Entfernen Sie die Einträge für diese Website.
 
     ## Firefox
-    1. Das Schloss-Symbol in der Adressleiste öffnen und <b>Cookies und Seitendaten löschen</b> wählen.
+    1. Wählen Sie das Schloss-Symbol in der Adressleiste und dann <b>Cookies und Website-Daten löschen</b>.
 
-    ## Safari
-    1. <b>Einstellungen</b> öffnen, dann <b>Privatsphäre</b>, dann <b>Website-Daten verwalten</b>.
-    2. Diese Website finden und <b>Entfernen</b> wählen.
+    ## Safari auf dem Mac
+    1. Öffnen Sie <b>Safari</b>, dann <b>Einstellungen</b>, <b>Datenschutz</b> und <b>Websitedaten verwalten</b>.
+    2. Suchen Sie diese Website und wählen Sie <b>Entfernen</b>.
 
-    Um nur den Sehverlauf zu entfernen, siehe <a=/help/article/viewing-history>So wird der Sehverlauf verwaltet</a>.
+    ## Safari auf iPhone und iPad
+    Öffnen Sie die App <b>Einstellungen</b>, dann <b>Apps</b>, <b>Safari</b>, <b>Erweitert</b>, <b>Website-Daten</b>, und entfernen Sie diese Website.
+
+    ## Daten aus Ihrem Konto löschen
+    - Um Titel aus Ihrer Wiedergabeaktivität zu entfernen, siehe <a=/help/article/viewing-history>Ihren Wiedergabeverlauf verwalten</a>.
+    - Um ein Profil zu löschen, siehe <a=/help/article/profiles-manage>Profile erstellen, bearbeiten oder löschen</a>.
+    - Um alles zu löschen, siehe <a=/help/article/delete-account>Ihr Konto löschen</a>.
 
     @@ data
+
 help-art-privacy-data-title = Welche Daten sammelt { $brand }?
 help-art-privacy-data-summary = Eine kurze Zusammenfassung dessen, was gespeichert und gesendet wird, und wo die vollständige Richtlinie zu finden ist.
 help-art-privacy-data-keywords = Datenschutz Daten sammeln persönliche Informationen Tracking verkaufen teilen Cookies Analysen
 help-art-privacy-data-body =
-    Wir verkaufen keine personenbezogenen Daten. Hier die Kurzversion. Die <a=/privacy>Datenschutzerklärung</a> enthält den vollständigen Text.
+    Wir verkaufen keine personenbezogenen Daten und zeigen keine Werbung. Hier die Kurzfassung. Die <a=/privacy>Datenschutzerklärung</a> enthält den vollständigen Text.
 
-    ## Auf Ihrem Gerät gespeichert
-    Profile, PINs, Ihre gewählte Sprache und der Fortschritt beim Ansehen.
+    ## Was Ihr Konto speichert
+    Ihren Namen, Ihre E-Mail-Adresse, eine optionale Telefonnummer, Ihre Profile, Meine Liste, Ihre Bewertungen, Ihre Wiedergabeaktivität und Ihre Einstellungen, dazu eine Liste der letzten Anmeldungen und der Geräte, von denen sie kamen.
 
-    ## Gesendet, wenn Sie die App nutzen
-    - Anfragen für Titel, Bilder und Details gehen an einen Katalogdienst und an unseren Empfehlungsdienst.
-    - Wenn Sie einen Titel öffnen oder starten, erhält der Empfehlungsdienst den Titel und eine zufällige Sitzungsnummer. Er speichert ein kleines Geschmacksprofil für etwa einen Tag im Speicher und löscht es dann.
-    - Wiedergabeanfragen gehen an unabhängige Drittanbieterquellen, die Ihre IP-Adresse wie bei jeder anderen Website sehen.
+    ## Was bei der Nutzung gesendet wird
+    - Anfragen nach Titeln, Bildern und Details gehen an einen öffentlichen Filmkatalog und an unseren Empfehlungsdienst.
+    - Wenn Sie einen Titel starten, erfährt der Empfehlungsdienst, welcher es war, damit Ihre Reihen Ihrem Geschmack folgen. Schalten Sie das mit <b>Personalisierte Empfehlungen</b> unter <b>Datenschutz- und Dateneinstellungen</b> aus.
+    - Videos kommen von unabhängigen Drittquellen, Trailer von YouTube. Sie sehen Ihre IP-Adresse wie jede Website, die Sie besuchen.
 
-    Zu Cookies siehe die <a=/cookies>Cookie-Richtlinie</a>. Um die auf Ihrem Gerät gespeicherten Daten zu löschen, siehe <a=/help/article/clear-data>So löschen Sie Ihre gespeicherten Daten</a>.
+    ## Ihre Möglichkeiten
+    - Laden Sie eine Kopie Ihrer Daten herunter. Siehe <a=/help/article/download-data>Eine Kopie Ihrer Daten herunterladen</a>.
+    - Löschen Sie Ihr Konto, wann immer Sie möchten. Siehe <a=/help/article/delete-account>Ihr Konto löschen</a>.
+
+    Zu Cookies und Browserspeicher siehe die <a=/cookies>Cookie-Richtlinie</a>.
 
     @@ cookies
 
     @@ data
+
 help-art-free-to-use-title = Ist { $brand } kostenlos?
 help-art-free-to-use-summary = Bei { $brand } ist nichts zu bezahlen.
 help-art-free-to-use-keywords = kostenlos preis kosten bezahlen zahlung abonnement rechnung karte kredit plan testphase
 help-art-free-to-use-body =
-    { $brand } berechnet keine Gebühren, bietet kein Abonnement an und fragt nach keinen Kartendaten. Es gibt keine Pläne, Testphasen oder Rechnungsdaten.
+    { $brand } erhebt keine Gebühren, bietet kein Abo an und fragt nicht nach Kartendaten. Es gibt keine Tarife, Testphasen oder Abrechnungstermine.
 
-    Wenn eine Seite, E-Mail oder Nachricht behauptet, von { $brand } zu sein, und zur Zahlung auffordert, stammt sie nicht von uns. Keine Zahlungsdaten eingeben. An <a=mailto:{ $help_email }>{ $help_email }</a> weiterleiten, dann wird sich darum gekümmert.
+    Wenn eine Seite, E-Mail oder Nachricht vorgibt, von { $brand } zu sein, und Sie zum Bezahlen auffordert, stammt sie nicht von uns. Geben Sie keine Zahlungsdaten ein. Leiten Sie sie an <a=mailto:{ $help_email }>{ $help_email }</a> weiter, und wir kümmern uns darum.
 
-    { $brand } ist ein Index von Links zu Titeln, die von anderen Diensten gehostet werden. Ob ein Dienst für seine eigenen Inhalte Gebühren erhebt, liegt in der Entscheidung dieses Dienstes. Siehe <a=/help/article/sources>Woher Titel stammen</a>.
+    { $brand } ist ein Verzeichnis von Links zu Titeln, die andere Dienste bereitstellen. Ob ein Dienst für seine eigenen Inhalte Geld verlangt, entscheidet dieser Dienst. Siehe <a=/help/article/sources>Woher die Titel kommen</a>.
+
 help-art-wont-play-title = Ein Titel lässt sich nicht abspielen
 help-art-wont-play-summary = Die schnellsten Lösungen, wenn der Player einen Fehler anzeigt, schwarz bleibt oder nie startet.
 help-art-wont-play-keywords = spielt nicht ab lässt sich nicht abspielen fehler kann nicht abspielen video schlägt fehl laden spinner hängt player
@@ -337,7 +374,7 @@ help-art-playback-unavailable-title = { $brand } zeigt "Wiedergabe nicht verfüg
 help-art-playback-unavailable-summary = Was die Nachricht bedeutet und was als Nächstes zu tun ist.
 help-art-playback-unavailable-keywords = Wiedergabe nicht verfügbar Fehlermeldung Streaming nicht möglich Anbieter nicht unterstützt
 help-art-playback-unavailable-body =
-    Sie sehen möglicherweise <b>Wiedergabe nicht verfügbar</b> oder <b>Video kann nicht gestreamt werden. Alle Quellanbieter waren nicht verfügbar oder von Ihrem Browser nicht unterstützt.</b>
+    Sie sehen möglicherweise <b>Wiedergabe nicht verfügbar</b> oder <b>Video kann nicht gestreamt werden. Alle Quellenanbieter waren nicht verfügbar oder werden von Ihrem Browser nicht unterstützt.</b>
 
     Das bedeutet, dass der Player jede Quelle, die er für diesen Titel kennt, angefragt hat und keine einen Stream zurückgegeben hat, den Ihr Browser abspielen kann.
 
@@ -346,9 +383,10 @@ help-art-playback-unavailable-body =
     3. Versuchen Sie einen anderen Browser. Einige Streams benötigen Funktionen, die in älteren Browsern fehlen.
     4. Versuchen Sie einen anderen Titel, um zu prüfen, ob das Problem nur bei diesem vorliegt.
 
-    Wenn derselbe Titel einen Tag lang fehlschlägt, <a=/help/article/report-bug>teilen Sie es uns mit</a>. Geben Sie den Titel, das Jahr und den verwendeten Browser an.
+    Wenn derselbe Titel einen Tag lang fehlschlägt, <a=/help/article/report-bug>Problem melden</a>. Geben Sie den Titel, das Jahr und den verwendeten Browser an.
 
     @@ diagnostics
+
 help-art-black-screen-title = Schwarzer Bildschirm mit Ton
 help-art-black-screen-summary = Das Bild fehlt, aber Sie hören den Titel.
 help-art-black-screen-keywords = schwarzer Bildschirm kein Bild nur Audio Video fehlt leerer grüner Bildschirm
@@ -363,8 +401,8 @@ help-art-black-screen-body =
 
     @@ diagnostics
 help-art-buffering-title = Pufferung, Einfrieren oder langsamer Start
-help-art-buffering-summary = Verbessern Sie einen Stream, der ständig pausiert, um zu laden.
-help-art-buffering-keywords = buffering lag slow freezing stutter loading spinner connection speed quality
+help-art-buffering-summary = Einen Stream verbessern, der immer wieder zum Laden anhält.
+help-art-buffering-keywords = puffern ruckeln langsam einfrieren stocken ladekreis verbindung geschwindigkeit qualität
 help-art-buffering-body =
     Ein Stream pausiert, wenn Ihre Verbindung Daten langsamer liefert, als das Video benötigt.
 
@@ -378,33 +416,35 @@ help-art-buffering-body =
 
     @@ diagnostics
 help-art-subtitles-missing-title = Untertitel fehlen oder sind nicht synchron
-help-art-subtitles-missing-summary = Beheben Sie Untertitel, die nicht angezeigt werden, die falsche Sprache zeigen oder hinter der Sprache zurückbleiben.
-help-art-subtitles-missing-keywords = subtitles captions missing wrong language out of sync delay cc text
+help-art-subtitles-missing-summary = Untertitel beheben, die nicht erscheinen, die falsche Sprache zeigen oder dem Gesprochenen hinterherhinken.
+help-art-subtitles-missing-keywords = untertitel fehlen falsche sprache nicht synchron verzögerung text
 help-art-subtitles-missing-body =
-    1. Wählen Sie im Player <b>Audio & Untertitel</b> und stellen Sie sicher, dass eine Untertitelsprache ausgewählt ist.
-    2. Wählen Sie eine andere Spur, wenn die Liste eine anbietet. Spuren stammen von der Quelle und unterscheiden sich je nach Titel.
-    3. Stellen Sie Ihre bevorzugte Untertitelsprache in <b>Einstellungen</b> ein. Siehe <a=/help/article/language>So ändern Sie die Sprache</a>.
-    4. Wenn der Text zu früh oder zu spät erscheint, laden Sie neu und starten Sie die Wiedergabe erneut. Die Zeitstellung wird von der Quelle festgelegt und kann für einen einzelnen Titel nicht angepasst werden.
+    1. Wählen Sie im Player <b>Audio & Untertitel</b> und prüfen Sie, ob eine Untertitelsprache ausgewählt ist.
+    2. Wählen Sie eine andere Spur, falls die Liste eine anbietet. Die Spuren kommen von der Quelle und unterscheiden sich je nach Titel.
+    3. Legen Sie die bevorzugte Untertitelsprache des Profils fest. Siehe <a=/help/article/language>So ändern Sie die Sprache</a>.
+    4. Sind die Untertitel zu früh oder zu spät, verwenden Sie <b>-0.5s</b> oder <b>+0.5s</b> unter <b>Audio & Untertitel</b>, bis sie zum Gesprochenen passen.
 
-    Wenn ein Titel überhaupt keine Untertitel hat, wurden von der Quelle keine bereitgestellt.
+    Hat ein Titel gar keine Untertitel, liefert die Quelle keine.
 
     @@ language
+
 help-art-supported-browsers-title = Unterstützte Browser
-help-art-supported-browsers-summary = Welche Browser und Versionen am besten funktionieren.
-help-art-supported-browsers-keywords = browser chrome firefox safari edge brave opera internet explorer version update compatible
+help-art-supported-browsers-summary = Welche Browser und Systeme am besten funktionieren.
+help-art-supported-browsers-keywords = browser chrome firefox safari edge brave opera internet explorer version aktualisieren kompatibel
 help-art-supported-browsers-body =
-    { $brand } funktioniert am besten in aktuellen Versionen dieser Browser:
+    { $brand } funktioniert in aktuellen Versionen dieser Browser:
 
-    - Google Chrome und andere Chromium-Browser wie Edge und Brave
-    - Mozilla Firefox
-    - Apple Safari auf macOS, iPhone und iPad
+    - <b>Google Chrome</b>, <b>Microsoft Edge</b>, <b>Brave</b> und andere Chromium-Browser unter Windows, macOS, Linux und Android
+    - <b>Mozilla Firefox</b> unter Windows, macOS, Linux und Android
+    - <b>Safari</b> auf Mac, iPhone und iPad
 
-    Internet Explorer wird nicht unterstützt. Halten Sie Ihren Browser auf dem neuesten Stand und erlauben Sie der Seite die Verwendung von JavaScript und lokalem Speicher.
+    Internet Explorer wird nicht unterstützt. Halten Sie Ihren Browser aktuell und erlauben Sie der Website JavaScript und Websitedaten.
 
     @@ diagnostics
 
-    >> Browser zeigt einen Fehler an, bevor die Seite geladen wird
-    Laden Sie die Seite mit <b>Ctrl + Shift + R</b> (auf einem Mac <b>Cmd + Shift + R</b>) neu, um die neueste Version der App abzurufen, und versuchen Sie es erneut.
+    >> Der Browser zeigt einen Fehler, bevor die Seite lädt
+    Laden Sie unter Windows und Linux mit <b>Strg + Umschalt + R</b> oder auf dem Mac mit <b>Cmd + Umschalt + R</b> neu, um die neueste Version der App zu holen, und versuchen Sie es dann erneut.
+
 help-art-fix-phone-title = Problem auf dem Handy oder Tablet beheben
 help-art-fix-phone-summary = Schritte für iPhone, iPad und Android.
 help-art-fix-phone-keywords = handy tablet android iphone ipad mobil problem beheben app
@@ -413,11 +453,12 @@ help-art-fix-phone-body =
     2. Aktualisieren Sie Ihren Browser über den App-Store.
     3. Deaktivieren Sie den Dateneinsparmodus oder den Energiesparmodus während des Sehens.
     4. Stellen Sie sicher, dass Sie eine stabile Verbindung haben. Siehe <a=/help/article/buffering>Pufferung, Einfrieren oder langsamer Start</a>.
-    5. Wenn Sie { $brand } auf Ihrem Startbildschirm hinzugefügt haben und es veraltet aussieht, entfernen Sie es und fügen Sie es erneut hinzu. Siehe <a=/help/article/install-app>So installieren Sie { $brand } als App</a>.
+    5. Wenn Sie { $brand } auf Ihrem Startbildschirm hinzugefügt haben und es veraltet aussieht, entfernen Sie es und fügen Sie es erneut hinzu. Siehe <a=/help/article/install-app>Wie man { $brand } als App installiert</a>.
 
     @@ diagnostics
 
     @@ refresh
+
 help-art-fix-tv-title = Problem am Fernseher beheben
 help-art-fix-tv-summary = Schritte, wenn Sie über einen TV-Browser oder per Cast schauen.
 help-art-fix-tv-keywords = fernseher smart tv chromecast cast problem beheben hdmi stick browser
@@ -429,9 +470,10 @@ help-art-fix-tv-body =
     - Wenn Sie einen Tab senden, halten Sie das sendende Gerät im selben Netzwerk und schließen Sie andere Tabs darauf.
     - Wenn der TV-Browser langsam ist, senden Sie den Tab stattdessen von einem Computer.
 
-    Siehe <a=/help/article/watch-on-tv>So schauen Sie auf Ihrem Fernseher</a>.
+    Siehe <a=/help/article/watch-on-tv>Auf dem Fernseher schauen</a>.
 
     @@ diagnostics
+
 help-art-extensions-blockers-title = Erweiterungen, die den Player blockieren
 help-art-extensions-blockers-summary = Ad-Blocker und Datenschutz-Tools können verhindern, dass ein Stream geladen wird.
 help-art-extensions-blockers-keywords = erweiterung adblock ublock ghostery datenschutz blocker script blocking vpn dns filter
@@ -445,55 +487,120 @@ help-art-extensions-blockers-body =
     !! Hinweis: Wir bitten Sie niemals, eine Browser-Erweiterung oder einen Codec zu installieren, um Inhalte anzusehen. Schließen Sie jede Seite, die dies tut.
 
     @@ diagnostics
-help-art-rows-wont-load-title = Zeilen oder Bilder werden nicht geladen
-help-art-rows-wont-load-summary = Die Seite zeigt leere Zeilen, einen Ladebalken oder fehlende Bilder.
+help-art-rows-wont-load-title = Reihen oder Bilder werden nicht geladen
+help-art-rows-wont-load-summary = Die Seite zeigt leere Reihen, ein Ladesymbol oder fehlende Bilder.
 help-art-rows-wont-load-keywords = zeilen leer laden leere seite bilder bilder poster nicht laden startseite fehler empfehlungen down
 help-art-rows-wont-load-body =
-    Die Zeilen auf der Startseite stammen von einem Empfehlungsdienst. Poster und Details stammen von einem Katalogdienst. Wenn einer davon nicht erreichbar ist, können leere Zeilen oder ein Ladebalken angezeigt werden.
+    Die Reihen und die Suche kommen von unserem Empfehlungsdienst. Poster und Details kommen aus einem öffentlichen Filmkatalog. Ist einer davon nicht erreichbar, sehen Sie vielleicht leere Reihen, ein Ladesymbol oder fehlende Bilder.
 
     1. Laden Sie die Seite neu.
     2. Prüfen Sie Ihre Verbindung.
-    3. Deaktivieren Sie Blocker für diese Website. Siehe <a=/help/article/extensions-blockers>Erweiterungen, die den Player blockieren</a>.
-    4. Versuchen Sie es in wenigen Minuten erneut.
+    3. Schalten Sie Blocker für diese Website aus. Siehe <a=/help/article/extensions-blockers>Erweiterungen, die den Player blockieren</a>.
+    4. Versuchen Sie es in ein paar Minuten noch einmal.
 
-    Die Suchseite und Ihre gespeicherten Elemente funktionieren weiterhin, wenn der Empfehlungsdienst ausgefallen ist. Wenn das Problem länger als eine Stunde anhält, <a=/help/article/report-bug>lassen Sie es uns wissen</a>.
+    Ihre Profile, Meine Liste und Ihre Einstellungen sind währenddessen sicher in Ihrem Konto. Wenn das Problem länger als eine Stunde dauert, <a=/help/article/report-bug>Problem melden</a>.
 
     @@ diagnostics
 
     @@ refresh
+
 help-art-list-missing-title = Meine Liste oder der Fortschritt ist verschwunden
-help-art-list-missing-summary = Warum eine Liste oder die Zeile 'Weiterschauen' leer sein kann und was zu tun ist.
+help-art-list-missing-summary = Warum Meine Liste oder Weiterschauen leer aussehen können und wie Sie sie zurückbekommen.
 help-art-list-missing-keywords = meine liste fehlt verschwunden leer verloren weiterschauen fortschritt zurückgesetzt
 help-art-list-missing-body =
-    { $brand } speichert Profile und Fortschritt in diesem Browser. Sie fehlen, wenn:
+    Meine Liste und Ihr Fortschritt gehören zu einem Profil und werden in Ihrem Konto gespeichert. Wenn sie leer aussehen:
 
-    - Sie { $brand } in einem anderen Browser oder auf einem anderen Gerät geöffnet haben
-    - Sie ein privates oder Inkognito-Fenster verwendet haben
-    - Sie die Website-Daten oder Cookies gelöscht haben
-    - Sie ein anderes Profil verwenden
+    - Prüfen Sie, ob Sie im richtigen Profil sind. Jedes Profil hat seine eigene Liste. Wechseln Sie über das Profilmenü.
+    - Prüfen Sie, ob Sie mit demselben Konto angemeldet sind wie zuvor.
+    - Geben Sie einem neuen Gerät nach der Anmeldung ein paar Sekunden, um Ihr Konto zu laden, oder laden Sie die Seite neu.
+    - Titel, die Sie in Ihrer Wiedergabeaktivität ausgeblendet haben, verschwinden auch aus Weiterschauen.
 
-    Ihre Liste bleibt für die Zeit erhalten, die die Seite offen bleibt, da Konten, die sie speichern, noch nicht verfügbar sind. Beim Neuladen der Seite wird sie geleert.
-
-    Wechseln Sie über das Profilmenü zu dem Profil, das Sie zuvor verwendet haben. Siehe <a=/help/article/saved-data>Wo Ihre Profile, Liste und Ihr Fortschritt gespeichert werden</a>.
+    Fehlt auf einem Gerät immer noch etwas, melden Sie sich dort ab und wieder an. Siehe <a=/help/article/saved-data>Wo Ihre Profile, Ihre Liste und Ihr Fortschritt gespeichert sind</a>.
 
     @@ profiles
 
-    @@ data
 help-art-forgot-pin-title = Ich habe meine Profil-PIN vergessen
-help-art-forgot-pin-summary = PINs können von uns nicht zurückgesetzt werden, so kommen Sie wieder hinein.
+help-art-forgot-pin-summary = Entfernen Sie die PIN mit Ihrem Kontopasswort und legen Sie eine neue fest.
 help-art-forgot-pin-keywords = pin vergessen zurücksetzen verloren passcode gesperrt profil sperre
 help-art-forgot-pin-body =
-    Eine PIN wird nur auf Ihrem Gerät gespeichert, daher können wir sie nicht nachschauen oder zurücksetzen.
+    1. Öffnen Sie das Profilmenü, wählen Sie <b>Konto</b>, dann <b>Profile verwalten</b>, und wählen Sie das gesperrte Profil.
+    2. Wählen Sie <b>Profil-Sperre</b> und geben Sie Ihr Kontopasswort ein.
+    3. Wählen Sie <b>PIN vergessen?</b> und dann <b>Profil-Sperre entfernen</b>.
 
-    1. Versuchen Sie die PIN erneut, eine Ziffer pro Feld.
-    2. Wenn Sie sie nicht mehr wissen, ist der Weg zurück, die Daten dieser Website in Ihrem Browser zu löschen. Dabei werden alle Profile, PINs und der Fortschritt gelöscht. Siehe <a=/help/article/clear-data>So löschen Sie Ihre gespeicherten Daten</a>.
-    3. Erstellen Sie Ihre Profile erneut.
+    Das Profil öffnet sich wieder ohne PIN, und Sie können eine neue festlegen. Siehe <a=/help/article/profile-pin>Profil-PIN hinzufügen, ändern oder entfernen</a>.
 
-    !! Hinweis: Wählen Sie eine PIN, die Sie sich merken können, und verwenden Sie sie nicht für andere Zwecke.
+    !! Hinweis: Nur wer das Kontopasswort kennt, kann eine PIN entfernen. Wenn Sie auch das Passwort vergessen haben, siehe <a=/help/article/forgot-password>Ich habe mein Passwort vergessen</a>.
 
     @@ profiles
 
-    @@ data
+help-art-forgot-password-title = Ich habe mein Passwort vergessen
+help-art-forgot-password-summary = Erhalten Sie per E-Mail einen Link, um ein neues Passwort festzulegen.
+help-art-forgot-password-keywords = passwort vergessen passwort zurücksetzen passwort verloren anmeldung geht nicht neues passwort link
+help-art-forgot-password-body =
+    1. Wählen Sie auf der Anmeldeseite <b>Passwort vergessen?</b>
+    2. Geben Sie die E-Mail-Adresse Ihres Kontos ein und wählen Sie <b>Link senden</b>.
+    3. Öffnen Sie die E-Mail von { $brand } und folgen Sie dem Link, um ein neues Passwort festzulegen.
+
+    Der Link funktioniert nur einmal und nur für begrenzte Zeit. Wenn nach einigen Minuten keine E-Mail da ist, sehen Sie im Spam-Ordner nach und versuchen Sie es dann erneut.
+
+    !! Hinweis: Wir fragen Sie nie per E-Mail, Chat oder Telefon nach Ihrem Passwort. Siehe <a=/help/article/fake-sites>So erkennt man gefälschte { $brand }-Seiten und -Nachrichten</a>.
+
+help-art-change-email-password-title = E-Mail-Adresse, Passwort oder Telefonnummer ändern
+help-art-change-email-password-summary = Aktualisieren Sie die Angaben, mit denen Sie sich anmelden und Ihr Konto wiederherstellen.
+help-art-change-email-password-keywords = e-mail ändern passwort ändern passwort aktualisieren telefonnummer handy kontodaten name sicherheit
+help-art-change-email-password-body =
+    Öffnen Sie das Profilmenü und wählen Sie <b>Konto</b>. Ihre Angaben stehen unter <b>Kontodetails</b>. Vor einer Änderung bitten wir Sie eventuell, mit Ihrem Passwort oder einem per E-Mail gesendeten Code zu bestätigen, dass Sie es sind.
+
+    ## Passwort
+    1. Wählen Sie <b>Passwort</b>.
+    2. Geben Sie Ihr aktuelles Passwort ein und dann zweimal das neue. Es braucht mindestens 8 Zeichen.
+    3. Schalten Sie <b>Von allen Geräten abmelden</b> ein, falls jemand anders das alte Passwort kennen könnte, und wählen Sie <b>Speichern</b>.
+
+    ## E-Mail
+    1. Wählen Sie <b>E-Mail</b> und geben Sie die neue Adresse ein.
+    2. Öffnen Sie den Link, den wir an die neue Adresse senden, um die Änderung abzuschließen.
+
+    ## Mobiltelefon und Name
+    Wählen Sie <b>Mobiltelefon</b>, um eine Nummer hinzuzufügen, mit der Sie wieder in Ihr Konto kommen, oder <b>Name</b>, um Ihren Namen zu ändern. Das Hauptprofil trägt Ihren Vornamen.
+
+help-art-devices-sign-out-title = Von einem Gerät oder allen Geräten abmelden
+help-art-devices-sign-out-summary = Sehen Sie, wo Ihr Konto angemeldet ist, und melden Sie Geräte ab, die Sie nicht mehr nutzen.
+help-art-devices-sign-out-keywords = abmelden alle geräte angemeldete geräte sitzungen sicherheit neues gerät handy verloren öffentlicher computer
+help-art-devices-sign-out-body =
+    1. Öffnen Sie das Profilmenü und wählen Sie <b>Konto</b>.
+    2. Wählen Sie <b>Zugriff und Geräte</b>.
+    3. Wählen Sie <b>Von diesem Gerät abmelden</b>, oder <b>Von allen Geräten abmelden</b>, um jeden Browser abzumelden, in dem Ihr Konto geöffnet ist, auch diesen.
+
+    <b>Letzte Sicherheitsaktivität</b> auf derselben Seite zeigt die letzten Anmeldungen und Änderungen an Ihrem Konto. Außerdem schicken wir Ihnen eine E-Mail, wenn sich ein neues Gerät anmeldet.
+
+    !! Hinweis: Wenn Sie eine Anmeldung sehen, die Sie nicht kennen, melden Sie sich von allen Geräten ab und ändern Sie Ihr Passwort. Siehe <a=/help/article/change-email-password>E-Mail-Adresse, Passwort oder Telefonnummer ändern</a>.
+
+help-art-download-data-title = Eine Kopie Ihrer Daten herunterladen
+help-art-download-data-summary = Erhalten Sie eine Datei mit den persönlichen Daten, die Ihr Konto enthält.
+help-art-download-data-keywords = meine daten herunterladen persönliche daten kopie export dsgvo auskunft datenanfrage
+help-art-download-data-body =
+    1. Öffnen Sie das Profilmenü und wählen Sie <b>Konto</b>.
+    2. Wählen Sie <b>Zugriff auf persönliche Informationen</b>.
+    3. Folgen Sie den Schritten, um die Datei zu speichern.
+
+    Die Datei enthält Ihre Kontodaten, Profile, Einstellungen, Meine Liste, Bewertungen und Wiedergabeaktivität. Sie wird auf Ihrem Gerät gespeichert. Bewahren Sie sie also sicher auf.
+
+    Um die Wiedergabeaktivität eines Profils als Tabelle herunterzuladen, öffnen Sie die <b>Wiedergabeaktivität</b> dieses Profils und wählen Sie <b>Alle herunterladen</b>.
+
+help-art-delete-account-title = Ihr Konto löschen
+help-art-delete-account-summary = Entfernen Sie Ihr Konto und alles darin endgültig.
+help-art-delete-account-keywords = konto löschen konto schließen konto entfernen daten löschen konto kündigen
+help-art-delete-account-body =
+    Wenn Sie Ihr Konto löschen, wird es sofort entfernt, mit allen Profilen, Listen, Bewertungen, Einstellungen und der gesamten Wiedergabeaktivität. Das lässt sich nicht rückgängig machen.
+
+    1. Öffnen Sie das Profilmenü und wählen Sie <b>Konto</b>.
+    2. Wählen Sie unten auf der Seite <b>Konto löschen</b>.
+    3. Bestätigen Sie, dass Sie es sind, und wählen Sie <b>Dauerhaft löschen</b>.
+
+    Wenn Sie nur eine Person entfernen möchten, löschen Sie stattdessen ihr Profil. Siehe <a=/help/article/profiles-manage>Profile erstellen, bearbeiten oder löschen</a>.
+
+    !! Hinweis: Wenn Sie eine Kopie Ihrer Daten behalten möchten, laden Sie sie vorher herunter. Siehe <a=/help/article/download-data>Eine Kopie Ihrer Daten herunterladen</a>.
+
 help-art-page-not-found-title = Ich sehe eine "404"-Seite
 help-art-page-not-found-summary = Der Link ist falsch oder die Seite wurde verschoben.
 help-art-page-not-found-keywords = 404 nicht gefunden Seite fehlt defekter Link Fehler leer
@@ -502,135 +609,138 @@ help-art-page-not-found-body =
 
     - Verwenden Sie <b>Startseite</b> in der oberen Leiste, um zum Anfang zurückzukehren.
     - Verwenden Sie die Suche im <a=/help>Hilfe-Center</a>, um einen Artikel zu finden.
-    - Wenn Sie über einen Link auf { $brand } hierher gelangt sind, <a=/help/article/report-bug>teilen Sie uns mit</a>, wo Sie ihn gefunden haben.
+    - Wenn Sie über einen Link auf { $brand } hierher gelangt sind, <a=/help/article/report-bug>Problem melden</a>, wo Sie ihn gefunden haben.
 
     @@ refresh
+
 help-art-language-title = So ändern Sie die Sprache
-help-art-language-summary = Ändern Sie die Sprache der Oberfläche und Ihre bevorzugte Untertitelsprache.
+help-art-language-summary = Ändern Sie die Sprache von { $brand } und die Sprachen, in denen Sie schauen.
 help-art-language-keywords = Sprache ändern übersetzen Oberfläche anzeigen Untertitel Audio Englisch Spanisch Französisch Arabisch
 help-art-language-body =
-    ## Sprache der Oberfläche
-    1. Scrollen Sie auf jeder Hilfe-Center-Seite nach unten und wählen Sie eine Sprache in <b>Ihre bevorzugte Sprache auswählen</b>.
-    2. Die Seite wird in dieser Sprache neu geladen. Ihre Auswahl wird auf diesem Gerät gespeichert.
+    ## Anzeigesprache
+    1. Öffnen Sie das Profilmenü, wählen Sie <b>Konto</b>, dann <b>Profile verwalten</b>, und wählen Sie Ihr Profil.
+    2. Wählen Sie <b>Sprachen</b>, dann <b>Anzeigesprache</b>, und wählen Sie eine Sprache.
 
-    Sie können sie auch in <b>Einstellungen</b> unter <b>Sprachen</b> und dann <b>Anzeigesprache</b> ändern.
+    Die Auswahl gehört zum Profil und gilt deshalb auf allen Ihren Geräten. Im Hilfe-Center können Sie die Sprache auch unten auf jeder Seite wählen.
 
-    ## Untertitelsprache
-    1. Öffnen Sie <b>Einstellungen</b> und wählen Sie <b>Sprachen</b>.
-    2. Wählen Sie unter <b>Bevorzugte Untertitelsprache</b> eine Sprache aus und klicken Sie auf <b>Präferenzen speichern</b>.
+    ## Audio- und Untertitelsprache
+    1. Öffnen Sie wie oben die <b>Sprachen</b> Ihres Profils und dann <b>Audio und Untertitel</b>.
+    2. Wählen Sie eine <b>Audiosprache</b> und eine <b>Untertitelsprache</b>. <b>Wie Anzeigesprache</b> folgt der Sprache der App.
 
-    !! Hinweis: In der Liste erscheinen nur Sprachen, die vollständig übersetzt sind. Noch nicht übersetzter Text wird auf Englisch angezeigt.
+    Der Player nutzt sie immer dann, wenn ein Titel sie anbietet.
+
+    !! Hinweis: In der Liste erscheinen nur vollständig übersetzte Sprachen.
 
     @@ language
-help-art-subtitles-title = So verwenden Sie Untertitel, Bildunterschriften oder wählen die Audiosprache
+
+help-art-subtitles-title = Untertitel verwenden oder die Audiosprache wählen
 help-art-subtitles-summary = Schalten Sie Untertitel ein, wählen Sie eine Spur und ändern Sie das Aussehen.
 help-art-subtitles-keywords = Untertitel Bildunterschriften CC Audiosprache Spur Größe Farbe Aussehen Hintergrund
 help-art-subtitles-body =
     ## Untertitel ein- oder ausschalten
-    1. Starten Sie einen Titel und bewegen Sie den Zeiger über den Player oder tippen Sie auf den Bildschirm.
+    1. Starten Sie einen Titel und bewegen Sie den Mauszeiger über den Player, oder tippen Sie auf den Bildschirm.
     2. Wählen Sie <b>Audio & Untertitel</b>.
     3. Wählen Sie eine Untertitelsprache oder <b>Aus</b>.
 
+    Kommen die Untertitel zu früh oder zu spät, verschieben Sie sie im selben Bereich mit <b>-0.5s</b> und <b>+0.5s</b>.
+
     ## Aussehen der Untertitel ändern
-    1. Öffnen Sie <b>Einstellungen</b> und wählen Sie <b>Untertitel-Aussehen</b>.
-    2. Wählen Sie eine Größe und eine Farbe. Die Vorschau über den Buttons zeigt das Ergebnis.
-    3. Wählen Sie <b>Fertig</b>.
+    1. Öffnen Sie das Profilmenü, wählen Sie <b>Konto</b>, dann <b>Profile verwalten</b>, und wählen Sie Ihr Profil.
+    2. Wählen Sie <b>Untertitel-Erscheinungsbild</b>.
+    3. Wählen Sie Textgröße, Textfarbe, Rand, Hintergrund und Fensterfarbe. Die Vorschau zeigt das Ergebnis. <b>Auf Standard zurücksetzen</b> macht Ihre Änderungen rückgängig.
 
-    !! Hinweis: Welche Sprachen und Audiospuren verfügbar sind, hängt von der Quelle des Titels ab. Siehe <a=/help/article/subtitles-missing>Untertitel fehlen oder sind nicht synchron</a>.
-help-art-playback-speed-title = So ändern Sie die Wiedergabegeschwindigkeit
-help-art-playback-speed-summary = Schneller oder langsamer schauen über die Player-Steuerung.
-help-art-playback-speed-keywords = geschwindigkeit schneller langsamer 2x 1.5x wiedergabegeschwindigkeit
-help-art-playback-speed-body =
-    1. Starten Sie einen Titel und zeigen Sie die Player-Steuerung an.
-    2. Wählen Sie den Geschwindigkeits-Button unten rechts.
-    3. Wählen Sie eine Geschwindigkeit aus dem Menü.
+    !! Hinweis: Welche Sprachen und Tonspuren es gibt, hängt von der Quelle des Titels ab. Siehe <a=/help/article/subtitles-missing>Untertitel fehlen oder sind nicht synchron</a>.
 
-    Die Geschwindigkeit gilt für den Titel, den Sie gerade schauen, und geht für den nächsten Titel auf Normal zurück.
 help-art-shortcuts-title = Tastenkürzel
 help-art-shortcuts-summary = Den Player ohne Maus steuern.
 help-art-shortcuts-keywords = tastatur kürzel tasten space pfeil vollbild stummschalten lautstärke überspringen zurückspulen hotkeys
 help-art-shortcuts-body =
-    Diese Tasten funktionieren, während ein Titel auf einem Computer läuft.
+    Diese Tasten funktionieren am Computer, während ein Titel läuft.
 
-    - <b>Space</b> oder <b>K</b>: Abspielen oder Pausieren
+    - <b>Leertaste</b> oder <b>K</b>: abspielen oder pausieren
     - <b>Pfeil links</b> oder <b>J</b>: 10 Sekunden zurück
     - <b>Pfeil rechts</b> oder <b>L</b>: 10 Sekunden vor
-    - <b>Pfeil hoch</b> und <b>Pfeil runter</b>: Lautstärke hoch und runter
-    - <b>M</b>: Stummschalten oder Ton wieder einschalten
+    - <b>Pfeil hoch</b> und <b>Pfeil runter</b>: lauter und leiser
+    - <b>M</b>: Ton aus oder wieder ein
     - <b>F</b>: Vollbild ein oder aus
-help-art-skip-intro-next-title = Intro überspringen und nächste Folge
+
+help-art-skip-intro-next-title = „Intro überspringen“ und „Nächste Folge“
 help-art-skip-intro-next-summary = Am Anfang vorbeispringen oder zur nächsten Folge wechseln.
 help-art-skip-intro-next-keywords = intro überspringen nächste folge autoplay berieselung folgen saison schublade
 help-art-skip-intro-next-body =
-    - <b>Intro überspringen</b> erscheint für wenige Sekunden, wenn der Anfang einer Folge startet. Wählen Sie es, um zur Handlung zu springen.
+    - <b>Intro überspringen</b> erscheint einige Sekunden lang, wenn der Vorspann einer Folge beginnt. Wählen Sie es, um direkt zur Handlung zu springen.
     - <b>Nächste Folge</b> in der Player-Steuerung startet die nächste Folge.
-    - <b>Folgen</b> öffnet eine Liste der Staffel, damit Sie jede Folge auswählen können.
+    - <b>Folgen</b> öffnet eine Liste der Staffel, sodass Sie jede Folge auswählen können.
 
-    Um zu steuern, was passiert, wenn eine Folge endet, öffnen Sie <b>Einstellungen</b>, dann <b>Wiedergabe-Einstellungen</b>, und schalten Sie <b>Nächste Folge automatisch abspielen</b> ein oder aus.
+    Was am Ende einer Folge passiert, legen Sie in den <b>Wiedergabeeinstellungen</b> Ihres Profils fest: Schalten Sie <b>Nächste Folge automatisch abspielen</b> ein oder aus.
+
 help-art-my-list-title = So nutzen Sie Meine Liste
 help-art-my-list-summary = Titel für später speichern und wiederfinden.
 help-art-my-list-keywords = meine liste hinzufügen entfernen watchlist speichern später favoriten plus
 help-art-my-list-body =
-    ## Titel hinzufügen
-    Tippen Sie auf die <b>+</b>-Schaltfläche auf der Titelseite, im Detailfenster oder im Hero-Bereich oben auf der Seite.
+    ## Einen Titel hinzufügen
+    Wählen Sie die Schaltfläche <b>+</b> auf einer Titelkachel, im Detailfenster oder beim großen Titel oben auf der Seite.
 
-    ## Titel entfernen
-    Tippen Sie auf das Häkchen beim Titel, um es wieder in <b>+</b> zu verwandeln.
+    ## Einen Titel entfernen
+    Wählen Sie das Häkchen beim Titel. Es wird wieder zu <b>+</b>.
 
     ## Ihre Liste ansehen
-    Öffnen Sie <b>Meine Liste</b> in der oberen Leiste. Auf dem Smartphone befindet sie sich in der unteren Leiste.
+    Öffnen Sie <b>Mein Streams</b> in der oberen Leiste oder auf dem Smartphone in der unteren Leiste. Dort finden Sie Ihre Liste, neben <b>Weiterschauen</b>, den Titeln, die Ihnen gefallen haben, und den Trailern, die Sie gesehen haben.
 
-    !! Hinweis: Ihre Liste bleibt derzeit nur so lange erhalten, wie die Seite geöffnet ist, und wird beim Neuladen gelöscht. Das Speichern in Ihrem Profil ist Teil der Konto-Funktionen. Siehe <a=/help/article/list-missing>Meine Liste oder Fortschritt verschwunden</a>.
+    Meine Liste gehört zum Profil und wird in Ihrem Konto gespeichert. Sie ist also auf jedem Gerät gleich.
+
 help-art-continue-watching-title = So nutzen Sie Weiterschauen
 help-art-continue-watching-summary = Setzen Sie dort fort, wo Sie aufgehört haben, und entfernen Sie Titel aus der Reihe.
 help-art-continue-watching-keywords = weiterschauen fortsetzen fortschritt entfernen reihe angehalten halb angesehen
 help-art-continue-watching-body =
-    Titel, die Sie gestartet haben, erscheinen in der Reihe <b>Weiterschauen</b> auf der Startseite, mit einem Fortschrittsbalken, der zeigt, wie weit Sie gekommen sind.
+    Titel, die Sie begonnen haben, erscheinen in der Reihe <b>Weiterschauen</b>, mit einem Balken, der zeigt, wie weit Sie gekommen sind. Die Reihe finden Sie auch unter <b>Mein Streams</b>.
 
     ## Fortsetzen
-    Wählen Sie den Titel aus. Die Wiedergabe beginnt dort, wo Sie aufgehört haben.
+    Wählen Sie den Titel. Die Wiedergabe beginnt dort, wo Sie aufgehört haben, auf jedem Gerät, auf dem Sie angemeldet sind.
 
-    ## Titel aus der Reihe entfernen
-    1. Öffnen Sie das Optionsmenü auf der Titelseite.
-    2. Wählen Sie <b>Aus 'Weiterschauen' entfernen</b>.
+    ## Einen Titel aus der Reihe entfernen
+    1. Öffnen Sie das Optionsmenü auf der Titelkachel.
+    2. Wählen Sie <b>Aus „Weiterschauen“ entfernen</b>.
 
-    Die Reihe wird aus dem in diesem Browser gespeicherten Fortschritt erstellt, daher hat jedes andere Gerät seine eigene Reihe. Siehe <a=/help/article/saved-data>Wo Ihre Profile, Liste und der Fortschritt gespeichert werden</a>.
+    Um einen Titel auch aus Ihrer Wiedergabeaktivität zu entfernen, siehe <a=/help/article/viewing-history>Ihren Wiedergabeverlauf verwalten</a>.
 
-    @@ data
-help-art-viewing-history-title = So verwalten Sie Ihre Sehverlauf
-help-art-viewing-history-summary = Was aufgezeichnet wird, wenn Sie schauen, und wie Sie es entfernen.
+help-art-viewing-history-title = Ihren Wiedergabeverlauf verwalten
+help-art-viewing-history-summary = Was beim Schauen aufgezeichnet wird und wie Sie es entfernen.
 help-art-viewing-history-keywords = sehverlauf angesehen aktivität löschen leeren entfernen bewertungen empfehlungen
 help-art-viewing-history-body =
-    { $brand } zeichnet die Titel auf, die Sie gestartet haben, und wie weit Sie geschaut haben, in diesem Browser, damit Weiterschauen funktioniert und Empfehlungen Ihrem Geschmack folgen können.
+    Jedes Profil hat eine Seite <b>Wiedergabeaktivität</b> mit den Titeln, die es geschaut hat, die neuesten zuerst. { $brand } nutzt sie für Weiterschauen und für Empfehlungen.
 
-    - Um einen Titel aus der Reihe „Weiterschauen“ auszublenden, siehe <a=/help/article/continue-watching>So nutzen Sie Weiterschauen</a>.
-    - Um alles zu entfernen, siehe <a=/help/article/clear-data>So löschen Sie Ihre gespeicherten Daten</a>.
+    1. Öffnen Sie das Profilmenü, wählen Sie <b>Konto</b>, dann <b>Profile verwalten</b>, und wählen Sie das Profil.
+    2. Wählen Sie <b>Wiedergabeaktivität</b>.
+    3. Wählen Sie <b>Diesen Titel ausblenden</b> neben einem Titel oder <b>Alle ausblenden</b>.
 
-    !! Hinweis: Die Seite <b>Sehaktivität</b> in <b>Einstellungen</b> listet noch keine Titel auf.
+    Ein ausgeblendeter Titel verschwindet aus Weiterschauen und beeinflusst die Empfehlungen nicht mehr, auf allen Geräten. <b>Alle herunterladen</b> speichert die Liste als Tabelle.
 
     @@ data
+
 help-art-notifications-title = Benachrichtigungen
 help-art-notifications-summary = Was die Glocke in der oberen Leiste anzeigt und wie Einträge als gelesen markiert werden.
 help-art-notifications-keywords = benachrichtigungen glocke meldungen neu eingetroffen aktualisierungen gelesen ungelesen
 help-art-notifications-body =
-    Die Glocke in der oberen Leiste listet Titel auf, die einen Blick wert sind, z. B. Neuheiten und beliebte Empfehlungen. Wählen Sie einen Eintrag aus, um die Details des Titels zu öffnen.
+    Die Glocke in der oberen Leiste zeigt sehenswerte Titel, etwa Neuheiten und beliebte Titel. Wählen Sie einen Eintrag, um die Details des Titels zu öffnen.
 
-    Geöffnete Einträge werden als gelesen markiert. Dies wird im Browser gespeichert. Die Anzahl an der Glocke zeigt an, wie viele Einträge noch ungelesen sind.
+    Geöffnete Einträge werden als gelesen markiert, und die Zahl an der Glocke zeigt, wie viele noch ungelesen sind.
 
-    Benachrichtigungen erscheinen nur innerhalb von { $brand }. Wir senden keine E-Mails oder Push-Nachrichten zu Titeln.
+    Die <b>Benachrichtigungseinstellungen</b> Ihres Profils bieten Optionen für E-Mails und Push-Mitteilungen. Sie werden mit dem Profil gespeichert, aber { $brand } verschickt noch keine E-Mails oder Push-Mitteilungen zu Titeln. E-Mails zu Ihrem Konto, etwa Anmeldelinks, kommen immer an.
+
 help-art-search-browse-title = Suchen und Stöbern
 help-art-search-browse-summary = Titel nach Name, Genre oder Stimmung finden.
 help-art-search-browse-keywords = suchen stöbern finden genre filme serien kategorie titel schauspieler regisseur
 help-art-search-browse-body =
-    ## Suche
-    1. Wählen Sie die Lupe in der oberen Leiste aus.
-    2. Geben Sie einen Titel, einen Schauspieler oder einen Regisseur ein.
-    3. Drücken Sie <b>Enter</b>, um alle Treffer anzuzeigen.
+    ## Suchen
+    1. Wählen Sie die Lupe in der oberen Leiste.
+    2. Geben Sie einen Titel, eine Schauspielerin, einen Schauspieler oder eine Regie ein. Ergebnisse erscheinen schon beim Tippen, und kleine Tippfehler werden verziehen.
 
     ## Stöbern
-    - <b>Serien</b> und <b>Filme</b> in der oberen Leiste öffnen eine Seite für jede Art von Titel. Verwenden Sie dort <b>Genres</b>, um die Auswahl einzugrenzen.
-    - Zeilen auf der Startseite sind nach Thema gruppiert, z. B. nach Jahrzehnt und Genre oder nach Titeln, die einem gesehenen Titel ähneln.
+    - <b>Serien</b> und <b>Filme</b> in der oberen Leiste öffnen je eine Seite für jede Art von Titel. Mit <b>Genres</b> grenzen Sie dort weiter ein.
+    - Die Reihen auf der Startseite sind nach Themen gruppiert. Siehe <a=/help/article/recommendations>So funktionieren Empfehlungen</a>.
     - <b>Nach Sprache stöbern</b> findet Titel nach Originalsprache, Synchronisation oder Untertiteln. Siehe <a=/help/article/browse-language>Nach Sprache stöbern</a>.
+
 help-art-browse-language-title = Nach Sprache stöbern
 help-art-browse-language-summary = Titel nach Originalsprache, Synchronisation oder Untertiteln finden.
 help-art-browse-language-keywords = nach sprache stöbern original synchronisation untertitel fremdsprachig international anime koreanisch spanisch
@@ -648,107 +758,124 @@ help-art-new-popular-body =
 
     Die Listen werden aus dem Katalog aktualisiert und ändern sich daher von Tag zu Tag.
 help-art-recommendations-title = So funktionieren Empfehlungen
-help-art-recommendations-summary = Wie Zeilen ausgewählt werden und was man ändern kann.
-help-art-recommendations-keywords = empfehlungen reihen vorschläge weil du gesehen hast geschmack algorithmus für dich personalisiert
+help-art-recommendations-summary = Wie die Reihen entstehen und was sie verändert.
+help-art-recommendations-keywords = empfehlungen reihen vorschläge weil sie gesehen haben geschmack algorithmus für sie personalisiert
 help-art-recommendations-body =
-    Die Reihen auf der Startseite werden aus den Beschreibungen, Genres und Credits der Titel erstellt. Titel, die sich im Inhalt ähneln, werden in einer Reihe zusammengefasst, zum Beispiel ein Jahrzehnt und ein Genre oder <b>Ähnlich wie</b> gefolgt von einem Titel, den du gesehen hast.
+    Die Reihen entstehen aus dem, was Titel ausmacht: Genres, Stimmungen, Themen, Land und Jahrzehnt, zum Beispiel <b>Romantische Komödien zum Wohlfühlen</b> oder <b>Koreanische Krimiserien</b>. Innerhalb einer Reihe folgt die Reihenfolge Ihrem Geschmack.
 
-    ## Was deine Reihen verändert
-    - Wenn du einen Titel startest. Der Empfehlungsdienst lernt, welche Genres du bevorzugst, und passt die Reihen für etwa einen Tag an.
-    - Das Profil, das du verwendest. Ein Kinderprofil zeigt nur Titel für jüngere Zuschauer.
+    ## Was Ihre Reihen verändert
+    - Was Sie starten und zu Ende schauen, was Sie bewerten und was Sie zu Meine Liste hinzufügen.
+    - Reihen wie <b>Weil Sie … gesehen haben</b>, <b>Heutige Top-Empfehlungen für Sie</b> und <b>Als Nächstes für Sie</b> entstehen aus Ihren letzten Titeln. Auf der Seite eines Genres bleiben sie in diesem Genre.
+    - Das Profil, das Sie nutzen. Jedes Profil hat seinen eigenen Geschmack, und ein Kinderprofil zeigt nur Titel für Kinder.
+    - Der Tag und die Jahreszeit. Reihen zu Feiertagen und Ereignissen erscheinen zu ihrer Zeit.
 
-    ## Was keine Rolle spielt
-    Die Reihen werden nicht durch deinen Zahlungsbetrag, deinen Wohnort oder deine Person beeinflusst. Wir verwenden weder deinen Namen noch deine E-Mail-Adresse, da der Dienst nur eine zufällige Sitzungsnummer sieht. Siehe <a=/help/article/privacy-data>Welche Daten sammelt { $brand }?</a>
+    ## Ausschalten
+    Schalten Sie unter <b>Datenschutz- und Dateneinstellungen</b> Ihres Profils <b>Personalisierte Empfehlungen</b> aus. Dann sehen Sie dieselben Vorschläge wie alle anderen.
+
+    Wir verwenden nie Ihren Namen oder Ihre E-Mail-Adresse, um Titel auszuwählen. Siehe <a=/help/article/privacy-data>Welche Daten sammelt { $brand }?</a>
 
     @@ data
+
 help-art-trailers-clips-title = Trailer und Clips
 help-art-trailers-clips-summary = Einen Titel vorab ansehen, bevor man sich entscheidet.
 help-art-trailers-clips-keywords = trailer clips vorab ansehen kurze videos teaser ton ausblenden autostart previews
 help-art-trailers-clips-body =
-    - Bewege den Mauszeiger über eine Titelkarte am Computer oder öffne die Details, um eine Trailer-Vorschau zu sehen.
-    - <b>Clips</b> zeigt kurze vertikale Vorschauen, die man durchscrollen kann.
-    - Verwende den Lautsprecher-Button, um den Ton der Vorschauen ein- oder auszuschalten. Deine Auswahl wird für das Profil gespeichert.
+    - Bewegen Sie am Computer den Mauszeiger über eine Titelkachel oder öffnen Sie die Details, um eine Trailer-Vorschau zu sehen.
+    - <b>Clips</b> zeigt kurze Hochformat-Vorschauen, durch die Sie scrollen können.
+    - Mit der Lautsprechertaste schalten Sie den Ton der Vorschau ein oder aus.
 
-    Um zu verhindern, dass Vorschauen von selbst starten, öffne <b>Einstellungen</b>, dann <b>Wiedergabeeinstellungen</b> und deaktiviere <b>Autoplay-Vorschauen</b>.
+    Trailer werden von YouTube abgespielt. Damit Vorschauen nicht von selbst starten, schalten Sie in den <b>Wiedergabeeinstellungen</b> Ihres Profils <b>Vorschauen automatisch abspielen</b> aus.
+
 help-art-what-is-title = Was ist { $brand }?
 help-art-what-is-summary = Eine kurze Beschreibung von { $brand } und was es kann und was nicht.
 help-art-what-is-keywords = was ist über streams dienst erklären index links katalog netflix ähnlich
 help-art-what-is-body =
-    { $brand } hilft dir, deinen nächsten Film oder deine nächste Serie zu finden. Es lernt, was dir gefällt, und ordnet den Katalog in Reihen für dich an, auf einer Seite, die sich wie die Streaming-Dienste anfühlt, die du kennst.
+    { $brand } hilft Ihnen, Ihren nächsten Film oder Ihre nächste Serie zu finden. Es lernt, was Ihnen gefällt, und ordnet den Katalog für Sie in Reihen, auf einer Seite, die sich wie die Streamingdienste anfühlt, die Sie kennen.
 
-    { $brand } ist ein Index von Links. Es hostet oder lädt keine Videos hoch. Wenn du auf Wiedergabe drückst, fragt der Player unabhängige Quellen nach einem Stream und spielt den ersten ab, der funktioniert. Siehe <a=/help/article/sources>Woher die Titel kommen</a>.
+    { $brand } ist ein Verzeichnis von Links. Es hostet keine Videos und lädt keine hoch. Wenn Sie auf Wiedergabe drücken, fragt der Player unabhängige Quellen nach einem Stream und spielt den ersten ab, der funktioniert. Siehe <a=/help/article/sources>Woher die Titel kommen</a>.
 
     Es gibt nichts zu kaufen und kein Abo. Siehe <a=/help/article/free-to-use>Ist { $brand } kostenlos?</a>
+
 help-art-getting-started-title = Erste Schritte mit { $brand }
-help-art-getting-started-summary = Deine ersten fünf Minuten: Profile, einen Titel finden und speichern.
+help-art-getting-started-summary = Ihre ersten fünf Minuten: Konto, Profile, einen Titel finden und speichern.
 help-art-getting-started-keywords = einstieg starten erstes mal tour neuer nutzer anleitung grundlagen
 help-art-getting-started-body =
-    1. <b>Profil auswählen oder erstellen.</b> Siehe <a=/help/article/profiles-manage>Profile erstellen, bearbeiten oder löschen</a>.
-    2. <b>Startseite erkunden.</b> Zeilen sind nach Themen gruppiert, und der große Titel oben wechselt.
-    3. <b>Suche</b> nach einem Titel mit der Lupe. Siehe <a=/help/article/search-browse>Suchen und stöbern</a>.
-    4. <b>Titel auswählen</b>, um Infos zu lesen, den Trailer anzusehen und Play zu drücken.
-    5. <b>Titel zu Meiner Liste hinzufügen</b> mit der <b>+</b>-Schaltfläche.
+    1. <b>Legen Sie Ihr kostenloses Konto an.</b> Siehe <a=/help/article/need-account>Brauche ich ein Konto?</a>
+    2. <b>Wählen oder erstellen Sie ein Profil.</b> Siehe <a=/help/article/profiles-manage>Profile erstellen, bearbeiten oder löschen</a>.
+    3. <b>Sehen Sie sich die Startseite an.</b> Die Reihen sind nach Themen gruppiert, und der große Titel oben wechselt.
+    4. <b>Suchen</b> Sie mit der Lupe nach einem Titel, einer Schauspielerin, einem Schauspieler oder einer Regie. Siehe <a=/help/article/search-browse>Suchen und Stöbern</a>.
+    5. <b>Wählen Sie einen Titel</b>, um mehr darüber zu lesen, den Trailer zu sehen und die Wiedergabe zu starten.
+    6. <b>Fügen Sie Titel zu Meine Liste hinzu</b>, mit der Schaltfläche <b>+</b>.
 
-    Lernt die Tasten kennen, die beim Anschauen helfen: <a=/help/article/shortcuts>Tastaturkürzel</a>.
+    Lernen Sie die Tasten kennen, die beim Schauen helfen: <a=/help/article/shortcuts>Tastenkombinationen</a>.
+
 help-art-sources-title = Woher die Titel kommen
 help-art-sources-summary = Wie { $brand } Streams findet und warum ein Titel an einem Tag funktioniert und am nächsten nicht.
 help-art-sources-keywords = quellen provider gehostet links drittanbieter woher katalog tmdb metadaten verfügbarkeit
 help-art-sources-body =
-    Details, Poster und Bewertungen stammen aus einem öffentlichen Film- und TV-Katalog. Das Video selbst ist nicht auf { $brand }. Wenn man auf Play drückt, fragt der Player unabhängige Drittanbieter-Quellen nach einem Stream an.
+    Details, Poster und Bewertungen stammen aus einem öffentlichen Film- und Serienkatalog. Das Video selbst liegt nicht bei { $brand }. Wenn Sie auf Wiedergabe drücken, fragt der Player unabhängige Drittquellen nach einem Stream.
 
-    - Ein Titel kann von einer Quelle verfügbar sein und von einer anderen nicht.
+    - Ein Titel kann bei einer Quelle verfügbar sein und bei einer anderen nicht.
     - Eine Quelle kann ohne Vorwarnung offline gehen.
-    - Qualität, Audiospuren und Untertitel stammen von der Quelle.
+    - Qualität, Tonspuren und Untertitel kommen von der Quelle.
 
-    Wir kontrollieren oder prüfen diese Quellen nicht. Siehe <a=/disclaimer>Haftungsausschluss</a>. Falls man Rechteinhaber ist, siehe <a=/help/article/copyright>Urheberrechtsproblem melden</a>.
+    Wir kontrollieren und prüfen diese Quellen nicht. Siehe den <a=/disclaimer>Haftungsausschluss</a>. Wenn Sie Rechteinhaber sind, siehe <a=/help/article/copyright>Wie man ein Urheberrechtsproblem meldet</a>.
+
 help-art-contribute-title = Wie kann ich mitwirken?
-help-art-contribute-summary = Ideen, Fixes, Übersetzungen und Bug-Reports sind willkommen.
+help-art-contribute-summary = Ideen, Korrekturen, Übersetzungen und Fehlerberichte sind willkommen.
 help-art-contribute-keywords = mitwirken beitragen freiwillig übersetzen übersetzung code github helfen verbessern vorschläge
 help-art-contribute-body =
-    { $brand } wird offen entwickelt. Man kann auf verschiedene Arten helfen:
+    { $brand } wird offen entwickelt. Sie können auf verschiedene Arten helfen:
 
-    - <b>Übersetzungen.</b> Interface-Texte liegen in Klartextdateien, eine pro Sprache, sodass eine Übersetzung eine bearbeitbare Textdatei ist.
-    - <b>Bug-Reports.</b> Siehe <a=/help/article/report-bug>Problem melden</a>.
-    - <b>Fixes und Features.</b> Eine Beschreibung oder einen Patch senden.
-    - <b>Ideen.</b> Sagen, was man sich für das Help Center oder die App wünscht.
+    - <b>Übersetzungen.</b> Die Texte der Oberfläche liegen in einfachen Textdateien, eine pro Sprache. Eine Übersetzung ist also eine Textdatei, die Sie bearbeiten können.
+    - <b>Fehlerberichte.</b> Siehe <a=/help/article/report-bug>Problem melden</a>.
+    - <b>Korrekturen und Funktionen.</b> Schicken Sie eine Beschreibung oder einen Patch.
+    - <b>Ideen.</b> Sagen Sie uns, was das Hilfe-Center oder die App können sollte.
 
-    Schreiben an <a=mailto:{ $contribute_email }>{ $contribute_email }</a> mit ein paar Zeilen dazu, was man tun möchte.
+    Schreiben Sie an <a=mailto:{ $contribute_email }>{ $contribute_email }</a> mit ein paar Zeilen dazu, was Sie tun möchten.
+
 help-art-install-app-title = Wie man { $brand } als App installiert
-help-art-install-app-summary = Fügt { $brand } zum Startbildschirm oder Desktop hinzu, damit es in einem eigenen Fenster geöffnet wird.
+help-art-install-app-summary = Fügen Sie { $brand } zum Startbildschirm, Dock oder Desktop hinzu, damit es in einem eigenen Fenster öffnet.
 help-art-install-app-keywords = app installieren pwa zum startbildschirm hinzufügen desktop verknüpfung symbol web app
 help-art-install-app-body =
-    { $brand } ist eine Web-App. Es gibt keinen Store-Download. Der Browser kann sie installieren, sodass sie in einem eigenen Fenster geöffnet wird und über ein eigenes Symbol verfügt.
+    { $brand } ist eine Web-App. Es gibt nichts aus einem Store herunterzuladen. Ihr Browser kann sie installieren, sodass sie in einem eigenen Fenster mit eigenem Symbol öffnet.
 
-    ## Chrome und Edge am Computer
-    Das Installations-Symbol rechts in der Adressleiste auswählen oder das Browsermenü öffnen und <b>{ $brand } installieren</b> wählen.
+    ## Chrome und Edge unter Windows, Mac und Linux
+    Wählen Sie das Installationssymbol rechts in der Adressleiste, oder öffnen Sie das Browsermenü und wählen Sie <b>{ $brand } installieren</b> (in Edge: <b>Apps</b>, dann <b>Diese Website als App installieren</b>).
+
+    ## Safari auf dem Mac
+    Öffnen Sie das Menü <b>Ablage</b> und wählen Sie <b>Zum Dock hinzufügen</b>.
 
     ## Android
-    Das Browsermenü öffnen und <b>App installieren</b> oder <b>Zum Startbildschirm hinzufügen</b> wählen.
+    Öffnen Sie das Browsermenü und wählen Sie <b>App installieren</b> oder <b>Zum Startbildschirm hinzufügen</b>.
 
     ## iPhone und iPad
-    In Safari die <b>Teilen</b>-Schaltfläche auswählen, dann <b>Zum Startbildschirm hinzufügen</b>.
+    Wählen Sie in Safari die Schaltfläche <b>Teilen</b> und dann <b>Zum Home-Bildschirm</b>.
 
-    !! Hinweis: Eine installierte App ist dieselbe Website. Sie aktualisiert sich selbst und verwendet dieselben gespeicherten Profile wie der Browser, aus dem sie installiert wurde.
+    !! Hinweis: Firefox am Computer kann Websites nicht als App installieren. Nutzen Sie ein Lesezeichen oder installieren Sie über Chrome, Edge oder Safari. Eine installierte App ist dieselbe Website: Sie aktualisiert sich selbst und hält Sie angemeldet wie der Browser.
+
 help-art-phone-tablet-title = { $brand } auf dem Handy oder Tablet nutzen
 help-art-phone-tablet-summary = Das mobile Layout, die untere Leiste und Tipps für kleine Bildschirme.
 help-art-phone-tablet-keywords = handy tablet mobil android iphone ipad touch untere leiste app layout
 help-art-phone-tablet-body =
-    Die Website im Browser des Handys öffnen. Die Seite wechselt zu einem für Touch optimierten Layout mit einer Leiste unten für <b>Start</b>, <b>Clips</b>, <b>Suche</b> und <b>Meine Liste</b>.
+    Öffnen Sie die Website im Browser Ihres Smartphones. Die Seite wechselt zu einem Layout für Touch-Bedienung, mit einer Leiste unten für <b>Start</b>, <b>Clips</b>, <b>Suche</b> und <b>Mein Streams</b>.
 
-    - Auf eine Karte tippen, um die Details anzuzeigen, dann auf die Wiedergabetaste tippen, um zu starten.
-    - Das Handy in die Querformatstellung drehen, um das beste Bild zu erhalten.
-    - Damit es sich wie eine App anfühlt, siehe <a=/help/article/install-app>{ $brand } als App installieren</a>.
+    - Tippen Sie auf eine Kachel für die Details und dann auf die Wiedergabetaste, um zu starten.
+    - Drehen Sie das Smartphone ins Querformat, um das beste Bild zu bekommen.
+    - Damit es sich wie eine App anfühlt, siehe <a=/help/article/install-app>Wie man { $brand } als App installiert</a>.
+
 help-art-watch-on-tv-title = Auf dem Fernseher schauen
 help-art-watch-on-tv-summary = Den Browser des Fernsehers verwenden oder einen Browser-Tab von einem Computer oder Handy senden.
 help-art-watch-on-tv-keywords = fernseher television smart tv cast chromecast airplay hdmi fire stick großer bildschirm
 help-art-watch-on-tv-body =
-    Es gibt noch keine { $brand }-App für Fernseher. Diese Optionen funktionieren aktuell:
+    Es gibt noch keine { $brand }-App für Fernseher. Diese Möglichkeiten funktionieren heute:
 
-    - <b>Fernseher-Browser.</b> Die { $brand }-Adresse im Browser öffnen, der mit dem Fernseher geliefert wurde.
-    - <b>Tab senden.</b> In Chrome oder Edge am Computer das Browsermenü öffnen und <b>Senden</b> wählen, dann den Fernseher oder Streaming-Stick auswählen.
-    - <b>Kabel.</b> Ein Laptop per HDMI-Kabel mit dem Fernseher verbinden und Vollbild verwenden.
+    - <b>Browser des Fernsehers.</b> Öffnen Sie die { $brand }-Adresse im Browser, der auf Ihrem Fernseher installiert ist.
+    - <b>Tab übertragen.</b> Öffnen Sie in Chrome oder Edge am Computer das Browsermenü, wählen Sie <b>Streamen</b> und dann Ihren Fernseher oder Streaming-Stick.
+    - <b>Kabel.</b> Verbinden Sie einen Laptop per HDMI-Kabel mit dem Fernseher und nutzen Sie den Vollbildmodus.
 
-    Falls Bild oder Ton nicht stimmen, siehe <a=/help/article/fix-tv>Problem am Fernseher beheben</a>.
+    Wenn Bild oder Ton nicht stimmen, siehe <a=/help/article/fix-tv>Problem am Fernseher beheben</a>.
+
 help-art-copyright-title = Wie man ein Urheberrechtsproblem meldet
 help-art-copyright-summary = Rechteinhaber können die Entfernung eines Links anfordern.
 help-art-copyright-keywords = urheberrecht dmca takedown einbruch rechteinhaber entfernen melden hinweis rechtlich
@@ -882,7 +1009,7 @@ help-act-v-blocked = Blockiert oder voll
 help-act-v-reachable = Erreichbar in { $ms } ms
 help-act-v-unreachable = Nicht erreichbar
 help-act-v-timeout = Keine Antwort in { $s } Sekunden
-help-act-data-title = Ihre Daten auf diesem Gerät
+help-act-data-title = Ihre Profile und Ihre Wiedergabeaktivität
 help-act-data-profiles =
     { $count ->
         [one] 1 Profil
@@ -894,9 +1021,9 @@ help-act-data-progress =
        *[other] { $count } Titel mit gespeichertem Fortschritt
     }
 help-act-data-lang = Sprache: { $lang }
-help-act-clear-progress = Wiedergabefortschritt löschen
+help-act-clear-progress = Gesamte Wiedergabeaktivität ausblenden
 help-act-reset-recs = Empfehlungen zurücksetzen
-help-act-clear-all = Alle gespeicherten Daten löschen
+help-act-clear-all = Daten dieses Browsers löschen und abmelden
 help-act-confirm = Sind Sie sicher? Dies kann nicht rückgängig gemacht werden.
 help-act-yes = Ja, ausführen
 help-act-cancel = Abbrechen
@@ -922,7 +1049,7 @@ nav-series = Serien
 nav-films = Filme
 nav-games = Spiele
 nav-new-popular = Neu & Beliebt
-nav-my-list = Meine Liste
+nav-my-list = Mein Streams
 nav-browse-language = Nach Sprache stöbern
 nav-new-hot = Neu & Trending
 nav-clips = Clips
@@ -1157,43 +1284,45 @@ nf-zone-4 = Analoge Korruption
 nf-zone-5 = Wächter des Leeren
 nf-zone-6 = Kosmische Drift
 legal-privacy-title = Datenschutzerklärung
-legal-privacy-updated = Zuletzt aktualisiert: August 2026
+legal-privacy-updated = Zuletzt aktualisiert: Oktober 2026
 legal-privacy-1-title = 1. Einleitung
 legal-privacy-1-body = { $brand } ist ein Link-Aggregator und eine Suchmaschine. Diese Datenschutzerklärung erklärt, wie wir Ihre persönlichen Informationen sammeln, verwenden und schützen, wenn Sie unseren Dienst nutzen.
 legal-privacy-2-title = 2. Informationen, die wir sammeln
 legal-privacy-2-body = Wir sammeln begrenzte persönliche Informationen, um den Dienst bereitzustellen und zu verbessern:
-legal-privacy-2-b1 = <strong>Kontoinformationen:</strong> E-Mail-Adresse und Anzeigename, wenn Sie ein Konto erstellen.
-legal-privacy-2-b2 = <strong>Nutzungsdaten:</strong> Anonymisierte Verlaufsdaten und Einstellungen, begrenzt auf Ihr Profil.
-legal-privacy-2-b3 = <strong>Sitzungs-Cookies:</strong> Werden verwendet, um Sie sicher angemeldet zu halten.
+legal-privacy-2-b1 = <strong>Kontodaten:</strong> Ihr Vor- und Nachname, Ihre E-Mail-Adresse und Ihr Passwort (von unserem Anmeldedienst nur verschlüsselt gespeichert) sowie eine Mobilnummer, falls Sie eine hinzufügen.
+legal-privacy-2-b2 = <strong>Profile und Aktivität:</strong> Ihre Profile und deren Einstellungen, Meine Liste, Ihre Bewertungen, Ihr Fortschritt und Ihre Wiedergabeaktivität. Sie sind mit Ihrem Konto verknüpft, damit sie Ihnen auf jedes Gerät folgen.
+legal-privacy-2-b3 = <strong>Sicherheitsprotokolle:</strong> die letzten Anmeldungen und Änderungen an Ihrem Konto mit Browser, System und Land, aus dem sie kamen, damit wir Ihnen Ihre Geräte zeigen und Sie vor einer neuen Anmeldung warnen können.
+legal-privacy-2-b4 = <strong>Speicher auf Ihrem Gerät:</strong> was Sie angemeldet hält, eine Kopie Ihrer Profile und Einstellungen, damit Seiten schnell öffnen, und Ihre Cookie-Entscheidungen. Siehe die Cookie-Richtlinie.
 legal-privacy-3-title = 3. Was wir nicht tun
 legal-privacy-3-body = Wir verpflichten uns zu Ihrem Datenschutz:
 legal-privacy-3-b1 = <strong>Ihre Daten weitergeben:</strong> Wir geben keine personenbezogenen Daten an Werbetreibende oder Datenhändler weiter.
 legal-privacy-3-b2 = <strong>Ihre Daten verkaufen:</strong> Wir verkaufen, vermieten oder tauschen niemals personenbezogene Daten mit Dritten.
-legal-privacy-3-b3 = <strong>Ihren Browser identifizieren:</strong> Wir führen kein Browser-Fingerprinting oder eine andere Form der Geräteidentifizierung durch.
+legal-privacy-3-b3 = <strong>Sie verfolgen:</strong> Wir verwenden keine Werbe- oder Analyse-Cookies, erstellen keine Browser-Fingerabdrücke und verfolgen Sie nicht über andere Websites.
 legal-privacy-4-title = 4. Rechtliche Grundlage für die Verarbeitung (UK-DSGVO)
 legal-privacy-4-body = Gemäß der UK-Datenschutzgrundverordnung (UK-DSGVO) stützen wir die Verarbeitung dieser Informationen auf folgende rechtliche Grundlagen:
-legal-privacy-4-b1 = <strong>Vertragliche Erforderlichkeit:</strong> Um Ihnen die Link-Aggregations- und Profilfunktionen bereitzustellen, für die Sie sich angemeldet haben.
-legal-privacy-4-b2 = <strong>Legitime Interessen:</strong> Zur Analyse der allgemeinen Plattformnutzung und zur Verbesserung der Leistungsfähigkeit unter Verwendung streng anonymisierter, aggregierter Daten.
+legal-privacy-4-b1 = <strong>Vertrag:</strong> um Ihnen Ihr Konto, Ihre Profile und die Funktionen bereitzustellen, die Sie nutzen.
+legal-privacy-4-b2 = <strong>Berechtigte Interessen:</strong> um Konten zu schützen (Anmeldeprotokolle) und den Dienst zu betreiben und zu verbessern.
+legal-privacy-4-b3 = <strong>Einwilligung:</strong> um das, was Sie schauen, für personalisierte Empfehlungen zu nutzen. Sie können sie jederzeit unter Datenschutz- und Dateneinstellungen widerrufen.
 legal-privacy-5-title = 5. Wie wir Ihre Daten speichern
-legal-privacy-5-body = Ihre Daten werden sicher über Supabase (unser Backend-Infrastrukturanbieter) gespeichert. Wir verwenden Row-Level-Security-(RLS)-Richtlinien, um sicherzustellen, dass nur Sie auf Ihre Daten zugreifen können.
+legal-privacy-5-body = Ihre Kontodaten werden bei Supabase, unserem Datenbankanbieter, mit Sicherheit auf Zeilenebene gespeichert, sodass nur Ihr Konto sie lesen kann. Jeder Browser, in dem Sie angemeldet sind, behält eine Kopie, damit alles schneller geht. Wenn Sie Ihr Konto löschen, werden seine Daten sofort gelöscht.
 legal-privacy-6-title = 6. Dienste von Drittanbietern
-legal-privacy-6-body = Wir verwenden APIs von Drittanbietern, darunter TMDB (für Metadaten) und Cloudflare Turnstile (für Botschutz). Diese Dienste unterliegen ihren eigenen Datenschutzrichtlinien.
+legal-privacy-6-body = Wir nutzen diese Anbieter, jeweils mit eigener Datenschutzerklärung: Supabase (Konten und Datenspeicherung), Cloudflare (Hosting der Website und Weiterleitung von E-Mails), Hugging Face (Hosting des Empfehlungsdienstes), Resend (Versand der Konto-E-Mails), TMDB (Informationen und Bilder zu Filmen und Serien) und YouTube (Trailer). Videos kommen von unabhängigen Drittquellen, die Ihre IP-Adresse wie jede Website sehen, die Sie besuchen.
 legal-privacy-7-title = 7. Ihre Rechte zum Datenschutz
 legal-privacy-7-body = Gemäß der UK-DSGVO haben Sie folgende Rechte:
-legal-privacy-7-b1 = <strong>Zugangsrecht:</strong> Fordern Sie eine Kopie der personenbezogenen Daten an, die wir über Sie gespeichert haben.
-legal-privacy-7-b2 = <strong>Recht auf Löschung:</strong> Fordern Sie die Löschung Ihrer personenbezogenen Daten an (das „Recht auf Vergessenwerden“). Sie können Ihr Konto direkt auf der Seite Einstellungen löschen.
-legal-privacy-7-b3 = <strong>Recht auf Berichtigung:</strong> Fordern Sie die Berichtigung ungenauer personenbezogener Daten an, die wir über Sie gespeichert haben.
-legal-privacy-7-b4 = <strong>Widerspruchsrecht:</strong> Widersprechen Sie der Verarbeitung Ihrer personenbezogenen Daten, wenn wir uns auf legitime Interessen stützen.
+legal-privacy-7-b1 = <strong>Auskunftsrecht:</strong> Laden Sie jederzeit unter Konto, Zugriff auf persönliche Informationen, eine Kopie Ihrer Daten herunter.
+legal-privacy-7-b2 = <strong>Recht auf Löschung:</strong> Löschen Sie Ihr Konto jederzeit unter Konto, Konto löschen. Alles darin wird sofort gelöscht.
+legal-privacy-7-b3 = <strong>Recht auf Berichtigung:</strong> Ändern Sie Namen, E-Mail-Adresse und Telefonnummer unter Konto, oder bitten Sie uns, alles andere zu korrigieren.
+legal-privacy-7-b4 = <strong>Widerspruchsrecht:</strong> Schalten Sie personalisierte Empfehlungen aus, oder schreiben Sie uns, um einer Verarbeitung aufgrund berechtigter Interessen zu widersprechen.
 legal-privacy-8-title = 8. Kontakt
-legal-privacy-8-body = Wenn Sie Fragen zu dieser Datenschutzrichtlinie haben oder Ihre Datenrechte ausüben möchten, wenden Sie sich bitte an den Repository-Betreiber unter { $support_email }.
+legal-privacy-8-body = Wenn Sie Fragen zu dieser Datenschutzerklärung haben oder Ihre Rechte ausüben möchten, schreiben Sie uns an { $support_email }.
 legal-terms-title = Nutzungsbedingungen
-legal-terms-updated = Zuletzt aktualisiert: August 2026
+legal-terms-updated = Zuletzt aktualisiert: Oktober 2026
 legal-terms-1-title = 1. Annahme der Bedingungen
 legal-terms-1-body = Durch den Zugriff auf oder die Nutzung von { $brand } erklären Sie sich mit diesen Nutzungsbedingungen und unserer Datenschutzerklärung einverstanden. Wenn Sie nicht einverstanden sind, nutzen Sie den Dienst nicht.
 legal-terms-2-title = 2. Art des Dienstes
 legal-terms-2-body = { $brand } ist ein Link-Aggregator und eine Suchmaschine. Wir hosten, laden, übertragen oder kontrollieren keine Videoinhalte auf unseren Servern. Alle Medien stammen von Drittanbieter-Plattformen.
 legal-terms-3-title = 3. Benutzerkonten
-legal-terms-3-body = Um auf bestimmte Funktionen zuzugreifen (wie das Speichern einer Merkliste oder das Synchronisieren des Fortschritts), müssen Sie ein Konto erstellen. Sie sind dafür verantwortlich, die Sicherheit Ihrer Kontodaten zu gewährleisten.
+legal-terms-3-body = Für die Nutzung von { $brand } brauchen Sie ein kostenloses Konto. Sie sind dafür verantwortlich, Ihr Passwort sicher aufzubewahren, und für alles, was in Ihrem Konto geschieht. Sagen Sie uns sofort Bescheid, wenn Sie glauben, dass jemand anders es nutzt.
 legal-terms-4-title = 4. Zulässige Nutzung
 legal-terms-4-body = Sie erklären sich damit einverstanden, den Dienst nicht zu folgenden Zwecken zu nutzen:
 legal-terms-4-b1 = Sicherheitsfunktionen des Dienstes zu umgehen, zu deaktivieren oder zu beeinträchtigen.
@@ -1213,10 +1342,14 @@ legal-terms-9-body = Diese Nutzungsbedingungen unterliegen dem Recht von England
 legal-terms-10-title = 10. Kontakt
 legal-terms-10-body = Bei Fragen zu diesen Nutzungsbedingungen wenden Sie sich bitte über die Kontaktseite an uns.
 legal-cookie-policy-title = Cookie-Richtlinie
-legal-cookie-policy-updated = Zuletzt aktualisiert: 16. August 2026
-legal-cookie-policy-1-title = Wie wir Cookies verwenden
-legal-cookie-policy-1-body = Wir verwenden Cookies und ähnliche Tracking-Technologien, um die Aktivität auf unserem Dienst zu verfolgen und bestimmte Informationen zu speichern. Cookies sind Dateien mit kleinen Datenmengen, die einen anonymen eindeutigen Bezeichner enthalten können.
-legal-dmca-title = DMCA Safe Harbor Notice
+legal-cookie-policy-updated = Zuletzt aktualisiert: Oktober 2026
+legal-cookie-policy-1-title = Wie wir Cookies und Speicher verwenden
+legal-cookie-policy-1-body = { $brand } verwendet keine Werbe- oder Analyse-Cookies. Wir nutzen den lokalen Speicher Ihres Browsers, einen Bereich auf Ihrem Gerät, den nur diese Website lesen kann, für:
+legal-cookie-policy-1-b1 = <strong>Anmeldung:</strong> was Sie in diesem Browser angemeldet hält.
+legal-cookie-policy-1-b2 = <strong>Geschwindigkeit:</strong> eine Kopie Ihrer Profile, Einstellungen und Ihres Fortschritts, damit Seiten sofort öffnen.
+legal-cookie-policy-1-b3 = <strong>Ihre Entscheidungen:</strong> Ihre Entscheidungen zu Cookies und Personalisierung sowie Ihre Anzeigesprache.
+legal-cookie-policy-1-b4 = <strong>Andere Websites:</strong> Trailer werden von YouTube abgespielt, das beim Abspielen eigene Cookies setzen kann. Sie können Ihre Entscheidungen jederzeit unter Datenschutz- und Dateneinstellungen ändern. Wenn Sie die Daten dieser Website in Ihrem Browser löschen, werden Sie in diesem Browser abgemeldet; Ihr Konto behält alles.
+legal-dmca-title = DMCA-Hinweis (Safe Harbor)
 legal-dmca-updated = Zuletzt aktualisiert: August 2026
 legal-dmca-1-title = 1. Unsere Rolle – Link-Aggregator, kein Host
 legal-dmca-1-body = { $brand } ist ein Link-Aggregator und eine Suchmaschine. Wir hosten, laden, speichern, übertragen oder kontrollieren keine Video- oder Mediendateien. Alle Inhalte werden von Drittanbieter-Servern bereitgestellt, die vollständig außerhalb unserer Kontrolle liegen.
@@ -1265,6 +1398,7 @@ help-ui-section-link = Link zu diesem Abschnitt
 help-ui-policy-questions = Fragen zu dieser Richtlinie?
 help-topic-legal = Rechtliches und Richtlinien
 help-group-policies = Richtlinien
+help-group-signing-in = Anmeldung und Sicherheit
 help-art-fake-sites-title = So erkennt man gefälschte { $brand }-Seiten und -Nachrichten
 help-art-fake-sites-summary = Die offiziellen Adressen, was wir niemals verlangen und was man bei einer Kopie tun sollte.
 help-art-fake-sites-keywords = gefälscht betrug phishing kopie nachahmung offizielle adresse sichere download passwort zahlung e-mail
@@ -1286,7 +1420,7 @@ help-art-fake-sites-body =
     3. Senden Sie die Adresse an <a=mailto:{ $help_email }>{ $help_email }</a>, damit wir sie melden können.
 help-art-security-report-title = Sicherheitsproblem melden
 help-art-security-report-summary = Wie man uns sicher über eine Schwachstelle informiert.
-help-art-security-report-keywords = security vulnerability bug bounty responsible disclosure exploit hack report weakness
+help-art-security-report-keywords = sicherheit sicherheitslücke schwachstelle melden verantwortungsvolle offenlegung exploit hack
 help-art-security-report-body =
     Wenn Sie einen Weg gefunden haben, auf die Daten anderer zuzugreifen, ein Profil-PIN zu umgehen oder die Seite zu kompromittieren, informieren Sie uns bitte, bevor Sie es jemand anderem sagen.
 
@@ -1297,57 +1431,66 @@ help-art-security-report-body =
     Wir lesen jeden Bericht. Die gleichen Details finden sich in der maschinenlesbaren Datei unter <a=/.well-known/security.txt>/.well-known/security.txt</a>.
 help-art-translate-title = Helfen Sie bei der Übersetzung von { $brand }
 help-art-translate-summary = Oberflächentexte befinden sich in einfachen Dateien, eine pro Sprache, und jeder kann sie verbessern.
-help-art-translate-keywords = translate translation localisation localization language contribute ftl fluent grammar gender plural
+help-art-translate-keywords = übersetzen übersetzung lokalisierung sprache mitmachen ftl fluent grammatik geschlecht
 help-art-translate-body =
-    Der gesamte Interface-Text wird pro Sprache in einer einfachen Textdatei gespeichert. Für Übersetzungen ist kein Programmieren nötig.
+    Alle Texte der Oberfläche stehen in einer einfachen Textdatei pro Sprache. Zum Übersetzen müssen Sie nicht programmieren können.
 
-    ## Was zu beachten ist
-    - Nachrichten sehen so aus: <b>Schlüssel = Text</b>. Nur den Text nach dem Gleichheitszeichen ändern.
-    - Wörter in geschweiften Klammern, z. B. <b>{ "{ $brand }" }</b>, werden von der App eingefügt. Diese beibehalten und bei Bedarf an die passende Stelle im Satz verschieben.
-    - Manche Nachrichten haben Formen für Einzahl und Mehrzahl (<b>1 Staffel</b>, <b>2 Staffeln</b>). Sprachen mit mehr als zwei Formen können alle hinzufügen.
-    - Wenn die Sprache ein Wort je nach Genus oder Kasus ändert, die passende Form für den Satz verwenden.
+    ## Was Sie wissen sollten
+    - Meldungen sehen so aus: <b>Schlüssel = Text</b>. Ändern Sie nur den Text nach dem Gleichheitszeichen.
+    - Wörter in geschweiften Klammern, etwa <b>{ "{ $brand }" }</b>, setzt die App ein. Lassen Sie sie unverändert und stellen Sie sie dorthin, wo Ihre Sprache sie braucht.
+    - Manche Meldungen haben Formen für eins und für mehrere (<b>1 Staffel</b>, <b>2 Staffeln</b>). Sprachen mit mehr als zwei Formen können alle ergänzen.
+    - Wo Ihre Sprache ein Wort nach Geschlecht oder Fall verändert, schreiben Sie die Form, die in den Satz passt.
 
-    ## So wird eine Übersendung gesendet
-    An <a=mailto:{ $contribute_email }>{ $contribute_email }</a> schreiben und die Sprache sowie entweder die Datei oder einen Link zur Änderung angeben. Muttersprachler, die die Arbeit der anderen prüfen, sind die beste Kontrolle.
+    ## So schicken Sie eine Übersetzung
+    Schreiben Sie an <a=mailto:{ $contribute_email }>{ $contribute_email }</a> mit der Sprache und entweder der Datei oder einem Link zu Ihrer Änderung. Muttersprachler, die die Arbeit der anderen prüfen, sind die beste Kontrolle, die wir haben.
+
 help-art-cookies-explained-title = Cookies und lokaler Speicher erklärt
 help-art-cookies-explained-summary = Was der Browser für { $brand } speichert, in einfachen Worten.
 help-art-cookies-explained-keywords = Cookies lokaler Speicher Browserdaten Tracking Einwilligung Banner Einstellungen Sitzung Drittanbieter
 help-art-cookies-explained-body =
-    <b>Cookies</b> sind kleine Notizen, die eine Website vom Browser speichern lässt. <b>Lokaler Speicher</b> ist ein ähnlicher Ort, den nur die Website lesen kann und der nicht mit jeder Anfrage gesendet wird.
+    <b>Cookies</b> sind kleine Notizen, die eine Website Ihren Browser speichern lässt. Der <b>lokale Speicher</b> ist ein ähnlicher Ort, den nur die Website selbst lesen kann und der nicht bei jeder Anfrage mitgeschickt wird.
 
-    { $brand } verwendet den lokalen Speicher für Profile, PINs, Fortschritt und Sprache. Diese bleiben auf dem Gerät. Andere Websites, die Bilder oder Videos bereitstellen, können eigene Cookies setzen, die nicht kontrolliert werden können. Siehe <a=/help/article/sources>Wo Titel herkommen</a>.
+    { $brand } nutzt den lokalen Speicher, keine Werbe- oder Tracking-Cookies. Gespeichert werden:
+    - was Sie angemeldet hält,
+    - eine Kopie Ihrer Profile, Einstellungen und Ihres Fortschritts, damit Seiten schnell öffnen,
+    - Ihre Entscheidungen zu Cookies und Personalisierung.
 
-    ## Optionen
-    - Beim ersten Besuch fragt ein Banner, ob Empfehlungen das Nutzungsverhalten verwenden dürfen. Die Entscheidung kann jederzeit geändert werden.
-    - Mit <b>Ablehnen</b> bleiben alle Funktionen erhalten, die für die Nutzung der Website nötig sind, und die Personalisierung wird deaktiviert.
-    - Der Browser kann Cookies und Website-Daten auch blockieren oder löschen. In diesem Fall gehen Profile und Fortschritt verloren.
+    Trailer werden von YouTube abgespielt, das eigene Cookies setzen kann, und Bilder kommen aus einem öffentlichen Filmkatalog. Darauf haben wir keinen Einfluss. Siehe <a=/help/article/sources>Woher die Titel kommen</a>.
+
+    ## Ihre Möglichkeiten
+    - Beim ersten Besuch fragt ein Banner, ob Empfehlungen nutzen dürfen, was Sie schauen. Sie können Ihre Meinung jederzeit unter <b>Datenschutz- und Dateneinstellungen</b> oder mit dem Werkzeug unten ändern.
+    - <b>Ablehnen</b> behält nur, was die Website zum Funktionieren braucht, und schaltet die Personalisierung aus.
+    - Wenn Ihr Browser die Websitedaten löscht, werden Sie in diesem Browser abgemeldet. Ihr Konto behält alles.
 
     @@ cookies
+
 help-art-stuck-loading-title = Die Seite bleibt beim Logo oder auf einem leeren Bildschirm stehen
 help-art-stuck-loading-summary = Was zu tun ist, wenn { $brand } nicht fertig startet.
 help-art-stuck-loading-keywords = hängt Ladeanzeige Logo leer weißer Bildschirm Startbildschirm startet nicht WebAssembly wasm eingefroren Start
 help-art-stuck-loading-body =
-    Während { $brand } startet, wird das Würfel-Logo mit einer Reihe sich bewegender Punkte angezeigt. Das sollte nur wenige Sekunden dauern. { $brand } läuft als WebAssembly-App, daher bleibt man auf diesem Bildschirm, wenn der Browser oder eine Einstellung WebAssembly deaktiviert.
+    Während { $brand } startet, sehen Sie das Würfel-Logo mit einer Reihe sich bewegender Punkte. Das sollte nur ein paar Sekunden dauern. { $brand } läuft als WebAssembly-App. Ein Browser oder eine Einstellung, die WebAssembly abschaltet, lässt Sie auf diesem Bildschirm hängen.
 
-    1. Laden Sie die Seite mit <b>Strg + Umschalt + R</b> (auf dem Mac <b>Cmd + Umschalt + R</b>) neu, um die neueste Version abzurufen.
-    2. Öffnen Sie die Seite in einem privaten Fenster. Wenn es dort funktioniert, stört eine Erweiterung. Siehe <a=/help/article/extensions-blockers>Erweiterungen, die den Player blockieren</a>.
+    1. Laden Sie mit <b>Strg + Umschalt + R</b> (<b>Cmd + Umschalt + R</b> auf dem Mac) neu, um die neueste Version zu holen.
+    2. Öffnen Sie die Seite in einem privaten Fenster. Funktioniert sie dort, stört eine Erweiterung. Siehe <a=/help/article/extensions-blockers>Erweiterungen, die den Player blockieren</a>.
     3. Aktualisieren Sie Ihren Browser. Siehe <a=/help/article/supported-browsers>Unterstützte Browser</a>.
-    4. Deaktivieren Sie für diese Website jeden Modus, der Web-Funktionen einschränkt, wie z. B. einen Lockdown- oder strikten Sicherheitsmodus.
-    5. Löschen Sie die Daten dieser Website. Siehe <a=/help/article/clear-data>So löschen Sie Ihre gespeicherten Daten</a>.
+    4. Schalten Sie für diese Website jeden Modus aus, der Webfunktionen einschränkt, etwa den Blockierungsmodus auf Apple-Geräten oder die strenge Sicherheit in Edge.
+    5. Löschen Sie die Daten dieser Website und melden Sie sich wieder an. Siehe <a=/help/article/clear-data>Gespeicherte Daten löschen</a>.
 
     @@ refresh
+
 help-art-slow-pages-title = Seiten laden langsam
 help-art-slow-pages-summary = So wird das Browsen bei langsamer Verbindung oder älteren Geräten schneller.
 help-art-slow-pages-keywords = langsam lag performance geschwindigkeit laden speicher altes handy ruckeln scrollen vorschauen
 help-art-slow-pages-body =
-    Beim ersten Besuch wird die App heruntergeladen, ca. 3 MB. Danach besteht der größte Teil der Wartezeit aus Bildern und Vorschauen.
+    Beim ersten Besuch wird die App geladen, etwa 2 MB. Danach entsteht die Wartezeit vor allem durch Bilder und Vorschauen.
 
-    - Deaktivieren Sie <b>Automatische Vorschauen</b> in den <b>Einstellungen</b> unter <b>Wiedergabeeinstellungen</b>. Trailer, die von selbst starten, verbrauchen Daten und Speicher.
-    - Schließen Sie Tabs und andere Apps, die das Netzwerk oder viel Speicherplatz nutzen.
-    - Verwenden Sie einen aktuellen Browser. Ältere Browser führen die App langsamer aus.
-    - Bei mobilen Daten: Wechseln Sie, wenn möglich, zu Wi-Fi.
+    - Schalten Sie in den <b>Wiedergabeeinstellungen</b> Ihres Profils <b>Vorschauen automatisch abspielen</b> aus. Vorschauen, die von selbst starten, verbrauchen Daten und Speicher.
+    - Schließen Sie Tabs und andere Apps, die das Netzwerk oder viel Speicher nutzen.
+    - Verwenden Sie einen aktuellen Browser. Ältere führen die App langsamer aus.
+    - Wechseln Sie bei mobilen Daten nach Möglichkeit ins WLAN.
 
     @@ diagnostics
+
 help-art-vpn-network-title = VPNs, Schul- und Arbeitsnetzwerke
 help-art-vpn-network-summary = Warum einige Netzwerke Titel oder Bilder blockieren und was man versuchen kann.
 help-art-vpn-network-keywords = vpn proxy schule arbeit netzwerk firewall dns filter blockiert safedns eingeschränkt wifi
@@ -1356,12 +1499,13 @@ help-art-vpn-network-body =
 
     - <b>VPN oder Proxy.</b> Einige Quellen antworten nicht auf VPN-Adressen. Schalten Sie es aus oder wählen Sie ein anderes Land.
     - <b>Schule, Arbeit oder öffentliches Wi-Fi.</b> Filter blockieren oft Streaming oder den Katalog. Versuchen Sie die mobilen Daten Ihres Handys.
-    - <b>DNS-Filter.</b> Ein filternder DNS-Dienst kann den Katalog blockieren und Zeilen oder Bilder leer lassen. Verwenden Sie einen anderen DNS oder deaktivieren Sie den Filter für diese Website.
+    - <b>DNS-Filter.</b> Ein filternder DNS-Dienst kann den Katalog blockieren und Reihen oder Bilder leer lassen. Verwenden Sie einen anderen DNS oder deaktivieren Sie den Filter für diese Website.
 
     Die Geräteprüfung zeigt, welchen Dienst Ihr Netzwerk nicht erreichen kann.
 
     @@ diagnostics
-help-art-is-down-title = Ist { $brand } down?
+
+help-art-is-down-title = Ist { $brand } gestört?
 help-art-is-down-summary = Prüfen Sie, welche Teile von Ihrem Gerät aus funktionieren.
 help-art-is-down-keywords = ausfall status nicht funktioniert offline nicht verfügbar server wartung fehler seite
 help-art-is-down-body =
@@ -1387,81 +1531,129 @@ help-art-autoplay-blocked-title = Video startet stumm oder startet nicht automat
 help-art-autoplay-blocked-summary = Warum Browser verhindern, dass Ton automatisch startet, und wie { $brand } damit umgeht.
 help-art-autoplay-blocked-keywords = autoplay blockiert stumm start richtlinie browser ton auto play previews trailer
 help-art-autoplay-blocked-body =
-    Browser erlauben es einer Seite nicht, Video mit Ton zu starten, bis Sie darauf geklickt oder getippt haben. { $brand } versucht zunächst, mit Ton zu starten. Wenn der Browser dies ablehnt, startet es stumm und zeigt den stummen Lautsprecher an, und Sie können den Ton mit <b>M</b> oder dem Lautsprecher-Button aktivieren.
+    Browser lassen eine Seite kein Video mit Ton starten, bevor Sie darauf geklickt oder getippt haben. { $brand } versucht zuerst, mit Ton zu starten. Lehnt der Browser das ab, startet es stumm und zeigt den durchgestrichenen Lautsprecher. Schalten Sie den Ton mit <b>M</b> oder der Lautsprechertaste ein.
 
-    - Damit Trailer und Vorschauen nicht mehr automatisch starten, deaktivieren Sie <b>Autoplay-Vorschauen</b> in <b>Einstellungen</b> unter <b>Wiedergabeeinstellungen</b>.
-    - Wenn ein Titel nie startet, siehe <a=/help/article/wont-play>Ein Titel wird nicht abgespielt</a>.
+    - Damit Vorschauen nicht von selbst starten, schalten Sie in den <b>Wiedergabeeinstellungen</b> Ihres Profils <b>Vorschauen automatisch abspielen</b> aus.
+    - Wenn ein Titel nie startet, siehe <a=/help/article/wont-play>Ein Titel lässt sich nicht abspielen</a>.
+
 help-art-clips-title = Clips verwenden
 help-art-clips-summary = Durch kurze Vorschauen scrollen und das, was man mag, zur Liste hinzufügen.
 help-art-clips-keywords = Clips Kurzvideos Vorschauen Scrollen Vertikal Trailer Wischen Stummschalten Info Meine Liste
 help-art-clips-body =
-    <b>Clips</b> zeigt kurze Vorschauen nacheinander an, in der Leiste unten auf dem Smartphone.
+    <b>Clips</b> zeigt kurze Vorschauen nacheinander, auf dem Smartphone in der Leiste unten.
 
-    1. Scrollen oder wischen, um zum nächsten Clip zu gelangen.
-    2. Auf die Lautsprecher-Taste tippen, um den Ton ein- oder auszuschalten. Clips starten stumm.
-    3. Auf <b>Meine Liste</b> tippen, um den Titel zu speichern, auf <b>Wiedergabe</b>, um ihn anzusehen, oder auf <b>Info</b>, um mehr darüber zu erfahren.
+    1. Scrollen oder wischen Sie zum nächsten Clip.
+    2. Wählen Sie die Lautsprechertaste, um den Ton ein- oder auszuschalten. Clips starten stumm.
+    3. Wählen Sie <b>Meine Liste</b>, um den Titel zu speichern, <b>Wiedergabe</b>, um ihn anzusehen, oder <b>Info</b>, um mehr darüber zu lesen.
+
 help-art-genres-title = Nach Genre stöbern
 help-art-genres-summary = Filme und Serien nach dem gewünschten Titeltyp eingrenzen.
 help-art-genres-keywords = Genres Kategorien Komödie Drama Horror Action Filtern Stöbern Filme Serien Untermenü
 help-art-genres-body =
-    1. <b>Filme</b> oder <b>Serien</b> in der oberen Leiste öffnen.
-    2. Auf <b>Genres</b> neben dem Seitentitel tippen.
-    3. Ein Genre auswählen. Die Seite zeigt dann nur dieses Genre mit dafür erstellten Reihen.
+    1. Öffnen Sie <b>Filme</b> oder <b>Serien</b> in der oberen Leiste.
+    2. Wählen Sie <b>Genres</b> neben dem Seitentitel.
+    3. Wählen Sie ein Genre. Die Seite zeigt dann nur dieses Genre, mit eigens dafür erstellten Reihen.
 
-    Um zu allem zurückzukehren, <b>Filme</b> oder <b>Serien</b> erneut öffnen. Auf dem Smartphone öffnet sich die Genreliste als Blatt von unten.
+    Um wieder alles zu sehen, öffnen Sie erneut <b>Filme</b> oder <b>Serien</b>. Auf dem Smartphone öffnet sich die Genreliste von unten.
+
 help-art-top-10-title = Was sind die Top-10-Reihen?
-help-art-top-10-summary = Eine Reihe mit den zehn Titeln, die gerade am meisten angesehen werden.
+help-art-top-10-summary = Eine Reihe mit den zehn beliebtesten Titeln im Moment.
 help-art-top-10-keywords = Top 10 Top Ten beliebt Trending Ranking Zahlen Reihe am meisten angesehen
-help-art-top-10-body = Eine <b>Top-10</b>-Reihe zeigt die zehn am meisten angesehenen Titel des Moments, jeweils mit einer großen Zahl. Sie folgt der aktuellen Beliebtheit im Katalog und ändert sich von Tag zu Tag. Sie ist für alle gleich und basiert nicht auf dem eigenen Profil.
-help-art-episodes-title = Staffeln und Episoden
-help-art-episodes-summary = Eine Staffel und eine Episode im Detailfenster oder im Player auswählen.
+help-art-top-10-body = Eine <b>Top 10</b>-Reihe zeigt die zehn beliebtesten Filme oder Serien im Moment, jeweils mit einer großen Zahl. Sie folgt der täglichen Beliebtheit der Titel im Filmkatalog und ändert sich deshalb von Tag zu Tag. Sie ist für alle gleich und hängt nicht von Ihrem Profil ab.
+help-art-episodes-title = Staffeln und Folgen
+help-art-episodes-summary = Eine Staffel und eine Folge im Detailfenster oder im Player auswählen.
 help-art-episodes-keywords = Staffeln Episoden Serien Liste Nächste Episode Schublade Serienauswahl TV-Sendungen
 help-art-episodes-body =
     ## Vor der Wiedergabe
-    Eine Serie öffnen und auf <b>Episoden</b> tippen. Über das Staffelmenü die Staffel wechseln und dann eine Episode auswählen.
+    Öffnen Sie eine Serie und wählen Sie <b>Folgen</b>. Wechseln Sie über das Staffelmenü die Staffel und wählen Sie dann eine Folge.
 
     ## Während der Wiedergabe
-    - Auf <b>Episoden</b> in den Player-Steuerungselementen tippen, um die Liste zu öffnen, ohne den Player zu verlassen.
-    - Auf <b>Nächste Episode</b> tippen oder sie automatisch starten lassen. Siehe <a=/help/article/skip-intro-next>Intro überspringen und Nächste Episode</a>.
+    - Wählen Sie <b>Folgen</b> in der Player-Steuerung, um die Liste zu öffnen, ohne den Player zu verlassen.
+    - Wählen Sie <b>Nächste Folge</b>, oder lassen Sie sie automatisch starten. Siehe <a=/help/article/skip-intro-next>„Intro überspringen“ und „Nächste Folge“</a>.
+
 help-art-share-title = So teilt man einen Titel
 help-art-share-summary = Einen Link zu einem Titel an eine Freundin oder einen Freund senden.
 help-art-share-keywords = Teilen Link WhatsApp Nachrichten Instagram Snapchat Kopieren Senden Freundin Freund
 help-art-share-body =
-    1. Öffne die Details eines Titels und wähle <b>Teilen</b>.
-    2. Wähle <b>WhatsApp</b> oder <b>Nachrichten</b>, um den Link zu senden, oder <b>Link kopieren</b>, um ihn überall einzufügen.
-    3. Für Instagram und Snapchat wird der Link kopiert und in die App eingefügt.
+    1. Öffnen Sie die Details eines Titels und wählen Sie <b>Teilen</b>.
+    2. Wählen Sie <b>WhatsApp</b> oder <b>Nachrichten</b>, um den Link zu senden, oder <b>Link kopieren</b>, um ihn irgendwo einzufügen.
+    3. Bei Instagram und Snapchat wird der Link kopiert, und Sie fügen ihn dann in der App ein.
 
-    Der Link öffnet die Titelseite auf { $brand }. Die Person, die ihn öffnet, muss nicht angemeldet sein.
+    Der Link öffnet den Titel auf { $brand }. Wer ihn öffnet, muss sich anmelden oder ein kostenloses Konto anlegen, um zu schauen.
+
 help-art-title-details-title = Das Titeldetails-Fenster
 help-art-title-details-summary = Was man lesen und tun kann, bevor man auf Abspielen drückt.
 help-art-title-details-keywords = mehr info details modal besetzung genres handlung ähnliche mehr wie dieser trailer bewertung match
 help-art-title-details-body =
-    Wähle eine Titelkarte oder <b>Mehr Infos</b>, um die Details zu öffnen.
+    Wählen Sie eine Titelkachel oder <b>Mehr Infos</b>, um die Details zu öffnen.
 
-    - <b>Abspielen</b> oder <b>Weiter</b> startet den Titel an der Stelle, an der man aufgehört hat.
-    - <b>Meine Liste</b> speichert ihn, und der Daumen bewertet ihn.
-    - Die Zusammenfassung, die Besetzung, die Genres und ein paar Wörter, die die Stimmung beschreiben, helfen bei der Entscheidung.
-    - Für Serien listet <b>Folgen</b> die Staffeln auf.
-    - <b>Ähnliche Titel</b> zeigt Titel, die inhaltlich ähnlich sind, was ein guter Weg ist, etwas Neues zu finden.
+    - <b>Abspielen</b> oder <b>Weiter</b> startet den Titel dort, wo Sie aufgehört haben.
+    - <b>Meine Liste</b> speichert ihn, und mit dem Daumen bewerten Sie ihn.
+    - Zusammenfassung, Besetzung, Genres und ein paar Worte zur Stimmung helfen bei der Entscheidung.
+    - Bei Serien listet <b>Folgen</b> die Staffeln auf.
+    - <b>Ähnliche Titel</b> zeigt verwandte Titel, eine gute Möglichkeit, etwas Neues zu entdecken.
+
 help-art-accessibility-title = Barrierefreiheit auf { $brand }
 help-art-accessibility-summary = Untertitel, Tastatursteuerung und Anzeigeeinstellungen, die helfen.
 help-art-accessibility-keywords = barrierefreiheit screen reader tastatur untertitel untertitel größe kontrast zoom reduzierte bewegung behinderung
 help-art-accessibility-body =
-    - <b>Untertitel.</b> Wähle Sprache, Größe, Farbe und Hintergrund in <b>Einstellungen</b>. Siehe <a=/help/article/subtitles>So nutzt man Untertitel, Bildunterschriften oder wählt die Audiosprache</a>.
-    - <b>Tastatur.</b> Nutze <b>Tab</b>, um zwischen Steuerelementen zu wechseln, und <b>Esc</b>, um Fenster zu schließen. Der Player hat eigene Tasten, siehe <a=/help/article/shortcuts>Tastaturkürzel</a>.
-    - <b>Textgröße.</b> Zoome den Browser mit <b>Ctrl</b> und <b>+</b> (<b>Cmd</b> und <b>+</b> auf einem Mac). Das Layout passt sich an.
-    - <b>Bewegung.</b> Wenn das Gerät nach reduzierter Bewegung fragt, bleibt das animierte Logo still.
+    - <b>Untertitel.</b> Wählen Sie die Sprache unter <b>Sprachen</b> Ihres Profils und Größe, Farbe und Hintergrund unter <b>Untertitel-Erscheinungsbild</b>. Siehe <a=/help/article/subtitles>Untertitel verwenden oder die Audiosprache wählen</a>.
+    - <b>Tastatur.</b> Mit <b>Tab</b> wechseln Sie zwischen den Bedienelementen, mit <b>Esc</b> schließen Sie Fenster. Der Player hat eigene Tasten, siehe <a=/help/article/shortcuts>Tastenkombinationen</a>.
+    - <b>Textgröße.</b> Vergrößern Sie die Ansicht im Browser mit <b>Strg</b> und <b>+</b> (<b>Cmd</b> und <b>+</b> auf dem Mac). Das Layout passt sich an.
+    - <b>Bewegung.</b> Wenn Ihr Gerät reduzierte Bewegung verlangt, bleibt das animierte Logo stehen.
 
-    Wenn etwas schwer zu bedienen ist, teile es uns auf der Seite <a=/help/article/report-bug>Problem melden</a> mit. Wir nehmen diese Meldungen ernst.
-help-art-profile-icons-title = So wählt man ein Profilsymbol
-help-art-profile-icons-summary = Wähle einen Avatar für ein Profil.
+    Wenn etwas schwer zu bedienen ist, sagen Sie es uns auf der Seite <a=/help/article/report-bug>Problem melden</a>. Wir nehmen diese Meldungen ernst.
+
+help-art-profile-icons-title = Ein Profilbild auswählen
+help-art-profile-icons-summary = Wählen Sie ein Bild für ein Profil.
 help-art-profile-icons-keywords = profil symbol avatar bild bild ändern wählen charakter
 help-art-profile-icons-body =
-    1. Öffnen Sie <b>Profile verwalten</b> und wählen Sie das Profil aus.
-    2. Wählen Sie das Symbol aus.
-    3. Wählen Sie eines aus den Gruppen und klicken Sie auf <b>Speichern</b>.
+    1. Öffnen Sie <b>Profile verwalten</b> und wählen Sie das Profil.
+    2. Wählen Sie das Bild.
+    3. Wählen Sie ein neues aus und dann <b>Speichern</b>.
 
-    Ein Kinderprofil verwendet standardmäßig das gestreifte Kinder-Symbol, es sei denn, Sie wählen ein anderes aus. Sie können den Symbolauswahlbereich auch über <b>Einstellungen</b> erreichen.
+    Sie können es auch unter <b>Konto</b> und <b>Profile verwalten</b> ändern: Wählen Sie das Profil und dann sein Bild. Ein Kinderprofil verwendet das Kinderbild, bis Sie ein anderes wählen.
+
+help-art-parental-controls-title = Kindersicherung: Altersfreigaben und gesperrte Titel
+help-art-parental-controls-summary = Beschränken Sie ein Profil auf Titel bis zu einer Altersfreigabe oder blenden Sie Titel nach Namen aus.
+help-art-parental-controls-keywords = kindersicherung jugendschutz altersfreigabe fsk einschränkungen titel sperren ausblenden kinder jugendliche 12 16 18
+help-art-parental-controls-body =
+    Jedes Profil kann eigene Grenzen haben. Öffnen Sie das Profilmenü, wählen Sie <b>Konto</b>, dann <b>Profile verwalten</b>, wählen Sie das Profil und dann <b>Kindersicherung anpassen</b>.
+
+    ## Altersfreigaben
+    1. Wählen Sie <b>Altersfreigaben</b>.
+    2. Wählen Sie die höchste Freigabe, die das Profil sehen darf. Es werden nur Titel bis zu dieser Freigabe angezeigt, und Titel ohne Freigabe werden ebenfalls ausgeblendet.
+
+    <b>Kennzeichnung der Altersfreigaben</b> legt fest, welche Kennzeichnung Sie sehen: britische (U, PG, 12, 15, 18) oder US-amerikanische (G, PG, PG-13, R, NC-17). <b>Automatisch</b> richtet sich nach dem Land, aus dem Sie sich anmelden.
+
+    ## Titel sperren
+    1. Wählen Sie <b>Titel blockieren</b>.
+    2. Geben Sie den Namen einer Serie oder eines Films ein und wählen Sie <b>Hinzufügen</b>.
+
+    Gesperrte Titel werden in diesem Profil nicht angezeigt. Wählen Sie <b>Entfernen</b>, um einen Titel wieder anzuzeigen.
+
+    !! Hinweis: Die Titel stammen aus unabhängigen Quellen, und manche haben keine Freigabe. Für kleine Kinder ist ein Kinderprofil die sicherere Wahl. Siehe <a=/help/article/kids-profile>Ein Kinderprofil erstellen</a>.
+
+    @@ profiles
+
+help-art-transfer-profile-title = Ein Profil in ein anderes Konto übertragen
+help-art-transfer-profile-summary = Speichern Sie ein Profil als Datei und fügen Sie es mit Verlauf und Einstellungen einem anderen Konto hinzu.
+help-art-transfer-profile-keywords = profil übertragen verschieben kopieren anderes konto importieren exportieren profildatei
+help-art-transfer-profile-body =
+    Ein Profil lässt sich in ein anderes Konto kopieren, etwa wenn jemand auszieht. Die Kopie behält Namen, Bild, Einstellungen und Wiedergabeaktivität.
+
+    ## Profil speichern
+    1. Öffnen Sie das Profilmenü und wählen Sie <b>Profil übertragen</b>.
+    2. Wählen Sie das Profil und dann <b>Profildatei herunterladen</b>. Bewahren Sie die Datei sicher auf.
+
+    ## Im anderen Konto hinzufügen
+    1. Melden Sie sich beim anderen Konto an und öffnen Sie <b>Profile verwalten</b>.
+    2. Wählen Sie <b>Profil importieren</b> und dann die Datei.
+
+    !! Hinweis: Die Datei enthält nicht die PIN des Profils. Jeder, der die Datei hat, kann das Profil zu seinem Konto hinzufügen. Geben Sie sie also nicht weiter.
+
+    <b>Profilübertragung</b> unter <b>Konto</b> erlaubt oder verbietet das Kopieren von Profilen aus Ihrem Konto. Profile, die hinzukommen, werden nie blockiert.
+
 auth-questions = Fragen?
 auth-email = E-Mail-Adresse
 auth-password = Passwort
@@ -1479,8 +1671,8 @@ auth-signing-in = Anmeldung läuft…
 auth-remember = Angemeldet bleiben
 auth-forgot-link = Passwort vergessen?
 auth-get-help = Hilfe erhalten
-auth-resume-hint = Du hast dich vor kurzem von diesem Gerät abgemeldet. Fahre mit { $email } fort, um ohne Passwort zurückzukehren.
-auth-resume-forget = Nicht du? Diesen Browser vergessen
+auth-resume-hint = Sie haben sich vor Kurzem von diesem Gerät abgemeldet. Fahren Sie mit { $email } fort, um ohne Passwort zurückzukehren.
+auth-resume-forget = Nicht Sie? Diesen Browser vergessen
 auth-resend = Bestätigungs-E-Mail erneut senden
 auth-resent = Wir haben eine neue Bestätigungs-E-Mail an { $email } gesendet.
 auth-error-email = Geben Sie eine gültige E-Mail-Adresse ein.
@@ -1523,9 +1715,11 @@ landing-read-more = Vollständigen Artikel lesen
 legal-credits-title = Lizenzen und Credits
 legal-credits-updated = Zuletzt aktualisiert: Oktober 2026
 legal-credits-1-title = 1. Schriften
-legal-credits-1-body = Der Text im Logo ist in einer Pixel-Schrift gesetzt. Alle anderen Interface-Texte sind in Inter gesetzt.
-legal-credits-1-b1 = <strong>Baby Blocks</strong> von Colorful Typhoon, verwendet für das { $brand }-Logo unter den Linkware-Bedingungen für private, nicht-kommerzielle Nutzung. Siehe <a href="http://www.geocities.jp/kitschlabo/" target="_blank" rel="noopener">Colorful Typhoon</a>.
+legal-credits-1-body = Das Logo ist in einer Pixelschrift gesetzt, die Oberfläche in Inter und die Titel der Sammlungen in Schmuckschriften:
+legal-credits-1-b1 = <strong>Baby Blocks</strong> von Colorful Typhoon, für das { $brand }-Logo unter den Freeware-Bedingungen für nicht kommerzielle Nutzung verwendet. Siehe <a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">die Schrift auf FontSpace</a>.
 legal-credits-1-b2 = <strong>Inter</strong> von Rasmus Andersson, verwendet unter der SIL Open Font License 1.1.
+legal-credits-1-b3 = <strong>Abril Fatface, Caveat Brush, DM Serif Display, Fredoka, Gochi Hand, Kalam, Londrina Solid, Playfair Display und Sedgwick Ave</strong> von Google Fonts, verwendet unter der SIL Open Font License 1.1.
+legal-credits-1-b4 = <strong>Permanent Marker</strong> und <strong>Rock Salt</strong> von Google Fonts, verwendet unter der Apache License 2.0.
 legal-credits-2-title = 2. Symbole
 legal-credits-2-body = Interface-Symbole stammen von Phosphor Icons und werden unter der MIT-Lizenz verwendet.
 legal-credits-3-title = 3. Informationen zu Filmen und Serien
@@ -1657,7 +1851,7 @@ set-title-email = E-Mail
 set-title-phone = Mobiltelefon
 set-title-devices = Zugriff und Geräte
 set-title-privacy = Datenschutz- und Dateneinstellungen
-set-title-activity = Ansehaktivität
+set-title-activity = Wiedergabeaktivität
 set-title-delete = Konto löschen
 set-ratings-hint = In diesem Profil werden nur Titel bis zur ausgewählten Altersfreigabe angezeigt. Titel ohne Altersfreigabe werden nur angezeigt, wenn keine Einschränkungen gesetzt sind.
 set-blocked-hint = Blockierte Titel werden in diesem Profil nicht angezeigt.
@@ -1740,13 +1934,13 @@ set-licences-tmdb = Film- und Seriendaten sowie Bilder stammen von TMDB. Dieses 
 set-account-security = Sicherheit
 set-account-devices = Geräte
 set-account-profiles = Profile
-set-verify-title = Zuerst stellen wir sicher, dass es sich um dich handelt
-set-verify-body = Bestätige vor Änderungen dein Kontopasswort.
+set-verify-title = Zuerst stellen wir sicher, dass Sie es sind
+set-verify-body = Bevor wir etwas ändern, brauchen wir nur eine kurze Bestätigung.
 set-password-current = Aktuelles Passwort
 set-password-forgot = Passwort vergessen?
 set-password-current-required = Geben Sie Ihr aktuelles Passwort ein.
 set-forgot-password = Passwort vergessen?
-set-password-hint = Schütze dein Konto mit einem eindeutigen Passwort mit mindestens { $min } Zeichen.
+set-password-hint = Schützen Sie Ihr Konto mit einem eigenen Passwort aus mindestens { $min } Zeichen.
 set-password-new = Neues Passwort
 set-password-again = Neues Passwort erneut eingeben
 set-password-signout-all = Von allen Geräten abmelden
@@ -1773,14 +1967,14 @@ set-privacy-activity-hint = Verwalten Sie Ihren Ansehverlauf
 set-privacy-data = Dateneinstellungen
 set-privacy-personalization = Personalisierte Empfehlungen
 set-privacy-personalization-hint = Nutzen Sie Ihre Ansehgewohnheiten, um Titel vorzuschlagen. Wenn deaktiviert, werden allgemeine Empfehlungen angezeigt.
-set-activity-clear-body = Ihr Ansehverlauf und Fortschrittsstände werden von diesem Browser entfernt.
+set-activity-clear-body = Die Titel werden auf allen Ihren Geräten aus der Wiedergabeaktivität dieses Profils und aus Weiterschauen entfernt.
 set-err-invalid = Das Passwort ist falsch. Versuchen Sie es erneut.
 set-err-weak = Das Passwort ist zu schwach. Verwenden Sie ein längeres Passwort mit Buchstaben und Zahlen.
 set-err-rate = Zu viele Versuche. Warten Sie eine Minute und versuchen Sie es erneut.
 set-err-network = Die Verbindung ist fehlgeschlagen. Prüfen Sie Ihr Netzwerk und versuchen Sie es erneut.
 set-err-other = Etwas ist schiefgelaufen. Versuchen Sie es in einem Moment erneut.
 set-audio-subtitles-hint = Wählen Sie die Sprachen, in denen Sie Serien und Filme ansehen möchten. Ohne Auswahl wird die Anzeigesprache verwendet.
-set-audio-language = TonSprache
+set-audio-language = Audiosprache
 set-subtitle-language = Untertitelsprache
 set-lang-follow = Wie Anzeigesprache
 set-subtitles-off = Aus
@@ -1800,6 +1994,13 @@ set-name-required = Vor- und Nachname eingeben.
 set-name-saved = Ihr Name wurde gespeichert.
 set-err-recent = Aus Sicherheitsgründen geben Sie Ihr Passwort erneut ein, um fortzufahren.
 set-events-title = Letzte Sicherheitsaktivität
+set-event-profile_created = Profil erstellt
+set-event-profile_deleted = Profil gelöscht
+set-event-pin_set = Profil-Sperre eingerichtet
+set-event-pin_cleared = Profil-Sperre entfernt
+set-event-pin_locked = Profil-Sperre nach zu vielen Versuchen blockiert
+set-event-pin_reset = Profil-Sperre zurückgesetzt
+set-event-main_profile_changed = Hauptprofil geändert
 set-privacy-export = Meine Daten herunterladen
 set-nav-overview = Übersicht
 set-back-to-app = Zurück zu { $brand }
@@ -1864,6 +2065,14 @@ set-csv-date = Datum
 set-notify-email-hint = Nachrichten über Neuheiten und Updates
 set-notify-push-hint = Benachrichtigungen auf diesem Gerät
 set-topics-title = Wovon Sie hören
+set-topic-new_arrivals = Neuheiten
+set-topic-new_arrivals-hint = Serien und Filme, die gerade dazugekommen sind.
+set-topic-recommendations = Empfehlungen
+set-topic-recommendations-hint = Für dieses Profil ausgewählte Vorschläge.
+set-topic-reminders = Erinnerungen
+set-topic-reminders-hint = Titel, die Sie begonnen haben, und neue Folgen von Serien, die Sie schauen.
+set-topic-news = Neuigkeiten von { $brand }
+set-topic-news-hint = Neue Funktionen und Änderungen am Dienst.
 set-push-denied = Benachrichtigungen sind in Ihrem Browser für diese Website blockiert. Erlauben Sie sie in den Browser-Einstellungen und versuchen Sie es erneut.
 set-push-unsupported = Dieser Browser kann keine Benachrichtigungen anzeigen.
 set-usage-title = Datennutzung pro Bildschirm
@@ -1907,6 +2116,12 @@ set-personal-info-hint = Eine Kopie Ihrer persönlichen Informationen anfordern
 set-personal-info-body = Sie können eine Kopie der persönlichen Informationen anfordern, die wir über Ihr Konto gespeichert haben. Die Datei enthält:
 set-personal-info-done = Ihre Datei wurde gespeichert.
 set-personal-info-note = Die Datei bleibt auf Ihrem Gerät. Sie kann persönliche Informationen enthalten, daher bitte sicher aufbewahren.
+set-personal-info-account = Ihre Kontodaten: Name, E-Mail-Adresse und Telefonnummer
+set-personal-info-profiles = Ihre Profile und deren Einstellungen
+set-personal-info-lists = Meine Liste und die Bewertungen jedes Profils
+set-personal-info-history = Fortschritt und Wiedergabeaktivität jedes Profils
+set-personal-info-settings = Ihre Einstellungen und Entscheidungen, etwa zu Benachrichtigungen und Cookies
+set-personal-info-security = Letzte Anmeldungen und Sicherheitsaktivität
 set-testing-body = Von Zeit zu Zeit testen wir neue Funktionen mit einer kleinen Gruppe, bevor sie für alle verfügbar sind.
 set-testing-switch = An Tests und Vorschauen teilnehmen
 set-testing-hint = Deaktivieren Sie diese Option, um bei der aktuellen Version aller Funktionen zu bleiben.
@@ -1973,6 +2188,13 @@ set-device-timezone = Zeitzone
 set-device-screen = Bildschirm
 set-device-language = Sprache
 set-device-countries-note = Dieses Gerät hat sich aus mehreren Ländern verbunden: { $countries }. Ein VPN oder eine Reise kann der Grund dafür sein. Ein Gerät wird über seinen Browser erkannt, nicht über den Ort der Verbindung, es handelt sich also weiterhin um dasselbe Gerät.
+set-device-type-desktop = Computer
+set-device-type-mobile = Smartphone
+set-device-type-tablet = Tablet
+set-device-type-other = Anderes Gerät
+set-event-new_device = Neues Gerät angemeldet
+set-event-device_new_country = Ein Gerät hat sich aus einem neuen Land verbunden
+set-event-session_revoked = Ein Gerät wurde abgemeldet
 email-footer = Gesendet von { $brand }. Fragen? Lesen Sie das Hilfe-Center oder schreiben Sie an { $help_email }.
 email-help-center = Hilfe-Center
 email-ignore = Falls Sie dies nicht angefordert haben, können Sie diese E-Mail ignorieren.
@@ -1988,7 +2210,7 @@ email-recovery-subject = Setzen Sie Ihr { $brand }-Passwort zurück
 email-recovery-title = Setzen Sie Ihr Passwort zurück
 email-recovery-body = Wir haben eine Anfrage zum Zurücksetzen des Passworts Ihres Kontos erhalten. Verwenden Sie den Button, um ein neues auszuwählen. Der Link funktioniert nur einmal und läuft bald ab.
 email-recovery-button = Neues Passwort wählen
-email-code-subject = Ihr { $brand }-Anmeldecode
+email-code-subject = Ihr { $brand }-Anmeldecode · { $code }
 email-code-title = Ihr Anmeldecode
 email-code-body = Geben Sie diesen Code ein, um fortzufahren. Er funktioniert nur einmal und läuft in { $minutes } Minuten ab.
 email-code-or-link = Oder verwenden Sie den Button, um sich anzumelden.
@@ -2001,12 +2223,12 @@ email-invite-subject = Sie wurden zu { $brand } eingeladen
 email-invite-title = Sie wurden eingeladen
 email-invite-body = Akzeptieren Sie die Einladung, um Ihr Konto zu erstellen.
 email-invite-button = Einladung annehmen
-email-reauth-subject = Ihr { $brand }-Bestätigungscode
+email-reauth-subject = Ihr { $brand }-Bestätigungscode · { $code }
 email-reauth-title = Ihr Bestätigungscode
-email-reauth-body = Gib diesen Code ein, um zu bestätigen, dass es sich um dich handelt. Er funktioniert nur einmal und läuft bald ab.
-email-device-subject = Neues Gerät bei deinem { $brand }-Konto angemeldet
+email-reauth-body = Geben Sie diesen Code ein, um zu bestätigen, dass Sie es sind. Er gilt nur einmal und läuft bald ab.
+email-device-subject = Neues Gerät bei Ihrem { $brand }-Konto angemeldet
 email-device-title = Neues Gerät angemeldet
-email-device-body = { $browser } auf { $system } hat sich { $where } am { $time } bei deinem Konto angemeldet. Falls dies du warst, ist nichts weiter zu tun. Falls nicht, ändere dein Passwort und melde dich von allen Geräten ab.
+email-device-body = { $browser } auf { $system } hat sich { $where } am { $time } bei Ihrem Konto angemeldet. Wenn Sie das waren, müssen Sie nichts tun. Falls nicht, ändern Sie Ihr Passwort und melden Sie sich von allen Geräten ab.
 email-device-where = aus { $country }
 email-device-button = Geräte überprüfen
 help-breadcrumb-label = Brotkrumen-Navigation
@@ -2014,7 +2236,7 @@ help-pagination-label = Seitennavigation
 age-badge-all = Alle
 age-aria-all = Für alle Altersgruppen geeignet
 age-aria-plus = Geeignet für { $age } und älter
-set-rating-system-title = Altersfreigabe-Labels
+set-rating-system-title = Kennzeichnung der Altersfreigaben
 set-rating-system-hint = Welche Altersfreigabe-Labels angezeigt werden. Bei „Automatisch“ wird das Land des Geräts verwendet, von dem aus angemeldet wurde.
 set-rating-system-auto = Automatisch
 set-rating-system-uk = Vereinigtes Königreich (U, PG, 12, 15, 18)
@@ -2024,7 +2246,7 @@ row-my-list = Meine Liste
 row-because-you-watched = Weil Sie { $title } gesehen haben
 row-more-like = Mehr wie { $title }
 row-todays-top-picks = Heutige Top-Empfehlungen für Sie
-row-your-next-watch = Ihr nächster Film
+row-your-next-watch = Als Nächstes für Sie
 row-gems-for-you = Schätze für Sie
 row-we-think-youll-love = Wir denken, Sie werden diese lieben
 row-familiar-favourites = Bekannte Favoriten
@@ -2261,7 +2483,7 @@ set-po-lock-hint = PIN-Eingabe für den Zugriff auf dieses Profil erforderlich
 set-po-preferences = Einstellungen
 set-po-languages = Sprachen
 set-po-languages-hint = Sprachen für Anzeige und Ton festlegen
-set-po-restrictions = Elternkontrollen anpassen
+set-po-restrictions = Kindersicherung anpassen
 set-po-restrictions-hint = Altersfreigaben und Titelbeschränkungen bearbeiten
 set-po-subtitles-hint = Darstellung der Untertitel anpassen
 set-po-playback-hint = Autoplay sowie Audio- und Videoqualität festlegen

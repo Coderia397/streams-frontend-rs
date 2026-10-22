@@ -13,7 +13,7 @@ def read(text):
             if key is not None:
                 entries.append((key, _join(first, rest)))
             key, first, rest = m.group(1), m.group(2).strip(), []
-        elif key is not None and (line.startswith(" ") or line == ""):
+        elif key is not None and (line.startswith(" ") or line == "" or line.strip() == "}"):
             rest.append(line)
     if key is not None:
         entries.append((key, _join(first, rest)))

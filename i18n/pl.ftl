@@ -339,7 +339,7 @@ help-art-playback-unavailable-title = { $brand } mówi "Odtwarzanie niedostępne
 help-art-playback-unavailable-summary = Co oznacza to komunikat i co robić dalej.
 help-art-playback-unavailable-keywords = odtwarzanie niedostępne komunikat błędu nie można strumieniować dostawcy nie wspierane
 help-art-playback-unavailable-body =
-    Możesz zobaczyć <b>Playback Unavailable</b> lub <b>Unable to stream video. All source providers were unavailable or unsupported by your browser.</b>
+    Możesz zobaczyć <b>Odtwarzanie niedostępne</b> lub <b>Nie można odtwarzać wideo. Wszystkie dostawcy źródeł były niedostępne lub nie wspierane przez przeglądarkę.</b>
 
     Oznacza to, że odtwarzacz poprosił wszystkie źródła, które zna, o ten tytuł, a żadne z nich nie zwróciło strumienia, który Twój przeglądarka może odtworzyć.
 
@@ -351,6 +351,7 @@ help-art-playback-unavailable-body =
     Jeśli ten sam tytuł nie działa przez cały dzień, <a=/help/article/report-bug>tell us</a>. Dodaj tytuł, rok i przeglądarkę, którą użyłeś.
 
     @@ diagnostics
+
 help-art-black-screen-title = Czarna ekran z dźwiękiem
 help-art-black-screen-summary = Brak obrazu, ale możesz słyszeć tytuł.
 help-art-black-screen-keywords = czarna ekran brak obrazu dźwięk tylko video brak biały ekran zielony ekran
@@ -539,15 +540,6 @@ help-art-subtitles-body =
     3. Wybierz <b>Zakończ</b>.
 
     !! Uwaga: Dostępne języki i ścieżki dźwiękowe zależą od źródła filmu. Zobacz <a=/help/article/subtitles-missing>Napisy są brakujące lub niezgodne</a>.
-help-art-playback-speed-title = Jak zmienić prędkość odtwarzania
-help-art-playback-speed-summary = Odtwarzaj szybciej lub wolniej z kontrolerów odtwarzacza.
-help-art-playback-speed-keywords = prędkość szybciej wolniej 2x 1.5x prędkość odtwarzania
-help-art-playback-speed-body =
-    1. Rozpocznij film i pokaż kontrolery odtwarzacza.
-    2. Wybierz przycisk prędkości w prawym dolnym rogu.
-    3. Wybierz prędkość z menu.
-
-    Prędkość dotyczy filmu, który obecnie odtwarzasz i wraca do normalnej dla kolejnego.
 help-art-shortcuts-title = Skróty klawiaturowe
 help-art-shortcuts-summary = Kontroluj odtwarzacz bez myszy.
 help-art-shortcuts-keywords = skróty klawiaturowe klawisze spacja strzałka pełny ekran wyciszenie głośność przeskoczenie cofnięcie skróty
@@ -1540,7 +1532,7 @@ legal-credits-title = Licencje i kredyty
 legal-credits-updated = Ostatnio zmienione: październik 2026
 legal-credits-1-title = 1. Czcionki
 legal-credits-1-body = Tekst w logotypie jest w czcionce pikselowej. Wszystkie inne teksty interfejsowe są w czcionce Inter.
-legal-credits-1-b1 = <strong>Baby Blocks</strong> przez Colorful Typhoon, używane w logotypie { $brand } w ramach jego linkware terms do osobistego, niekomercyjnego użytkowania. Zobacz <a href="http://www.geocities.jp/kitschlabo/" target="_blank" rel="noopener">Colorful Typhoon</a>.
+legal-credits-1-b1 = <strong>Baby Blocks</strong> przez Colorful Typhoon, używane w logotypie { $brand } w ramach jego linkware terms do osobistego, niekomercyjnego użytkowania. Zobacz <a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">Colorful Typhoon</a>.
 legal-credits-1-b2 = <strong>Inter</strong> przez Rasmus Andersson, używane pod licencją SIL Open Font License 1.1.
 legal-credits-2-title = 2. Ikony
 legal-credits-2-body = Ikony interfejsowe pochodzą z Phosphor Icons, używane pod licencją MIT.
@@ -2008,7 +2000,7 @@ email-recovery-subject = Zresetuj hasło do { $brand }
 email-recovery-title = Zresetuj hasło
 email-recovery-body = Otrzymaliśmy prośbę o zresetowanie hasła do Twojego konta. Użyj przycisku, aby wybrać nowe hasło. Link działa tylko raz i wygasa wkrótce.
 email-recovery-button = Wybierz nowe hasło
-email-code-subject = Twój kod logowania do { $brand }
+email-code-subject = Twój kod logowania do { $brand } · { $code }
 email-code-title = Twój kod logowania
 email-code-body = Wprowadź ten kod, aby kontynuować. Działa tylko raz i wygasa w ciągu { $minutes } minut.
 email-code-or-link = Lub użyj przycisku, aby się zalogować.
@@ -2021,7 +2013,7 @@ email-invite-subject = Zostałeś zaproszony do { $brand }
 email-invite-title = Zostałeś zaproszony
 email-invite-body = Akceptuj zaproszenie, aby utworzyć konto.
 email-invite-button = Akceptuj zaproszenie
-email-reauth-subject = Twój kod potwierdzenia do { $brand }
+email-reauth-subject = Twój kod potwierdzenia do { $brand } · { $code }
 email-reauth-title = Twój kod potwierdzenia
 email-reauth-body = Wprowadź ten kod, aby potwierdzić, że to Ty. Działa tylko raz i wygasa wkrótce.
 email-device-subject = Nowy urządzenie zalogowało się do Twojego konta { $brand }

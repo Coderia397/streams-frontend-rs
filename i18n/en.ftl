@@ -269,7 +269,7 @@ help-art-sign-in-body =
     Leave <b>Remember me</b> on to stay signed in on this device. If you signed out of this device a short while ago, you can continue without typing your password again.
 
     ## Sign out
-    Open the profile menu and choose <b>Sign out</b>. To sign out everywhere at once, see <a=/help/article/devices-sign-out>Sign out of a device or of all devices</a>.
+    Open the profile menu and choose <b>Sign out of { $brand }</b>. To sign out everywhere at once, see <a=/help/article/devices-sign-out>Sign out of a device or of all devices</a>.
 
     ## Sign in does not work
     - Check the email address for typing mistakes. The password is case sensitive.
@@ -1611,14 +1611,14 @@ help-art-accessibility-title = Accessibility on { $brand }
 help-art-accessibility-summary = Subtitles, keyboard control and display settings that help.
 help-art-accessibility-keywords = accessibility screen reader keyboard subtitles captions size contrast zoom reduced motion disability
 help-art-accessibility-body =
-    - <b>Subtitles.</b> Choose the language, size, color and background in <b>Settings</b>. See <a=/help/article/subtitles>How to use subtitles, captions, or choose the audio language</a>.
+    - <b>Subtitles.</b> Choose the language in your profile's <b>Languages</b>, and the size, colour and background in <b>Subtitle Appearance</b>. See <a=/help/article/subtitles>How to use subtitles, captions, or choose the audio language</a>.
     - <b>Keyboard.</b> Use <b>Tab</b> to move between controls and <b>Esc</b> to close windows. The player has its own keys, see <a=/help/article/shortcuts>Keyboard shortcuts</a>.
     - <b>Text size.</b> Zoom your browser with <b>Ctrl</b> and <b>+</b> (<b>Cmd</b> and <b>+</b> on a Mac). The layout adjusts.
     - <b>Motion.</b> If your device asks for reduced motion, the animated logo stays still.
 
     If something is hard to use, tell us on the <a=/help/article/report-bug>Report a problem</a> page. We take these reports seriously.
 
-help-art-profile-icons-title = How to choose a profile icon
+help-art-profile-icons-title = How to choose a profile picture
 help-art-profile-icons-summary = Pick a picture for a profile.
 help-art-profile-icons-keywords = profile icon avatar picture image change choose character
 help-art-profile-icons-body =

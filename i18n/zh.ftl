@@ -337,7 +337,7 @@ help-art-playback-unavailable-title = { $brand } 显示“无法播放”
 help-art-playback-unavailable-summary = 该消息的含义及后续操作。
 help-art-playback-unavailable-keywords = 无法播放 错误消息 无法流媒体 提供商 不支持
 help-art-playback-unavailable-body =
-    您可能会看到 <b>无法播放</b> 或 <b>无法流式传输视频。所有源提供商均不可用或您的浏览器不支持。</b>
+    您可能会看到 <b>无法播放</b> 或 <b>无法流式传输视频。所有源提供商均不可用或不受您的浏览器支持。</b>
 
     这意味着播放器已向该标题的所有已知源发出请求，但没有一个返回您的浏览器可以播放的流。
 
@@ -349,6 +349,7 @@ help-art-playback-unavailable-body =
     如果同一标题持续一天无法播放，请<a=/help/article/report-bug>告诉我们</a>。请包含标题、年份以及您使用的浏览器。
 
     @@ diagnostics
+
 help-art-black-screen-title = 有声音但黑屏
 help-art-black-screen-summary = 画面缺失，但您可以听到声音。
 help-art-black-screen-keywords = 黑屏 无画面 仅音频 视频缺失 空白 绿屏
@@ -537,15 +538,6 @@ help-art-subtitles-body =
     3. 选择<b>完成</b>。
 
     !! 注意：可用的语言和音轨取决于内容来源。请参阅<a=/help/article/subtitles-missing>字幕缺失或不同步</a>。
-help-art-playback-speed-title = 如何更改播放速度
-help-art-playback-speed-summary = 通过播放器控件加快或减慢播放速度。
-help-art-playback-speed-keywords = 速度 快 慢 2倍 1.5倍 播放速率
-help-art-playback-speed-body =
-    1. 开始播放内容并显示播放器控件。
-    2. 选择右下角的速度按钮。
-    3. 从菜单中选择速度。
-
-    速度仅适用于当前播放的内容，播放下一部内容时会恢复为正常速度。
 help-art-shortcuts-title = 键盘快捷键
 help-art-shortcuts-summary = 无需鼠标即可控制播放器。
 help-art-shortcuts-keywords = 键盘 快捷键 按键 空格 方向键 全屏 静音 音量 跳过 后退 热键
@@ -1517,7 +1509,7 @@ legal-credits-title = 许可证和致谢
 legal-credits-updated = 最后更新：2026年10月
 legal-credits-1-title = 1. 字体
 legal-credits-1-body = Logo 中的文字使用像素字体。其他所有界面文字使用 Inter。
-legal-credits-1-b1 = <strong>Baby Blocks</strong> 由 Colorful Typhoon 制作，根据链接软件条款用于个人、非商业用途的 { $brand } Logo。参见 <a href="http://www.geocities.jp/kitschlabo/" target="_blank" rel="noopener">Colorful Typhoon</a>。
+legal-credits-1-b1 = <strong>Baby Blocks</strong> 由 Colorful Typhoon 制作，根据链接软件条款用于个人、非商业用途的 { $brand } Logo。参见 <a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">Colorful Typhoon</a>。
 legal-credits-1-b2 = <strong>Inter</strong> 由 Rasmus Andersson 制作，根据 SIL Open Font License 1.1 使用。
 legal-credits-2-title = 2. 图标
 legal-credits-2-body = 界面图标来自 Phosphor Icons，根据 MIT 许可证使用。
@@ -1979,7 +1971,7 @@ email-recovery-subject = 重置您的 { $brand } 密码
 email-recovery-title = 重置您的密码
 email-recovery-body = 我们收到重置您账户密码的请求。请使用按钮选择新密码。该链接仅可使用一次且即将过期。
 email-recovery-button = 选择新密码
-email-code-subject = 您的 { $brand } 登录代码
+email-code-subject = 您的 { $brand } 登录代码 · { $code }
 email-code-title = 您的登录代码
 email-code-body = 输入此代码以继续。该代码仅可使用一次，并在 { $minutes } 分钟后过期。
 email-code-or-link = 或使用按钮登录。
@@ -1992,7 +1984,7 @@ email-invite-subject = 你收到了 { $brand } 的邀请
 email-invite-title = 你收到了邀请
 email-invite-body = 接受邀请以创建你的账户。
 email-invite-button = 接受邀请
-email-reauth-subject = 你的 { $brand } 验证码
+email-reauth-subject = 你的 { $brand } 验证码 · { $code }
 email-reauth-title = 你的验证码
 email-reauth-body = 输入此代码以确认是你本人。该代码仅可使用一次，且即将过期。
 email-device-subject = 新设备登录了你的 { $brand } 账户

@@ -337,7 +337,7 @@ help-art-playback-unavailable-title = { $brand } कहता है "खेल�
 help-art-playback-unavailable-summary = संदेश का अर्थ क्या है और अगला क्या करना है
 help-art-playback-unavailable-keywords = खेलकर अनुपलब्ध त्रुटि संदेश खेलकर असंभव प्रदाता अनुपलब्ध
 help-art-playback-unavailable-body =
-    आप <b>Playback Unavailable</b> या <b>वीडियो स्ट्रीम करना संभव नहीं है। सभी स्रोत प्रदाता उपलब्ध नहीं थे या आपके ब्राउज़र द्वारा समर्थित नहीं थे।</b>
+    आप <b>प्लेबैक उपलब्ध नहीं है</b> या <b>वीडियो स्ट्रीम करना संभव नहीं है। सभी स्रोत प्रदाता उपलब्ध नहीं थे या आपके ब्राउज़र द्वारा समर्थित नहीं थे।</b>
 
     इसका अर्थ है कि प्लेयर इस शीर्षक के लिए अपने ज्ञात सभी स्रोतों को अनुरोध करता है और कोई भी स्रोत आपके ब्राउज़र द्वारा चलाए जा सकने वाले स्ट्रीम को नहीं देता है।
 
@@ -349,6 +349,7 @@ help-art-playback-unavailable-body =
     अगर एक ही शीर्षक एक दिन बार बार विफल रहता है, <a=/help/article/report-bug>हमें बताएं</a>। शीर्षक, वर्ष और आपके ब्राउज़र के बारे में शामिल करें।
 
     @@ diagnostics
+
 help-art-black-screen-title = स्वर के साथ काला स्क्रीन
 help-art-black-screen-summary = आप शीर्षक को सुन सकते हैं लेकिन चित्र नहीं दिखाई देता है।
 help-art-black-screen-keywords = काला स्क्रीन चित्र नहीं आवाज़ केवल वीडियो गायब ग्रीन स्क्रीन
@@ -537,15 +538,6 @@ help-art-subtitles-body =
     3. <b>करें</b> चुनें।
 
     !! ध्यान दें: शीर्षक के स्रोत पर आधारित भाषाएं और ऑडियो ट्रैक कौन से हैं। <a=/help/article/subtitles-missing>सबटाइटल गायब या समय समायोजित हो रहे हैं</a> देखें।
-help-art-playback-speed-title = प्लेबैक गति बदलने के तरीके
-help-art-playback-speed-summary = खेल नियंत्रक से तेज या धीमा देखें।
-help-art-playback-speed-keywords = गति तेज धीमा 2x 1.5x प्लेबैक दर
-help-art-playback-speed-body =
-    1. एक शीर्षक शुरू करें और खेल नियंत्रक दिखाएं।
-    2. नीचे दाहिने के बटन पर गति बटन को चुनें।
-    3. मेनू से एक गति चुनें।
-
-    गति आप देख रहे शीर्षक पर लागू होती है और अगले शीर्षक के लिए आम बन जाती है।
 help-art-shortcuts-title = कीबोर्ड शॉर्टकट
 help-art-shortcuts-summary = माउस के बिना खेल को नियंत्रित करें।
 help-art-shortcuts-keywords = कीबोर्ड शॉर्टकट की बटन स्पेस बिंदु पूर्ण रूप से बंद करें ध्वनि आयतन छोड़ दें वापस ले लें गर्मी कुंजी
@@ -1524,7 +1516,7 @@ legal-credits-title = अनुमतियाँ और संदर्भ
 legal-credits-updated = अपडेट कर रहे: अक्टूबर 2026
 legal-credits-1-title = 1. फ़ॉन्ट
 legal-credits-1-body = लोगो में टेक्स्ट एक पिक्सेल फ़ॉन्ट में है। सभी अन्य इंटरफ़ेस टेक्स्ट इंटर में है।
-legal-credits-1-b1 = <strong>Baby Blocks</strong> रंगीन तूफान द्वारा, { $brand } लोगो के लिए उपयोग किया गया है इसके लिंकवेयर शर्तों के तहत व्यक्तिगत, गैर-कमर्शियल उपयोग के लिए। देखें <a href="http://www.geocities.jp/kitschlabo/" target="_blank" rel="noopener">रंगीन तूफान</a>।
+legal-credits-1-b1 = <strong>Baby Blocks</strong> रंगीन तूफान द्वारा, { $brand } लोगो के लिए उपयोग किया गया है इसके लिंकवेयर शर्तों के तहत व्यक्तिगत, गैर-कमर्शियल उपयोग के लिए। देखें <a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">रंगीन तूफान</a>।
 legal-credits-1-b2 = <strong>इंटर</strong> रैसमस एंडरसन द्वारा, इसके एसआईएल ओपन फ़ॉन्ट लाइसेंस 1.1 के तहत उपयोग किया गया है।
 legal-credits-2-title = 2. आइकन
 legal-credits-2-body = इंटरफ़ेस आइकन फ़ोस्फर आइकन से आते हैं, जो एमआईटी लाइसेंस के तहत उपयोग किया गया है।
@@ -1988,7 +1980,7 @@ email-recovery-subject = अपना { $brand } पासवर्ड रीस
 email-recovery-title = अपना पासवर्ड रीसेट करें
 email-recovery-body = हमने आपके खाते के पासवर्ड को रीसेट करने के लिए एक अनुरोध प्राप्त किया है। बटन का उपयोग करके एक नया चुनें। लिंक एक बार उपयोग किया जा सकता है और जल्द ही समाप्त हो जाएगा।
 email-recovery-button = एक नया पासवर्ड चुनें
-email-code-subject = आपका { $brand } लॉग इन कोड
+email-code-subject = आपका { $brand } लॉग इन कोड · { $code }
 email-code-title = आपका लॉग इन कोड
 email-code-body = जारी करने के लिए इस कोड को दर्ज करें। यह एक बार उपयोग किया जा सकता है और { $minutes } मिनट में समाप्त हो जाएगा।
 email-code-or-link = या बटन का उपयोग करके लॉग इन करें।
@@ -2001,7 +1993,7 @@ email-invite-subject = आपको { $brand } के लिए आमंत्�
 email-invite-title = आपको आमंत्रण मिला है
 email-invite-body = अपने खाते के निर्माण के लिए आमंत्रण स्वीकृत करें।
 email-invite-button = आमंत्रण स्वीकृत करें
-email-reauth-subject = आपके { $brand } पुष्टि कोड
+email-reauth-subject = आपके { $brand } पुष्टि कोड · { $code }
 email-reauth-title = आपका पुष्टि कोड
 email-reauth-body = इस कोड को दर्ज करें ताकि यह आप ही हैं। यह एक बार काम करता है और जल्द ही समाप्त हो जाएगा।
 email-device-subject = नया डिवाइस आपके { $brand } खाते में साइन इन कर चुका है

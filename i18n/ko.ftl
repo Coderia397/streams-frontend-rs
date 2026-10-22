@@ -336,7 +336,7 @@ help-art-playback-unavailable-title = { $brand }가 "Playback Unavailable"라고
 help-art-playback-unavailable-summary = 메시지의 의미와 다음 단계
 help-art-playback-unavailable-keywords = 재생 불가능 오류 메시지 스트리밍 불가능 제공업체 미지원
 help-art-playback-unavailable-body =
-    <b>재생 불가</b> 또는 <b>비디오 스트리밍을 사용할 수 없습니다. 모든 소스 제공자가 사용 불가능하거나 브라우저에서 지원되지 않습니다.</b>라는 메시지가 표시될 수 있습니다.
+    <b>재생 불가능</b> 또는 <b>비디오 스트리밍이 불가능합니다. 모든 소스 제공업체가 사용 불가능하거나 브라우저에서 지원되지 않습니다.</b>라는 메시지가 표시될 수 있습니다.
 
     이는 플레이어가 해당 제목에 대해 알고 있는 모든 소스에 요청했지만, 브라우저에서 재생할 수 있는 스트림을 반환한 소스가 없음을 의미합니다.
 
@@ -348,6 +348,7 @@ help-art-playback-unavailable-body =
     같은 제목이 하루 종일 실패한다면, <a=/help/article/report-bug>알려 주세요</a>. 제목, 연도, 사용 중인 브라우저를 포함해 주세요.
 
     @@ diagnostics
+
 help-art-black-screen-title = 검은 화면과 소리
 help-art-black-screen-summary = 화면이 보이지 않지만 제목을 들을 수 있습니다.
 help-art-black-screen-keywords = black screen no picture audio only video missing blank green screen
@@ -536,15 +537,6 @@ help-art-subtitles-body =
     3. <b>완료</b>를 선택합니다.
 
     !! 주의: 자막 및 오디오 트랙이 존재하는지 여부는 제목의 출처에 따라 달라집니다. 자막이 누락되었거나 동기화되지 않은 경우 <a=/help/article/subtitles-missing>자막이 누락되었거나 동기화되지 않음</a>을 참조하십시오.
-help-art-playback-speed-title = 재생 속도를 변경하는 방법
-help-art-playback-speed-summary = 플레이어 제어에서 더 빠르게 또는 더 느리게 시청할 수 있습니다.
-help-art-playback-speed-keywords = 속도 빠르게 느리게 2x 1.5x 재생 속도
-help-art-playback-speed-body =
-    1. 제목을 시작하고 플레이어 제어를 표시합니다.
-    2. 하단 오른쪽의 속도 버튼을 선택합니다.
-    3. 메뉴에서 속도를 선택합니다.
-
-    선택한 속도는 현재 시청 중인 제목에 적용되며, 다음 제목으로 돌아가면 다시 정상 속도로 돌아갑니다.
 help-art-shortcuts-title = 키보드 단축키
 help-art-shortcuts-summary = 마우스 없이 플레이어를 제어합니다.
 help-art-shortcuts-keywords = 키보드 단축키 키 스페이스 화살표 전체 화면 음소거 볼륨 건너뛰기 되감기 핫키
@@ -1516,7 +1508,7 @@ legal-credits-title = 라이선스 및 출처
 legal-credits-updated = 마지막 업데이트: 2026년 10월
 legal-credits-1-title = 1. 폰트
 legal-credits-1-body = 로고의 텍스트는 픽셀 폰트로 설정되어 있으며, 다른 인터페이스 텍스트는 Inter 폰트로 설정되어 있습니다.
-legal-credits-1-b1 = <strong>Baby Blocks</strong> by Colorful Typhoon, { $brand } 로고를 위해 사용되며, 개인 및 비상업적 용도를 위한 링크웨어 조건에 따라 사용되었습니다. 자세한 내용은 <a href="http://www.geocities.jp/kitschlabo/" target="_blank" rel="noopener">Colorful Typhoon</a>을 참조하십시오.
+legal-credits-1-b1 = <strong>Baby Blocks</strong> by Colorful Typhoon, { $brand } 로고를 위해 사용되며, 개인 및 비상업적 용도를 위한 링크웨어 조건에 따라 사용되었습니다. 자세한 내용은 <a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">Colorful Typhoon</a>을 참조하십시오.
 legal-credits-1-b2 = <strong>Inter</strong> by Rasmus Andersson, SIL Open Font License 1.1 하에 사용되었습니다.
 legal-credits-2-title = 2. 아이콘
 legal-credits-2-body = 인터페이스 아이콘은 Phosphor Icons에서 가져왔으며, MIT 라이선스 하에 사용되었습니다.
@@ -1978,7 +1970,7 @@ email-recovery-subject = { $brand } 비밀번호 재설정
 email-recovery-title = 비밀번호 재설정
 email-recovery-body = 계정의 비밀번호 재설정 요청을 받았습니다. 새 비밀번호를 선택하려면 버튼을 사용하세요. 링크는 한 번만 작동하며 곧 만료됩니다.
 email-recovery-button = 새 비밀번호 선택
-email-code-subject = 당신의 { $brand } 로그인 코드
+email-code-subject = 당신의 { $brand } 로그인 코드 · { $code }
 email-code-title = 당신의 로그인 코드
 email-code-body = 계속하려면 이 코드를 입력하세요. 코드는 한 번만 작동하며 { $minutes } 분 이내에 만료됩니다.
 email-code-or-link = 또는 버튼을 사용하여 로그인할 수 있습니다.
@@ -1991,7 +1983,7 @@ email-invite-subject = { $brand }에 초대받았습니다
 email-invite-title = 초대받았습니다
 email-invite-body = 계정을 생성하려면 초대를 수락하세요.
 email-invite-button = 초대 수락
-email-reauth-subject = 귀하의 { $brand } 확인 코드
+email-reauth-subject = 귀하의 { $brand } 확인 코드 · { $code }
 email-reauth-title = 확인 코드
 email-reauth-body = 이 코드를 입력하여 이 사람이 당신임을 확인하세요. 이 코드는 한 번만 사용되며 곧 만료됩니다.
 email-device-subject = 새로운 장치가 귀하의 { $brand } 계정에 로그인했습니다

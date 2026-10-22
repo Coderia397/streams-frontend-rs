@@ -339,7 +339,7 @@ help-art-playback-unavailable-title = { $brand } говорит "Воспрои�
 help-art-playback-unavailable-summary = Что означает это сообщение и что делать дальше.
 help-art-playback-unavailable-keywords = воспроизведение недоступно сообщение об ошибке невозможно стримить поставщики не поддерживаются
 help-art-playback-unavailable-body =
-    Вы можете увидеть <b>Недоступно воспроизведение</b> или <b>Невозможно стримить видео. Все источники не доступны или не поддерживаются вашим браузером.</b>
+    Вы можете увидеть <b>Плеер недоступен</b> или <b>Невозможно потоковое видео. Все поставщики источников были недоступны или не поддерживались вашим браузером.</b>
 
     Это означает, что плеер попросил у всех известных ему источников этот титул, и ни один из них не вернул поток, который ваш браузер может воспроизводить.
 
@@ -351,6 +351,7 @@ help-art-playback-unavailable-body =
     Если та же запись не работает в течение дня, <a=/help/article/report-bug>сообщите нам</a>. Включите название, год и браузер, который вы использовали.
 
     @@ diagnostics
+
 help-art-black-screen-title = Чёрный экран с звуком
 help-art-black-screen-summary = Изображение отсутствует, но вы можете слышать название.
 help-art-black-screen-keywords = чёрный экран нет изображения аудио только видео отсутствует белый экран зелёный экран
@@ -539,15 +540,6 @@ help-art-subtitles-body =
     3. Выберите <b>Готово</b>.
 
     !! Примечание: Доступные языки и дорожки аудио зависят от источника контента. См. <a=/help/article/subtitles-missing>Субтитры отсутствуют или синхронизированы неправильно</a>.
-help-art-playback-speed-title = Как изменить скорость воспроизведения
-help-art-playback-speed-summary = Просматривайте быстрее или медленнее с помощью кнопок управления проигрывателем.
-help-art-playback-speed-keywords = скорость быстрее медленнее 2x 1.5x скорость воспроизведения
-help-art-playback-speed-body =
-    1. Начните просмотр и покажите кнопки управления проигрывателем.
-    2. Выберите кнопку скорости в правом нижнем углу.
-    3. Выберите скорость из меню.
-
-    Скорость применяется к контенту, который вы смотрите, и возвращается к нормальной для следующего.
 help-art-shortcuts-title = Клавиатурные сочетания
 help-art-shortcuts-summary = Управляйте проигрывателем без использования мыши.
 help-art-shortcuts-keywords = клавиатурные сочетания клавиши пробел стрелка полноэкранное отключение звука громкость пропуск воспроизведение горячие клавиши
@@ -1540,7 +1532,7 @@ legal-credits-title = Лицензии и кредиты
 legal-credits-updated = Последнее обновление: Октябрь 2026
 legal-credits-1-title = 1. Шрифты
 legal-credits-1-body = Текст в логотипе настроен в пиксельном шрифте. Все остальные текстовые интерфейсы настроены в Inter.
-legal-credits-1-b1 = <strong>Baby Blocks</strong> от Colorful Typhoon, используемый для логотипа { $brand } по его лицензионным условиям для личного, некоммерческого использования. См. <a href="http://www.geocities.jp/kitschlabo/" target="_blank" rel="noopener">Colorful Typhoon</a>.
+legal-credits-1-b1 = <strong>Baby Blocks</strong> от Colorful Typhoon, используемый для логотипа { $brand } по его лицензионным условиям для личного, некоммерческого использования. См. <a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">Colorful Typhoon</a>.
 legal-credits-1-b2 = <strong>Inter</strong> от Rasmus Andersson, используемый по лицензии SIL Open Font License 1.1.
 legal-credits-2-title = 2. Иконки
 legal-credits-2-body = Иконки интерфейса взяты из Phosphor Icons, используемые по лицензии MIT.
@@ -2008,7 +2000,7 @@ email-recovery-subject = Сбросить пароль для { $brand }
 email-recovery-title = Сбросить пароль
 email-recovery-body = Мы получили запрос на сброс пароля вашего аккаунта. Используйте кнопку, чтобы выбрать новый. Ссылка работает один раз и истекает скоро.
 email-recovery-button = Выбрать новый пароль
-email-code-subject = Ваш код входа в { $brand }
+email-code-subject = Ваш код входа в { $brand } · { $code }
 email-code-title = Ваш код входа
 email-code-body = Введите этот код, чтобы продолжить. Он работает один раз и истекает через { $minutes } минут.
 email-code-or-link = Или используйте кнопку, чтобы войти.
@@ -2021,7 +2013,7 @@ email-invite-subject = Вы были приглашены в { $brand }
 email-invite-title = Вы были приглашены
 email-invite-body = Примите приглашение, чтобы создать ваш аккаунт.
 email-invite-button = Принять приглашение
-email-reauth-subject = Ваш код подтверждения для { $brand }
+email-reauth-subject = Ваш код подтверждения для { $brand } · { $code }
 email-reauth-title = Ваш код подтверждения
 email-reauth-body = Введите этот код, чтобы подтвердить, что это вы. Он работает один раз и истекает скоро.
 email-device-subject = Новое устройство вошло в ваш аккаунт { $brand }

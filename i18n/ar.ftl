@@ -337,7 +337,7 @@ help-art-playback-unavailable-title = { $brand } يقول "التشغيل غير
 help-art-playback-unavailable-summary = ما يعنيه هذا الرسالة وماذا تفعل بعد ذلك.
 help-art-playback-unavailable-keywords = خطأ التشغيل غير متاح رسالة خطأ غير قادر على البث مزودون غير مدعومين
 help-art-playback-unavailable-body =
-    قد ترى <b>التشغيل غير متاح</b> أو <b>تعذر بث الفيديو. جميع مزودي المصادر كانوا غير متاحين أو غير مدعومين من متصفحك.</b>
+    قد ترى <b>التشغيل غير متاح</b> أو <b>تعذر بث الفيديو. جميع مزودي المصدر غير متاحين أو غير مدعومين من متصفحك.</b>
 
     يعني ذلك أن المشغل طلب من كل مصدر يعرفه لهذا العمل ولم يُرجع أيٌّ منهم بثًا يمكن لمتصفحك تشغيله.
 
@@ -349,6 +349,7 @@ help-art-playback-unavailable-body =
     إذا فشل نفس العمل لمدة يوم، <a=/help/article/report-bug>أخبرنا</a>. شمل اسم العمل والسنة والمتصفح الذي استخدمته.
 
     @@ diagnostics
+
 help-art-black-screen-title = شاشة سوداء مع صوت
 help-art-black-screen-summary = الصورة مفقودة لكنك تسمع صوت العمل.
 help-art-black-screen-keywords = شاشة سوداء لا توجد صورة صوت فقط فيديو مفقود شاشة فارغة شاشة خضراء
@@ -537,15 +538,6 @@ help-art-subtitles-body =
     3. اختر <b>تم</b>.
 
     !! ملاحظة: تعتمد اللغات ومسارات الصوت المتاحة على مصدر العنوان. راجع <a=/help/article/subtitles-missing>الترجمة مفقودة أو غير متزامنة</a>.
-help-art-playback-speed-title = كيفية تغيير سرعة التشغيل
-help-art-playback-speed-summary = شاهد بسرعة أكبر أو أبطأ من خلال عناصر التحكم في المشغّل.
-help-art-playback-speed-keywords = سرعة أسرع أبطأ 2x 1.5x معدل التشغيل
-help-art-playback-speed-body =
-    1. ابدأ تشغيل العنوان وأظهر عناصر التحكم في المشغّل.
-    2. اختر زر السرعة في الزاوية السفلية اليمنى.
-    3. اختر سرعة من القائمة.
-
-    تُطبَّق السرعة على العنوان الذي تشاهده وتعود إلى الوضع الطبيعي للعنوان التالي.
 help-art-shortcuts-title = اختصارات لوحة المفاتيح
 help-art-shortcuts-summary = تحكم في المشغّل دون استخدام الفأرة.
 help-art-shortcuts-keywords = اختصارات لوحة المفاتيح مفاتيح مسافة سهم ملء الشاشة كتم الصوت مستوى الصوت تخطي رجوع اختصارات سريعة
@@ -1527,7 +1519,7 @@ legal-credits-title = التراخيص والإعادات
 legal-credits-updated = آخر تحديث: أكتوبر 2026
 legal-credits-1-title = 1. الخطوط
 legal-credits-1-body = النص في الشعار مكتوب بخط بكسل. جميع نصوص الواجهة الأخرى مكتوبة بخط Inter.
-legal-credits-1-b1 = <strong>Baby Blocks</strong> من Colorful Typhoon، مستخدم لشعار { $brand } بموجب شروطه للروابط للاستخدام الشخصي غير التجاري. راجع <a href="http://www.geocities.jp/kitschlabo/" target="_blank" rel="noopener">Colorful Typhoon</a>.
+legal-credits-1-b1 = <strong>Baby Blocks</strong> من Colorful Typhoon، مستخدم لشعار { $brand } بموجب شروطه للروابط للاستخدام الشخصي غير التجاري. راجع <a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">Colorful Typhoon</a>.
 legal-credits-1-b2 = <strong>Inter</strong> من Rasmus Andersson، مستخدم بموجب ترخيص SIL Open Font 1.1.
 legal-credits-2-title = 2. الأيقونات
 legal-credits-2-body = أيقونات الواجهة من Phosphor Icons، مستخدمة بموجب ترخيص MIT.
@@ -1999,7 +1991,7 @@ email-recovery-subject = إعادة تعيين كلمة مرور { $brand }
 email-recovery-title = إعادة تعيين كلمة المرور
 email-recovery-body = استلمنا طلبًا لإعادة تعيين كلمة مرور حسابك. استخدم الزر لاختيار كلمة مرور جديدة. يعمل الرابط مرة واحدة وينتهي قريبًا.
 email-recovery-button = اختيار كلمة مرور جديدة
-email-code-subject = رمز تسجيل الدخول الخاص بك في { $brand }
+email-code-subject = رمز تسجيل الدخول الخاص بك في { $brand } · { $code }
 email-code-title = رمز تسجيل الدخول الخاص بك
 email-code-body = أدخل هذا الرمز للمتابعة. يعمل مرة واحدة وينتهي خلال { $minutes } دقائق.
 email-code-or-link = أو استخدم الزر لتسجيل الدخول.
@@ -2012,7 +2004,7 @@ email-invite-subject = تمت دعوتك إلى { $brand }
 email-invite-title = تمت دعوتك
 email-invite-body = قبل الدعوة لإنشاء حسابك.
 email-invite-button = قبول الدعوة
-email-reauth-subject = رمز التأكيد الخاص بك في { $brand }
+email-reauth-subject = رمز التأكيد الخاص بك في { $brand } · { $code }
 email-reauth-title = رمز التأكيد الخاص بك
 email-reauth-body = أدخل هذا الرمز للتأكد من هويتك. يعمل مرة واحدة وينتهي قريبًا.
 email-device-subject = تم تسجيل الدخول من جهاز جديد إلى حسابك في { $brand }

@@ -337,7 +337,7 @@ help-art-playback-unavailable-title = { $brand } säger "Playback Unavailable"
 help-art-playback-unavailable-summary = Vad meddelandet innebär och vad du ska göra sedan.
 help-art-playback-unavailable-keywords = spelning tillgänglig felmeddelande kan inte strömma leverantörer oanvändbara
 help-art-playback-unavailable-body =
-    Du kan se <b>Playback Unavailable</b> eller <b>Unable to stream video. All source providers were unavailable or unsupported by your browser.</b>
+    Du kan se <b>Upptäckning inte tillgänglig</b> eller <b>Det går inte att strömma videon. Alla källleverantörer var o tillgängliga eller inte stödjas av din webbläsare.</b>
 
     Det betyder att spelaren frågade alla källor som känner igen titeln och ingen returnerade en ström som din webbläsare kan spela.
 
@@ -349,6 +349,7 @@ help-art-playback-unavailable-body =
     Om samma titel misslyckas i en dag, <a=/help/article/report-bug>tell us</a>. Inkludera titeln, året och webbläsaren du använde.
 
     @@ diagnostics
+
 help-art-black-screen-title = Svart skärm med ljud
 help-art-black-screen-summary = Bilden saknas men du kan höra titeln.
 help-art-black-screen-keywords = svart skärm inget bild ljud endast video saknas tomt grön skärm
@@ -537,15 +538,6 @@ help-art-subtitles-body =
     3. Välj <b>Slutför</b>.
 
     !! Obs: Vilka språk och ljudspår som finns beror på källan till programmet. Se <a=/help/article/subtitles-missing>Undertexter saknas eller är synkade</a>.
-help-art-playback-speed-title = Hur man ändrar uppspelningsspelet
-help-art-playback-speed-summary = Titta snabbare eller långsammare från spelarens kontroller.
-help-art-playback-speed-keywords = hastighet snabbare långsammare 2x 1.5x uppspelningsspeed
-help-art-playback-speed-body =
-    1. Starta ett program och visa spelarens kontroller.
-    2. Välj hastighetsknappen i det övre högra hörnet.
-    3. Välj en hastighet från menyn.
-
-    Hastigheten gäller det program du tittar på och återgår till normal för nästa.
 help-art-shortcuts-title = Tangentbordsknappar
 help-art-shortcuts-summary = Styr spelaren utan musen.
 help-art-shortcuts-keywords = tangentbordsknappar tangentbordsknappar tangentbordsknappar mellanrum pil fullskärm tysta volym hoppa tillbaka hoppa fram snabbknappar
@@ -1524,7 +1516,7 @@ legal-credits-title = Licenser och krediteringar
 legal-credits-updated = Senast uppdaterad: Oktober 2026
 legal-credits-1-title = 1. Typsnitt
 legal-credits-1-body = Texten i logotypen är skriven i ett pixeltypsnitt. All annan gränssnittstext är skriven i Inter.
-legal-credits-1-b1 = <strong>Baby Blocks</strong> av Colorful Typhoon, används för { $brand } logotypen under dess linkware-villkor för personligt, icke-kommersiellt bruk. Se <a href="http://www.geocities.jp/kitschlabo/" target="_blank" rel="noopener">Colorful Typhoon</a>.
+legal-credits-1-b1 = <strong>Baby Blocks</strong> av Colorful Typhoon, används för { $brand } logotypen under dess linkware-villkor för personligt, icke-kommersiellt bruk. Se <a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">Colorful Typhoon</a>.
 legal-credits-1-b2 = <strong>Inter</strong> av Rasmus Andersson, används under SIL Open Font License 1.1.
 legal-credits-2-title = 2. Ikoner
 legal-credits-2-body = Gränssnittsikoner kommer från Phosphor Icons, används under MIT License.
@@ -1988,7 +1980,7 @@ email-recovery-subject = Återställ ditt { $brand } lösenord
 email-recovery-title = Återställ ditt lösenord
 email-recovery-body = Vi fick en begäran om att återställa lösenordet för ditt konto. Använd knappen för att välja ett nytt. Länken fungerar en gång och förfaller snart.
 email-recovery-button = Välj ett nytt lösenord
-email-code-subject = Din { $brand } inloggningskod
+email-code-subject = Din { $brand } inloggningskod · { $code }
 email-code-title = Din inloggningskod
 email-code-body = Använd denna kod för att fortsätta. Den fungerar en gång och förfaller inom { $minutes } minuter.
 email-code-or-link = Eller använd knappen för att logga in.
@@ -2001,7 +1993,7 @@ email-invite-subject = Du har blivit inbjuden till { $brand }
 email-invite-title = Du har blivit inbjuden
 email-invite-body = Acceptera inbjudan för att skapa ditt konto.
 email-invite-button = Acceptera inbjudan
-email-reauth-subject = Din { $brand } bekräftelseskod
+email-reauth-subject = Din { $brand } bekräftelseskod · { $code }
 email-reauth-title = Din bekräftelseskod
 email-reauth-body = Skriv in denna kod för att bekräfta att det är du. Den fungerar en gång och förfaller snart.
 email-device-subject = Ny enhet inloggad på ditt { $brand } konto

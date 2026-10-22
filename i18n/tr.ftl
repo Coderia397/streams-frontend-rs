@@ -337,7 +337,7 @@ help-art-playback-unavailable-title = { $brand } "Oynatma Kullanılamıyor" diyo
 help-art-playback-unavailable-summary = Mesajın ne anlama geldiğini ve ne yapmanız gerektiğini gösterir.
 help-art-playback-unavailable-keywords = oynatma kullanılamıyor hata mesajı akış sağlayıcılar desteklenmeyen
 help-art-playback-unavailable-body =
-    Bazı <b>Oynatma Mevcut Değil</b> veya <b>Video akışı başlatılamadı. Tüm kaynak sağlayıcılar mevcut değil veya tarayıcınız tarafından desteklenmiyor.</b>
+    Bazı <b>Oynatma Kullanılamıyor</b> veya <b>Video akışı yapılamıyor. Tüm kaynak sağlayıcılar kullanılamaz veya tarayıcınız tarafından desteklenmiyor.</b>
 
     Oyuncu bu başlık için bildirdiği tüm kaynakları denedi ve hiçbirinden tarayıcınız oynatabileceği bir akış döndürmedi.
 
@@ -349,6 +349,7 @@ help-art-playback-unavailable-body =
     Aynı başlık bir gün boyunca başarısız olursa, <a=/help/article/report-bug>bağlantı kurun</a>. Başlık, yıl ve kullandığınız tarayıcıyı belirtin.
 
     @@ diagnostics
+
 help-art-black-screen-title = Sessiz ekran
 help-art-black-screen-summary = Görüntü yok ancak başlık sesi duyulur.
 help-art-black-screen-keywords = kara ekran no image audio only video missing blank green screen
@@ -537,15 +538,6 @@ help-art-subtitles-body =
     3. <b>Bitir</b> seçeneğini seçin.
 
     !! Not: Hangi diller ve ses izlemleri varsa, başlığın kaynaklarına bağlıdır. <a=/help/article/subtitles-missing>Altyazı eksik veya senkronize değil</a> sayfasına bakın.
-help-art-playback-speed-title = Oynatma hızını değiştirmek nasıl yapılır
-help-art-playback-speed-summary = Oyuncu denetimlerinden daha hızlı veya daha yavaş izleyin.
-help-art-playback-speed-keywords = hız hızlı yavaş 2x 1.5x oynatma oranı
-help-art-playback-speed-body =
-    1. Bir başlık başlatın ve oyuncu denetimlerini gösterin.
-    2. Alt sağdaki hız düğmesini seçin.
-    3. Menüden bir hız seçin.
-
-    Hız, izlediğiniz başlığa uygulanır ve bir sonraki başlık için normal hale döner.
 help-art-shortcuts-title = Klavye kısayolları
 help-art-shortcuts-summary = Fare olmadan oyuncuyu denetleyin.
 help-art-shortcuts-keywords = klavye kısayolları tuşlar boşluk ok tam ekran sustur volume atla geri al kısayollar
@@ -1524,7 +1516,7 @@ legal-credits-title = Lisanslar ve krediler
 legal-credits-updated = Son güncelleme: Ekim 2026
 legal-credits-1-title = 1. Fontlar
 legal-credits-1-body = Logo'daki metin bir piksel fontu ile yazılmıştır. Diğer tüm arayüz metinleri Inter fontu ile yazılmıştır.
-legal-credits-1-b1 = <strong>Baby Blocks</strong> Colorful Typhoon tarafından geliştirilmiştir ve kişisel, ticari amaçlı olmayan kullanım için { $brand } logosu için linkware koşulları altında kullanılmıştır. Daha fazla bilgi için <a href="http://www.geocities.jp/kitschlabo/" target="_blank" rel="noopener">Colorful Typhoon</a> adresine bakın.
+legal-credits-1-b1 = <strong>Baby Blocks</strong> Colorful Typhoon tarafından geliştirilmiştir ve kişisel, ticari amaçlı olmayan kullanım için { $brand } logosu için linkware koşulları altında kullanılmıştır. Daha fazla bilgi için <a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">Colorful Typhoon</a> adresine bakın.
 legal-credits-1-b2 = <strong>Inter</strong> Rasmus Andersson tarafından geliştirilmiştir ve SIL Open Font License 1.1 altında kullanılmıştır.
 legal-credits-2-title = 2. Simgeler
 legal-credits-2-body = Arayüz simgeleri Phosphor Icons'tan alınmıştır ve MIT Lisansı altında kullanılmıştır.
@@ -1988,7 +1980,7 @@ email-recovery-subject = { $brand } şifrenizi sıfırlayın
 email-recovery-title = Şifrenizi sıfırlayın
 email-recovery-body = Hesabınızın şifresini sıfırlamak için bir istek aldık. Yeni birini seçmek için düğmeyi kullanın. Bağlantı sadece bir kez çalışır ve kısa sürede sona erer.
 email-recovery-button = Yeni bir şifre seçin
-email-code-subject =  { $brand } giriş kodunuz
+email-code-subject = { $brand } giriş kodunuz · { $code }
 email-code-title = Giriş kodunuz
 email-code-body = Devam etmek için bu kodu girin. Sadece bir kez çalışır ve { $minutes } dakika içinde sona erer.
 email-code-or-link = Veya giriş için düğmeyi kullanın.
@@ -2001,7 +1993,7 @@ email-invite-subject = { $brand }'a davet edildiniz
 email-invite-title = Davet edildiniz
 email-invite-body = Hesabınızı oluşturmak için davetiye kabul edin.
 email-invite-button = Davetiye kabul et
-email-reauth-subject =  { $brand } doğrulama kodunuz
+email-reauth-subject = { $brand } doğrulama kodunuz · { $code }
 email-reauth-title = Doğrulama kodunuz
 email-reauth-body = Bu kodu girmekle kim olduğunuzu doğruluyorsunuz. Sadece bir kez çalışır ve kısa sürede sona erer.
 email-device-subject = Yeni cihaz { $brand } hesabınıza giriş yaptı
