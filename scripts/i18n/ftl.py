@@ -1,7 +1,7 @@
 """Small reader for the .ftl files used here: messages are 'key = value' blocks, and a value can continue on indented lines."""
 import re
 
-KEY = re.compile(r"^([a-z0-9][a-z0-9-]*) =(.*)$")
+KEY = re.compile(r"^([a-z0-9][a-z0-9_-]*) =(.*)$")
 
 
 def read(text):

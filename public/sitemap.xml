@@ -36,7 +36,6 @@
   <url><loc>https://streams.watch/help/article/page-not-found</loc><lastmod>2026-10-22</lastmod><priority>0.5</priority></url>
   <url><loc>https://streams.watch/help/article/language</loc><lastmod>2026-10-22</lastmod><priority>0.5</priority></url>
   <url><loc>https://streams.watch/help/article/subtitles</loc><lastmod>2026-10-22</lastmod><priority>0.5</priority></url>
-  <url><loc>https://streams.watch/help/article/playback-speed</loc><lastmod>2026-10-22</lastmod><priority>0.5</priority></url>
   <url><loc>https://streams.watch/help/article/shortcuts</loc><lastmod>2026-10-22</lastmod><priority>0.5</priority></url>
   <url><loc>https://streams.watch/help/article/skip-intro-next</loc><lastmod>2026-10-22</lastmod><priority>0.5</priority></url>
   <url><loc>https://streams.watch/help/article/my-list</loc><lastmod>2026-10-22</lastmod><priority>0.5</priority></url>
@@ -76,4 +75,11 @@
   <url><loc>https://streams.watch/help/article/title-details</loc><lastmod>2026-10-22</lastmod><priority>0.5</priority></url>
   <url><loc>https://streams.watch/help/article/accessibility</loc><lastmod>2026-10-22</lastmod><priority>0.5</priority></url>
   <url><loc>https://streams.watch/help/article/profile-icons</loc><lastmod>2026-10-22</lastmod><priority>0.5</priority></url>
+  <url><loc>https://streams.watch/help/article/parental-controls</loc><lastmod>2026-10-22</lastmod><priority>0.5</priority></url>
+  <url><loc>https://streams.watch/help/article/transfer-profile</loc><lastmod>2026-10-22</lastmod><priority>0.5</priority></url>
+  <url><loc>https://streams.watch/help/article/forgot-password</loc><lastmod>2026-10-22</lastmod><priority>0.5</priority></url>
+  <url><loc>https://streams.watch/help/article/change-email-password</loc><lastmod>2026-10-22</lastmod><priority>0.5</priority></url>
+  <url><loc>https://streams.watch/help/article/devices-sign-out</loc><lastmod>2026-10-22</lastmod><priority>0.5</priority></url>
+  <url><loc>https://streams.watch/help/article/download-data</loc><lastmod>2026-10-22</lastmod><priority>0.5</priority></url>
+  <url><loc>https://streams.watch/help/article/delete-account</loc><lastmod>2026-10-22</lastmod><priority>0.5</priority></url>
 </urlset>

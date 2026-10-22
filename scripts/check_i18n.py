@@ -5,7 +5,7 @@ Genre names (genre-*) and policy text (legal-<id>-*) are looked up at runtime fr
 those families counts as used when its id appears as a string in src/data/help.rs."""
 import re, sys, pathlib
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-KEY = re.compile(r"^([a-z0-9-]+) =", re.M)
+KEY = re.compile(r"^([a-z0-9_-]+) =", re.M)
 def load(p):
     text = p.read_text()
     return {m.group(1): m.start() for m in KEY.finditer(text)}

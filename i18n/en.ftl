@@ -141,7 +141,7 @@ help-ui-ql-title = Feedback about a title on { $brand }
 help-ui-ql-email = Email us at { $help_email }
 help-ui-not-found-title = We couldn’t find that article
 help-ui-not-found-body = It may have moved, or the link may be wrong. Search the Help Centre or browse the topics.
-help-ui-legal-terms = Terms of Use
+help-ui-legal-terms = Terms of Service
 help-ui-legal-privacy = Privacy
 help-ui-legal-cookies = Cookie Policy
 help-ui-legal-dmca = DMCA
@@ -152,7 +152,7 @@ help-topic-fix = Fix a Problem
 help-topic-watching = Watching
 help-topic-start = Getting Started
 help-group-profiles = Profiles
-help-group-account-data = Account and Data
+help-group-account-data = Your Data and Privacy
 help-group-paying = Paying for { $brand }
 help-group-playback-issues = Playback Problems
 help-group-device-issues = Browsers and Devices
@@ -164,35 +164,38 @@ help-group-about = About { $brand }
 help-group-setup = Device Setup
 help-group-reporting = Reporting and Legal
 help-art-profiles-manage-title = How to create, edit, or delete profiles
-help-art-profiles-manage-summary = Add a profile for each person, change a name or icon, turn on a PIN, or remove a profile you no longer need.
+help-art-profiles-manage-summary = Add a profile for each person, change a name or picture, lock a profile, or remove one you no longer need.
 help-art-profiles-manage-keywords = profile profiles add create edit delete remove name icon avatar who's watching
 help-art-profiles-manage-body =
-    Each person who uses { $brand } on this device can have a profile with its own name, icon, list and recommendations.
+    Everyone at home can have a profile with its own name, picture, My List, viewing activity and recommendations. An account holds up to 5 profiles.
 
     ## Add a profile
-    1. Open the profile menu at the top right and choose <b>Manage Profiles</b>, or open the <b>Who's watching?</b> screen.
+    1. Open the profile menu at the top right and choose <b>Manage Profiles</b>, or select <b>Manage Profiles</b> on the <b>Who's watching?</b> screen.
     2. Select <b>Add Profile</b>.
-    3. Type a name, choose an icon, and choose <b>Save</b>.
+    3. Type a name and pick a picture. Turn on <b>Kids Profile</b> if the profile is for a child.
+    4. Choose <b>Save</b>.
 
     ## Edit or delete a profile
-    1. Open <b>Manage Profiles</b>.
-    2. Select the profile you want to change.
-    3. Change the name or icon, turn the PIN or Kids setting on or off, then choose <b>Save</b>. To remove the profile choose <b>Delete Profile</b>.
+    1. Open <b>Manage Profiles</b> and select the profile you want to change.
+    2. Change the name or picture, or turn <b>Kids Profile</b> or <b>Profile Lock</b> on or off, then choose <b>Save</b>.
+    3. To remove the profile, choose <b>Delete Profile</b>. Its viewing activity and settings go with it.
 
-    !! Note: Profiles are saved in this browser, on this device. See <a=/help/article/saved-data>Where your profiles, list and progress are saved</a>.
+    Languages, subtitles, parental controls and the other preferences of a profile are in <b>Account</b>, under <b>Manage profiles</b>.
+
+    !! Note: Profiles are saved in your account, so they appear on every device where you sign in.
 
     @@ profiles
 
     >> Can't delete a profile
-    You need to keep at least one profile. Create another one first, then delete the old one.
+    The main profile, the one named after you, cannot be deleted, and an account always keeps at least one profile. Every other profile can be deleted.
 
 help-art-switch-profile-title = How to switch profiles
 help-art-switch-profile-summary = Change who is watching without leaving the page.
 help-art-switch-profile-keywords = switch change profile who's watching menu
 help-art-switch-profile-body =
-    1. Open the profile menu at the top right of the page.
+    1. Open the profile menu at the top right of the page. On a phone, tap your profile picture in the bar at the bottom.
     2. Select the profile you want to use.
-    3. If the profile has a PIN, type the four digits to continue.
+    3. If the profile is locked, type its 4 digit PIN.
 
     Recommendations, <b>My List</b> and <b>Continue Watching</b> change with the profile you pick.
 
@@ -201,99 +204,119 @@ help-art-switch-profile-body =
     @@ profiles
 
 help-art-profile-pin-title = How to add, edit, or remove a profile PIN
-help-art-profile-pin-summary = Lock a profile with a four digit PIN so only the right person can open it.
-help-art-profile-pin-keywords = pin lock profile lock code passcode four digit secure
+help-art-profile-pin-summary = Lock a profile with a 4 digit PIN so only the right person can open it.
+help-art-profile-pin-keywords = pin lock profile lock passcode private protect profile code
 help-art-profile-pin-body =
-    A profile PIN is four digits. Anyone who selects the profile has to type the PIN before it opens.
+    A profile lock asks for a 4 digit PIN before the profile opens. The PIN belongs to your account, so it works on every device where you sign in.
 
-    ## Turn on or change a PIN
-    1. Open <b>Manage Profiles</b> and select the profile.
-    2. Turn on <b>Profile Lock</b> and type four digits.
-    3. Choose <b>Save</b>.
+    ## Turn on a profile lock
+    1. Open the profile menu, choose <b>Account</b>, then <b>Manage profiles</b>, and select the profile.
+    2. Choose <b>Profile lock</b> and enter your account password to confirm it's you.
+    3. Type four digits and choose <b>Save</b>.
 
-    ## Remove a PIN
-    1. Open <b>Manage Profiles</b> and select the profile, then type the current PIN.
-    2. Turn off <b>Profile Lock</b> and choose <b>Save</b>.
+    You can also turn on <b>Profile Lock</b> when you add or edit a profile in <b>Manage Profiles</b>.
 
-    !! Note: The PIN is stored on this device and keeps other people out of a profile on this browser. It is not a strong lock against someone who can open your browser's settings. If you forget it, see <a=/help/article/forgot-pin>I forgot my profile PIN</a>.
+    ## Change or remove the PIN
+    1. Open <b>Profile lock</b> for the profile, as above.
+    2. Choose <b>Change PIN</b>, or <b>Remove profile lock</b> and type the current PIN.
+
+    !! Note: After too many wrong tries the profile stays locked for a while. If you forgot the PIN, see <a=/help/article/forgot-pin>I forgot my profile PIN</a>.
 
     @@ profiles
 
 help-art-kids-profile-title = How to create a profile for kids
-help-art-kids-profile-summary = A Kids profile shows titles chosen for younger viewers and keeps the rest out of reach.
+help-art-kids-profile-summary = A Kids profile shows titles made for children and keeps everything else out of reach.
 help-art-kids-profile-keywords = kids children child family parental controls safe young profile
 help-art-kids-profile-body =
-    A Kids profile limits what is shown to titles suited to younger viewers and removes mature rows from the pages.
+    A Kids profile only shows titles suited to children, with its own home page and menus made for kids.
 
     1. Open <b>Manage Profiles</b> and choose <b>Add Profile</b>.
-    2. Turn on <b>Kids Mode</b> for this profile.
-    3. Choose a name and icon, then <b>Save</b>.
+    2. Type a name and turn on <b>Kids Profile</b>.
+    3. Choose <b>Save</b>.
 
-    To stop a child from switching to another profile, put a PIN on every adult profile. See <a=/help/article/profile-pin>How to add, edit, or remove a profile PIN</a>.
+    To turn an existing profile into a Kids profile, edit it and turn on <b>Kids Profile</b>. The main profile cannot be a Kids profile.
 
-    !! Note: Titles come from independent sources and not every title carries a rating. A Kids profile reduces what a child can find. It does not replace watching together.
+    To leave the Kids pages, choose <b>Exit Kids</b> and pick another profile. To stop a child from switching, lock the other profiles with a PIN. See <a=/help/article/profile-pin>How to add, edit, or remove a profile PIN</a>.
+
+    For older children, you can set an age rating on any profile instead. See <a=/help/article/parental-controls>Parental controls: age ratings and blocked titles</a>.
+
+    !! Note: Titles come from independent sources, and not every title carries an age rating. A Kids profile reduces what a child can find. It does not replace watching together.
 
     @@ profiles
 
 help-art-need-account-title = Do I need an account?
-help-art-need-account-summary = You can browse and watch without one. Here is what an account will add.
+help-art-need-account-summary = Yes, a free account. Here is what it keeps for you.
 help-art-need-account-keywords = account sign up register login required membership
 help-art-need-account-body =
-    You do not need an account to browse, search or watch on { $brand }.
+    Yes. You need a free account to watch on { $brand }. Creating one takes a minute and never asks for payment details.
 
-    Today your profiles, list and viewing progress are saved in this browser on this device. Accounts that keep them in step across your devices are being built. Until they are available, the sign in page is a preview and does not create a real account.
+    1. On the { $brand } home page, enter your email address and choose <b>Get Started</b>.
+    2. Enter your first and last name and choose a password of at least 8 characters.
+    3. Open the link we email you to confirm your address, then sign in.
 
-    !! Note: { $brand } will never ask for a card number to create an account. See <a=/help/article/free-to-use>Is { $brand } free?</a>
+    Your account keeps your profiles, My List, ratings, viewing activity and settings, so they are the same on every device where you sign in. Your first name becomes the name of your main profile.
+
+    !! Note: { $brand } is free and will never ask for a card number. See <a=/help/article/free-to-use>Is { $brand } free?</a>
 
 help-art-sign-in-title = Signing in and out
-help-art-sign-in-summary = What the sign in page does today and what to do when it does not behave as expected.
-help-art-sign-in-keywords = sign in login log in sign out logout password email cannot sign in
+help-art-sign-in-summary = Sign in with your email and password, stay signed in, and sign out.
+help-art-sign-in-keywords = sign in log in login sign out log out remember me email password account
 help-art-sign-in-body =
-    The sign in page is a preview of the accounts that are being built. Choosing to continue takes you to your profiles on this device. No password or email is checked yet.
+    ## Sign in
+    1. Choose <b>Sign In</b> at the top of the { $brand } home page.
+    2. Enter your email address and password, then choose <b>Sign In</b>.
+
+    Leave <b>Remember me</b> on to stay signed in on this device. If you signed out of this device a short while ago, you can continue without typing your password again.
 
     ## Sign out
-    Open the profile menu and choose <b>Sign out</b>. Your saved profiles stay on this device.
+    Open the profile menu and choose <b>Sign out</b>. To sign out everywhere at once, see <a=/help/article/devices-sign-out>Sign out of a device or of all devices</a>.
 
     ## Sign in does not work
-    - Reload the page and try again.
-    - Make sure the browser allows this site to store data. See <a=/help/article/saved-data>Where your profiles, list and progress are saved</a>.
-    - If the problem continues, write to us from the <a=/help/contact>Contact Us</a> page.
+    - Check the email address for typing mistakes. The password is case sensitive.
+    - If you just signed up, open the confirmation link we emailed you first. <b>Send the confirmation email again</b> sends a new one.
+    - After too many tries, wait a minute and try again.
+    - Forgot your password? See <a=/help/article/forgot-password>I forgot my password</a>.
 
 help-art-saved-data-title = Where your profiles, list and progress are saved
-help-art-saved-data-summary = Profiles, PINs and viewing progress live in this browser, on this device.
+help-art-saved-data-summary = Your account keeps them, and each browser keeps a copy so pages open fast.
 help-art-saved-data-keywords = saved data storage local browser device lost sync progress history profiles cookies
 help-art-saved-data-body =
-    { $brand } keeps your profiles, PINs and viewing progress in your browser's local storage on the device you are using. Nothing about them is uploaded to an account yet.
+    Your profiles, My List, ratings, viewing activity and settings are saved in your account. Each browser where you sign in keeps a copy, so pages open at once and work for a while without a connection. Changes go to your account within a few seconds and reach your other devices when you open { $brand } there.
 
     ## What this means
-    - A different browser or device starts with no profiles and no progress.
-    - Private or incognito windows forget everything when they close.
-    - Clearing site data in your browser removes your profiles and progress.
-    - Your list lasts for the time the page stays open until accounts are available.
+    - Sign in on another device and everything is there.
+    - Clearing site data in a browser signs you out there and removes that copy. Your account keeps everything.
+    - In a private or incognito window, the copy is removed when the window closes.
 
-    ## What is sent to our servers
-    When you open or start a title, the app tells the recommendation service which title it was, with a random session number that is not linked to your name. Rows adapt for about a day after you stop. See <a=/help/article/recommendations>How recommendations work</a>.
+    ## What else is sent to our servers
+    When you start a title, the recommendation service learns which title it was, so your rows can follow your taste. You can turn this off with <b>Personalised recommendations</b> in <b>Privacy and data settings</b>. See <a=/help/article/recommendations>How recommendations work</a>.
 
     @@ data
 
 help-art-clear-data-title = How to clear your saved data
-help-art-clear-data-summary = Remove your profiles, PINs and viewing progress from this browser.
+help-art-clear-data-summary = Remove what this browser keeps for { $brand }, or delete data from your account.
 help-art-clear-data-keywords = clear delete reset remove data history cache storage cookies start over
 help-art-clear-data-body =
-    Removing site data deletes every profile, PIN and viewing record that { $brand } saved in this browser. It cannot be undone.
+    Clearing site data in a browser signs you out there and removes the copy of your profiles and settings that the browser keeps. Everything stays in your account and comes back when you sign in again.
 
     ## Chrome, Edge and Brave
-    1. Open the site's information icon in the address bar and choose <b>Cookies and site data</b>, then <b>Manage on-device site data</b>.
-    2. Remove the entry for this site.
+    1. Select the site information icon at the left of the address bar and choose <b>Cookies and site data</b>, then <b>Manage on-device site data</b>.
+    2. Remove the entries for this site.
 
     ## Firefox
-    1. Open the padlock icon in the address bar and choose <b>Clear cookies and site data</b>.
+    1. Select the padlock icon in the address bar and choose <b>Clear cookies and site data</b>.
 
-    ## Safari
-    1. Open <b>Settings</b>, then <b>Privacy</b>, then <b>Manage Website Data</b>.
+    ## Safari on a Mac
+    1. Open <b>Safari</b>, then <b>Settings</b>, then <b>Privacy</b>, then <b>Manage Website Data</b>.
     2. Find this site and choose <b>Remove</b>.
 
-    To remove only the viewing history, see <a=/help/article/viewing-history>How to manage your viewing history</a>.
+    ## Safari on iPhone and iPad
+    Open the <b>Settings</b> app, then <b>Apps</b>, <b>Safari</b>, <b>Advanced</b>, <b>Website Data</b>, and remove this site.
+
+    ## Delete data from your account
+    - To remove titles from your viewing activity, see <a=/help/article/viewing-history>How to manage your viewing history</a>.
+    - To delete a profile, see <a=/help/article/profiles-manage>How to create, edit, or delete profiles</a>.
+    - To delete everything, see <a=/help/article/delete-account>Delete your account</a>.
 
     @@ data
 
@@ -301,17 +324,21 @@ help-art-privacy-data-title = What data does { $brand } collect?
 help-art-privacy-data-summary = A short summary of what is stored, what is sent, and where to read the full policy.
 help-art-privacy-data-keywords = privacy data collect personal information tracking sell share cookies analytics
 help-art-privacy-data-body =
-    We do not sell personal data. Here is the short version. The <a=/privacy>Privacy Policy</a> has the full text.
+    We do not sell personal data and we do not show ads. Here is the short version. The <a=/privacy>Privacy Policy</a> has the full text.
 
-    ## Stored on your device
-    Profiles, PINs, your chosen language and viewing progress.
+    ## Kept in your account
+    Your name, email address, an optional phone number, your profiles, My List, ratings, viewing activity and settings, and a list of recent sign ins and the devices they came from.
 
     ## Sent when you use the app
-    - Requests for titles, images and details go to a catalog service and to our recommendation service.
-    - When you open or start a title, the recommendation service receives the title and a random session number. It keeps a small taste profile in memory for about a day and then discards it.
-    - Playback requests go to independent third party sources, which see your IP address like any website you visit.
+    - Requests for titles, pictures and details go to a public film catalog and to our recommendation service.
+    - When you start a title, the recommendation service learns which title it was, so your rows follow your taste. Turn this off with <b>Personalised recommendations</b> in <b>Privacy and data settings</b>.
+    - Video comes from independent third party sources, and trailers from YouTube. They see your IP address like any website you visit.
 
-    For cookies, see the <a=/cookies>Cookie Policy</a>. To remove what is stored on your device, see <a=/help/article/clear-data>How to clear your saved data</a>.
+    ## Your choices
+    - Download a copy of your data. See <a=/help/article/download-data>Download a copy of your data</a>.
+    - Delete your account at any time. See <a=/help/article/delete-account>Delete your account</a>.
+
+    For cookies and browser storage, see the <a=/cookies>Cookie Policy</a>.
 
     @@ cookies
 
@@ -397,29 +424,29 @@ help-art-subtitles-missing-keywords = subtitles captions missing wrong language 
 help-art-subtitles-missing-body =
     1. Select <b>Audio & Subtitles</b> in the player and make sure a subtitle language is selected.
     2. Choose another track if the list offers one. Tracks come from the source and differ between titles.
-    3. Set your preferred subtitle language in <b>Settings</b>. See <a=/help/article/language>How to change the language</a>.
-    4. If the text is early or late, reload and play again. Timing is set by the source and we cannot adjust it for one title.
+    3. Set your preferred subtitle language for the profile. See <a=/help/article/language>How to change the language</a>.
+    4. If the text is early or late, use <b>-0.5s</b> or <b>+0.5s</b> in <b>Audio & Subtitles</b> until it matches the speech.
 
     If a title has no subtitles at all, the source did not provide any.
 
     @@ language
 
 help-art-supported-browsers-title = Supported browsers
-help-art-supported-browsers-summary = Which browsers and versions work best.
+help-art-supported-browsers-summary = Which browsers and systems work best.
 help-art-supported-browsers-keywords = browser chrome firefox safari edge brave opera internet explorer version update compatible
 help-art-supported-browsers-body =
-    { $brand } works best in current versions of these browsers:
+    { $brand } works in current versions of these browsers:
 
-    - Google Chrome and other Chromium browsers such as Edge and Brave
-    - Mozilla Firefox
-    - Apple Safari on macOS, iPhone and iPad
+    - <b>Google Chrome</b>, <b>Microsoft Edge</b>, <b>Brave</b> and other Chromium browsers on Windows, macOS, Linux and Android
+    - <b>Mozilla Firefox</b> on Windows, macOS, Linux and Android
+    - <b>Safari</b> on Mac, iPhone and iPad
 
-    Internet Explorer is not supported. Keep your browser updated and allow the site to use JavaScript and local storage.
+    Internet Explorer is not supported. Keep your browser up to date and allow the site to use JavaScript and site data.
 
     @@ diagnostics
 
     >> Browser shows an error before the page loads
-    Reload with <b>Ctrl + Shift + R</b> (<b>Cmd + Shift + R</b> on a Mac) to fetch the newest version of the app, then try again.
+    Reload with <b>Ctrl + Shift + R</b> on Windows and Linux, or <b>Cmd + Shift + R</b> on a Mac, to fetch the newest version of the app, then try again.
 
 help-art-fix-phone-title = Fix a problem on your phone or tablet
 help-art-fix-phone-summary = Steps for iPhone, iPad and Android.
@@ -468,53 +495,115 @@ help-art-rows-wont-load-title = Rows or pictures do not load
 help-art-rows-wont-load-summary = The page shows empty rows, a spinner or missing images.
 help-art-rows-wont-load-keywords = rows empty loading blank page pictures images posters not loading home error recommendations down
 help-art-rows-wont-load-body =
-    The home page rows come from a recommendation service. Posters and details come from a catalog service. If either is unreachable, you may see empty rows or a loading spinner.
+    The rows and search come from our recommendation service. Posters and details come from a public film catalog. If either is out of reach, you may see empty rows, a spinner or missing pictures.
 
     1. Reload the page.
     2. Check your connection.
     3. Turn off blockers for this site. See <a=/help/article/extensions-blockers>Extensions that block the player</a>.
     4. Try again in a few minutes.
 
-    The search page and your saved items still work if the recommendation service is down. If the problem lasts more than an hour, <a=/help/article/report-bug>tell us</a>.
+    Your profiles, My List and settings are safe in your account while this happens. If the problem lasts more than an hour, <a=/help/article/report-bug>tell us</a>.
 
     @@ diagnostics
 
     @@ refresh
 
 help-art-list-missing-title = My List or progress disappeared
-help-art-list-missing-summary = Why a list or Continue Watching row can be empty and what to do.
+help-art-list-missing-summary = Why My List or Continue Watching can look empty, and how to get it back.
 help-art-list-missing-keywords = my list missing gone disappeared empty lost continue watching progress reset
 help-art-list-missing-body =
-    { $brand } stores profiles and progress in this browser. They are missing when:
+    My List and your viewing progress belong to a profile and are saved in your account. If they look empty:
 
-    - you opened { $brand } in a different browser or on another device
-    - you used a private or incognito window
-    - you cleared site data or cookies
-    - you are using a different profile
+    - Check that you are on the right profile. Each profile has its own list. Switch from the profile menu.
+    - Check that you signed in with the same account as before.
+    - Give a new device a few seconds to load your account after you sign in, or reload the page.
+    - Titles you hid from your viewing activity also leave Continue Watching.
 
-    Your list lasts for the time the page stays open for now, because accounts that save it are not available yet. Reloading the page empties it.
-
-    Switch to the profile you used before from the profile menu. See <a=/help/article/saved-data>Where your profiles, list and progress are saved</a>.
+    If something is still missing on one device, sign out and sign in again there. See <a=/help/article/saved-data>Where your profiles, list and progress are saved</a>.
 
     @@ profiles
-
-    @@ data
 
 help-art-forgot-pin-title = I forgot my profile PIN
-help-art-forgot-pin-summary = PINs cannot be reset by us, here is how to get back in.
+help-art-forgot-pin-summary = Remove the PIN with your account password and set a new one.
 help-art-forgot-pin-keywords = forgot pin reset lost passcode locked out profile lock
 help-art-forgot-pin-body =
-    A PIN is stored only on your device, so we cannot look it up or reset it.
+    1. Open the profile menu, choose <b>Account</b>, then <b>Manage profiles</b>, and select the locked profile.
+    2. Choose <b>Profile lock</b> and enter your account password.
+    3. Choose <b>Forgot your PIN?</b>, then <b>Remove profile lock</b>.
 
-    1. Try the PIN again, one digit per box.
-    2. If you cannot remember it, the way back in is to clear this site's data in your browser. This removes all profiles, PINs and viewing progress. See <a=/help/article/clear-data>How to clear your saved data</a>.
-    3. Create your profiles again.
+    The profile opens without a PIN again, and you can set a new one. See <a=/help/article/profile-pin>How to add, edit, or remove a profile PIN</a>.
 
-    !! Note: Pick a PIN you can remember and do not use it for anything else.
+    !! Note: Only someone who knows the account password can remove a PIN. If you forgot the password too, see <a=/help/article/forgot-password>I forgot my password</a>.
 
     @@ profiles
 
-    @@ data
+help-art-forgot-password-title = I forgot my password
+help-art-forgot-password-summary = Get a link by email to choose a new password.
+help-art-forgot-password-keywords = forgot password reset password lost password can't sign in new password link
+help-art-forgot-password-body =
+    1. On the sign in page, choose <b>Forgot your password?</b>
+    2. Enter the email address of your account and choose <b>Send the link</b>.
+    3. Open the email from { $brand } and follow the link to choose a new password.
+
+    The link works once and for a limited time. If no email arrives within a few minutes, look in your spam folder, then try again.
+
+    !! Note: We never ask for your password by email, chat or phone. See <a=/help/article/fake-sites>How to spot fake { $brand } sites and messages</a>.
+
+help-art-change-email-password-title = Change your email, password or phone number
+help-art-change-email-password-summary = Update the details you use to sign in and to get back into your account.
+help-art-change-email-password-keywords = change email change password update password phone number mobile account details name security
+help-art-change-email-password-body =
+    Open the profile menu and choose <b>Account</b>. Your details are under <b>Account Details</b>. Before a change we may ask you to confirm it's you, with your password or a code we email you.
+
+    ## Password
+    1. Choose <b>Password</b>.
+    2. Enter your current password, then the new one twice. It needs at least 8 characters.
+    3. Turn on <b>Sign out of all devices</b> if someone else might know the old password, then choose <b>Save</b>.
+
+    ## Email
+    1. Choose <b>Email</b> and enter the new address.
+    2. Open the link we send to the new address to finish the change.
+
+    ## Mobile phone and name
+    Choose <b>Mobile phone</b> to add a number that helps you get back into your account, or <b>Name</b> to change your name. The main profile follows your first name.
+
+help-art-devices-sign-out-title = Sign out of a device or of all devices
+help-art-devices-sign-out-summary = See where your account is signed in and sign out of devices you no longer use.
+help-art-devices-sign-out-keywords = sign out all devices devices signed in sessions security new device lost phone public computer
+help-art-devices-sign-out-body =
+    1. Open the profile menu and choose <b>Account</b>.
+    2. Choose <b>Access and devices</b>.
+    3. Choose <b>Sign out of this device</b>, or <b>Sign out of all devices</b> to sign out every browser where your account is open, this one included.
+
+    <b>Recent security activity</b> on the same page lists recent sign ins and changes to your account. We also email you when a new device signs in.
+
+    !! Note: If you see a sign in you don't recognise, sign out of all devices and change your password. See <a=/help/article/change-email-password>Change your email, password or phone number</a>.
+
+help-art-download-data-title = Download a copy of your data
+help-art-download-data-summary = Get a file with the personal information your account holds.
+help-art-download-data-keywords = download my data personal information copy export gdpr data request access
+help-art-download-data-body =
+    1. Open the profile menu and choose <b>Account</b>.
+    2. Choose <b>Personal information access</b>.
+    3. Follow the steps to save the file.
+
+    The file lists your account details, profiles, settings, My List, ratings and viewing activity. It is saved on your device, so keep it somewhere safe.
+
+    To download the viewing activity of one profile as a spreadsheet, open <b>Viewing activity</b> for that profile and choose <b>Download all</b>.
+
+help-art-delete-account-title = Delete your account
+help-art-delete-account-summary = Remove your account and everything in it for good.
+help-art-delete-account-keywords = delete account close account remove account erase data cancel account
+help-art-delete-account-body =
+    Deleting your account removes it straight away, with every profile, list, rating, setting and all viewing activity. It cannot be undone.
+
+    1. Open the profile menu and choose <b>Account</b>.
+    2. Choose <b>Delete account</b> at the bottom of the page.
+    3. Confirm it's you, then choose <b>Permanently delete</b>.
+
+    If you only want to remove one person, delete their profile instead. See <a=/help/article/profiles-manage>How to create, edit, or delete profiles</a>.
+
+    !! Note: To keep a copy of your data, download it first. See <a=/help/article/download-data>Download a copy of your data</a>.
 
 help-art-page-not-found-title = I see a "404" page
 help-art-page-not-found-summary = The link is wrong or the page moved.
@@ -529,20 +618,22 @@ help-art-page-not-found-body =
     @@ refresh
 
 help-art-language-title = How to change the language
-help-art-language-summary = Change the language of the interface and your preferred subtitle language.
+help-art-language-summary = Change the language of { $brand } and the languages you watch in.
 help-art-language-keywords = language change translate interface display subtitle audio english spanish french arabic
 help-art-language-body =
-    ## Interface language
-    1. Scroll to the bottom of any Help Centre page and choose a language in <b>Select your preferred language</b>.
-    2. The page reloads in that language. Your choice is remembered on this device.
+    ## Display language
+    1. Open the profile menu, choose <b>Account</b>, then <b>Manage profiles</b>, and select your profile.
+    2. Choose <b>Languages</b>, then <b>Display language</b>, and pick a language.
 
-    You can also change it in <b>Settings</b>, under <b>Languages</b>, then <b>Display Language</b>.
+    The choice belongs to the profile, so it follows you to every device. In the Help Centre you can also pick a language at the bottom of any page.
 
-    ## Subtitle language
-    1. Open <b>Settings</b> and choose <b>Languages</b>.
-    2. Under <b>Preferred Subtitle Language</b> pick a language and choose <b>Save Preferences</b>.
+    ## Audio and subtitle languages
+    1. Open <b>Languages</b> for your profile, as above, then <b>Audio and subtitles</b>.
+    2. Choose an <b>Audio language</b> and a <b>Subtitle language</b>. <b>Same as display language</b> follows the language of the app.
 
-    !! Note: Only languages that are fully translated appear in the list. Text that is not translated yet shows in English.
+    The player uses these whenever a title offers them.
+
+    !! Note: Only languages that are fully translated appear in the list.
 
     @@ language
 
@@ -555,22 +646,14 @@ help-art-subtitles-body =
     2. Select <b>Audio & Subtitles</b>.
     3. Choose a subtitle language, or <b>Off</b>.
 
+    If the words come too early or too late, use <b>-0.5s</b> and <b>+0.5s</b> in the same panel to move them.
+
     ## Change how subtitles look
-    1. Open <b>Settings</b> and choose <b>Subtitle Appearance</b>.
-    2. Pick a size and a colour. The preview above the buttons shows the result.
-    3. Choose <b>Done</b>.
+    1. Open the profile menu, choose <b>Account</b>, then <b>Manage profiles</b>, and select your profile.
+    2. Choose <b>Subtitle Appearance</b>.
+    3. Pick the text size, text colour, edge, background and window colour. The preview shows the result. <b>Reset to default</b> undoes your changes.
 
     !! Note: Which languages and audio tracks exist depends on the source of the title. See <a=/help/article/subtitles-missing>Subtitles are missing or out of sync</a>.
-
-help-art-playback-speed-title = How to change the playback speed
-help-art-playback-speed-summary = Watch faster or slower from the player controls.
-help-art-playback-speed-keywords = speed faster slower 2x 1.5x playback rate
-help-art-playback-speed-body =
-    1. Start a title and show the player controls.
-    2. Select the speed button in the bottom right.
-    3. Choose a speed from the menu.
-
-    The speed applies to the title you are watching and goes back to normal for the next one.
 
 help-art-shortcuts-title = Keyboard shortcuts
 help-art-shortcuts-summary = Control the player without the mouse.
@@ -593,50 +676,49 @@ help-art-skip-intro-next-body =
     - <b>Next Episode</b> in the player controls starts the next episode.
     - <b>Episodes</b> opens a list of the season, so you can pick any episode.
 
-    To control what happens when an episode ends, open <b>Settings</b>, then <b>Playback Settings</b>, and turn <b>Autoplay next episode</b> on or off.
+    To choose what happens when an episode ends, open your profile's <b>Playback Settings</b> and turn <b>Autoplay next episode</b> on or off.
 
 help-art-my-list-title = How to use My List
 help-art-my-list-summary = Save titles for later and find them again.
 help-art-my-list-keywords = my list add remove watchlist save later favorites plus
 help-art-my-list-body =
     ## Add a title
-    Select the <b>+</b> button on a title card, in its details window, or in the hero at the top of the page.
+    Select the <b>+</b> button on a title card, in its details window, or in the big title at the top of the page.
 
     ## Remove a title
-    Select the check mark on the title, which turns it back into <b>+</b>.
+    Select the check mark on the title. It turns back into <b>+</b>.
 
     ## See your list
-    Open <b>My List</b> in the top bar. On a phone it is in the bottom bar.
+    Open <b>My Streams</b> in the top bar, or in the bar at the bottom on a phone. Your list is there, next to <b>Continue Watching</b>, the titles you liked and the trailers you watched.
 
-    !! Note: For now your list lasts while the page stays open and is cleared when you reload. Saving it to your profile is part of the accounts work. See <a=/help/article/list-missing>My List or progress disappeared</a>.
+    My List belongs to the profile and is saved in your account, so it is the same on every device.
 
 help-art-continue-watching-title = How to use Continue Watching
 help-art-continue-watching-summary = Pick up where you stopped and remove titles from the row.
 help-art-continue-watching-keywords = continue watching resume progress remove row stopped half watched
 help-art-continue-watching-body =
-    Titles you started appear in the <b>Continue Watching</b> row on the home page, with a progress bar that shows how far you got.
+    Titles you started appear in the <b>Continue Watching</b> row, with a bar that shows how far you got. It is also on <b>My Streams</b>.
 
     ## Resume
-    Select the title. Playback starts where you stopped.
+    Select the title. Playback starts where you stopped, on any device where you sign in.
 
     ## Remove a title from the row
     1. Open the options menu on the title card.
     2. Choose <b>Remove from Continue Watching</b>.
 
-    The row is built from progress saved in this browser, so another device has its own row. See <a=/help/article/saved-data>Where your profiles, list and progress are saved</a>.
-
-    @@ data
+    To remove a title from your viewing activity as well, see <a=/help/article/viewing-history>How to manage your viewing history</a>.
 
 help-art-viewing-history-title = How to manage your viewing history
 help-art-viewing-history-summary = What is recorded when you watch and how to remove it.
 help-art-viewing-history-keywords = viewing history watched activity delete clear remove ratings recommendations
 help-art-viewing-history-body =
-    { $brand } records the titles you start and how far you watched, in this browser, so that Continue Watching works and recommendations can follow your taste.
+    Each profile has a <b>Viewing activity</b> page with the titles it watched, newest first. { $brand } uses it for Continue Watching and for recommendations.
 
-    - To hide one title from the Continue Watching row, see <a=/help/article/continue-watching>How to use Continue Watching</a>.
-    - To remove everything, see <a=/help/article/clear-data>How to clear your saved data</a>.
+    1. Open the profile menu, choose <b>Account</b>, then <b>Manage profiles</b>, and select the profile.
+    2. Choose <b>Viewing activity</b>.
+    3. Choose <b>Hide this title</b> next to a title, or <b>Hide all</b>.
 
-    !! Note: The <b>Viewing Activity</b> page in <b>Settings</b> does not list titles yet.
+    A hidden title leaves Continue Watching and no longer shapes recommendations, on every device. <b>Download all</b> saves the list as a spreadsheet.
 
     @@ data
 
@@ -646,9 +728,9 @@ help-art-notifications-keywords = notifications bell alerts new arrival updates 
 help-art-notifications-body =
     The bell in the top bar lists titles worth a look, such as new arrivals and popular picks. Select an item to open the title's details.
 
-    Items you opened are marked as read. This is remembered in your browser. The count on the bell shows how many items are still unread.
+    Items you opened are marked as read, and the count on the bell shows how many are still unread.
 
-    Notifications appear inside { $brand } only. We do not send email or push messages about titles.
+    <b>Notification settings</b> in your profile has choices for email and push messages. They are saved with the profile, but { $brand } does not send email or push messages about titles yet. Emails about your account, such as sign in links, always arrive.
 
 help-art-search-browse-title = How to search and browse
 help-art-search-browse-summary = Find a title by name, genre or mood.
@@ -656,12 +738,11 @@ help-art-search-browse-keywords = search browse find genre films series category
 help-art-search-browse-body =
     ## Search
     1. Select the magnifying glass in the top bar.
-    2. Type a title, an actor or a director.
-    3. Press <b>Enter</b> to see all matches.
+    2. Type a title, an actor or a director. Results appear as you type, and small typing mistakes are forgiven.
 
     ## Browse
     - <b>Series</b> and <b>Films</b> in the top bar open a page for each kind of title. Use <b>Genres</b> there to narrow it down.
-    - Rows on the home page are grouped by theme, such as a decade and genre, or titles like one you watched.
+    - Rows on the home page are grouped by theme. See <a=/help/article/recommendations>How recommendations work</a>.
     - <b>Browse by language</b> finds titles by original language, dubbing or subtitles. See <a=/help/article/browse-language>Browse by language</a>.
 
 help-art-browse-language-title = Browse by language
@@ -683,17 +764,21 @@ help-art-new-popular-body =
     The lists refresh from the catalog, so they change from day to day.
 
 help-art-recommendations-title = How recommendations work
-help-art-recommendations-summary = How rows are chosen and what you can do to change them.
+help-art-recommendations-summary = How the rows are made and what changes them.
 help-art-recommendations-keywords = recommendations rows suggestions because you watched taste algorithm for you personalised personalized
 help-art-recommendations-body =
-    Rows on the home page are built from the descriptions, genres and credits of titles. Titles that are close in meaning are grouped into one row, for example a decade and genre, or <b>Like</b> followed by a title you watched.
+    Rows are made from what titles are: their genres, moods, subjects, country and decade, for example <b>Feel-good Romantic Comedies</b> or <b>Korean Crime Series</b>. Within a row, the order follows your taste.
 
     ## What changes your rows
-    - Starting a title. The recommendation service learns which genres you reach for and adapts the rows for about a day.
-    - The profile you use. A Kids profile only shows titles for younger viewers.
+    - What you start and finish, what you rate, and what you add to My List.
+    - Rows such as <b>Because You Watched</b>, <b>Today's Top Picks for You</b> and <b>Your Next Watch</b> come from your recent titles. On a genre page they stay inside that genre.
+    - The profile you use. Each profile has its own taste, and a Kids profile only shows titles for children.
+    - The day and the season. Rows for holidays and events appear in their season.
 
-    ## What does not
-    Rows are not shaped by what you pay, where you live or who you are. We do not use your name or email, since the service only sees a random session number. See <a=/help/article/privacy-data>What data does { $brand } collect?</a>
+    ## Turn it off
+    Turn off <b>Personalised recommendations</b> in your profile's <b>Privacy and data settings</b>. You then see the same picks as everyone else.
+
+    We never use your name or email to choose titles. See <a=/help/article/privacy-data>What data does { $brand } collect?</a>
 
     @@ data
 
@@ -703,9 +788,9 @@ help-art-trailers-clips-keywords = trailers clips preview short videos teaser mu
 help-art-trailers-clips-body =
     - Hover over a title card on a computer, or open its details, to see a trailer preview.
     - <b>Clips</b> shows short vertical previews you can scroll through.
-    - Use the speaker button to turn preview sound on or off. Your choice is remembered for the profile.
+    - Use the speaker button to turn preview sound on or off.
 
-    To stop previews from starting by themselves, open <b>Settings</b>, then <b>Playback Settings</b>, and turn off <b>Autoplay previews</b>.
+    Trailers are played from YouTube. To stop previews from starting by themselves, turn off <b>Autoplay previews</b> in your profile's <b>Playback Settings</b>.
 
 help-art-what-is-title = What is { $brand }?
 help-art-what-is-summary = A short description of { $brand } and what it does and does not do.
@@ -718,14 +803,15 @@ help-art-what-is-body =
     There is nothing to buy and no subscription. See <a=/help/article/free-to-use>Is { $brand } free?</a>
 
 help-art-getting-started-title = Getting started with { $brand }
-help-art-getting-started-summary = Your first five minutes: profiles, finding a title and saving it.
+help-art-getting-started-summary = Your first five minutes: account, profiles, finding a title and saving it.
 help-art-getting-started-keywords = getting started begin first time tour new user how to use guide basics
 help-art-getting-started-body =
-    1. <b>Pick or create a profile.</b> See <a=/help/article/profiles-manage>How to create, edit, or delete profiles</a>.
-    2. <b>Look around the home page.</b> Rows are grouped by theme, and the big title at the top changes.
-    3. <b>Search</b> for a title with the magnifying glass. See <a=/help/article/search-browse>How to search and browse</a>.
-    4. <b>Select a title</b> to read about it, watch the trailer, and press play.
-    5. <b>Add titles to My List</b> with the <b>+</b> button.
+    1. <b>Create your free account.</b> See <a=/help/article/need-account>Do I need an account?</a>
+    2. <b>Pick or create a profile.</b> See <a=/help/article/profiles-manage>How to create, edit, or delete profiles</a>.
+    3. <b>Look around the home page.</b> Rows are grouped by theme, and the big title at the top changes.
+    4. <b>Search</b> for a title, an actor or a director with the magnifying glass. See <a=/help/article/search-browse>How to search and browse</a>.
+    5. <b>Select a title</b> to read about it, watch the trailer, and press play.
+    6. <b>Add titles to My List</b> with the <b>+</b> button.
 
     Learn the keys that help while you watch: <a=/help/article/shortcuts>Keyboard shortcuts</a>.
 
@@ -755,13 +841,16 @@ help-art-contribute-body =
     Write to <a=mailto:{ $contribute_email }>{ $contribute_email }</a> with a few lines about what you want to do.
 
 help-art-install-app-title = How to install { $brand } as an app
-help-art-install-app-summary = Add { $brand } to your home screen or desktop so it opens in its own window.
+help-art-install-app-summary = Add { $brand } to your home screen, dock or desktop so it opens in its own window.
 help-art-install-app-keywords = install app pwa add to home screen desktop shortcut icon web app
 help-art-install-app-body =
-    { $brand } is a web app. There is no store download. Your browser can install it so it opens in its own window and has its own icon.
+    { $brand } is a web app. There is no store download. Your browser can install it so it opens in its own window with its own icon.
 
-    ## Chrome and Edge on a computer
-    Select the install icon at the right of the address bar, or open the browser menu and choose <b>Install { $brand }</b>.
+    ## Chrome and Edge on Windows, Mac and Linux
+    Select the install icon at the right of the address bar, or open the browser menu and choose <b>Install { $brand }</b> (in Edge: <b>Apps</b>, then <b>Install this site as an app</b>).
+
+    ## Safari on a Mac
+    Open the <b>File</b> menu and choose <b>Add to Dock</b>.
 
     ## Android
     Open the browser menu and choose <b>Install app</b> or <b>Add to Home screen</b>.
@@ -769,13 +858,13 @@ help-art-install-app-body =
     ## iPhone and iPad
     In Safari, select the <b>Share</b> button, then <b>Add to Home Screen</b>.
 
-    !! Note: An installed app is the same website. It updates itself and uses the same saved profiles as the browser it was installed from.
+    !! Note: Firefox on a computer cannot install sites as apps. Use a bookmark, or install from Chrome, Edge or Safari. An installed app is the same website: it updates itself and keeps you signed in like the browser.
 
 help-art-phone-tablet-title = How to use { $brand } on your phone or tablet
 help-art-phone-tablet-summary = The mobile layout, the bottom bar and tips for small screens.
 help-art-phone-tablet-keywords = phone tablet mobile android iphone ipad touch bottom bar app layout
 help-art-phone-tablet-body =
-    Open the site in your phone's browser. The page switches to a layout built for touch, with a bar at the bottom for <b>Home</b>, <b>Clips</b>, <b>Search</b> and <b>My List</b>.
+    Open the site in your phone's browser. The page switches to a layout built for touch, with a bar at the bottom for <b>Home</b>, <b>Clips</b>, <b>Search</b> and <b>My Streams</b>.
 
     - Tap a card for its details, then the play button to start.
     - Rotate the phone to landscape for the best picture.
@@ -929,7 +1018,7 @@ help-act-v-blocked = Blocked or full
 help-act-v-reachable = Reachable in { $ms } ms
 help-act-v-unreachable = Not reachable
 help-act-v-timeout = No answer in { $s } seconds
-help-act-data-title = Your data on this device
+help-act-data-title = Your profiles and viewing activity
 help-act-data-profiles =
     { $count ->
         [one] 1 profile
@@ -941,9 +1030,9 @@ help-act-data-progress =
        *[other] { $count } titles with saved progress
     }
 help-act-data-lang = Language: { $lang }
-help-act-clear-progress = Clear viewing progress
+help-act-clear-progress = Hide all viewing activity
 help-act-reset-recs = Reset recommendations
-help-act-clear-all = Clear all saved data
+help-act-clear-all = Clear this browser's data and sign out
 help-act-confirm = Are you sure? This cannot be undone.
 help-act-yes = Yes, do it
 help-act-cancel = Cancel
@@ -1204,43 +1293,45 @@ nf-zone-4 = Analog Corruption
 nf-zone-5 = Void Sentinels
 nf-zone-6 = Cosmic Drift
 legal-privacy-title = Privacy Policy
-legal-privacy-updated = Last updated: August 2026
+legal-privacy-updated = Last updated: October 2026
 legal-privacy-1-title = 1. Introduction
 legal-privacy-1-body = { $brand } is a link aggregator and search engine. This Privacy Policy explains how we collect, use, and protect your personal information when you use our service.
 legal-privacy-2-title = 2. Information We Collect
 legal-privacy-2-body = We collect limited personal information to provide and improve the service:
-legal-privacy-2-b1 = <strong>Account Information:</strong> Email address and display name when you create an account.
-legal-privacy-2-b2 = <strong>Usage Data:</strong> Anonymised viewing history and preferences, scoped to your profile.
-legal-privacy-2-b3 = <strong>Session Cookies:</strong> Used to keep you signed in securely.
+legal-privacy-2-b1 = <strong>Account information:</strong> your first and last name, email address and password (kept only in scrambled form by our sign in provider), and a mobile number if you add one.
+legal-privacy-2-b2 = <strong>Profiles and activity:</strong> your profiles and their settings, My List, ratings, viewing progress and viewing activity. They are linked to your account so they follow you to every device.
+legal-privacy-2-b3 = <strong>Security records:</strong> recent sign ins and changes to your account, with the browser, system and country they came from, so we can show you your devices and warn you about a new sign in.
+legal-privacy-2-b4 = <strong>Storage on your device:</strong> what keeps you signed in, a copy of your profiles and settings so pages open fast, and your cookie choices. See the Cookie Policy.
 legal-privacy-3-title = 3. What We Do Not Do
 legal-privacy-3-body = We are committed to your privacy:
 legal-privacy-3-b1 = <strong>Share Your Data:</strong> We do not share personal data with advertisers or data brokers.
 legal-privacy-3-b2 = <strong>Sell Your Data:</strong> We do not sell, rent, or trade any personal data to third parties, ever.
-legal-privacy-3-b3 = <strong>Fingerprint Your Browser:</strong> We do not perform browser fingerprinting or any form of device identification.
+legal-privacy-3-b3 = <strong>Track You:</strong> We do not use advertising or analytics cookies, we do not fingerprint browsers, and we do not follow you across other websites.
 legal-privacy-4-title = 4. Lawful Basis for Processing (UK GDPR)
 legal-privacy-4-body = Under the UK General Data Protection Regulation (UK GDPR), the lawful bases we rely on for processing this information are:
-legal-privacy-4-b1 = <strong>Contractual Necessity:</strong> To provide you with the link aggregation and profile features you signed up for.
-legal-privacy-4-b2 = <strong>Legitimate Interests:</strong> To analyse general platform usage and improve performance, using strictly anonymised, aggregated data.
+legal-privacy-4-b1 = <strong>Contract:</strong> to provide your account, your profiles and the features you use.
+legal-privacy-4-b2 = <strong>Legitimate interests:</strong> to keep accounts secure (sign in records) and to keep the service running and improving.
+legal-privacy-4-b3 = <strong>Consent:</strong> to use what you watch for personalised recommendations. You can withdraw it at any time in Privacy and data settings.
 legal-privacy-5-title = 5. How We Store Your Data
-legal-privacy-5-body = Your data is securely stored using Supabase (our backend infrastructure provider). We use Row-Level Security (RLS) policies to ensure that only you can access your data.
+legal-privacy-5-body = Your account data is stored with Supabase, our database provider, with row level security so that only your account can read it. Each browser where you sign in keeps a copy for speed. When you delete your account, its data is deleted straight away.
 legal-privacy-6-title = 6. Third-Party Services
-legal-privacy-6-body = We use third-party APIs including TMDB (for metadata) and Cloudflare Turnstile (for bot protection). These services operate under their own privacy policies.
+legal-privacy-6-body = We use these providers, each under its own privacy policy: Supabase (accounts and data storage), Cloudflare (hosting the site and forwarding email), Hugging Face (hosting the recommendation service), Resend (sending account emails), TMDB (film and series information and pictures) and YouTube (trailers). Video streams come from independent third party sources, which see your IP address like any website you visit.
 legal-privacy-7-title = 7. Your Data Protection Rights
 legal-privacy-7-body = Under UK GDPR, you have the following rights:
-legal-privacy-7-b1 = <strong>Right of Access:</strong> Request a copy of the personal data we hold about you.
-legal-privacy-7-b2 = <strong>Right to Erasure:</strong> Request deletion of your personal data (the "Right to be Forgotten"). You can delete your account directly from the Settings page.
-legal-privacy-7-b3 = <strong>Right to Rectification:</strong> Request correction of any inaccurate personal data we hold.
-legal-privacy-7-b4 = <strong>Right to Object:</strong> Object to processing of your personal data where we rely on legitimate interests.
+legal-privacy-7-b1 = <strong>Right of access:</strong> download a copy of your data at any time in Account, under Personal information access.
+legal-privacy-7-b2 = <strong>Right to erasure:</strong> delete your account at any time in Account, under Delete account. Everything in it is deleted straight away.
+legal-privacy-7-b3 = <strong>Right to rectification:</strong> change your name, email address and phone number in Account, or ask us to correct anything else.
+legal-privacy-7-b4 = <strong>Right to object:</strong> turn off personalised recommendations, or write to us to object to processing based on legitimate interests.
 legal-privacy-8-title = 8. Contact
-legal-privacy-8-body = If you have questions about this Privacy Policy or wish to exercise your data rights, please contact the repository maintainer at { $support_email }.
+legal-privacy-8-body = If you have questions about this Privacy Policy or want to use your rights, write to us at { $support_email }.
 legal-terms-title = Terms of Service
-legal-terms-updated = Last updated: August 2026
+legal-terms-updated = Last updated: October 2026
 legal-terms-1-title = 1. Acceptance of Terms
 legal-terms-1-body = By accessing or using { $brand }, you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree, do not use the service.
 legal-terms-2-title = 2. Nature of the Service
 legal-terms-2-body = { $brand } is a link aggregator and search engine. We do not host, upload, transmit, or control any video content on our servers. All media is sourced from third-party platforms.
 legal-terms-3-title = 3. User Accounts
-legal-terms-3-body = To access certain features (such as saving a watchlist or syncing progress), you must create an account. You are responsible for maintaining the security of your account credentials.
+legal-terms-3-body = You need a free account to use { $brand }. You are responsible for keeping your password safe and for what happens on your account. Tell us at once if you think someone else is using it.
 legal-terms-4-title = 4. Acceptable Use
 legal-terms-4-body = You agree not to use the service to:
 legal-terms-4-b1 = Circumvent, disable, or interfere with security-related features of the service.
@@ -1260,9 +1351,13 @@ legal-terms-9-body = These Terms of Service shall be governed by and construed i
 legal-terms-10-title = 10. Contact
 legal-terms-10-body = For any questions regarding these Terms of Service, please contact us via the Contact page.
 legal-cookie-policy-title = Cookie Policy
-legal-cookie-policy-updated = Last Updated: August 16, 2026
-legal-cookie-policy-1-title = How we use cookies
-legal-cookie-policy-1-body = We use cookies and similar tracking technologies to track the activity on our service and hold certain information. Cookies are files with small amount of data which may include an anonymous unique identifier.
+legal-cookie-policy-updated = Last updated: October 2026
+legal-cookie-policy-1-title = How we use cookies and storage
+legal-cookie-policy-1-body = { $brand } does not use advertising or analytics cookies. We use your browser's local storage, a place on your device that only this site can read, for:
+legal-cookie-policy-1-b1 = <strong>Signing in:</strong> what keeps you signed in on this browser.
+legal-cookie-policy-1-b2 = <strong>Speed:</strong> a copy of your profiles, settings and viewing progress, so pages open at once.
+legal-cookie-policy-1-b3 = <strong>Your choices:</strong> your cookie and personalisation choices and your display language.
+legal-cookie-policy-1-b4 = <strong>Other sites:</strong> trailers are played from YouTube, which may set its own cookies when a trailer plays. You can change your choices at any time in Privacy and data settings. Deleting this site's data in your browser signs you out on that browser; your account keeps everything.
 legal-dmca-title = DMCA Safe Harbor Notice
 legal-dmca-updated = Last updated: August 2026
 legal-dmca-1-title = 1. Our Role — Link Aggregator, Not a Host
@@ -1312,6 +1407,7 @@ help-ui-section-link = Link to this section
 help-ui-policy-questions = Questions about this policy?
 help-topic-legal = Legal and Policies
 help-group-policies = Policies
+help-group-signing-in = Signing In and Security
 help-art-fake-sites-title = How to spot fake { $brand } sites and messages
 help-art-fake-sites-summary = The official addresses, what we never ask for, and what to do about a copy.
 help-art-fake-sites-keywords = fake scam phishing copycat imitation official address safe download password payment email
@@ -1363,14 +1459,19 @@ help-art-cookies-explained-title = Cookies and local storage explained
 help-art-cookies-explained-summary = What your browser keeps for { $brand }, in plain words.
 help-art-cookies-explained-keywords = cookies local storage browser data tracking consent banner preferences session third party
 help-art-cookies-explained-body =
-    <b>Cookies</b> are small notes a website asks your browser to keep. <b>Local storage</b> is a similar place that only the site can read and that is not sent with every request.
+    <b>Cookies</b> are small notes a website asks your browser to keep. <b>Local storage</b> is a similar place that only the site itself can read and that is not sent with every request.
 
-    { $brand } uses local storage for your profiles, PINs, viewing progress and language. Those stay on your device. Other websites that serve us pictures or video may set their own cookies, which we cannot control. See <a=/help/article/sources>Where titles come from</a>.
+    { $brand } uses local storage, not advertising or tracking cookies. It keeps:
+    - what keeps you signed in,
+    - a copy of your profiles, settings and progress, so pages open fast,
+    - your cookie and personalisation choices.
+
+    Trailers are played from YouTube, which can set its own cookies, and pictures come from a public film catalog. We do not control those. See <a=/help/article/sources>Where titles come from</a>.
 
     ## Your choices
-    - The first time you visit, a banner asks whether recommendations may use what you watch. You can change your mind at any time.
-    - Choosing <b>Reject</b> keeps everything that is needed to use the site and turns off personalisation.
-    - Your browser can block or delete cookies and site data as well. If it does, your profiles and progress are lost.
+    - On your first visit a banner asks whether recommendations may use what you watch. Change your mind at any time under <b>Privacy and data settings</b>, or with the tool below.
+    - <b>Reject</b> keeps only what the site needs to work and turns off personalisation.
+    - If your browser clears site data, you are signed out on that browser. Your account keeps everything.
 
     @@ cookies
 
@@ -1378,13 +1479,13 @@ help-art-stuck-loading-title = The page stays on the logo or a blank screen
 help-art-stuck-loading-summary = What to try when { $brand } never finishes starting.
 help-art-stuck-loading-keywords = stuck loading logo blank white screen splash not starting webassembly wasm frozen startup
 help-art-stuck-loading-body =
-    While { $brand } starts you see the cube logo with a row of moving dots. It should take a few seconds. { $brand } runs as a WebAssembly app, so a browser or setting that switches WebAssembly off will leave you on that screen.
+    While { $brand } starts you see the cube logo with a row of moving dots. It should take a few seconds. { $brand } runs as a WebAssembly app, so a browser or setting that switches WebAssembly off leaves you on that screen.
 
     1. Reload with <b>Ctrl + Shift + R</b> (<b>Cmd + Shift + R</b> on a Mac) to fetch the newest version.
     2. Open the page in a private window. If it works there, an extension is in the way. See <a=/help/article/extensions-blockers>Extensions that block the player</a>.
     3. Update your browser. See <a=/help/article/supported-browsers>Supported browsers</a>.
-    4. Turn off any mode that limits web features, such as a lockdown or strict security mode, for this site.
-    5. Clear this site's data. See <a=/help/article/clear-data>How to clear your saved data</a>.
+    4. Turn off any mode that limits web features for this site, such as Lockdown Mode on Apple devices or strict security settings in Edge.
+    5. Clear this site's data, then sign in again. See <a=/help/article/clear-data>How to clear your saved data</a>.
 
     @@ refresh
 
@@ -1392,9 +1493,9 @@ help-art-slow-pages-title = Pages load slowly
 help-art-slow-pages-summary = Make browsing faster on a slow connection or an older device.
 help-art-slow-pages-keywords = slow lag performance speed loading memory old phone laggy scrolling previews
 help-art-slow-pages-body =
-    The first visit downloads the app, about 3 MB. After that, most of the wait is pictures and previews.
+    The first visit downloads the app, about 2 MB. After that, most of the wait is pictures and previews.
 
-    - Turn off <b>Autoplay previews</b> in <b>Settings</b>, under <b>Playback Settings</b>. Trailers that start by themselves use data and memory.
+    - Turn off <b>Autoplay previews</b> in your profile's <b>Playback Settings</b>. Previews that start by themselves use data and memory.
     - Close tabs and other apps that use the network or a lot of memory.
     - Use a current browser. Older ones run the app more slowly.
     - On mobile data, switch to Wi-Fi if you can.
@@ -1443,9 +1544,9 @@ help-art-autoplay-blocked-title = Video starts muted or does not start by itself
 help-art-autoplay-blocked-summary = Why browsers stop sound from starting alone, and how { $brand } handles it.
 help-art-autoplay-blocked-keywords = autoplay blocked muted start policy browser sound auto play previews trailer
 help-art-autoplay-blocked-body =
-    Browsers do not let a page start video with sound until you have clicked or tapped on it. { $brand } first tries to start with sound. If the browser refuses, it starts muted and shows the muted speaker, and you can unmute with <b>M</b> or the speaker button.
+    Browsers do not let a page start video with sound until you have clicked or tapped on it. { $brand } first tries to start with sound. If the browser refuses, it starts muted and shows the muted speaker. Unmute with <b>M</b> or the speaker button.
 
-    - To make trailers and previews stop starting by themselves, turn off <b>Autoplay previews</b> in <b>Settings</b>, under <b>Playback Settings</b>.
+    - To stop previews from starting by themselves, turn off <b>Autoplay previews</b> in your profile's <b>Playback Settings</b>.
     - If a title never starts, see <a=/help/article/wont-play>A title will not play</a>.
 
 help-art-clips-title = Using Clips
@@ -1469,10 +1570,9 @@ help-art-genres-body =
     To go back to everything, open <b>Films</b> or <b>Series</b> again. On a phone the genre list opens as a sheet from the bottom.
 
 help-art-top-10-title = What are the Top 10 rows?
-help-art-top-10-summary = A row of the ten titles people watch most right now.
+help-art-top-10-summary = A row of the ten most popular titles right now.
 help-art-top-10-keywords = top 10 top ten popular trending ranking numbers row most watched
-help-art-top-10-body =
-    A <b>Top 10</b> row shows the ten most watched titles of the moment, with a large number on each. It follows current popularity in the catalog and changes from day to day. It is the same for everyone and is not based on your profile.
+help-art-top-10-body = A <b>Top 10</b> row shows the ten most popular films or series of the moment, with a large number on each. It follows the daily popularity of titles in the film catalog, so it changes from day to day. It is the same for everyone and does not depend on your profile.
 
 help-art-episodes-title = Seasons and episodes
 help-art-episodes-summary = Pick a season and an episode from the details window or the player.
@@ -1491,9 +1591,9 @@ help-art-share-keywords = share link whatsapp messages instagram snapchat copy s
 help-art-share-body =
     1. Open a title's details and select <b>Share</b>.
     2. Choose <b>WhatsApp</b> or <b>Messages</b> to send the link, or <b>Copy link</b> to paste it anywhere.
-    3. For Instagram and Snapchat the link is copied and you paste it into the app.
+    3. For Instagram and Snapchat the link is copied, then you paste it into the app.
 
-    The link opens the title's page on { $brand }. The person who opens it does not need to be signed in.
+    The link opens the title on { $brand }. The person who opens it needs to sign in, or create a free account, to watch.
 
 help-art-title-details-title = The title details window
 help-art-title-details-summary = What you can read and do before you press play.
@@ -1519,14 +1619,55 @@ help-art-accessibility-body =
     If something is hard to use, tell us on the <a=/help/article/report-bug>Report a problem</a> page. We take these reports seriously.
 
 help-art-profile-icons-title = How to choose a profile icon
-help-art-profile-icons-summary = Pick an avatar for a profile.
+help-art-profile-icons-summary = Pick a picture for a profile.
 help-art-profile-icons-keywords = profile icon avatar picture image change choose character
 help-art-profile-icons-body =
     1. Open <b>Manage Profiles</b> and select the profile.
-    2. Select the icon.
-    3. Pick one from the groups, then choose <b>Save</b>.
+    2. Select the picture.
+    3. Pick a new one, then choose <b>Save</b>.
 
-    A Kids profile uses the striped Kids icon unless you choose another. You can also reach the icon picker from <b>Settings</b>.
+    You can also change it in <b>Account</b>, under <b>Manage profiles</b>: select the profile, then its picture. A Kids profile uses the Kids picture until you choose another.
+
+help-art-parental-controls-title = Parental controls: age ratings and blocked titles
+help-art-parental-controls-summary = Limit a profile to titles up to an age rating, or hide titles by name.
+help-art-parental-controls-keywords = parental controls age rating maturity restrictions block title hide kids teen certificate pg 12 15 18
+help-art-parental-controls-body =
+    Any profile can have its own limits. Open the profile menu, choose <b>Account</b>, then <b>Manage profiles</b>, select the profile and choose <b>Adjust parental controls</b>.
+
+    ## Age ratings
+    1. Choose <b>Age ratings</b>.
+    2. Pick the highest rating the profile may see. Only titles up to that rating are shown, and titles without a rating are hidden as well.
+
+    <b>Rating labels</b> sets which labels you read, British (U, PG, 12, 15, 18) or American (G, PG, PG-13, R, NC-17). <b>Automatic</b> follows the country you sign in from.
+
+    ## Block titles
+    1. Choose <b>Block titles</b>.
+    2. Type the name of a series or film and choose <b>Add</b>.
+
+    Blocked titles are not shown on that profile. Choose <b>Remove</b> to show one again.
+
+    !! Note: Titles come from independent sources and some have no rating. For young children, a Kids profile is the safer choice. See <a=/help/article/kids-profile>How to create a profile for kids</a>.
+
+    @@ profiles
+
+help-art-transfer-profile-title = Move a profile to another account
+help-art-transfer-profile-summary = Save a profile as a file and add it to another account with its history and settings.
+help-art-transfer-profile-keywords = transfer profile move copy profile another account import export profile file
+help-art-transfer-profile-body =
+    A profile can be copied to another account, for example when someone moves out. The copy keeps the name, picture, settings and viewing activity.
+
+    ## Save the profile
+    1. Open the profile menu and choose <b>Transfer Profile</b>.
+    2. Select the profile and choose <b>Download profile file</b>. Keep the file safe.
+
+    ## Add it to the other account
+    1. Sign in to the other account and open <b>Manage profiles</b>.
+    2. Choose <b>Import a profile</b> and select the file.
+
+    !! Note: The file does not contain the profile's PIN. Anyone with the file can add the profile to their account, so do not share it.
+
+    <b>Profile transfer</b> in <b>Account</b> turns copying out of your account on or off. It never blocks profiles coming in.
+
 auth-questions = Questions?
 auth-email = Email address
 auth-password = Password
@@ -1588,9 +1729,11 @@ landing-read-more = Read the full article
 legal-credits-title = Licenses and credits
 legal-credits-updated = Last updated: October 2026
 legal-credits-1-title = 1. Fonts
-legal-credits-1-body = The text in the logo is set in a pixel font. All other interface text is set in Inter.
-legal-credits-1-b1 = <strong>Baby Blocks</strong> by Colorful Typhoon, used for the { $brand } logo under its linkware terms for personal, non-commercial use. See <a href="http://www.geocities.jp/kitschlabo/" target="_blank" rel="noopener">Colorful Typhoon</a>.
+legal-credits-1-body = The logo is set in a pixel font, the interface in Inter, and the titles of collections in display fonts:
+legal-credits-1-b1 = <strong>Baby Blocks</strong> by Colorful Typhoon, used for the { $brand } logo under its freeware terms for non-commercial use. See <a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">the font on FontSpace</a>.
 legal-credits-1-b2 = <strong>Inter</strong> by Rasmus Andersson, used under the SIL Open Font License 1.1.
+legal-credits-1-b3 = <strong>Abril Fatface, Caveat Brush, DM Serif Display, Fredoka, Gochi Hand, Kalam, Londrina Solid, Playfair Display and Sedgwick Ave</strong> from Google Fonts, used under the SIL Open Font License 1.1.
+legal-credits-1-b4 = <strong>Permanent Marker</strong> and <strong>Rock Salt</strong> from Google Fonts, used under the Apache License 2.0.
 legal-credits-2-title = 2. Icons
 legal-credits-2-body = Interface icons come from Phosphor Icons, used under the MIT License.
 legal-credits-3-title = 3. Film and series information
@@ -1845,7 +1988,7 @@ set-privacy-activity-hint = Manage your watch history
 set-privacy-data = Data settings
 set-privacy-personalization = Personalised recommendations
 set-privacy-personalization-hint = Use what you watch to suggest titles. When off, you see general picks.
-set-activity-clear-body = Your watch history and resume points will be removed from this browser.
+set-activity-clear-body = The titles are removed from this profile's viewing activity and Continue Watching on all your devices.
 set-err-invalid = That password is not right. Try again.
 set-err-weak = That password is too weak. Use a longer one with letters and numbers.
 set-err-rate = Too many attempts. Wait a minute and try again.
@@ -1951,6 +2094,12 @@ set-notify-push-hint = Notifications on this device
 set-topics-title = What you hear about
 set-topic-new_arrivals = New arrivals
 set-topic-new_arrivals-hint = Series and films that were just added.
+set-topic-recommendations = Recommendations
+set-topic-recommendations-hint = Picks chosen for this profile.
+set-topic-reminders = Reminders
+set-topic-reminders-hint = Titles you started and new episodes of series you watch.
+set-topic-news = News from { $brand }
+set-topic-news-hint = New features and changes to the service.
 set-push-denied = Notifications are blocked for this site in your browser. Allow them in the browser settings, then try again.
 set-push-unsupported = This browser cannot show notifications.
 
@@ -1998,6 +2147,12 @@ set-personal-info-hint = Request a copy of your personal information
 set-personal-info-body = You can ask for a copy of the personal information we hold about your account. The file lists:
 set-personal-info-done = Your file was saved.
 set-personal-info-note = The file stays on your device. It may contain personal information, so keep it safe.
+set-personal-info-account = Your account details: name, email address and phone number
+set-personal-info-profiles = Your profiles and their preferences
+set-personal-info-lists = My List and ratings of each profile
+set-personal-info-history = Viewing progress and activity of each profile
+set-personal-info-settings = Your settings and choices, such as notifications and cookies
+set-personal-info-security = Recent sign ins and security activity
 
 set-testing-body = From time to time we try new features with a small group before everyone gets them.
 set-testing-switch = Include me in tests and previews
@@ -2074,6 +2229,10 @@ set-device-timezone = Time zone
 set-device-screen = Screen
 set-device-language = Language
 set-device-countries-note = This device has connected from more than one country: { $countries }. A VPN or travel can cause this. A device is recognised by its browser, not by where it connects from, so it is still the same device.
+set-device-type-desktop = Computer
+set-device-type-mobile = Phone
+set-device-type-tablet = Tablet
+set-device-type-other = Other device
 set-event-new_device = New device signed in
 set-event-device_new_country = A device connected from a new country
 set-event-session_revoked = A device was signed out

@@ -1,4 +1,4 @@
-Contact: mailto:support@streams.watch
+Contact: mailto:help@streams.watch
 Expires: 2027-10-11T00:00:00Z
 Preferred-Languages: en
 Canonical: https://streams.watch/.well-known/security.txt
