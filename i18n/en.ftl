@@ -922,7 +922,7 @@ help-art-report-bug-body =
 
     @@ diagnostics
 
-cookie-sheet = <b>{ $brand }</b> uses cookies to keep your profiles and preferences and, if you allow it, to personalise recommendations.
+cookie-sheet = <b>{ $brand }</b> keeps a few items in your browser to keep you signed in and open pages fast and, if you allow it, to personalise recommendations.
 cookie-learn = Learn more
 cookie-reject = Reject
 cookie-accept = Accept
@@ -941,23 +941,27 @@ cookie-nav-ads = Advertising Cookies
 cookie-general =
     This tool explains what { $brand } keeps in your browser and lets you control the optional part.
 
-    Most browsers let you block or delete cookies and site data. If you do, parts of { $brand } will stop working and your profiles and progress will be lost.
+    Most browsers let you block or delete cookies and site data. If you do, you are signed out on that browser and pages take longer to open until the copies are back. Your account keeps your profiles, lists and progress.
 
     Your choices here are saved in your browser, so clearing site data resets them.
 
     For more, see the <a=/cookies>Cookie Policy</a> and the <a=/privacy>Privacy Policy</a>.
-cookie-essential =
-    These items are needed to give you the service you asked for. They keep your profiles and PINs, how far you watched, your language and the choices you make here. They stay on your device and are not sent to our servers. You cannot opt out of them.
 
-    Lifespan: they stay until you clear this site's data.
+cookie-essential =
+    These items are needed to give you the service you asked for. They keep you signed in, hold a copy of your profiles, settings, My List, ratings and progress so pages open at once, and remember your language and the choices you make here. The copies are kept in step with your account. You cannot opt out of them.
+
+    Lifespan: until you clear this site's data. Signing out removes the copies of your account's data.
+
 cookie-essential-list =
-    - <b>streams_profiles</b> and <b>streams_active_profile</b>: your profiles and the one in use.
-    - <b>streams_watch_progress_v1</b>: how far you watched each title.
-    - <b>streams_session</b>: your sign in, when you have one.
-    - <b>streams_language</b>: the language you chose.
+    - <b>streams_session</b>, <b>streams_device_key</b> and <b>streams_resume</b>: your sign in, a random id that lets your account recognise this browser, and a sealed note that lets you come back within a day of signing out.
+    - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b> and <b>streams_account_prefs</b>: copies of your profiles, the one in use and your settings.
+    - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b> and <b>streams_episode_progress_v1</b>: copies of My List, ratings and how far you watched, for each profile.
+    - <b>streams_sync_snapshot</b> and <b>streams_sync_cursor</b>: what was last exchanged with your account, so only changes are sent.
+    - <b>streams_language</b>, <b>streams_country</b> and <b>streams_rating_system_auto</b>: your language, and the country used to pick rating labels.
     - <b>streams_consent</b>: the choices you make in this window.
-    - <b>streams_help_votes</b>: your answers to “Was this article helpful?”
-    - <b>streams-notifications-read:default</b>: which notifications you have opened.
+    - <b>streams_help_votes</b>, <b>streams_help_viewed</b> and <b>streams_help_recent</b>: your answers to “Was this article helpful?”, the articles you viewed and your recent searches in the Help Centre.
+    - <b>streams-notifications-read:default</b>, <b>streams_preview_muted</b> and <b>streams_boot_seen</b>: which notifications you opened, whether previews start muted, and whether to show the start animation.
+
 cookie-personal =
     These items let { $brand } adapt the rows to your taste. When you start a title, the app sends the title and a random session number to our recommendation service. The service keeps a small taste profile for about a day and then discards it.
 
@@ -968,9 +972,10 @@ cookie-personal-list =
     - <b>streams_session_id</b>: a random number that is not linked to your name.
     - <b>streams_user_affinity</b>: the genres you picked.
 cookie-third =
-    Posters and details come from a public film catalog, and streams come from independent sources. Those websites receive your IP address when your browser loads from them and may set their own cookies. We cannot switch them off from here.
+    Posters and details come from a public film catalog, trailers play from YouTube, and streams come from independent sources. Those websites receive your IP address when your browser loads from them and may set their own cookies. We cannot switch them off from here.
 
     See <a=/help/article/sources>Where titles come from</a>.
+
 cookie-ads = We do not use advertising cookies, trackers or analytics.
 help-ui-foryou = Help for you on this device
 help-ui-recommended-inline = Recommended for you

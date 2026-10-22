@@ -922,7 +922,7 @@ help-art-report-bug-body =
 
     @@ diagnostics
 
-cookie-sheet = <b>{ $brand }</b> 使用 Cookie 来保存您的个人资料和偏好设置，并在您允许的情况下个性化推荐内容。
+cookie-sheet = <b>{ $brand }</b> 会在你的浏览器中保存少量信息，用来保持登录、让页面快速打开；如果你允许，还会用来个性化推荐。
 cookie-learn = 了解更多
 cookie-reject = 拒绝
 cookie-accept = 接受
@@ -939,25 +939,29 @@ cookie-nav-personal = 个性化 Cookie
 cookie-nav-third = 第三方 Cookie
 cookie-nav-ads = 广告 Cookie
 cookie-general =
-    此工具说明 { $brand } 在您的浏览器中保存了哪些内容，并允许您控制可选部分。
+    这个工具说明 { $brand } 在你的浏览器中保存了什么，并让你控制其中可选的部分。
 
-    大多数浏览器允许您阻止或删除 Cookie 和站点数据。如果您这样做，{ $brand } 的部分功能将停止工作，您的个人资料和进度将会丢失。
+    大多数浏览器都允许你阻止或删除 Cookie 和网站数据。如果这样做，你会在该浏览器上退出登录，而且在副本恢复之前页面打开会变慢。你的个人资料、片单和进度仍保存在账户中。
 
-    您在此处的选择将保存在您的浏览器中，因此清除站点数据会重置这些选择。
+    你在这里的选择保存在浏览器中，所以清除网站数据会把它们重置。
 
-    如需了解更多信息，请参阅 <a=/cookies>Cookie 政策</a> 和 <a=/privacy>隐私政策</a>。
+    更多信息请参阅<a=/cookies>Cookie 政策</a>和<a=/privacy>隐私政策</a>。
+
 cookie-essential =
-    这些项目是为您提供所请求服务所必需的。它们保存您的个人资料和 PIN 码、观看进度、语言以及您在此处做出的选择。它们保留在您的设备上，不会发送到我们的服务器。您无法选择退出这些项目。
+    这些项目是为你提供所请求服务所必需的。它们让你保持登录，保存个人资料、设置、我的片单、评分和进度的副本以便页面立刻打开，并记住你的语言和你在这里做出的选择。这些副本会与你的账户保持同步。你无法关闭它们。
 
-    有效期：直到您清除此站点的数据。
+    保存期限：直到你清除本网站的数据。退出登录会删除你账户数据的副本。
+
 cookie-essential-list =
-    - <b>streams_profiles</b> 和 <b>streams_active_profile</b>：您的个人资料及当前使用的资料。
-    - <b>streams_watch_progress_v1</b>：您观看每个标题的进度。
-    - <b>streams_session</b>：您的登录状态（如有）。
-    - <b>streams_language</b>：您选择的语言。
-    - <b>streams_consent</b>：您在此窗口中做出的选择。
-    - <b>streams_help_votes</b>：您对“这篇文章有帮助吗？”的回答。
-    - <b>streams-notifications-read:default</b>：您已打开的通知。
+    - <b>streams_session</b>、<b>streams_device_key</b>、<b>streams_resume</b>：你的登录信息、一个让账户识别此浏览器的随机 ID，以及一条让你在退出后一天内可以直接回来的加密记录。
+    - <b>streams_profiles</b>、<b>streams_active_profile</b>、<b>streams_profile_prefs</b>、<b>streams_app_prefs</b>、<b>streams_account_prefs</b>：你的个人资料、正在使用的个人资料和设置的副本。
+    - <b>streams_my_list_v1</b>、<b>streams_title_ratings_v1</b>、<b>streams_watch_progress_v1</b>、<b>streams_episode_progress_v1</b>：每个个人资料的我的片单、评分和观看位置的副本。
+    - <b>streams_sync_snapshot</b>、<b>streams_sync_cursor</b>：上次与账户交换的内容，这样只需发送更改。
+    - <b>streams_language</b>、<b>streams_country</b>、<b>streams_rating_system_auto</b>：你的语言，以及用于选择分级标识的国家/地区。
+    - <b>streams_consent</b>：你在这个窗口中做出的选择。
+    - <b>streams_help_votes</b>、<b>streams_help_viewed</b>、<b>streams_help_recent</b>：你对“这篇文章有帮助吗？”的回答、看过的文章，以及最近在帮助中心的搜索。
+    - <b>streams-notifications-read:default</b>、<b>streams_preview_muted</b>、<b>streams_boot_seen</b>：你打开过哪些通知、预览是否静音开始，以及是否显示启动动画。
+
 cookie-personal =
     这些项目让 { $brand } 根据您的喜好调整内容行。当您开始观看某个标题时，应用会将该标题和一个随机会话编号发送到我们的推荐服务。该服务会保留一个小型口味档案约一天，然后将其丢弃。
 
@@ -968,9 +972,10 @@ cookie-personal-list =
     - <b>streams_session_id</b>：一个与您的姓名无关的随机编号。
     - <b>streams_user_affinity</b>：您选择的类型。
 cookie-third =
-    海报和详情来自公共电影目录，流媒体来自独立来源。当浏览器从这些网站加载内容时，它们会收到你的 IP 地址，并可能设置自己的 Cookie。我们无法在此处关闭它们。
+    海报和详情来自公开的影视目录，预告片从 YouTube 播放，视频流来自独立来源。这些网站会在浏览器加载其内容时收到你的 IP 地址，并可能设置自己的 Cookie。我们无法在这里关闭它们。
 
-    查看<a=/help/article/sources>片源来自哪里</a>。
+    请参阅<a=/help/article/sources>作品从哪里来</a>。
+
 cookie-ads = 我们不使用广告 Cookie、追踪器或分析工具。
 help-ui-foryou = 适合这台设备的帮助
 help-ui-recommended-inline = 为你推荐

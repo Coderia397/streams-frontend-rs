@@ -906,7 +906,7 @@ help-art-report-bug-body =
     La page <a=/help/contact>Contactez-nous</a> contient un bouton qui ouvre un e-mail avec les détails de votre navigateur préremplis.
 
     @@ diagnostics
-cookie-sheet = <b>{ $brand }</b> utilise des cookies pour conserver vos profils et préférences et, si vous l’autorisez, pour personnaliser les recommandations.
+cookie-sheet = <b>{ $brand }</b> conserve quelques éléments dans votre navigateur pour vous garder connecté et ouvrir les pages rapidement et, si vous l'acceptez, pour personnaliser les recommandations.
 cookie-learn = En savoir plus
 cookie-reject = Refuser
 cookie-accept = Accepter
@@ -925,23 +925,27 @@ cookie-nav-ads = Cookies publicitaires
 cookie-general =
     Cet outil explique ce que { $brand } conserve dans votre navigateur et vous permet de contrôler la partie facultative.
 
-    La plupart des navigateurs permettent de bloquer ou de supprimer les cookies et les données du site. Si vous le faites, certaines parties de { $brand } cesseront de fonctionner et vos profils et votre progression seront perdus.
+    La plupart des navigateurs permettent de bloquer ou de supprimer les cookies et les données de site. Si vous le faites, vous êtes déconnecté sur ce navigateur et les pages mettent plus de temps à s'ouvrir jusqu'au retour des copies. Votre compte conserve vos profils, vos listes et votre progression.
 
-    Vos choix ici sont enregistrés dans votre navigateur, donc la suppression des données du site les réinitialise.
+    Vos choix ici sont enregistrés dans votre navigateur ; supprimer les données du site les réinitialise donc.
 
-    Pour en savoir plus, consultez la <a=/cookies>Politique relative aux cookies</a> et la <a=/privacy>Politique de confidentialité</a>.
+    Pour en savoir plus, consultez la <a=/cookies>Politique de cookies</a> et la <a=/privacy>Politique de confidentialité</a>.
+
 cookie-essential =
-    Ces éléments sont nécessaires pour vous fournir le service demandé. Ils conservent vos profils et vos codes PIN, votre progression de visionnage, votre langue et les choix effectués ici. Ils restent sur votre appareil et ne sont pas envoyés à nos serveurs. Vous ne pouvez pas les désactiver.
+    Ces éléments sont nécessaires pour vous fournir le service demandé. Ils vous gardent connecté, conservent une copie de vos profils, réglages, Ma liste, notes et progression pour que les pages s'ouvrent immédiatement, et mémorisent votre langue et les choix faits ici. Les copies restent synchronisées avec votre compte. Vous ne pouvez pas les refuser.
 
-    Durée de vie : ils restent jusqu'à ce que vous supprimiez les données de ce site.
+    Durée : jusqu'à ce que vous supprimiez les données de ce site. La déconnexion supprime les copies des données de votre compte.
+
 cookie-essential-list =
-    - <b>streams_profiles</b> et <b>streams_active_profile</b> : vos profils et celui utilisé.
-    - <b>streams_watch_progress_v1</b> : votre progression de visionnage pour chaque titre.
-    - <b>streams_session</b> : votre connexion, si vous en avez une.
-    - <b>streams_language</b> : la langue que vous avez choisie.
-    - <b>streams_consent</b> : les choix effectués dans cette fenêtre.
-    - <b>streams_help_votes</b> : vos réponses à « Cet article a-t-il été utile ? »
-    - <b>streams-notifications-read:default</b> : les notifications que vous avez ouvertes.
+    - <b>streams_session</b>, <b>streams_device_key</b> et <b>streams_resume</b> : votre connexion, un identifiant aléatoire qui permet à votre compte de reconnaître ce navigateur, et une note scellée qui vous permet de revenir dans la journée qui suit une déconnexion.
+    - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b> et <b>streams_account_prefs</b> : des copies de vos profils, de celui en cours d'utilisation et de vos réglages.
+    - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b> et <b>streams_episode_progress_v1</b> : des copies de Ma liste, des notes et de votre avancement, pour chaque profil.
+    - <b>streams_sync_snapshot</b> et <b>streams_sync_cursor</b> : ce qui a été échangé en dernier avec votre compte, pour n'envoyer que les changements.
+    - <b>streams_language</b>, <b>streams_country</b> et <b>streams_rating_system_auto</b> : votre langue et le pays utilisé pour choisir les classifications d'âge affichées.
+    - <b>streams_consent</b> : les choix que vous faites dans cette fenêtre.
+    - <b>streams_help_votes</b>, <b>streams_help_viewed</b> et <b>streams_help_recent</b> : vos réponses à « Cet article a-t-il été utile ? », les articles consultés et vos recherches récentes dans le Centre d'aide.
+    - <b>streams-notifications-read:default</b>, <b>streams_preview_muted</b> et <b>streams_boot_seen</b> : les notifications ouvertes, si les aperçus démarrent sans le son et s'il faut afficher l'animation de démarrage.
+
 cookie-personal =
     Ces éléments permettent à { $brand } d'adapter les rangées à vos goûts. Lorsque vous commencez un titre, l'application envoie le titre et un numéro de session aléatoire à notre service de recommandation. Le service conserve un petit profil de goûts pendant environ un jour, puis le supprime.
 
@@ -952,9 +956,10 @@ cookie-personal-list =
     - <b>streams_session_id</b> : un numéro aléatoire non lié à votre nom.
     - <b>streams_user_affinity</b> : les genres que vous avez choisis.
 cookie-third =
-    Les affiches et les détails proviennent d'un catalogue de films public, et les flux proviennent de sources indépendantes. Ces sites web reçoivent votre adresse IP lorsque votre navigateur charge du contenu depuis eux et peuvent définir leurs propres cookies. Nous ne pouvons pas les désactiver depuis ici.
+    Les affiches et les détails proviennent d'un catalogue public de films, les bandes-annonces sont lues depuis YouTube et les flux viennent de sources indépendantes. Ces sites reçoivent votre adresse IP quand votre navigateur charge leur contenu et peuvent déposer leurs propres cookies. Nous ne pouvons pas les désactiver d'ici.
 
-    Voir <a=/help/article/sources>D'où proviennent les titres</a>.
+    Consultez <a=/help/article/sources>D'où viennent les titres</a>.
+
 cookie-ads = Nous n'utilisons pas de cookies publicitaires, de traceurs ni d'outils d'analyse.
 help-ui-foryou = Aide pour vous sur cet appareil
 help-ui-recommended-inline = Recommandé pour vous

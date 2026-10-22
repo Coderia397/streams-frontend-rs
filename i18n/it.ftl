@@ -612,10 +612,11 @@ help-art-page-not-found-body =
     Una pagina 404 significa che l'indirizzo non porta a niente su { $brand }. Controlla l'indirizzo per errori di digitazione o usa il menu e la ricerca per trovare ciò che cercavi.
 
     - Usa <b>Casa</b> nella barra in alto per tornare all'inizio.
-    - Usa la ricerca del <a=/help> Centro Assistenza </a> per trovare un articolo.
+    - Usa la ricerca del <a=/help>Centro Assistenza</a> per trovare un articolo.
     - Se un link su { $brand } ti ha portato qui, <a=/help/article/report-bug> segnalaci </a> dove l'hai trovato.
 
     @@ refresh
+
 help-art-language-title = Come cambiare la lingua
 help-art-language-summary = Cambia la lingua di { $brand } e le lingue in cui guardi.
 help-art-language-keywords = lingua cambio traduci interfaccia visualizzazione sottotitoli audio inglese spagnolo francese arabo
@@ -916,7 +917,7 @@ help-art-report-bug-body =
     La pagina <a=/help/contact>Contatta l'Assistenza</a> ha un pulsante che apre un'email con i dettagli del browser già compilati.
 
     @@ diagnostics
-cookie-sheet = <b>{ $brand }</b> utilizza cookie per mantenere i tuoi profili e preferenze e, se lo permetti, per personalizzare le raccomandazioni.
+cookie-sheet = <b>{ $brand }</b> salva alcuni dati nel tuo browser per mantenerti connesso e aprire le pagine in fretta e, se lo consenti, per personalizzare i consigli.
 cookie-learn = Scopri di più
 cookie-reject = Rifiuta
 cookie-accept = Accetta
@@ -933,25 +934,29 @@ cookie-nav-personal = Cookie di personalizzazione
 cookie-nav-third = Cookie di terze parti
 cookie-nav-ads = Cookie pubblicitari
 cookie-general =
-    Questo strumento spiega cosa { $brand } conserva nel tuo browser e ti permette di controllare la parte opzionale.
+    Questo strumento spiega cosa salva { $brand } nel tuo browser e ti permette di gestire la parte facoltativa.
 
-    La maggior parte dei browser ti permette di bloccare o eliminare i cookie e i dati del sito. Se lo fai, parte di { $brand } smetterà di funzionare e i tuoi profili e progressi saranno persi.
+    La maggior parte dei browser ti permette di bloccare o eliminare cookie e dati dei siti. Se lo fai, esci dall'account su quel browser e le pagine si aprono più lentamente finché le copie non tornano. Il tuo account conserva profili, liste e progressi.
 
-    Le tue scelte qui sono salvate nel browser, quindi l'eliminazione dei dati del sito ripristinerà le impostazioni.
+    Le tue scelte qui vengono salvate nel browser, quindi eliminare i dati del sito le azzera.
 
-    Per saperne di più, consulta la <a=/cookies>Politica sui cookie</a> e la <a=/privacy>Politica sulla privacy</a>.
+    Per saperne di più, vedi <a=/cookies>Politica sui Cookie</a> e <a=/privacy>Politica sulla Privacy</a>.
+
 cookie-essential =
-    Questi elementi sono necessari per fornirti il servizio richiesto. Mantengono i tuoi profili e PIN, il progresso della visione, la tua lingua e le scelte che fai qui. Rimangono sul tuo dispositivo e non vengono inviati ai nostri server. Non puoi disattivarli.
+    Questi elementi servono a fornirti il servizio che hai richiesto. Ti mantengono connesso, conservano una copia di profili, impostazioni, La mia lista, valutazioni e progressi perché le pagine si aprano subito, e ricordano la tua lingua e le scelte fatte qui. Le copie restano allineate con il tuo account. Non puoi disattivarli.
 
-    Durata: rimangono finché non cancelli i dati di questo sito.
+    Durata: finché non elimini i dati di questo sito. Uscendo dall'account si eliminano le copie dei dati del tuo account.
+
 cookie-essential-list =
-    - <b>streams_profiles</b> e <b>streams_active_profile</b>: i tuoi profili e quello attivo.
-    - <b>streams_watch_progress_v1</b>: quanto hai visto di ogni titolo.
-    - <b>streams_session</b>: il tuo accesso, quando ne hai uno.
-    - <b>streams_language</b>: la lingua che hai scelto.
+    - <b>streams_session</b>, <b>streams_device_key</b> e <b>streams_resume</b>: il tuo accesso, un identificativo casuale che permette al tuo account di riconoscere questo browser e una nota sigillata che ti fa rientrare entro un giorno dall'uscita.
+    - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b> e <b>streams_account_prefs</b>: copie dei tuoi profili, di quello in uso e delle tue impostazioni.
+    - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b> e <b>streams_episode_progress_v1</b>: copie di La mia lista, delle valutazioni e di dove sei arrivato, per ogni profilo.
+    - <b>streams_sync_snapshot</b> e <b>streams_sync_cursor</b>: l'ultimo scambio con il tuo account, così vengono inviate solo le modifiche.
+    - <b>streams_language</b>, <b>streams_country</b> e <b>streams_rating_system_auto</b>: la tua lingua e il paese usato per scegliere le classificazioni per età.
     - <b>streams_consent</b>: le scelte che fai in questa finestra.
-    - <b>streams_help_votes</b>: le tue risposte a "Questo articolo è stato utile?"
-    - <b>streams-notifications-read:default</b>: le notifiche che hai aperto.
+    - <b>streams_help_votes</b>, <b>streams_help_viewed</b> e <b>streams_help_recent</b>: le tue risposte a “Questo articolo ti è stato utile?”, gli articoli visti e le tue ricerche recenti nel Centro Assistenza.
+    - <b>streams-notifications-read:default</b>, <b>streams_preview_muted</b> e <b>streams_boot_seen</b>: quali notifiche hai aperto, se le anteprime partono senza audio e se mostrare l'animazione di avvio.
+
 cookie-personal =
     Questi elementi permettono a { $brand } di adattare le righe al tuo gusto. Quando inizi un titolo, l'app invia il titolo e un numero di sessione casuale al nostro servizio di raccomandazioni. Il servizio mantiene un piccolo profilo di gusto per circa un giorno e poi lo elimina.
 
@@ -962,9 +967,10 @@ cookie-personal-list =
     - <b>streams_session_id</b>: un numero casuale non collegato al tuo nome.
     - <b>streams_user_affinity</b>: i generi che hai selezionato.
 cookie-third =
-    I poster e i dettagli provengono da un catalogo cinematografico pubblico, e i flussi provengono da fonti indipendenti. Quei siti ricevono il tuo indirizzo IP quando il tuo browser li carica e potrebbero impostare i propri cookie. Non possiamo disattivarli da qui.
+    Locandine e dettagli provengono da un catalogo pubblico di film, i trailer sono riprodotti da YouTube e i flussi arrivano da fonti indipendenti. Questi siti ricevono il tuo indirizzo IP quando il browser carica contenuti da loro e possono impostare i propri cookie. Da qui non possiamo disattivarli.
 
-    Consulta <a=/help/article/sources>Da dove provengono i titoli</a>.
+    Vedi <a=/help/article/sources>Da dove arrivano i titoli</a>.
+
 cookie-ads = Non utilizziamo cookie pubblicitari, tracker o analitici.
 help-ui-foryou = Aiuto per te su questo dispositivo
 help-ui-recommended-inline = Consigliati per te

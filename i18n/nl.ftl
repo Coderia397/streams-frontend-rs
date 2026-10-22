@@ -89,7 +89,7 @@ video-player-fullscreen = Volledig scherm
 video-player-rewind-10s = 10s terugspoelen
 whos-watching-choose = Kies je profiel
 whos-watching-add-profile = Profiel toevoegen
-help-ui-center = Help Center
+help-ui-center = Helpcentrum
 help-ui-browse = Blader
 help-ui-signin = Aanmelden
 help-ui-hero-title = Waarmee kunnen we je helpen?
@@ -121,7 +121,7 @@ help-ui-signout = Uitloggen bij { $brand }
 help-ui-results-count-link = Bekijk alle resultaten voor “{ $query }”
 help-ui-results-none = Geen resultaten voor “{ $query }”.
 help-ui-results-hint = Controleer de spelling, probeer minder woorden of blader door de onderwerpen.
-help-ui-results-empty = Typ een paar woorden om te zoeken in de Help Center.
+help-ui-results-empty = Typ een paar woorden om in het Helpcentrum te zoeken.
 help-ui-page-prev = Vorige pagina
 help-ui-page-next = Volgende pagina
 help-ui-page-n = Pagina { $n }
@@ -140,13 +140,13 @@ help-ui-ql-copyright = Aangifte van auteursrechtprobleem
 help-ui-ql-title = Feedback over een titel op { $brand }
 help-ui-ql-email = Stuur ons een e-mail op { $help_email }
 help-ui-not-found-title = We konden dat artikel niet vinden
-help-ui-not-found-body = Het kan verplaatst zijn of de link is fout. Zoek in de Help Center of blader door de onderwerpen.
+help-ui-not-found-body = Misschien is de pagina verplaatst of klopt de link niet. Zoek in het Helpcentrum of blader door de onderwerpen.
 help-ui-legal-terms = Gebruiksvoorwaarden
 help-ui-legal-privacy = Privacy
 help-ui-legal-cookies = Cookiebeleid
 help-ui-legal-dmca = DMCA
 help-ui-legal-disclaimer = Verklaring
-help-ui-doc-title = { $brand } Help Center
+help-ui-doc-title = { $brand } Helpcentrum
 help-topic-account = Account en Profielen
 help-topic-fix = Een probleem oplossen
 help-topic-watching = Beeldbellen
@@ -922,7 +922,7 @@ help-art-report-bug-body =
 
     @@ diagnostics
 
-cookie-sheet = <b>{ $brand }</b> gebruikt cookies om je profielen en voorkeuren op te slaan en, als je dat toestaat, om aanbevelingen te personaliseren.
+cookie-sheet = <b>{ $brand }</b> bewaart een paar gegevens in je browser zodat je ingelogd blijft en pagina's snel openen en, als je dat toestaat, om aanbevelingen te personaliseren.
 cookie-learn = Leer meer
 cookie-reject = Afwijzen
 cookie-accept = Accepteren
@@ -939,25 +939,29 @@ cookie-nav-personal = Personalisatiecookies
 cookie-nav-third = Derde partij cookies
 cookie-nav-ads = Advertentiecookies
 cookie-general =
-    Dit tool legt uit wat { $brand } opslaat in je browser en laat je de optionele onderdelen controleren.
+    Deze tool legt uit wat { $brand } in je browser bewaart en laat je het optionele deel regelen.
 
-    Meeste browsers laten je blokkeren of verwijderen van cookies en site data. Als je dat doet, stopt gedeelte van { $brand } met werken en je profielen en voortgang worden verloren.
+    In de meeste browsers kun je cookies en sitegegevens blokkeren of verwijderen. Doe je dat, dan word je in die browser uitgelogd en openen pagina's trager tot de kopieën terug zijn. Je account bewaart je profielen, lijsten en voortgang.
 
-    Je keuzes hier worden opgeslagen in je browser, dus het wissen van site data reset ze.
+    Je keuzes hier worden in je browser bewaard, dus als je de sitegegevens wist, worden ze teruggezet.
 
-    Voor meer informatie zie de <a=/cookies>Cookie Policy</a> en de <a=/privacy>Privacy Policy</a>.
+    Lees meer in het <a=/cookies>Cookiebeleid</a> en het <a=/privacy>Privacybeleid</a>.
+
 cookie-essential =
-    Deze items zijn nodig om je de dienst te geven die je hebt gevraagd. Ze houden je profielen en PINs, hoe ver je hebt gekeken, je taal en de keuzes die je hier maakt. Ze blijven op je apparaat en worden niet gestuurd naar onze servers. Je kunt niet opt out van deze items.
+    Deze gegevens zijn nodig om je de dienst te geven waar je om vroeg. Ze houden je ingelogd, bewaren een kopie van je profielen, instellingen, Mijn lijst, beoordelingen en voortgang zodat pagina's meteen openen, en onthouden je taal en de keuzes die je hier maakt. De kopieën blijven gelijk met je account. Je kunt ze niet uitzetten.
 
-    Levensduur: ze blijven tot je deze site's data wisst.
+    Bewaartermijn: tot je de gegevens van deze site wist. Uitloggen verwijdert de kopieën van de gegevens van je account.
+
 cookie-essential-list =
-    - <b>streams_profiles</b> en <b>streams_active_profile</b>: je profielen en het ene dat in gebruik is.
-    - <b>streams_watch_progress_v1</b>: hoe ver je elk titel hebt gekeken.
-    - <b>streams_session</b>: je inloggen, als je er een hebt.
-    - <b>streams_language</b>: de taal die je hebt gekozen.
-    - <b>streams_consent</b>: de keuzes die je maakt in dit venster.
-    - <b>streams_help_votes</b>: je antwoorden op 'Was deze artikel nuttig?' 
-    - <b>streams-notifications-read:default</b>: welke meldingen je hebt geopend.
+    - <b>streams_session</b>, <b>streams_device_key</b> en <b>streams_resume</b>: je inlog, een willekeurige code waarmee je account deze browser herkent, en een verzegelde notitie waarmee je binnen een dag na het uitloggen terug kunt komen.
+    - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b> en <b>streams_account_prefs</b>: kopieën van je profielen, het profiel dat in gebruik is en je instellingen.
+    - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b> en <b>streams_episode_progress_v1</b>: kopieën van Mijn lijst, beoordelingen en hoe ver je keek, per profiel.
+    - <b>streams_sync_snapshot</b> en <b>streams_sync_cursor</b>: wat het laatst met je account is uitgewisseld, zodat alleen wijzigingen worden verstuurd.
+    - <b>streams_language</b>, <b>streams_country</b> en <b>streams_rating_system_auto</b>: je taal en het land waarmee de leeftijdslabels worden gekozen.
+    - <b>streams_consent</b>: de keuzes die je in dit venster maakt.
+    - <b>streams_help_votes</b>, <b>streams_help_viewed</b> en <b>streams_help_recent</b>: je antwoorden op ‘Was dit artikel nuttig?’, de artikelen die je bekeek en je recente zoekopdrachten in het Helpcentrum.
+    - <b>streams-notifications-read:default</b>, <b>streams_preview_muted</b> en <b>streams_boot_seen</b>: welke meldingen je hebt geopend, of previews zonder geluid starten en of de startanimatie wordt getoond.
+
 cookie-personal =
     Deze items laten { $brand } de rijen aanpassen naar je smaak. Wanneer je een titel start, stuurt de app de titel en een willekeurige sessie nummer naar onze aanbevelingsdienst. De dienst houdt een klein smaakprofiel voor ongeveer een dag en gooit het dan weg.
 
@@ -968,9 +972,10 @@ cookie-personal-list =
     - <b>streams_session_id</b>: een willekeurig nummer dat niet gekoppeld is aan je naam.
     - <b>streams_user_affinity</b>: de genres die je hebt gekozen.
 cookie-third =
-    Poster en details komen uit een openbare film catalogus, en streams komen uit onafhankelijke bronnen. Die websites krijgen je IP adres wanneer je browser van hen laadt en kunnen hun eigen cookies instellen. We kunnen deze niet uitzetten vanaf hier.
+    Posters en details komen uit een openbare filmcatalogus, trailers worden afgespeeld vanaf YouTube en streams komen van onafhankelijke bronnen. Die websites zien je IP-adres als je browser iets van ze laadt en kunnen hun eigen cookies plaatsen. Dat kunnen we hier niet uitzetten.
 
-    Zie <a=/help/article/sources>Van waar komen de titels</a>.
+    Zie <a=/help/article/sources>Waar de titels vandaan komen</a>.
+
 cookie-ads = We gebruiken geen advertentiecookies, trackers of analyses.
 help-ui-foryou = Help voor jou op dit apparaat
 help-ui-recommended-inline = Aanbevolen voor jou
@@ -2054,7 +2059,7 @@ set-saved = Opgeslagen
 set-done = Klaar
 set-show-more = Meer tonen
 set-need-help = Hulp nodig?
-set-visit-help = Bezoek het Help Center
+set-visit-help = Naar het Helpcentrum
 set-try-another-way = Probeer een andere manier
 set-title-game-handle = Spelnaam
 set-title-personal-info = Toegang tot persoonlijke informatie
@@ -2167,7 +2172,7 @@ set-check-some-failed = Sommige controles zijn mislukt. Probeer het opnieuw of c
 set-spec-drm-title = Digitale rechtenbeheer
 set-spec-playback-title = Afspelen
 set-spec-resolution = Maximale afspelresolutie
-set-spec-help = Help Center
+set-spec-help = Helpcentrum
 set-speed-intro = Deze test downloadt een bestand en meet hoe snel je verbinding het binnenhaalt.
 set-speed-unit = Mbps
 set-speed-running = Testen…
@@ -2207,8 +2212,8 @@ set-device-type-other = Ander apparaat
 set-event-new_device = Nieuw apparaat ingelogd
 set-event-device_new_country = Een apparaat maakte verbinding vanuit een nieuw land
 set-event-session_revoked = Een apparaat is uitgelogd
-email-footer = Verzonden door { $brand }. Vragen? Lees het Help Center of schrijf naar { $help_email }.
-email-help-center = Help Center
+email-footer = Verzonden door { $brand }. Vragen? Kijk in het Helpcentrum of schrijf naar { $help_email }.
+email-help-center = Helpcentrum
 email-ignore = Als je deze niet hebt aangevraagd, kun je deze e-mail negeren.
 email-button-fallback = Als de knop niet werkt, kopieer deze adres naar je browser:
 email-greeting = Hallo { $name },

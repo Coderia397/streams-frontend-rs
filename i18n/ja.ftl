@@ -922,7 +922,7 @@ help-art-report-bug-body =
 
     @@ diagnostics
 
-cookie-sheet = <b>{ $brand }</b> は、プロフィールや設定情報を保存し、許可された場合、おすすめ情報をパーソナライズするためにクッキーを使用しています。
+cookie-sheet = <b>{ $brand }</b> は、サインインした状態を保ち、ページをすばやく開くため、また許可された場合はおすすめをパーソナライズするために、いくつかの情報をブラウザに保存します。
 cookie-learn = 詳しくはこちら
 cookie-reject = 拒否
 cookie-accept = 承諾
@@ -939,25 +939,29 @@ cookie-nav-personal = パーソナライズクッキー
 cookie-nav-third = 第三者クッキー
 cookie-nav-ads = 広告クッキー
 cookie-general =
-    このツールは、{ $brand }がブラウザに保存している情報を説明し、オプション部分を制御できるようにします。
+    このツールでは、{ $brand } がブラウザに保存するものを説明し、任意の部分を設定できます。
 
-    ほとんどのブラウザはクッキーとサイトデータのブロックまたは削除を許可します。これをすると、{ $brand }の一部が動作しなくなり、プロフィールや進捗が失われます。
+    ほとんどのブラウザでは、クッキーやサイトデータをブロックまたは削除できます。削除すると、そのブラウザではサインアウトされ、コピーが戻るまでページを開くのに時間がかかります。プロフィール、リスト、進捗はアカウントに残ります。
 
-    ここで選択した内容はブラウザに保存されるため、サイトデータをクリアするとリセットされます。
+    ここでの選択はブラウザに保存されるため、サイトデータを消去するとリセットされます。
 
-    詳しくは、<a=/cookies>クッキーポリシー</a>と<a=/privacy>プライバシーポリシー</a>をご覧ください。
+    詳しくは<a=/cookies>クッキーポリシー</a>と<a=/privacy>プライバシーポリシー</a>をご覧ください。
+
 cookie-essential =
-    これらは、あなたが求めたサービスを提供するために必要な項目です。プロフィールやPIN、視聴した進捗、言語、ここで行った選択を保持します。これらはあなたのデバイスに保存され、サーバーに送信されません。これらはオプトアウトできません。
+    これらはご希望のサービスを提供するために必要です。サインインした状態を保ち、ページがすぐに開くようにプロフィール、設定、マイリスト、評価、進捗のコピーを保存し、言語とここでの選択を記憶します。コピーはアカウントと同期されます。オフにすることはできません。
 
-    有効期間：これらはこのサイトのデータをクリアするまで残ります。
+    保存期間：このサイトのデータを消去するまで。サインアウトすると、アカウントのデータのコピーは削除されます。
+
 cookie-essential-list =
-    - <b>streams_profiles</b> および <b>streams_active_profile</b>：あなたのプロフィールと現在使用中のプロフィール。
-    - <b>streams_watch_progress_v1</b>：各タイトルの視聴進捗。
-    - <b>streams_session</b>：サインインしている場合のサインイン情報。
-    - <b>streams_language</b>：選択した言語。
-    - <b>streams_consent</b>：このウィンドウで行った選択。
-    - <b>streams_help_votes</b>：『この記事は役立ちましたか？』へのあなたの回答。
-    - <b>streams-notifications-read:default</b>：開いた通知の項目。
+    - <b>streams_session</b>、<b>streams_device_key</b>、<b>streams_resume</b>：サインイン情報、アカウントがこのブラウザを識別するためのランダムな ID、サインアウト後 1 日以内に戻れるようにする封印されたメモ。
+    - <b>streams_profiles</b>、<b>streams_active_profile</b>、<b>streams_profile_prefs</b>、<b>streams_app_prefs</b>、<b>streams_account_prefs</b>：プロフィール、使用中のプロフィール、設定のコピー。
+    - <b>streams_my_list_v1</b>、<b>streams_title_ratings_v1</b>、<b>streams_watch_progress_v1</b>、<b>streams_episode_progress_v1</b>：プロフィールごとのマイリスト、評価、視聴位置のコピー。
+    - <b>streams_sync_snapshot</b>、<b>streams_sync_cursor</b>：変更分だけを送るための、アカウントと最後にやり取りした内容。
+    - <b>streams_language</b>、<b>streams_country</b>、<b>streams_rating_system_auto</b>：言語と、年齢レーティングの表記を決めるための国。
+    - <b>streams_consent</b>：このウィンドウでの選択。
+    - <b>streams_help_votes</b>、<b>streams_help_viewed</b>、<b>streams_help_recent</b>：「この記事は役立ちましたか？」への回答、閲覧した記事、ヘルプセンターでの最近の検索。
+    - <b>streams-notifications-read:default</b>、<b>streams_preview_muted</b>、<b>streams_boot_seen</b>：開いた通知、プレビューをミュートで始めるかどうか、起動アニメーションを表示するかどうか。
+
 cookie-personal =
     これらは、{ $brand }があなたの好みに合わせて行列表示を調整するために使用されます。タイトルを開始すると、アプリはタイトルとランダムなセッション番号を推奨サービスに送信します。サービスは約1日間小さな好みプロフィールを保持し、その後削除します。
 
@@ -968,9 +972,10 @@ cookie-personal-list =
     - <b>streams_session_id</b>：あなたの名前と関連付けられていないランダムな番号。
     - <b>streams_user_affinity</b>：選んだジャンル。
 cookie-third =
-    ポスターと詳細情報は公開されている映画カタログから取得され、ストリームは独立したソースから取得されます。これらのウェブサイトは、ブラウザがそれらから読み込まれるときにあなたのIPアドレスを受け取り、独自のクッキーを設定する可能性があります。これらはここからオフにすることはできません。
+    ポスターと詳細は公開の映画カタログから、予告編は YouTube から、ストリームは独立した配信元から届きます。これらのサイトは、ブラウザが読み込む際に IP アドレスを受け取り、独自のクッキーを設定することがあります。ここからオフにすることはできません。
 
-    <a=/help/article/sources>タイトルの出所</a>をご覧ください。
+    <a=/help/article/sources>作品の配信元について</a>をご覧ください。
+
 cookie-ads = 広告用クッキー、トラッカー、または分析ツールは使用していません。
 help-ui-foryou = このデバイスで役立つヘルプ
 help-ui-recommended-inline = あなたにおすすめ

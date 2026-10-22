@@ -89,7 +89,7 @@ video-player-fullscreen = Vollbild
 video-player-rewind-10s = 10s zurückspulen
 whos-watching-choose = Profil auswählen
 whos-watching-add-profile = Profil hinzufügen
-help-ui-center = Hilfezentrum
+help-ui-center = Hilfe-Center
 help-ui-browse = Stöbern
 help-ui-signin = Einloggen
 help-ui-hero-title = Wie können wir helfen?
@@ -121,7 +121,7 @@ help-ui-signout = Abmelden von { $brand }
 help-ui-results-count-link = Alle Ergebnisse für „{ $query }“ anzeigen
 help-ui-results-none = Keine Ergebnisse für „{ $query }“.
 help-ui-results-hint = Rechtschreibung prüfen, weniger Wörter verwenden oder Themen durchstöbern.
-help-ui-results-empty = Geben Sie einige Wörter ein, um im Hilfezentrum zu suchen.
+help-ui-results-empty = Geben Sie einige Wörter ein, um im Hilfe-Center zu suchen.
 help-ui-page-prev = Vorherige Seite
 help-ui-page-next = Nächste Seite
 help-ui-page-n = Seite { $n }
@@ -914,7 +914,7 @@ help-art-report-bug-body =
     Auf der Seite <a=/help/contact>Kontakt</a> gibt es einen Button, der eine E-Mail mit Ihren Browserdetails öffnet.
 
     @@ diagnostics
-cookie-sheet = <b>{ $brand }</b> verwendet Cookies, um Ihre Profile und Einstellungen zu speichern und, wenn Sie es zulassen, Empfehlungen zu personalisieren.
+cookie-sheet = <b>{ $brand }</b> speichert einige Daten in Ihrem Browser, damit Sie angemeldet bleiben und Seiten schnell öffnen, und, wenn Sie zustimmen, um Empfehlungen zu personalisieren.
 cookie-learn = Mehr erfahren
 cookie-reject = Ablehnen
 cookie-accept = Akzeptieren
@@ -931,25 +931,29 @@ cookie-nav-personal = Personalisierungs-Cookies
 cookie-nav-third = Cookies von Drittanbietern
 cookie-nav-ads = Werbe-Cookies
 cookie-general =
-    Dieses Tool erklärt, was { $brand } in Ihrem Browser speichert, und ermöglicht es Ihnen, den optionalen Teil zu steuern.
+    Dieses Tool erklärt, was { $brand } in Ihrem Browser speichert, und lässt Sie den optionalen Teil steuern.
 
-    Die meisten Browser erlauben es, Cookies und Website-Daten zu blockieren oder zu löschen. Wenn Sie dies tun, funktionieren Teile von { $brand } nicht mehr, und Ihre Profile und Ihr Fortschritt gehen verloren.
+    In den meisten Browsern können Sie Cookies und Websitedaten blockieren oder löschen. Dann werden Sie in diesem Browser abgemeldet, und Seiten öffnen sich langsamer, bis die Kopien wieder da sind. Ihr Konto behält Ihre Profile, Listen und Ihren Fortschritt.
 
-    Ihre Auswahl hier wird in Ihrem Browser gespeichert, daher werden sie zurückgesetzt, wenn Sie die Website-Daten löschen.
+    Ihre Auswahl hier wird in Ihrem Browser gespeichert. Wenn Sie die Websitedaten löschen, wird sie zurückgesetzt.
 
-    Weitere Informationen finden Sie in der <a=/cookies>Cookie-Richtlinie</a> und der <a=/privacy>Datenschutzerklärung</a>.
+    Mehr dazu in der <a=/cookies>Cookie-Richtlinie</a> und der <a=/privacy>Datenschutzerklärung</a>.
+
 cookie-essential =
-    Diese Elemente sind erforderlich, um Ihnen den gewünschten Service bereitzustellen. Sie speichern Ihre Profile und PINs, wie weit Sie geschaut haben, Ihre Sprache und die Auswahl, die Sie hier treffen. Sie verbleiben auf Ihrem Gerät und werden nicht an unsere Server gesendet. Sie können sich nicht dagegen entscheiden.
+    Diese Daten sind nötig, um Ihnen den gewünschten Dienst zu bieten. Sie halten Sie angemeldet, speichern eine Kopie Ihrer Profile, Einstellungen, Meine Liste, Bewertungen und Ihres Fortschritts, damit Seiten sofort öffnen, und merken sich Ihre Sprache und Ihre Auswahl hier. Die Kopien werden mit Ihrem Konto abgeglichen. Sie können sie nicht abwählen.
 
-    Lebensdauer: Sie bleiben erhalten, bis Sie die Daten dieser Website löschen.
+    Speicherdauer: bis Sie die Daten dieser Website löschen. Beim Abmelden werden die Kopien der Daten Ihres Kontos entfernt.
+
 cookie-essential-list =
-    - <b>streams_profiles</b> und <b>streams_active_profile</b>: Ihre Profile und das aktuell verwendete.
-    - <b>streams_watch_progress_v1</b>: Wie weit Sie jeden Titel geschaut haben.
-    - <b>streams_session</b>: Ihre Anmeldung, sofern vorhanden.
-    - <b>streams_language</b>: Die von Ihnen gewählte Sprache.
-    - <b>streams_consent</b>: Die Auswahl, die Sie in diesem Fenster treffen.
-    - <b>streams_help_votes</b>: Ihre Antworten auf „War dieser Artikel hilfreich?“
-    - <b>streams-notifications-read:default</b>: Welche Benachrichtigungen Sie geöffnet haben.
+    - <b>streams_session</b>, <b>streams_device_key</b> und <b>streams_resume</b>: Ihre Anmeldung, eine zufällige Kennung, an der Ihr Konto diesen Browser wiedererkennt, und eine versiegelte Notiz, mit der Sie innerhalb eines Tages nach dem Abmelden zurückkehren können.
+    - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b> und <b>streams_account_prefs</b>: Kopien Ihrer Profile, des aktiven Profils und Ihrer Einstellungen.
+    - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b> und <b>streams_episode_progress_v1</b>: Kopien von Meine Liste, Bewertungen und Ihrem Fortschritt, für jedes Profil.
+    - <b>streams_sync_snapshot</b> und <b>streams_sync_cursor</b>: was zuletzt mit Ihrem Konto abgeglichen wurde, damit nur Änderungen gesendet werden.
+    - <b>streams_language</b>, <b>streams_country</b> und <b>streams_rating_system_auto</b>: Ihre Sprache und das Land, nach dem die Altersfreigaben angezeigt werden.
+    - <b>streams_consent</b>: Ihre Auswahl in diesem Fenster.
+    - <b>streams_help_votes</b>, <b>streams_help_viewed</b> und <b>streams_help_recent</b>: Ihre Antworten auf „War dieser Artikel hilfreich?“, die gelesenen Artikel und Ihre letzten Suchen im Hilfe-Center.
+    - <b>streams-notifications-read:default</b>, <b>streams_preview_muted</b> und <b>streams_boot_seen</b>: welche Benachrichtigungen Sie geöffnet haben, ob Vorschauen stumm starten und ob die Startanimation gezeigt wird.
+
 cookie-personal =
     Diese Elemente ermöglichen es { $brand }, die Reihen an Ihren Geschmack anzupassen. Wenn Sie einen Titel starten, sendet die App den Titel und eine zufällige Sitzungsnummer an unseren Empfehlungsdienst. Der Dienst speichert ein kleines Geschmacksprofil für etwa einen Tag und verwirft es dann.
 
@@ -960,9 +964,10 @@ cookie-personal-list =
     - <b>streams_session_id</b>: Eine zufällige Nummer, die nicht mit Ihrem Namen verknüpft ist.
     - <b>streams_user_affinity</b>: Die von Ihnen gewählten Genres.
 cookie-third =
-    Poster und Details stammen aus einem öffentlichen Filmkatalog, Streams aus unabhängigen Quellen. Diese Websites erhalten Ihre IP-Adresse, wenn Ihr Browser sie lädt, und können eigene Cookies setzen. Von hier aus können wir sie nicht deaktivieren.
+    Poster und Details stammen aus einem öffentlichen Filmkatalog, Trailer werden von YouTube abgespielt, und Streams kommen aus unabhängigen Quellen. Diese Websites erhalten Ihre IP-Adresse, wenn Ihr Browser Inhalte von ihnen lädt, und können eigene Cookies setzen. Das können wir hier nicht abschalten.
 
-    Siehe <a=/help/article/sources>Woher Titel stammen</a>.
+    Siehe <a=/help/article/sources>Woher die Titel kommen</a>.
+
 cookie-ads = Wir verwenden keine Werbe-Cookies, Tracker oder Analysen.
 help-ui-foryou = Hilfe für Sie auf diesem Gerät
 help-ui-recommended-inline = Für Sie empfohlen
@@ -1406,7 +1411,7 @@ help-art-fake-sites-body =
     Kopien beliebter Seiten tauchen ständig auf. Dies sind die einzigen Adressen, die zu { $brand } gehören:
 
     - <b>streams.watch</b>, die App
-    - <b>help.streams.watch</b>, dieses Hilfezentrum
+    - <b>help.streams.watch</b>, dieses Hilfe-Center
     - <b>@streams.watch</b>-E-Mail-Adressen, z. B. <a=mailto:{ $help_email }>{ $help_email }</a>
 
     ## Was wir niemals verlangen
@@ -1418,6 +1423,7 @@ help-art-fake-sites-body =
     1. Schließen Sie die Seite und geben Sie keine Daten ein.
     2. Falls Sie ein Passwort eingegeben haben, ändern Sie es auf der Seite, zu der es gehört.
     3. Senden Sie die Adresse an <a=mailto:{ $help_email }>{ $help_email }</a>, damit wir sie melden können.
+
 help-art-security-report-title = Sicherheitsproblem melden
 help-art-security-report-summary = Wie man uns sicher über eine Schwachstelle informiert.
 help-art-security-report-keywords = sicherheit sicherheitslücke schwachstelle melden verantwortungsvolle offenlegung exploit hack
@@ -2501,9 +2507,9 @@ set-del-when = Das Konto und alle Inhalte werden sofort gelöscht.
 set-del-check = Ja, ich möchte mein { $brand }-Konto dauerhaft löschen.
 set-del-button = Dauerhaft löschen
 set-del-questions = Bei Fragen besuchen Sie unsere
-set-del-help = Hilfezentrum
+set-del-help = Hilfe-Center
 set-verified = Verifiziert
-set-menu-help = Hilfezentrum
+set-menu-help = Hilfe-Center
 set-menu-switch = Profil wechseln
 profile-not-saved = Diese Änderung konnte nicht in Ihrem Konto gespeichert werden. Die Profile wurden daher wiederhergestellt.
 profile-icon-for = Für { $name }

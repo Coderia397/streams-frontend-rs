@@ -911,7 +911,7 @@ help-art-report-bug-body =
     La página <a=/help/contact>Contáctanos</a> tiene un botón que abre un correo electrónico con los detalles de tu navegador ya completados.
 
     @@ diagnostics
-cookie-sheet = <b>{ $brand }</b> usa cookies para mantener tus perfiles y preferencias y, si lo permites, para personalizar las recomendaciones.
+cookie-sheet = <b>{ $brand }</b> guarda algunos datos en tu navegador para mantener tu sesión iniciada y abrir las páginas rápido y, si lo permites, para personalizar las recomendaciones.
 cookie-learn = Saber más
 cookie-reject = Rechazar
 cookie-accept = Aceptar
@@ -930,23 +930,27 @@ cookie-nav-ads = Cookies publicitarias
 cookie-general =
     Esta herramienta explica qué guarda { $brand } en tu navegador y te permite controlar la parte opcional.
 
-    La mayoría de los navegadores te permiten bloquear o eliminar cookies y datos del sitio. Si lo haces, algunas funciones de { $brand } dejarán de funcionar y se perderán tus perfiles y progreso.
+    La mayoría de los navegadores te permiten bloquear o borrar las cookies y los datos de sitios. Si lo haces, se cerrará tu sesión en ese navegador y las páginas tardarán más en abrirse hasta que vuelvan las copias. Tu cuenta conserva tus perfiles, listas y progreso.
 
-    Tus elecciones aquí se guardan en tu navegador, por lo que borrar los datos del sitio las restablecerá.
+    Tus elecciones aquí se guardan en tu navegador, así que borrar los datos del sitio las restablece.
 
     Para más información, consulta la <a=/cookies>Política de cookies</a> y la <a=/privacy>Política de privacidad</a>.
-cookie-essential =
-    Estos elementos son necesarios para brindarte el servicio que solicitaste. Mantienen tus perfiles y PINs, hasta dónde viste, tu idioma y las elecciones que haces aquí. Permanecen en tu dispositivo y no se envían a nuestros servidores. No puedes desactivarlos.
 
-    Duración: permanecen hasta que borres los datos de este sitio.
+cookie-essential =
+    Estos elementos son necesarios para darte el servicio que pediste. Mantienen tu sesión iniciada, guardan una copia de tus perfiles, ajustes, Mi lista, valoraciones y progreso para que las páginas se abran al instante, y recuerdan tu idioma y lo que elijas aquí. Las copias se mantienen al día con tu cuenta. No puedes desactivarlos.
+
+    Duración: hasta que borres los datos de este sitio. Al cerrar sesión se eliminan las copias de los datos de tu cuenta.
+
 cookie-essential-list =
-    - <b>streams_profiles</b> y <b>streams_active_profile</b>: tus perfiles y el que está en uso.
-    - <b>streams_watch_progress_v1</b>: hasta dónde viste cada título.
-    - <b>streams_session</b>: tu inicio de sesión, cuando lo tengas.
-    - <b>streams_language</b>: el idioma que elegiste.
-    - <b>streams_consent</b>: las elecciones que haces en esta ventana.
-    - <b>streams_help_votes</b>: tus respuestas a «¿Fue útil este artículo?»
-    - <b>streams-notifications-read:default</b>: qué notificaciones has abierto.
+    - <b>streams_session</b>, <b>streams_device_key</b> y <b>streams_resume</b>: tu sesión, un identificador aleatorio que permite a tu cuenta reconocer este navegador y una nota sellada que te deja volver durante el día siguiente a cerrar sesión.
+    - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b> y <b>streams_account_prefs</b>: copias de tus perfiles, del que está en uso y de tus ajustes.
+    - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b> y <b>streams_episode_progress_v1</b>: copias de Mi lista, de las valoraciones y de hasta dónde viste, para cada perfil.
+    - <b>streams_sync_snapshot</b> y <b>streams_sync_cursor</b>: lo último que se intercambió con tu cuenta, para enviar solo los cambios.
+    - <b>streams_language</b>, <b>streams_country</b> y <b>streams_rating_system_auto</b>: tu idioma y el país que se usa para elegir las etiquetas de clasificación.
+    - <b>streams_consent</b>: lo que elijas en esta ventana.
+    - <b>streams_help_votes</b>, <b>streams_help_viewed</b> y <b>streams_help_recent</b>: tus respuestas a “¿Te resultó útil este artículo?”, los artículos que viste y tus búsquedas recientes en el Centro de ayuda.
+    - <b>streams-notifications-read:default</b>, <b>streams_preview_muted</b> y <b>streams_boot_seen</b>: qué notificaciones abriste, si las vistas previas empiezan sin sonido y si se muestra la animación de inicio.
+
 cookie-personal =
     Estos elementos permiten que { $brand } adapte las filas a tu gusto. Cuando inicias un título, la aplicación envía el título y un número de sesión aleatorio a nuestro servicio de recomendaciones. El servicio mantiene un pequeño perfil de gustos durante aproximadamente un día y luego lo descarta.
 
@@ -957,9 +961,10 @@ cookie-personal-list =
     - <b>streams_session_id</b>: un número aleatorio que no está vinculado a tu nombre.
     - <b>streams_user_affinity</b>: los géneros que elegiste.
 cookie-third =
-    Los pósters y detalles provienen de un catálogo público de películas, y las transmisiones provienen de fuentes independientes. Esos sitios web reciben tu dirección IP cuando tu navegador carga desde ellos y pueden establecer sus propias cookies. No podemos desactivarlos desde aquí.
+    Los pósteres y los detalles vienen de un catálogo público de películas, los tráileres se reproducen desde YouTube y los streams vienen de fuentes independientes. Esos sitios reciben tu dirección IP cuando tu navegador carga contenido de ellos y pueden colocar sus propias cookies. No podemos desactivarlas desde aquí.
 
-    Consulta <a=/help/article/sources>De dónde provienen los títulos</a>.
+    Consulta <a=/help/article/sources>De dónde vienen los títulos</a>.
+
 cookie-ads = No usamos cookies publicitarias, rastreadores ni analíticas.
 help-ui-foryou = Ayuda para ti en este dispositivo
 help-ui-recommended-inline = Recomendado para ti

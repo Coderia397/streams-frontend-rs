@@ -103,7 +103,7 @@ help-ui-contact-us = Kontakta oss
 help-ui-language-label = Välj ditt önskade språk:
 help-ui-back = Tillbaka till Hjälp Hemsida
 help-ui-related = Relaterade artiklar
-help-ui-helpful = Var detta inlägg användbart?
+help-ui-helpful = Var den här artikeln till hjälp?
 help-ui-yes = Ja
 help-ui-no = Nej
 help-ui-thanks = Tack för din feedback.
@@ -922,7 +922,7 @@ help-art-report-bug-body =
 
     @@ diagnostics
 
-cookie-sheet = <b>{ $brand }</b> använder cookies för att hålla dina profiler och preferenser och, om du tillåter det, för att anpassa rekommendationer.
+cookie-sheet = <b>{ $brand }</b> sparar några uppgifter i din webbläsare så att du förblir inloggad och sidor öppnas snabbt, och, om du tillåter det, för att anpassa rekommendationer.
 cookie-learn = Läs mer
 cookie-reject = Neka
 cookie-accept = Godkänn
@@ -939,25 +939,29 @@ cookie-nav-personal = Personanpassning
 cookie-nav-third = Tredjepartscookies
 cookie-nav-ads = Reklamcookies
 cookie-general =
-    Detta verktyg förklarar vad { $brand } lagrar i din webbläsare och låter dig styra den valfria delen.
+    Det här verktyget förklarar vad { $brand } sparar i din webbläsare och låter dig styra den valfria delen.
 
-    De flesta webbläsare låter dig blockera eller ta bort cookies och webbplatsdata. Om du gör det, kommer delar av { $brand } att stoppa fungera och dina profiler och framsteg kommer att förloras.
+    De flesta webbläsare låter dig blockera eller radera cookies och webbplatsdata. Gör du det loggas du ut i den webbläsaren och sidor öppnas långsammare tills kopiorna är tillbaka. Ditt konto behåller dina profiler, listor och var du är.
 
-    Dina val här sparas i din webbläsare, så att rensa webbplatsdata återställer dem.
+    Dina val här sparas i webbläsaren, så om du rensar webbplatsdata återställs de.
 
-    För mer information, se <a=/cookies>Cookie Policy</a> och <a=/privacy>Privacy Policy</a>.
+    Läs mer i <a=/cookies>Cookiepolicy</a> och <a=/privacy>Integritetspolicy</a>.
+
 cookie-essential =
-    Dessa är nödvändiga för att ge dig den tjänst du begärde. De håller dina profiler och PIN-koder, hur långt du har tittat, ditt språk och de val du gör här. De finns kvar på din enhet och skickas inte till våra servrar. Du kan inte avslå dem.
+    De här uppgifterna behövs för att ge dig tjänsten du bad om. De håller dig inloggad, sparar en kopia av dina profiler, inställningar, Min lista, betyg och var du är så att sidor öppnas direkt, och kommer ihåg ditt språk och dina val här. Kopiorna hålls i takt med ditt konto. Du kan inte välja bort dem.
 
-    Lifespan: de finns kvar tills du rensar webbplatsdata.
+    Livslängd: tills du rensar den här webbplatsens data. När du loggar ut tas kopiorna av ditt kontos data bort.
+
 cookie-essential-list =
-    - <b>streams_profiles</b> och <b>streams_active_profile</b>: dina profiler och den som används.
-    - <b>streams_watch_progress_v1</b>: hur långt du har tittat på varje titel.
-    - <b>streams_session</b>: din inloggning, om du har en.
-    - <b>streams_language</b>: det språk du valde.
-    - <b>streams_consent</b>: de val du gör i detta fönster.
-    - <b>streams_help_votes</b>: dina svar på "Var detta artikel användbar?"
-    - <b>streams-notifications-read:default</b>: vilka meddelanden du har öppnat.
+    - <b>streams_session</b>, <b>streams_device_key</b> och <b>streams_resume</b>: din inloggning, ett slumpmässigt id som låter ditt konto känna igen den här webbläsaren och en förseglad anteckning som låter dig komma tillbaka inom ett dygn efter att du loggat ut.
+    - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b> och <b>streams_account_prefs</b>: kopior av dina profiler, den som används och dina inställningar.
+    - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b> och <b>streams_episode_progress_v1</b>: kopior av Min lista, betyg och hur långt du har tittat, för varje profil.
+    - <b>streams_sync_snapshot</b> och <b>streams_sync_cursor</b>: det som senast utbyttes med ditt konto, så att bara ändringar skickas.
+    - <b>streams_language</b>, <b>streams_country</b> och <b>streams_rating_system_auto</b>: ditt språk och det land som används för att välja åldersgränser.
+    - <b>streams_consent</b>: de val du gör i det här fönstret.
+    - <b>streams_help_votes</b>, <b>streams_help_viewed</b> och <b>streams_help_recent</b>: dina svar på ”Var den här artikeln till hjälp?”, artiklarna du läst och dina senaste sökningar i Hjälpcenter.
+    - <b>streams-notifications-read:default</b>, <b>streams_preview_muted</b> och <b>streams_boot_seen</b>: vilka aviseringar du har öppnat, om förhandsvisningar startar utan ljud och om startanimationen ska visas.
+
 cookie-personal =
     Dessa gör att { $brand } anpassar raderna efter dina preferenser. När du börjar en titel skickar appen titeln och en slumpmässig sessionssiffra till vår rekommendationservice. Servicen håller ett litet smakprofil i ungefär en dag och kastar sedan bort den.
 
@@ -968,9 +972,10 @@ cookie-personal-list =
     - <b>streams_session_id</b>: en slumpmässig siffra som inte är kopplad till ditt namn.
     - <b>streams_user_affinity</b>: de genrer du valde.
 cookie-third =
-    Poster och detaljer kommer från ett offentligt filmkatalog och streams kommer från oberoende källor. Dessa webbplatser får din IP-adress när din webbläsare laddar från dem och kan sätta sina egna cookies. Vi kan inte stänga av dem här.
+    Affischer och detaljer kommer från en offentlig filmkatalog, trailrar spelas upp från YouTube och strömmar kommer från oberoende källor. De webbplatserna får din IP-adress när webbläsaren hämtar något från dem och kan sätta egna cookies. Det kan vi inte stänga av härifrån.
 
-    Se <a=/help/article/sources>Var kommer titlarna ifrån</a>.
+    Se <a=/help/article/sources>Var titlarna kommer ifrån</a>.
+
 cookie-ads = Vi använder inte reklamcookies, spårare eller analyser.
 help-ui-foryou = Hjälp för dig på detta enhet
 help-ui-recommended-inline = Rekommenderat för dig

@@ -921,7 +921,7 @@ help-art-report-bug-body =
 
     @@ diagnostics
 
-cookie-sheet = <b>{ $brand }</b>는 프로필과 선호도를 유지하고, 허용하는 경우 추천을 개인화하기 위해 쿠키를 사용합니다.
+cookie-sheet = <b>{ $brand }</b>는 로그인 상태를 유지하고 페이지를 빠르게 열기 위해, 그리고 허용하면 추천을 맞춤화하기 위해 브라우저에 몇 가지 정보를 저장해요.
 cookie-learn = 더 알아보기
 cookie-reject = 거부
 cookie-accept = 수락
@@ -938,25 +938,29 @@ cookie-nav-personal = 개인화 쿠키
 cookie-nav-third = 제3자 쿠키
 cookie-nav-ads = 광고 쿠키
 cookie-general =
-    이 도구는 { $brand }가 브라우저에 저장하는 정보를 설명하고, 선택적으로 제어할 수 있는 기능을 제공합니다.
+    이 도구는 { $brand }가 브라우저에 저장하는 것을 설명하고, 선택 항목을 관리할 수 있게 해 줘요.
 
-    대부분의 브라우저는 쿠키 및 사이트 데이터를 차단하거나 삭제할 수 있습니다. 이를 수행하면 { $brand }의 일부 기능이 작동하지 않으며, 프로필과 진행 상황이 손실될 수 있습니다.
+    대부분의 브라우저에서는 쿠키와 사이트 데이터를 차단하거나 삭제할 수 있어요. 그렇게 하면 그 브라우저에서 로그아웃되고, 사본이 다시 생길 때까지 페이지가 느리게 열려요. 프로필, 목록, 진행 상황은 계정에 그대로 남아 있어요.
 
-    여기에서 선택한 설정은 브라우저에 저장되므로, 사이트 데이터를 지우면 설정이 초기화됩니다.
+    여기서 고른 선택은 브라우저에 저장되므로, 사이트 데이터를 지우면 초기화돼요.
 
-    자세한 내용은 <a=/cookies>쿠키 정책</a> 및 <a=/privacy>개인정보 정책</a>을 참조하십시오.
+    자세한 내용은 <a=/cookies>쿠키 정책</a>과 <a=/privacy>개인정보 처리방침</a>에서 확인하세요.
+
 cookie-essential =
-    이 항목들은 요청하신 서비스를 제공하기 위해 필요합니다. 프로필과 PIN, 시청한 정도, 언어 및 여기에서 선택한 설정을 유지합니다. 이들은 기기에서만 저장되며, 서버로 전송되지 않습니다. 이 항목들은 선택할 수 없습니다.
+    요청한 서비스를 제공하는 데 꼭 필요한 항목이에요. 로그인 상태를 유지하고, 페이지가 바로 열리도록 프로필, 설정, 내 목록, 평가, 진행 상황 사본을 저장하며, 언어와 여기서 고른 선택을 기억해요. 사본은 계정과 동기화돼요. 끌 수 없어요.
 
-    수명: 이 사이트의 데이터를 지우기 전까지 유지됩니다.
+    보관 기간: 이 사이트의 데이터를 지울 때까지. 로그아웃하면 계정 데이터의 사본이 삭제돼요.
+
 cookie-essential-list =
-    - <b>streams_profiles</b> 및 <b>streams_active_profile</b>: 프로필과 현재 사용 중인 프로필
-    - <b>streams_watch_progress_v1</b>: 각 제목의 시청 정도
-    - <b>streams_session</b>: 로그인한 경우 로그인 정보
-    - <b>streams_language</b>: 선택한 언어
-    - <b>streams_consent</b>: 이 창에서 선택한 설정
-    - <b>streams_help_votes</b>: "이 기사가 도움이 되었나요?"에 대한 답변
-    - <b>streams-notifications-read:default</b>: 열람한 알림
+    - <b>streams_session</b>, <b>streams_device_key</b>, <b>streams_resume</b>: 로그인 정보, 계정이 이 브라우저를 알아보게 하는 무작위 ID, 로그아웃 후 하루 안에 다시 들어올 수 있게 하는 봉인된 메모.
+    - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b>, <b>streams_account_prefs</b>: 프로필, 사용 중인 프로필, 설정의 사본.
+    - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b>, <b>streams_episode_progress_v1</b>: 프로필별 내 목록, 평가, 시청 위치의 사본.
+    - <b>streams_sync_snapshot</b>, <b>streams_sync_cursor</b>: 변경된 것만 보내기 위해 계정과 마지막으로 주고받은 내용.
+    - <b>streams_language</b>, <b>streams_country</b>, <b>streams_rating_system_auto</b>: 언어, 그리고 등급 표기를 정하는 데 쓰는 국가.
+    - <b>streams_consent</b>: 이 창에서 고른 선택.
+    - <b>streams_help_votes</b>, <b>streams_help_viewed</b>, <b>streams_help_recent</b>: '이 도움말이 도움이 되었나요?'에 대한 답변, 본 도움말, 도움말 센터에서 최근 검색한 내용.
+    - <b>streams-notifications-read:default</b>, <b>streams_preview_muted</b>, <b>streams_boot_seen</b>: 열어 본 알림, 미리보기를 음소거로 시작할지, 시작 애니메이션을 보여 줄지.
+
 cookie-personal =
     이 항목들은 { $brand }가 선호도에 맞게 콘텐츠를 조정할 수 있도록 합니다. 제목을 시작하면 앱이 제목과 무작위 세션 번호를 추천 서비스로 전송합니다. 서비스는 약 하루 동안 작은 선호도 프로필을 유지한 후 삭제합니다.
 
@@ -967,9 +971,10 @@ cookie-personal-list =
     - <b>streams_session_id</b>: 이름과 연결되지 않은 무작위 숫자
     - <b>streams_user_affinity</b>: 선택한 장르
 cookie-third =
-    포스터 및 세부 정보는 공개 영화 카탈로그에서 가져오며, 스트리밍은 독립적인 출처에서 가져옵니다. 이러한 웹사이트는 브라우저가 해당 사이트에서 로드될 때 IP 주소를 받을 수 있으며, 자체 쿠키를 설정할 수 있습니다. 여기서는 이를 비활성화할 수 없습니다.
+    포스터와 상세 정보는 공개 영화 카탈로그에서, 예고편은 YouTube에서, 스트림은 독립적인 소스에서 와요. 이 사이트들은 브라우저가 내용을 불러올 때 IP 주소를 받으며, 자체 쿠키를 설정할 수 있어요. 여기서는 끌 수 없어요.
 
-    <a=/help/article/sources>제목의 출처</a>를 참조하십시오.
+    <a=/help/article/sources>콘텐츠의 출처</a>에서 확인하세요.
+
 cookie-ads = 광고 쿠키, 추적기 또는 분석 도구를 사용하지 않습니다.
 help-ui-foryou = 이 기기에 맞춘 도움말
 help-ui-recommended-inline = 추천 항목

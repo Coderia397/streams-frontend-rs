@@ -922,7 +922,7 @@ help-art-report-bug-body =
 
     @@ diagnostics
 
-cookie-sheet = <b>{ $brand }</b> profillerinizi ve tercihlerinizi korumak ve izin verirseniz, önerileri kişiselleştirmek için çerezler kullanır.
+cookie-sheet = <b>{ $brand }</b>, oturumunuzu açık tutmak ve sayfaları hızlı açmak için, izin verirseniz de önerileri kişiselleştirmek için tarayıcınızda birkaç veri saklar.
 cookie-learn = Daha fazla bilgi
 cookie-reject = Reddet
 cookie-accept = Kabul et
@@ -939,25 +939,29 @@ cookie-nav-personal = Kişiselleştirme Çerezleri
 cookie-nav-third = Üçüncü Taraf Çerezleri
 cookie-nav-ads = Reklam Çerezleri
 cookie-general =
-    Bu araç, { $brand }'ın tarayıcınızda ne tür verileri sakladığını açıklar ve isteğe bağlı kısmını kontrol etmenizi sağlar.
+    Bu araç, { $brand } uygulamasının tarayıcınızda ne sakladığını açıklar ve isteğe bağlı kısmı yönetmenizi sağlar.
 
-    Çoğu tarayıcı, çerezleri ve sitenin verilerini engellemeyi veya silmeyi sağlar. Eğer bunu yaparsanız, { $brand }'ın bazı bölümleri çalışmayacak ve profilleriniz ve ilerlemeniz kaybolacak.
+    Çoğu tarayıcı çerezleri ve site verilerini engellemenize veya silmenize izin verir. Bunu yaparsanız o tarayıcıda oturumunuz kapanır ve kopyalar geri gelene kadar sayfalar daha yavaş açılır. Hesabınız profillerinizi, listelerinizi ve ilerlemenizi saklamaya devam eder.
 
-    Buradaki seçimleriniz tarayıcınızda saklanır, bu yüzden sitenin verilerini temizlemek bu seçimleri sıfırlar.
+    Buradaki seçimleriniz tarayıcınızda saklanır; site verilerini silmek onları sıfırlar.
 
-    Daha fazlası için, <a=/cookies>Çerez Politikası</a> ve <a=/privacy>Gizlilik Politikası</a> sayfalarını inceleyin.
+    Daha fazlası için <a=/cookies>Çerez Politikası</a> ve <a=/privacy>Gizlilik Politikası</a> sayfalarına bakın.
+
 cookie-essential =
-    Bu öğeler, sizi talep ettiğiniz hizmeti vermek için gerekli olanlardır. Profillerinizi ve PIN'lerinizi, izlediğiniz konumları, dilinizi ve burada yaptığınız seçimleri saklarlar. Bu çerezler, cihazınıza kalır ve sunucularımıza gönderilmez. Bu çerezlerden kaçınmak mümkün değildir.
+    Bu öğeler, istediğiniz hizmeti sunmak için gereklidir. Oturumunuzu açık tutar, sayfalar hemen açılsın diye profillerinizin, ayarlarınızın, Listem'in, puanlarınızın ve ilerlemenizin bir kopyasını saklar, dilinizi ve burada yaptığınız seçimleri hatırlar. Kopyalar hesabınızla eşit tutulur. Bunları kapatamazsınız.
 
-    Ömür süresi: bu site verilerini temizlediğinizde kalırlar.
+    Süre: bu sitenin verilerini silene kadar. Oturumu kapatmak, hesabınızdaki verilerin kopyalarını kaldırır.
+
 cookie-essential-list =
-    - <b>streams_profiles</b> ve <b>streams_active_profile</b>: profilleriniz ve kullanmakta olan profil.
-    - <b>streams_watch_progress_v1</b>: her başlık için izlediğiniz konum.
-    - <b>streams_session</b>: giriş yaptığınızda, girişinizi.
-    - <b>streams_language</b>: seçtiğiniz dil.
+    - <b>streams_session</b>, <b>streams_device_key</b> ve <b>streams_resume</b>: oturumunuz, hesabınızın bu tarayıcıyı tanımasını sağlayan rastgele bir kimlik ve oturumu kapattıktan sonraki bir gün içinde geri dönmenizi sağlayan mühürlü bir not.
+    - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b> ve <b>streams_account_prefs</b>: profillerinizin, kullanılan profilin ve ayarlarınızın kopyaları.
+    - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b> ve <b>streams_episode_progress_v1</b>: her profil için Listem'in, puanların ve nereye kadar izlediğinizin kopyaları.
+    - <b>streams_sync_snapshot</b> ve <b>streams_sync_cursor</b>: yalnızca değişiklikler gönderilsin diye hesabınızla en son paylaşılanlar.
+    - <b>streams_language</b>, <b>streams_country</b> ve <b>streams_rating_system_auto</b>: diliniz ve yaş sınırı etiketlerini seçmek için kullanılan ülke.
     - <b>streams_consent</b>: bu pencerede yaptığınız seçimler.
-    - <b>streams_help_votes</b>: "Bu makale faydalı mıydı?" sorusuna verdiğiniz cevaplar.
-    - <b>streams-notifications-read:default</b>: açmış olduğunuz bildirimler.
+    - <b>streams_help_votes</b>, <b>streams_help_viewed</b> ve <b>streams_help_recent</b>: “Bu makale faydalı mıydı?” sorusuna verdiğiniz yanıtlar, görüntülediğiniz makaleler ve Yardım Merkezi içindeki son aramalarınız.
+    - <b>streams-notifications-read:default</b>, <b>streams_preview_muted</b> ve <b>streams_boot_seen</b>: hangi bildirimleri açtığınız, önizlemelerin sessiz başlayıp başlamadığı ve açılış animasyonunun gösterilip gösterilmeyeceği.
+
 cookie-personal =
     Bu öğeler, { $brand }'ın satırı sizin tercihinize göre ayarlamasını sağlar. Başlık başlatıldığında, uygulama başlığı ve rastgele bir oturum numarasını öneri hizmetimize gönderir. Hizmet, yaklaşık bir gün boyunca küçük bir tercih profili tutar ve sonra bu profili siler.
 
@@ -968,9 +972,10 @@ cookie-personal-list =
     - <b>streams_session_id</b>: isminizle ilişkili olmayan rastgele bir sayı.
     - <b>streams_user_affinity</b>: seçtiğiniz türler.
 cookie-third =
-    Poster ve detaylar, bir açık film kataloğundan gelir ve akışlar bağımsız kaynaklardan gelir. Bu siteler, tarayıcınızdan onlara yüklediğinizde IP adresinizi alır ve kendi çerezlerini ayarlayabilirler. Bu çerezleri buradan kapatamayız.
+    Afişler ve ayrıntılar herkese açık bir film kataloğundan gelir, fragmanlar YouTube'dan oynatılır ve yayınlar bağımsız kaynaklardan gelir. Bu siteler, tarayıcınız onlardan bir şey yüklediğinde IP adresinizi görür ve kendi çerezlerini ayarlayabilir. Bunları buradan kapatamayız.
 
-    <a=/help/article/sources>Basliklar nereden gelir</a> sayfasını inceleyin.
+    Bkz. <a=/help/article/sources>Başlıklar nereden geliyor</a>.
+
 cookie-ads = Reklam çerezleri, izleyiciler veya analitikler kullanmıyoruz.
 help-ui-foryou = Bu cihaz için size özel yardım
 help-ui-recommended-inline = Sizin için öneriler
