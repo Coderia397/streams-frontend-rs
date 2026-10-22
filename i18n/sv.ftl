@@ -26,7 +26,7 @@ category-sub-nav-mobile-series = Serier
 choose-icon-back = Bakåt
 clips-clips = Clips
 continue-watching-options-sheet-cancel = Avbryt
-continue-watching-options-sheet-remove-from-continue-watching = Ta bort från 'Fortsätt titta'
+continue-watching-options-sheet-remove-from-continue-watching = Ta bort från Fortsätt titta
 continue-watching-row-continue-watching = Fortsätt att titta
 continue-watching-row-scroll-left = Rulla till vänster
 continue-watching-row-scroll-right = Rulla till höger
@@ -152,7 +152,7 @@ help-topic-fix = Fixa ett problem
 help-topic-watching = Att titta
 help-topic-start = Att börja
 help-group-profiles = Profil
-help-group-account-data = Konto och data
+help-group-account-data = Dina uppgifter och din integritet
 help-group-paying = Betala för { $brand }
 help-group-playback-issues = Spelspelarproblem
 help-group-device-issues = Webbläsare och enheter
@@ -163,622 +163,766 @@ help-group-finding = Att hitta något att titta på
 help-group-about = Om { $brand }
 help-group-setup = Enhetsinställning
 help-group-reporting = Redovisning och juridiskt
-help-art-profiles-manage-title = Hur man skapar, redigerar eller tar bort profiler
-help-art-profiles-manage-summary = Lägg till en profil för varje person, ändra ett namn eller en ikon, aktivera ett PIN-kod, eller ta bort en profil som du inte längre behöver.
-help-art-profiles-manage-keywords = profil profil add skapa redigera ta bort namn ikon avatar vem som tittar
+help-art-profiles-manage-title = Skapa, redigera eller radera profiler
+help-art-profiles-manage-summary = Lägg till en profil för varje person, byt namn eller bild, lås en profil eller radera en du inte behöver längre.
+help-art-profiles-manage-keywords = skapa profil redigera profil radera profil hantera profiler namn bild
 help-art-profiles-manage-body =
-    Varje person som använder { $brand } på denna enhet kan ha en profil med sitt eget namn, ikon, lista och rekommendationer.
+    Alla i hemmet kan ha en egen profil med eget namn, egen bild, Min lista, tittaraktivitet och rekommendationer. Ett konto rymmer upp till 5 profiler.
 
-    ## Lägg till en profil
-    1. Öppna profilmenyn i övre högra hörnet och välj <b>Hantera profiler</b>, eller öppna <b>Vem som tittar?</b>-skärmen.
+    ## Lägga till en profil
+    1. Öppna profilmenyn uppe till höger och välj <b>Hantera profiler</b>, eller välj <b>Hantera profiler</b> på skärmen <b>Vem tittar?</b>.
     2. Välj <b>Lägg till profil</b>.
-    3. Skriv ett namn, välj en ikon och välj <b>Spara</b>.
+    3. Skriv ett namn och välj en bild. Slå på <b>Barnprofil</b> om profilen är till ett barn.
+    4. Välj <b>Spara</b>.
 
-    ## Redigera eller ta bort en profil
-    1. Öppna <b>Hantera profiler</b>.
-    2. Välj den profil du vill ändra.
-    3. Ändra namnet eller ikonen, aktivera eller inaktivera PIN-kod eller barnsinställningen, och välj sedan <b>Spara</b>. För att ta bort en profil väljer du <b>Ta bort profil</b>.
+    ## Redigera eller radera en profil
+    1. Öppna <b>Hantera profiler</b> och välj profilen du vill ändra.
+    2. Ändra namnet eller bilden, eller slå på eller av <b>Barnprofil</b> eller <b>Profillås</b>, och välj sedan <b>Spara</b>.
+    3. Välj <b>Radera profil</b> för att ta bort profilen. Profilens tittaraktivitet och inställningar försvinner med den.
 
-    !! Notera: Profiler sparas i den här webbläsaren, på denna enhet. Se <a=/help/article/saved-data>Var dina profiler, lista och framsteg sparas</a>.
+    Språk, undertexter, föräldrakontroll och profilens övriga inställningar finns under <b>Konto</b>, i <b>Hantera profiler</b>.
 
-    @@ profiler
+    !! Obs! Profilerna sparas i ditt konto, så de syns på alla enheter där du loggar in.
 
-    >> Kan inte ta bort en profil
-    Du måste behålla minst en profil. Skapa en annan först, och ta sedan bort den gamla.
-help-art-switch-profile-title = Hur man byter profil
+    @@ profiles
+
+    >> Det går inte att radera en profil
+    Huvudprofilen, den som har ditt förnamn, kan inte raderas, och ett konto har alltid minst en profil. Alla andra profiler kan raderas.
+
+help-art-switch-profile-title = Byta profil
 help-art-switch-profile-summary = Byt vem som tittar utan att lämna sidan.
-help-art-switch-profile-keywords = byt ändra profil vem som tittar meny
+help-art-switch-profile-keywords = byta profil annan profil vem tittar profilmeny
 help-art-switch-profile-body =
-    1. Öppna profilmenyet i toppen till höger på sidan.
-    2. Välj det profil du vill använda.
-    3. Om profilen har ett PIN, skriv in de fyra siffrorna för att fortsätta.
+    1. Öppna profilmenyn uppe till höger på sidan. På mobilen trycker du på din profilbild i fältet längst ner.
+    2. Välj profilen du vill använda.
+    3. Om profilen är låst skriver du dess PIN-kod med 4 siffror.
 
-    Rekommendationer, <b>Mitt valdlista</b> och <b>Fortsätt titta</b> ändras med den profil du väljer.
+    Rekommendationer, <b>Min lista</b> och <b>Fortsätt titta</b> följer den profil du väljer.
 
-    !! Obs: Du kan låsa en profil med ett PIN. Se <a=/help/article/profile-pin>Hur man lägger till, redigerar eller tar bort ett profil PIN</a>.
+    !! Obs! Du kan låsa en profil med en PIN-kod. Se <a=/help/article/profile-pin>Lägga till, ändra eller ta bort en profils PIN-kod</a>.
 
     @@ profiles
-help-art-profile-pin-title = Hur man lägger till, redigerar eller tar bort ett profil PIN
-help-art-profile-pin-summary = Lås en profil med ett fyrsiffrigt PIN så att endast rätt person kan öppna den.
-help-art-profile-pin-keywords = pin lås profil lås kod lösenord fyrsiffrigt säker
+
+help-art-profile-pin-title = Lägga till, ändra eller ta bort en profils PIN-kod
+help-art-profile-pin-summary = Lås en profil med en PIN-kod på 4 siffror så att bara rätt person kan öppna den.
+help-art-profile-pin-keywords = pin pinkod lås profillås kod privat skydda profil
 help-art-profile-pin-body =
-    Ett profil PIN är fyra siffror. När någon väljer profilen måste de skriva in PIN för att öppna den.
+    Ett profillås frågar efter en PIN-kod på 4 siffror innan profilen öppnas. PIN-koden hör till ditt konto, så den gäller på alla enheter där du loggar in.
 
-    ## Tummen upp eller ändra ett PIN
-    1. Öppna <b>Hantera profiler</b> och välj profilen.
-    2. Tummen upp <b>Profil lås</b> och skriv in fyra siffror.
-    3. Välj <b>Spara</b>.
+    ## Slå på profillås
+    1. Öppna profilmenyn, välj <b>Konto</b>, sedan <b>Hantera profiler</b>, och välj profilen.
+    2. Välj <b>Profillås</b> och skriv ditt kontolösenord för att bekräfta att det är du.
+    3. Skriv fyra siffror och välj <b>Spara</b>.
 
-    ## Ta bort ett PIN
-    1. Öppna <b>Hantera profiler</b> och välj profilen, sedan skriv in det nuvarande PIN.
-    2. Tummen upp <b>Profil lås</b> och välj <b>Spara</b>.
+    Du kan också slå på <b>Profillås</b> när du lägger till eller redigerar en profil i <b>Hantera profiler</b>.
 
-    !! Obs: PIN lagras på detta enhet och håller andra personer utom från en profil på den här webbläsaren. Det är inte ett starkt lås mot någon som kan öppna inställningarna i din webbläsare. Om du glömt det, se <a=/help/article/forgot-pin>Jag glömde mitt profil PIN</a>.
+    ## Ändra eller ta bort PIN-koden
+    1. Öppna profilens <b>Profillås</b>, som ovan.
+    2. Välj <b>Ändra PIN</b>, eller <b>Ta bort profillås</b> och skriv den nuvarande PIN-koden.
+
+    !! Obs! Efter för många felaktiga försök förblir profilen låst en stund. Om du har glömt PIN-koden, se <a=/help/article/forgot-pin>Jag har glömt min profils PIN-kod</a>.
 
     @@ profiles
-help-art-kids-profile-title = Hur man skapar en profil för barn
-help-art-kids-profile-summary = En barnprofil visar titlar som har valts ut för yngre tittare och håller resten utom räckhåll.
-help-art-kids-profile-keywords = barn barn barn familj föräldra kontroller säker ung profil
+
+help-art-kids-profile-title = Skapa en profil för barn
+help-art-kids-profile-summary = En barnprofil visar titlar som är gjorda för barn och håller allt annat borta.
+help-art-kids-profile-keywords = barnprofil barn kids säker ålder föräldrar
 help-art-kids-profile-body =
-    En barnprofil begränsar vad som visas till titlar som passar yngre tittare och tar bort vuxna radar från sidorna.
+    En barnprofil visar bara titlar som passar barn, med en egen startsida och egna menyer för barn.
 
     1. Öppna <b>Hantera profiler</b> och välj <b>Lägg till profil</b>.
-    2. Tummen upp <b>Barnläge</b> för denna profil.
-    3. Välj ett namn och en ikon, sedan <b>Spara</b>.
+    2. Skriv ett namn och slå på <b>Barnprofil</b>.
+    3. Välj <b>Spara</b>.
 
-    För att stoppa ett barn från att växla till en annan profil, lägg till ett PIN på varje vuxen profil. Se <a=/help/article/profile-pin>Hur man lägger till, redigerar eller tar bort ett profil PIN</a>.
+    Vill du göra en befintlig profil till barnprofil redigerar du den och slår på <b>Barnprofil</b>. Huvudprofilen kan inte vara en barnprofil.
 
-    !! Obs: Titlar kommer från oberoende källor och inte alla titlar har en betyg. En barnprofil minskar vad ett barn kan hitta. Det ersätter inte att titta tillsammans.
+    Välj <b>Lämna Barn</b> och sedan en annan profil för att lämna barnsidorna. Vill du hindra ett barn från att byta profil låser du de andra profilerna med en PIN-kod. Se <a=/help/article/profile-pin>Lägga till, ändra eller ta bort en profils PIN-kod</a>.
+
+    För äldre barn kan du i stället sätta en åldersgräns på vilken profil som helst. Se <a=/help/article/parental-controls>Föräldrakontroll: åldersgränser och blockerade titlar</a>.
+
+    !! Obs! Titlarna kommer från oberoende källor och alla har inte en åldersgräns. En barnprofil begränsar vad ett barn kan hitta, men ersätter inte att titta tillsammans.
 
     @@ profiles
+
 help-art-need-account-title = Behöver jag ett konto?
-help-art-need-account-summary = Du kan bläddra och titta utan ett. Här är vad ett konto lägger till.
-help-art-need-account-keywords = konto registrera inloggning krävs medlemskap
+help-art-need-account-summary = Ja, ett gratis konto. Så här mycket sparar det åt dig.
+help-art-need-account-keywords = behöver konto gratis registrera skapa konto
 help-art-need-account-body =
-    Du behöver inte ett konto för att bläddra, söka eller titta på { $brand }.
+    Ja. Du behöver ett gratis konto för att titta på { $brand }. Det tar en minut att skapa och frågar aldrig efter betaluppgifter.
 
-    Idag sparas dina profiler, listor och tittarprogress i den här webbläsaren på detta enhet. Konton som håller dem synkroniserade över dina enheter byggs på. Förrän de är tillgängliga är inloggningsidan en förhandsvisning och skapar inte ett verkligt konto.
+    1. Skriv din e-postadress på { $brand }s startsida och välj <b>Kom igång</b>.
+    2. Skriv ditt för- och efternamn och välj ett lösenord på minst 8 tecken.
+    3. Öppna länken vi mejlar dig för att bekräfta adressen, och logga sedan in.
 
-    !! Obs: { $brand } kommer aldrig att fråga efter en kortnummer för att skapa ett konto. Se <a=/help/article/free-to-use>Är { $brand } gratis?</a>
-help-art-sign-in-title = Inloggning och utloggning
-help-art-sign-in-summary = Vad inloggningsidan gör idag och vad du ska göra om den inte beter sig som förväntat.
-help-art-sign-in-keywords = inloggning logga in logga ut utloggnings lösenord e-post kan inte inlogga
+    Ditt konto sparar dina profiler, Min lista, dina betyg, din tittaraktivitet och dina inställningar, så att allt är likadant på alla enheter där du loggar in. Ditt förnamn blir namnet på din huvudprofil.
+
+    !! Obs! { $brand } är gratis och kommer aldrig att be om ett kortnummer. Se <a=/help/article/free-to-use>Är { $brand } gratis?</a>
+
+help-art-sign-in-title = Logga in och logga ut
+help-art-sign-in-summary = Logga in med e-post och lösenord, förbli inloggad och logga ut.
+help-art-sign-in-keywords = logga in inloggning logga ut kom ihåg mig e-post lösenord konto
 help-art-sign-in-body =
-    Inloggningsidan är en förhandsvisning av konton som byggs. Att välja att fortsätta tar dig till dina profiler på detta enhet. Inga lösenord eller e-postadress kontrolleras ännu.
+    ## Logga in
+    1. Välj <b>Logga in</b> högst upp på { $brand }s startsida.
+    2. Skriv din e-postadress och ditt lösenord och välj <b>Logga in</b>.
 
-    ## Utloggnings
-    Öppna profilmeny och välj <b>Utloggnings</b>. Dina sparade profiler finns kvar på detta enhet.
+    Låt <b>Kom ihåg mig</b> vara påslaget för att förbli inloggad på den här enheten. Om du loggade ut från enheten för en liten stund sedan kan du fortsätta utan att skriva lösenordet igen.
 
-    ## Inloggning fungerar inte
-    - Ladda om sidan och försök igen.
-    - Se till att webbläsaren tillåter att denna webbplats lagrar data. Se <a=/help/article/saved-data>Var dina profiler, lista och framsteg sparas</a>.
-    - Om problemet fortsätter, skriv till oss från <a=/help/contact>Kontakta oss</a> sidan.
-help-art-saved-data-title = Var dina profiler, lista och framsteg sparas
-help-art-saved-data-summary = Profiler, PIN-koder och tittarprogress finns i den här webbläsaren, på detta enhet.
-help-art-saved-data-keywords = sparad data lagring lokal webbläsare enhet förlorad synkronisering framsteg historik profiler cookies
+    ## Logga ut
+    Öppna profilmenyn och välj <b>Logga ut från { $brand }</b>. Vill du logga ut överallt på en gång, se <a=/help/article/devices-sign-out>Logga ut från en enhet eller från alla enheter</a>.
+
+    ## Inloggningen fungerar inte
+    - Kontrollera att e-postadressen är rätt stavad. Lösenordet skiljer på stora och små bokstäver.
+    - Om du precis har registrerat dig öppnar du först bekräftelselänken vi mejlade. <b>Skicka bekräftelsemejlet igen</b> skickar en ny.
+    - Efter för många försök väntar du en minut och försöker igen.
+    - Glömt lösenordet? Se <a=/help/article/forgot-password>Jag har glömt mitt lösenord</a>.
+
+help-art-saved-data-title = Var dina profiler, din lista och ditt framsteg sparas
+help-art-saved-data-summary = Ditt konto sparar dem, och varje webbläsare har en kopia så att sidorna öppnas snabbt.
+help-art-saved-data-keywords = sparade uppgifter konto synkronisera enheter webbläsare kopia framsteg lista
 help-art-saved-data-body =
-    { $brand } sparas dina profiler, PIN-koder och tittarprogress i webbläsarens lokala lagring på den enhet du använder. Inget av dem laddas upp till ett konto ännu.
+    Dina profiler, Min lista, dina betyg, din tittaraktivitet och dina inställningar sparas i ditt konto. Varje webbläsare där du loggar in har en kopia, så sidorna öppnas direkt och fungerar en stund utan anslutning. Ändringar når ditt konto inom några sekunder och dina andra enheter när du öppnar { $brand } där.
 
-    ## Vad detta innebär
-    - En annan webbläsare eller enhet börjar med inga profiler och inga framsteg.
-    - Privata eller incognito-fönster glömmer allt när de stängs.
-    - Att rensa webbplatsdata i din webbläsare tar bort dina profiler och framsteg.
-    - Din lista håller i sig så länge sidan är öppen tills konton är tillgängliga.
+    ## Vad det betyder
+    - Logga in på en annan enhet så finns allt där.
+    - Om du rensar webbplatsdata i en webbläsare loggas du ut där och kopian försvinner. Ditt konto sparar allt.
+    - I ett privat fönster tas kopian bort när du stänger fönstret.
 
-    ## Vad som skickas till våra servrar
-    När du öppnar eller startar en titel, säger appen rekommendations tjänsten vilken titel det var, med ett slumpmässigt sessionnummer som inte är kopplat till ditt namn. Raderna anpassas i ungefär en dag efter att du stoppar. Se <a=/help/article/recommendations>Hur rekommendationer fungerar</a>.
+    ## Vad mer som skickas till våra servrar
+    När du startar en titel får rekommendationstjänsten veta vilken, så att dina rader följer din smak. Du kan stänga av det med <b>Personliga rekommendationer</b> under <b>Integritet och datainställningar</b>. Se <a=/help/article/recommendations>Så fungerar rekommendationer</a>.
 
     @@ data
-help-art-clear-data-title = Hur du rensar dina sparade data
-help-art-clear-data-summary = Ta bort dina profiler, PIN-koder och visningsprogress från den här webbläsaren.
-help-art-clear-data-keywords = rensar radera återställa ta bort data historia cache lagring cookies börja om
+
+help-art-clear-data-title = Rensa sparade uppgifter
+help-art-clear-data-summary = Ta bort det som den här webbläsaren sparar för { $brand }, eller radera uppgifter från ditt konto.
+help-art-clear-data-keywords = rensa uppgifter webbplatsdata cookies ta bort webbläsare logga ut
 help-art-clear-data-body =
-    Att ta bort webbplatsdata tar bort alla profiler, PIN-koder och visningsrecords som { $brand } sparade i den här webbläsaren. Det kan inte återställas.
+    Om du rensar webbplatsdata i en webbläsare loggas du ut där och kopian av dina profiler och inställningar försvinner från den. Allt finns kvar i ditt konto och kommer tillbaka när du loggar in igen.
 
     ## Chrome, Edge och Brave
-    1. Öppna webbplatsens informationssymbol i adressfältet och välj <b>Cookie och webbplatsdata</b>, sedan <b>Hantera webbplatsdata på enheten</b>.
-    2. Ta bort inlägget för denna webbplats.
+    1. Välj ikonen för webbplatsinformation till vänster i adressfältet och välj <b>Cookies och webbplatsdata</b>, sedan <b>Hantera webbplatsdata på enheten</b>.
+    2. Ta bort posterna för den här webbplatsen.
 
     ## Firefox
-    1. Öppna låset i adressfältet och välj <b>Rensa cookie och webbplatsdata</b>.
+    1. Välj hänglåset i adressfältet och välj <b>Rensa kakor och webbplatsdata</b>.
 
-    ## Safari
-    1. Öppna <b>Inställningar</b>, sedan <b>Integritet</b>, sedan <b>Hantera webbplatsdata</b>.
-    2. Hitta denna webbplats och välj <b>Ta bort</b>.
+    ## Safari på Mac
+    1. Öppna <b>Safari</b>, sedan <b>Inställningar</b>, <b>Integritet</b> och <b>Hantera webbplatsdata</b>.
+    2. Leta upp webbplatsen och välj <b>Ta bort</b>.
 
-    För att ta bort endast visningshistorik, se <a=/help/article/viewing-history>Hur du hanterar din visningshistorik</a>.
+    ## Safari på iPhone och iPad
+    Öppna appen <b>Inställningar</b>, sedan <b>Appar</b>, <b>Safari</b>, <b>Avancerat</b>, <b>Webbplatsdata</b>, och ta bort webbplatsen.
+
+    ## Radera uppgifter från ditt konto
+    - För att ta bort titlar från din tittaraktivitet, se <a=/help/article/viewing-history>Hantera din tittarhistorik</a>.
+    - För att radera en profil, se <a=/help/article/profiles-manage>Skapa, redigera eller radera profiler</a>.
+    - För att radera allt, se <a=/help/article/delete-account>Radera ditt konto</a>.
 
     @@ data
-help-art-privacy-data-title = Vad samlar { $brand } in?
-help-art-privacy-data-summary = En kort sammanfattning av vad som sparas, vad som skickas och var du kan läsa hela policyen.
-help-art-privacy-data-keywords = integritet data samlar personlig information följa sälja dela cookie analyser
+
+help-art-privacy-data-title = Vilka uppgifter samlar { $brand } in?
+help-art-privacy-data-summary = En kort sammanfattning av vad som sparas, vad som skickas och var du läser hela policyn.
+help-art-privacy-data-keywords = integritet uppgifter samla in personuppgifter policy vad sparar ni
 help-art-privacy-data-body =
-    Vi säljer inte personlig data. Här är den korta versionen. Den <a=/privacy>Integritetspolicy</a> har hela texten.
+    Vi säljer inga personuppgifter och visar ingen reklam. Här är den korta versionen. <a=/privacy>Integritetspolicyn</a> har hela texten.
 
-    ## Sparat på din enhet
-    Profiler, PIN-koder, ditt valda språk och visningsprogress.
+    ## Vad ditt konto sparar
+    Ditt namn, din e-postadress, ett telefonnummer om du lägger till ett, dina profiler, Min lista, dina betyg, din tittaraktivitet och dina inställningar, plus en lista över de senaste inloggningarna och enheterna de kom från.
 
-    ## Skickas när du använder appen
-    - Begäranden för titlar, bilder och detaljer går till en katalogtjänst och till vår rekommendationstjänst.
-    - När du öppnar eller startar en titel får rekommendationstjänsten titeln och en slumpmässig sessionssiffra. Den spårar ett litet smakprofil i minnet i ungefär en dag och kastar sedan bort den.
-    - Spelatbegränsningsbegäranden går till oberoende tredjeparts källor, som ser din IP-adress som vilken webbplats du besöker.
+    ## Vad som skickas när du använder appen
+    - Förfrågningar om titlar, bilder och detaljer går till en öppen filmkatalog och till vår rekommendationstjänst.
+    - När du startar en titel får rekommendationstjänsten veta vilken, så att dina rader följer din smak. Stäng av det med <b>Personliga rekommendationer</b> under <b>Integritet och datainställningar</b>.
+    - Video kommer från oberoende externa källor och trailers från YouTube. De ser din IP-adress precis som alla webbplatser du besöker.
 
-    För cookies, se <a=/cookies>Cookiepolicy</a>. För att ta bort vad som sparas på din enhet, se <a=/help/article/clear-data>Hur du rensar dina sparade data</a>.
+    ## Dina val
+    - Ladda ner en kopia av dina uppgifter. Se <a=/help/article/download-data>Ladda ner en kopia av dina uppgifter</a>.
+    - Radera ditt konto när du vill. Se <a=/help/article/delete-account>Radera ditt konto</a>.
+
+    Om cookies och webbläsarens lagring, se <a=/cookies>Cookiepolicyn</a>.
 
     @@ cookies
 
     @@ data
+
 help-art-free-to-use-title = Är { $brand } gratis?
 help-art-free-to-use-summary = Det finns inget att betala för i { $brand }.
-help-art-free-to-use-keywords = gratis pris kostnad betala betalning prenumeration fakturering kort kredit plan prov
+help-art-free-to-use-keywords = gratis kostnad betala abonnemang pris kreditkort
 help-art-free-to-use-body =
-    { $brand } betalar inte, har ingen prenumeration eller frågar efter kortuppgifter. Det finns inga planer, prover eller fakturering. 
+    { $brand } tar inte ut någon avgift, har inget abonnemang och ber inte om kortuppgifter. Det finns inga abonnemangsnivåer, provperioder eller faktureringsdatum.
 
-    Om en sida, e-post eller meddelande säger att det är { $brand } och frågar dig att betala, är det inte från oss. Sätt inte in betalningsuppgifter. Skicka det till <a=mailto:{ $help_email }>{ $help_email }</a> och vi undersöker det. 
+    Om en sida, ett mejl eller ett meddelande utger sig för att vara { $brand } och ber dig betala kommer det inte från oss. Skriv inte in några betaluppgifter. Vidarebefordra det till <a=mailto:{ $help_email }>{ $help_email }</a> så tittar vi på det.
 
-    { $brand } är en indexlista med länkar till titlar som är värdar av andra tjänster. Om en tjänst betalar för sin egen innehåll är det upp till den tjänsten. Se <a=/help/article/sources>Var kommer titlarna ifrån</a>.
-help-art-wont-play-title = En titel spelas inte av
+    { $brand } är en förteckning över länkar till titlar som andra tjänster tillhandahåller. Om en tjänst tar betalt för sitt eget innehåll bestämmer den tjänsten själv. Se <a=/help/article/sources>Var titlarna kommer ifrån</a>.
+
+help-art-wont-play-title = En titel spelas inte upp
 help-art-wont-play-summary = De snabbaste lösningarna när spelaren visar ett fel, förblir svart eller aldrig startar.
-help-art-wont-play-keywords = spelar inte inte spelas fel kan inte spelas video misslyckas laddning spinner fast spelare
+help-art-wont-play-keywords = spelas inte upp fungerar inte fel svart skärm startar inte
 help-art-wont-play-body =
-    Försök dessa steg i ordning. Testa efter varje steg.
+    Prova de här stegen i ordning. Testa efter varje steg.
 
-    1. Ladda om sidan. En tillfällig fel vid källan är den vanligaste orsaken.
-    2. Välj en annan avsnitt, eller starta titeln igen från dess detaljsida. Spelaren försöker källorna en efter en.
-    3. Stäng av reklamblockerare och integritetsutökningar för denna webbplats. Se <a=/help/article/extensions-blockers>Utökningar som blockerar spelaren</a>.
-    4. Använd en aktuell version av Chrome, Edge, Firefox eller Safari. Se <a=/help/article/supported-browsers>Stödade webbläsare</a>.
-    5. Växla nätverk, till exempel från Wi-Fi till mobildata, eller stäng av en VPN. Vissa källor avvisar vissa nätverk.
+    1. Ladda om sidan. Ett tillfälligt fel hos källan är den vanligaste orsaken.
+    2. Välj ett annat avsnitt, eller starta titeln igen från detaljfönstret. Spelaren provar de tillgängliga källorna en efter en.
+    3. Stäng av annonsblockerare och integritetstillägg för den här webbplatsen. Se <a=/help/article/extensions-blockers>Tillägg som blockerar spelaren</a>.
+    4. Använd en aktuell version av Chrome, Edge, Firefox eller Safari. Se <a=/help/article/supported-browsers>Webbläsare som stöds</a>.
+    5. Byt nätverk, till exempel från wifi till mobildata, eller stäng av ett VPN. Vissa källor nekar vissa nätverk.
 
     @@ diagnostics
 
-    >> Ännu inte spelas
-    Vissa titlar är inte tillgängliga från någon källa vid ett tillfälle. Försök igen senare. Om en populär titel aldrig spelas, berätta vilken det är på <a=/help/article/report-bug>Redovisa ett problem</a>-sidan.
-help-art-playback-unavailable-title = { $brand } säger "Playback Unavailable"
-help-art-playback-unavailable-summary = Vad meddelandet innebär och vad du ska göra sedan.
-help-art-playback-unavailable-keywords = spelning tillgänglig felmeddelande kan inte strömma leverantörer oanvändbara
+    >> Spelas fortfarande inte upp
+    Vissa titlar finns inte hos någon källa vid ett visst tillfälle. Försök igen senare. Om en populär titel aldrig spelas upp, berätta vilken på sidan <a=/help/article/report-bug>Rapportera ett problem</a>.
+
+help-art-playback-unavailable-title = { $brand } säger "Uppspelning ej tillgänglig"
+help-art-playback-unavailable-summary = Vad meddelandet betyder och vad du kan göra.
+help-art-playback-unavailable-keywords = uppspelning ej tillgänglig felmeddelande källa ingen stream
 help-art-playback-unavailable-body =
-    Du kan se <b>Upptäckning inte tillgänglig</b> eller <b>Det går inte att strömma videon. Alla källleverantörer var o tillgängliga eller inte stödjas av din webbläsare.</b>
+    Du kan se <b>Uppspelning ej tillgänglig</b> eller <b>Det går inte att strömma videon. Alla källor var otillgängliga eller stöds inte av din webbläsare.</b>
 
-    Det betyder att spelaren frågade alla källor som känner igen titeln och ingen returnerade en ström som din webbläsare kan spela.
+    Det betyder att spelaren har frågat alla källor den känner till efter den här titeln och att ingen gav en stream som din webbläsare kan spela upp.
 
-    1. Vänta en minut och tryck på spela igen. Källor går upp och ner.
-    2. Stäng blockerare. Se <a=/help/article/extensions-blockers>Extensions that block the player</a>.
-    3. Försök en annan webbläsare. Vissa strömningar kräver funktioner som saknas i äldre webbläsare.
-    4. Försök en annan titel för att kontrollera om problemet bara är med denna.
+    1. Vänta en minut och tryck på spela igen. Källor går ibland ner en stund.
+    2. Stäng av blockerare. Se <a=/help/article/extensions-blockers>Tillägg som blockerar spelaren</a>.
+    3. Prova en annan webbläsare. Vissa streamar behöver funktioner som saknas i äldre webbläsare.
+    4. Prova en annan titel för att se om problemet bara gäller den här.
 
-    Om samma titel misslyckas i en dag, <a=/help/article/report-bug>tell us</a>. Inkludera titeln, året och webbläsaren du använde.
+    Om samma titel misslyckas en hel dag, <a=/help/article/report-bug>berätta för oss</a>. Ange titel, år och vilken webbläsare du använde.
 
     @@ diagnostics
 
-help-art-black-screen-title = Svart skärm med ljud
-help-art-black-screen-summary = Bilden saknas men du kan höra titeln.
-help-art-black-screen-keywords = svart skärm inget bild ljud endast video saknas tomt grön skärm
+help-art-black-screen-title = Svart bild med ljud
+help-art-black-screen-summary = Bilden saknas men du hör titeln.
+help-art-black-screen-keywords = svart bild svart skärm ljud men ingen bild hårdvaruacceleration
 help-art-black-screen-body =
-    1. Tryck på <b>F</b> för att lämna och återgå till fullskärmsläge, eller tryck på <b>Esc</b> och spela igen.
+    1. Tryck på <b>F</b> för att lämna och öppna helskärm igen, eller tryck på <b>Esc</b> och spela upp igen.
     2. Ladda om sidan.
-    3. Stäng på hårdvaruacceleration i din webbläsares inställningar, starta om webbläsaren och försök igen.
-    4. Uppdatera din webbläsare och grafikdrivrutin.
-    5. Försök en annan webbläsare.
+    3. Stäng av hårdvaruacceleration i webbläsarens inställningar, starta om webbläsaren och försök igen.
+    4. Uppdatera din webbläsare och din grafikdrivrutin.
+    5. Prova en annan webbläsare.
 
-    !! Observera: Vissa webbläsarutvidgningar som ändrar sidans färger eller blockerar media kan också dölja bilden. Se <a=/help/article/extensions-blockers>Extensions that block the player</a>.
+    !! Obs! Vissa webbläsartillägg som ändrar sidans färger eller blockerar media kan också dölja bilden. Se <a=/help/article/extensions-blockers>Tillägg som blockerar spelaren</a>.
 
     @@ diagnostics
-help-art-buffering-title = Buffering, stoppning eller långsam start
-help-art-buffering-summary = Förbättra en ström som stannar för att ladda.
-help-art-buffering-keywords = buffering störning långsam stoppning störning laddningsvältandet anslutning hastighet kvalitet
+
+help-art-buffering-title = Buffring, frysningar eller långsam start
+help-art-buffering-summary = Förbättra en stream som hela tiden stannar för att ladda.
+help-art-buffering-keywords = buffring hackar långsam laddar fryser anslutning hastighet kvalitet
 help-art-buffering-body =
-    En ström stannar när din anslutning levererar data långsammare än videon behöver.
+    En stream stannar när din anslutning levererar data långsammare än videon behöver.
 
     - Stäng andra flikar, nedladdningar och enheter som använder samma nätverk.
     - Flytta dig närmare routern eller använd en kabel.
-    - Stanna i en minut så att spelaren kan ladda framåt, sedan tryck på spela.
-    - Stäng av en VPN, eller välj en närmare server i VPN.
-    - Försök igen senare. Källor är långsammare under tysta timmar.
+    - Pausa en minut så att spelaren hinner ladda i förväg, och tryck sedan på spela.
+    - Stäng av ett VPN, eller välj en server som ligger närmare.
+    - Försök igen senare. Källorna är långsammare när många tittar.
 
-    Källan bestämmer vilken kvalitetsnivå som erbjuds, så bilden kan förändras under spelning.
+    Källan bestämmer vilken kvalitet som erbjuds, så bildens skärpa kan ändras under uppspelningen.
 
     @@ diagnostics
-help-art-subtitles-missing-title = Undertext saknas eller är synkroniserad
-help-art-subtitles-missing-summary = Korrigerar undertext som inte visas, visar fel språk eller ligger bakom talen.
-help-art-subtitles-missing-keywords = undertext text saknas felaktig språk synkning fördröjning cc text
-help-art-subtitles-missing-body =
-    1. Välj <b>Audio & Undertext</b> i spelaren och se till att ett språk för undertexter är valt.
-    2. Välj en annan spår om det erbjuds. Spår kommer från källan och skiljer sig mellan titlar.
-    3. Ställ in ditt önskade språk för undertexter i <b>Inställningar</b>. Se <a=/help/article/language>Hur man byter språk</a>.
-    4. Om texten är för tidig eller för sent, ladda om och spela inom kort. Tidningen är inställd av källan och vi kan inte justera den för en enskild titel.
 
-    Om en titel saknar undertexter alls, har källan inte gett några.
+help-art-subtitles-missing-title = Undertexter saknas eller är osynkade
+help-art-subtitles-missing-summary = Åtgärda undertexter som inte syns, visar fel språk eller släpar efter talet.
+help-art-subtitles-missing-keywords = undertexter saknas fel språk osynkade fördröjning text
+help-art-subtitles-missing-body =
+    1. Välj <b>Ljud & undertexter</b> i spelaren och kontrollera att ett undertextspråk är valt.
+    2. Välj ett annat spår om listan har något. Spåren kommer från källan och skiljer sig mellan titlar.
+    3. Ställ in profilens föredragna undertextspråk. Se <a=/help/article/language>Byta språk</a>.
+    4. Om texten kommer för tidigt eller sent, använd <b>-0.5s</b> eller <b>+0.5s</b> i <b>Ljud & undertexter</b> tills den stämmer med talet.
+
+    Om en titel inte har några undertexter alls har källan inte levererat några.
 
     @@ language
-help-art-supported-browsers-title = Stödade webbläsare
-help-art-supported-browsers-summary = Vilka webbläsare och versioner fungerar bäst.
-help-art-supported-browsers-keywords = webbläsare chrome firefox safari edge brave opera internet explorer version uppdatering kompatibel
+
+help-art-supported-browsers-title = Webbläsare som stöds
+help-art-supported-browsers-summary = Vilka webbläsare och system som fungerar bäst.
+help-art-supported-browsers-keywords = webbläsare chrome firefox safari edge brave opera internet explorer version uppdatera
 help-art-supported-browsers-body =
-    { $brand } fungerar bäst i de aktuella versionerna av dessa webbläsare:
+    { $brand } fungerar i aktuella versioner av de här webbläsarna:
 
-    - Google Chrome och andra Chromium-webbläsare som Edge och Brave
-    - Mozilla Firefox
-    - Apple Safari på macOS, iPhone och iPad
+    - <b>Google Chrome</b>, <b>Microsoft Edge</b>, <b>Brave</b> och andra Chromium-webbläsare på Windows, macOS, Linux och Android
+    - <b>Mozilla Firefox</b> på Windows, macOS, Linux och Android
+    - <b>Safari</b> på Mac, iPhone och iPad
 
-    Internet Explorer stöds inte. Uppdatera din webbläsare och låt sidan använda JavaScript och lokal lagring.
+    Internet Explorer stöds inte. Håll webbläsaren uppdaterad och låt webbplatsen använda JavaScript och webbplatsdata.
 
     @@ diagnostics
 
     >> Webbläsaren visar ett fel innan sidan laddas
-    Ladda om med <b>Ctrl + Shift + R</b> (<b>Cmd + Shift + R</b> på en Mac) för att hämta den senaste versionen av appen och försök sedan igen.
-help-art-fix-phone-title = Fix ett problem på din mobil eller tablet
+    Ladda om med <b>Ctrl + Skift + R</b> på Windows och Linux, eller <b>Cmd + Skift + R</b> på Mac, för att hämta den senaste versionen av appen, och försök sedan igen.
+
+help-art-fix-phone-title = Åtgärda ett problem på mobil eller surfplatta
 help-art-fix-phone-summary = Steg för iPhone, iPad och Android.
-help-art-fix-phone-keywords = mobil tablet android iphone ipad fix problem app
+help-art-fix-phone-keywords = mobil surfplatta iphone ipad android telefon problem
 help-art-fix-phone-body =
     1. Stäng fliken och öppna { $brand } igen.
-    2. Uppdatera din webbläsare från appbutiken.
-    3. Slå av datasparsning eller låg effektläge medan du tittar.
-    4. Kontrollera att du har en stabil anslutning. Se <a=/help/article/buffering>Buffering, frysa eller långsam start</a>.
-    5. Om du har lagt till { $brand } på din startsida och det ser ut som att det är för gammalt, ta bort det och lägg till det igen. Se <a=/help/article/install-app>Hur man installerar { $brand } som en app</a>.
+    2. Uppdatera webbläsaren från appbutiken.
+    3. Stäng av datasparläge eller energisparläge medan du tittar.
+    4. Kontrollera att du har en stabil anslutning. Se <a=/help/article/buffering>Buffring, frysningar eller långsam start</a>.
+    5. Om du har lagt { $brand } på hemskärmen och det ser gammalt ut tar du bort det och lägger till det igen. Se <a=/help/article/install-app>Installera { $brand } som app</a>.
 
     @@ diagnostics
 
     @@ refresh
-help-art-fix-tv-title = Fix ett problem på din TV
-help-art-fix-tv-summary = Steg när du tittar genom en TV-webbläsare eller en cast.
-help-art-fix-tv-keywords = TV smart TV chromecast cast fix problem hdmi stick webbläsare
+
+help-art-fix-tv-title = Åtgärda ett problem på tv:n
+help-art-fix-tv-summary = Steg när du tittar via tv:ns webbläsare eller castar.
+help-art-fix-tv-keywords = tv smart-tv casta chromecast webbläsare problem
 help-art-fix-tv-body =
-    { $brand } har ingen TV-app. Du tittar genom din TV:s webbläsare eller genom att skicka en webbläsartabblad från en dator eller mobiltelefon.
+    { $brand } har ingen tv-app. Du tittar via tv:ns webbläsare eller genom att casta en webbläsarflik från en dator eller mobil.
 
-    - Uppdatera TV:s programvara och dess webbläsare.
-    - Starta om TV:n eller strömningssticks.
-    - Om du skickar ett tabblad, håll skickande enheten på samma nätverk och stäng andra tabblad på den.
-    - Om TV:s webbläsare är långsamm, skicka tabbladet istället från en dator.
+    - Uppdatera tv:ns programvara och webbläsare.
+    - Starta om tv:n eller streamingstickan.
+    - Om du castar en flik, håll den sändande enheten på samma nätverk och stäng andra flikar där.
+    - Om tv:ns webbläsare är långsam, casta hellre fliken från en dator.
 
-    Se <a=/help/article/watch-on-tv>Hur man tittar på din TV</a>.
+    Se <a=/help/article/watch-on-tv>Titta på tv:n</a>.
 
     @@ diagnostics
-help-art-extensions-blockers-title = Utökningar som blockerar spelaren
-help-art-extensions-blockers-summary = Reklamblockerare och integritetsverktyg kan stoppa en ström från att laddas.
-help-art-extensions-blockers-keywords = utökning reklamblockerare ublock ghostery integritet blocker skript blockerad vpn dns filter
+
+help-art-extensions-blockers-title = Tillägg som blockerar spelaren
+help-art-extensions-blockers-summary = Annonsblockerare och integritetsverktyg kan hindra en stream från att laddas.
+help-art-extensions-blockers-keywords = tillägg annonsblockerare adblock ublock ghostery integritet skriptblockering vpn dns filter
 help-art-extensions-blockers-body =
-    Spelaren laddar strömmar från tredjepartskällor. Verktyg som blockerar skript, ramar eller media från andra webbplatser kan stoppa det.
+    Spelaren hämtar streamar från externa källor. Verktyg som blockerar skript, ramar eller media från andra webbplatser kan stoppa den.
 
-    1. Öppna din utökning och pausa den för denna webbplats, sedan ladda om.
-    2. Om du använder ett nätverksbrett filter, som ett DNS-filter eller ett skol- eller arbetsnätverk, försök ett annat nätverk.
-    3. Om uppspelningen fungerar efteråt, lägg till { $brand } i utökningens tillåtna lista.
+    1. Öppna tillägget och pausa det för den här webbplatsen, och ladda sedan om.
+    2. Om du använder ett filter för hela nätverket, till exempel ett DNS-filter eller ett skol- eller jobbnätverk, prova ett annat nätverk.
+    3. Fungerar uppspelningen sedan, lägg till { $brand } i tilläggets lista över tillåtna webbplatser.
 
-    !! Notera: Vi frågar aldrig dig att installera en webbläsarutökning eller en kodex för att titta. Stäng alla sidor som gör det.
+    !! Obs! Vi ber dig aldrig installera ett webbläsartillägg eller en kodek för att titta. Stäng sidor som gör det.
 
     @@ diagnostics
+
 help-art-rows-wont-load-title = Rader eller bilder laddas inte
-help-art-rows-wont-load-summary = Sidan visar tomma rader, en spinner eller saknade bilder.
-help-art-rows-wont-load-keywords = rader tomma laddning tomma sida bilder bilder annonser inte laddar hemma fel rekommendationer ner
+help-art-rows-wont-load-summary = Sidan visar tomma rader, en laddningssymbol eller saknade bilder.
+help-art-rows-wont-load-keywords = rader tomma laddar tom sida bilder affischer laddas inte startsida fel rekommendationer
 help-art-rows-wont-load-body =
-    Hemsidan rader kommer från en rekommendationservice. Bildförklaringar och detaljer kommer från en katalogtjänst. Om någon av dessa är oåtkomliga, kan du se tomma rader eller en laddningsspinner.
+    Raderna och sökningen kommer från vår rekommendationstjänst. Affischer och detaljer kommer från en öppen filmkatalog. Om någon av dem inte svarar kan du se tomma rader, en laddningssymbol eller saknade bilder.
 
     1. Ladda om sidan.
     2. Kontrollera din anslutning.
-    3. Stäng blockerare för denna webbplats. Se <a=/help/article/extensions-blockers>Utökningar som blockerar spelaren</a>.
-    4. Försök igen efter några minuter.
+    3. Stäng av blockerare för den här webbplatsen. Se <a=/help/article/extensions-blockers>Tillägg som blockerar spelaren</a>.
+    4. Försök igen om några minuter.
 
-    Sökningen och dina sparade föremål fungerar fortfarande om rekommendationservisen är nedsatt. Om problemet varar mer än en timme, <a=/help/article/report-bug>säg till oss</a>.
+    Dina profiler, Min lista och dina inställningar är säkra i ditt konto under tiden. Om problemet varar mer än en timme, <a=/help/article/report-bug>hör av dig</a>.
 
     @@ diagnostics
 
     @@ refresh
-help-art-list-missing-title = Min lista eller framsteg försvann
-help-art-list-missing-summary = Varför en lista eller raden 'Fortsätt att titta' kan vara tom och vad du ska göra.
-help-art-list-missing-keywords = min lista försvunnen försvunnen tomt förlorad fortsätt att titta framsteg återställ
+
+help-art-list-missing-title = Min lista eller mitt framsteg har försvunnit
+help-art-list-missing-summary = Varför Min lista eller Fortsätt titta kan se tomma ut, och hur du får tillbaka dem.
+help-art-list-missing-keywords = min lista borta försvunnen tom fortsätt titta framsteg
 help-art-list-missing-body =
-    { $brand } sparar profiler och framsteg i den här webbläsaren. De saknas när:
+    Min lista och ditt framsteg hör till en profil och sparas i ditt konto. Om de ser tomma ut:
 
-    - du öppnade { $brand } i en annan webbläsare eller på ett annat enhet
-    - du använde en privat eller incognito-fönster
-    - du rensade webbplatsdata eller cookies
-    - du använder en annan profil
+    - Kontrollera att du är i rätt profil. Varje profil har sin egen lista. Byt via profilmenyn.
+    - Kontrollera att du har loggat in med samma konto som tidigare.
+    - Ge en ny enhet några sekunder att ladda ditt konto efter inloggningen, eller ladda om sidan.
+    - Titlar som du har dolt i tittaraktiviteten försvinner också från Fortsätt titta.
 
-    Din lista håller i det tid span som sidan är öppen för tillfället, eftersom konton som sparar det inte är tillgängliga ännu. Ladda om sidan tömmer den.
-
-    Växla till den profil du använde tidigare från menyn för profiler. Se <a=/help/article/saved-data>Var dina profiler, lista och framsteg sparas</a>.
+    Saknas något fortfarande på en enhet loggar du ut och in igen där. Se <a=/help/article/saved-data>Var dina profiler, din lista och ditt framsteg sparas</a>.
 
     @@ profiles
 
-    @@ data
-help-art-forgot-pin-title = Jag glömde min profil PIN
-help-art-forgot-pin-summary = PIN-koder kan inte återställas av oss, här är hur du får tillbaka dig.
-help-art-forgot-pin-keywords = glömt pin återställa förlorad lösenkod låst ut profil lås
+help-art-forgot-pin-title = Jag har glömt min profils PIN-kod
+help-art-forgot-pin-summary = Ta bort PIN-koden med kontots lösenord och välj en ny.
+help-art-forgot-pin-keywords = glömt pin pinkod tappat bort profillås ta bort
 help-art-forgot-pin-body =
-    En PIN sparas endast på din enhet, så vi kan inte hitta den eller återställa den.
+    1. Öppna profilmenyn, välj <b>Konto</b>, sedan <b>Hantera profiler</b>, och välj den låsta profilen.
+    2. Välj <b>Profillås</b> och skriv kontots lösenord.
+    3. Välj <b>Glömt din PIN-kod?</b> och sedan <b>Ta bort profillås</b>.
 
-    1. Försök PIN igen, en siffra per ruta.
-    2. Om du inte kan komma ihåg den, är det vägen tillbaka att rensa webbplatsens data i din webbläsare. Detta tar bort alla profiler, PIN-koder och tittarframsteg. Se <a=/help/article/clear-data>Hur du rensar dina sparade data</a>.
-    3. Skapa dina profiler igen.
+    Profilen öppnas igen utan PIN-kod och du kan välja en ny. Se <a=/help/article/profile-pin>Lägga till, ändra eller ta bort en profils PIN-kod</a>.
 
-    !! Obs: Välj en PIN du kan komma ihåg och använd den inte för något annat.
+    !! Obs! Bara den som kan kontots lösenord kan ta bort en PIN-kod. Om du också har glömt lösenordet, se <a=/help/article/forgot-password>Jag har glömt mitt lösenord</a>.
 
     @@ profiles
 
-    @@ data
-help-art-page-not-found-title = Jag ser en "404" sida
-help-art-page-not-found-summary = Länken är felaktig eller sidan har flyttat.
-help-art-page-not-found-keywords = 404 inte hittat sida saknas skadad länk fel tom
-help-art-page-not-found-body =
-    En 404-sida betyder att adressen leder någonstans på { $brand }. Kontrollera adressen för stavfel eller använd menyn och sökning för att hitta det du sökte efter.
+help-art-forgot-password-title = Jag har glömt mitt lösenord
+help-art-forgot-password-summary = Få en länk via e-post för att välja ett nytt lösenord.
+help-art-forgot-password-keywords = glömt lösenord återställ lösenord tappat lösenord kan inte logga in nytt lösenord länk
+help-art-forgot-password-body =
+    1. Välj <b>Glömt ditt lösenord?</b> på inloggningssidan.
+    2. Skriv kontots e-postadress och välj <b>Skicka länken</b>.
+    3. Öppna mejlet från { $brand } och följ länken för att välja ett nytt lösenord.
 
-    - Använd <b>Startsida</b> i toppmenyn för att gå tillbaka till början.
-    - Använd <a=/help>hjälpcenter</a>-sökningen för att hitta en artikel.
-    - Om en länk på { $brand } ledde dig hit, <a=/help/article/report-bug>berätta</a> var du hittade den.
+    Länken fungerar en gång och under en begränsad tid. Om inget mejl kommer inom några minuter, titta i skräpposten och försök sedan igen.
+
+    !! Obs! Vi ber aldrig om ditt lösenord via e-post, chatt eller telefon. Se <a=/help/article/fake-sites>Känna igen falska { $brand }-sidor och meddelanden</a>.
+
+help-art-change-email-password-title = Ändra e-postadress, lösenord eller telefonnummer
+help-art-change-email-password-summary = Uppdatera uppgifterna du loggar in med och använder för att komma tillbaka in i kontot.
+help-art-change-email-password-keywords = ändra e-post byta lösenord uppdatera lösenord telefonnummer mobil kontouppgifter namn säkerhet
+help-art-change-email-password-body =
+    Öppna profilmenyn och välj <b>Konto</b>. Dina uppgifter finns under <b>Kontouppgifter</b>. Före en ändring kan vi be dig bekräfta att det är du, med ditt lösenord eller en kod vi mejlar dig.
+
+    ## Lösenord
+    1. Välj <b>Lösenord</b>.
+    2. Skriv ditt nuvarande lösenord och sedan det nya två gånger. Det måste ha minst 8 tecken.
+    3. Slå på <b>Logga ut från alla enheter</b> om någon annan kan känna till det gamla lösenordet, och välj <b>Spara</b>.
+
+    ## E-post
+    1. Välj <b>E-post</b> och skriv den nya adressen.
+    2. Öppna länken vi skickar till den nya adressen för att slutföra ändringen.
+
+    ## Mobiltelefon och namn
+    Välj <b>Mobiltelefon</b> för att lägga till ett nummer som hjälper dig att komma tillbaka in i kontot, eller <b>Namn</b> för att byta namn. Huvudprofilen följer ditt förnamn.
+
+help-art-devices-sign-out-title = Logga ut från en enhet eller från alla enheter
+help-art-devices-sign-out-summary = Se var ditt konto är inloggat och logga ut från enheter du inte använder längre.
+help-art-devices-sign-out-keywords = logga ut alla enheter inloggade enheter sessioner säkerhet ny enhet borttappad telefon offentlig dator
+help-art-devices-sign-out-body =
+    1. Öppna profilmenyn och välj <b>Konto</b>.
+    2. Välj <b>Åtkomst och enheter</b>.
+    3. Välj <b>Logga ut från denna enhet</b>, eller <b>Logga ut från alla enheter</b> för att logga ut från alla webbläsare där ditt konto är öppet, även den här.
+
+    <b>Senaste säkerhetsaktivitet</b> på samma sida visar de senaste inloggningarna och ändringarna i ditt konto. Vi mejlar dig också när en ny enhet loggar in.
+
+    !! Obs! Om du ser en inloggning du inte känner igen, logga ut från alla enheter och byt lösenord. Se <a=/help/article/change-email-password>Ändra e-postadress, lösenord eller telefonnummer</a>.
+
+help-art-download-data-title = Ladda ner en kopia av dina uppgifter
+help-art-download-data-summary = Få en fil med de personuppgifter som ditt konto har.
+help-art-download-data-keywords = ladda ner mina uppgifter personuppgifter kopia exportera gdpr registerutdrag
+help-art-download-data-body =
+    1. Öppna profilmenyn och välj <b>Konto</b>.
+    2. Välj <b>Åtkomst till personuppgifter</b>.
+    3. Följ stegen för att spara filen.
+
+    Filen innehåller dina kontouppgifter, profiler, inställningar, Min lista, betyg och tittaraktivitet. Den sparas på din enhet, så förvara den säkert.
+
+    För att ladda ner en profils tittaraktivitet som kalkylblad öppnar du profilens <b>Visningsaktivitet</b> och väljer <b>Ladda ner alla</b>.
+
+help-art-delete-account-title = Radera ditt konto
+help-art-delete-account-summary = Ta bort ditt konto och allt i det för gott.
+help-art-delete-account-keywords = radera konto stänga konto ta bort konto radera uppgifter avsluta konto
+help-art-delete-account-body =
+    När du raderar ditt konto tas det bort direkt, med alla profiler, listor, betyg, inställningar och all tittaraktivitet. Det går inte att ångra.
+
+    1. Öppna profilmenyn och välj <b>Konto</b>.
+    2. Välj <b>Radera konto</b> längst ner på sidan.
+    3. Bekräfta att det är du och välj <b>Radera permanent</b>.
+
+    Vill du bara ta bort en person raderar du hellre den personens profil. Se <a=/help/article/profiles-manage>Skapa, redigera eller radera profiler</a>.
+
+    !! Obs! Vill du behålla en kopia av dina uppgifter laddar du ner den först. Se <a=/help/article/download-data>Ladda ner en kopia av dina uppgifter</a>.
+
+help-art-page-not-found-title = Jag ser en "404"-sida
+help-art-page-not-found-summary = Länken är fel eller sidan har flyttats.
+help-art-page-not-found-keywords = 404 hittades inte sidan finns inte trasig länk fel
+help-art-page-not-found-body =
+    En 404-sida betyder att adressen inte leder någonstans på { $brand }. Kontrollera adressen efter stavfel, eller använd menyn och sökningen för att hitta det du letade efter.
+
+    - Använd <b>Hem</b> i fältet högst upp för att gå tillbaka till början.
+    - Använd sökningen i <a=/help>hjälpcentret</a> för att hitta en artikel.
+    - Om en länk på { $brand } ledde hit, <a=/help/article/report-bug>berätta för oss</a> var du hittade den.
 
     @@ refresh
-help-art-language-title = Hur man ändrar språket
-help-art-language-summary = Ändra språket för gränssnittet och ditt önskade undertekstspråk.
-help-art-language-keywords = språk ändra översätt gränssnitt visning undertekst ljud engelska spanska franska arabiska
+
+help-art-language-title = Byta språk
+help-art-language-summary = Byt språk i { $brand } och de språk du tittar på.
+help-art-language-keywords = byta språk visningsspråk undertextspråk ljudspråk
 help-art-language-body =
-    ## Språkinställningar
-    1. Scrolla till botten av en Help Center-sida och välj ett språk i <b>Välj ditt önskade språk</b>.
-    2. Sidan laddas om i det valda språket. Ditt val kommer att sparas på den här enheten.
+    ## Visningsspråk
+    1. Öppna profilmenyn, välj <b>Konto</b>, sedan <b>Hantera profiler</b>, och välj din profil.
+    2. Välj <b>Språk</b>, sedan <b>Visningsspråk</b>, och välj ett språk.
 
-    Du kan också ändra det i <b>Inställningar</b>, under <b>Språk</b>, sedan <b>Visningsspråk</b>.
+    Valet hör till profilen, så det följer med dig till alla dina enheter. I hjälpcentret kan du också välja språk längst ner på varje sida.
 
-    ## Underspråk
-    1. Öppna <b>Inställningar</b> och välj <b>Språk</b>.
-    2. Under <b>Önskat underspråk</b> välj ett språk och välj <b>Spara inställningar</b>.
+    ## Ljud- och undertextspråk
+    1. Öppna <b>Språk</b> för din profil, som ovan, och sedan <b>Ljud och undertexter</b>.
+    2. Välj ett <b>Ljudspråk</b> och ett <b>Undertextspråk</b>. <b>Samma som visningsspråk</b> följer appens språk.
 
-    !! Obs: Endast språk som är helt översatta visas i listan. Text som inte är översatt ännu visas på engelska.
+    Spelaren använder dem när en titel erbjuder dem.
 
-    @@ språk
-help-art-subtitles-title = Hur man använder undertexter, captions eller väljer ljudspråk
-help-art-subtitles-summary = Tänd undertexter, välj en spår och ändra hur de ser ut.
-help-art-subtitles-keywords = undertexter captions cc ljudspråk spår storlek färg utseende bakgrund
+    !! Obs! Bara språk som är helt översatta visas i listan.
+
+    @@ language
+
+help-art-subtitles-title = Använda undertexter eller välja ljudspråk
+help-art-subtitles-summary = Slå på undertexter, välj ett spår och ändra hur de ser ut.
+help-art-subtitles-keywords = undertexter slå på stänga av språk storlek färg utseende
 help-art-subtitles-body =
-    ## Tänd eller släck undertexter
-    1. Starta ett program och flytta markören över spelaren, eller tryck på skärmen.
-    2. Välj <b>Ljud & Undertexter</b>.
+    ## Slå på eller av undertexter
+    1. Starta en titel och för pekaren över spelaren, eller tryck på skärmen.
+    2. Välj <b>Ljud & undertexter</b>.
     3. Välj ett undertextspråk, eller <b>Av</b>.
 
-    ## Ändra hur undertexter ser ut
-    1. Öppna <b>Inställningar</b> och välj <b>Undertextutseende</b>.
-    2. Välj en storlek och en färg. Förhandsvisningen ovanför knapparna visar resultatet.
-    3. Välj <b>Slutför</b>.
+    Om texten kommer för tidigt eller för sent använder du <b>-0.5s</b> och <b>+0.5s</b> i samma panel för att flytta den.
 
-    !! Obs: Vilka språk och ljudspår som finns beror på källan till programmet. Se <a=/help/article/subtitles-missing>Undertexter saknas eller är synkade</a>.
-help-art-shortcuts-title = Tangentbordsknappar
-help-art-shortcuts-summary = Styr spelaren utan musen.
-help-art-shortcuts-keywords = tangentbordsknappar tangentbordsknappar tangentbordsknappar mellanrum pil fullskärm tysta volym hoppa tillbaka hoppa fram snabbknappar
+    ## Ändra hur undertexterna ser ut
+    1. Öppna profilmenyn, välj <b>Konto</b>, sedan <b>Hantera profiler</b>, och välj din profil.
+    2. Välj <b>Undertexternas utseende</b>.
+    3. Välj textstorlek, textfärg, kant, bakgrund och fönsterfärg. Förhandsvisningen visar resultatet. <b>Återställ till standard</b> tar bort dina ändringar.
+
+    !! Obs! Vilka språk och ljudspår som finns beror på titelns källa. Se <a=/help/article/subtitles-missing>Undertexter saknas eller är osynkade</a>.
+
+help-art-shortcuts-title = Kortkommandon
+help-art-shortcuts-summary = Styr spelaren utan mus.
+help-art-shortcuts-keywords = kortkommandon tangentbord mellanslag paus volym helskärm
 help-art-shortcuts-body =
-    Dessa knappar fungerar när en titel spelas på en dator.
+    De här tangenterna fungerar på en dator medan en titel spelas.
 
-    - <b>Space</b> eller <b>K</b>: spela eller pausa
-    - <b>Left arrow</b> eller <b>J</b>: tillbaka 10 sekunder
-    - <b>Right arrow</b> eller <b>L</b>: framåt 10 sekunder
-    - <b>Up arrow</b> och <b>Down arrow</b>: ljud upp och ner
-    - <b>M</b>: tysta eller avtysta
-    - <b>F</b>: fullskär på eller av
-help-art-skip-intro-next-title = Hoppa över inledning och nästa episk
-help-art-skip-intro-next-summary = Hoppa över inledningen eller gå vidare till nästa episk.
-help-art-skip-intro-next-keywords = hoppa över inledning nästa episk automatisk upprepning binge episk säsong drawer
+    - <b>Mellanslag</b> eller <b>K</b>: spela eller pausa
+    - <b>Vänsterpil</b> eller <b>J</b>: 10 sekunder bakåt
+    - <b>Högerpil</b> eller <b>L</b>: 10 sekunder framåt
+    - <b>Uppåtpil</b> och <b>Nedåtpil</b>: högre och lägre volym
+    - <b>M</b>: stäng av eller slå på ljudet
+    - <b>F</b>: helskärm på eller av
+
+help-art-skip-intro-next-title = "Hoppa över intro" och "Nästa avsnitt"
+help-art-skip-intro-next-summary = Hoppa förbi introt eller gå vidare till nästa avsnitt.
+help-art-skip-intro-next-keywords = hoppa över intro nästa avsnitt spela upp automatiskt sträcktitta avsnitt säsong
 help-art-skip-intro-next-body =
-    - <b>Hoppa över inledning</b> visas i några sekunder när inledningen till en episk börjar. Välj det för att hoppa till historien.
-    - <b>Nästa episk</b> i spelkontrollerna startar nästa episk.
-    - <b>Episier</b> öppnar en lista över säsongen, så du kan välja vilken episk du vill.
+    - <b>Hoppa över intro</b> visas några sekunder när introt till ett avsnitt börjar. Välj det för att hoppa direkt till handlingen.
+    - <b>Nästa avsnitt</b> i spelarens kontroller startar nästa avsnitt.
+    - <b>Avsnitt</b> öppnar en lista över säsongen så att du kan välja vilket avsnitt som helst.
 
-    För att kontrollera vad som händer när en episk är klar, öppna <b>Inställningar</b>, sedan <b>Spelinställningar</b>, och aktivera eller inaktivera <b>Automatisk upprepning av nästa episk</b>.
-help-art-my-list-title = Hur man använder Min Lista
-help-art-my-list-summary = Spara titlar för senare och hitta dem igen.
-help-art-my-list-keywords = min lista lägg till ta bort önskelista spara senare favoriter plus
+    Vill du bestämma vad som händer när ett avsnitt tar slut öppnar du din profils <b>Uppspelningsinställningar</b> och slår på eller av <b>Spela upp nästa avsnitt automatiskt</b>.
+
+help-art-my-list-title = Använda Min lista
+help-art-my-list-summary = Spara titlar till senare och hitta dem igen.
+help-art-my-list-keywords = min lista lägga till ta bort spara till senare favoriter plus
 help-art-my-list-body =
-    ## Lägg till en titel
-    Välj <b>+</b>-knappen på en titelkarta, i dess detaljerfönster eller i heroen ovanför sidan.
+    ## Lägga till en titel
+    Välj knappen <b>+</b> på ett titelkort, i detaljfönstret eller vid den stora titeln högst upp på sidan.
 
     ## Ta bort en titel
-    Välj kryssmärket på titeln, vilket gör det tillbaka till <b>+</b>.
+    Välj bocken på titeln. Den blir ett <b>+</b> igen.
 
     ## Se din lista
-    Öppna <b>Min Lista</b> i toppmenyn. På en telefon finns den i bottennaven.
+    Öppna <b>Mitt Streams</b> i fältet högst upp, eller i fältet längst ner på mobilen. Där finns din lista, bredvid <b>Fortsätt titta</b>, titlarna du har gillat och trailrarna du har sett.
 
-    !! Notera: För tillfället hålls din lista så länge sidan är öppen och rensas när du laddar om. Att spara den till din profil är en del av arbetet med konton. Se <a=/help/article/list-missing>Min Lista eller framsteg försvann</a>.
-help-art-continue-watching-title = Hur man använder Fortsätt att Titta
-help-art-continue-watching-summary = Ta upp där du stannade och ta bort titlar från raden.
-help-art-continue-watching-keywords = fortsätt att titta återuppta framsteg ta bort rad stannad halvt tittad
+    Min lista hör till profilen och sparas i ditt konto, så den är likadan på alla enheter.
+
+help-art-continue-watching-title = Använda Fortsätt titta
+help-art-continue-watching-summary = Fortsätt där du slutade och ta bort titlar från raden.
+help-art-continue-watching-keywords = fortsätt titta återuppta framsteg ta bort rad slutade halvsedd
 help-art-continue-watching-body =
-    Titlar du startade visas i <b>Fortsätt Titta</b>-raden på startsidan, med en progressbar som visar hur långt du kom.
+    Titlar du har börjat titta på visas i raden <b>Fortsätt titta</b>, med en stapel som visar hur långt du har kommit. Raden finns också i <b>Mitt Streams</b>.
 
-    ## Fortsätt
-    Välj titeln. Spelningen börjar där du stannade.
+    ## Återuppta
+    Välj titeln. Uppspelningen börjar där du slutade, på alla enheter där du loggar in.
 
     ## Ta bort en titel från raden
     1. Öppna alternativmenyn på titelkortet.
-    2. Välj <b>Ta bort från Fortsätt Titta</b>.
+    2. Välj <b>Ta bort från Fortsätt titta</b>.
 
-    Raden byggs från progress som sparas i den här webbläsaren, så en annan enhet har sin egen rad. Se <a=/help/article/saved-data>Var dina profiler, lista och framsteg sparas</a>.
+    Vill du också ta bort titeln från din tittaraktivitet, se <a=/help/article/viewing-history>Hantera din tittarhistorik</a>.
 
-    @@ data
-help-art-viewing-history-title = Hur du hanterar din tittarhistorik
-help-art-viewing-history-summary = Vad som sparas när du tittar och hur du tar bort det.
-help-art-viewing-history-keywords = tittarhistorik tittat aktivitet ta bort rensa ta bort betyg rekommendationer
+help-art-viewing-history-title = Hantera din tittarhistorik
+help-art-viewing-history-summary = Vad som registreras när du tittar och hur du tar bort det.
+help-art-viewing-history-keywords = tittarhistorik visningsaktivitet dölja ta bort ladda ner
 help-art-viewing-history-body =
-    { $brand } sparar titlar du startar och hur långt du tittade, i den här webbläsaren, så att Fortsätt Titta fungerar och rekommendationer följer ditt smakmönster.
+    Varje profil har en sida med <b>Visningsaktivitet</b> som visar titlarna profilen har sett, de senaste först. { $brand } använder den för Fortsätt titta och för rekommendationer.
 
-    - För att dölja en titel från Fortsätt Titta-rad, se <a=/help/article/continue-watching>Hur man använder Fortsätt Titta</a>.
-    - För att ta bort allt, se <a=/help/article/clear-data>Hur du rensar dina sparade data</a>.
+    1. Öppna profilmenyn, välj <b>Konto</b>, sedan <b>Hantera profiler</b>, och välj profilen.
+    2. Välj <b>Visningsaktivitet</b>.
+    3. Välj <b>Dölj denna titel</b> bredvid en titel, eller <b>Dölj alla</b>.
 
-    !! Obs: <b>Tittaraktivitet</b>-sidan i <b>Inställningar</b> listar inte titlar ännu.
+    En dold titel försvinner från Fortsätt titta och påverkar inte längre rekommendationerna, på alla enheter. <b>Ladda ner alla</b> sparar listan som kalkylblad.
 
     @@ data
-help-art-notifications-title = Meddelanden
-help-art-notifications-summary = Vad ringen i toppfältet visar och hur föremål markeras som lästa.
-help-art-notifications-keywords = meddelanden ring varningar ny ankomst uppdateringar lästa olästa
+
+help-art-notifications-title = Aviseringar
+help-art-notifications-summary = Vad klockan i fältet högst upp visar och hur saker markeras som lästa.
+help-art-notifications-keywords = aviseringar klocka nytt meddelanden e-post push
 help-art-notifications-body =
-    Ringen i toppfältet listar titlar värt en titt, som nya ankomster och populära val. Välj ett föremål för att öppna titelns detaljer.
+    Klockan i fältet högst upp visar titlar som är värda en titt, till exempel nyheter och populära titlar. Välj en post för att öppna titelns detaljer.
 
-    Föremål du öppnat markeras som lästa. Detta sparas i din webbläsare. Antalet på ringen visar hur många föremål som fortfarande är olästa.
+    Poster du öppnar markeras som lästa, och siffran på klockan visar hur många som fortfarande är olästa.
 
-    Meddelanden visas endast inom { $brand }. Vi skickar inte e-post eller push-meddelanden om titlar.
-help-art-search-browse-title = Hur du söker och bläddrar
+    Din profils <b>Meddelandeinställningar</b> har val för e-post och pushnotiser. De sparas med profilen, men { $brand } skickar ännu inga mejl eller pushnotiser om titlar. Mejl om ditt konto, till exempel inloggningslänkar, kommer alltid fram.
+
+help-art-search-browse-title = Söka och bläddra
 help-art-search-browse-summary = Hitta en titel efter namn, genre eller stämning.
-help-art-search-browse-keywords = sök bläddra hitta genre filmer serier kategori leta efter titel skådespelare regissör
+help-art-search-browse-keywords = söka bläddra titel skådespelare regissör genre
 help-art-search-browse-body =
-    ## Sök
-    1. Välj linsen i toppmenyn.
-    2. Skriv en titel, en skådespelare eller en regissör.
-    3. Tryck <b>Enter</b> för att se alla matchningar.
+    ## Söka
+    1. Välj förstoringsglaset i fältet högst upp.
+    2. Skriv en titel, skådespelare eller regissör. Resultaten visas medan du skriver, och små stavfel gör inget.
 
     ## Bläddra
-    - <b>Serier</b> och <b>Filmer</b> i toppmenyn öppnar en sida för varje typ av titel. Använd <b>Genre</b> där för att förfinas.
-    - Raderna på startsidan är grupperade efter tema, som en dekade och genre, eller titlar som du sett.
-    - <b>Bläddra efter språk</b> hittar titlar efter ursprungs språk, dubbelning eller undertexter. Se <a=/help/article/browse-language>Bläddra efter språk</a>.
+    - <b>Serier</b> och <b>Filmer</b> i fältet högst upp öppnar en sida för varje sorts titel. Använd <b>Genrer</b> där för att smalna av.
+    - Raderna på startsidan är grupperade efter tema. Se <a=/help/article/recommendations>Så fungerar rekommendationer</a>.
+    - <b>Bläddra efter språk</b> hittar titlar efter originalspråk, dubbning eller undertexter. Se <a=/help/article/browse-language>Bläddra efter språk</a>.
+
 help-art-browse-language-title = Bläddra efter språk
-help-art-browse-language-summary = Hitta titlar efter ursprungs språk, dubbelning eller undertexter.
-help-art-browse-language-keywords = bläddra efter språk ursprungs språk dubbelning undertexter främmande internationella anime koreanska spanska
+help-art-browse-language-summary = Hitta titlar efter originalspråk, dubbning eller undertexter.
+help-art-browse-language-keywords = språk originalspråk dubbning undertexter
 help-art-browse-language-body =
-    1. Öppna <b>Bläddra efter språk</b> i toppmenyn.
-    2. Välj vad du vill: <b>Ursprungs språk</b>, <b>Dubbelning</b> eller <b>Undertexter</b>.
-    3. Välj ett språk för att se matchande titlar.
+    1. Öppna <b>Bläddra efter språk</b> i fältet högst upp.
+    2. Välj vad du letar efter: <b>Originalspråk</b>, <b>Dubbning</b> eller <b>Undertexter</b>.
+    3. Välj ett språk för att se titlar som passar.
 
-    !! Notera: Tillgängligheten för dubbelning och undertexter beror på källan. En titel som visas här kan erbjuda färre spår när du spelar den.
-help-art-new-popular-title = Nya & populära
+    !! Obs! Om det finns dubbning och undertexter beror på källan. En titel i den här listan kan ha färre spår när du spelar upp den.
+
+help-art-new-popular-title = Nya & Populära
 help-art-new-popular-summary = Se vad som kommer och vad folk tittar på just nu.
-help-art-new-popular-keywords = ny populära trendande senaste topp 10 snart denna vecka
+help-art-new-popular-keywords = nytt populärt kommer snart trendar nya titlar
 help-art-new-popular-body =
-    <b>Nya & populära</b> i toppmenyn listar titlar som är nya eller trendande. Öppna en titel för dess detaljer, sedan lägg till den i <b>Min lista</b> för att hitta den senare.
+    <b>Nya & Populära</b> i fältet högst upp visar nya och populära titlar. Öppna en titel för detaljer och lägg till den i <b>Min lista</b> så hittar du den senare.
 
-    Lista uppdateras från katalogen, så de ändras från dag till dag.
-help-art-recommendations-title = Hur rekommendationer fungerar
-help-art-recommendations-summary = Hur raderna väljs och vad du kan göra för att ändra dem.
-help-art-recommendations-keywords = rekommendationer raderna förslag eftersom du tittat smak algoritm för dig personlig personlig
+    Listorna uppdateras från katalogen och ändras alltså från dag till dag.
+
+help-art-recommendations-title = Så fungerar rekommendationer
+help-art-recommendations-summary = Hur raderna skapas och vad som ändrar dem.
+help-art-recommendations-keywords = rekommendationer rader förslag eftersom du såg smak personligt
 help-art-recommendations-body =
-    Raderna på startsidan byggs från beskrivningar, genrer och krediter till titlar. Titlar som är liknande i betydelse grupperas till en rad, till exempel en dekade och genre, eller <b>Like</b> följt av en titel du såg.
+    Raderna utgår från vad titlarna är: genrer, stämning, ämnen, land och decennium, till exempel <b>Romantiska komedier att må bra av</b> eller <b>Koreanska kriminalserier</b>. Inom varje rad följer ordningen din smak.
 
-    ## Vad som ändrar dina raderna
-    - Att börja en titel. Rekommendations tjänsten lär sig vilka genrer du letar efter och anpassar raderna i ungefär en dag.
-    - Den profil du använder. En barnprofil visar endast titlar för yngre åldersgrupper.
+    ## Vad som ändrar dina rader
+    - Vad du startar och tittar klart på, vad du betygsätter och vad du lägger till i Min lista.
+    - Rader som <b>Eftersom du såg</b>, <b>Dagens bästa val för dig</b> och <b>Titta härnäst</b> kommer från dina senaste titlar. På en genres sida håller de sig inom den genren.
+    - Profilen du använder. Varje profil har sin egen smak, och en barnprofil visar bara titlar för barn.
+    - Dagen och årstiden. Rader för högtider och evenemang dyker upp under sin säsong.
 
-    ## Vad som inte
-    Raderna påverkas inte av vad du betalar, var du bor eller vem du är. Vi använder inte ditt namn eller e-postadress, eftersom tjänsten endast ser en slumpmässig sessionsnummer. Se <a=/help/article/privacy-data>Vad samlar { $brand } in?</a>
+    ## Stänga av det
+    Stäng av <b>Personliga rekommendationer</b> under din profils <b>Integritet och datainställningar</b>. Då ser du samma förslag som alla andra.
+
+    Vi använder aldrig ditt namn eller din e-postadress för att välja titlar. Se <a=/help/article/privacy-data>Vilka uppgifter samlar { $brand } in?</a>
 
     @@ data
-help-art-trailers-clips-title = Trailers och clips
-help-art-trailers-clips-summary = Förhandsgranska en titel innan du väljer den.
-help-art-trailers-clips-keywords = trailers clips förhandsgranskning korta videor teaser stumma ljud automatisk uppspelning förhandsgranskningar
+
+help-art-trailers-clips-title = Trailers och klipp
+help-art-trailers-clips-summary = Kika på en titel innan du bestämmer dig.
+help-art-trailers-clips-keywords = trailers klipp förhandsvisning korta ljud automatisk uppspelning
 help-art-trailers-clips-body =
-    - Lägg muspekaren över en titelkarta på en dator, eller öppna dess detaljer, för att se en trailerförhandsgranskning.
-    - <b>Clips</b> visar korta lodräta förhandsgranskningar som du kan rulla genom.
-    - Använd ljudknappen för att aktivera eller inaktivera förhandsgranskningssound. Ditt val kommer att sparas för profilen.
+    - Håll pekaren över ett titelkort på en dator, eller öppna detaljerna, för att se en trailer.
+    - <b>Clips</b> visar korta, stående förhandsvisningar som du bläddrar igenom.
+    - Använd högtalarknappen för att slå på eller av ljudet i förhandsvisningar.
 
-    För att stoppa förhandsgranskningar från att starta själva, öppna <b>Inställningar</b>, sedan <b>Spelinställningar</b>, och stäng av <b>Automatisk uppspelning av förhandsgranskningar</b>.
+    Trailers spelas upp från YouTube. För att förhandsvisningar inte ska starta av sig själva stänger du av <b>Spela upp förhandsvisningar automatiskt</b> i din profils <b>Uppspelningsinställningar</b>.
+
 help-art-what-is-title = Vad är { $brand }?
-help-art-what-is-summary = En kort beskrivning av { $brand } och vad den gör och inte gör.
-help-art-what-is-keywords = vad är om streams tjänst förklaring index länkar katalog netflix lika
+help-art-what-is-summary = En kort beskrivning av { $brand }: vad det gör och inte gör.
+help-art-what-is-keywords = vad är streams tjänst förklaring länkar katalog
 help-art-what-is-body =
-    { $brand } hjälper dig hitta din nästa film eller serie. Den lär sig vad du gillar och ordnar katalogen till raderna för dig, på en sida som känns som de strömningstjänster du känner till.
+    { $brand } hjälper dig att hitta din nästa film eller serie. Det lär sig vad du gillar och ordnar katalogen i rader åt dig, på en sida som känns som de streamingtjänster du känner till.
 
-    { $brand } är ett index av länkar. Den har inte uppoffrat eller uppladdat videor. När du trycker på spela, frågar spelaren oberoende källor efter en ström och spelar den första som fungerar. Se <a=/help/article/sources>Var kommer titlarna ifrån?</a>
+    { $brand } är en förteckning över länkar. Det lagrar eller laddar inte upp video. När du trycker på spela frågar spelaren oberoende källor efter en stream och spelar den första som fungerar. Se <a=/help/article/sources>Var titlarna kommer ifrån</a>.
 
-    Det finns inget att köpa och ingen prenumeration. Se <a=/help/article/free-to-use>Är { $brand } gratis?</a>
-help-art-getting-started-title = Att börja använda { $brand }
-help-art-getting-started-summary = Dina första fem minuter: profiler, hitta en titel och spara den.
-help-art-getting-started-keywords = att börja använda börja första gången tur ny användare hur man använder guide grundläggande
+    Det finns inget att köpa och inget abonnemang. Se <a=/help/article/free-to-use>Är { $brand } gratis?</a>
+
+help-art-getting-started-title = Kom igång med { $brand }
+help-art-getting-started-summary = Dina första fem minuter: konto, profiler, hitta en titel och spara den.
+help-art-getting-started-keywords = kom igång börja första gången guide ny användare grunder
 help-art-getting-started-body =
-    1. <b>Välj eller skapa en profil.</b> Se <a=/help/article/profiles-manage>Hur man skapar, redigerar eller tar bort profiler</a>.
-    2. <b>Utforska startsidan.</b> Raderna är grupperade efter tema och det stora rubriken ovanför förändras.
-    3. <b>Sök</b> efter en titel med hjälp av linsen. Se <a=/help/article/search-browse>Hur man söker och bläddrar</a>.
-    4. <b>Välj en titel</b> för att läsa om den, titta på trailer och tryck på spela.
-    5. <b>Lägg till titlar i Min Lista</b> med knappen <b>+</b>.
+    1. <b>Skapa ditt gratis konto.</b> Se <a=/help/article/need-account>Behöver jag ett konto?</a>
+    2. <b>Välj eller skapa en profil.</b> Se <a=/help/article/profiles-manage>Skapa, redigera eller radera profiler</a>.
+    3. <b>Titta runt på startsidan.</b> Raderna är grupperade efter tema, och den stora titeln högst upp byts ut.
+    4. <b>Sök</b> efter en titel, skådespelare eller regissör med förstoringsglaset. Se <a=/help/article/search-browse>Söka och bläddra</a>.
+    5. <b>Välj en titel</b> för att läsa om den, se trailern och spela upp.
+    6. <b>Lägg till titlar i Min lista</b> med knappen <b>+</b>.
 
-    Lär dig nycklarna som hjälper dig när du tittar: <a=/help/article/shortcuts>Tangentbordsknappar</a>.
-help-art-sources-title = Var kommer titlarna ifrån
-help-art-sources-summary = Hur { $brand } hittar strömmar och varför en titel kan fungera en dag och inte nästa.
-help-art-sources-keywords = källor leverantörer värdar länkar tredjepartsplattformar varifrån katalog tmdb metadata tillgänglighet
+    Lär dig tangenterna som hjälper när du tittar: <a=/help/article/shortcuts>Kortkommandon</a>.
+
+help-art-sources-title = Var titlarna kommer ifrån
+help-art-sources-summary = Hur { $brand } hittar streamar, och varför en titel kan fungera ena dagen och inte nästa.
+help-art-sources-keywords = källor var kommer titlar ifrån stream fungerar inte
 help-art-sources-body =
-    Detaljer, bilddokumentation och betyg kommer från ett offentligt film- och TV-katalog. Videon själv finns inte på { $brand }. När du trycker på spela, frågar spelaren oberoende tredjepartskällor efter en ström.
+    Detaljer, affischer och betyg kommer från en öppen film- och tv-katalog. Själva videon finns inte på { $brand }. När du trycker på spela frågar spelaren oberoende externa källor efter en stream.
 
-    - En titel kan vara tillgänglig från en källa och inte från en annan.
-    - En källa kan gå offline utan varning.
+    - En titel kan finnas hos en källa men inte hos en annan.
+    - En källa kan gå offline utan förvarning.
     - Kvalitet, ljudspår och undertexter kommer från källan.
 
-    Vi kontrollerar inte eller styr dessa källor. Se <a=/disclaimer>Ansvarsfriskrivning</a>. Om du är rättshavare, se <a=/help/article/copyright>Hur man rapporterar ett rättsskyddat problem</a>.
-help-art-contribute-title = Hur kan jag bidra?
-help-art-contribute-summary = Idéer, fixar, översättningar och felrapporteringar är välkomna.
-help-art-contribute-keywords = bidra bidragande volontär översätta översättning kod github hjälp förbättra förslag
-help-art-contribute-body =
-    { $brand } byggs öppet. Du kan hjälpa på flera sätt:
+    Vi styr inte över och kontrollerar inte de källorna. Se <a=/disclaimer>Ansvarsfriskrivningen</a>. Om du är rättighetsinnehavare, se <a=/help/article/copyright>Rapportera ett upphovsrättsproblem</a>.
 
-    - <b>Översättningar.</b> Gränssnittstext finns i vanliga textfiler, en per språk, så en översättning är en textfil du kan redigera.
-    - <b>Felrapporteringar.</b> Se <a=/help/article/report-bug>Rapportera ett problem</a>.
-    - <b>Fixar och funktioner.</b> Skicka en beskrivning eller en patch.
-    - <b>Ideer.</b> Berätta för oss vad du önskar att hjälpcenter eller appen gjorde.
+help-art-contribute-title = Hur kan jag bidra?
+help-art-contribute-summary = Idéer, rättningar, översättningar och felrapporter är välkomna.
+help-art-contribute-keywords = bidra hjälpa översätta rapportera fel idéer
+help-art-contribute-body =
+    { $brand } byggs öppet. Du kan hjälpa till på flera sätt:
+
+    - <b>Översättningar.</b> Gränssnittets texter ligger i vanliga textfiler, en per språk, så en översättning är en textfil som du kan redigera.
+    - <b>Felrapporter.</b> Se <a=/help/article/report-bug>Rapportera ett problem</a>.
+    - <b>Rättningar och funktioner.</b> Skicka en beskrivning eller en patch.
+    - <b>Idéer.</b> Berätta vad du önskar att hjälpcentret eller appen gjorde.
 
     Skriv till <a=mailto:{ $contribute_email }>{ $contribute_email }</a> med några rader om vad du vill göra.
-help-art-install-app-title = Hur man installerar { $brand } som ett app
-help-art-install-app-summary = Lägg till { $brand } på din startsida eller skrivbord så att det öppnas i sitt egena fönster.
-help-art-install-app-keywords = installera app pwa lägg till på startsida skrivbordsknapp ikon webbapp
-help-art-install-app-body =
-    { $brand } är en webbapp. Det finns ingen butik att ladda ner från. Din webbläsare kan installera den så att den öppnas i sitt eget fönster och har sitt eget ikon.
 
-    ## Chrome och Edge på en dator
-    Välj installationsikonen till höger om adressfältet, eller öppna webbläsar-menyn och välj <b>Installera { $brand }</b>.
+help-art-install-app-title = Installera { $brand } som app
+help-art-install-app-summary = Lägg till { $brand } på hemskärmen, i Dock eller på skrivbordet så att det öppnas i ett eget fönster.
+help-art-install-app-keywords = installera app hemskärm dock skrivbord pwa
+help-art-install-app-body =
+    { $brand } är en webbapp. Det finns inget att ladda ner från en butik. Din webbläsare kan installera appen så att den öppnas i ett eget fönster med egen symbol.
+
+    ## Chrome och Edge på Windows, Mac och Linux
+    Välj installationsikonen till höger i adressfältet, eller öppna webbläsarens meny och välj <b>Installera { $brand }</b> (i Edge: <b>Appar</b> och sedan <b>Installera den här webbplatsen som en app</b>).
+
+    ## Safari på Mac
+    Öppna menyn <b>Arkiv</b> och välj <b>Lägg till i Dock</b>.
 
     ## Android
-    Öppna webbläsar-menyn och välj <b>Installera app</b> eller <b>Lägg till på startsidan</b>.
+    Öppna webbläsarens meny och välj <b>Installera app</b> eller <b>Lägg till på startskärmen</b>.
 
     ## iPhone och iPad
-    I Safari väljer du <b>Dela</b>-knappen, sedan <b>Lägg till på startsidan</b>.
+    Välj knappen <b>Dela</b> i Safari och sedan <b>Lägg till på hemskärmen</b>.
 
-    !! Obs: En installerad app är samma webbplats. Den uppdaterar sig själv och använder samma sparade profiler som webbläsaren den installeras från.
-help-art-phone-tablet-title = Hur man använder { $brand } på telefon eller tablet
-help-art-phone-tablet-summary = Den mobila layouten, den undre balken och tips för små skärmar.
-help-art-phone-tablet-keywords = telefon tablet mobil android iphone ipad touch undre balk app layout
+    !! Obs! Firefox på datorn kan inte installera webbplatser som appar. Använd ett bokmärke, eller installera från Chrome, Edge eller Safari. En installerad app är samma webbplats: den uppdaterar sig själv och håller dig inloggad precis som webbläsaren.
+
+help-art-phone-tablet-title = Använda { $brand } på mobil eller surfplatta
+help-art-phone-tablet-summary = Mobillayouten, fältet längst ner och tips för små skärmar.
+help-art-phone-tablet-keywords = mobil surfplatta telefon fält längst ner
 help-art-phone-tablet-body =
-    Öppna webbplatsen i din telefonens webbläsare. Sidan växlar till en layout som är byggd för touch, med en balk längst ner för <b>Hem</b>, <b>Snippets</b>, <b>Sök</b> och <b>Mitt lista</b>.
+    Öppna webbplatsen i mobilens webbläsare. Sidan byter till en layout gjord för pekskärm, med ett fält längst ner för <b>Hem</b>, <b>Clips</b>, <b>Sök</b> och <b>Mitt Streams</b>.
 
-    - Tryck på en kort för dess detaljer, sedan på spelpåsknappen för att starta.
-    - Vrid telefonen till landskapsläge för bästa bild.
-    - För att det ska känna sig som en app, se <a=/help/article/install-app>Hur man installerar { $brand } som en app</a>.
-help-art-watch-on-tv-title = Hur man tittar på din TV
-help-art-watch-on-tv-summary = Använd din TV:s webbläsare, eller skicka en webbläsartabblad från en dator eller telefon.
-help-art-watch-on-tv-keywords = TV television smart TV cast chromecast airplay hdmi fire stick stor skärm
+    - Tryck på ett kort för detaljer och sedan på uppspelningsknappen för att börja.
+    - Vrid mobilen till liggande läge för bästa bild.
+    - Vill du att det ska kännas som en app, se <a=/help/article/install-app>Installera { $brand } som app</a>.
+
+help-art-watch-on-tv-title = Titta på tv:n
+help-art-watch-on-tv-summary = Använd tv:ns webbläsare, eller skicka en webbläsarflik från en dator eller mobil.
+help-art-watch-on-tv-keywords = tv titta casta hdmi webbläsare
 help-art-watch-on-tv-body =
-    Det finns ännu ingen { $brand } app för TV:n. Dessa alternativ fungerar idag:
+    Det finns ännu ingen { $brand }-app för tv. De här sätten fungerar redan nu:
 
-    - <b>TV-webbläsare.</b> Öppna { $brand }-adressen i webbläsaren som kom med din TV.
-    - <b>Skicka en tab.</b> I Chrome eller Edge på en dator öppnar du webbläsar-menyn och väljer <b>Skicka</b>, sedan väljer du din TV eller strömningstangentbord.
-    - <b>Kabel.</b> Anslut en dator till TV:n med en HDMI-kabel och använd fullskärm.
+    - <b>Tv:ns webbläsare.</b> Öppna { $brand }s adress i webbläsaren som finns på din tv.
+    - <b>Casta en flik.</b> Öppna webbläsarens meny i Chrome eller Edge på en dator, välj <b>Casta</b> och välj sedan din tv eller streamingsticka.
+    - <b>Kabel.</b> Anslut en bärbar dator till tv:n med en HDMI-kabel och använd helskärm.
 
-    Om bilden eller ljudet inte är rätt, se <a=/help/article/fix-tv>Fixa ett problem på din TV</a>.
-help-art-copyright-title = Hur man rapporterar ett copyright-problem
-help-art-copyright-summary = Rättshavare kan be om en länk ska tas bort.
-help-art-copyright-keywords = copyright dmca takedown infraction rättshavare ta bort rapport notis juridisk
+    Om bild eller ljud inte stämmer, se <a=/help/article/fix-tv>Åtgärda ett problem på tv:n</a>.
+
+help-art-copyright-title = Rapportera ett upphovsrättsproblem
+help-art-copyright-summary = Rättighetsinnehavare kan be om att en länk tas bort.
+help-art-copyright-keywords = upphovsrätt dmca ta bort rättighetsinnehavare anmälan
 help-art-copyright-body =
-    { $brand } har inte upphovsrätt till videofiler. Det listar länkar till titlar som är upphovsrättshavare hos andra tjänster. Om du äger rättigheter till en titel och du tror att en länk kränker dem, skicka oss en anmälan och vi kommer att granska den.
+    { $brand } lagrar inga videofiler. Det listar länkar till titlar som finns hos andra tjänster. Om du äger rättigheterna till en titel och tror att en länk gör intrång i dem, skicka en anmälan till oss så granskar vi den.
 
-    En anmälan bör innehålla:
-    1. Ditt namn och kontaktuppgifter.
-    2. En beskrivning av arbetet du äger.
+    En anmälan ska innehålla:
+    1. Ditt namn och dina kontaktuppgifter.
+    2. En beskrivning av verket som du äger.
     3. Adressen till sidan på { $brand } som länkar till det.
-    4. En uttalande att du är upphovsrättsinnehavare eller tillåten att agera i deras namn.
+    4. Ett intygande om att du är rättighetsinnehavare eller får agera för den.
 
-    Skicka det till <a=mailto:{ $help_email }>{ $help_email }</a> med ämnet <b>DMCA anmälan</b>. Hela processen finns på <a=/dmca>DMCA-sidan</a>.
-help-art-title-feedback-title = Feedback om en titel på { $brand }
-help-art-title-feedback-summary = Rapportera en felaktig beskrivning, en saknad titel eller en titel som aldrig spelas.
-help-art-title-feedback-keywords = feedback titel felaktig beskrivning saknad begäran film serie lägg till rapport felaktig bild
+    Skicka den till <a=mailto:{ $help_email }>{ $help_email }</a> med ämnet <b>DMCA-anmälan</b>. Hela processen finns på <a=/dmca>DMCA-sidan</a>.
+
+help-art-title-feedback-title = Synpunkter på en titel på { $brand }
+help-art-title-feedback-summary = Rapportera en felaktig beskrivning, en titel som saknas eller en titel som aldrig spelas upp.
+help-art-title-feedback-keywords = synpunkter titel fel beskrivning saknas säsong
 help-art-title-feedback-body =
-    Skriv till <a=mailto:{ $help_email }>{ $help_email }</a> och inkludera:
+    Skriv till <a=mailto:{ $help_email }>{ $help_email }</a> och ange:
 
     - titeln och året
-    - adressen till dess sida på { $brand }
-    - vad som är felaktigt, till exempel en felaktig bild, en saknad säsong eller en titel som aldrig spelas
+    - adressen till sidan på { $brand }
+    - vad som är fel, till exempel fel affisch, en säsong som saknas eller en titel som aldrig spelas upp
 
-    Detaljer kommer från en offentlig katalog, så en felaktig beskrivning är bäst åtgärdat på dess källa. Vi kan vidarege korrigeringar som vi får.
+    Detaljerna kommer från en öppen katalog, så en felaktig beskrivning rättas bäst vid källan. Rättelser vi får skickar vi vidare.
+
 help-art-report-bug-title = Rapportera ett problem
-help-art-report-bug-summary = Vad du ska inkludera så att vi kan hitta och åtgärda ett fel snabbt.
-help-art-report-bug-keywords = rapport fel problem issue fel felaktig felaktig funktion feedback kontakt
+help-art-report-bug-summary = Vad du ska ta med så att vi snabbt kan hitta och åtgärda ett fel.
+help-art-report-bug-keywords = rapportera problem fel bugg kontakt
 help-art-report-bug-body =
-    Ju mer vi vet, desto snabbare kan vi åtgärda det. Vänligen inkludera:
+    Ju mer vi vet, desto snabbare kan vi åtgärda det. Ta med:
 
-    1. Vad du gjorde och vad du förväntade dig.
-    2. Vad som hände istället och eventuella meddelanden du såg.
+    1. Vad du gjorde och vad du väntade dig.
+    2. Vad som hände i stället, och vilket meddelande du såg.
     3. Titeln, om det gäller uppspelning.
-    4. Ditt enhet och webbläsare.
+    4. Din enhet och webbläsare.
 
-    Den <a=/help/contact>Kontakta oss</a>-sidan har en knapp som öppnar ett e-postmeddelande med dina webbläsaruppgifter fyllda.
+    Sidan <a=/help/contact>Kontakta oss</a> har en knapp som öppnar ett mejl där webbläsarens uppgifter redan är ifyllda.
 
     @@ diagnostics
+
 cookie-sheet = <b>{ $brand }</b> använder cookies för att hålla dina profiler och preferenser och, om du tillåter det, för att anpassa rekommendationer.
 cookie-learn = Läs mer
 cookie-reject = Neka
@@ -874,7 +1018,7 @@ help-act-v-blocked = Blockerad eller full
 help-act-v-reachable = Åtkomlig inom { $ms } ms
 help-act-v-unreachable = Inte åtkomlig
 help-act-v-timeout = Ingen svar inom { $s } sekunder
-help-act-data-title = Dina data på detta enhet
+help-act-data-title = Dina profiler och din tittaraktivitet
 help-act-data-profiles =
     { $count ->
         [one] 1 profil
@@ -886,9 +1030,9 @@ help-act-data-progress =
        *[other] { $count } titlar med sparad framfart
     }
 help-act-data-lang = Språk: { $lang }
-help-act-clear-progress = Rensa tittning framfart
+help-act-clear-progress = Dölj all tittaraktivitet
 help-act-reset-recs = Återställ rekommendationer
-help-act-clear-all = Rensa alla sparade data
+help-act-clear-all = Rensa den här webbläsarens data och logga ut
 help-act-confirm = Är du säker? Detta kan inte återkallas.
 help-act-yes = Ja, gör det
 help-act-cancel = Avbryt
@@ -914,14 +1058,14 @@ nav-series = Serier
 nav-films = Filmer
 nav-games = Spel
 nav-new-popular = Nya & Populära
-nav-my-list = Min Lista
+nav-my-list = Mitt Streams
 nav-browse-language = Bläddra efter språk
 nav-new-hot = Nya & Heta
 nav-clips = Clips
 nav-search = Sök
 nav-kids = Barn
 nav-exit-kids = Lämna Barn
-nav-genres = Genre
+nav-genres = Genrer
 nav-categories = Kategorier
 tabs-everyone-watching = Allas Tittar
 tabs-top10-series = Top 10 Serier
@@ -988,7 +1132,7 @@ media-cast = Kast:
 media-genres = Genre:
 media-this-show-is = Detta program är:
 media-this-movie-is = Detta film är:
-media-episodes = Episoder
+media-episodes = Avsnitt
 media-no-description = Ingen beskrivning tillgänglig.
 media-no-episodes = Inga episoder tillgängliga.
 media-more-like-this = Mer som detta
@@ -1022,15 +1166,15 @@ clips-sound = Ljud
 clips-info = Info
 lang-original = Originalspråk
 lang-no-titles = Inga titlar tillgängliga för detta språk.
-player-skip-intro = Hoppa över introduktion
+player-skip-intro = Hoppa över intro
 player-next-episode = Nästa avsnitt
 player-subs-off = Av
-player-unavailable = Upptäckning inte tillgänglig
+player-unavailable = Uppspelning ej tillgänglig
 player-back = Tillbaka
 profile-manage = Hantera profiler
 profile-transfer = Överför profil
 profile-kids = Barnprofil
-profile-lock = Profil lås
+profile-lock = Profillås
 profile-choose-icon = Välj ett ikon
 common-done = Klar
 profile-pin-invalid = PIN måste vara exakt 4 siffror.
@@ -1039,7 +1183,7 @@ player-pause = Pausa (Space)
 player-play = Spela (Space)
 player-unmute = Avstumma (M)
 player-mute = Stumma (M)
-player-error-no-source = Det går inte att strömma videon. Alla källleverantörer var o tillgängliga eller inte stödjas av din webbläsare.
+player-error-no-source = Det går inte att strömma videon. Alla källor var otillgängliga eller stöds inte av din webbläsare.
 genre-action = Action
 genre-anime = Anime
 genre-black-stories = Svarta berättelser
@@ -1115,8 +1259,8 @@ genre-talk = Diskussion
 genre-war-politics = Krig & Politik
 genre-tv-movie = TV-film
 profile-manage-title = Hantera Profiler:
-profile-whos-watching = Vem Tittar?
-profile-sign-out = Logga Ut Från { $brand }
+profile-whos-watching = Vem tittar?
+profile-sign-out = Logga ut från { $brand }
 profile-enter-pin = Skriv in ditt PIN för att komma åt { $name }'s profil.
 profile-edit-title = Redigera profil
 profile-edit-hint = Uppdatera denna profilens namn, ikon och lås.
@@ -1149,43 +1293,45 @@ nf-zone-4 = Analog Corruption
 nf-zone-5 = Void Sentinels
 nf-zone-6 = Cosmic Drift
 legal-privacy-title = Integritetspolicy
-legal-privacy-updated = Senast uppdaterad: Augusti 2026
+legal-privacy-updated = Senast uppdaterad: oktober 2026
 legal-privacy-1-title = 1. Introduktion
 legal-privacy-1-body = { $brand } är en länkaggregator och sökmotor. Denna integritetspolicy förklarar hur vi samlar in, använder och skyddar din personuppgifter när du använder vår tjänst.
 legal-privacy-2-title = 2. Information Vi Samlar In
 legal-privacy-2-body = Vi samlar in begränsad personuppgifter för att erbjuda och förbättra tjänsten:
-legal-privacy-2-b1 = <strong>Kontoinformation:</strong> E-postadress och visningsnamn när du skapar ett konto.
-legal-privacy-2-b2 = <strong>Användningsdata:</strong> Anonymiserad visningshistorik och preferenser, begränsad till din profil.
-legal-privacy-2-b3 = <strong>Sessionscookies:</strong> Används för att hålla dig inloggad säkert.
+legal-privacy-2-b1 = <strong>Kontouppgifter:</strong> ditt för- och efternamn, din e-postadress och ditt lösenord (som vår inloggningstjänst bara sparar krypterat), och ett mobilnummer om du lägger till ett.
+legal-privacy-2-b2 = <strong>Profiler och aktivitet:</strong> dina profiler och deras inställningar, Min lista, dina betyg, ditt framsteg och din tittaraktivitet. De är kopplade till ditt konto så att de följer med dig till alla enheter.
+legal-privacy-2-b3 = <strong>Säkerhetsloggar:</strong> de senaste inloggningarna och ändringarna i ditt konto, med webbläsare, system och land de kom från, så att vi kan visa dina enheter och varna dig för en ny inloggning.
+legal-privacy-2-b4 = <strong>Lagring på din enhet:</strong> det som håller dig inloggad, en kopia av dina profiler och inställningar så att sidorna öppnas snabbt, och dina val om cookies. Se cookiepolicyn.
 legal-privacy-3-title = 3. Vad Vi Inte Gör
 legal-privacy-3-body = Vi är engagerade i din integritet:
 legal-privacy-3-b1 = <strong>Delar Din Data:</strong> Vi delar inte personuppgifter med annonserare eller datahandlare.
 legal-privacy-3-b2 = <strong>Säljer Din Data:</strong> Vi säljer, hyr eller handlar aldrig någon personuppgifter till tredje part.
-legal-privacy-3-b3 = <strong>Fingeravtryck På Din Webbbläddrare:</strong> Vi gör inte webbläsarfingeravtryck eller någon form av enhetsidentifiering.
+legal-privacy-3-b3 = <strong>Spåra dig:</strong> Vi använder inga reklam- eller analyscookies, tar inga fingeravtryck av webbläsaren och följer dig inte på andra webbplatser.
 legal-privacy-4-title = 4. Laglig Grund För Behandling (UK GDPR)
 legal-privacy-4-body = Under UK General Data Protection Regulation (UK GDPR) är de lagliga grundarna vi förlitar oss på för behandling av denna information:
-legal-privacy-4-b1 = <strong>Kontraktuell Nödvändighet:</strong> För att erbjuda dig länkaggregering och profil funktioner som du prenumererat på.
-legal-privacy-4-b2 = <strong>Legitima Intressen:</strong> För att analysera allmän plattformshantering och förbättra prestanda, med strikt anonymiserad, sammanställd data.
+legal-privacy-4-b1 = <strong>Avtal:</strong> för att ge dig ditt konto, dina profiler och funktionerna du använder.
+legal-privacy-4-b2 = <strong>Berättigat intresse:</strong> för att skydda konton (inloggningsloggar) och för att tjänsten ska fungera och bli bättre.
+legal-privacy-4-b3 = <strong>Samtycke:</strong> för att använda det du tittar på till personliga rekommendationer. Du kan ta tillbaka det när som helst under Integritet och datainställningar.
 legal-privacy-5-title = 5. Hur Vi Lagrar Dina Data
-legal-privacy-5-body = Dina data lagras säkert med hjälp av Supabase (vår backend infrastrukturleverantör). Vi använder Row-Level Security (RLS) policyer för att säkerställa att endast du kan komma åt dina data.
+legal-privacy-5-body = Dina kontouppgifter lagras hos Supabase, vår databasleverantör, med säkerhet på radnivå så att bara ditt konto kan läsa dem. Varje webbläsare där du loggar in sparar en kopia för att gå snabbare. När du raderar ditt konto raderas uppgifterna direkt.
 legal-privacy-6-title = 6. Tredjeparts-tjänster
-legal-privacy-6-body = Vi använder tredjeparts-API:er inklusive TMDB (för metadata) och Cloudflare Turnstile (för bot-skydd). Dessa tjänster bedriver verksamheten enligt sina egna integritetspolicyer.
+legal-privacy-6-body = Vi använder de här leverantörerna, var och en med sin egen integritetspolicy: Supabase (konton och lagring), Cloudflare (drift av webbplatsen och vidarebefordran av e-post), Hugging Face (drift av rekommendationstjänsten), Resend (utskick av kontomejl), TMDB (information och bilder om filmer och serier) och YouTube (trailers). Video kommer från oberoende externa källor, som ser din IP-adress precis som alla webbplatser du besöker.
 legal-privacy-7-title = 7. Dina dataskyddsreformer
 legal-privacy-7-body = Enligt UK GDPR har du följande rättigheter:
-legal-privacy-7-b1 = <strong>Rätt till tillgång:</strong> Begär en kopia av den personuppgifter vi har om dig.
-legal-privacy-7-b2 = <strong>Rätt till radering:</strong> Begär radering av dina personuppgifter ("Rätt att bli glömd"). Du kan radera ditt konto direkt från inställningssidan.
-legal-privacy-7-b3 = <strong>Rätt till korrektion:</strong> Begär korrektion av några felaktiga personuppgifter vi har.
-legal-privacy-7-b4 = <strong>Rätt att företräda:</strong> Företräda behandling av dina personuppgifter där vi förlitar oss på legitima intressen.
+legal-privacy-7-b1 = <strong>Rätt till tillgång:</strong> ladda ner en kopia av dina uppgifter när som helst under Konto, Åtkomst till personuppgifter.
+legal-privacy-7-b2 = <strong>Rätt till radering:</strong> radera ditt konto när som helst under Konto, Radera konto. Allt i det raderas direkt.
+legal-privacy-7-b3 = <strong>Rätt till rättelse:</strong> ändra ditt namn, din e-postadress och ditt telefonnummer under Konto, eller be oss rätta något annat.
+legal-privacy-7-b4 = <strong>Rätt att invända:</strong> stäng av personliga rekommendationer, eller skriv till oss för att invända mot behandling som grundar sig på berättigat intresse.
 legal-privacy-8-title = 8. Kontakta
-legal-privacy-8-body = Om du har frågor om denna integritetspolicy eller vill utöva dina datarättigheter, vänligen kontakta repository-maintainer på { $support_email }.
-legal-terms-title = Villkor för tjänst
-legal-terms-updated = Senast uppdaterad: Augusti 2026
+legal-privacy-8-body = Om du har frågor om den här integritetspolicyn eller vill använda dina rättigheter, skriv till { $support_email }.
+legal-terms-title = Användarvillkor
+legal-terms-updated = Senast uppdaterad: oktober 2026
 legal-terms-1-title = 1. Acceptans av villkor
 legal-terms-1-body = Genom att komma åt eller använda { $brand }, godkänner du att du är bunden av dessa villkor för tjänst och vår integritetspolicy. Om du inte godkänner, använd inte tjänsten.
 legal-terms-2-title = 2. Naturen av tjänsten
 legal-terms-2-body = { $brand } är en länkaggregator och sökmotor. Vi har inte värd, uppladdat, sänder eller kontrollerar någon videokontent på våra servrar. All media hämtas från tredjepartsplattformar.
 legal-terms-3-title = 3. Användarkonton
-legal-terms-3-body = För att komma åt vissa funktioner (t.ex. spara en visningslista eller synkronisera framsteg) måste du skapa ett konto. Du är ansvarig för att säkerställa säkerheten hos dina kontouppgifter.
+legal-terms-3-body = Du behöver ett gratis konto för att använda { $brand }. Du ansvarar för att hålla ditt lösenord säkert och för det som händer på ditt konto. Hör av dig direkt om du tror att någon annan använder det.
 legal-terms-4-title = 4. Acceptabel användning
 legal-terms-4-body = Du godkänner inte att använda tjänsten för:
 legal-terms-4-b1 = Övergå, inaktivera eller störa säkerhetsrelaterade funktioner i tjänsten.
@@ -1205,9 +1351,13 @@ legal-terms-9-body = Dessa villkor ska regleras och tolkas enligt lagarna i Engl
 legal-terms-10-title = 10. Kontakta
 legal-terms-10-body = För frågor angående dessa villkor, vänligen kontakta oss via Kontaktsidan.
 legal-cookie-policy-title = Cookiepolicy
-legal-cookie-policy-updated = Senast uppdaterad: Augusti 16, 2026
-legal-cookie-policy-1-title = Hur vi använder cookies
-legal-cookie-policy-1-body = Vi använder cookies och liknande spårningstekniker för att spåra aktiviteten på vår tjänst och hålla vissa information. Cookies är filer med en liten mängd data som kan inkludera ett anonymt unikt identifierare.
+legal-cookie-policy-updated = Senast uppdaterad: oktober 2026
+legal-cookie-policy-1-title = Hur vi använder cookies och lagring
+legal-cookie-policy-1-body = { $brand } använder inga reklam- eller analyscookies. Vi använder webbläsarens lokala lagring, en plats på din enhet som bara den här webbplatsen kan läsa, till:
+legal-cookie-policy-1-b1 = <strong>Inloggning:</strong> det som håller dig inloggad i den här webbläsaren.
+legal-cookie-policy-1-b2 = <strong>Snabbhet:</strong> en kopia av dina profiler, inställningar och ditt framsteg, så att sidorna öppnas direkt.
+legal-cookie-policy-1-b3 = <strong>Dina val:</strong> dina val om cookies och personalisering, och ditt visningsspråk.
+legal-cookie-policy-1-b4 = <strong>Andra webbplatser:</strong> trailers spelas upp från YouTube, som kan sätta egna cookies när en trailer spelas. Du kan ändra dina val när som helst under Integritet och datainställningar. Om du rensar webbplatsens data i webbläsaren loggas du ut där; ditt konto sparar allt.
 legal-dmca-title = DMCA säkerhetsfångstmeddelande
 legal-dmca-updated = Senast uppdaterad: Augusti 2026
 legal-dmca-1-title = 1. Vårt roll — Länkaggregat, inte en värd
@@ -1257,203 +1407,266 @@ help-ui-section-link = Länk till denna avsnitt
 help-ui-policy-questions = Frågor om denna fil?
 help-topic-legal = Lagliga och filer
 help-group-policies = Filer
-help-art-fake-sites-title = Hur man identifierar falska { $brand } sidor och meddelanden
-help-art-fake-sites-summary = De officiella adresserna, vad vi aldrig frågar efter och vad du ska göra om du hittar en kopia.
-help-art-fake-sites-keywords = falsk skam phishing kopia imitering officiell adress säker nedladdning lösenord betalning e-post
+help-group-signing-in = Inloggning och säkerhet
+help-art-fake-sites-title = Känna igen falska { $brand }-sidor och meddelanden
+help-art-fake-sites-summary = De officiella adresserna, vad vi aldrig ber om och vad du gör om du hittar en kopia.
+help-art-fake-sites-keywords = falsk sida bedrägeri nätfiske officiell adress
 help-art-fake-sites-body =
-    Kopior av populära sidor dyker upp alltid. Dessa är de enda adresserna som tillhör { $brand }:
+    Kopior av populära webbplatser dyker upp hela tiden. Det här är de enda adresserna som tillhör { $brand }:
 
     - <b>streams.watch</b>, appen
-    - <b>help.streams.watch</b>, denna Hjälpcenter
-    - <b>@streams.watch</b> e-postadresser, såsom <a=mailto:{ $help_email }>{ $help_email }</a>
+    - <b>help.streams.watch</b>, det här hjälpcentret
+    - e-postadresser på <b>@streams.watch</b>, till exempel <a=mailto:{ $help_email }>{ $help_email }</a>
 
-    ## Vad vi aldrig frågar efter
-    - En kortnummer, bankuppgifter eller någon betalning. { $brand } är gratis. Se <a=/help/article/free-to-use>Är { $brand } gratis?</a>
-    - Ditt lösenord via e-post, chatt eller ett formulär utanför inloggningsidan.
-    - En nedladdning, en tillägg, en kod eller en uppdatering för att titta.
+    ## Vad vi aldrig ber om
+    - Ett kortnummer, bankuppgifter eller någon betalning. { $brand } är gratis. Se <a=/help/article/free-to-use>Är { $brand } gratis?</a>
+    - Ditt lösenord via e-post, chatt eller ett formulär utanför inloggningssidan.
+    - En nedladdning, ett tillägg, en kodek eller en uppdatering för att kunna titta.
 
     ## Om du hittar en kopia
-    1. Stäng sidan och ange inte några uppgifter.
-    2. Om du redan angivit ett lösenord, ändra det på den sida det tillhör.
-    3. Skicka adressen till <a=mailto:{ $help_email }>{ $help_email }</a> så att vi kan rapportera det.
-help-art-security-report-title = Rapportera en säkerhetsproblem
-help-art-security-report-summary = Hur du kan berätta för oss om en svaghet säkert.
-help-art-security-report-keywords = säkerhetssvaghet bugg bounty ansvarsfulla offentliggör exploit hack rapport svaghet
+    1. Stäng sidan och skriv inte in några uppgifter.
+    2. Om du redan har skrivit ett lösenord, byt det på den webbplats det hör till.
+    3. Skicka adressen till <a=mailto:{ $help_email }>{ $help_email }</a> så anmäler vi den.
+
+help-art-security-report-title = Rapportera ett säkerhetsproblem
+help-art-security-report-summary = Hur du tryggt berättar för oss om en svaghet.
+help-art-security-report-keywords = säkerhet sårbarhet svaghet rapportera ansvarsfullt
 help-art-security-report-body =
-    Om du hittat en metod att läsa någon annans data, hoppa över en profil PIN eller bryta sidan, vänligen berätta för oss innan du berättar för någon annan.
+    Om du har hittat ett sätt att läsa någon annans uppgifter, kringgå en profils PIN-kod eller få webbplatsen att gå sönder, berätta det för oss innan du berättar för någon annan.
 
     1. Skriv till <a=mailto:{ $help_email }>{ $help_email }</a> med ämnet <b>Säkerhet</b>.
-    2. Beskriv vad du hittat, stegen för att upprepa det och den sida eller adress som det påverkar.
-    3. Åtkom inte andra personers data och testa inte med automatiserade flod av begäranden.
+    2. Beskriv vad du hittade, stegen för att upprepa det och sidan eller adressen det gäller.
+    3. Titta inte på andras uppgifter och testa inte med automatiska mängder av förfrågningar.
 
-    Vi läser varje rapport. Samma detaljer finns i den maskinläsbara filen på <a=/.well-known/security.txt>/.well-known/security.txt</a>.
-help-art-translate-title = Hjälp oss översätta { $brand }
-help-art-translate-summary = Gränssnittstext finns i enkla filer, en per språk, och vem som helst kan förbättra en.
-help-art-translate-keywords = översätt översättning lokalisation lokalisation språk bidra ftl fluent grammatik kön flertal
+    Vi läser varje rapport. Samma uppgifter finns i den maskinläsbara filen på <a=/.well-known/security.txt>/.well-known/security.txt</a>.
+
+help-art-translate-title = Hjälp till att översätta { $brand }
+help-art-translate-summary = Gränssnittets texter ligger i enkla filer, en per språk, och alla kan förbättra dem.
+help-art-translate-keywords = översätta översättning språk bidra ftl fluent
 help-art-translate-body =
-    All gränssnittstext är lagrad i en enkel textfil per språk. En översättning kräver inte programmering.
+    Alla gränssnittets texter finns i en vanlig textfil per språk. Du behöver inte kunna programmera för att översätta.
 
-    ## Vad du behöver veta
-    - Meddelanden ser ut som <b>nyckel = text</b>. Endast ändra texten efter likhetstecknet.
-    - Ord i kurvparenteser, som <b>{ "{ $brand }" }</b>, fylls i av applikationen. Lämna dem som de är och flytta dem där ditt språk behöver dem.
-    - Vissa meddelanden har former för ett och flera (<b>1 säsong</b>, <b>2 säsonger</b>). Språk med mer än två former kan lägga till alla.
-    - Var du språk ändrar ett ord för kön eller fall, skriv den form som passar meningen.
+    ## Bra att veta
+    - Meddelanden ser ut som <b>nyckel = text</b>. Ändra bara texten efter likhetstecknet.
+    - Ord inom klammerparenteser, som <b>{ "{ $brand }" }</b>, fylls i av appen. Låt dem vara som de är och placera dem där ditt språk behöver dem.
+    - Vissa meddelanden har former för en och för flera (<b>1 säsong</b>, <b>2 säsonger</b>). Språk med fler än två former kan lägga till alla.
+    - Där ditt språk böjer ett ord efter genus eller kasus skriver du den form som passar i meningen.
 
-    ## Hur du skickar en
-    Skriv till <a=mailto:{ $contribute_email }>{ $contribute_email }</a> med språket och antingen filen eller en länk till din förändring. Nativtalande som granskar varandras arbete är det bästa test vi har.
-help-art-cookies-explained-title = Cookie och lokalt lagring förklarade
-help-art-cookies-explained-summary = Vad din webbläsare håller för { $brand }, i enkla ord.
-help-art-cookies-explained-keywords = cookie lokalt lagring webbläsare data spårning samtycke banner inställningar session tredje part
+    ## Så skickar du en översättning
+    Skriv till <a=mailto:{ $contribute_email }>{ $contribute_email }</a> med språket och antingen filen eller en länk till din ändring. Personer med språket som modersmål som granskar varandras arbete är den bästa kontroll vi har.
+
+help-art-cookies-explained-title = Cookies och lokal lagring förklarade
+help-art-cookies-explained-summary = Vad din webbläsare sparar för { $brand }, med enkla ord.
+help-art-cookies-explained-keywords = cookies kakor lokal lagring samtycke personalisering youtube
 help-art-cookies-explained-body =
-    <b>Cookies</b> är små anteckningar en webbplats ber om att din webbläsare ska hålla. <b>Lokalt lagring</b> är en liknande plats som endast webbplatsen kan läsa och som inte skickas med varje begäran.
+    <b>Cookies</b> är små anteckningar som en webbplats ber din webbläsare att spara. <b>Lokal lagring</b> är en liknande plats som bara webbplatsen själv kan läsa och som inte skickas med varje förfrågan.
 
-    { $brand } använder lokalt lagring för dina profiler, PIN-koder, visningsskridande och språk. Dessa finns på din enhet. Andra webbplatser som serverar oss bilder eller videor kan sätta sina egna cookies, vilket vi inte kan styra. Se <a=/help/article/sources>Var titlar kommer ifrån</a>.
+    { $brand } använder lokal lagring, inte reklam- eller spårningscookies. Där sparas:
+    - det som håller dig inloggad,
+    - en kopia av dina profiler, inställningar och ditt framsteg, så att sidorna öppnas snabbt,
+    - dina val om cookies och personalisering.
+
+    Trailers spelas upp från YouTube, som kan sätta egna cookies, och bilder kommer från en öppen filmkatalog. Det styr inte vi över. Se <a=/help/article/sources>Var titlarna kommer ifrån</a>.
 
     ## Dina val
-    - Första gången du besöker, frågas en banner om rekommendationer kan använda vad du tittar på. Du kan ändra ditt beslut när som helst.
-    - Att välja <b>Neka</b> behåller allt som behövs för att använda webbplatsen och stänger av personlig anpassning.
-    - Din webbläsare kan blockera eller ta bort cookies och webbplatsdata också. Om den gör det, förlorar du dina profiler och framsteg.
+    - Vid ditt första besök frågar en banderoll om rekommendationerna får använda det du tittar på. Du kan ändra dig när som helst under <b>Integritet och datainställningar</b> eller med verktyget nedan.
+    - <b>Neka</b> behåller bara det webbplatsen behöver för att fungera och stänger av personaliseringen.
+    - Om din webbläsare rensar webbplatsdata loggas du ut i den webbläsaren. Ditt konto sparar allt.
 
     @@ cookies
-help-art-stuck-loading-title = Sidan förblir på logotypen eller ett tomt skärmen
-help-art-stuck-loading-summary = Vad du kan prova när { $brand } aldrig slutför startningen.
-help-art-stuck-loading-keywords = stuck loading logo blank white screen splash not starting webassembly wasm frozen startup
-help-art-stuck-loading-body =
-    När { $brand } startar ser du kuben med en rad rörliga punkter. Det bör ta några sekunder. { $brand } körs som en WebAssembly-app, så en webbläsare eller inställning som stänger av WebAssembly kommer att lämna dig på skärmen.
 
-    1. Ladda om med <b>Ctrl + Shift + R</b> (<b>Cmd + Shift + R</b> på en Mac) för att hämta den senaste versionen.
-    2. Öppna sidan i ett privat fönster. Om det fungerar där är en tillägg i vägen. Se <a=/help/article/extensions-blockers>Extensions that block the player</a>.
-    3. Uppdatera din webbläsare. Se <a=/help/article/supported-browsers>Supported browsers</a>.
-    4. Stäng av någon läge som begränsar webbfungering, som ett lås eller strikt säkerhetsläge, för denna webbplats.
-    5. Rensa denna webbplats data. Se <a=/help/article/clear-data>How to clear your saved data</a>.
+help-art-stuck-loading-title = Sidan fastnar på logotypen eller en tom skärm
+help-art-stuck-loading-summary = Vad du kan prova när { $brand } aldrig blir klar med att starta.
+help-art-stuck-loading-keywords = fastnar laddar logotyp tom vit skärm startar inte webassembly wasm fryst uppstart
+help-art-stuck-loading-body =
+    Medan { $brand } startar ser du kublogotypen med en rad prickar som rör sig. Det ska ta några sekunder. { $brand } körs som en WebAssembly-app, så en webbläsare eller inställning som stänger av WebAssembly gör att du fastnar på den skärmen.
+
+    1. Ladda om med <b>Ctrl + Skift + R</b> (<b>Cmd + Skift + R</b> på Mac) för att hämta den senaste versionen.
+    2. Öppna sidan i ett privat fönster. Om den fungerar där är det ett tillägg som stör. Se <a=/help/article/extensions-blockers>Tillägg som blockerar spelaren</a>.
+    3. Uppdatera din webbläsare. Se <a=/help/article/supported-browsers>Webbläsare som stöds</a>.
+    4. Stäng av alla lägen som begränsar webbfunktioner för den här webbplatsen, till exempel Låst läge på Apple-enheter eller strikt säkerhet i Edge.
+    5. Rensa den här webbplatsens data och logga in igen. Se <a=/help/article/clear-data>Rensa sparade uppgifter</a>.
 
     @@ refresh
-help-art-slow-pages-title = Sidor laddas långsamt
-help-art-slow-pages-summary = Förbättra surfen på en långsammare anslutning eller äldre enhet.
-help-art-slow-pages-keywords = slow lag performance speed loading memory old phone laggy scrolling previews
+
+help-art-slow-pages-title = Sidorna laddas långsamt
+help-art-slow-pages-summary = Gör surfandet snabbare på en långsam anslutning eller en äldre enhet.
+help-art-slow-pages-keywords = långsam laggar prestanda hastighet laddning minne gammal telefon förhandsvisningar
 help-art-slow-pages-body =
-    Den första besöket laddar appen, cirka 3 MB. Efter det är större delen av väntetiden bilder och förhandsvisningar.
+    Vid första besöket laddas appen ner, ungefär 2 MB. Därefter är det mest bilder och förhandsvisningar som tar tid.
 
-    - Stäng av <b>Autoplay previews</b> i <b>Inställningar</b>, under <b>Spelinställningar</b>. Trailers som startar av sig själva använder data och minne.
-    - Stäng flikar och andra appar som använder nätet eller mycket minne.
-    - Använd en modern webbläsare. Äldre körs appen långsammare.
-    - På mobilnät, växla till Wi-Fi om du kan.
+    - Stäng av <b>Spela upp förhandsvisningar automatiskt</b> i din profils <b>Uppspelningsinställningar</b>. Förhandsvisningar som startar av sig själva drar data och minne.
+    - Stäng flikar och andra appar som använder nätverket eller mycket minne.
+    - Använd en aktuell webbläsare. Äldre kör appen långsammare.
+    - Byt till wifi om du kan när du använder mobildata.
 
     @@ diagnostics
-help-art-vpn-network-title = VPNs, skola och arbetsnätverk
-help-art-vpn-network-summary = Varför vissa nätverk blockerar titlar eller bilder och vad du kan prova.
-help-art-vpn-network-keywords = vpn proxy skola arbetsnätverk firewall dns filter blockerat safedns begränsat wifi
+
+help-art-vpn-network-title = VPN, skol- och jobbnätverk
+help-art-vpn-network-summary = Varför vissa nätverk blockerar titlar eller bilder, och vad du kan prova.
+help-art-vpn-network-keywords = vpn proxy skola jobb nätverk blockerat dns
 help-art-vpn-network-body =
-    { $brand } laddar in detaljer och bilder från ett offentligt filmkatalog och strömmar från oberoende källor. Vissa nätverk blockerar dessa webbplatser, och vissa källor avvisar vissa adresser.
+    { $brand } hämtar detaljer och bilder från en öppen filmkatalog och streamar från oberoende källor. Vissa nätverk blockerar de webbplatserna, och vissa källor nekar vissa adresser.
 
-    - <b>VPN eller proxy.</b> Vissa källor svarar inte på VPN-adresser. Stäng av det, eller välj ett annat land.
-    - <b>Skola, arbete eller offentlig Wi-Fi.</b> Filter blockerar ofta strömning eller katalogen. Försök att använda telefonens mobilnät.
-    - <b>DNS-filter.</b> En filtrerande DNS-tjänst kan blockera katalogen och lämna rader eller bilder tomma. Använd en annan DNS eller stäng av filtret för denna webbplats.
+    - <b>VPN eller proxy.</b> Vissa källor svarar inte på VPN-adresser. Stäng av VPN:et eller välj ett annat land.
+    - <b>Wifi i skolan, på jobbet eller offentligt.</b> Filter blockerar ofta streaming eller katalogen. Prova mobilens mobildata.
+    - <b>DNS-filter.</b> En filtrerande DNS-tjänst kan blockera katalogen så att rader eller bilder blir tomma. Använd en annan DNS eller stäng av filtret för den här webbplatsen.
 
-    Enhetskontrollen visar vilken tjänst ditt nätverk inte kan nå.
+    Enhetskontrollen visar vilken tjänst ditt nätverk inte når.
 
     @@ diagnostics
-help-art-is-down-title = Är { $brand } nere?
+
+help-art-is-down-title = Ligger { $brand } nere?
 help-art-is-down-summary = Kontrollera vilka delar som fungerar från din enhet.
-help-art-is-down-keywords = ned, avbrott, status, inte fungerar, offline, tillgänglighet, server, underhåll, fel, webbplats
+help-art-is-down-keywords = nere driftstörning status fungerar inte offline
 help-art-is-down-body =
-    { $brand } har tre delar som kan gå fel separat:
+    { $brand } har tre delar som kan sluta fungera var för sig:
 
-    - <b>Appen</b>, som du tittar på just nu.
+    - <b>Appen</b>, som du tittar på nu.
     - <b>Film- och seriekatalogen</b>, som ger detaljer och bilder.
-    - <b>Strömningssource</b>, som levererar videon.
+    - <b>Streamkällorna</b>, som levererar videon.
 
-    Kör kontrollen för att se vilken av dem svarar från din enhet. Om katalogen eller källorna inte svarar för alla, vänta några minuter och försök igen. Om en är oåtkomlig endast för dig, se <a=/help/article/vpn-network>VPN, skola och arbetsnätverk</a>.
+    Kör kontrollen för att se vilka av dem som svarar från din enhet. Om katalogen eller källorna inte svarar för någon, vänta några minuter och försök igen. Om någon bara är onåbar för dig, se <a=/help/article/vpn-network>VPN, skol- och jobbnätverk</a>.
 
     @@ diagnostics
-help-art-no-sound-title = Ingen ljud
-help-art-no-sound-summary = Korrigerar en titel som spelar utan ljud.
-help-art-no-sound-keywords = ingen ljud, ljud, tyst, tyst, volym, ljudutgivare, bluetooth, hörlurar, automatisk uppspelning
+
+help-art-no-sound-title = Det hörs inget ljud
+help-art-no-sound-summary = Åtgärda en titel som spelas utan ljud.
+help-art-no-sound-keywords = inget ljud tyst volym högtalare bluetooth hörlurar
 help-art-no-sound-body =
-    1. Tryck på <b>M</b>, eller välj ljudknappen i spelaren, för att avstänga tystnad. Webbläsare börjar ofta en video tyst när den börjar av sig själv, se <a=/help/article/autoplay-blocked>Video börjar tyst</a>.
-    2. Tryck på <b>Up-arrow</b> för att öka volymen och kontrollera enhetens volym.
-    3. Kontrollera att webbläsartabben inte är tyst. Klicka höger på tabben för att se.
-    4. Öppna <b>Ljud och undertexter</b> och välj en annan ljudspår om det finns en.
-    5. Om du använder Bluetooth, koppla av och koppla på dina hörlurar.
-help-art-autoplay-blocked-title = Video börjar tyst eller börjar inte av sig själv
-help-art-autoplay-blocked-summary = Varför webbläsare stoppar ljudet från att starta själva, och hur { $brand } hanterar det.
-help-art-autoplay-blocked-keywords = automatisk uppspelning, blockerat, tyst, start, politik, webbläsare, ljud, automatisk uppspelning, förhandsvisning, trailer
+    1. Tryck på <b>M</b>, eller välj högtalarknappen i spelaren, för att slå på ljudet. Webbläsare startar ofta en video utan ljud när den börjar av sig själv, se <a=/help/article/autoplay-blocked>Videon startar utan ljud eller startar inte av sig själv</a>.
+    2. Tryck på <b>Uppåtpil</b> för att höja volymen, och kontrollera enhetens volym.
+    3. Kontrollera att webbläsarfliken inte är ljudlös. Högerklicka på fliken för att se.
+    4. Öppna <b>Ljud & undertexter</b> och välj ett annat ljudspår om det finns ett.
+    5. Om du använder Bluetooth, koppla från och anslut hörlurarna igen.
+
+help-art-autoplay-blocked-title = Videon startar utan ljud eller startar inte av sig själv
+help-art-autoplay-blocked-summary = Varför webbläsare inte låter ljud starta av sig självt, och hur { $brand } hanterar det.
+help-art-autoplay-blocked-keywords = automatisk uppspelning blockerad utan ljud start webbläsare förhandsvisningar trailer
 help-art-autoplay-blocked-body =
-    Browsrar låter inte en sida börja videon med ljud förrän du har klickat eller tryckt på den. { $brand } försöker först starta med ljud. Om webbläsaren nekar, startar den tyst och visar den tysta luren, och du kan avtysta med <b>M</b> eller luren knappen.
+    Webbläsare låter inte en sida starta video med ljud förrän du har klickat eller tryckt på sidan. { $brand } försöker först starta med ljud. Om webbläsaren nekar startar videon utan ljud och visar den överstrukna högtalaren. Slå på ljudet med <b>M</b> eller högtalarknappen.
 
-    - För att stoppa trailrar och förhandsvisningar från att starta själva, stäng av <b>Autoplay förhandsvisningar</b> i <b>Inställningar</b>, under <b>Spelinställningar</b>.
-    - Om en titel aldrig startar, se <a=/help/article/wont-play>A title will not play</a>.
+    - För att förhandsvisningar inte ska starta av sig själva stänger du av <b>Spela upp förhandsvisningar automatiskt</b> i din profils <b>Uppspelningsinställningar</b>.
+    - Om en titel aldrig startar, se <a=/help/article/wont-play>En titel spelas inte upp</a>.
+
 help-art-clips-title = Använda Clips
-help-art-clips-summary = Rulla kort förhandsvisningar och lägg till det du gillar i din lista.
-help-art-clips-keywords = clips shorts previews scroll vertical trailers swipe mute info my list
+help-art-clips-summary = Bläddra bland korta förhandsvisningar och lägg till det du gillar i din lista.
+help-art-clips-keywords = clips korta videor scrolla stående trailers ljud
 help-art-clips-body =
-    <b>Clips</b> visar korta förhandsvisningar en efter en i den nedre balken på en telefon.
+    <b>Clips</b> visar korta förhandsvisningar efter varandra, på mobilen i fältet längst ner.
 
-    1. Rulla eller sväng till nästa clip.
-    2. Välj luren knappen för att aktivera eller inaktivera ljud. Clips startar tysta.
-    3. Välj <b>My List</b> för att spara titeln, <b>Play</b> för att titta på den, eller <b>Info</b> för att läsa om den.
+    1. Scrolla eller svep till nästa klipp.
+    2. Välj högtalarknappen för att slå på eller av ljudet. Klippen startar utan ljud.
+    3. Välj <b>Min lista</b> för att spara titeln, <b>Spela</b> för att titta, eller <b>Info</b> för att läsa om den.
+
 help-art-genres-title = Bläddra efter genre
-help-art-genres-summary = Närvara filmer och serier till den typ av titel du vill ha.
-help-art-genres-keywords = genres categories comedy drama horror action filter browse films series sub menu
+help-art-genres-summary = Smalna av Filmer och Serier till den sortens titel du vill ha.
+help-art-genres-keywords = genrer kategorier komedi drama skräck action filtrera
 help-art-genres-body =
-    1. Öppna <b>Filmer</b> eller <b>Serier</b> i toppfältet.
-    2. Välj <b>Genres</b> bredvid sidans titel.
-    3. Välj en genre. Sidan visar då endast den genre, med rader gjorda för den.
+    1. Öppna <b>Filmer</b> eller <b>Serier</b> i fältet högst upp.
+    2. Välj <b>Genrer</b> bredvid sidans titel.
+    3. Välj en genre. Sidan visar då bara den genren, med rader gjorda för den.
 
-    För att återgå till allt, öppna <b>Filmer</b> eller <b>Serier</b> igen. På en telefon öppnar genrelistan som ett blad från botten.
-help-art-top-10-title = Vad är Top 10 raderna?
-help-art-top-10-summary = En rad med de tio titlarna som folk tittar mest just nu.
-help-art-top-10-keywords = top 10 top ten popular trending ranking numbers row most watched
-help-art-top-10-body = En <b>Top 10</b> rad visar de tio mest tittade titlarna just nu, med ett stort nummer på varje. Den följer den aktuella populariteten i katalogen och förändras från dag till dag. Den är samma för alla och baseras inte på din profil.
-help-art-episodes-title = Säsonger och episoder
-help-art-episodes-summary = Välj en säsong och en episk från detaljfönstret eller spelaren.
-help-art-episodes-keywords = seasons episodes series list next episode drawer binge selector tv shows
+    Öppna <b>Filmer</b> eller <b>Serier</b> igen för att se allt. På mobilen glider genrelistan upp nerifrån.
+
+help-art-top-10-title = Vad är Topp 10-raderna?
+help-art-top-10-summary = En rad med de tio populäraste titlarna just nu.
+help-art-top-10-keywords = topp 10 tio populära topplista siffror rad
+help-art-top-10-body = En <b>Topp 10</b>-rad visar de tio populäraste filmerna eller serierna just nu, med en stor siffra på varje. Den följer titlarnas dagliga popularitet i filmkatalogen och ändras alltså från dag till dag. Den är likadan för alla och beror inte på din profil.
+help-art-episodes-title = Säsonger och avsnitt
+help-art-episodes-summary = Välj en säsong och ett avsnitt i detaljfönstret eller i spelaren.
+help-art-episodes-keywords = avsnitt säsonger serie lista nästa avsnitt
 help-art-episodes-body =
     ## Innan du trycker på spela
-    Öppna en serie och välj <b>Episoder</b>. Använd säsongmenyn för att byta säsong, sedan välj en episk.
+    Öppna en serie och välj <b>Avsnitt</b>. Byt säsong med säsongsmenyn och välj sedan ett avsnitt.
 
-    ## När du tittar
-    - Välj <b>Episoder</b> i spelaren för att öppna listan utan att lämna.
-    - Välj <b>Nästa Episod</b>, eller låt den starta automatiskt. Se <a=/help/article/skip-intro-next>Skip Intro och Nästa Episod</a>.
-help-art-share-title = Hur man delar en titel
+    ## Medan du tittar
+    - Välj <b>Avsnitt</b> i spelarens kontroller för att öppna listan utan att lämna spelaren.
+    - Välj <b>Nästa avsnitt</b>, eller låt det starta av sig självt. Se <a=/help/article/skip-intro-next>"Hoppa över intro" och "Nästa avsnitt"</a>.
+
+help-art-share-title = Dela en titel
 help-art-share-summary = Skicka en länk till en titel till en vän.
-help-art-share-keywords = dela länk whatsapp meddelanden instagram snapchat kopiera skicka vän
+help-art-share-keywords = dela länk whatsapp meddelanden kopiera
 help-art-share-body =
     1. Öppna en titels detaljer och välj <b>Dela</b>.
-    2. Välj <b>WhatsApp</b> eller <b>Meddelanden</b> för att skicka länken, eller <b>Kopiera länk</b> för att klistra in den någonstans.
+    2. Välj <b>WhatsApp</b> eller <b>Meddelanden</b> för att skicka länken, eller <b>Kopiera länk</b> för att klistra in den var du vill.
     3. För Instagram och Snapchat kopieras länken och du klistrar in den i appen.
 
-    Länken öppnar titelns sida på { $brand }. Den som öppnar den behöver inte vara inloggad.
-help-art-title-details-title = Detaljvyn för en titel
+    Länken öppnar titeln på { $brand }. Den som öppnar den behöver logga in, eller skapa ett gratis konto, för att titta.
+
+help-art-title-details-title = Titelns detaljfönster
 help-art-title-details-summary = Vad du kan läsa och göra innan du trycker på spela.
-help-art-title-details-keywords = mer info detaljer modal skådespelare genrer sammanfattning liknande mer som detta trailer betyg match
+help-art-title-details-keywords = detaljer titel mer info spela betyg
 help-art-title-details-body =
-    Välj en titelkarta eller <b>Mer Info</b> för att öppna dess detaljer.
+    Välj ett titelkort, eller <b>Mer info</b>, för att öppna detaljerna.
 
-    - <b>Spela</b> eller <b>Återuppta</b> startar titeln där du lämnade den.
-    - <b>Min Lista</b> sparar den, och fingret bedömer den.
-    - Sammanfattningen, skådespelarna, genrer och några ord som beskriver humöret hjälper dig att besluta.
-    - För serier, <b>Episoder</b> listar säsongerna.
-    - <b>Mer som detta</b> visar titlar som är liknande i betydelse, vilket är ett bra sätt att hitta något nytt.
+    - <b>Spela</b> eller <b>Återuppta</b> startar titeln där du slutade.
+    - <b>Min lista</b> sparar den, och med tummen betygsätter du den.
+    - Sammanfattningen, rollistan, genrerna och några ord om stämningen hjälper dig att bestämma dig.
+    - För serier visar <b>Avsnitt</b> säsongerna.
+    - <b>Mer som detta</b> visar liknande titlar, ett bra sätt att hitta något nytt.
+
 help-art-accessibility-title = Tillgänglighet på { $brand }
-help-art-accessibility-summary = Undersättningar, tangentbordskontroll och visningsinställningar som hjälper.
-help-art-accessibility-keywords = tillgänglighet skärmläsare tangentbord undersättningar bildtext storlek kontrast zoom reducerad rörelse funktionsnedsättning
+help-art-accessibility-summary = Undertexter, tangentbordsstyrning och visningsinställningar som hjälper.
+help-art-accessibility-keywords = tillgänglighet undertexter tangentbord zooma rörelse
 help-art-accessibility-body =
-    - <b>Undersökningar.</b> Välj språk, storlek, färg och bakgrund i <b>Inställningar</b>. Se <a=/help/article/subtitles>Hur man använder undersökningar, bildtext eller väljer ljudspråk</a>.
-    - <b>Tangentbord.</b> Använd <b>Tab</b> för att navigera mellan kontroller och <b>Esc</b> för att stänga fönster. Spelaren har sina egna tangentbord, se <a=/help/article/shortcuts>Tangentbordssnabbtaster</a>.
-    - <b>Textstorlek.</b> Zooma din webbläsare med <b>Ctrl</b> och <b>+</b> (<b>Cmd</b> och <b>+</b> på en Mac). Layouten anpassas.
-    - <b>Bewegung.</b> Om din enhet frågar efter minskad rörelse, förblir det animerade logotypen stilla.
+    - <b>Undertexter.</b> Välj språk under din profils <b>Språk</b>, och storlek, färg och bakgrund under <b>Undertexternas utseende</b>. Se <a=/help/article/subtitles>Använda undertexter eller välja ljudspråk</a>.
+    - <b>Tangentbord.</b> Använd <b>Tab</b> för att gå mellan kontrollerna och <b>Esc</b> för att stänga fönster. Spelaren har egna tangenter, se <a=/help/article/shortcuts>Kortkommandon</a>.
+    - <b>Textstorlek.</b> Zooma i webbläsaren med <b>Ctrl</b> och <b>+</b> (<b>Cmd</b> och <b>+</b> på Mac). Layouten anpassar sig.
+    - <b>Rörelse.</b> Om din enhet ber om minskad rörelse står den animerade logotypen stilla.
 
-    Om något är svårt att använda, berätta för oss på sidan <a=/help/article/report-bug>Skicka ett problem</a>. Vi tar dessa rapporter på allvar.
-help-art-profile-icons-title = Hur man väljer en profilikon
-help-art-profile-icons-summary = Välj en avatar för en profil.
-help-art-profile-icons-keywords = profilikon avatar bild bild ändra välja karaktär
+    Om något är svårt att använda, berätta det på sidan <a=/help/article/report-bug>Rapportera ett problem</a>. Vi tar sådana rapporter på allvar.
+
+help-art-profile-icons-title = Välja profilbild
+help-art-profile-icons-summary = Välj en bild till en profil.
+help-art-profile-icons-keywords = profilbild bild avatar ikon välja
 help-art-profile-icons-body =
     1. Öppna <b>Hantera profiler</b> och välj profilen.
-    2. Välj ikonen.
-    3. Välj en från grupperna, sedan välj <b>Spara</b>.
+    2. Välj bilden.
+    3. Välj en ny och sedan <b>Spara</b>.
 
-    En barnprofil använder den strippade barnikonen om du inte väljer en annan. Du kan också nå ikonvaljaren från <b>Inställningar</b>.
+    Du kan också byta den under <b>Konto</b>, i <b>Hantera profiler</b>: välj profilen och sedan dess bild. En barnprofil använder barnbilden tills du väljer en annan.
+
+help-art-parental-controls-title = Föräldrakontroll: åldersgränser och blockerade titlar
+help-art-parental-controls-summary = Begränsa en profil till titlar upp till en viss åldersgräns, eller dölj titlar efter namn.
+help-art-parental-controls-keywords = föräldrakontroll åldersgräns begränsningar blockera titel dölja barn tonåringar 7 11 15 18
+help-art-parental-controls-body =
+    Varje profil kan ha egna gränser. Öppna profilmenyn, välj <b>Konto</b>, sedan <b>Hantera profiler</b>, välj profilen och välj <b>Justera föräldrakontroll</b>.
+
+    ## Åldersgränser
+    1. Välj <b>Åldersgränser</b>.
+    2. Välj den högsta åldersgräns som profilen får se. Bara titlar upp till den gränsen visas, och titlar utan åldersgräns döljs också.
+
+    <b>Åldersmärkning</b> styr vilka märkningar du ser: brittiska (U, PG, 12, 15, 18) eller amerikanska (G, PG, PG-13, R, NC-17). <b>Automatiskt</b> följer landet du loggar in från.
+
+    ## Blockera titlar
+    1. Välj <b>Blockera titlar</b>.
+    2. Skriv namnet på en serie eller film och välj <b>Lägg till</b>.
+
+    Blockerade titlar visas inte i den profilen. Välj <b>Ta bort</b> för att visa en igen.
+
+    !! Obs! Titlarna kommer från oberoende källor och vissa saknar åldersgräns. För små barn är en barnprofil det säkrare valet. Se <a=/help/article/kids-profile>Skapa en profil för barn</a>.
+
+    @@ profiles
+
+help-art-transfer-profile-title = Flytta en profil till ett annat konto
+help-art-transfer-profile-summary = Spara en profil som fil och lägg till den i ett annat konto med historik och inställningar.
+help-art-transfer-profile-keywords = överföra profil flytta kopiera profil annat konto importera exportera profilfil
+help-art-transfer-profile-body =
+    En profil kan kopieras till ett annat konto, till exempel när någon flyttar hemifrån. Kopian behåller namn, bild, inställningar och tittaraktivitet.
+
+    ## Spara profilen
+    1. Öppna profilmenyn och välj <b>Överför profil</b>.
+    2. Välj profilen och välj <b>Ladda ner profilfil</b>. Förvara filen säkert.
+
+    ## Lägga till den i det andra kontot
+    1. Logga in på det andra kontot och öppna <b>Hantera profiler</b>.
+    2. Välj <b>Importera en profil</b> och välj filen.
+
+    !! Obs! Filen innehåller inte profilens PIN-kod. Vem som helst som har filen kan lägga till profilen i sitt konto, så dela den inte.
+
+    <b>Profilöverföring</b> under <b>Konto</b> slår på eller av kopiering av profiler från ditt konto. Den blockerar aldrig profiler som kommer in.
+
 auth-questions = Frågor?
 auth-email = E-postadress
 auth-password = Lösenord
@@ -1473,7 +1686,7 @@ auth-forgot-link = Glömt ditt lösenord?
 auth-get-help = Få hjälp
 auth-resume-hint = Du loggade nyligen ut från den här enheten. Fortsätt med { $email } för att komma tillbaka utan lösenord.
 auth-resume-forget = Inte du? Glöm den här webbläsaren
-auth-resend = Skicka bekräftelsesidan igen
+auth-resend = Skicka bekräftelsemejlet igen
 auth-resent = Vi skickade en ny bekräftelsesida till { $email }.
 auth-error-email = Ange en giltig e-postadress.
 auth-error-invalid = Felaktig e-postadress eller lösenord. Försök igen eller återställ ditt lösenord.
@@ -1515,9 +1728,11 @@ landing-read-more = Läs hela artikeln
 legal-credits-title = Licenser och krediteringar
 legal-credits-updated = Senast uppdaterad: Oktober 2026
 legal-credits-1-title = 1. Typsnitt
-legal-credits-1-body = Texten i logotypen är skriven i ett pixeltypsnitt. All annan gränssnittstext är skriven i Inter.
-legal-credits-1-b1 = <strong>Baby Blocks</strong> av Colorful Typhoon, används för { $brand } logotypen under dess linkware-villkor för personligt, icke-kommersiellt bruk. Se <a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">Colorful Typhoon</a>.
+legal-credits-1-body = Logotypen är satt i ett pixeltypsnitt, gränssnittet i Inter och samlingarnas titlar i dekorativa typsnitt:
+legal-credits-1-b1 = <strong>Baby Blocks</strong> av Colorful Typhoon, används till { $brand }-logotypen enligt typsnittets freewarevillkor för icke-kommersiellt bruk. Se <a href="https://www.fontspace.com/baby-blocks-font-f3699" target="_blank" rel="noopener">typsnittet på FontSpace</a>.
 legal-credits-1-b2 = <strong>Inter</strong> av Rasmus Andersson, används under SIL Open Font License 1.1.
+legal-credits-1-b3 = <strong>Abril Fatface, Caveat Brush, DM Serif Display, Fredoka, Gochi Hand, Kalam, Londrina Solid, Playfair Display och Sedgwick Ave</strong> från Google Fonts, används enligt SIL Open Font License 1.1.
+legal-credits-1-b4 = <strong>Permanent Marker</strong> och <strong>Rock Salt</strong> från Google Fonts, används enligt Apache License 2.0.
 legal-credits-2-title = 2. Ikoner
 legal-credits-2-body = Gränssnittsikoner kommer från Phosphor Icons, används under MIT License.
 legal-credits-3-title = 3. Film och serieinformation
@@ -1634,12 +1849,12 @@ set-title-profiles = Hantera profiler
 set-title-edit-profile = Redigera profil
 set-title-avatar = Välj en profilbild
 set-title-restrictions = Visningsrestriktioner
-set-title-ratings = Åldersteg
+set-title-ratings = Åldersgränser
 set-title-blocked = Blockera titlar
-set-title-lock = Profilklick
+set-title-lock = Profillås
 set-title-language = Visningsspråk
-set-title-subtitles = Undersökningsutseende
-set-title-audio-subtitles = Ljud och undersökningsutseende
+set-title-subtitles = Undertexternas utseende
+set-title-audio-subtitles = Ljud och undertexter
 set-title-name = Namn
 set-title-app = Appinställningar
 set-title-account = Konto
@@ -1667,15 +1882,15 @@ set-lock-body = Gör denna profil privat med ett { $digits } siffror PIN som må
 set-lock-pin = Nytt PIN
 set-lock-invalid = PIN:en behöver { $digits } siffror.
 set-lock-change = Ändra PIN
-set-lock-remove = Ta bort profilklick
+set-lock-remove = Ta bort profillås
 set-lock-remove-body = Vem som helst kommer kunna öppna denna profil utan ett PIN. Skriv in det nuvarande PIN:et för att fortsätta.
 set-delete-profile = Radera profil
 set-delete-profile-body = Denna profil, dess visningshistorik och dess inställningar kommer att tas bort. Detta kan inte återställas.
 set-language-hint = Välj språket för texten du ser i appen. Det gäller alla dina enheter.
 set-subtitles-hint = Ändra hur undersökningsutseendet ser ut.
-set-autoplay-next = Autospelar nästa avsnitt
+set-autoplay-next = Spela upp nästa avsnitt automatiskt
 set-autoplay-next-hint = Starta nästa avsnitt när ett avslutas.
-set-autoplay-previews = Autospelar förhandsvisningar
+set-autoplay-previews = Spela upp förhandsvisningar automatiskt
 set-autoplay-previews-hint = Spela in förhandsvisningar när du bläddrar.
 set-sub-preview = Det här är hur dina undersökningsutseenden kommer att se ut.
 set-sub-size = Textstorlek
@@ -1763,9 +1978,9 @@ set-privacy-viewing = Visningsintegritet
 set-privacy-lock-hint = Kräv ett PIN för att öppna denna profil
 set-privacy-activity-hint = Hantera din tittarhistorik
 set-privacy-data = Datainställningar
-set-privacy-personalization = Personifierade rekommendationer
+set-privacy-personalization = Personliga rekommendationer
 set-privacy-personalization-hint = Använd vad du tittar på för att föreslå titlar. När det är avstängt ser du generella förslag.
-set-activity-clear-body = Din tittarhistorik och återupptagningspunkter kommer att tas bort från den här webbläsaren.
+set-activity-clear-body = Titlarna tas bort från profilens tittaraktivitet och från Fortsätt titta på alla dina enheter.
 set-err-invalid = Det här lösenordet är inte rätt. Försök igen.
 set-err-weak = Det här lösenordet är för svagt. Använd ett längre med bokstäver och siffror.
 set-err-rate = För många försök. Vänta en minut och försök igen.
@@ -1773,7 +1988,7 @@ set-err-network = Anslutningen misslyckades. Kontrollera din nätverk och förs�
 set-err-other = Något gick fel. Försök igen om en stund.
 set-audio-subtitles-hint = Välj de språk du gillar att titta serier och filmer i. Utan val används visningsspråket.
 set-audio-language = Ljudspråk
-set-subtitle-language = Undersökningsspråk
+set-subtitle-language = Undertextspråk
 set-lang-follow = Samma som visningsspråk
 set-subtitles-off = Av
 set-name-taken = En annan profil har redan detta namn.
@@ -1791,11 +2006,18 @@ set-name-last = Efternamn
 set-name-required = Skriv ett förnamn och ett efternamn.
 set-name-saved = Ditt namn sparades.
 set-err-recent = För din säkerhet, skriv in ditt lösenord igen för att fortsätta.
-set-events-title = Nyligen säkerhetsaktivitet
+set-events-title = Senaste säkerhetsaktivitet
+set-event-profile_created = Profil skapad
+set-event-profile_deleted = Profil raderad
+set-event-pin_set = Profillås inställt
+set-event-pin_cleared = Profillåset togs bort
+set-event-pin_locked = Profillåset spärrades efter för många försök
+set-event-pin_reset = Profillåset återställdes
+set-event-main_profile_changed = Huvudprofilen ändrades
 set-privacy-export = Ladda ner mina data
 set-nav-overview = Översikt
 set-back-to-app = Tillbaka till { $brand }
-set-title-playback = Spelinställningar
+set-title-playback = Uppspelningsinställningar
 set-title-notifications = Meddelandeinställningar
 set-playback-hint = Ställ in automatikspelning och förhandsvisningar.
 set-playback-autoplay = Automatikspelning och övergångar
@@ -1803,7 +2025,7 @@ set-notifications-hint = Hantera meddelanden för e-post och push.
 set-notifications-body = Välj hur denna profil får veta om nya tillkomster och uppdateringar.
 set-notify-email = E-post
 set-notify-push = Pushmeddelanden
-set-account-details = Kontoinställningar
+set-account-details = Kontouppgifter
 set-access-hint = Hantera inloggade enheter
 set-overview-quick = Snabblänkar
 set-overview-update-password = Uppdatera lösenord
@@ -1856,6 +2078,14 @@ set-csv-date = Datum
 set-notify-email-hint = Meddelanden om nya anländer och uppdateringar
 set-notify-push-hint = Meddelanden på detta enhet
 set-topics-title = Vad du får höra om
+set-topic-new_arrivals = Nytt
+set-topic-new_arrivals-hint = Serier och filmer som precis har kommit.
+set-topic-recommendations = Rekommendationer
+set-topic-recommendations-hint = Förslag som valts ut för den här profilen.
+set-topic-reminders = Påminnelser
+set-topic-reminders-hint = Titlar du har börjat titta på och nya avsnitt av serier du följer.
+set-topic-news = Nyheter från { $brand }
+set-topic-news-hint = Nya funktioner och ändringar i tjänsten.
 set-push-denied = Notifikationer är blockerade för denna webbplats i din webbläsare. Tillåt dem i inställningarna för webbläsaren, sedan försök igen.
 set-push-unsupported = Den här webbläsaren kan inte visa notifikationer.
 set-usage-title = Dataanvändning per skärm
@@ -1899,6 +2129,12 @@ set-personal-info-hint = Förfråga en kopia av din personuppgifter
 set-personal-info-body = Du kan begära en kopia av den personuppgifter vi har om ditt konto. Filen listar:
 set-personal-info-done = Din fil sparad
 set-personal-info-note = Filn finns på din enhet. Den kan innehålla personuppgifter, så håll den säker.
+set-personal-info-account = Dina kontouppgifter: namn, e-postadress och telefonnummer
+set-personal-info-profiles = Dina profiler och deras inställningar
+set-personal-info-lists = Min lista och betygen för varje profil
+set-personal-info-history = Framsteg och tittaraktivitet för varje profil
+set-personal-info-settings = Dina inställningar och val, till exempel aviseringar och cookies
+set-personal-info-security = De senaste inloggningarna och säkerhetsaktivitet
 set-testing-body = Vi testar ibland nya funktioner med en liten grupp innan alla får dem.
 set-testing-switch = Inkludera mig i tester och förhandsvisningar
 set-testing-hint = Stäng detta för att förbli på den aktuella versionen av varje funktion.
@@ -1965,6 +2201,13 @@ set-device-timezone = Tidszon
 set-device-screen = Skärm
 set-device-language = Språk
 set-device-countries-note = Den här enheten har anslutit från flera länder: { $countries }. En VPN eller resor kan orsaka detta. En enhet identifieras av sin webbläsare, inte av varifrån den ansluter, så det är fortfarande samma enhet.
+set-device-type-desktop = Dator
+set-device-type-mobile = Mobil
+set-device-type-tablet = Surfplatta
+set-device-type-other = Annan enhet
+set-event-new_device = Ny enhet inloggad
+set-event-device_new_country = En enhet anslöt från ett nytt land
+set-event-session_revoked = En enhet loggades ut
 email-footer = Skickat av { $brand }. Frågor? Läs Hjälpcenter eller skriv till { $help_email }.
 email-help-center = Hjälpcenter
 email-ignore = Om du inte begärde detta kan du ignorera den här e-posten.
@@ -2006,7 +2249,7 @@ help-pagination-label = Paginering
 age-badge-all = Alla
 age-aria-all = Lämplig för alla åldrar
 age-aria-plus = Lämplig för åldrar { $age } och över
-set-rating-system-title = Betygsystem
+set-rating-system-title = Åldersmärkning
 set-rating-system-hint = Vilka årsbetygsystem du läser. Automatiskt följer landet för enheten du inloggat från.
 set-rating-system-auto = Automatiskt
 set-rating-system-uk = Storbritannien (U, PG, 12, 15, 18)
@@ -2015,8 +2258,8 @@ row-continue-watching = Fortsätt att titta
 row-my-list = Min lista
 row-because-you-watched = Eftersom du såg { $title }
 row-more-like = Mer som { $title }
-row-todays-top-picks = Idagens bästa val för dig
-row-your-next-watch = Din nästa film
+row-todays-top-picks = Dagens bästa val för dig
+row-your-next-watch = Titta härnäst
 row-gems-for-you = Själva gämmorna för dig
 row-we-think-youll-love = Vi tror att du kommer att tycka om dessa
 row-familiar-favourites = Kända favoriter
