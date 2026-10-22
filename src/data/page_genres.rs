@@ -12,13 +12,66 @@ pub type PageGenre = Genre;
 /// `/browse/genre/<genre id>?bc=<id of the page it belongs to>`.
 pub const SERIES_PAGE_ID: u32 = 83;
 pub const FILMS_PAGE_ID: u32 = 34399;
+/// The Kids profile's Series and Films pages (the engine's `genre-list` names them for a children's rating): their genre pages carry ids 20001 up (series), 21001 up (films)
+/// and 22001 up (the pages both menus share, films and series mixed).
+pub const KIDS_SERIES_PAGE_ID: u32 = 20000;
+pub const KIDS_FILMS_PAGE_ID: u32 = 21000;
+
+/// Whether an id is a genre page of the Kids menus.
+pub const fn is_kids_genre_id(id: u32) -> bool {
+    matches!(id, 20001..=22999)
+}
+
+/// The pages of the calendar events (the engine's `genre_pages::EVENT_PAGES`): Halloween keeps its Netflix id, the others count from 10101. The engine offers each in its
+/// window only; the names here are for the page's header and the fallback when the engine cannot be reached.
+pub static EVENT_PAGES: &[PageGenre] = &[
+    PageGenre { id: 10016, name: "Halloween" },
+    PageGenre { id: 10101, name: "Christmas" },
+    PageGenre { id: 10102, name: "New Year" },
+    PageGenre { id: 10103, name: "Valentine's Day" },
+    PageGenre { id: 10104, name: "Thanksgiving" },
+    PageGenre { id: 10105, name: "Easter" },
+    PageGenre { id: 10106, name: "Summer" },
+    PageGenre { id: 10107, name: "Back to School" },
+    PageGenre { id: 10108, name: "Autumn" },
+    PageGenre { id: 10109, name: "Winter" },
+    PageGenre { id: 10110, name: "Spring" },
+    PageGenre { id: 10111, name: "Ramadan & Eid" },
+    PageGenre { id: 10112, name: "Diwali" },
+    PageGenre { id: 10113, name: "Hanukkah" },
+    PageGenre { id: 10114, name: "Black History Month" },
+    PageGenre { id: 10115, name: "Women's History Month" },
+    PageGenre { id: 10116, name: "Awards Season" },
+    PageGenre { id: 10117, name: "4th of July" },
+    PageGenre { id: 10118, name: "St Patrick's Day" },
+    PageGenre { id: 10119, name: "Mother's Day" },
+    PageGenre { id: 10120, name: "Father's Day" },
+    PageGenre { id: 10121, name: "Lunar New Year" },
+    PageGenre { id: 10122, name: "Cinco de Mayo" },
+    PageGenre { id: 10123, name: "Independence Day" },
+    PageGenre { id: 10124, name: "Summer Blockbusters" },
+];
+
+/// Whether an id is the page of a calendar event.
+pub const fn is_event_page_id(id: u32) -> bool {
+    id == 10016 || matches!(id, 10101..=10199)
+}
+
+/// The name of an event page by its id.
+pub fn event_name(id: u32) -> Option<&'static str> {
+    EVENT_PAGES.iter().find(|g| g.id == id).map(|g| g.name)
+}
 
 /// The address of a genre page: `/browse/genre/<id>?bc=<page id>` for a genre, the page's own address for none.
 pub fn genre_url(kind: &str, genre_id: Option<u32>) -> String {
-    let page = if kind == "tv" { SERIES_PAGE_ID } else { FILMS_PAGE_ID };
+    genre_url_on(if kind == "tv" { SERIES_PAGE_ID } else { FILMS_PAGE_ID }, genre_id)
+}
+
+/// The address of a genre page under a given page (the Series or Films page, or the Kids profile's own Series or Films page).
+pub fn genre_url_on(page_id: u32, genre_id: Option<u32>) -> String {
     match genre_id {
-        Some(g) => format!("/browse/genre/{g}?bc={page}"),
-        None => format!("/browse/genre/{page}"),
+        Some(g) => format!("/browse/genre/{g}?bc={page_id}"),
+        None => format!("/browse/genre/{page_id}"),
     }
 }
 
@@ -27,9 +80,9 @@ pub fn page_kind_of_genre_route(path: &str, search: &str) -> Option<&'static str
     let id = path.strip_prefix("/browse/genre/")?.split('/').next()?;
     let bc = search.trim_start_matches('?').split('&').find_map(|kv| kv.strip_prefix("bc="));
     match (id.parse::<u32>().ok()?, bc) {
-        (SERIES_PAGE_ID, _) | (_, Some("83")) => Some("tv"),
-        (FILMS_PAGE_ID, _) | (_, Some("34399")) => Some("movie"),
-        (n, _) => Some(if is_tv_only_genre_id(n) { "tv" } else { "movie" }),
+        (SERIES_PAGE_ID | KIDS_SERIES_PAGE_ID, _) | (_, Some("83") | Some("20000")) => Some("tv"),
+        (FILMS_PAGE_ID | KIDS_FILMS_PAGE_ID, _) | (_, Some("34399") | Some("21000")) => Some("movie"),
+        (n, _) => Some(if is_tv_only_genre_id(n) || matches!(n, 20001..=20999) { "tv" } else { "movie" }),
     }
 }
 
@@ -364,5 +417,19 @@ mod address_tests {
         // without bc a genre only a series page has belongs to the series page
         assert_eq!(page_kind_of_genre_route("/browse/genre/10759", ""), Some("tv"));
         assert_eq!(page_kind_of_genre_route("/browse/series", ""), None);
+    }
+
+    #[test]
+    fn kids_and_event_pages_have_addresses_of_their_own() {
+        assert_eq!(genre_url_on(KIDS_SERIES_PAGE_ID, Some(20005)), "/browse/genre/20005?bc=20000");
+        assert_eq!(genre_url_on(KIDS_FILMS_PAGE_ID, None), "/browse/genre/21000");
+        assert_eq!(page_kind_of_genre_route("/browse/genre/20000", ""), Some("tv"));
+        assert_eq!(page_kind_of_genre_route("/browse/genre/21000", ""), Some("movie"));
+        assert_eq!(page_kind_of_genre_route("/browse/genre/22001", "?bc=20000"), Some("tv"));
+        assert_eq!(page_kind_of_genre_route("/browse/genre/22001", "?bc=21000"), Some("movie"));
+        assert_eq!(page_kind_of_genre_route("/browse/genre/20009", ""), Some("tv"));
+        assert!(is_kids_genre_id(22003) && !is_kids_genre_id(20000) && !is_kids_genre_id(10016));
+        assert!(is_event_page_id(10016) && is_event_page_id(10101) && !is_event_page_id(10001) && !is_event_page_id(10018));
+        assert_eq!(event_name(10101), Some("Christmas"));
     }
 }

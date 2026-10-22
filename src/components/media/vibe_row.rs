@@ -2,7 +2,11 @@ use leptos::prelude::*;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
 use crate::services::tmdb::MediaItem;
+use crate::services::ai_engine::RowMore;
 use super::movie_card::MovieCard;
+
+/// Titles asked for at a time once a row is paged near the end of what it shows.
+const MORE_ITEMS: usize = 48;
 
 fn set_timeout_ms<F: FnOnce() + 'static>(cb: F, ms: i32) {
     if let Some(window) = web_sys::window() {
@@ -17,6 +21,8 @@ pub fn VibeRow(
     #[prop(default = None)] tagline: Option<String>,
     #[prop(optional, default = Vec::new())] mood_pills: Vec<String>,
     #[prop(into)] items: Vec<MediaItem>,
+    /// Where the rest of the row's titles come from, when the page sent only its first ones (the engine keeps rows of up to 150 titles, see `/api/feed/row`)
+    #[prop(optional_no_strip)] more: Option<RowMore>,
 ) -> impl IntoView {
     let _ = (&tagline, &mood_pills);
     let scroll_ref = NodeRef::<leptos::html::Div>::new();
@@ -28,7 +34,31 @@ pub fn VibeRow(
     // how many pages the row has once it is on the screen (0 until measured): the dashes follow it
     let (page_count, set_page_count) = signal(0usize);
 
-    let items_stored = StoredValue::new(items);
+    // the titles on the strip: the page's first ones, then what the row fetches as it is paged towards its end
+    let items_sig = RwSignal::new(items);
+    let more_src = StoredValue::new(more);
+    let (has_more, set_has_more) = signal(more_src.with_value(|m| m.is_some()));
+    let (loading, set_loading) = signal(false);
+    let load_more = Callback::new(move |_: ()| {
+        if loading.get_untracked() || !has_more.get_untracked() {
+            return;
+        }
+        let Some(src) = more_src.get_value() else { return };
+        set_loading.set(true);
+        let offset = items_sig.with_untracked(|v| v.len());
+        wasm_bindgen_futures::spawn_local(async move {
+            match crate::services::ai_engine::fetch_row_items(&src.query, &src.row_id, offset, MORE_ITEMS).await {
+                Some(page) => {
+                    let fresh: Vec<MediaItem> = page.items.iter().map(|i| i.to_media_item()).collect();
+                    let got = !fresh.is_empty();
+                    items_sig.update(|v| v.extend(fresh));
+                    set_has_more.set(page.has_more_items && got);
+                }
+                None => set_has_more.set(false),
+            }
+            set_loading.set(false);
+        });
+    });
 
     let update_scroll_state = Callback::new(move |_: ()| {
         if let Some(el) = scroll_ref.get() {
@@ -44,6 +74,10 @@ pub fn VibeRow(
             } else if client_w > 0.0 {
                 let p = (cur / (client_w * 0.85)).round() as usize;
                 set_page_index.set(p);
+            }
+            // within a screen and a half of the end of what the strip shows: ask for the next titles before the viewer gets there
+            if has_more.get_untracked() && scroll_w - (cur + client_w) < client_w * 1.5 {
+                load_more.run(());
             }
         }
     });
@@ -108,7 +142,7 @@ pub fn VibeRow(
 
                 // Netflix Pagination indicators (dashes) on hover
                 {move || {
-                    let count = items_stored.with_value(|it| it.len());
+                    let count = items_sig.with(|it| it.len());
                     if count > 4 {
                         let pages = if page_count.get() > 0 { page_count.get() } else { (count / 4).clamp(2, 6) };
                         let current = page_index.get();
@@ -137,58 +171,62 @@ pub fn VibeRow(
             // Horizontal Carousel Strip
             <div class="relative group/row row-scroll-outer" style="container-type: inline-size;">
                 {
-                    let m = items_stored.get_value();
-                    if m.is_empty() {
+                    if items_sig.with_untracked(|m| m.is_empty()) {
                         view! { <div /> }.into_any()
                     } else {
                         let scroll_left = scroll.clone();
                         let scroll_right = scroll.clone();
-                        let (lead_views, card_views) = {
-                                        let card = move |item: crate::services::tmdb::MediaItem, role: u8| {
-                                            let movie_id = item.id;
-                                            let is_tv = item.is_tv();
-                                            let title_item = item.display_title().to_string();
-                                            let backdrop = item.backdrop_url("w780").unwrap_or_default();
-                                            let poster = item.poster_url("w342").unwrap_or_default();
-                                            let vote_avg = item.vote_average;
-                                            let match_pct = item.match_percentage;
-                                            let vibe_pills = item.vibe_pills.clone();
-                                            let overview = item.overview.clone();
-                                            let genre_ids = item.genre_ids.clone();
-                                            let is_new = item.badges.iter().any(|b| b == "new");
-                                            view! {
-                                                <div
-                                                    class=format!("movie-card-container relative flex-none pointer-events-auto overflow-visible rounded-tile {} aspect-video{}", card_width_class, if role >= 2 { " max-md:hidden" } else { "" })
-                                                    style="z-index: auto;"
-                                                    data-loop-first=(role == 1).then_some("1")
-                                                    data-loop-clone=(role == 2).then_some("1")
-                                                >
-                                                    <MovieCard
-                                                        movie_id=movie_id
-                                                        is_tv=is_tv
-                                                        title=title_item
-                                                        backdrop_path=backdrop
-                                                        poster_path=poster
-                                                        vote_average=vote_avg
-                                                        overview=overview
-                                                        genre_ids=genre_ids
-                                                        match_percentage=match_pct
-                                                        vibe_pills=vibe_pills
-                                                        is_new=is_new
-                                                    />
-                                                </div>
-                                            }
-                                        };
-                                        // the cards, with a copy of the last ones in front and a copy of the first ones behind, so that the row can be paged round (see row_scroll.rs)
-                                        let n = m.len();
-                                        let k = if n > 7 { n.min(12) } else { 0 };
-                                        let leads: Vec<_> = m[n - k..].iter().cloned().collect();
-                                        let copies: Vec<_> = m[..k].iter().cloned().collect();
-                                        let mut views: Vec<_> = m.into_iter().enumerate().map(|(i, item)| card(item, if i == 0 { 1 } else { 0 })).collect();
-                                        views.extend(copies.into_iter().enumerate().map(|(i, item)| card(item, if i == 0 { 2 } else { 3 })));
-                                        let lead_views: Vec<_> = leads.into_iter().map(|item| card(item, 3)).collect();
-                                        (lead_views, views)
-                                    };
+                        let card = move |item: crate::services::tmdb::MediaItem, role: u8| {
+                            let movie_id = item.id;
+                            let is_tv = item.is_tv();
+                            let title_item = item.display_title().to_string();
+                            let backdrop = item.backdrop_url("w780").unwrap_or_default();
+                            let poster = item.poster_url("w342").unwrap_or_default();
+                            let vote_avg = item.vote_average;
+                            let match_pct = item.match_percentage;
+                            let vibe_pills = item.vibe_pills.clone();
+                            let overview = item.overview.clone();
+                            let genre_ids = item.genre_ids.clone();
+                            let is_new = item.badges.iter().any(|b| b == "new");
+                            view! {
+                                <div
+                                    class=format!("movie-card-container relative flex-none pointer-events-auto overflow-visible rounded-tile {} aspect-video{}", card_width_class, if role >= 2 { " max-md:hidden" } else { "" })
+                                    style="z-index: auto;"
+                                    data-loop-first=(role == 1).then_some("1")
+                                    data-loop-clone=(role == 2).then_some("1")
+                                >
+                                    <MovieCard
+                                        movie_id=movie_id
+                                        is_tv=is_tv
+                                        title=title_item
+                                        backdrop_path=backdrop
+                                        poster_path=poster
+                                        vote_average=vote_avg
+                                        overview=overview
+                                        genre_ids=genre_ids
+                                        match_percentage=match_pct
+                                        vibe_pills=vibe_pills
+                                        is_new=is_new
+                                    />
+                                </div>
+                            }
+                        };
+                        // how many cards are copied at each end so the row can be paged round (see row_scroll.rs): none while more titles are still to come
+                        let loop_cards = move |n: usize| if n > 7 && !has_more.get() { n.min(12) } else { 0 };
+                        // the copy of the last cards in front of the row, and the cards with a copy of the first ones behind; both rebuilt when more titles arrive
+                        let lead_views = move || {
+                            let m = items_sig.get();
+                            let k = loop_cards(m.len());
+                            m[m.len() - k..].iter().cloned().map(|item| card(item, 3)).collect::<Vec<_>>()
+                        };
+                        let card_views = move || {
+                            let m = items_sig.get();
+                            let k = loop_cards(m.len());
+                            let copies: Vec<_> = m[..k].to_vec();
+                            let mut views: Vec<_> = m.into_iter().enumerate().map(|(i, item)| card(item, if i == 0 { 1 } else { 0 })).collect();
+                            views.extend(copies.into_iter().enumerate().map(|(i, item)| card(item, if i == 0 { 2 } else { 3 })));
+                            views
+                        };
                         view! {
                             <>
                                 <div

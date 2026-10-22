@@ -117,6 +117,35 @@ pub struct FeedRow {
     /// Banner data of a collection row
     #[serde(default)]
     pub collection: Option<Collection>,
+    /// How many titles the row holds in all, and whether `/api/feed/row` can add to the ones the page sent (the engine keeps rows of up to 150)
+    #[serde(default)]
+    pub row_total: Option<usize>,
+    #[serde(default)]
+    pub has_more_items: bool,
+    /// The query the page was fetched with (after `/api/feed?`), kept on each row so the row can ask the same page for more of its titles
+    #[serde(skip)]
+    pub page_query: Option<String>,
+}
+
+/// Where a row's remaining titles come from: the page's query and the row's id (see `fetch_row_items`).
+#[derive(Clone, Debug, PartialEq)]
+pub struct RowMore {
+    pub query: String,
+    pub row_id: String,
+    pub total: usize,
+}
+
+/// One slice of a row's titles from `/api/feed/row`.
+#[derive(Clone, Debug, Default, Deserialize)]
+pub struct RowItems {
+    #[serde(default)]
+    pub row_total: usize,
+    #[serde(default)]
+    pub next_item_offset: usize,
+    #[serde(default)]
+    pub has_more_items: bool,
+    #[serde(default)]
+    pub items: Vec<VibeItem>,
 }
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq)]
@@ -187,6 +216,12 @@ impl FeedRow {
 
     pub fn to_media_items(&self) -> Vec<MediaItem> {
         self.items.iter().map(|item| item.to_media_item()).collect()
+    }
+
+    /// Where to ask for the rest of this row's titles, when the page sent only its first ones.
+    pub fn more_source(&self) -> Option<RowMore> {
+        let query = self.page_query.clone()?;
+        self.has_more_items.then(|| RowMore { query, row_id: self.id.clone(), total: self.row_total.unwrap_or(0) })
     }
 }
 
@@ -298,17 +333,37 @@ pub struct GenreEntry {
     pub name: String,
     #[serde(default)]
     pub supported: bool,
+    /// "movie", "tv" or "both" (a page that mixes films and series: the Kids pages both menus share, the events)
+    #[serde(default)]
+    pub surface: String,
+    /// The calendar event the page is the page of, if it is one
+    #[serde(default)]
+    pub event: Option<String>,
+}
+
+/// A genre menu from the engine: the page the genre addresses hang under (`/browse/genre/<id>?bc=<page_id>`), whether it is the Kids profile's, and its pages.
+#[derive(Clone, Debug, Deserialize, PartialEq)]
+pub struct GenreMenu {
+    #[serde(default)]
+    pub page_id: u32,
+    #[serde(default)]
+    pub kids: bool,
+    #[serde(default)]
+    pub genres: Vec<GenreEntry>,
 }
 
 /// The genre pages of a surface from the engine (`kind` is "movie" or "tv"), in picker order, for the profile in use. None when the engine cannot be reached: the page then uses its own list.
 pub async fn fetch_genre_list(kind: &str) -> Option<Vec<GenreEntry>> {
-    #[derive(Deserialize)]
-    struct Answer { genres: Vec<GenreEntry> }
+    fetch_genre_menu(kind).await.map(|m| m.genres)
+}
+
+/// The genre menu of a surface with the page its addresses hang under (the Kids profile has pages of its own, 20000 and 21000). None when the engine cannot be reached.
+pub async fn fetch_genre_menu(kind: &str) -> Option<GenreMenu> {
     let url = format!("{}/api/genre-list?surface={}&rating={}", base(), kind, crate::pages::settings::prefs::active_rating().unwrap_or("18"));
     let resp = engine_get(&url).await.ok()?;
     if !resp.ok() { return None; }
-    let a: Answer = resp.json().await.ok()?;
-    (!a.genres.is_empty()).then_some(a.genres)
+    let m: GenreMenu = resp.json().await.ok()?;
+    (!m.genres.is_empty()).then_some(m)
 }
 
 /// The switches the engine sets for the product (`games`): anything not on is off, also when the engine cannot be reached.
@@ -548,42 +603,62 @@ pub async fn fetch_page_header(genre: &str) -> Option<Collection> {
 /// The page of a mood collection (what Explore all opens): its header and rows, from the engine.
 pub async fn fetch_collection_page(collection: &str, limit: usize, signals: &str) -> Option<FeedResponse> {
     let encoded: String = js_sys::encode_uri_component(collection).into();
-    let url = format!("{}/api/feed?surface=all&limit={}&collection={}&session_id={}{}{}", base(), limit, encoded, get_or_create_session_id(), rating_query(), signals);
+    let q = format!("surface=all&limit={}&collection={}&session_id={}{}{}", limit, encoded, get_or_create_session_id(), rating_query(), signals);
+    let url = format!("{}/api/feed?{q}", base());
     let resp = engine_get(&url).await.ok()?;
     if !resp.ok() { return None; }
-    resp.json::<FeedResponse>().await.ok()
+    let mut data = resp.json::<FeedResponse>().await.ok()?;
+    for r in &mut data.rows {
+        r.page_query = Some(q.clone());
+    }
+    Some(data)
+}
+
+/// The query of a feed page (after `/api/feed?`): the same string fetches the page and, later, more titles of its rows (`fetch_row_items`), so the engine finds the same page.
+fn feed_query(surface: &str, genre: Option<&str>, limit: usize, signals: &str) -> String {
+    let session_id = get_or_create_session_id();
+    let mut q = format!("surface={}&limit={}&session_id={}{}{}", surface, limit, session_id, rating_query(), signals);
+    if let Some(aff) = get_user_taste_affinity() {
+        if !aff.is_empty() {
+            let encoded: String = js_sys::encode_uri_component(&aff).into();
+            q.push_str(&format!("&affinity={}", encoded));
+        }
+    }
+    if let Some(g) = genre {
+        if !g.is_empty() {
+            let encoded: String = js_sys::encode_uri_component(g).into();
+            q.push_str(&format!("&genre={}", encoded));
+        }
+    }
+    q
 }
 
 pub async fn fetch_feed_page(surface: &str, genre: Option<&str>, limit: Option<usize>, signals: &str) -> Option<FeedResponse> {
-    let lim = limit.unwrap_or(18);
-    let session_id = get_or_create_session_id();
-    let mut url = format!("{}/api/feed?surface={}&limit={}&session_id={}{}{}", base(), surface, lim, session_id, rating_query(), signals);
-    
-    if let Some(aff) = get_user_taste_affinity() {
-        if !aff.is_empty() {
-            let encoded = js_sys::encode_uri_component(&aff);
-            let encoded_str: String = encoded.into();
-            url.push_str(&format!("&affinity={}", encoded_str));
-        }
-    }
-
-    if let Some(g) = genre {
-        if !g.is_empty() {
-            let encoded = js_sys::encode_uri_component(g);
-            let encoded_str: String = encoded.into();
-            url.push_str(&format!("&genre={}", encoded_str));
-        }
-    }
+    let q = feed_query(surface, genre, limit.unwrap_or(18), signals);
+    let url = format!("{}/api/feed?{q}", base());
     let resp = engine_get(&url).await.ok()?;
     if !resp.ok() {
         return None;
     }
-    let data: FeedResponse = resp.json().await.ok()?;
+    let mut data: FeedResponse = resp.json().await.ok()?;
     if data.rows.is_empty() {
-        None
-    } else {
-        Some(data)
+        return None;
     }
+    for r in &mut data.rows {
+        r.page_query = Some(q.clone());
+    }
+    Some(data)
+}
+
+/// More titles of one row of a page: `page_query` is the query the page was fetched with, `row` the row's id; `item_offset` says how many the row already shows.
+pub async fn fetch_row_items(page_query: &str, row: &str, item_offset: usize, item_limit: usize) -> Option<RowItems> {
+    let encoded: String = js_sys::encode_uri_component(row).into();
+    let url = format!("{}/api/feed/row?{}&row={}&item_offset={}&item_limit={}", base(), page_query, encoded, item_offset, item_limit);
+    let resp = engine_get(&url).await.ok()?;
+    if !resp.ok() {
+        return None;
+    }
+    resp.json::<RowItems>().await.ok()
 }
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq)]

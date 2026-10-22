@@ -20,7 +20,8 @@ pub fn FeedRowView(row: FeedRow, #[prop(into)] kind: String) -> impl IntoView {
     let tagline = row.tagline.clone();
     let mood_pills = row.mood_pills.clone();
     let items = row.to_media_items();
-    view! { <VibeRow title=title tagline=tagline mood_pills=mood_pills items=items /> }.into_any()
+    let more = row.more_source();
+    view! { <VibeRow title=title tagline=tagline mood_pills=mood_pills items=items more=more /> }.into_any()
 }
 
 /// The engine's Continue Watching row repeats the one the page draws from the watch records (with progress bars), so it is left out.
