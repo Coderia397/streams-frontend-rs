@@ -31,6 +31,7 @@ pub fn can_be_kids(list: &[Profile], id: &str) -> bool {
 
 #[cfg(test)]
 mod rules {
+    use super::*;
     use crate::models::profile::Profile;
 
     fn p(id: &str, kids: bool, main: Option<bool>) -> Profile {
