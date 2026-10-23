@@ -360,10 +360,10 @@ fn Episodes(series_id: u32, seasons: u32, season: RwSignal<u32>) -> impl IntoVie
         async move { fetch_season_details(series_id, n).await.map(|s| s.episodes).unwrap_or_default() }
     });
     view! {
-        <div class="px-2.5 pt-1">
+        <div class="px-2 pt-2">
             {(seasons > 1).then(|| view! {
                 // round, as every dropdown here (owner, 2026-10-23)
-                <button type="button" on:click=move |_| menu_open.set(true) class="flex h-9 items-center gap-2 rounded-button bg-sheet ps-3.5 pe-3 text-body-md font-medium text-ink cursor-pointer">
+                <button type="button" on:click=move |_| menu_open.set(true) class="flex h-9 items-center gap-2 rounded-button bg-sheet ps-3.5 pe-3 text-title-sm font-bold text-ink cursor-pointer">
                     {move || crate::i18n::t_args("media-season-n", &[("n", fluent_bundle::FluentValue::from(season.get() as i64))])}
                     <i class="ph-fill ph-caret-down text-sm opacity-80"></i>
                 </button>
@@ -375,7 +375,8 @@ fn Episodes(series_id: u32, seasons: u32, season: RwSignal<u32>) -> impl IntoVie
                         let href = format!("/watch/tv/{series_id}?season={}&episode={}", season.get_untracked(), ep.episode_number);
                         let still = ep.still_url("w300");
                         view! {
-                            <a href=href class="block py-3">
+                            // Netflix's row (note 116): the still 130 x 80 px from 10 px in, the title 12 px after it, the synopsis right under the still
+                            <a href=href class="block px-0.5 pt-2 pb-6">
                                 <div class="flex items-center gap-3">
                                     <div class="relative aspect-[130/80] w-[130px] shrink-0 overflow-hidden rounded-tile bg-raised">
                                         {still.map(|s| view! { <img src=s alt="" loading="lazy" class="h-full w-full object-cover" /> })}
@@ -384,11 +385,11 @@ fn Episodes(series_id: u32, seasons: u32, season: RwSignal<u32>) -> impl IntoVie
                                         </span>
                                     </div>
                                     <div class="min-w-0 flex-1">
-                                        <p class="text-body-md font-bold leading-tight text-ink">{format!("{}. {}", ep.episode_number, ep.name)}</p>
-                                        {ep.runtime.filter(|r| *r > 0).map(|r| view! { <p class="mt-0.5 text-body-sm text-ink-body">{format!("{r}m")}</p> })}
+                                        <p class="text-title-sm font-bold leading-tight text-ink">{format!("{}. {}", ep.episode_number, ep.name)}</p>
+                                        {ep.runtime.filter(|r| *r > 0).map(|r| view! { <p class="mt-0.5 text-body-md text-ink-body">{format!("{r}m")}</p> })}
                                     </div>
                                 </div>
-                                {(!ep.overview.is_empty()).then(|| view! { <p class="mt-2 text-body-sm leading-[18px] text-ink-body">{ep.overview.clone()}</p> })}
+                                {(!ep.overview.is_empty()).then(|| view! { <p class="mt-3 line-clamp-4 text-body-md leading-[19.4px] text-ink-body">{ep.overview.clone()}</p> })}
                             </a>
                         }
                     }).collect_view())}
