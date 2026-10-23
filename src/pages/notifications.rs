@@ -18,6 +18,8 @@ pub fn NotificationsPage() -> impl IntoView {
             set.insert(n.id.clone());
             save_read_ids(set);
         });
+        // the bell's badge on the next page counts this one as read
+        crate::services::ai_engine::store_answer("unread", &crate::services::ai_engine::stored_answer::<usize>("unread").unwrap_or(1).saturating_sub(1));
         ui_store.modal_initial_time.set(0.0);
         ui_store.modal_current_time.set(0.0);
         ui_store.info_modal_movie_id.set(Some(n.movie_id));

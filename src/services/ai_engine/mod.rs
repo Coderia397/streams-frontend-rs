@@ -43,6 +43,21 @@ pub(crate) const FEED_FRESH_MS: f64 = 60_000.0;
 /// How long menus and lists that change rarely stay fresh (genre menus, season pages, games).
 pub(crate) const MENU_FRESH_MS: f64 = 600_000.0;
 
+/// The last answer to an engine address that is kept in this browser (small answers the page needs before it is drawn: the season
+/// chips, the feature switches), so the parts that depend on them show at once on the next start instead of moving in when the answer
+/// comes (the phone's chip row grew by three chips after the first frame). The answer is refreshed in the background each time.
+pub(crate) fn stored_answer<T: serde::de::DeserializeOwned>(name: &str) -> Option<T> {
+    let raw = web_sys::window()?.local_storage().ok().flatten()?.get_item(&format!("streams_engine_{name}")).ok().flatten()?;
+    serde_json::from_str(&raw).ok()
+}
+
+/// Keeps an answer for `stored_answer`.
+pub(crate) fn store_answer<T: serde::Serialize>(name: &str, value: &T) {
+    if let (Some(s), Ok(raw)) = (web_sys::window().and_then(|w| w.local_storage().ok().flatten()), serde_json::to_string(value)) {
+        let _ = s.set_item(&format!("streams_engine_{name}"), &raw);
+    }
+}
+
 /// A request to the engine whose answer is shared while fresh: two parts of a page that ask the same thing make one request, and a page
 /// opened again shortly after draws without waiting. The profile in use is part of the key (the engine answers per profile); signing out
 /// reloads the page, which empties this. A failed request is forgotten so the next caller asks again.

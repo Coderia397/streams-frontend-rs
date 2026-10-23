@@ -85,7 +85,9 @@ pub async fn fetch_features() -> std::collections::HashMap<String, bool> {
         let fut: LocalBoxFuture<'static, Option<Answer>> = async {
             let resp = engine_get(&format!("{}/api/features", base())).await.ok()?;
             if !resp.ok() { return None; }
-            resp.json::<Answer>().await.ok()
+            let answer = resp.json::<Answer>().await.ok()?;
+            store_answer("features", &answer);
+            Some(answer)
         }
         .boxed_local();
         let shared = fut.shared();
@@ -101,8 +103,13 @@ pub async fn fetch_features() -> std::collections::HashMap<String, bool> {
     }
 }
 
+/// The feature switches this browser saw last (all off when it has seen none), to draw what depends on them at once.
+pub fn stored_features() -> std::collections::HashMap<String, bool> {
+    stored_answer("features").unwrap_or_default()
+}
+
 /// An event in season that has a page of its own (Halloween): its label key and label for the chip, and the id of its genre page.
-#[derive(Clone, Debug, Deserialize, PartialEq)]
+#[derive(Clone, Debug, Deserialize, serde::Serialize, PartialEq)]
 pub struct SeasonChip {
     pub id: String,
     pub label_key: String,
@@ -114,7 +121,16 @@ pub struct SeasonChip {
 pub async fn fetch_season_chips() -> Vec<SeasonChip> {
     #[derive(Deserialize)]
     struct Answer { chips: Vec<SeasonChip> }
-    engine_json::<Answer>(&format!("{}/api/season-chips", base()), MENU_FRESH_MS).await.map(|a| a.chips).unwrap_or_default()
+    let chips = engine_json::<Answer>(&format!("{}/api/season-chips", base()), MENU_FRESH_MS).await.map(|a| a.chips);
+    if let Some(c) = &chips {
+        store_answer("season_chips", c);
+    }
+    chips.unwrap_or_default()
+}
+
+/// The season chips this browser saw last, to draw the chip row at once (the engine's answer replaces them when it comes).
+pub fn stored_season_chips() -> Vec<SeasonChip> {
+    stored_answer("season_chips").unwrap_or_default()
 }
 
 /// The genre pages a limited profile should not be offered (see `hidden_pages`).

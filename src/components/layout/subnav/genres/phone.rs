@@ -31,8 +31,11 @@ pub fn CategorySubNavMobile(
     let is_games_active = move || path().starts_with("/browse/games");
     // events in season with a page of their own (Halloween); the list is empty out of season, so the pill goes away by itself
     let features = LocalResource::new(|| async { crate::services::ai_engine::fetch_features().await });
-    let games_on = move || features.get().is_some_and(|f| f.get("games") == Some(&true));
+    // what this browser saw last until the engine answers, so the row is drawn once with all its chips
+    let stored_games = crate::services::ai_engine::stored_features().get("games") == Some(&true);
+    let games_on = move || features.get().map(|f| f.get("games") == Some(&true)).unwrap_or(stored_games);
     let season_chips = LocalResource::new(|| async { crate::services::ai_engine::fetch_season_chips().await });
+    let stored_chips = StoredValue::new(crate::services::ai_engine::stored_season_chips());
 
     let to = |url: &'static str| { let nav = navigate.clone(); move |_| nav(url, Default::default()) };
     let on_series = to("/browse/genre/83");
@@ -61,7 +64,7 @@ pub fn CategorySubNavMobile(
                         <button on:click=on_series.clone() class=move || pill(false)>{crate::i18n::t("category-sub-nav-mobile-series")}</button>
                         <button on:click=on_films.clone() class=move || pill(false)>{crate::i18n::t("category-sub-nav-mobile-films")}</button>
                         <Show when=games_on><button on:click=move |_| navigate_event.with_value(|n| n("/browse/games", Default::default())) class=move || pill(is_games_active())>{crate::i18n::t("nav-games")}</button></Show>
-                        {move || season_chips.get().unwrap_or_default().into_iter().map(|chip| {
+                        {move || season_chips.get().unwrap_or_else(|| stored_chips.get_value()).into_iter().map(|chip| {
                             let label = crate::services::ai_engine::engine_text(&chip.label_key, None).unwrap_or_else(|| chip.label.clone());
                             let id = chip.genre_id;
                             view! { <button on:click=move |_| navigate_event.with_value(|nav| nav(&format!("/browse/genre/{id}"), Default::default())) class=move || pill(false)>{label}</button> }

@@ -61,10 +61,17 @@ pub async fn load_notifications() -> Vec<AppNotification> {
 /// How many of the current notices this browser has not opened yet (for the bell of the mobile header).
 pub async fn unread_count() -> usize {
     let read = load_read_ids();
-    crate::services::notifications::fetch().await.into_iter()
+    let n = crate::services::notifications::fetch().await.into_iter()
         .filter(|n| n.item.backdrop_url("w300").or_else(|| n.item.poster_url("w300")).is_some())
         .filter(|n| !read.contains(&format!("notif-{}-{}", if n.item.is_tv() { "tv" } else { "movie" }, n.item.id)))
-        .count()
+        .count();
+    crate::services::ai_engine::store_answer("unread", &n);
+    n
+}
+
+/// The unread count this browser saw last, so the bell's badge is drawn with the bell (the fresh count replaces it).
+pub fn stored_unread_count() -> usize {
+    crate::services::ai_engine::stored_answer("unread").unwrap_or(0)
 }
 
 #[component]

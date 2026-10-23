@@ -83,6 +83,7 @@ pub fn PhoneNav(
         p == "/browse" || p == "/" || p.is_empty() || p.starts_with("/browse/my-list")
     };
     let unread = LocalResource::new(|| async { crate::components::layout::nav::website::notifications::unread_count().await });
+    let stored_unread = crate::components::layout::nav::website::notifications::stored_unread_count();
     let nav_to_bell = navigate.clone();
     let on_search = move || location.pathname.get().starts_with("/search");
     let go_back = {
@@ -230,7 +231,7 @@ pub fn PhoneNav(
                         aria-label=crate::i18n::t("notifications-dropdown-notifications")
                     >
                         <i class="ph ph-bell text-heading"></i>
-                        {move || unread.get().filter(|n| *n > 0).map(|n| view! {
+                        {move || Some(unread.get().unwrap_or(stored_unread)).filter(|n| *n > 0).map(|n| view! {
                             <span class="absolute top-[2px] right-[3px] flex h-5 min-w-5 items-center justify-center rounded-full bg-brand px-1 text-micro font-bold leading-none text-ink">
                                 {if n > 99 { "99+".to_string() } else { n.to_string() }}
                             </span>
