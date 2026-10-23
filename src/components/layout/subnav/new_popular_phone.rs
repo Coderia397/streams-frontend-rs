@@ -37,7 +37,8 @@ pub fn NewPopularSubNavMobile(
 ) -> impl IntoView {
     let features = LocalResource::new(|| async { crate::services::ai_engine::fetch_features().await });
     let games_on = move || features.get().is_some_and(|f| f.get("games") == Some(&true));
-    // The pills of the app: Coming Soon, Everyone's Watching, Games, Top 10 Series, Top 10 Films, each with its own glyph
+    // The pills of the app: Coming Soon, Everyone's Watching, Games, Top 10 Series, Top 10 Films, each with its own glyph; 36 px high, 8 px under
+    // the bar, the first card 12 px under them (measured on a Pixel 8, note 116)
     let tabs = vec![
         (Some(NewPopularTab::ComingSoon), "tabs-coming-soon", Glyph::Popcorn),
         (Some(NewPopularTab::Watching), "tabs-everyone-watching", Glyph::Flame),
@@ -61,7 +62,7 @@ pub fn NewPopularSubNavMobile(
 
     view! {
         <div class="relative w-full overflow-hidden select-none">
-            <div id="nh-pills" class="pt-2 pb-3 px-3 flex items-center justify-start overflow-x-auto scrollbar-hide max-w-full">
+            <div id="nh-pills" class="pt-2 pb-1 px-3 flex items-center justify-start overflow-x-auto scrollbar-hide max-w-full">
                 <div class="flex items-center gap-2 shrink-0">
                     {tabs.into_iter().map(|(tab, label, glyph)| {
                         let is_active = move || tab.is_some_and(|t| active_tab.get() == t);
@@ -78,7 +79,7 @@ pub fn NewPopularSubNavMobile(
                                     } else {
                                         "bg-transparent text-ink border-ink/35"
                                     };
-                                    format!("flex items-center justify-center gap-2 h-[33px] ps-2.5 pe-3.5 rounded-button border-[1.5px] text-pill font-semibold whitespace-nowrap active:scale-95 transition-all leading-none shrink-0 cursor-pointer {look}")
+                                    format!("flex items-center justify-center gap-2 h-9 ps-2.5 pe-3.5 rounded-button border-[1.5px] text-pill font-semibold whitespace-nowrap active:scale-95 transition-all leading-none shrink-0 cursor-pointer {look}")
                                 }
                             >
                                 {match glyph {

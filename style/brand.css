@@ -183,7 +183,7 @@
   --radius-chip-inner: 12px;
   --radius-chip: 20px;
   --radius-pill: 14px;
-  /* the phone billboard card: 12 dp, as Netflix's Android app (fitted on a Pixel 8 capture, note 116) */
+  /* the phone billboard card and the New & Hot cards: 12 dp, as Netflix's Android app (fitted on a Pixel 8 capture, note 116) */
   --radius-poster: 12px;
   --radius-billboard: 24px;
   --radius-sheet: 1rem;

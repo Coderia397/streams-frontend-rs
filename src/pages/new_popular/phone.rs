@@ -162,13 +162,13 @@ pub fn PhoneNewPopular() -> impl IntoView {
 
     view! {
         <div class="relative min-h-screen bg-void">
-            // under the phone header
-            <div class="h-16" />
+            // under the phone header (52 px and the safe area)
+            <div class="h-[calc(var(--nav-h-mobile)+env(safe-area-inset-top))]" />
                 <div>
                     <div class="mobile-pills-sticky">
                         <NewPopularSubNavMobile active_tab=active_tab on_tab_change=jump_to />
                     </div>
-                    <div class="px-3 pt-3 pb-24 space-y-8">
+                    <div class="px-3 pb-24 space-y-8">
                         {SECTIONS.into_iter().map(|tab| if tab == NewPopularTab::Games { view! { <NewHotGames /> }.into_any() } else { view! { <NewHotSection tab=tab /> }.into_any() }).collect::<Vec<_>>()}
                     </div>
                 </div>

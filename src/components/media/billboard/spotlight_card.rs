@@ -116,7 +116,7 @@ pub fn SpotlightCard(
     view! {
         <div class="spot-card relative overflow-visible py-3 group/spotlight z-10 w-full sm:max-w-[85vw] sm:mx-auto">
             // the shade the page lays over a card that is leaving or arriving (see new_popular.rs dim_cards)
-            <div class="absolute inset-0 z-30 pointer-events-none rounded-pill bg-void transition-opacity duration-(--motion-fast)" style="opacity: var(--dim, 0)"></div>
+            <div class="absolute inset-0 z-30 pointer-events-none rounded-poster bg-void transition-opacity duration-(--motion-fast)" style="opacity: var(--dim, 0)"></div>
             // Top 10: a strip peeks out above the card with the numeral on it. It is a gradient of the colour of the artwork (the one the hero uses): left the colour at its own brightness,
             // right a little less bright and almost grey (`strip_style`). The numeral is outlined thin and its foot is hidden behind the card, as in the app.
             {formatted_rank.clone().map(|r_text| {
@@ -134,7 +134,7 @@ pub fn SpotlightCard(
 
             // Spotlight card container
             <div
-                class="relative z-10 w-full min-h-[440px] flex flex-col bg-void border border-ink/25 rounded-pill overflow-hidden select-none"
+                class="relative z-10 w-full min-h-[440px] flex flex-col bg-void border-[1.2px] border-ink/20 rounded-poster overflow-hidden select-none"
             >
                 // Picture area: the trailer plays by itself while the card is on screen (see SpotlightArtwork)
                 <div class="relative">
@@ -151,33 +151,34 @@ pub fn SpotlightCard(
                 </div>
 
                 // Below-media content area: the only part that opens the details (the picture area plays, pauses and mutes the trailer)
-                <div on:click=move |_| on_card_click(()) class="px-5 pb-6 pt-4 flex flex-col flex-grow gap-3 cursor-pointer">
+                // Netflix's app (note 116): 12 px in, the logo 8 px under the trailer, the date in 18.5 px #e5e5e5, the synopsis in 16 px #b3b3b3
+                <div on:click=move |_| on_card_click(()) class="px-3 pb-4 pt-2 flex flex-col flex-grow gap-3 cursor-pointer">
                     // The title as its logo (a title without one shows its name), then what is happening: coming on a day, or the title's own name when it is out
                     {move || logo.get().flatten().map(|url| view! {
                         <img src=url alt=logo_alt.clone() class="max-h-[74px] max-w-[70%] w-auto object-contain object-left" loading="lazy" decoding="async" />
                     })}
                     {if is_coming_soon && !coming_soon_label.is_empty() {
                         view! {
-                            <p class="text-ink font-bold text-title leading-tight">
+                            <p class="text-ink-soft font-bold text-[18.5px] leading-tight">
                                 {crate::i18n::t_args("media-coming", &[("when", fluent_bundle::FluentValue::from(coming_soon_label.clone()))])}
                             </p>
                         }.into_any()
                     } else {
-                        view! { <h3 class="text-ink font-bold text-title leading-tight">{crate::i18n::t(if is_tv { "new-hot-watch-series" } else { "new-hot-watch-film" })}</h3> }.into_any()
+                        view! { <h3 class="text-ink-soft font-bold text-[18.5px] leading-tight">{crate::i18n::t(if is_tv { "new-hot-watch-series" } else { "new-hot-watch-film" })}</h3> }.into_any()
                     }}
 
                     // Overview
-                    <p class="text-body-lg text-ink-soft font-normal leading-relaxed line-clamp-3 flex-1">
+                    <p class="text-[16px] leading-[24px] text-ink-body font-normal line-clamp-4 flex-1">
                         {overview}
                     </p>
 
                     // CTA Buttons
-                    <div class="mt-auto pt-3">
+                    <div class="mt-auto pt-1">
                         {if is_coming_soon || hide_play {
                             view! {
                                 <button
                                     on:click=on_toggle_list
-                                    class="flex items-center justify-center h-[51px] px-5 rounded-button bg-ink-soft text-chrome text-title font-semibold gap-2.5 transition-all active:scale-95 w-fit"
+                                    class="flex items-center justify-center h-[51px] px-5 rounded-button bg-ink-soft text-chrome text-[18px] font-semibold gap-2.5 transition-all active:scale-95 w-fit"
                                 >
                                     {move || if is_in_my_list() {
                                         view! {
@@ -197,7 +198,7 @@ pub fn SpotlightCard(
                                 <div class="flex items-center gap-2">
                                     <button
                                         on:click=on_play_click
-                                        class="flex items-center justify-center h-[54px] px-5 rounded-button bg-ink-soft text-chrome text-title font-semibold gap-2 transition-all active:scale-95"
+                                        class="flex items-center justify-center h-[54px] px-5 rounded-button bg-ink-soft text-chrome text-[18px] font-semibold gap-2 transition-all active:scale-95"
                                     >
                                         <i class="ph-fill ph-play text-xl text-chrome"></i>
                                         <span>{move || {
