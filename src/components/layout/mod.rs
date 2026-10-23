@@ -1,13 +1,12 @@
-pub mod navbar;
-pub mod navbar_mobile;
-pub mod bottom_nav_mobile;
-pub mod search_bar;
-pub mod notifications_dropdown;
-pub mod category_sub_nav;
-pub mod category_sub_nav_mobile;
-pub mod new_popular_sub_nav_mobile;
+//! The frame of the browsing pages and its parts, grouped: `nav` (the bars), `subnav` (the headers under them). Their modules are re-exported
+//! here, so `layout::navbar` and `layout::nav::navbar` name the same module and the paths used across the app keep working.
+pub mod nav;
+pub mod subnav;
 pub mod footer;
 pub mod tour;
+
+pub use nav::{bottom_nav_mobile, navbar, navbar_mobile, notifications_dropdown, search_bar};
+pub use subnav::{category_sub_nav, category_sub_nav_mobile, new_popular_sub_nav_mobile};
 
 use leptos::prelude::*;
 use navbar::Navbar;
