@@ -58,11 +58,12 @@ fn SearchListRow(item: MediaItem) -> impl IntoView {
         navigate(&format!("/watch/{}/{}", if is_tv { "tv" } else { "movie" }, id), Default::default());
     };
     view! {
-        <div on:click=open class="flex items-center gap-3 w-full cursor-pointer active:opacity-80">
-            <div class="relative w-[33%] flex-none aspect-video overflow-hidden rounded-field bg-card">
+        // Netflix's app (note 116): a 140.5 x 79 px picture, the title 10 px after it at 15 sp (17 px at the owner's font scale)
+        <div on:click=open class="flex items-center gap-[10px] w-full cursor-pointer active:opacity-80">
+            <div class="relative w-[140.5px] flex-none aspect-video overflow-hidden rounded-field bg-card">
                 <img src=picture alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" draggable="false" />
             </div>
-            <span class="flex-1 min-w-0 text-body-md font-bold leading-tight text-ink line-clamp-2">{title.clone()}</span>
+            <span class="flex-1 min-w-0 text-[17px] font-bold leading-tight text-ink line-clamp-2">{title.clone()}</span>
             <button on:click=play aria-label=crate::i18n::t("media-play") class="btn-circle btn-circle-sm">
                 <i class="ph-fill ph-play text-ink text-body-sm ms-px"></i>
             </button>
@@ -101,6 +102,7 @@ pub fn PhoneSearch(#[prop(into)] q: Signal<String>, results: Found, recommended:
         go_input(v);
     };
     let input_ref = NodeRef::<Input>::new();
+    let (focused, set_focused) = signal(true);
     Effect::new(move |_| {
         if let Some(i) = input_ref.get() { let _ = i.focus(); }
     });
@@ -132,9 +134,16 @@ pub fn PhoneSearch(#[prop(into)] q: Signal<String>, results: Found, recommended:
             // ── The bar of the phone layout ─────────────────────────────────────
             <div class="fixed top-0 inset-x-0 z-(--z-nav) bg-field pt-[env(safe-area-inset-top)]">
                 <div class="flex items-center h-[52px] ps-1 pe-1">
-                    <button on:click=on_back aria-label=crate::i18n::t("navbar-mobile-back") class="w-12 h-12 flex items-center justify-center text-ink flex-none">
-                        <i class="ph ph-arrow-left text-heading-md"></i>
-                    </button>
+                    // the app: a back arrow while typing, a magnifier once the keyboard is down
+                    {move || if focused.get() {
+                        view! {
+                            <button on:click=on_back.clone() aria-label=crate::i18n::t("navbar-mobile-back") class="w-12 h-12 flex items-center justify-center text-ink flex-none">
+                                <i class="ph ph-arrow-left text-heading-md"></i>
+                            </button>
+                        }.into_any()
+                    } else {
+                        view! { <span class="w-12 h-12 flex items-center justify-center text-ink/90 flex-none"><i class="ph ph-magnifying-glass text-heading-md"></i></span> }.into_any()
+                    }}
                     <input
                         node_ref=input_ref
                         type="text"
@@ -147,6 +156,8 @@ pub fn PhoneSearch(#[prop(into)] q: Signal<String>, results: Found, recommended:
                         aria-label=crate::i18n::t("search-bar-search-input")
                         prop:value=move || draft.get()
                         on:input=on_input.clone()
+                        on:focus=move |_| set_focused.set(true)
+                        on:blur=move |_| set_focused.set(false)
                         class="flex-1 min-w-0 bg-transparent text-title-md text-ink placeholder:text-ink/55 outline-none border-0 ps-3"
                     />
                     {move || if draft.get().is_empty() {
@@ -168,11 +179,11 @@ pub fn PhoneSearch(#[prop(into)] q: Signal<String>, results: Found, recommended:
             <div class="pt-[calc(60px+env(safe-area-inset-top))] px-3 pb-28 min-h-screen bg-void">
                 // Nothing typed: the recommendations, as a list
                 <Show when=move || q.get().trim().is_empty()>
-                    <h1 class="text-title-md font-bold text-ink mb-3 mt-1 ps-1">{crate::i18n::t("search-recommended")}</h1>
+                    <h1 class="text-[20px] leading-[30px] font-bold text-ink mt-1.5 mb-[5px]">{crate::i18n::t("search-recommended")}</h1>
                     <Suspense fallback=move || view! { <crate::components::skeleton::ListSkeleton /> }>
                         {move || recommended.get().map(|items| match items {
                             Some(items) if !items.is_empty() => view! {
-                                <div class="flex flex-col gap-3">
+                                <div class="flex flex-col gap-2">
                                     {items.into_iter().take(12).map(|it| view! { <SearchListRow item=it /> }).collect::<Vec<_>>()}
                                 </div>
                             }.into_any(),
