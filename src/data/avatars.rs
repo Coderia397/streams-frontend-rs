@@ -235,6 +235,12 @@ pub fn fast_avatar(url: &str) -> String {
 /// The six plain faces (red, dark blue, yellow, green, purple, pink), the pictures a new profile starts with.
 pub const SMILE_IDS: [&str; 6] = ["classic-red-smile", "classic-dark-grey-smile", "classic-yellow-smile", "classic-green-smile", "classic-purple-smile", "classic-pink-smile"];
 
+/// One of the six faces chosen by a seed (the browser's device key), as the address of its picture: the same seed always gives the same face.
+pub fn smile_for(seed: &str) -> String {
+    let h = seed.bytes().fold(0u32, |h, b| h.wrapping_mul(31).wrapping_add(b as u32));
+    avatar_address(SMILE_IDS[h as usize % SMILE_IDS.len()])
+}
+
 /// One of the six faces at random, as the address of its picture.
 pub fn random_smile() -> String {
     let i = ((js_sys::Math::random() * SMILE_IDS.len() as f64) as usize).min(SMILE_IDS.len() - 1);

@@ -96,12 +96,13 @@ pub struct ProfileStore {
     pub notice: RwSignal<Option<String>>,
 }
 
-/// The profiles of a browser that has saved none: the main profile and the Kids profile.
+/// The profiles of a browser that has saved none: the main profile and the Kids profile. They are not saved (signing in makes the account's first profiles when none are), so the
+/// main profile's face comes from this browser's device key: the same at every start (a random face changed colour at each visit, note 116).
 pub fn default_profiles() -> Vec<crate::models::profile::Profile> {
-    default_profiles_with(crate::data::avatars::random_smile())
+    default_profiles_with(crate::data::avatars::smile_for(&crate::services::device::device_key()))
 }
 
-/// The first profiles of a browser, with the main profile's picture given (the random smile needs the browser, so tests pass one).
+/// The first profiles of a browser, with the main profile's picture given (the device key needs the browser, so tests pass one).
 pub fn default_profiles_with(main_avatar: String) -> Vec<crate::models::profile::Profile> {
     vec![
         crate::models::profile::Profile {
