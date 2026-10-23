@@ -179,11 +179,11 @@ fn Clip(item: MediaItem, index: usize, current: RwSignal<usize>) -> impl IntoVie
 
             // the title, its tags, the synopsis and the time left, at the bottom left
             <div class="absolute start-4 end-24 bottom-[calc(96px+env(safe-area-inset-bottom))]">
-                <button type="button" on:click=open_title class="text-start text-[22px] font-bold leading-tight text-ink cursor-pointer">{title.clone()}</button>
-                {(!tags.is_empty()).then(|| view! { <p class="mt-1 text-[13px] font-medium text-ink">{tags.clone()}</p> })}
+                <button type="button" on:click=open_title class="text-start text-title-md font-bold leading-tight text-ink cursor-pointer">{title.clone()}</button>
+                {(!tags.is_empty()).then(|| view! { <p class="mt-1 text-label font-medium text-ink">{tags.clone()}</p> })}
                 <p
                     on:click=move |_| full.set(true)
-                    class=move || format!("mt-1 text-[14px] leading-[18px] text-ink {}", if full.get() { "line-clamp-4" } else { "line-clamp-1" })
+                    class=move || format!("mt-1 text-body-sm leading-[18px] text-ink {}", if full.get() { "line-clamp-4" } else { "line-clamp-1" })
                 >
                     {synopsis.clone()}
                 </p>
@@ -191,7 +191,7 @@ fn Clip(item: MediaItem, index: usize, current: RwSignal<usize>) -> impl IntoVie
                     <div class="relative h-[3px] flex-1 rounded-full bg-ink/30">
                         <div class="absolute inset-y-0 left-0 rounded-full bg-ink" style=move || format!("width:{:.2}%", fraction() * 100.0)></div>
                     </div>
-                    <span class="text-[13px] tabular-nums text-ink-body">{left}</span>
+                    <span class="text-label tabular-nums text-ink-body">{left}</span>
                 </div>
             </div>
             <crate::components::media::share_sheet::ShareSheet open=share_open title=title.clone() url=share_url />

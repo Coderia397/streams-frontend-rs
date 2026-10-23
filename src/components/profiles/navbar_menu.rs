@@ -4,7 +4,7 @@ use crate::store::use_profile_store;
 
 /// A row of the menu and its icon (Netflix's redesigned menu, see the view).
 const ROW: &str = "flex h-12 w-full shrink-0 cursor-pointer items-center gap-3 rounded-menu-item px-3 text-start text-body-md text-ink transition-colors hover:bg-glass focus-visible:bg-glass";
-const ICON: &str = "ph flex h-6 w-6 shrink-0 items-center justify-center text-[24px] text-ink/70";
+const ICON: &str = "ph flex h-6 w-6 shrink-0 items-center justify-center text-heading text-ink/70";
 
 #[component]
 pub fn NavbarProfileMenu() -> impl IntoView {

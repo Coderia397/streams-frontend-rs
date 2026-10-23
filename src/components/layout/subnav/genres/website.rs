@@ -76,7 +76,7 @@ pub fn CategorySubNavDesktop(
                 <div node_ref=container_ref class="pointer-events-auto flex items-center gap-4">
                 // A picked genre is a page of its own, as on Netflix: the genre's name after a short strip in the brand colour (Netflix: 4 x 28 at 70 %, 16 px before the
                 // title). The Genres pill stays beside it, so another genre or the whole page is one click away (Netflix drops it and leaves only the nav tab).
-                <h1 class="flex items-center text-[20px] font-medium leading-[31px] text-ink md:text-[24px]">
+                <h1 class="flex items-center text-title font-medium leading-[31px] text-ink md:text-heading">
                     {move || selected_genre.get().map(|_| view! { <span aria-hidden="true" class="me-4 h-7 w-1 shrink-0 bg-brand/70" /> })}
                     {
                         let page_title = title_clone.clone();

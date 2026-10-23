@@ -107,7 +107,7 @@ pub fn BrowseLanguagePage() -> impl IntoView {
                 <div class="px-6 md:px-[var(--app-x,56px)] pt-2 md:pt-0">
                     // Header with title and Netflix-matching preference dropdowns
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-                        <h1 class="select-none text-heading-lg font-bold leading-tight tracking-tight text-ink md:text-[24px] md:font-medium md:leading-[31px] md:tracking-normal">
+                        <h1 class="select-none text-heading-lg font-bold leading-tight tracking-tight text-ink md:text-heading md:font-medium md:leading-[31px] md:tracking-normal">
                             {crate::i18n::t("language-browse-by-language")}
                         </h1>
 

@@ -135,7 +135,7 @@ pub fn RecCard(
                                         <img src=url alt=t.clone() class="max-h-11 max-w-full object-contain object-left-bottom drop-shadow-lg rtl:object-right-bottom" />
                                     }.into_any(),
                                     _ => view! {
-                                        <p class="line-clamp-2 text-[16px] font-bold leading-tight text-ink drop-shadow-md">{t.clone()}</p>
+                                        <p class="line-clamp-2 text-body-md font-bold leading-tight text-ink drop-shadow-md">{t.clone()}</p>
                                     }.into_any(),
                                 })
                             }
@@ -147,7 +147,7 @@ pub fn RecCard(
             // facts and synopsis: click opens the title's details
             <div class="flex flex-1 cursor-pointer flex-col px-2 pb-2 pt-3" on:click=on_body_click>
                 <div class="flex items-center justify-between gap-2">
-                    <div class="flex min-w-0 items-center gap-x-1.5 overflow-hidden whitespace-nowrap text-[14px] font-medium leading-[21px]">
+                    <div class="flex min-w-0 items-center gap-x-1.5 overflow-hidden whitespace-nowrap text-body-sm font-medium leading-[21px]">
                         <span class="text-success">
                             {crate::i18n::t_args("media-percent-match", &[("pct", fluent_bundle::FluentValue::from(match_score as i64))])}
                         </span>
@@ -156,7 +156,7 @@ pub fn RecCard(
                     </div>
                     <MyListButton is_in_list=is_added on_toggle=toggle_my_list_cb size="sm".to_string() />
                 </div>
-                <p class="mt-2 line-clamp-4 text-[14px] leading-[21px] text-ink/70">{overview}</p>
+                <p class="mt-2 line-clamp-4 text-body-sm leading-[21px] text-ink/70">{overview}</p>
             </div>
         </div>
     }
@@ -193,7 +193,7 @@ pub fn InfoModalRecommendations(
     view! {
         <Suspense fallback=move || view! {
             <div class="mt-12">
-                <h3 class="mb-4 text-[24px] font-medium leading-[1.25] text-ink">{crate::i18n::t("media-more-like-this")}</h3>
+                <h3 class="mb-4 text-heading font-medium leading-[1.25] text-ink">{crate::i18n::t("media-more-like-this")}</h3>
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {(0..6).map(|_| view! {
                         <div class="skeleton aspect-[4/5] rounded-card" aria-hidden="true" />
@@ -210,7 +210,7 @@ pub fn InfoModalRecommendations(
 
                     view! {
                         <div class="mt-12">
-                            <h3 class="mb-4 text-[24px] font-medium leading-[1.25] text-ink">{crate::i18n::t("media-more-like-this")}</h3>
+                            <h3 class="mb-4 text-heading font-medium leading-[1.25] text-ink">{crate::i18n::t("media-more-like-this")}</h3>
                             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                                 {visible_items.into_iter().map(|item| {
                                     let movie = Movie::from(item);

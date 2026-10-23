@@ -229,7 +229,7 @@ pub fn PhoneNav(
                         class="relative flex h-11 w-11 shrink-0 items-center justify-center text-ink cursor-pointer active:scale-95 transition-transform"
                         aria-label=crate::i18n::t("notifications-dropdown-notifications")
                     >
-                        <i class="ph ph-bell text-[24px]"></i>
+                        <i class="ph ph-bell text-heading"></i>
                         {move || unread.get().filter(|n| *n > 0).map(|n| view! {
                             <span class="absolute top-[2px] right-[3px] flex h-5 min-w-5 items-center justify-center rounded-full bg-brand px-1 text-micro font-bold leading-none text-ink">
                                 {if n > 99 { "99+".to_string() } else { n.to_string() }}

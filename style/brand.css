@@ -220,6 +220,8 @@
   --text-heading-xl: 32px;
   --text-display-sm: 38px;
   --text-display: 40px;
+  /* the landing page's headline on a computer (Netflix's "Unlimited films, series and more") */
+  --text-display-lg: 56px;
   --text-row: 23px;
   --text-heading-2xl: 30px;
   --text-icon-md: 34px;

@@ -249,28 +249,28 @@ fn TitleBody(details: DetailedMediaItem, season: RwSignal<u32>, tab: RwSignal<Ta
 
     view! {
         <div class="px-2.5 pt-0.5">
-            <h1 class="text-[28px] font-bold leading-[1.2] text-ink">{title.clone()}</h1>
+            <h1 class="text-heading-lg font-bold leading-[1.2] text-ink">{title.clone()}</h1>
             // year, age rating, length, picture quality
-            <div class="mt-2 flex items-center gap-2.5 text-[15px] text-ink-body">
+            <div class="mt-2 flex items-center gap-2.5 text-body text-ink-body">
                 {(!year.is_empty()).then(|| view! { <span>{year}</span> })}
                 <RatingBadge id=id is_tv=is_tv size="xs".to_string() />
                 {length.map(|l| view! { <span>{l}</span> })}
                 <span class="rounded-tick border border-ink/40 px-[5px] text-caption-sm leading-[16px] text-ink/90">"HD"</span>
             </div>
 
-            <a href=watch_url class="btn-pill btn-ink mt-2.5 h-12 w-full text-[17px]">
+            <a href=watch_url class="btn-pill btn-ink mt-2.5 h-12 w-full text-body-lg">
                 <i class="ph-fill ph-play text-2xl"></i>
                 <span>{if started { crate::i18n::t("media-resume") } else { crate::i18n::t("media-play") }}</span>
             </a>
 
-            <p class="mt-2 text-[16px] leading-[20.7px] text-ink">{details.overview.clone()}</p>
+            <p class="mt-2 text-body-md leading-[20.7px] text-ink">{details.overview.clone()}</p>
 
             {(!cast.is_empty()).then(|| {
                 let short = cast.iter().take(3).cloned().collect::<Vec<_>>().join(", ");
                 let all = cast.join(", ");
                 let more = cast.len() > 3;
                 view! {
-                    <p class="mt-2.5 text-[14px] leading-[17.6px] text-ink-body">
+                    <p class="mt-2.5 text-body-sm leading-[17.6px] text-ink-body">
                         {crate::i18n::t("title-starring")}" "
                         {move || if cast_open.get() { all.clone() } else { short.clone() }}
                         {move || (more && !cast_open.get()).then(|| view! {
@@ -281,7 +281,7 @@ fn TitleBody(details: DetailedMediaItem, season: RwSignal<u32>, tab: RwSignal<Ta
                 }
             })}
             {(!makers.is_empty()).then(|| view! {
-                <p class="text-[14px] leading-[17.6px] text-ink-body">
+                <p class="text-body-sm leading-[17.6px] text-ink-body">
                     {if is_tv { crate::i18n::t("title-creators") } else { crate::i18n::t("title-directors") }}" "{makers.join(", ")}
                 </p>
             })}
@@ -289,13 +289,13 @@ fn TitleBody(details: DetailedMediaItem, season: RwSignal<u32>, tab: RwSignal<Ta
             // My List, Rate and Share: an icon over its label, 96 px wide and 8 px apart from 14 px in, as in the app
             <div class="mt-4 flex items-start gap-2 ps-1">
                 <button type="button" on:click=toggle_list class="flex w-24 flex-col items-center gap-2.5 py-2 text-ink cursor-pointer active:scale-95 transition-transform">
-                    <i class=move || if in_list.get() { "ph-bold ph-check text-[22px]" } else { "ph-bold ph-plus text-[22px]" }></i>
-                    <span class="text-[13px] text-ink-body">{crate::i18n::t("my-list")}</span>
+                    <i class=move || if in_list.get() { "ph-bold ph-check text-title-md" } else { "ph-bold ph-plus text-title-md" }></i>
+                    <span class="text-label text-ink-body">{crate::i18n::t("my-list")}</span>
                 </button>
                 <div class="relative">
                     <button type="button" on:click=move |_| rate_open.update(|o| *o = !*o) class="flex w-24 flex-col items-center gap-2.5 py-2 text-ink cursor-pointer active:scale-95 transition-transform">
                         {move || view! { <RatingIcon rating=rating.get() size=22 mask_color="var(--color-void)".to_string() /> }}
-                        <span class="text-[13px] text-ink-body">{move || if rating.get().is_some() { crate::i18n::t("rating-rated") } else { crate::i18n::t("action-buttons-rate") }}</span>
+                        <span class="text-label text-ink-body">{move || if rating.get().is_some() { crate::i18n::t("rating-rated") } else { crate::i18n::t("action-buttons-rate") }}</span>
                     </button>
                     // the three choices in a bubble over the button
                     <Show when=move || rate_open.get()>
@@ -314,8 +314,8 @@ fn TitleBody(details: DetailedMediaItem, season: RwSignal<u32>, tab: RwSignal<Ta
                     </Show>
                 </div>
                 <button type="button" on:click=move |_| share_open.set(true) class="flex w-24 flex-col items-center gap-2.5 py-2 text-ink cursor-pointer active:scale-95 transition-transform">
-                    <i class="ph-bold ph-share-network text-[22px]"></i>
-                    <span class="text-[13px] text-ink-body">{crate::i18n::t("share-button")}</span>
+                    <i class="ph-bold ph-share-network text-title-md"></i>
+                    <span class="text-label text-ink-body">{crate::i18n::t("share-button")}</span>
                 </button>
             </div>
             <crate::components::media::share_sheet::ShareSheet open=share_open title=title.clone() url=share_url />
@@ -343,7 +343,7 @@ fn TabButton(label: String, me: Tab, tab: RwSignal<Tab>) -> impl IntoView {
         <button
             type="button"
             on:click=move |_| tab.set(me)
-            class=move || format!("relative flex h-12 items-center px-3 text-[16px] font-bold cursor-pointer {}", if tab.get() == me { "text-ink" } else { "text-ink-soft" })
+            class=move || format!("relative flex h-12 items-center px-3 text-body-md font-bold cursor-pointer {}", if tab.get() == me { "text-ink" } else { "text-ink-soft" })
         >
             <span class="absolute inset-x-0 top-0 h-1 bg-brand transition-opacity" class=("opacity-0", move || tab.get() != me)></span>
             {label}
@@ -363,12 +363,12 @@ fn Episodes(series_id: u32, seasons: u32, season: RwSignal<u32>) -> impl IntoVie
         <div class="px-2.5 pt-1">
             {(seasons > 1).then(|| view! {
                 // round, as every dropdown here (owner, 2026-10-23)
-                <button type="button" on:click=move |_| menu_open.set(true) class="flex h-9 items-center gap-2 rounded-button bg-sheet ps-3.5 pe-3 text-[16px] font-medium text-ink cursor-pointer">
+                <button type="button" on:click=move |_| menu_open.set(true) class="flex h-9 items-center gap-2 rounded-button bg-sheet ps-3.5 pe-3 text-body-md font-medium text-ink cursor-pointer">
                     {move || crate::i18n::t_args("media-season-n", &[("n", fluent_bundle::FluentValue::from(season.get() as i64))])}
                     <i class="ph-fill ph-caret-down text-sm opacity-80"></i>
                 </button>
             })}
-            {(seasons == 1).then(|| view! { <p class="py-2 text-[16px] font-bold text-ink">{crate::i18n::t_args("media-season-n", &[("n", fluent_bundle::FluentValue::from(1))])}</p> })}
+            {(seasons == 1).then(|| view! { <p class="py-2 text-body-md font-bold text-ink">{crate::i18n::t_args("media-season-n", &[("n", fluent_bundle::FluentValue::from(1))])}</p> })}
             <Suspense fallback=|| view! { <crate::components::skeleton::EpisodeRowsSkeleton /> }>
                 <div class="mt-2">
                     {move || episodes.get().map(|list| list.into_iter().map(|ep| {
@@ -384,11 +384,11 @@ fn Episodes(series_id: u32, seasons: u32, season: RwSignal<u32>) -> impl IntoVie
                                         </span>
                                     </div>
                                     <div class="min-w-0 flex-1">
-                                        <p class="text-[16px] font-bold leading-tight text-ink">{format!("{}. {}", ep.episode_number, ep.name)}</p>
-                                        {ep.runtime.filter(|r| *r > 0).map(|r| view! { <p class="mt-0.5 text-[14px] text-ink-body">{format!("{r}m")}</p> })}
+                                        <p class="text-body-md font-bold leading-tight text-ink">{format!("{}. {}", ep.episode_number, ep.name)}</p>
+                                        {ep.runtime.filter(|r| *r > 0).map(|r| view! { <p class="mt-0.5 text-body-sm text-ink-body">{format!("{r}m")}</p> })}
                                     </div>
                                 </div>
-                                {(!ep.overview.is_empty()).then(|| view! { <p class="mt-2 text-[14px] leading-[18px] text-ink-body">{ep.overview.clone()}</p> })}
+                                {(!ep.overview.is_empty()).then(|| view! { <p class="mt-2 text-body-sm leading-[18px] text-ink-body">{ep.overview.clone()}</p> })}
                             </a>
                         }
                     }).collect_view())}
@@ -403,7 +403,7 @@ fn Episodes(series_id: u32, seasons: u32, season: RwSignal<u32>) -> impl IntoVie
                         <button
                             type="button"
                             on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); season.set(n); menu_open.set(false); }
-                            class=move || format!("px-6 py-3 cursor-pointer {}", if season.get() == n { "text-[22px] font-bold text-ink" } else { "text-[18px] text-ink-body" })
+                            class=move || format!("px-6 py-3 cursor-pointer {}", if season.get() == n { "text-title-md font-bold text-ink" } else { "text-title-sm text-ink-body" })
                         >
                             {crate::i18n::t_args("media-season-n", &[("n", fluent_bundle::FluentValue::from(n as i64))])}
                         </button>

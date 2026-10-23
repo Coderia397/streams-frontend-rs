@@ -43,9 +43,9 @@ pub fn NotificationsPage() -> impl IntoView {
                                     </Show>
                                     <img src=n.backdrop.clone() alt="" loading="lazy" class="aspect-video w-[113px] shrink-0 rounded-[4px] object-cover bg-raised" />
                                     <span class="min-w-0 flex-1">
-                                        <span class="block text-[17px] font-bold leading-snug text-ink">{n.headline.clone()}</span>
-                                        <span class="mt-0.5 block truncate text-[15px] text-ink-body">{n.body.clone()}</span>
-                                        <span class="mt-0.5 block text-[14px] text-ink-body">{n.relative_time.clone()}</span>
+                                        <span class="block text-body-lg font-bold leading-snug text-ink">{n.headline.clone()}</span>
+                                        <span class="mt-0.5 block truncate text-body text-ink-body">{n.body.clone()}</span>
+                                        <span class="mt-0.5 block text-body-sm text-ink-body">{n.relative_time.clone()}</span>
                                     </span>
                                 </button>
                             }

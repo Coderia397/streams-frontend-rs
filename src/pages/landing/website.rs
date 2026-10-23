@@ -152,8 +152,8 @@ fn FeatureCard(id: &'static str, #[prop(into)] title: String, #[prop(into)] desc
         // Netflix's reason card: 16 px corners and padding, a 149 degree navy to plum gradient, 24 px title, 16 px text at 70 % white
         <div class="relative flex min-h-[175px] flex-col justify-between overflow-hidden rounded-2xl bg-[linear-gradient(149deg,var(--color-reason-from)_0%,var(--color-reason-to)_96.86%)] p-4 group transition-all duration-(--motion-slow) md:min-h-[210px] lg:min-h-[318px]">
             <div>
-                <h3 class="mb-4 text-[20px] font-medium leading-tight text-ink md:text-[24px]">{title}</h3>
-                <p class="text-[16px] leading-normal text-ink/70">{desc}</p>
+                <h3 class="mb-4 text-title font-medium leading-tight text-ink md:text-heading">{title}</h3>
+                <p class="text-body-md leading-normal text-ink/70">{desc}</p>
             </div>
             <div class="mt-4 self-end opacity-90 transition-transform duration-(--motion-slow) group-hover:scale-110">
                 <FeatureIcon id=id />
@@ -200,11 +200,11 @@ pub fn WebsiteLanding() -> impl IntoView {
                     <div class="absolute inset-0 bg-linear-to-b from-void/60 via-void/20 to-void" />
                 </div>
                 <div class="relative z-10 mx-auto w-full max-w-[588px]">
-                    <h1 class="text-[32px] font-bold leading-tight drop-shadow-text md:text-[56px] md:leading-[70px]">
+                    <h1 class="text-heading-xl font-bold leading-tight drop-shadow-text md:text-display-lg md:leading-[70px]">
                         {crate::i18n::t("login-unlimited-films-series-and-more")}
                     </h1>
-                    <p class="mt-4 text-[18px] font-medium md:text-[20px]">{crate::i18n::t("auth-tick-free")}</p>
-                    <p class="mt-8 text-[16px] leading-6">{crate::i18n::t("login-ready-to-watch-enter-your")}</p>
+                    <p class="mt-4 text-title-sm font-medium md:text-title">{crate::i18n::t("auth-tick-free")}</p>
+                    <p class="mt-8 text-body-md leading-6">{crate::i18n::t("login-ready-to-watch-enter-your")}</p>
                     <div class="mt-4"><LandingForm email=hero_email set_email=set_hero_email on_submit=handle_get_started /></div>
                 </div>
                 // curved glow at the bottom of the picture wall
@@ -218,7 +218,7 @@ pub fn WebsiteLanding() -> impl IntoView {
 
             // Promo band
             <section class="mx-auto -mt-1 flex max-w-[1100px] flex-col gap-4 px-6 py-8 sm:flex-row sm:items-center md:px-12">
-                <i class="ph-fill ph-gift text-[3.5rem] text-brand-glow" aria-hidden="true"></i>
+                <i class="ph-fill ph-gift text-display-lg text-brand-glow" aria-hidden="true"></i>
                 <div class="flex flex-1 flex-col gap-4 rounded-card bg-linear-to-r from-brand-deep/60 to-void/60 p-5 sm:flex-row sm:items-center sm:justify-between">
                     <div>
                         <p class="text-body-md font-bold">{crate::pages::help::tr("landing-promo-title")}</p>
@@ -235,7 +235,7 @@ pub fn WebsiteLanding() -> impl IntoView {
 
             // More reasons to join
             <section class="bg-void px-6 py-10 md:px-12 md:py-16 xl:px-[148px]">
-                <h2 class="mb-6 text-[20px] font-medium md:text-[24px]">{crate::i18n::t("login-more-reasons")}</h2>
+                <h2 class="mb-6 text-title font-medium md:text-heading">{crate::i18n::t("login-more-reasons")}</h2>
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
                     <FeatureCard id="tv" title=crate::i18n::t("login-reason-screens-title") desc=crate::i18n::t_args("login-reason-screens-body", &[("brand", fluent_bundle::FluentValue::from(crate::brand::NAME))]) />
                     <FeatureCard id="stream" title=crate::i18n::t("login-reason-hd-title") desc=crate::i18n::t("login-reason-hd-body") />
@@ -246,15 +246,15 @@ pub fn WebsiteLanding() -> impl IntoView {
 
             // Frequently asked questions, answered from the help articles
             <section class="px-6 py-8 md:px-12 xl:px-[148px]">
-                <h2 class="mb-6 text-[20px] font-medium md:text-[24px]">{crate::i18n::t("landing-faq")}</h2>
+                <h2 class="mb-6 text-title font-medium md:text-heading">{crate::i18n::t("landing-faq")}</h2>
                 <div class="grid items-start gap-2 md:grid-cols-2 md:gap-x-8">
                     {faq.into_iter().map(|slug| view! {
                         <details class="group bg-faq-item">
-                            <summary class="flex min-h-[84px] cursor-pointer list-none items-center justify-between gap-4 p-6 text-[18px] hover:bg-faq-item-hover md:text-[24px]">
+                            <summary class="flex min-h-[84px] cursor-pointer list-none items-center justify-between gap-4 p-6 text-title-sm hover:bg-faq-item-hover md:text-heading">
                                 <span>{crate::pages::help::art(slug, "title")}</span>
                                 <i class="ph ph-plus text-heading transition-transform duration-(--motion-base) group-open:rotate-45" aria-hidden="true"></i>
                             </summary>
-                            <div class="border-t border-void p-6 text-[18px] leading-7 text-ink-soft md:text-[24px] md:leading-normal">
+                            <div class="border-t border-void p-6 text-title-sm leading-7 text-ink-soft md:text-heading md:leading-normal">
                                 <p>{crate::pages::help::art(slug, "summary")}</p>
                                 <a href=format!("/help/article/{slug}") class="mt-3 inline-block font-semibold underline underline-offset-2">{crate::i18n::t("landing-read-more")}</a>
                             </div>
@@ -265,7 +265,7 @@ pub fn WebsiteLanding() -> impl IntoView {
 
             // Bottom prompt
             <section class="flex w-full flex-col items-center bg-void px-6 py-14 text-center md:py-16">
-                <p class="mx-auto mb-4 max-w-[783px] text-[16px] leading-6">{crate::i18n::t("login-ready")}</p>
+                <p class="mx-auto mb-4 max-w-[783px] text-body-md leading-6">{crate::i18n::t("login-ready")}</p>
                 <div class="w-full max-w-[783px]"><LandingForm email=hero_email set_email=set_hero_email on_submit=handle_get_started /></div>
             </section>
 
@@ -286,11 +286,11 @@ fn LandingForm(email: ReadSignal<String>, set_email: WriteSignal<String>, on_sub
                 on:input=move |e| set_email.set(event_target_value(&e))
                 placeholder=crate::i18n::t("login-email-address")
                 aria-label=crate::i18n::t("auth-email")
-                class="h-14 w-full min-w-0 border border-scrim-edge bg-scrim-field px-4 text-[16px] text-ink transition-colors placeholder:text-ink/70 focus:border-ink focus:outline-none sm:flex-1"
+                class="h-14 w-full min-w-0 border border-scrim-edge bg-scrim-field px-4 text-body-md text-ink transition-colors placeholder:text-ink/70 focus:border-ink focus:outline-none sm:flex-1"
             />
             <button
                 type="submit"
-                class="btn-brand btn-pill btn-pill-xl text-[20px] sm:text-[24px]"
+                class="btn-brand btn-pill btn-pill-xl text-title sm:text-heading"
             >
                 {crate::i18n::t("login-get-started")}
                 <i class="ph-bold ph-caret-right" aria-hidden="true"></i>

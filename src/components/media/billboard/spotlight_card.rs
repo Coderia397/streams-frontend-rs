@@ -159,16 +159,16 @@ pub fn SpotlightCard(
                     })}
                     {if is_coming_soon && !coming_soon_label.is_empty() {
                         view! {
-                            <p class="text-ink-soft font-bold text-[18.5px] leading-tight">
+                            <p class="text-ink-soft font-bold text-title-sm leading-tight">
                                 {crate::i18n::t_args("media-coming", &[("when", fluent_bundle::FluentValue::from(coming_soon_label.clone()))])}
                             </p>
                         }.into_any()
                     } else {
-                        view! { <h3 class="text-ink-soft font-bold text-[18.5px] leading-tight">{crate::i18n::t(if is_tv { "new-hot-watch-series" } else { "new-hot-watch-film" })}</h3> }.into_any()
+                        view! { <h3 class="text-ink-soft font-bold text-title-sm leading-tight">{crate::i18n::t(if is_tv { "new-hot-watch-series" } else { "new-hot-watch-film" })}</h3> }.into_any()
                     }}
 
                     // Overview
-                    <p class="text-[16px] leading-[24px] text-ink-body font-normal line-clamp-4 flex-1">
+                    <p class="text-body-md leading-[24px] text-ink-body font-normal line-clamp-4 flex-1">
                         {overview}
                     </p>
 
@@ -178,7 +178,7 @@ pub fn SpotlightCard(
                             view! {
                                 <button
                                     on:click=on_toggle_list
-                                    class="flex items-center justify-center h-[51px] px-5 rounded-button bg-ink-soft text-chrome text-[18px] font-semibold gap-2.5 transition-all active:scale-95 w-fit"
+                                    class="flex items-center justify-center h-[51px] px-5 rounded-button bg-ink-soft text-chrome text-title-sm font-semibold gap-2.5 transition-all active:scale-95 w-fit"
                                 >
                                     {move || if is_in_my_list() {
                                         view! {
@@ -198,7 +198,7 @@ pub fn SpotlightCard(
                                 <div class="flex items-center gap-2">
                                     <button
                                         on:click=on_play_click
-                                        class="flex items-center justify-center h-[54px] px-5 rounded-button bg-ink-soft text-chrome text-[18px] font-semibold gap-2 transition-all active:scale-95"
+                                        class="flex items-center justify-center h-[54px] px-5 rounded-button bg-ink-soft text-chrome text-title-sm font-semibold gap-2 transition-all active:scale-95"
                                     >
                                         <i class="ph-fill ph-play text-xl text-chrome"></i>
                                         <span>{move || {

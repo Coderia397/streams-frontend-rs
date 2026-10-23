@@ -94,7 +94,7 @@ pub fn PhoneProfilePicker(
                                     }}
                                     {move || editing.get().then(|| view! { <span class="absolute inset-0 flex items-center justify-center bg-void/55"><i class="ph-bold ph-pencil-simple text-heading text-ink"></i></span> })}
                                 </span>
-                                <span class="flex max-w-full items-center gap-1 text-[17px] font-bold leading-tight text-ink">
+                                <span class="flex max-w-full items-center gap-1 text-body-lg font-bold leading-tight text-ink">
                                     <span class="truncate">{name}</span>
                                     {(locked && !editing.get_untracked()).then(|| view! { <i class="ph ph-lock-key text-body-md"></i> })}
                                 </span>
@@ -104,14 +104,14 @@ pub fn PhoneProfilePicker(
                     {move || (profiles.get().len() < 5).then(|| view! {
                         <button type="button" on:click=move |_| on_add.run(()) class="flex w-[100px] cursor-pointer flex-col items-center gap-[13px] focus:outline-none active:scale-95 transition-transform">
                             <span class="flex h-[72px] w-[72px] items-center justify-center rounded-[8px] bg-ink/15"><i class="ph ph-plus text-heading text-ink"></i></span>
-                            <span class="text-[17px] font-normal leading-tight text-ink">{crate::i18n::t("whos-watching-add-profile")}</span>
+                            <span class="text-body-lg font-normal leading-tight text-ink">{crate::i18n::t("whos-watching-add-profile")}</span>
                         </button>
                     })}
                     // Edit: a pencil on a 15 % white square (it takes the sheet's tint, as the app's), the label in regular weight
                     <Show when=move || !editing.get() && !manage>
                         <button type="button" on:click=move |_| on_manage.run(()) class="flex w-[100px] cursor-pointer flex-col items-center gap-[13px] focus:outline-none active:scale-95 transition-transform">
                             <span class="flex h-[72px] w-[72px] items-center justify-center rounded-[8px] bg-ink/15"><i class="ph ph-pencil-simple text-heading text-ink"></i></span>
-                            <span class="text-[17px] font-normal leading-tight text-ink">{crate::i18n::t("whos-watching-edit")}</span>
+                            <span class="text-body-lg font-normal leading-tight text-ink">{crate::i18n::t("whos-watching-edit")}</span>
                         </button>
                     </Show>
                 </div>

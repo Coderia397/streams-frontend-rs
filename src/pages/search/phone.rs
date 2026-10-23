@@ -63,7 +63,7 @@ fn SearchListRow(item: MediaItem) -> impl IntoView {
             <div class="relative w-[140.5px] flex-none aspect-video overflow-hidden rounded-field bg-card">
                 <img src=picture alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" draggable="false" />
             </div>
-            <span class="flex-1 min-w-0 text-[17px] font-bold leading-tight text-ink line-clamp-2">{title.clone()}</span>
+            <span class="flex-1 min-w-0 text-body-lg font-bold leading-tight text-ink line-clamp-2">{title.clone()}</span>
             <button on:click=play aria-label=crate::i18n::t("media-play") class="btn-circle btn-circle-sm">
                 <i class="ph-fill ph-play text-ink text-body-sm ms-px"></i>
             </button>
@@ -179,7 +179,7 @@ pub fn PhoneSearch(#[prop(into)] q: Signal<String>, results: Found, recommended:
             <div class="pt-[calc(60px+env(safe-area-inset-top))] px-3 pb-28 min-h-screen bg-void">
                 // Nothing typed: the recommendations, as a list
                 <Show when=move || q.get().trim().is_empty()>
-                    <h1 class="text-[20px] leading-[30px] font-bold text-ink mt-1.5 mb-[5px]">{crate::i18n::t("search-recommended")}</h1>
+                    <h1 class="text-title leading-[30px] font-bold text-ink mt-1.5 mb-[5px]">{crate::i18n::t("search-recommended")}</h1>
                     <Suspense fallback=move || view! { <crate::components::skeleton::ListSkeleton /> }>
                         {move || recommended.get().map(|items| match items {
                             Some(items) if !items.is_empty() => view! {

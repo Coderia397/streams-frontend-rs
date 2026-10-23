@@ -305,7 +305,7 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
                     <h1 class="mt-3 flex w-full items-center justify-center md:mt-6">
                         {move || match logo.get().flatten() {
                             Some(src) => view! { <img src=src alt=title_text class="max-h-[60px] max-w-[180px] object-contain drop-shadow-text md:max-h-[100px] md:max-w-full" /> }.into_any(),
-                            None => view! { <span class="text-[28px] font-black leading-tight drop-shadow-text md:text-[40px]">{title_text}</span> }.into_any(),
+                            None => view! { <span class="text-heading-lg font-black leading-tight drop-shadow-text md:text-display">{title_text}</span> }.into_any(),
                         }}
                     </h1>
                     <form on:submit=on_submit class="mt-3 flex w-full flex-col items-center md:mt-8">
@@ -316,13 +316,13 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
                             on:input=move |e| email.set(event_target_value(&e))
                             placeholder=t("login-email-address")
                             aria-label=t("auth-email")
-                            class="h-10 w-full border border-scrim-edge bg-scrim-field px-4 text-[16px] text-ink placeholder:text-ink/70 focus:border-ink focus:outline-none md:h-14"
+                            class="h-10 w-full border border-scrim-edge bg-scrim-field px-4 text-body-md text-ink placeholder:text-ink/70 focus:border-ink focus:outline-none md:h-14"
                         />
-                        <button type="submit" class="btn-brand btn-pill btn-pill-lg mt-2 h-10 w-[200px] md:mt-3 md:h-12 md:w-60 md:text-[18px]">
+                        <button type="submit" class="btn-brand btn-pill btn-pill-lg mt-2 h-10 w-[200px] md:mt-3 md:h-12 md:w-60 md:text-title-sm">
                             {t("login-get-started")}
                         </button>
                     </form>
-                    <p class="mt-2 text-[14px] md:text-[16px]">{t("title-free-line")}</p>
+                    <p class="mt-2 text-body-sm md:text-body-md">{t("title-free-line")}</p>
                 </div>
             </section>
 
@@ -332,7 +332,7 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
                     {move || details.get().map(|res| match res {
                         Some(d) => view! { <TitleBody details=d id=id is_tv=is_tv videos=videos play_video=play_video /> }.into_any(),
                         None => view! {
-                            <p class=format!("{CARD} mt-8 p-6 text-center text-[16px] md:mt-[52px]")>{t("info-modal-error-loading-details")}</p>
+                            <p class=format!("{CARD} mt-8 p-6 text-center text-body-md md:mt-[52px]")>{t("info-modal-error-loading-details")}</p>
                         }.into_any(),
                     })}
                 </Suspense>
@@ -343,7 +343,7 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
                     <img src=crate::pages::landing::wall("wide") alt="" class="absolute inset-0 h-full w-full object-cover opacity-40" />
                     <div class="absolute inset-0 bg-linear-to-r from-void/80 to-void/30"></div>
                     <div class="relative flex flex-col gap-4 p-6 md:flex-row md:items-center md:justify-between md:px-6">
-                        <p class="text-[20px] font-bold md:text-[24px]">{t("login-unlimited-films-series-and-more")}</p>
+                        <p class="text-title font-bold md:text-heading">{t("login-unlimited-films-series-and-more")}</p>
                         <a href="/" class="btn-glass btn-pill btn-pill-sm w-fit shrink-0">{t("landing-learn-more")}</a>
                     </div>
                 </section>
@@ -360,7 +360,7 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
                 class=("opacity-0", move || !show_join.get())
                 class=("translate-y-4", move || !show_join.get())
             >
-                <button type="button" on:click=move |_| go_signup.run(()) class="btn-brand btn-pill btn-pill-lg w-60 text-[18px] shadow-2xl">
+                <button type="button" on:click=move |_| go_signup.run(()) class="btn-brand btn-pill btn-pill-lg w-60 text-title-sm shadow-2xl">
                     {t("login-get-started")}
                 </button>
             </div>
@@ -371,9 +371,9 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
 /// The page's cards (summary, episodes, More Details): the shared `.surface-card` in style/components.css.
 const CARD: &str = "surface-card";
 /// A jump link: 14 px, 70 % white, 41 px tall.
-const JUMP_LINK: &str = "shrink-0 cursor-pointer px-5 pb-3 pt-[11.2px] text-[14px] font-medium leading-[17.8px] text-ink/70 hover:text-ink";
+const JUMP_LINK: &str = "shrink-0 cursor-pointer px-5 pb-3 pt-[11.2px] text-body-sm font-medium leading-[17.8px] text-ink/70 hover:text-ink";
 /// A section heading: 20 px on a phone, 32 px from a tablet up, the line 1.25 of the size (Netflix Sans' normal line).
-const SECTION_HEADING: &str = "mb-2.5 text-[20px] font-bold leading-[1.25] md:mb-3.5 md:text-[32px]";
+const SECTION_HEADING: &str = "mb-2.5 text-title font-bold leading-[1.25] md:mb-3.5 md:text-heading-xl";
 
 /// Everything under the hero that needs the title's details: the summary card, trailers, episodes, more details and titles like it.
 #[component]
@@ -402,22 +402,22 @@ fn TitleBody(
     let vibe_heading = if is_tv { heading("media-this-show-is") } else { heading("media-this-movie-is") };
     // each dot travels with the item after it, so a wrapped line never ends on a dot
     let dot = || view! { <span class="text-ink/50" aria-hidden="true">"•"</span> };
-    let detail = "text-[14px] font-medium";
+    let detail = "text-body-sm font-medium";
 
     view! {
         // summary card
         <section class=format!("{CARD} mt-8 p-4 md:mt-[52px] md:px-8 md:py-6")>
-            <h2 class="text-[20px] font-medium leading-[1.25] md:text-[24px]">{title.clone()}</h2>
-            <p class="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] font-medium leading-[21px]">
+            <h2 class="text-title font-medium leading-[1.25] md:text-heading">{title.clone()}</h2>
+            <p class="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-sm font-medium leading-[21px]">
                 {(!year.is_empty()).then(|| view! { <span>{year.clone()}</span> })}
                 {(seasons > 0).then(|| view! { <span class="inline-flex items-center gap-2">{dot()}<span>{crate::i18n::t_args("media-seasons", &[("n", fluent_bundle::FluentValue::from(seasons as i64))])}</span></span> })}
                 <span class="inline-flex items-center gap-2">{dot()}<RatingBadge id=id is_tv=is_tv size="xs".to_string() /></span>
                 {first_genre.map(|g| view! { <span class="inline-flex items-center gap-2">{dot()}<span>{g}</span></span> })}
             </p>
             <div class="mt-3 md:grid md:grid-cols-[1fr_1px_1fr] md:gap-x-4">
-                <p class="text-[16px] leading-normal">{details.overview.clone()}</p>
+                <p class="text-body-md leading-normal">{details.overview.clone()}</p>
                 <div class="hidden bg-ink/20 md:block" aria-hidden="true"></div>
-                <div class="mt-4 space-y-1 text-[14px] leading-[21px] md:mt-0">
+                <div class="mt-4 space-y-1 text-body-sm leading-[21px] md:mt-0">
                     {(!starring.is_empty()).then(|| view! { <p><span class="font-medium">{t("title-starring")}" "</span>{starring}</p> })}
                     {(!creators.is_empty()).then(|| view! { <p><span class="font-medium">{t("title-creators")}" "</span>{creators}</p> })}
                 </div>
@@ -444,8 +444,8 @@ fn TitleBody(
                                         <img src=format!("https://i.ytimg.com/vi/{}/hqdefault.jpg", v.key) alt="" loading="lazy" class="h-full w-full object-cover transition-transform duration-(--motion-base) group-hover:scale-105" />
                                         <span class="btn-circle btn-circle-md absolute bottom-3 start-3"><i class="ph-fill ph-play"></i></span>
                                     </div>
-                                    <p class="mt-2 text-[13px] font-bold uppercase leading-none tracking-[0.16em] text-ink/70">{label}</p>
-                                    <p class="mt-[3px] line-clamp-2 text-[16px] font-medium leading-normal">{v.name.clone().unwrap_or_default()}</p>
+                                    <p class="mt-2 text-label font-bold uppercase leading-none tracking-[0.16em] text-ink/70">{label}</p>
+                                    <p class="mt-[3px] line-clamp-2 text-body-md font-medium leading-normal">{v.name.clone().unwrap_or_default()}</p>
                                 </button>
                             }
                         }).collect_view()}
@@ -492,13 +492,13 @@ fn Episodes(id: u32, seasons: u32) -> impl IntoView {
     view! {
         <section id="title-episodes" class="mt-8 md:mt-10">
             <div class="mb-2.5 flex flex-wrap items-center gap-4 md:mb-3.5">
-                <h2 class="text-[20px] font-bold leading-[1.25] md:text-[32px]">{t("media-episodes")}</h2>
+                <h2 class="text-title font-bold leading-[1.25] md:text-heading-xl">{t("media-episodes")}</h2>
                 {(seasons > 1).then(|| view! {
                     <div class="relative">
                         <select
                             aria-label=t("title-season-label")
                             on:change=move |e| { if let Ok(n) = event_target_value(&e).parse::<u32>() { season.set(n); } }
-                            class="h-10 cursor-pointer appearance-none border border-scrim-edge bg-scrim-field ps-3 pe-9 text-[16px] text-ink hover:border-ink"
+                            class="h-10 cursor-pointer appearance-none border border-scrim-edge bg-scrim-field ps-3 pe-9 text-body-md text-ink hover:border-ink"
                         >
                             {(1..=seasons).map(|n| view! {
                                 <option value=n.to_string() selected=move || season.get() == n class="bg-paper text-paper-ink">
@@ -518,12 +518,12 @@ fn Episodes(id: u32, seasons: u32) -> impl IntoView {
                                 <div class="relative aspect-video overflow-hidden rounded-xl bg-field-deep md:rounded-2xl">
                                     {ep.still_url("w300").map(|src| view! { <img src=src alt="" loading="lazy" class="h-full w-full object-cover" /> })}
                                     {ep.runtime.filter(|r| *r > 0).map(|r| view! {
-                                        <span class="absolute bottom-[9px] end-5 rounded-tick bg-void/70 px-1.5 py-0.5 text-[13px] font-medium text-ink/70">{format!("{r}m")}</span>
+                                        <span class="absolute bottom-[9px] end-5 rounded-tick bg-void/70 px-1.5 py-0.5 text-label font-medium text-ink/70">{format!("{r}m")}</span>
                                     })}
                                 </div>
                                 <div class="px-4 pb-4 pt-[18px]">
-                                    <p class="text-[16px] font-medium leading-6">{format!("{}. {}", ep.episode_number, ep.name)}</p>
-                                    <p class="mt-2 line-clamp-4 text-[14px] leading-[21px] text-ink/70">{ep.overview.clone()}</p>
+                                    <p class="text-body-md font-medium leading-6">{format!("{}. {}", ep.episode_number, ep.name)}</p>
+                                    <p class="mt-2 line-clamp-4 text-body-sm leading-[21px] text-ink/70">{ep.overview.clone()}</p>
                                 </div>
                             </div>
                         }).collect_view()}
@@ -626,12 +626,12 @@ fn Rail(children: Children, #[prop(optional)] inset: bool) -> impl IntoView {
             </div>
             <Show when=move || can_back.get()>
                 <button type="button" on:click=move |_| by(false) class=format!("{arrow} start-1 lg:-start-8") aria-label=t("vibe-row-scroll-left")>
-                    <i class="ph-bold ph-caret-left text-[16px] rtl:rotate-180"></i>
+                    <i class="ph-bold ph-caret-left text-body-md rtl:rotate-180"></i>
                 </button>
             </Show>
             <Show when=move || can_fwd.get()>
                 <button type="button" on:click=move |_| by(true) class=format!("{arrow} end-1 lg:-end-8") aria-label=t("vibe-row-scroll-right")>
-                    <i class="ph-bold ph-caret-right text-[16px] rtl:rotate-180"></i>
+                    <i class="ph-bold ph-caret-right text-body-md rtl:rotate-180"></i>
                 </button>
             </Show>
         </div>
