@@ -80,17 +80,18 @@ pub async fn fetch_movie_logo(id: u32, is_tv: bool) -> Result<Option<String>, gl
     Ok(logo)
 }
 
+/// The English logo, else one without text, else any. TMDB's answer carries every poster and backdrop too (26 KB a title on average,
+/// 183 titles on a cold Home), so it is asked for English and language-free pictures first, which holds a logo for 177 of 183
+/// titles at about half the size; the full list only when that one has no logo (measured 2026-10-23, note 115).
 async fn fetch_logo_from_tmdb(kind: &str, id: u32) -> Result<Option<String>, gloo_net::Error> {
-    let url = format!(
-        "{}/{}/{}/images?api_key={}",
-        TMDB_BASE_URL, kind, id, TMDB_API_KEY
-    );
-    let resp: TmdbImages = get_json(&url).await?;
-    
-    // Find english logo or first available
+    let url = format!("{}/{}/{}/images?api_key={}", TMDB_BASE_URL, kind, id, TMDB_API_KEY);
+    let mut resp: TmdbImages = get_json(&format!("{url}&include_image_language=en,null")).await?;
+    if resp.logos.is_empty() {
+        resp = get_json(&url).await?;
+    }
     let logo = resp.logos.iter().find(|l| l.iso_639_1.as_deref() == Some("en"))
+        .or_else(|| resp.logos.iter().find(|l| l.iso_639_1.is_none()))
         .or_else(|| resp.logos.first());
-        
     Ok(logo.map(|l| format!("{}/w300{}", TMDB_IMAGE_BASE, l.file_path)))
 }
 

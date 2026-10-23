@@ -8,10 +8,8 @@
 /assets/*
   Cache-Control: public, max-age=86400
 
-/*.wasm
-  Cache-Control: public, max-age=31536000, immutable
-
-# the app's script and stylesheet carry a hash of their content in the name, so a copy never goes stale
+# the app's wasm, script and stylesheet carry a hash of their content in the name, so a copy never goes stale
+# (one rule each: Pages joins the values of every rule that matches, so a second rule repeats the header)
 /streams-frontend-rs-*
   Cache-Control: public, max-age=31536000, immutable
 
