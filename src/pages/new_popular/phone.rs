@@ -1,11 +1,10 @@
-use wasm_bindgen::JsCast;
-use leptos::prelude::*;
-use crate::components::layout::Layout;
-use crate::components::media::row::Row;
-use crate::components::media::top_ten_row::TopTenRow;
-use crate::components::media::spotlight_card::SpotlightCard;
+//! New & Popular on phones (note 114): one long page of the app's tabs (Coming Soon, Everyone's Watching, Games, the Top 10s), the pills
+//! under the header jumping to a tab and following the scrolling, each title a large card that dims as it leaves the middle of the screen.
 use crate::components::layout::subnav::new_popular_phone::{NewPopularSubNavMobile, NewPopularTab};
-use crate::services::tmdb::{fetch_trending, fetch_top_rated, fetch_row_content};
+use crate::components::media::spotlight_card::SpotlightCard;
+use crate::services::tmdb::{fetch_row_content, fetch_top_rated, fetch_trending};
+use leptos::prelude::*;
+use wasm_bindgen::JsCast;
 
 /// The titles of one tab of the phone layout: the engine's row for the tab, TMDB when the engine cannot be reached.
 async fn tab_items(tab: NewPopularTab) -> Vec<crate::services::tmdb::MediaItem> {
@@ -123,7 +122,7 @@ fn dim_cards(doc: &web_sys::Document) {
 }
 
 #[component]
-pub fn NewPopularPage() -> impl IntoView {
+pub fn PhoneNewPopular() -> impl IntoView {
     let (active_tab, set_active_tab) = signal(NewPopularTab::ComingSoon);
 
     // the pill follows the scrolling: the last tab whose top has reached the pills is the one in use
@@ -165,17 +164,11 @@ pub fn NewPopularPage() -> impl IntoView {
         }
     });
 
-    // Desktop rows from the engine; the fixed TMDB rows below are the fallback
-    let desktop_feed = LocalResource::new(move || async move { crate::services::ai_engine::fetch_new_popular(None).await.unwrap_or_default() });
-
     view! {
-        <Layout>
-            <div class="relative min-h-screen bg-void md:bg-page">
-                // Top spacing under fixed navbar: the first row title 20 px under the nav, as on Netflix's My Netflix (its New & Popular is still the old page)
-                <div class="h-16 sm:h-20 md:h-[calc(var(--nav-h)+20px)]" />
-
-                // ── MOBILE: ONE LONG PAGE OF TABS (< md) ───────────────────
-                <div class="block md:hidden">
+        <div class="relative min-h-screen bg-void">
+            // under the phone header
+            <div class="h-16" />
+                <div>
                     <div class="mobile-pills-sticky">
                         <NewPopularSubNavMobile active_tab=active_tab on_tab_change=jump_to />
                     </div>
@@ -183,58 +176,6 @@ pub fn NewPopularPage() -> impl IntoView {
                         {SECTIONS.into_iter().map(|tab| if tab == NewPopularTab::Games { view! { <NewHotGames /> }.into_any() } else { view! { <NewHotSection tab=tab /> }.into_any() }).collect::<Vec<_>>()}
                     </div>
                 </div>
-
-                // ── DESKTOP DYNAMIC ROWS (>= md) ──────────────────────────
-                <main class="hidden md:block relative z-10 pb-16 rows-stack">
-                    <Suspense fallback=move || view! {
-                        <div class="space-y-6">
-                            <div class="h-40 bg-ink/[0.02] rounded-card animate-pulse mx-[var(--app-x,56px)]" />
-                            <div class="h-40 bg-ink/[0.02] rounded-card animate-pulse mx-[var(--app-x,56px)]" />
-                        </div>
-                    }>
-                        {move || desktop_feed.get().map(|rows| {
-                            if rows.is_empty() {
-                                view! { <FallbackRows /> }.into_any()
-                            } else {
-                                rows.into_iter().map(|r| {
-                                    let row_title = r.display_title();
-                                    let media_items = r.to_media_items();
-                                    if r.is_top_ten() {
-                                        let kind = if r.items.first().is_some_and(|i| i.is_tv()) { "tv" } else { "movie" };
-                                        view! { <TopTenRow title=row_title kind=kind.to_string() items=Some(media_items) /> }.into_any()
-                                    } else {
-                                        view! {
-                                            <crate::components::media::vibe_row::VibeRow
-                                                title=row_title
-                                                tagline=r.tagline.clone()
-                                                mood_pills=r.mood_pills.clone()
-                                                items=media_items
-                                            />
-                                        }.into_any()
-                                    }
-                                }).collect::<Vec<_>>().into_any()
-                            }
-                        })}
-                    </Suspense>
-                </main>
-            </div>
-        </Layout>
-    }
-}
-
-/// The page as it was before the engine served it: fixed TMDB rows, shown only when the engine cannot be reached.
-#[component]
-fn FallbackRows() -> impl IntoView {
-    view! {
-        <TopTenRow title=crate::i18n::t("new-popular-top-10-films-in-the") kind="movie" />
-        <TopTenRow title=crate::i18n::t("new-popular-top-10-series-in-the") kind="tv" />
-        <Row title=crate::i18n::t("new-popular-newly-added-to-the-collection") endpoint="/movie/now_playing" kind="movie" />
-        <Row title=crate::i18n::t("new-popular-worth-the-wait") sort_by="vote_average.desc" extra_params="&vote_count.gte=1000" kind="movie" />
-        <Row title=crate::i18n::t("new-popular-rising-stars-under-the-radar") sort_by="popularity.desc" extra_params="&vote_count.lte=2500&vote_count.gte=150&vote_average.gte=7.0" kind="movie" />
-        <Row title=crate::i18n::t("new-popular-the-best-of-2026-so") sort_by="vote_average.desc" extra_params="&primary_release_date.gte=2025-01-01&vote_count.gte=80" kind="movie" />
-        <Row title=crate::i18n::t("new-popular-new-series-everyone-is-watching") endpoint="/trending/tv/week" kind="tv" />
-        <Row title=crate::i18n::t("new-popular-the-films-everyone-is-discussing") endpoint="/trending/movie/week" kind="movie" />
-        <Row title=crate::i18n::t("new-popular-coming-to-the-collection-soon") endpoint="/movie/upcoming" kind="movie" />
-        <Row title=crate::i18n::t("new-popular-new-and-acclaimed") sort_by="vote_average.desc" extra_params="&vote_count.gte=400&primary_release_date.gte=2024-01-01" kind="movie" />
+        </div>
     }
 }
