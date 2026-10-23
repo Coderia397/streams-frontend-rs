@@ -3,6 +3,8 @@
 //! for the move from the first product name).
 
 pub const ACTIVE_PROFILE: &str = "streams_active_profile";
+/// When this browser was last used (milliseconds): a long time away brings back Who's watching (services/profile_gate.rs).
+pub const LAST_SEEN: &str = "streams_last_seen";
 pub const PROFILES: &str = "streams_profiles";
 pub const PREVIEW_MUTED: &str = "streams_preview_muted";
 pub const SESSION_ID: &str = "streams_session_id";

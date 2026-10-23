@@ -362,8 +362,8 @@ fn Episodes(series_id: u32, seasons: u32, season: RwSignal<u32>) -> impl IntoVie
     view! {
         <div class="px-2.5 pt-1">
             {(seasons > 1).then(|| view! {
-                // radius: a dropdown chip, 12 px corners as the phone's other dropdown chips (note 116)
-                <button type="button" on:click=move |_| menu_open.set(true) class="flex h-9 items-center gap-2 rounded-chip-inner bg-sheet ps-3.5 pe-3 text-[16px] font-medium text-ink cursor-pointer">
+                // round, as every dropdown here (owner, 2026-10-23)
+                <button type="button" on:click=move |_| menu_open.set(true) class="flex h-9 items-center gap-2 rounded-button bg-sheet ps-3.5 pe-3 text-[16px] font-medium text-ink cursor-pointer">
                     {move || crate::i18n::t_args("media-season-n", &[("n", fluent_bundle::FluentValue::from(season.get() as i64))])}
                     <i class="ph-fill ph-caret-down text-sm opacity-80"></i>
                 </button>

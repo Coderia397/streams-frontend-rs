@@ -32,6 +32,8 @@ pub fn App() -> impl IntoView {
     crate::form::start();
     crate::store::provide_ui_store();
     crate::store::provide_profile_store();
+    // Who's watching again after a while away (shorter on a computer than on a phone)
+    crate::services::profile_gate::start(crate::store::use_profile_store());
     crate::store::provide_library_store();
     crate::store::provide_watch_store();
     crate::consent::provide_ui();

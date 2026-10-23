@@ -7,4 +7,5 @@ pub mod rating;
 pub mod notifications;
 pub mod trailer_resolver;
 pub mod unplayable;
+pub mod profile_gate;
 pub mod sync;

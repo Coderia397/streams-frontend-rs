@@ -83,8 +83,8 @@ pub fn CategorySubNavMobile(
                     <button
                         on:click=move |_| set_genre_menu_open.update(|o| *o = !*o)
                         aria-haspopup="listbox"
-                        // radius: a dropdown chip, 12 px corners as in Netflix's Android app (43 px high, 40 % white edge; note 116)
-                        class="flex items-center gap-3 h-[43px] ps-5 pe-4 rounded-chip-inner border border-ink/40 bg-transparent text-title font-medium leading-none whitespace-nowrap active:scale-95 transition-transform cursor-pointer text-ink"
+                        // Netflix's Android app: 43 px high with a 40 % white edge (note 116); round, as every dropdown here (owner, 2026-10-23)
+                        class="flex items-center gap-3 h-[43px] ps-5 pe-4 rounded-button border border-ink/40 bg-transparent text-title font-medium leading-none whitespace-nowrap active:scale-95 transition-transform cursor-pointer text-ink"
                     >
                         <span>{move || active_genre_label.get()}</span>
                         <i class="ph-fill ph-caret-down text-base opacity-80"></i>
