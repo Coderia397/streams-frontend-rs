@@ -118,6 +118,12 @@ pub fn TrailerPlayer(
     #[prop(optional, into)] class: Option<String>,
 ) -> impl IntoView {
     let (is_frame_ready, set_is_frame_ready) = signal(false);
+    // YouTube said the video cannot play here (removed, private, not allowed in embeds or in this country): the frame stays hidden, so its
+    // error page ("Video unavailable") never shows over the picture
+    let (failed, set_failed) = signal(false);
+    // a message has come from this player's frame since the video was set: its messages decide when it shows
+    let heard = StoredValue::new(false);
+    let reveal_timer = StoredValue::new_local(None::<leptos::leptos_dom::helpers::TimeoutHandle>);
     let (has_ever_started, set_has_ever_started) = signal(is_playing.get_untracked());
     let (is_tab_hidden, set_is_tab_hidden) = signal(false);
     let (was_playing_before_tab_hidden, set_was_playing_before_tab_hidden) = signal(false);
@@ -164,6 +170,8 @@ pub fn TrailerPlayer(
         if k != prev {
             last_key.set_value(k.clone());
             set_is_frame_ready.set(false);
+            set_failed.set(false);
+            heard.set_value(false);
             last_tracked_time.set_value(0.0);
             has_initial_seek_done.set_value(false);
             playback_anchor_sec.set_value(0.0);
@@ -388,29 +396,33 @@ pub fn TrailerPlayer(
     });
 
     // ── Safety Fallback Timer for Frame Visibility ──────────────────────────
-    // If YouTube postMessage is delayed or blocked by browser cross-origin policy,
-    // ensure is_frame_ready becomes true after 1200ms so video is visible and never stuck black
+    // When no message at all has come from the frame after 1.2 s (the browser blocks them), the frame is shown anyway so the video is never
+    // stuck behind the picture. Once the frame talks, its messages decide: a video that cannot play sends an error and no time, and stays
+    // hidden. The framework's timer, cleared when the video changes or the player goes (the old one ran on after both).
     Effect::new(move |_| {
         let playing = is_playing.get();
         let has_key = video_key.get().is_some();
+        reveal_timer.update_value(|t| if let Some(h) = t.take() { h.clear() });
         if playing && has_key {
             let on_ready_cb = on_ready;
-            if let Some(win) = web_sys::window() {
-                let cb = Closure::once_into_js(move || {
-                    set_is_frame_ready.set(true);
+            let handle = leptos::leptos_dom::helpers::set_timeout_with_handle(
+                move || {
+                    if heard.try_get_value() != Some(false) || failed.try_get_untracked() != Some(false) {
+                        return;
+                    }
+                    set_is_frame_ready.try_set(true);
                     if let Some(cb) = on_ready_cb {
                         cb.run(());
                     }
-                });
-                let _ = win.set_timeout_with_callback_and_timeout_and_arguments_0(
-                    cb.as_ref().unchecked_ref(),
-                    1200,
-                );
-            }
+                },
+                std::time::Duration::from_millis(1200),
+            );
+            reveal_timer.set_value(handle.ok());
         } else {
             set_is_frame_ready.set(false);
         }
     });
+    on_cleanup(move || reveal_timer.try_update_value(|t| if let Some(h) = t.take() { h.clear() }).unwrap_or(()));
 
     // ── YouTube iframe event listener (Ready, Playing, Ending, Outro-Cutoff, Time-Update) ─
     // one listener for the player's life (it went on the window for good before, so every player ever shown kept reading every message)
@@ -433,16 +445,34 @@ pub fn TrailerPlayer(
 
         let target_id = iframe_id_stored.get_value();
 
-        // only messages from this player's own frame: another player's, or any once this player's frame has gone, are not ours
-        let own = web_sys::window()
+        // only messages from this player's own frame: another player's, or any once this player's frame has gone, are not ours. Compared as
+        // plain values: a frame from another site fails the Window type test (instanceof is false across origins), which made every YouTube
+        // message look foreign from 2026-10-23 (ae87281) until this check
+        let own: Option<wasm_bindgen::JsValue> = web_sys::window()
             .and_then(|w| w.document())
             .and_then(|d| d.get_element_by_id(&target_id))
             .and_then(|el| el.dyn_into::<web_sys::HtmlIFrameElement>().ok())
-            .and_then(|f| f.content_window());
+            .and_then(|f| f.content_window())
+            .map(Into::into);
         let Some(own) = own else { return };
-        match e.source().and_then(|src| src.dyn_into::<web_sys::Window>().ok()) {
-            Some(src) if src == own => {}
-            _ => return,
+        let source: Option<wasm_bindgen::JsValue> = e.source().map(Into::into);
+        if source.as_ref() != Some(&own) {
+            return;
+        }
+        heard.set_value(true);
+
+        // The video cannot play here (YouTube's codes 2, 5, 100, 101, 150, 153): hide the frame and end, so the picture stays. Checked
+        // first: "info":150 also reads as "info":1 to the loose checks below, which took an error for playback and unmuted it.
+        if s.contains(r#""onError""#) {
+            set_failed.set(true);
+            set_is_frame_ready.set(false);
+            if let Some(cb) = on_ended_cb {
+                cb.run(());
+            }
+            return;
+        }
+        if failed.get_untracked() {
+            return;
         }
 
         // Kick stalled player if stuck in CUED (5), UNSTARTED (-1), or onReady
@@ -513,7 +543,10 @@ pub fn TrailerPlayer(
         // Live Time Update Reporting (for seamless handoff to modal and back)
         if s.contains(r#""currentTime""#) {
             if let Some(cur) = parse_yt_number(&s, "currentTime") {
-                set_is_frame_ready.set(true);
+                // time that moves is playback (a video that cannot play reports 0)
+                if cur > 0.0 {
+                    set_is_frame_ready.set(true);
+                }
                 last_tracked_time.set_value(cur);
                 if cur > 0.0 {
                     playback_anchor_sec.set_value(cur);
@@ -546,8 +579,8 @@ pub fn TrailerPlayer(
     view! {
         <div
             class=format!("absolute inset-0 overflow-hidden pointer-events-none transition-opacity duration-(--motion-slowest) ease-in-out {}", extra_class)
-            class:opacity-100=move || is_frame_ready.get() && is_playing.get()
-            class:opacity-0=move || !is_frame_ready.get() || !is_playing.get()
+            class:opacity-100=move || is_frame_ready.get() && is_playing.get() && !failed.get()
+            class:opacity-0=move || !is_frame_ready.get() || !is_playing.get() || failed.get()
         >
             {move || {
                 if let Some(key) = video_key.get() {

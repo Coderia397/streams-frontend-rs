@@ -2,6 +2,10 @@ use leptos::prelude::*;
 use leptos_router::hooks::use_navigate;
 use crate::store::use_profile_store;
 
+/// A row of the menu and its icon (Netflix's redesigned menu, see the view).
+const ROW: &str = "flex h-12 w-full shrink-0 cursor-pointer items-center gap-3 rounded-menu-item px-3 text-start text-body-md text-ink transition-colors hover:bg-glass focus-visible:bg-glass";
+const ICON: &str = "ph flex h-6 w-6 shrink-0 items-center justify-center text-[24px] text-ink/70";
+
 #[component]
 pub fn NavbarProfileMenu() -> impl IntoView {
     let profile_store = use_profile_store();
@@ -81,12 +85,16 @@ pub fn NavbarProfileMenu() -> impl IntoView {
             node_ref=root
             class="relative flex items-center group/menu select-none"
         >
+            // the picture's button, Netflix's: 2 px around the picture, a grey tint while open or pointed at
             <button
                 type="button"
                 aria-haspopup="menu"
                 aria-expanded=move || is_open.get().to_string()
+                aria-label=crate::i18n::t("navbar-menu-current-profile")
                 on:click=move |_| set_is_open.update(|o| *o = !*o)
-                class="flex cursor-pointer items-center"
+                // radius: 6 px, Netflix's (a picture's frame, not a pill)
+                class="flex cursor-pointer items-center rounded-[6px] p-[2px] transition-colors hover:bg-glass/50"
+                class=("bg-glass/50", move || is_open.get())
             >
                 <div data-profile-avatar="1" class="w-8 h-8 rounded-control overflow-hidden">
                     {move || {
@@ -99,26 +107,27 @@ pub fn NavbarProfileMenu() -> impl IntoView {
                         }
                     }}
                 </div>
-                <i class="ph-fill ph-caret-down text-ink-silver text-fine ms-3 me-1 transition-transform duration-(--motion-base)"
+                <i class="ph-fill ph-caret-down ms-4 flex w-4 justify-center text-fine text-ink transition-transform duration-(--motion-base)"
                    class=("rotate-180", move || is_open.get())></i>
             </button>
 
-            // Dropdown menu, laid out like the Netflix one: 250px wide, 52px rows, 32px avatars and icons, a line above Sign out
+            // Netflix's redesigned menu (measured 2026-10-23): 250 wide, 6 px under the button, 12 px corners, 5 px inside; rows 240 x 48, 4 px apart,
+            // 8 px corners, grey on hover; pictures 32 px, icons 24 px at 70 % white, text 16 px 12 px after them; a thin grey line above Sign out
             <div
                 role="menu"
                 class=move || format!(
-                    "absolute top-[calc(100%+8px)] right-0 w-[250px] origin-top-right rounded-modal bg-field py-1 shadow-popover transition-all duration-(--motion-base) z-50 {}",
+                    "absolute top-[calc(100%+6px)] right-0 z-50 flex w-[250px] origin-top-right flex-col gap-1 rounded-menu bg-popover p-[5px] shadow-menu transition-all duration-(--motion-base) {}",
                     if is_open.get() { "opacity-100 scale-100 pointer-events-auto" } else { "opacity-0 scale-95 pointer-events-none" }
                 )
             >
                 {move || is_kids.get().then(|| view! {
                     // a Kids profile has a short menu: Switch profile, Help Centre, Sign out
-                    <button type="button" role="menuitem" on:click=move |_| switch_gate.run(()) class="flex w-full cursor-pointer items-center gap-3 px-4 py-2.5 text-start hover:underline">
-                        <span class="text-body-lg text-ink">{crate::i18n::t("set-menu-switch")}</span>
+                    <button type="button" role="menuitem" on:click=move |_| switch_gate.run(()) class=ROW>
+                        {crate::i18n::t("set-menu-switch")}
                     </button>
-                    <a role="menuitem" href="/help" class="flex w-full cursor-pointer items-center gap-3 px-4 py-2.5 text-start hover:underline">
-                        <i class="ph ph-question flex h-8 w-8 shrink-0 items-center justify-center text-heading-lg text-ink-silver" aria-hidden="true"></i>
-                        <span class="text-body-lg text-ink">{crate::i18n::t("footer-help")}</span>
+                    <a role="menuitem" href="/help" class=ROW>
+                        <i class=format!("{ICON} ph-question") aria-hidden="true"></i>
+                        <span>{crate::i18n::t("footer-help")}</span>
                     </a>
                 })}
                 <div class=move || if is_kids.get() { "hidden" } else { "contents" }>
@@ -133,7 +142,7 @@ pub fn NavbarProfileMenu() -> impl IntoView {
                         <button
                             type="button"
                             role="menuitem"
-                            class="flex w-full cursor-pointer items-center gap-3 px-4 py-2.5 text-start hover:underline"
+                            class=ROW
                             on:click=move |_| switch_profile(id.clone())
                         >
                             <span class="h-8 w-8 shrink-0 overflow-hidden rounded-control">
@@ -143,14 +152,14 @@ pub fn NavbarProfileMenu() -> impl IntoView {
                                     view! { <img src=avatar class="h-full w-full object-cover" alt=name.clone() /> }.into_any()
                                 }}
                             </span>
-                            <span class="truncate text-body-lg text-ink">{name}</span>
+                            <span class="truncate">{name}</span>
                         </button>
                     }
                 }).collect::<Vec<_>>()}
 
-                <button type="button" role="menuitem" on:click=manage_profiles class="flex w-full cursor-pointer items-center gap-3 px-4 py-2.5 text-start hover:underline">
-                    <i class="ph ph-pencil-simple flex h-8 w-8 shrink-0 items-center justify-center text-heading-lg text-ink-silver" aria-hidden="true"></i>
-                    <span class="text-body-lg text-ink">{crate::i18n::t("profile-manage")}</span>
+                <button type="button" role="menuitem" on:click=manage_profiles class=ROW>
+                    <i class=format!("{ICON} ph-pencil-simple") aria-hidden="true"></i>
+                    <span>{crate::i18n::t("profile-manage")}</span>
                 </button>
 
                 <button type="button" role="menuitem" on:click=move |_| {
@@ -158,9 +167,9 @@ pub fn NavbarProfileMenu() -> impl IntoView {
                         // the transfer screen of the profile in use (the same page the profile settings open)
                         let id = active_profile_id.get_untracked().unwrap_or_default();
                         nav_to_transfer(&format!("/settings/profile/{id}/transfer"), Default::default());
-                    } class="flex w-full cursor-pointer items-center gap-3 px-4 py-2.5 text-start hover:underline">
-                    <i class="ph ph-user-switch flex h-8 w-8 shrink-0 items-center justify-center text-heading-lg text-ink-silver" aria-hidden="true"></i>
-                    <span class="text-body-lg text-ink">{crate::i18n::t("profile-transfer")}</span>
+                    } class=ROW>
+                    <i class=format!("{ICON} ph-user-switch") aria-hidden="true"></i>
+                    <span>{crate::i18n::t("profile-transfer")}</span>
                 </button>
 
                 <button
@@ -170,10 +179,10 @@ pub fn NavbarProfileMenu() -> impl IntoView {
                         set_is_open.set(false);
                         nav_to_account("/settings/account", Default::default());
                     }
-                    class="flex w-full cursor-pointer items-center gap-3 px-4 py-2.5 text-start hover:underline"
+                    class=ROW
                 >
-                    <i class="ph ph-user flex h-8 w-8 shrink-0 items-center justify-center text-heading-lg text-ink-silver" aria-hidden="true"></i>
-                    <span class="text-body-lg text-ink">{crate::i18n::t("help-ui-account")}</span>
+                    <i class=format!("{ICON} ph-user") aria-hidden="true"></i>
+                    <span>{crate::i18n::t("help-ui-account")}</span>
                 </button>
 
                 <button
@@ -183,20 +192,19 @@ pub fn NavbarProfileMenu() -> impl IntoView {
                         set_is_open.set(false);
                         nav_to_help("/help", Default::default());
                     }
-                    class="flex w-full cursor-pointer items-center gap-3 px-4 py-2.5 text-start hover:underline"
+                    class=ROW
                 >
-                    <i class="ph ph-question flex h-8 w-8 shrink-0 items-center justify-center text-heading-lg text-ink-silver" aria-hidden="true"></i>
-                    <span class="text-body-lg text-ink">{crate::i18n::t("footer-help")}</span>
+                    <i class=format!("{ICON} ph-question") aria-hidden="true"></i>
+                    <span>{crate::i18n::t("footer-help")}</span>
                 </button>
 
                 </div>
 
                 // Sign out
-                <div class="mt-1 border-t border-ink/15">
-                    <button type="button" role="menuitem" on:click=logout class="w-full cursor-pointer px-4 py-4 text-start text-body-lg text-ink hover:underline">
-                        {crate::i18n::t_args("profile-sign-out", &[("brand", fluent_bundle::FluentValue::from(crate::brand::NAME))])}
-                    </button>
-                </div>
+                <div role="separator" class="-mx-[5px] h-px shrink-0 bg-glass/50"></div>
+                <button type="button" role="menuitem" on:click=logout class=ROW>
+                    {crate::i18n::t_args("profile-sign-out", &[("brand", fluent_bundle::FluentValue::from(crate::brand::NAME))])}
+                </button>
             </div>
         </div>
     }
