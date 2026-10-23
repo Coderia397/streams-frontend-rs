@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
-use super::movie_card::MovieCard;
+use crate::components::media::movie_card::MovieCard;
 
 fn set_timeout_ms<F: FnOnce() + 'static>(cb: F, ms: i32) {
     if let Some(window) = web_sys::window() {

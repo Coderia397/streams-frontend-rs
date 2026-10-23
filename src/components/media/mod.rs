@@ -1,29 +1,18 @@
-pub mod row;
-pub mod row_scroll;
-pub mod movie_card;
-pub mod hero;
-pub mod info_modal;
-pub mod top_ten_row;
-pub mod top_ten_numerals;
-pub mod movie_card_popup;
-pub mod movie_card_badges;
-pub mod movie_card_rating;
-pub mod hero_skeleton;
-pub mod info_modal_episodes;
-pub mod info_modal_recommendations;
-pub mod tooltip_wrapper;
-pub mod share_sheet;
-pub mod continue_watching_options_sheet;
-pub mod mobile_hero;
-pub mod spotlight_card;
-pub mod continue_watching_row;
-pub mod action_buttons;
-pub mod vibe_row;
-pub mod collection_logo;
-pub mod collection_row;
-pub mod kids_banner;
-pub mod feed_row;
-pub mod spotlight_artwork;
-pub mod chip_icons;
-pub mod shelf_icons;
-pub mod title_strip;
+//! Everything that shows titles, grouped by kind. Each group's modules are re-exported here, so `media::info_modal` and
+//! `media::details::info_modal` name the same module and the paths used across the app keep working.
+
+pub mod buttons;
+pub mod cards;
+pub mod collections;
+pub mod details;
+pub mod billboard;
+pub mod icons;
+pub mod rows;
+
+pub use buttons::{action_buttons, tooltip_wrapper};
+pub use cards::{movie_card, movie_card_badges, movie_card_popup, movie_card_rating};
+pub use collections::{collection_logo, collection_row, kids_banner};
+pub use details::{info_modal, info_modal_episodes, info_modal_recommendations, share_sheet};
+pub use billboard::{hero, hero_skeleton, mobile_hero, spotlight_card, spotlight_artwork};
+pub use icons::{chip_icons, shelf_icons};
+pub use rows::{row, row_scroll, feed_row, top_ten_row, top_ten_numerals, continue_watching_row, continue_watching_options_sheet, vibe_row, title_strip};

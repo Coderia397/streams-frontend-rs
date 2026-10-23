@@ -1,7 +1,7 @@
-"""Writes src/components/media/top_ten_numerals.rs: the Top 10 numerals 1 to 10 as SVG paths cut from the site's Inter (weight 700), so they
+"""Writes src/components/media/rows/top_ten_numerals.rs: the Top 10 numerals 1 to 10 as SVG paths cut from the site's Inter (weight 700), so they
 look the same in every browser and on every system and never wait for the web font. Each single digit is squeezed to the same advance
 (0.6 of the box height, as the old textLength did), "10" to 1.08; the box leaves room for the outline, so nothing reaches past it.
-  uv run --with fonttools --with brotli python scripts/make_top_ten_numerals.py fonts/inter/inter-latin-wght-normal.woff2 src/components/media/top_ten_numerals.rs"""
+  uv run --with fonttools --with brotli python scripts/make_top_ten_numerals.py fonts/inter/inter-latin-wght-normal.woff2 src/components/media/rows/top_ten_numerals.rs"""
 import sys
 from fontTools.ttLib import TTFont
 from fontTools.varLib.instancer import instantiateVariableFont

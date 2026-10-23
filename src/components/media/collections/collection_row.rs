@@ -1,9 +1,9 @@
 use leptos::prelude::*;
 use crate::services::ai_engine::{engine_text, FeedRow};
-use super::movie_card::MovieCard;
-use super::collection_logo::{design_of, CollectionLogo, LogoFilters};
-use super::row_scroll::{page_target, Edge, EdgeButton};
-use super::kids_banner::{KidsBackdrop, KidsCollectionLogo};
+use crate::components::media::movie_card::MovieCard;
+use crate::components::media::collection_logo::{design_of, CollectionLogo, LogoFilters};
+use crate::components::media::row_scroll::{page_target, Edge, EdgeButton};
+use crate::components::media::kids_banner::{KidsBackdrop, KidsCollectionLogo};
 
 /// The page that lists a whole collection: the page of the genre the engine names (Halloween), or for a mood the numbered page of the collection (`/browse/genre/<n>?c=<id>`, the number
 /// is made from the id, as Netflix numbers its clusters).

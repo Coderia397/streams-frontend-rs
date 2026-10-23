@@ -3,7 +3,7 @@ use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
 use crate::services::tmdb::MediaItem;
 use crate::services::ai_engine::RowMore;
-use super::movie_card::MovieCard;
+use crate::components::media::movie_card::MovieCard;
 
 /// Titles asked for at a time once a row is paged near the end of what it shows.
 const MORE_ITEMS: usize = 48;

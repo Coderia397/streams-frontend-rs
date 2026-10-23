@@ -244,9 +244,9 @@ pub fn LogoGalleryPage() -> impl IntoView {
             <div class="mb-12 grid grid-cols-1 gap-6 xl:grid-cols-2">
                 {[("Spooky Season", "Friendly ghosts and silly monsters, fun and not frightening", 28u32), ("Besties and Buddies", "Friends who stick together, in good times and silly ones", 200), ("Shh, Secrets and Mysteries", "Hidden doors, clues and gentle mysteries", 265), ("Christmas Magic", "Snow, presents and festive songs", 140), ("All the Animals", "Lions, pups, penguins and plenty more", 95), ("For Little Ones", "Gentle shows and songs for the youngest viewers", 330)].into_iter().map(|(name, sentence, hue)| view! {
                     <div class="relative isolate flex min-h-[330px] items-center overflow-hidden rounded-card">
-                        <super::kids_banner::KidsBackdrop seed=hue />
+                        <crate::components::media::kids_banner::KidsBackdrop seed=hue />
                         <div class="relative flex w-[40%] flex-none flex-col items-center px-5 text-center">
-                            <super::kids_banner::KidsCollectionLogo text=name hue=hue />
+                            <crate::components::media::kids_banner::KidsCollectionLogo text=name hue=hue />
                             <p class="mt-3 rounded-full bg-white px-4 py-1 text-caption font-bold uppercase tracking-[0.2em] text-[#e30b15] shadow-md">{DEV_KIDS_BADGE}</p>
                             <p class="mt-4 max-w-[26ch] text-body leading-snug text-ink" style="font-family: 'Logo Kids','Fredoka',ui-rounded,sans-serif; font-weight: 500;">{sentence}</p>
                             <span class="mt-4 inline-flex h-10 items-center rounded-full bg-white px-6 text-body-md font-bold text-[#e30b15] shadow-lg">{DEV_EXPLORE_ALL}</span>

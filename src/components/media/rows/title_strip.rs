@@ -1,6 +1,6 @@
 //! A row of title cards with the page buttons of the other rows, for lists the app already holds (My List, trailers watched, liked titles).
-use super::movie_card::MovieCard;
-use super::row_scroll::{Edge, EdgeButton};
+use crate::components::media::movie_card::MovieCard;
+use crate::components::media::row_scroll::{Edge, EdgeButton};
 use crate::services::tmdb::MediaItem;
 use leptos::prelude::*;
 
@@ -18,7 +18,7 @@ pub fn TitleStrip(items: Vec<MediaItem>) -> impl IntoView {
     let page = Callback::new(move |forward: bool| {
         if let Some(el) = strip.get() {
             let (client, cur, total) = (el.client_width() as f64, el.scroll_left() as f64, el.scroll_width() as f64);
-            el.scroll_to_with_x_and_y(super::row_scroll::page_target(forward, cur, client, total, (client * 0.9).max(100.0)), 0.0);
+            el.scroll_to_with_x_and_y(crate::components::media::row_scroll::page_target(forward, cur, client, total, (client * 0.9).max(100.0)), 0.0);
             leptos::leptos_dom::helpers::set_timeout(move || update.run(()), std::time::Duration::from_millis(600));
         }
     });

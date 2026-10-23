@@ -28,7 +28,7 @@ fn clear_timeout_id(id: Option<i32>) {
 /// (style/input.css).
 #[component]
 fn RankNumber(index: usize) -> impl IntoView {
-    let (width, path) = super::top_ten_numerals::NUMERALS[index.min(9)];
+    let (width, path) = crate::components::media::top_ten_numerals::NUMERALS[index.min(9)];
     let gradient_id = {
         use std::sync::atomic::{AtomicUsize, Ordering};
         static NEXT: AtomicUsize = AtomicUsize::new(0);
@@ -41,8 +41,8 @@ fn RankNumber(index: usize) -> impl IntoView {
          <defs><linearGradient id=\"{gradient_id}\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\
          <stop offset=\"0\" stop-color=\"#aaaaaa\"/><stop offset=\"0.5\" stop-color=\"#666666\"/><stop offset=\"1\" stop-color=\"#262626\"/></linearGradient></defs>\
          <path class=\"topten-num\" d=\"{path}\" stroke-width=\"{stroke}\" stroke-linejoin=\"round\" paint-order=\"stroke\"/></svg>",
-        height = super::top_ten_numerals::BOX_HEIGHT,
-        stroke = super::top_ten_numerals::STROKE,
+        height = crate::components::media::top_ten_numerals::BOX_HEIGHT,
+        stroke = crate::components::media::top_ten_numerals::STROKE,
     );
 
     view! {
