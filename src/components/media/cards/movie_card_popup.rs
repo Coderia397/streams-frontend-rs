@@ -188,11 +188,12 @@ pub fn MovieCardPopup(
 
     let (top, left) = calc_popup_position(&hovered_rect, &hover_position, initial_scroll, window_w, window_h);
 
-    let transform_origin = match hover_position.as_str() {
-        "left" => "top left",
-        "right" => "top right",
-        _ => "top center",
-    };
+    // The card grows out of the tile, as Netflix's (measured 2026-10-23: from the tile's size and place to its own over about 0.36 s): it starts
+    // scaled to the tile's width with its picture over the tile's picture, from its top left corner.
+    let width = popup_w(hovered_rect.width());
+    let start_scale = hovered_rect.width() / width;
+    let start_x = initial_scroll.0 + hovered_rect.left() - left;
+    let start_y = initial_scroll.1 + hovered_rect.top() - top;
 
     let title = movie.display_title();
     let backdrop = movie.backdrop_path.clone().or(movie.poster_path.clone());
@@ -279,10 +280,9 @@ pub fn MovieCardPopup(
         <Portal>
             <div
                 data-popup="true"
-                class="absolute z-(--z-screen) pointer-events-auto rounded-chip overflow-hidden bg-raised text-ink shadow-chip animate-in fade-in zoom-in-95 duration-(--motion-base)"
+                class="absolute z-(--z-screen) pointer-events-auto rounded-chip overflow-hidden bg-raised text-ink shadow-chip animate-in duration-[360ms]"
                 style=format!(
-                    "width: {}px; top: {}px; left: {}px; transform-origin: {};",
-                    popup_w(hovered_rect.width()), top, left, transform_origin
+                    "width: {width}px; top: {top}px; left: {left}px; transform-origin: 0 0; --enter-x: {start_x:.1}px; --enter-y: {start_y:.1}px; --enter-scale: {start_scale:.4};"
                 )
                 on:mouseenter=move |_| on_mouse_enter.run(())
                 on:mouseleave=move |_| on_mouse_leave.run(())
