@@ -137,7 +137,7 @@ fn Center() -> impl IntoView {
                     </div>
                 </div>
                 <div class="border-t border-paper-line px-5 py-4">
-                    <button on:click=move |_| ui.decide(personal.get_untracked()) class="rounded-control bg-brand px-6 py-3 text-body-sm font-bold text-ink hover:bg-brand-hover">
+                    <button on:click=move |_| ui.decide(personal.get_untracked()) class="rounded-button bg-brand px-6 py-3 text-body-sm font-bold text-ink hover:bg-brand-hover">
                         {tr("cookie-save")}
                     </button>
                 </div>
@@ -186,9 +186,9 @@ pub fn CookieManager() -> impl IntoView {
                     </button>
                 </div>
                 <div class="mt-4 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:gap-3">
-                    <button on:click=move |_| ui.open_center() class="rounded-control border border-paper-edge bg-paper px-3 py-3 text-fine font-bold hover:bg-paper-soft sm:px-5 sm:text-body-sm">{tr("cookie-learn")}</button>
-                    <button on:click=move |_| ui.decide(false) class="rounded-control bg-brand px-3 py-3 text-fine font-bold text-ink hover:bg-brand-hover sm:px-5 sm:text-body-sm">{tr("cookie-reject")}</button>
-                    <button on:click=move |_| ui.decide(true) class="rounded-control bg-brand px-3 py-3 text-fine font-bold text-ink hover:bg-brand-hover sm:px-5 sm:text-body-sm">{tr("cookie-accept")}</button>
+                    <button on:click=move |_| ui.open_center() class="rounded-button border border-paper-edge bg-paper px-3 py-3 text-fine font-bold hover:bg-paper-soft sm:px-5 sm:text-body-sm">{tr("cookie-learn")}</button>
+                    <button on:click=move |_| ui.decide(false) class="rounded-button bg-brand px-3 py-3 text-fine font-bold text-ink hover:bg-brand-hover sm:px-5 sm:text-body-sm">{tr("cookie-reject")}</button>
+                    <button on:click=move |_| ui.decide(true) class="rounded-button bg-brand px-3 py-3 text-fine font-bold text-ink hover:bg-brand-hover sm:px-5 sm:text-body-sm">{tr("cookie-accept")}</button>
                 </div>
             </div>
         </Show>

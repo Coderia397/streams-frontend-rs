@@ -112,7 +112,7 @@ pub fn ProfilePinPrompt(
             // Close button
             <button
                 on:click=move |_| on_cancel.run(())
-                class="absolute top-6 right-6 w-9 h-9 rounded-full flex items-center justify-center text-ink/60 hover:text-ink hover:bg-ink/10 transition-colors cursor-pointer"
+                class="absolute top-6 right-6 btn-circle btn-circle-clear btn-circle-md text-ink/60 hover:text-ink"
                 aria-label=crate::i18n::t("action-buttons-close")
             >
                 <i class="ph-bold ph-x text-2xl"></i>
@@ -150,6 +150,7 @@ pub fn ProfilePinPrompt(
                     prop:value=move || digits.get().get(0).cloned().unwrap_or_default()
                     on:input=move |e| stored_input_digit.with_value(|f| f(0, event_target_value(&e)))
                     on:keydown=move |e| stored_keydown_digit.with_value(|f| f(0, e))
+                    // radius: a PIN digit box
                     class="w-12 h-14 sm:w-14 sm:h-16 bg-line border-2 border-ink/20 focus:border-ink rounded-field text-center text-ink text-2xl font-bold outline-none transition-all caret-transparent select-none"
                     class=("!border-danger", move || shake.get())
                 />
@@ -161,6 +162,7 @@ pub fn ProfilePinPrompt(
                     prop:value=move || digits.get().get(1).cloned().unwrap_or_default()
                     on:input=move |e| stored_input_digit.with_value(|f| f(1, event_target_value(&e)))
                     on:keydown=move |e| stored_keydown_digit.with_value(|f| f(1, e))
+                    // radius: a PIN digit box
                     class="w-12 h-14 sm:w-14 sm:h-16 bg-line border-2 border-ink/20 focus:border-ink rounded-field text-center text-ink text-2xl font-bold outline-none transition-all caret-transparent select-none"
                     class=("!border-danger", move || shake.get())
                 />
@@ -172,6 +174,7 @@ pub fn ProfilePinPrompt(
                     prop:value=move || digits.get().get(2).cloned().unwrap_or_default()
                     on:input=move |e| stored_input_digit.with_value(|f| f(2, event_target_value(&e)))
                     on:keydown=move |e| stored_keydown_digit.with_value(|f| f(2, e))
+                    // radius: a PIN digit box
                     class="w-12 h-14 sm:w-14 sm:h-16 bg-line border-2 border-ink/20 focus:border-ink rounded-field text-center text-ink text-2xl font-bold outline-none transition-all caret-transparent select-none"
                     class=("!border-danger", move || shake.get())
                 />
@@ -183,6 +186,7 @@ pub fn ProfilePinPrompt(
                     prop:value=move || digits.get().get(3).cloned().unwrap_or_default()
                     on:input=move |e| stored_input_digit.with_value(|f| f(3, event_target_value(&e)))
                     on:keydown=move |e| stored_keydown_digit.with_value(|f| f(3, e))
+                    // radius: a PIN digit box
                     class="w-12 h-14 sm:w-14 sm:h-16 bg-line border-2 border-ink/20 focus:border-ink rounded-field text-center text-ink text-2xl font-bold outline-none transition-all caret-transparent select-none"
                     class=("!border-danger", move || shake.get())
                 />
@@ -191,7 +195,7 @@ pub fn ProfilePinPrompt(
             // Cancel action button
             <button
                 on:click=move |_| on_cancel.run(())
-                class="px-6 py-2 border border-ink/30 text-ink/70 hover:text-ink hover:border-ink rounded-control text-sm font-semibold tracking-wider uppercase transition-colors cursor-pointer active:scale-95"
+                class="px-6 py-2 border border-ink/30 text-ink/70 hover:text-ink hover:border-ink rounded-button text-sm font-semibold tracking-wider uppercase transition-colors cursor-pointer active:scale-95"
             >
                 {crate::i18n::t("continue-watching-options-sheet-cancel")}
             </button>

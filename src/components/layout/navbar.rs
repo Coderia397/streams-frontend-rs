@@ -107,13 +107,13 @@ pub fn Navbar(
                 // Nav links — exact spacing and typography (Task 086)
                 // below 1024 px the tabs do not fit next to the search, bell and profile, so they sit in a Browse menu
                 <div class="relative ms-4 lg:hidden">
-                    <button type="button" on:click=move |_| set_browse_open.update(|o| *o = !*o) aria-haspopup="menu" aria-expanded=move || browse_open.get().to_string() class="inline-flex h-[40px] items-center gap-2 rounded-full px-4 text-body-md text-ink hover:bg-mute/40">
+                    <button type="button" on:click=move |_| set_browse_open.update(|o| *o = !*o) aria-haspopup="menu" aria-expanded=move || browse_open.get().to_string() class="inline-flex h-[40px] items-center gap-2 rounded-button px-4 text-body-md text-ink hover:bg-mute/40">
                         {crate::i18n::t("nav-browse")}
                         <i class="ph-fill ph-caret-down text-fine transition-transform duration-(--motion-base)" class=("rotate-180", move || browse_open.get())></i>
                     </button>
                     <Show when=move || browse_open.get()>
                         <div class="fixed inset-0 z-40" on:click=move |_| set_browse_open.set(false)></div>
-                        <ul role="menu" class="absolute start-0 top-[calc(100%+8px)] z-50 w-60 rounded-modal bg-field py-2 shadow-popover">
+                        <ul role="menu" class="absolute start-0 top-[calc(100%+8px)] z-50 w-60 rounded-menu bg-field py-2 shadow-popover">
                             {browse_items.clone().into_iter().filter(|(id, _, _)| *id != "games" || games_on()).map(|(_, label, href)| view! {
                                 <li role="none"><a role="menuitem" href=href on:click=move |_| set_browse_open.set(false) class="block px-5 py-3 text-body-md text-ink hover:bg-ink/10">{crate::i18n::t(label)}</a></li>
                             }).collect::<Vec<_>>()}
@@ -163,7 +163,7 @@ pub fn Navbar(
                                         crate::components::profiles::switch_overlay::begin_switch(main);
                                     }
                                 }
-                                class="flex h-9 items-center rounded-control bg-ink px-4 text-label font-bold text-void select-none cursor-pointer hover:bg-ink/85 transition-colors"
+                                class="flex h-9 items-center rounded-button bg-ink px-4 text-label font-bold text-void select-none cursor-pointer hover:bg-ink/85 transition-colors"
                             >{crate::i18n::t("nav-exit-kids")}</button>
                         }.into_any()
                     } else if !p_store.profiles.get().iter().any(|p| p.is_kids) {
@@ -177,7 +177,7 @@ pub fn Navbar(
                                         crate::components::profiles::switch_overlay::begin_switch(kids);
                                     }
                                 }
-                                class="flex items-center gap-2 text-ink hover:text-ink transition-all select-none cursor-pointer group h-9 pl-0.5 pr-2 ml-1.5 rounded-field hover:bg-mute/40"
+                                class="flex items-center gap-2 text-ink hover:text-ink transition-all select-none cursor-pointer group h-9 pl-0.5 pr-2 ml-1.5 rounded-button hover:bg-mute/40"
                                 title=crate::i18n::t("navbar-switch-to-kids-profile")
                             >
                                 <div class="w-8 h-8 rounded-control overflow-hidden flex items-center justify-center">

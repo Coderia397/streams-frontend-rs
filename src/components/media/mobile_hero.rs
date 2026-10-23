@@ -185,7 +185,7 @@ pub fn MobileHero(
                         <button
                             type="button"
                             on:click=handle_play
-                            class="btn-ink flex-1 flex items-center justify-center h-12 rounded-full text-lg gap-2 transition-all active:scale-95"
+                            class="btn-ink flex-1 flex items-center justify-center h-12 text-lg gap-2 transition-all active:scale-95"
                         >
                             <i class="ph-fill ph-play text-2xl"></i>
                             <span>{move || {
@@ -203,7 +203,7 @@ pub fn MobileHero(
                         <button
                             type="button"
                             on:click=toggle_my_list
-                            class="btn-glass flex-1 flex items-center justify-center h-12 rounded-full text-lg gap-2 transition-all active:scale-95"
+                            class="btn-glass flex-1 flex items-center justify-center h-12 text-lg gap-2 transition-all active:scale-95"
                         >
                             <i class=move || if is_added.get() { "ph-bold ph-check text-2xl" } else { "ph-bold ph-plus text-2xl" }></i>
                             <span>{crate::i18n::t("my-list")}</span>

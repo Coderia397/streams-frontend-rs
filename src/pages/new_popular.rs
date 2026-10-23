@@ -53,6 +53,7 @@ fn NewHotGames() -> impl IntoView {
     view! {
         <section id="nh-games" class="space-y-6 scroll-mt-[150px]">
             {move || games.get().unwrap_or_default().into_iter().map(|g| view! {
+                // radius: a game card
                 <a href=g.url.clone() target="_blank" rel="noopener" class="block bg-void border border-ink/25 rounded-pill overflow-hidden">
                     <div class="aspect-video bg-card"><img src=g.image.clone() alt="" class="w-full h-full object-cover" loading="lazy" /></div>
                     <div class="px-5 pb-6 pt-4 flex flex-col gap-2">

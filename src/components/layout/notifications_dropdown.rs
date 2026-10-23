@@ -137,7 +137,7 @@ pub fn NotificationsDropdown() -> impl IntoView {
             // Bell trigger button
             <button
                 on:click=toggle_open
-                class="relative w-10 h-10 flex items-center justify-center rounded-full text-ink hover:bg-mute/40 active:scale-95 transition-colors cursor-pointer"
+                class="relative btn-circle btn-circle-clear btn-circle-md"
                 title=crate::i18n::t("notifications-dropdown-notifications")
                 aria-label=crate::i18n::t("notifications-dropdown-notifications")
             >
@@ -154,7 +154,7 @@ pub fn NotificationsDropdown() -> impl IntoView {
 
             // Dropdown panel
             <Show when=move || open.get()>
-                <div class="absolute right-0 top-[calc(100%+8px)] w-[360px] sm:w-[420px] max-h-[560px] overflow-y-auto bg-menu rounded-modal shadow-2xl z-50 scrollbar-hide">
+                <div class="absolute right-0 top-[calc(100%+8px)] w-[360px] sm:w-[420px] max-h-[560px] overflow-y-auto bg-menu rounded-menu shadow-2xl z-50 scrollbar-hide">
                     // Header
                     <div class="px-4 py-3">
                         <p class="text-ink font-bold text-body">{crate::i18n::t("notif-title")}</p>
@@ -183,7 +183,7 @@ pub fn NotificationsDropdown() -> impl IntoView {
                                     view! {
                                         <button
                                             on:click=move |_| on_select(on_click_notif.clone())
-                                            class="w-full flex items-start gap-3 px-3 py-3 text-left hover:bg-ink/[0.08] rounded-card mx-1 transition-colors cursor-pointer group"
+                                            class="w-full flex items-start gap-3 px-3 py-3 text-left hover:bg-ink/[0.08] rounded-menu-item mx-1 transition-colors cursor-pointer group"
                                         >
                                             // Backdrop thumbnail (16:9)
                                             <div class="w-[112px] h-[63px] rounded-field overflow-hidden bg-zinc-800 shrink-0">

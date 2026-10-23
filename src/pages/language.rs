@@ -140,7 +140,7 @@ pub fn BrowseLanguagePage() -> impl IntoView {
                             <div node_ref=pref_container_ref class="relative" >
                                 <button
                                     on:click=toggle_pref_dropdown
-                                    class=if kids { "flex items-center justify-between min-w-[125px] px-4 py-2 leading-none text-body-sm font-semibold tracking-[-0.2px] text-ink bg-ink/10 hover:bg-ink/20 border border-ink/20 backdrop-blur-md transition-all rounded-full active:scale-95 gap-x-2.5 cursor-pointer shadow-sm" } else { "flex h-[35px] items-center justify-between min-w-[100px] md:min-w-[224px] cursor-pointer select-none gap-x-2.5 border border-ink/55 bg-void px-3 text-label font-medium leading-none text-ink hover:border-ink md:text-select" }
+                                    class=if kids { "flex items-center justify-between min-w-[125px] px-4 py-2 leading-none text-body-sm font-semibold tracking-[-0.2px] text-ink bg-ink/10 hover:bg-ink/20 border border-ink/20 backdrop-blur-md transition-all rounded-button active:scale-95 gap-x-2.5 cursor-pointer shadow-sm" } else { "flex h-[35px] items-center justify-between min-w-[100px] md:min-w-[224px] cursor-pointer select-none gap-x-2.5 border border-ink/55 bg-void px-3 text-label font-medium leading-none text-ink hover:border-ink md:text-select" }
                                 >
                                     <span>{move || crate::i18n::t(selected_pref_type.get())}</span>
                                     <i class="ph-fill ph-caret-down text-fine text-ink/80 shrink-0 transition-transform duration-(--motion-base)"
@@ -160,9 +160,9 @@ pub fn BrowseLanguagePage() -> impl IntoView {
                                                                 set_pref_dropdown_open.set(false);
                                                             }
                                                             class=if is_selected {
-                                                                "w-full text-left px-3.5 py-1.5 text-label md:text-body-sm text-ink font-bold bg-ink/10 rounded-card cursor-pointer"
+                                                                "w-full text-left px-3.5 py-1.5 text-label md:text-body-sm text-ink font-bold bg-ink/10 rounded-menu-item cursor-pointer"
                                                             } else {
-                                                                "w-full text-left px-3.5 py-1.5 text-label md:text-body-sm text-ink-soft hover:text-ink hover:bg-ink/15 rounded-card transition-colors cursor-pointer"
+                                                                "w-full text-left px-3.5 py-1.5 text-label md:text-body-sm text-ink-soft hover:text-ink hover:bg-ink/15 rounded-menu-item transition-colors cursor-pointer"
                                                             }
                                                         >
                                                             {crate::i18n::t(t)}
@@ -181,7 +181,7 @@ pub fn BrowseLanguagePage() -> impl IntoView {
                             <div node_ref=lang_container_ref class="relative">
                                 <button
                                     on:click=toggle_lang_dropdown
-                                    class=if kids { "flex items-center justify-between min-w-[125px] px-4 py-2 leading-none text-body-sm font-semibold tracking-[-0.2px] text-ink bg-ink/10 hover:bg-ink/20 border border-ink/20 backdrop-blur-md transition-all rounded-full active:scale-95 gap-x-2.5 cursor-pointer shadow-sm" } else { "flex h-[35px] items-center justify-between min-w-[100px] md:min-w-[240px] cursor-pointer select-none gap-x-2.5 border border-ink/55 bg-void px-3 text-label font-medium leading-none text-ink hover:border-ink md:text-select" }
+                                    class=if kids { "flex items-center justify-between min-w-[125px] px-4 py-2 leading-none text-body-sm font-semibold tracking-[-0.2px] text-ink bg-ink/10 hover:bg-ink/20 border border-ink/20 backdrop-blur-md transition-all rounded-button active:scale-95 gap-x-2.5 cursor-pointer shadow-sm" } else { "flex h-[35px] items-center justify-between min-w-[100px] md:min-w-[240px] cursor-pointer select-none gap-x-2.5 border border-ink/55 bg-void px-3 text-label font-medium leading-none text-ink hover:border-ink md:text-select" }
                                 >
                                     <span>{active_label}</span>
                                     <i class="ph-fill ph-caret-down text-fine text-ink/80 shrink-0 transition-transform duration-(--motion-base)"
@@ -203,9 +203,9 @@ pub fn BrowseLanguagePage() -> impl IntoView {
                                                                 set_lang_dropdown_open.set(false);
                                                             }
                                                             class=if is_selected {
-                                                                "w-full text-left px-3.5 py-1.5 text-label md:text-body-sm text-ink font-bold bg-ink/10 rounded-card cursor-pointer"
+                                                                "w-full text-left px-3.5 py-1.5 text-label md:text-body-sm text-ink font-bold bg-ink/10 rounded-menu-item cursor-pointer"
                                                             } else {
-                                                                "w-full text-left px-3.5 py-1.5 text-label md:text-body-sm text-ink-soft hover:text-ink hover:bg-ink/15 rounded-card transition-colors cursor-pointer"
+                                                                "w-full text-left px-3.5 py-1.5 text-label md:text-body-sm text-ink-soft hover:text-ink hover:bg-ink/15 rounded-menu-item transition-colors cursor-pointer"
                                                             }
                                                         >
                                                             {label}

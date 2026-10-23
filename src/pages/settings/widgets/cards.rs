@@ -10,7 +10,7 @@ pub fn CollapsibleCard(#[prop(into)] title: String, #[prop(into)] show_label: St
         <section class="rounded-control border border-ink/20 px-[25px] py-[15px] shadow-sm">
             <div class="flex items-center justify-between">
                 <p class="text-body-md font-medium leading-5">{title}</p>
-                <button type="button" on:click=move |_| open.update(|o| *o = !*o) aria-expanded=move || open.get().to_string() aria-label=move || if open.get() { hide_label.get_value() } else { show_label.get_value() } class="flex h-8 w-8 items-center justify-center rounded-full hover:bg-ink/10">
+                <button type="button" on:click=move |_| open.update(|o| *o = !*o) aria-expanded=move || open.get().to_string() aria-label=move || if open.get() { hide_label.get_value() } else { show_label.get_value() } class="btn-circle btn-circle-clear btn-circle-sm">
                     <i class=move || if open.get() { "ph ph-minus text-body-md" } else { "ph ph-plus text-body-md" } aria-hidden="true"></i>
                 </button>
             </div>

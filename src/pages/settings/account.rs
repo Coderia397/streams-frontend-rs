@@ -33,7 +33,7 @@ fn SignInBanner() -> impl IntoView {
     account::session().is_none().then(|| view! {
         <div class="mb-8 rounded-card border border-ink/10 bg-ink/5 p-5 text-center">
             <p class="mb-4 text-body-md text-ink/70">{t("set-signin-needed")}</p>
-            <a href=routes::LOGIN class="btn-ink inline-block rounded-control px-8 py-3">{t("help-ui-signin")}</a>
+            <a href=routes::LOGIN class="btn-ink inline-block px-8 py-3">{t("help-ui-signin")}</a>
         </div>
     })
 }
@@ -94,7 +94,7 @@ fn ProfilesSection() -> impl IntoView {
 fn delete_button() -> impl IntoView {
     view! {
         <div class="lg:hidden"><OutlineButton label=t("set-title-delete") danger=true on_click=Callback::new(|_| go(&Screen::Delete.path())) /></div>
-        <a href=Screen::Delete.path() class="hidden h-12 items-center rounded-control px-4 text-title-sm font-medium text-danger hover:bg-danger/10 lg:flex">{t("set-title-delete")}</a>
+        <a href=Screen::Delete.path() class="hidden h-12 items-center rounded-button px-4 text-title-sm font-medium text-danger hover:bg-danger/10 lg:flex">{t("set-title-delete")}</a>
     }
 }
 

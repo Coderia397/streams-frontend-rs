@@ -77,7 +77,7 @@ pub fn AddEditProfileModal(
                 // Close button
                 <button
                     on:click=move |_| on_cancel.run(())
-                    class="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center text-ink/50 hover:text-ink hover:bg-ink/10 transition-colors cursor-pointer"
+                    class="absolute top-5 right-5 btn-circle btn-circle-clear btn-circle-sm text-ink/50 hover:text-ink"
                     aria-label=crate::i18n::t("action-buttons-close")
                 >
                     <i class="ph-bold ph-x text-xl"></i>
@@ -96,6 +96,7 @@ pub fn AddEditProfileModal(
                     <button
                         type="button"
                         on:click=move |_| set_picking_avatar.set(true)
+                        // radius: the avatar tile
                         class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-field overflow-hidden bg-ink/10 shrink-0 shadow-md group hover:ring-4 hover:ring-ink/20 transition-all active:scale-95 cursor-pointer"
                     >
                         <img
@@ -116,7 +117,7 @@ pub fn AddEditProfileModal(
                             on:input=move |e| { set_name.set(event_target_value(&e)); set_name_missing.set(false); }
                             placeholder=crate::i18n::t("add-edit-modal-name")
                             maxlength="30"
-                            class=move || format!("w-full bg-transparent border rounded-control px-4 py-3 text-ink text-base placeholder:text-ink/30 outline-none transition-colors {}", if name_missing.get() { "border-danger-soft" } else { "border-ink/20 focus:border-ink" })
+                            class=move || format!("w-full bg-transparent border px-4 py-3 text-ink text-base placeholder:text-ink/30 outline-none transition-colors {}", if name_missing.get() { "border-danger-soft" } else { "border-ink/20 focus:border-ink" })
                         />
                         <Show when=move || name_missing.get()>
                             <p class="flex items-center gap-1.5 text-label text-danger-soft"><i class="ph ph-warning" aria-hidden="true"></i>{crate::i18n::t("set-profile-name-required")}</p>
@@ -180,7 +181,7 @@ pub fn AddEditProfileModal(
                                             let clean: String = v.chars().filter(|c| c.is_ascii_digit()).take(4).collect();
                                             set_pin_val.set(clean);
                                         }
-                                        class="w-48 bg-transparent border border-ink/20 rounded-control px-4 py-2 text-ink text-base tracking-widest placeholder:tracking-normal placeholder:text-ink/30 outline-none focus:border-ink transition-colors"
+                                        class="w-48 bg-transparent border border-ink/20 px-4 py-2 text-ink text-base tracking-widest placeholder:tracking-normal placeholder:text-ink/30 outline-none focus:border-ink transition-colors"
                                     />
                                     <Show when=move || !is_pin_valid()>
                                         <p class="text-danger-soft text-xs mt-1">{crate::i18n::t("profile-pin-invalid")}</p>
@@ -209,14 +210,14 @@ pub fn AddEditProfileModal(
                                                 <button
                                                     type="button"
                                                     on:click=move |_| on_del.run(())
-                                                    class="btn-brand px-4 py-1.5 text-xs rounded-control active:scale-95"
+                                                    class="btn-brand px-4 py-1.5 text-xs active:scale-95"
                                                 >
                                                     {crate::i18n::t("add-edit-modal-yes-delete")}
                                                 </button>
                                                 <button
                                                     type="button"
                                                     on:click=move |_| set_confirm_delete.set(false)
-                                                    class="px-4 py-1.5 border border-ink/30 text-ink/70 hover:text-ink rounded-control text-xs transition-colors cursor-pointer"
+                                                    class="px-4 py-1.5 border border-ink/30 text-ink/70 hover:text-ink rounded-button text-xs transition-colors cursor-pointer"
                                                 >
                                                     {crate::i18n::t("continue-watching-options-sheet-cancel")}
                                                 </button>
@@ -228,7 +229,7 @@ pub fn AddEditProfileModal(
                                         <button
                                             type="button"
                                             on:click=move |_| set_confirm_delete.set(true)
-                                            class="border border-ink/20 hover:border-danger text-ink/60 hover:text-danger-soft px-4 py-2 rounded-control text-sm font-semibold transition-colors cursor-pointer"
+                                            class="border border-ink/20 hover:border-danger text-ink/60 hover:text-danger-soft px-4 py-2 rounded-button text-sm font-semibold transition-colors cursor-pointer"
                                         >
                                             {crate::i18n::t("add-edit-modal-delete-profile")}
                                         </button>
@@ -246,7 +247,7 @@ pub fn AddEditProfileModal(
                     <button
                         type="button"
                         on:click=handle_save
-                        class="w-full rounded-control bg-ink py-4 text-body-md font-bold text-void transition-colors hover:bg-ink/90 cursor-pointer active:scale-[0.99]"
+                        class="w-full rounded-button bg-ink py-4 text-body-md font-bold text-void transition-colors hover:bg-ink/90 cursor-pointer active:scale-[0.99]"
                     >
                         {crate::i18n::t("add-edit-modal-save")}
                     </button>

@@ -35,7 +35,7 @@ pub fn DeleteAccount() -> impl IntoView {
     view! {
         <div class="lg:fixed lg:inset-x-0 lg:bottom-0 lg:top-settings-header lg:z-(--z-screen) lg:overflow-auto lg:bg-page">
             <div class="relative w-full max-w-[690px] max-lg:max-w-md lg:mx-auto lg:pt-[19px]">
-                <a href=Screen::AccountSecurity.path() aria-label=t("set-back") class="hidden h-10 w-10 items-center justify-center rounded-full text-ink hover:bg-ink/10 lg:absolute lg:-left-[266px] lg:top-[19px] lg:flex">
+                <a href=Screen::AccountSecurity.path() aria-label=t("set-back") class="hidden btn-circle btn-circle-clear btn-circle-md lg:absolute lg:-left-[266px] lg:top-[19px] lg:flex">
                     <i class="ph-bold ph-arrow-left text-2xl rtl:-scale-x-100" aria-hidden="true"></i>
                 </a>
                 <h1 class="mb-2 hidden text-heading-xl font-bold leading-[41px] text-ink/80 lg:block">{t("set-title-delete")}</h1>
@@ -51,7 +51,7 @@ pub fn DeleteAccount() -> impl IntoView {
                         <input type="checkbox" prop:checked=move || agreed.get() on:change=move |ev| agreed.set(event_target_checked(&ev)) class="mt-0 h-6 w-6 shrink-0 cursor-pointer appearance-none rounded-hairline border border-ink/60 bg-page checked:border-ink checked:bg-ink" />
                         <span>{crate::i18n::t_args("set-del-check", &[("brand", brand.into())])}</span>
                     </label>
-                    <button type="button" disabled=move || !agreed.get() on:click=move |_| delete.run(()) class="mb-[10px] mt-4 h-10 w-full rounded-control border border-ink/30 bg-page px-4 text-body-md font-medium text-[#c11119] disabled:cursor-not-allowed">{t("set-del-button")}</button>
+                    <button type="button" disabled=move || !agreed.get() on:click=move |_| delete.run(()) class="mb-[10px] mt-4 h-10 w-full rounded-button border border-ink/30 bg-page px-4 text-body-md font-medium text-[#c11119] disabled:cursor-not-allowed">{t("set-del-button")}</button>
                 </CollapsibleCard>
                 <p class="mt-9 text-label text-ink/70">{t("set-del-questions")}" "<a href=routes::HELP class="text-[#0080ff]">{t("set-del-help")}</a>"."</p>
             </div>

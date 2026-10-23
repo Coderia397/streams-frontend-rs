@@ -42,9 +42,9 @@ fn Tool(title: String, children: Children) -> impl IntoView {
 
 fn button_class(primary: bool) -> &'static str {
     if primary {
-        "rounded-control bg-void px-4 py-2.5 text-body-sm font-bold text-ink hover:bg-brand-deep disabled:opacity-50"
+        "rounded-button bg-void px-4 py-2.5 text-body-sm font-bold text-ink hover:bg-brand-deep disabled:opacity-50"
     } else {
-        "rounded-control border border-paper-edge bg-paper px-4 py-2.5 text-body-sm font-bold text-paper-ink hover:bg-paper-soft disabled:opacity-50"
+        "rounded-button border border-paper-edge bg-paper px-4 py-2.5 text-body-sm font-bold text-paper-ink hover:bg-paper-soft disabled:opacity-50"
     }
 }
 
@@ -346,7 +346,7 @@ pub fn LanguageTool() -> impl IntoView {
         <Tool title=tr("help-card-language-title")>
             <p class="mb-3 text-body-sm text-paper-mute">{tr_with("help-act-lang-current", &[("lang", FluentValue::from(crate::i18n::native_name(&current)))])}</p>
             <div class="flex flex-wrap items-center gap-3">
-                <select on:change=on_change aria-label=tr("help-card-language-title") class="min-w-48 cursor-pointer rounded-control border border-paper-edge bg-paper px-3 py-2.5 text-body-sm text-paper-ink">
+                <select on:change=on_change aria-label=tr("help-card-language-title") class="min-w-48 cursor-pointer border border-paper-edge bg-paper px-3 py-2.5 text-body-sm text-paper-ink">
                     {crate::i18n::AVAILABLE.iter().map(|code| view! { <option value=*code selected=*code == current>{crate::i18n::native_name(code)}</option> }).collect_view()}
                 </select>
                 <button on:click=move |_| crate::i18n::use_browser_language() class=button_class(false)>{tr("help-act-lang-use-browser")}</button>

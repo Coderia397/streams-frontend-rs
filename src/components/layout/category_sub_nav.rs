@@ -212,7 +212,7 @@ fn CategorySubNavDesktop(
                                 <div class="relative ml-3 md:ml-5">
                                     <button
                                         on:click=toggle_menu
-                                        class="flex items-center justify-between min-w-[100px] md:min-w-[125px] px-4 py-2 leading-none text-label md:text-body-sm font-semibold tracking-[-0.2px] text-ink bg-ink/10 hover:bg-ink/20 border border-ink/20 backdrop-blur-md transition-all rounded-full active:scale-95 gap-x-2.5 cursor-pointer shadow-sm"
+                                        class="flex items-center justify-between min-w-[100px] md:min-w-[125px] px-4 py-2 leading-none text-label md:text-body-sm font-semibold tracking-[-0.2px] text-ink bg-ink/10 hover:bg-ink/20 border border-ink/20 backdrop-blur-md transition-all rounded-button active:scale-95 gap-x-2.5 cursor-pointer shadow-sm"
                                         class=("!bg-ink/25 !border-ink/40", move || genre_menu_open.get())
                                         aria-haspopup="listbox"
                                         aria-expanded=move || genre_menu_open.get()
@@ -233,7 +233,7 @@ fn CategorySubNavDesktop(
                                         }
                                         role="listbox"
                                     >
-                                        <div class="w-max max-w-[90vw] md:max-w-none max-h-[65vh] md:max-h-[460px] overflow-y-auto bg-page/95 backdrop-blur-2xl border border-ink/15 rounded-sheet p-4 md:p-6 scrollbar-hide shadow-2xl">
+                                        <div class="w-max max-w-[90vw] md:max-w-none max-h-[65vh] md:max-h-[460px] overflow-y-auto bg-page/95 backdrop-blur-2xl border border-ink/15 rounded-menu p-4 md:p-6 scrollbar-hide shadow-2xl">
                                             <div class="grid grid-cols-[repeat(3,max-content)] gap-x-6 md:gap-x-10 gap-y-1">
                                                 {transposed.into_iter().enumerate().map(|(_idx, opt)| {
                                                     if let Some(genre) = opt {
@@ -246,7 +246,7 @@ fn CategorySubNavDesktop(
                                                                 }
                                                                 role="option"
                                                                 aria-selected="false"
-                                                                class="text-left text-body-sm md:text-body font-medium transition-all px-3 py-1.5 rounded-card hover:bg-ink/15 whitespace-nowrap text-ink/80 hover:text-ink cursor-pointer"
+                                                                class="text-left text-body-sm md:text-body font-medium transition-all px-3 py-1.5 rounded-menu-item hover:bg-ink/15 whitespace-nowrap text-ink/80 hover:text-ink cursor-pointer"
                                                             >
                                                                 {crate::i18n::genre_label(&genre.name)}
                                                             </button>

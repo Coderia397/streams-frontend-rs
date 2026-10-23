@@ -81,6 +81,7 @@ pub fn EditProfilePage(id: String) -> impl IntoView {
                 <h1 class="mb-[33px] text-display font-bold leading-[51px] text-ink">{t("set-edit-profile-page")}</h1>
                 {move || note.get().map(|m| view! { <p role="status" class="mb-4 rounded-control border border-danger/50 bg-danger/10 px-4 py-3 text-body-sm text-danger">{m}</p> })}
                 <div class="mb-[24px] flex items-start gap-[20px]">
+                    // radius: the avatar tile
                     <a href=Screen::Avatar(id.get_value()).path() class="group relative -ms-[4px] block h-[128px] w-[128px] shrink-0 overflow-hidden rounded-control" aria-label=t("set-title-avatar")>
                         {move || profile.get().map(|p| view! { <img src=p.avatar_url.clone().unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string()) alt="" class="h-full w-full object-cover" /> })}
                         <span class="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-chrome/50"><i class="ph ph-pencil-simple text-heading text-chrome-ink" aria-hidden="true"></i></span>
@@ -88,12 +89,12 @@ pub fn EditProfilePage(id: String) -> impl IntoView {
                     <div class="flex min-w-0 flex-1 flex-col gap-[8px]">
                         <FloatField label=t("set-profile-name") value=name maxlength=PROFILE_NAME_MAX as u32 />
                         <div class="relative">
-                            <button type="button" on:click=move |_| gender_open.update(|o| *o = !*o) aria-haspopup="listbox" aria-expanded=move || gender_open.get().to_string() class="flex h-[56px] w-full items-center justify-between rounded-control border border-[rgba(128,128,128,0.7)] bg-page px-4 text-start">
+                            <button type="button" on:click=move |_| gender_open.update(|o| *o = !*o) aria-haspopup="listbox" aria-expanded=move || gender_open.get().to_string() class="flex h-[56px] w-full items-center justify-between rounded-button border border-[rgba(128,128,128,0.7)] bg-page px-4 text-start">
                                 <span class="flex flex-col"><span class="text-fine leading-[14px] text-ink/70">{t("set-gender")}</span><span class="text-body-md leading-[22px] text-ink">{move || GENDERS.iter().find(|(k, _)| *k == gender.get()).map(|(_, l)| t(l)).unwrap_or_default()}</span></span>
                                 <i class="ph-fill ph-caret-down text-fine" aria-hidden="true"></i>
                             </button>
                             <Show when=move || gender_open.get()>
-                                <ul role="listbox" class="absolute inset-x-0 top-[calc(100%+3px)] z-10 rounded-control border border-[rgba(128,128,128,0.7)] bg-page py-2">
+                                <ul role="listbox" class="absolute inset-x-0 top-[calc(100%+3px)] z-10 rounded-menu border border-[rgba(128,128,128,0.7)] bg-page py-2">
                                     {GENDERS.iter().map(|(k, l)| { let k = *k; view! { <li role="option"><button type="button" on:click=move |_| { gender.set(k.to_string()); gender_open.set(false); } class="block w-full px-4 py-4 text-start text-body-md font-medium hover:bg-chrome/5">{t(l)}</button></li> } }).collect_view()}
                                 </ul>
                             </Show>
@@ -119,11 +120,11 @@ pub fn EditProfilePage(id: String) -> impl IntoView {
                 </div>
 
                 <div class="mt-[72px] flex flex-col gap-2">
-                    <button type="button" on:click=save class="h-10 w-full rounded-control bg-chrome text-body-md font-medium text-chrome-ink">{t("set-save")}</button>
-                    <button type="button" on:click=move |_| nav_cancel(&Screen::Profile(id.get_value()).path(), Default::default()) class="h-10 w-full rounded-control text-body-md font-medium text-ink">{t("set-cancel")}</button>
+                    <button type="button" on:click=save class="h-10 w-full rounded-button bg-chrome text-body-md font-medium text-chrome-ink">{t("set-save")}</button>
+                    <button type="button" on:click=move |_| nav_cancel(&Screen::Profile(id.get_value()).path(), Default::default()) class="h-10 w-full rounded-button text-body-md font-medium text-ink">{t("set-cancel")}</button>
                 </div>
                 <hr class="mb-[24px] mt-[32px] border-chrome/20" />
-                <button type="button" disabled=move || !deletable() on:click=move |_| confirm.set(true) class="h-10 w-full rounded-control text-body-md font-medium text-[#c11119] disabled:text-chrome/40">{t("set-po-delete-profile")}</button>
+                <button type="button" disabled=move || !deletable() on:click=move |_| confirm.set(true) class="h-10 w-full rounded-button text-body-md font-medium text-[#c11119] disabled:text-chrome/40">{t("set-po-delete-profile")}</button>
                 <Show when=move || !deletable()><p class="mt-[16px] text-body-sm text-chrome/70">{t("set-primary-cannot-delete")}</p></Show>
             </div>
             <ConfirmDialog open=confirm title=t("set-delete-profile") body=t("set-delete-profile-body") confirm_label=t("set-delete") danger=true on_confirm=delete />

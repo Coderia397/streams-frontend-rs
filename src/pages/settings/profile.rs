@@ -88,6 +88,7 @@ pub fn EditProfile(id: String, #[prop(optional)] edit_page: bool) -> impl IntoVi
             <div>
                 <Message text=note />
                 <div class="flex flex-col items-center gap-5 max-lg:mb-1 lg:mb-8 lg:flex-row lg:gap-6">
+                    // radius: the avatar tile
                     <a href=screen(Screen::Avatar) class="group relative block h-29 w-29 shrink-0 overflow-hidden rounded-card lg:h-24 lg:w-24" aria-label=t("set-title-avatar")>
                         <img src=p.avatar_url.clone().unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string()) alt="" class="h-full w-full object-cover" />
                         <span class="absolute bottom-1 end-1 flex h-7 w-7 items-center justify-center rounded-full bg-ink text-void">
@@ -98,8 +99,8 @@ pub fn EditProfile(id: String, #[prop(optional)] edit_page: bool) -> impl IntoVi
                         <Field label=t("set-profile-name") label_wide_only=true value=name maxlength=PROFILE_NAME_MAX as u32 />
                         // the website saves with a button; the app saves when you leave the field
                         <div class="hidden gap-3 lg:flex">
-                            <button type="button" on:click=move |_| save_name() class="btn-ink rounded-control px-6 py-2">{t("set-save")}</button>
-                            <button type="button" on:click=move |_| name.set(profile.get_untracked().map(|p| p.name).unwrap_or_default()) class="rounded-control px-6 py-2 text-body-md font-bold text-ink/80 hover:bg-ink/10">{t("set-cancel")}</button>
+                            <button type="button" on:click=move |_| save_name() class="btn-ink px-6 py-2">{t("set-save")}</button>
+                            <button type="button" on:click=move |_| name.set(profile.get_untracked().map(|p| p.name).unwrap_or_default()) class="rounded-button px-6 py-2 text-body-md font-bold text-ink/80 hover:bg-ink/10">{t("set-cancel")}</button>
                         </div>
                     </div>
                 </div>
@@ -311,7 +312,7 @@ pub fn GameHandle(id: String) -> impl IntoView {
             <Message text=note />
             <Field label=t("set-title-game-handle") value=value maxlength=GAME_HANDLE_MAX as u32 autocomplete="off" />
             <p class="-mt-2 mb-4 text-end text-label text-ink/50">{move || format!("{}/{}", value.with(|v| v.chars().count()), GAME_HANDLE_MAX)}</p>
-            <button type="button" on:click=suggest class="mb-6 rounded-control border border-ink/40 px-5 py-2.5 text-body-md font-bold hover:bg-ink/10">{t("set-handle-suggest")}</button>
+            <button type="button" on:click=suggest class="mb-6 rounded-button border border-ink/40 px-5 py-2.5 text-body-md font-bold hover:bg-ink/10">{t("set-handle-suggest")}</button>
             <FormButtons save_label=t("set-save") on_save=save cancel_href=Screen::Profile(id.get_value()).path() busy=Signal::derive(move || { let v = value.get(); !valid_handle(v.trim()) || prefs.profile(&id.get_value()).game_handle.as_deref() == Some(v.trim()) }) />
         </div>
     }
@@ -498,14 +499,14 @@ pub fn Lock(id: String) -> impl IntoView {
             <Message text=note />
             {move || match (mode.get(), has_pin.get()) {
                 (LockMode::Idle, false) => view! {
-                    <button type="button" on:click=move |_| mode.set(LockMode::Set) class="btn-ink mx-auto block rounded-control px-8 py-3 lg:w-full">{t("set-lock-create")}</button>
+                    <button type="button" on:click=move |_| mode.set(LockMode::Set) class="btn-ink mx-auto block px-8 py-3 lg:w-full">{t("set-lock-create")}</button>
                 }.into_any(),
                 (LockMode::Idle, true) => view! {
                     <div class="space-y-3">
-                        <button type="button" on:click=move |_| { note.set(None); mode.set(LockMode::Set) } class="btn-ink w-full rounded-control px-8 py-3">{t("set-lock-change")}</button>
+                        <button type="button" on:click=move |_| { note.set(None); mode.set(LockMode::Set) } class="btn-ink w-full px-8 py-3">{t("set-lock-change")}</button>
                         <OutlineButton label=t("set-lock-remove") danger=true on_click=Callback::new(move |_| { note.set(None); mode.set(LockMode::Remove) }) />
                         {signed_in.then(|| view! {
-                            <button type="button" on:click=move |_| confirm_reset.set(true) class="w-full rounded-control px-6 py-3 text-body-md text-ink/70 underline underline-offset-2 hover:text-ink">{t("set-lock-forgot")}</button>
+                            <button type="button" on:click=move |_| confirm_reset.set(true) class="w-full rounded-button px-6 py-3 text-body-md text-ink/70 underline underline-offset-2 hover:text-ink">{t("set-lock-forgot")}</button>
                         })}
                     </div>
                 }.into_any(),

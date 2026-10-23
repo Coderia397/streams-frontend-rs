@@ -134,9 +134,9 @@ pub fn SearchBox(
     };
 
     let frame = match variant {
-        Variant::Hero => "rounded-field p-0.5 bg-linear-to-r from-accent via-brand-glow to-brand shadow-raise",
-        Variant::Plain => "rounded-field border border-paper-edge focus-within:border-paper-ink",
-        Variant::Arrow => "rounded-control border border-paper-line focus-within:border-paper-ink",
+        Variant::Hero => "rounded-input p-0.5 bg-linear-to-r from-accent via-brand-glow to-brand shadow-raise",
+        Variant::Plain => "rounded-input border border-paper-edge focus-within:border-paper-ink",
+        Variant::Arrow => "rounded-input border border-paper-line focus-within:border-paper-ink",
     };
     let arrow = variant == Variant::Arrow;
     view! {
@@ -239,7 +239,7 @@ pub fn SearchBox(
                             role="listbox"
                             aria-label=move || tr("help-ui-suggestions")
                             on:mousedown=|ev| ev.prevent_default()
-                            class="absolute inset-x-0 top-full z-(--z-dialog) mt-2 overflow-hidden rounded-field border border-paper-line bg-paper text-start shadow-popover"
+                            class="absolute inset-x-0 top-full z-(--z-dialog) mt-2 overflow-hidden rounded-menu border border-paper-line bg-paper text-start shadow-popover"
                         >
                             {body}
                         </ul>

@@ -135,7 +135,7 @@ pub fn NotFoundPage() -> impl IntoView {
                 <div class="relative">
                     <button
                         on:click=move |_| set_dropdown_open.update(|o| *o = !*o)
-                        class="flex items-center gap-2 bg-void/80 hover:bg-void border border-ink/70 px-4 py-1.5 text-sm font-bold text-ink rounded-control transition-colors"
+                        class="flex items-center gap-2 bg-void/80 hover:bg-void border border-ink/70 px-4 py-1.5 text-sm font-bold text-ink rounded-button transition-colors"
                     >
                         <span>{move || crate::i18n::t(GLITCH_ZONES[active_index.get()])}</span>
                         <i class="ph-bold ph-caret-down text-xs" />
@@ -227,7 +227,7 @@ pub fn NotFoundPage() -> impl IntoView {
                                     let nav = navigate.clone();
                                     move |_| nav("/browse", Default::default())
                                 }
-                                class="btn-ink flex items-center justify-center px-6 sm:px-8 h-[36px] md:h-[42px] rounded-control text-body-sm md:text-body-lg gap-2 active:scale-95 shadow-lg duration-(--motion-base)"
+                                class="btn-ink flex items-center justify-center px-6 sm:px-8 h-[36px] md:h-[42px] text-body-sm md:text-body-lg gap-2 active:scale-95 shadow-lg duration-(--motion-base)"
                             >
                                 <i class="ph-fill ph-house text-xl text-void" />
                                 <span>{crate::i18n::t("nf-return-home")}</span>
@@ -235,7 +235,7 @@ pub fn NotFoundPage() -> impl IntoView {
 
                             <button
                                 on:click=move |_| set_is_drawer_open.set(true)
-                                class="btn-glass flex items-center justify-center px-5 sm:px-8 h-[36px] md:h-[42px] rounded-control transition-all text-body-sm md:text-body-lg gap-2 active:scale-95 shadow-lg duration-(--motion-base)"
+                                class="btn-glass flex items-center justify-center px-5 sm:px-8 h-[36px] md:h-[42px] transition-all text-body-sm md:text-body-lg gap-2 active:scale-95 shadow-lg duration-(--motion-base)"
                             >
                                 <span>{crate::i18n::t("nf-more-info")}</span>
                             </button>
@@ -304,7 +304,7 @@ pub fn NotFoundPage() -> impl IntoView {
                                     </div>
                                     <button
                                         on:click=move |_| set_is_drawer_open.set(false)
-                                        class="p-1 rounded-full hover:bg-ink/10 text-ink/60 hover:text-ink transition-colors"
+                                        class="btn-circle btn-circle-clear btn-circle-sm text-ink/60 hover:text-ink"
                                     >
                                         <i class="ph-bold ph-x text-2xl" />
                                     </button>
@@ -347,7 +347,7 @@ pub fn NotFoundPage() -> impl IntoView {
                                         nav("/browse", Default::default());
                                     }
                                 }
-                                class="w-full py-3.5 bg-brand hover:bg-danger-strong text-ink font-bold rounded-control flex items-center justify-center gap-2 transition-colors duration-(--motion-base) active:scale-[0.98] shadow-lg font-sans text-sm sm:text-base mt-8"
+                                class="w-full py-3.5 bg-brand hover:bg-danger-strong text-ink font-bold rounded-button flex items-center justify-center gap-2 transition-colors duration-(--motion-base) active:scale-[0.98] shadow-lg font-sans text-sm sm:text-base mt-8"
                             >
                                 <i class="ph-bold ph-caret-left text-xl" />
                                 <span>{crate::i18n::t("nf-return-home")}</span>

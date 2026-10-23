@@ -483,13 +483,13 @@ pub fn StreamsPlayer(
                         <div class="flex items-center gap-4">
                             <button
                                 on:click=move |_| do_resolve.run(true)
-                                class="btn-brand px-6 py-2.5 rounded-card text-sm"
+                                class="btn-brand px-6 py-2.5 text-sm"
                             >
                                 {crate::i18n::t("mod-retry")}
                             </button>
                             <button
                                 on:click=move |_| on_close.run(())
-                                class="px-6 py-2.5 bg-ink/15 hover:bg-ink/25 text-ink font-semibold rounded-card transition-colors text-sm"
+                                class="px-6 py-2.5 bg-ink/15 hover:bg-ink/25 text-ink font-semibold rounded-button transition-colors text-sm"
                             >
                                 {crate::i18n::t("controls-overlay-back-to-browse")}
                             </button>
@@ -517,7 +517,7 @@ pub fn StreamsPlayer(
                                         <div class="absolute top-4 left-4 z-30">
                                             <button
                                                 on:click=move |_| on_close.run(())
-                                                class="flex items-center gap-2 px-4 py-2 rounded-full bg-void/80 hover:bg-void text-ink text-sm font-semibold backdrop-blur-md shadow-lg"
+                                                class="flex items-center gap-2 px-4 py-2 rounded-button bg-void/80 hover:bg-void text-ink text-sm font-semibold backdrop-blur-md shadow-lg"
                                             >
                                                 <i class="ph ph-arrow-left text-lg"></i>
                                                 <span>{crate::i18n::t("player-back")}</span>

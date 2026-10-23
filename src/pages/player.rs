@@ -140,7 +140,7 @@ pub fn PlayerPage() -> impl IntoView {
                                 <p class="text-ink/60 text-sm mb-6">{crate::i18n::t("player-not-found-hint")}</p>
                                 <button
                                     on:click=move |_| on_close.run(())
-                                    class="btn-brand px-6 py-2.5 rounded-card text-sm"
+                                    class="btn-brand px-6 py-2.5 text-sm"
                                 >
                                     {crate::i18n::t("controls-overlay-back-to-browse")}
                                 </button>

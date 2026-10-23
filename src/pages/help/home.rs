@@ -19,6 +19,7 @@ fn GroupView(group: &'static Group) -> impl IntoView {
                 aria-expanded=move || is_open().to_string()
                 aria-controls=panel_id.clone()
                 on:click=move |_| open.update(|o| *o = if *o == Some(group.id) { None } else { Some(group.id) })
+                // radius: a topic row; the corners show only round the keyboard focus
                 class="flex w-full cursor-pointer items-center justify-between gap-4 rounded-control border-2 border-transparent py-3.5 text-left text-body-md font-semibold text-paper-ink focus-visible:border-paper-ink"
             >
                 <span>{tr(&format!("help-group-{}", group.id))}</span>
@@ -109,6 +110,7 @@ fn ForYou() -> impl IntoView {
                             <button
                                 on:click=move |_| set_open.update(|o| *o = if *o == Some(id) { None } else { Some(id) })
                                 aria-expanded=move || (open.get() == Some(id)).to_string()
+                                // radius: a card
                                 class="flex items-start gap-3 rounded-card border border-paper-line bg-paper p-4 text-start hover:bg-paper-soft"
                                 class=("border-paper-ink", move || open.get() == Some(id))
                             >

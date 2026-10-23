@@ -82,9 +82,9 @@ pub fn Blocked(id: String) -> impl IntoView {
                     prop:value=move || text.get()
                     on:input=move |ev| text.set(event_target_value(&ev))
                     on:keydown=move |ev| if ev.key() == "Enter" { add() }
-                    class="min-w-0 flex-1 rounded-control border border-ink/20 bg-ink/10 px-4 py-3 text-body-md text-ink focus:border-ink focus:outline-none"
+                    class="min-w-0 flex-1 border border-ink/20 bg-ink/10 px-4 py-3 text-body-md text-ink focus:border-ink focus:outline-none"
                 />
-                <button type="button" on:click=move |_| add() class="btn-ink rounded-control px-6">{t("set-add")}</button>
+                <button type="button" on:click=move |_| add() class="btn-ink px-6">{t("set-add")}</button>
             </div>
             <ul class="overflow-hidden rounded-card border border-ink/10 bg-ink/5 divide-y divide-ink/10">
                 {move || list.get().into_iter().map(|title| {
@@ -92,7 +92,7 @@ pub fn Blocked(id: String) -> impl IntoView {
                     view! {
                         <li class="flex items-center px-5 py-3">
                             <span class="flex-1 truncate text-body-md">{title}</span>
-                            <button type="button" aria-label=t("set-remove") on:click=move |_| prefs.update_profile(&id.get_value(), |p| p.blocked_titles.retain(|b| b != &gone)) class="flex h-9 w-9 items-center justify-center rounded-full text-ink/70 hover:bg-ink/10">
+                            <button type="button" aria-label=t("set-remove") on:click=move |_| prefs.update_profile(&id.get_value(), |p| p.blocked_titles.retain(|b| b != &gone)) class="btn-circle btn-circle-clear btn-circle-md text-ink/70">
                                 <i class="ph-bold ph-trash text-xl" aria-hidden="true"></i>
                             </button>
                         </li>

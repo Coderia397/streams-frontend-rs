@@ -99,7 +99,7 @@ pub fn Gate(account: bool, children: ChildrenFn) -> impl IntoView {
                 view! {
                     <div class="text-center">
                         <p class="mb-6 text-body-md text-ink/70">{t("set-signin-needed")}</p>
-                        <a href=routes::LOGIN class="btn-ink inline-block rounded-control px-8 py-3">{t("help-ui-signin")}</a>
+                        <a href=routes::LOGIN class="btn-ink inline-block px-8 py-3">{t("help-ui-signin")}</a>
                     </div>
                 }
                 .into_any()
@@ -124,11 +124,13 @@ pub fn Gate(account: bool, children: ChildrenFn) -> impl IntoView {
                 {move || match step.get() {
                     Step::Choose => view! {
                         <div class="flex flex-col gap-5">
+                            // radius: an option card
                             <button type="button" on:click=move |_| send_code.run(()) class="flex h-[69px] w-full items-center gap-[15px] rounded-card bg-ink/5 px-3 text-start hover:bg-ink/10">
                                 <i class="ph ph-envelope-simple shrink-0 text-body-md text-ink" aria-hidden="true"></i>
                                 <span class="min-w-0 flex-1"><span class="block text-title-sm font-bold leading-6">{t("set-code-email")}</span><span class="block text-body-sm leading-[22px] text-ink/70">{email.get_value()}</span></span>
                                 <i class="ph-bold ph-caret-right shrink-0 text-body-md text-ink rtl:-scale-x-100" aria-hidden="true"></i>
                             </button>
+                            // radius: an option card
                             <button type="button" on:click=move |_| { note.set(None); step.set(Step::Password) } class="flex h-[69px] w-full items-center gap-[15px] rounded-card bg-ink/5 px-3 text-start hover:bg-ink/10">
                                 <i class="ph ph-lock-simple shrink-0 text-body-md text-ink" aria-hidden="true"></i>
                                 <span class="min-w-0 flex-1"><span class="block text-title-sm font-bold leading-6">{t("set-password-confirm")}</span></span>
@@ -140,7 +142,7 @@ pub fn Gate(account: bool, children: ChildrenFn) -> impl IntoView {
                         <form on:submit=move |ev| { ev.prevent_default(); submit_password.run(()); }>
                             <PasswordField label=t("set-password-current") value=password />
                             <div class="flex flex-wrap items-center gap-4">
-                                <button type="submit" disabled=move || busy.get() class="btn-ink rounded-control px-8 py-2.5 disabled:opacity-50">{t("set-continue")}</button>
+                                <button type="submit" disabled=move || busy.get() class="btn-ink px-8 py-2.5 disabled:opacity-50">{t("set-continue")}</button>
                                 <a href="/forgot" class="text-body-md text-ink/70 underline underline-offset-2 hover:text-ink">{t("set-forgot-password")}</a>
                             </div>
                             <button type="button" on:click=move |_| { note.set(None); step.set(Step::Choose) } class="mt-6 text-body-md font-semibold text-ink underline underline-offset-2">{t("set-try-another-way")}</button>
@@ -150,9 +152,9 @@ pub fn Gate(account: bool, children: ChildrenFn) -> impl IntoView {
                         <form on:submit=move |ev| { ev.prevent_default(); submit_code.run(()); }>
                             <DigitBoxes label=t("set-code-label") value=code length=CODE_LENGTH one_time_code=true plain=true />
                             <div class="flex flex-col gap-2">
-                                <button type="submit" disabled=move || busy.get() || code.with(|c| c.chars().count() != CODE_LENGTH) class="h-10 w-full rounded-control bg-ink px-4 text-body-md font-medium text-void disabled:opacity-50">{t("set-code-submit")}</button>
-                                <button type="button" on:click=move |_| send_code.run(()) disabled=move || busy.get() class="h-10 w-full rounded-control bg-[rgba(128,128,128,0.3)] px-4 text-body-md font-medium text-ink disabled:opacity-50">{t("set-code-resend")}</button>
-                                <button type="button" on:click=move |_| { note.set(None); step.set(Step::Choose) } class="h-10 w-full rounded-control px-4 text-body-md font-medium text-ink">{t("set-try-another-way")}</button>
+                                <button type="submit" disabled=move || busy.get() || code.with(|c| c.chars().count() != CODE_LENGTH) class="h-10 w-full rounded-button bg-ink px-4 text-body-md font-medium text-void disabled:opacity-50">{t("set-code-submit")}</button>
+                                <button type="button" on:click=move |_| send_code.run(()) disabled=move || busy.get() class="h-10 w-full rounded-button bg-[rgba(128,128,128,0.3)] px-4 text-body-md font-medium text-ink disabled:opacity-50">{t("set-code-resend")}</button>
+                                <button type="button" on:click=move |_| { note.set(None); step.set(Step::Choose) } class="h-10 w-full rounded-button px-4 text-body-md font-medium text-ink">{t("set-try-another-way")}</button>
                             </div>
                         </form>
                     }.into_any(),

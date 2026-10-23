@@ -78,7 +78,7 @@ pub fn NewPopularSubNavMobile(
                                     } else {
                                         "bg-transparent text-ink border-ink/35"
                                     };
-                                    format!("flex items-center justify-center gap-2 h-[33px] ps-2.5 pe-3.5 rounded-full border-[1.5px] text-pill font-semibold whitespace-nowrap active:scale-95 transition-all leading-none shrink-0 cursor-pointer {look}")
+                                    format!("flex items-center justify-center gap-2 h-[33px] ps-2.5 pe-3.5 rounded-button border-[1.5px] text-pill font-semibold whitespace-nowrap active:scale-95 transition-all leading-none shrink-0 cursor-pointer {look}")
                                 }
                             >
                                 {match glyph {

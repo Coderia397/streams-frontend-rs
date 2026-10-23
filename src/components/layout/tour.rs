@@ -162,8 +162,8 @@ pub fn TourHost() -> impl IntoView {
                         <div class="mt-4 flex items-center justify-between">
                             <span class="text-xs text-ink/60">{crate::i18n::t_args("tour-step-of", &[("n", fluent_bundle::FluentValue::from(n)), ("total", fluent_bundle::FluentValue::from(total))])}</span>
                             <div class="flex gap-2">
-                                <button type="button" class="rounded-full border border-ink/40 px-4 py-1.5 text-sm disabled:opacity-40" disabled=move || step.get() == 0 on:click=move |_| back()>{crate::i18n::t("tour-back")}</button>
-                                <button type="button" class="rounded-full bg-ink text-void px-4 py-1.5 text-sm font-semibold" on:click=move |_| next()>{crate::i18n::t(if last { "tour-done" } else { "tour-next" })}</button>
+                                <button type="button" class="rounded-button border border-ink/40 px-4 py-1.5 text-sm disabled:opacity-40" disabled=move || step.get() == 0 on:click=move |_| back()>{crate::i18n::t("tour-back")}</button>
+                                <button type="button" class="rounded-button bg-ink text-void px-4 py-1.5 text-sm font-semibold" on:click=move |_| next()>{crate::i18n::t(if last { "tour-done" } else { "tour-next" })}</button>
                             </div>
                         </div>
                     </div>

@@ -65,6 +65,7 @@ pub fn ContinueWatchingOptionsSheet(
                             <button
                                 type="button"
                                 on:click=handle_remove
+                                // radius: a row of the options sheet, a card in looks
                                 class="w-full flex items-center gap-4 bg-menu rounded-modal px-4 py-4 active:scale-[0.99] active:bg-line transition-all cursor-pointer"
                             >
                                 <i class="ph-bold ph-x-circle text-ink text-2xl shrink-0"></i>

@@ -1,6 +1,20 @@
-/* Component classes built from the tokens in brand.css. Sizes, padding and radius stay on each element. */
+/* Text fields and dropdowns take the button radius without a class (Tailwind's reset sets 0, which this replaces), so a new field needs
+   nothing. Tick boxes, switches, sliders and pickers keep their own shape; a class on the element (rounded-field on a PIN box) still wins,
+   because utilities come after this layer. */
+@layer base {
+  input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"], [type="hidden"], [type="image"]),
+  select {
+    border-radius: var(--radius-input);
+  }
+  textarea {
+    border-radius: var(--radius-card);
+  }
+}
+
+/* Component classes built from the tokens in brand.css. Sizes and padding stay on each element; the button classes carry the button radius. */
 @layer components {
   .btn-brand {
+    border-radius: var(--radius-button);
     background-color: var(--color-brand);
     color: var(--color-ink);
     font-weight: 700;
@@ -10,22 +24,77 @@
   .btn-brand:hover { background-color: var(--color-brand-active); }
 
   .btn-ink {
+    border-radius: var(--radius-button);
     background-color: var(--color-ink);
     color: var(--color-void);
     font-weight: 700;
     cursor: pointer;
     transition: background-color var(--motion-base);
   }
-  .btn-ink:hover { background-color: color-mix(in srgb, var(--color-ink) 90%, transparent); }
+  .btn-ink:hover { background-color: var(--color-ink-hover); }
 
   .btn-glass {
-    background-color: color-mix(in srgb, var(--color-button-secondary) 40%, transparent);
+    border-radius: var(--radius-button);
+    background-color: var(--color-glass);
     color: var(--color-ink);
     font-weight: 700;
     cursor: pointer;
     transition: background-color var(--motion-base);
   }
-  .btn-glass:hover { background-color: color-mix(in srgb, var(--color-button-secondary) 60%, transparent); }
+  .btn-glass:hover { background-color: var(--color-glass-hover); }
+
+  /* Pills: buttons with text. Sizes from Netflix's redesigned pages (note 111): sm 32 px (Sign In), md 40 px (Genres), lg 48 px (Play,
+     More Info). Pair a size with a colour (btn-ink white, btn-glass grey, btn-brand) or the element's own colours. Weight 500, as Netflix's;
+     these come after the colour classes so the weight wins over theirs. */
+  .btn-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: var(--radius-button);
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color var(--motion-fast), color var(--motion-fast), transform var(--motion-fast);
+  }
+  .btn-pill:active { transform: scale(0.97); }
+  .btn-pill-sm { height: 32px; padding-inline: 16px; font-size: 14px; }
+  .btn-pill-md { height: 40px; padding-inline: 16px; font-size: 16px; }
+  .btn-pill-lg { height: 48px; padding-inline: 20px; font-size: 16px; }
+  .btn-pill-sm > i { font-size: 16px; }
+  .btn-pill-md > i { font-size: 20px; }
+  .btn-pill-lg > i { font-size: 24px; }
+  /* the Genres dropdown's look: a faint fill with a thin grey edge */
+  .btn-outline { background-color: rgb(0 0 0 / 0.1); color: var(--color-ink); box-shadow: inset 0 0 0 1px var(--color-glass-edge); }
+  .btn-outline:hover { background-color: var(--color-glass-hover); }
+
+  /* Round buttons: every icon button (sound, replay, add, rate, more, close, pause). Netflix's redesigned pages draw them as a grey see
+     through disc with no outline and no blur, the icon half the disc (the billboard's sound button, note 111). Sizes sm 32, md 40, lg 48;
+     -solid is the white Play disc, -clear has no fill until the pointer rests on it (the nav's search and bell). */
+  .btn-circle {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: var(--color-glass);
+    color: var(--color-ink);
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color var(--motion-fast), transform var(--motion-fast);
+  }
+  .btn-circle:hover { background-color: var(--color-glass-hover); }
+  .btn-circle:active { transform: scale(0.95); }
+  .btn-circle-sm { width: 32px; height: 32px; font-size: 16px; }
+  .btn-circle-md { width: 40px; height: 40px; font-size: 20px; }
+  .btn-circle-lg { width: 48px; height: 48px; font-size: 24px; }
+  .btn-circle-solid { background-color: var(--color-ink); color: var(--color-void); }
+  .btn-circle-solid:hover { background-color: var(--color-ink-hover); }
+  .btn-circle-clear { background-color: transparent; }
+  .btn-circle-clear:hover { background-color: var(--color-glass); }
 }
 
 /* Light page for the settings screens that Netflix draws white: the account pages on a phone (page grey, cards white) and every
@@ -151,4 +220,41 @@
 /* Section titles of the website's account pages are regular weight 18 px grey, not bold. */
 @media (min-width: 1024px) {
   .theme-paper-wide .set-section-title { font-weight: 400; color: #333333; }
+}
+
+/* The title page's hero, copied layer by layer from Netflix's signed out title page (note 111): the trailer's colours spill round the panel
+   (a blurred copy at 25 %, fading out at the bottom), the panel casts a shadow, its bottom edge curves up, the video fades into the panel's
+   light fill near the bottom, and two gradients darken the bottom and the corner under the sign up form. Mirrored in right to left pages. */
+@layer components {
+  .hero-glow {
+    -webkit-mask-image: linear-gradient(rgb(217 217 217) 78.62%, transparent 100%);
+    mask-image: linear-gradient(rgb(217 217 217) 78.62%, transparent 100%);
+  }
+  .hero-glow > img { filter: blur(32px); opacity: 0.25; }
+  .hero-glow-video { filter: blur(32px); opacity: 0.25; }
+  /* with the moving copy on a computer, the still picture under it drops to Netflix's 15 % */
+  @media (min-width: 48rem) { .hero-glow > img { opacity: 0.15; } }
+  .hero-drop { filter: drop-shadow(rgb(0 0 0 / 0.6) 24px 32px 24px); }
+  [dir="rtl"] .hero-drop { filter: drop-shadow(rgb(0 0 0 / 0.6) -24px 32px 24px); }
+  .hero-panel {
+    background-color: rgb(255 255 255 / 0.15);
+    -webkit-mask-image: radial-gradient(103% 12% at 50% 102%, transparent 50%, #fff 51%);
+    mask-image: radial-gradient(103% 12% at 50% 102%, transparent 50%, #fff 51%);
+  }
+  .hero-video {
+    --fade: linear-gradient(#fff 70%, rgb(255 255 255 / 0.992) 72.5%, rgb(255 255 255 / 0.97) 75%, rgb(255 255 255 / 0.925) 77.5%,
+      rgb(255 255 255 / 0.867) 80%, rgb(255 255 255 / 0.792) 82.5%, rgb(255 255 255 / 0.7) 85%, rgb(255 255 255 / 0.608) 87.5%,
+      rgb(255 255 255 / 0.533) 90%, rgb(255 255 255 / 0.475) 92.5%, rgb(255 255 255 / 0.43) 95%, rgb(255 255 255 / 0.408) 97.5%, rgb(255 255 255 / 0.4) 100%);
+    -webkit-mask-image: var(--fade);
+    mask-image: var(--fade);
+  }
+  .hero-shade {
+    --bottom: linear-gradient(transparent 40%, rgb(0 0 0 / 0.008) 45%, rgb(0 0 0 / 0.03) 50%, rgb(0 0 0 / 0.075) 55%, rgb(0 0 0 / 0.133) 60%,
+      rgb(0 0 0 / 0.208) 65%, rgb(0 0 0 / 0.3) 70%, rgb(0 0 0 / 0.392) 75%, rgb(0 0 0 / 0.467) 80%, rgb(0 0 0 / 0.525) 85%, rgb(0 0 0 / 0.57) 90%,
+      rgb(0 0 0 / 0.592) 95%, rgb(0 0 0 / 0.6) 100%);
+    background-image: var(--bottom), linear-gradient(224deg, rgb(15 15 15 / 0) 45.72%, rgb(0 0 0 / 0.6) 63.85%, #000 87.47%);
+  }
+  [dir="rtl"] .hero-shade {
+    background-image: var(--bottom), linear-gradient(136deg, rgb(15 15 15 / 0) 45.72%, rgb(0 0 0 / 0.6) 63.85%, #000 87.47%);
+  }
 }

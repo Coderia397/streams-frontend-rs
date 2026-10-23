@@ -29,7 +29,7 @@ pub fn AccountMenu(avatar: Memo<String>, signout_open: RwSignal<bool>) -> impl I
             open.set(false);
         }
     });
-    let item = "flex h-12 w-full items-center gap-4 rounded-control px-3 text-start text-body-md font-medium text-ink hover:bg-ink/5";
+    let item = "flex h-12 w-full items-center gap-4 rounded-menu-item px-3 text-start text-body-md font-medium text-ink hover:bg-ink/5";
     let switch = Callback::new(move |_: ()| {
         // Switch Profile goes back to the page that asks who is watching
         open.set(false);
@@ -41,12 +41,12 @@ pub fn AccountMenu(avatar: Memo<String>, signout_open: RwSignal<bool>) -> impl I
     });
     view! {
         <div node_ref=root class="relative">
-            <button type="button" aria-haspopup="menu" aria-expanded=move || open.get().to_string() aria-label=move || t("set-nav-profile") on:click=move |_| open.update(|o| *o = !*o) class="flex h-9 w-[68px] items-center justify-center gap-2 rounded-field hover:bg-ink/5">
+            <button type="button" aria-haspopup="menu" aria-expanded=move || open.get().to_string() aria-label=move || t("set-nav-profile") on:click=move |_| open.update(|o| *o = !*o) class="flex h-9 w-[68px] items-center justify-center gap-2 rounded-button hover:bg-ink/5">
                 <img src=move || avatar.get() alt="" class="h-8 w-8 rounded-control object-cover" />
                 <i class=move || if open.get() { "ph-fill ph-caret-up text-fine" } else { "ph-fill ph-caret-down text-fine" } aria-hidden="true"></i>
             </button>
             <Show when=move || open.get()>
-                <div role="menu" class="absolute end-0 top-[42px] z-50 w-[199px] rounded-card bg-page p-[5px] shadow-menu">
+                <div role="menu" class="absolute end-0 top-[42px] z-50 w-[199px] rounded-menu bg-page p-[5px] shadow-menu">
                     <a role="menuitem" href=routes::BROWSE class=item><i class="ph ph-arrow-left text-heading" aria-hidden="true"></i>{move || crate::i18n::t_args("set-back-to-app", &[("brand", crate::brand::NAME.into())])}</a>
                     <hr class="mx-3 my-[4px] border-set-line" />
                     <a role="menuitem" href=Screen::Account.path() class=item><i class="ph ph-user text-heading" aria-hidden="true"></i>{t("set-nav-account")}</a>

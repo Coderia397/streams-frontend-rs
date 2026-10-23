@@ -61,7 +61,7 @@ pub fn BrowseGridPage() -> impl IntoView {
                     <div class="flex items-center gap-3.5 mb-8 md:mb-12">
                         <button
                             on:click=on_back
-                            class="flex items-center justify-center text-ink p-1.5 rounded-full hover:bg-ink/10 transition-colors shrink-0 cursor-pointer"
+                            class="btn-circle btn-circle-clear btn-circle-md"
                             aria-label=crate::i18n::t("browse-grid-go-back")
                         >
                             <i class="ph-bold ph-arrow-left text-2xl md:text-3xl text-ink"></i>

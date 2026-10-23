@@ -43,7 +43,7 @@ pub fn ResultsPage() -> impl IntoView {
             <button
                 on:click=move |_| { set_filter.set(which); set_page.set(0); }
                 aria-pressed=move || (filter.get() == which).to_string()
-                class="rounded-full border px-4 py-1.5 text-body-sm font-semibold"
+                class="rounded-button border px-4 py-1.5 text-body-sm font-semibold"
                 class=("border-paper-ink", move || filter.get() == which)
                 class=("bg-void", move || filter.get() == which)
                 class=("text-ink", move || filter.get() == which)
@@ -112,7 +112,7 @@ pub fn ResultsPage() -> impl IntoView {
                                 <p class="mb-4 flex items-center gap-3 text-body-sm font-semibold text-paper-ink">{tr("help-ui-recommended")} <KindBadge policy=best.target.is_policy() /></p>
                                 <h2 class="mb-3 text-heading-md font-bold text-paper-ink">{best_title}</h2>
                                 <p class="mb-6 text-body-md leading-7 text-paper-mute">{highlighted(&best_summary, &words)}</p>
-                                <a href=best.target.href() class="inline-block rounded-control bg-void px-5 py-3 text-body-sm font-bold text-ink hover:bg-brand-deep">{tr("help-ui-read")}</a>
+                                <a href=best.target.href() class="inline-block rounded-button bg-void px-5 py-3 text-body-sm font-bold text-ink hover:bg-brand-deep">{tr("help-ui-read")}</a>
                             </section>
                         })}
                         {(!shown.is_empty()).then(|| view! {
@@ -141,7 +141,7 @@ pub fn ResultsPage() -> impl IntoView {
                                     aria-label=tr("help-ui-page-prev")
                                     disabled=move || page.get() == 0
                                     on:click=move |_| set_page.update(|p| *p = p.saturating_sub(1))
-                                    class="flex h-9 w-9 items-center justify-center rounded-control text-paper-ink hover:bg-paper-soft disabled:opacity-30"
+                                    class="flex h-9 w-9 items-center justify-center rounded-button text-paper-ink hover:bg-paper-soft disabled:opacity-30"
                                 >
                                     <i class="ph-bold ph-caret-left rtl:-scale-x-100"></i>
                                 </button>
@@ -150,7 +150,7 @@ pub fn ResultsPage() -> impl IntoView {
                                         aria-label=tr_with("help-ui-page-n", &[("n", FluentValue::from(n + 1))])
                                         aria-current=move || (page.get() == n).then_some("page")
                                         on:click=move |_| set_page.set(n)
-                                        class="h-9 min-w-9 rounded-control px-2 text-body-sm text-paper-ink hover:bg-paper-soft"
+                                        class="h-9 min-w-9 rounded-button px-2 text-body-sm text-paper-ink hover:bg-paper-soft"
                                         class=("bg-paper-soft", move || page.get() == n)
                                         class=("font-bold", move || page.get() == n)
                                     >
@@ -161,7 +161,7 @@ pub fn ResultsPage() -> impl IntoView {
                                     aria-label=tr("help-ui-page-next")
                                     disabled=move || page.get() + 1 >= pages
                                     on:click=move |_| set_page.update(|p| *p += 1)
-                                    class="flex h-9 w-9 items-center justify-center rounded-control text-paper-ink hover:bg-paper-soft disabled:opacity-30"
+                                    class="flex h-9 w-9 items-center justify-center rounded-button text-paper-ink hover:bg-paper-soft disabled:opacity-30"
                                 >
                                     <i class="ph-bold ph-caret-right rtl:-scale-x-100"></i>
                                 </button>

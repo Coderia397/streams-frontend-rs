@@ -126,8 +126,8 @@ pub fn TransferSetting() -> impl IntoView {
             </p>
             <Message text=note />
             <div class="flex w-full max-w-xl flex-col gap-3 sm:flex-row">
-                <a href=crate::config::routes::BROWSE class="flex-1 rounded-control bg-chrome-ink/90 px-6 py-3 text-body-md font-bold text-chrome hover:bg-chrome-ink">{t("set-transfer-go-home")}</a>
-                <button type="button" on:click=toggle class="flex-1 rounded-control border border-danger px-6 py-3 text-body-md font-bold text-chrome-ink hover:bg-danger/20">{move || if on.get() { t("set-transfer-turn-off") } else { t("set-transfer-turn-on") }}</button>
+                <a href=crate::config::routes::BROWSE class="flex-1 rounded-button bg-chrome-ink/90 px-6 py-3 text-body-md font-bold text-chrome hover:bg-chrome-ink">{t("set-transfer-go-home")}</a>
+                <button type="button" on:click=toggle class="flex-1 rounded-button border border-danger px-6 py-3 text-body-md font-bold text-chrome-ink hover:bg-danger/20">{move || if on.get() { t("set-transfer-turn-off") } else { t("set-transfer-turn-on") }}</button>
             </div>
         </div>
     }
@@ -154,7 +154,7 @@ pub fn TransferProfile(id: String) -> impl IntoView {
                 when=move || allowed.get()
                 fallback=move || view! {
                     <Notice icon="prohibit" title=t("set-transfer-off-title") body=t("set-transfer-blocked-body")>
-                        <a href=Screen::TransferSetting.path() class="btn-ink inline-block rounded-control px-6 py-2.5">{t("set-transfer-open-setting")}</a>
+                        <a href=Screen::TransferSetting.path() class="btn-ink inline-block px-6 py-2.5">{t("set-transfer-open-setting")}</a>
                     </Notice>
                 }
             >
@@ -164,7 +164,7 @@ pub fn TransferProfile(id: String) -> impl IntoView {
                     <li>{t("set-transfer-step-2")}</li>
                     <li>{t("set-transfer-step-3")}</li>
                 </ol>
-                <button type="button" on:click=move |_| download.run(()) class="btn-ink rounded-control px-8 py-3">{t("set-transfer-download")}</button>
+                <button type="button" on:click=move |_| download.run(()) class="btn-ink px-8 py-3">{t("set-transfer-download")}</button>
                 <p class="mt-4 text-body-sm text-ink/60">{t("set-transfer-note")}</p>
             </Show>
         </div>

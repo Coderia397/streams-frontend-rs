@@ -84,7 +84,7 @@ pub fn AuthFooter(#[prop(default = Look::Dark)] look: Look) -> impl IntoView {
                     </ul>
                     <label for="auth-language" class="sr-only">{tr("help-ui-language-label")}</label>
                     <div class="relative mt-8 inline-block">
-                        <select id="auth-language" on:change=on_language class=format!("min-w-40 cursor-pointer appearance-none rounded-control border py-2.5 ps-4 pe-10 text-body-sm {select}")>
+                        <select id="auth-language" on:change=on_language class=format!("min-w-40 cursor-pointer appearance-none border py-2.5 ps-4 pe-10 text-body-sm {select}")>
                             {crate::i18n::AVAILABLE.iter().map(|code| view! { <option value=*code selected=*code == current class="bg-paper text-paper-ink">{crate::i18n::native_name(code)}</option> }).collect_view()}
                         </select>
                         <i class="ph-fill ph-caret-down pointer-events-none absolute end-3 top-1/2 -translate-y-1/2 text-fine"></i>
@@ -124,7 +124,7 @@ pub fn Field(
                 prop:value=value
                 on:input=move |ev| value.set(event_target_value(&ev))
                 aria-invalid=move || invalid.is_some_and(|i| i.get()).to_string()
-                class=format!("peer h-14 w-full rounded-control border px-4 pt-5 text-body-md placeholder-transparent focus:outline-none {input}")
+                class=format!("peer h-14 w-full border px-4 pt-5 text-body-md placeholder-transparent focus:outline-none {input}")
                 class=("!border-danger", move || invalid.is_some_and(|i| i.get()))
             />
             <label
@@ -150,8 +150,8 @@ pub fn Field(
 /// The full width action button.
 pub fn button_class(look: Look) -> &'static str {
     match look {
-        Look::Dark => "flex h-12 w-full items-center justify-center rounded-control bg-brand text-body-md font-bold text-ink hover:bg-brand-hover disabled:opacity-60",
-        Look::Light => "flex h-14 w-full items-center justify-center rounded-control bg-brand text-title-sm font-bold text-ink hover:bg-brand-hover disabled:opacity-60",
+        Look::Dark => "flex h-12 w-full items-center justify-center rounded-button bg-brand text-body-md font-bold text-ink hover:bg-brand-hover disabled:opacity-60",
+        Look::Light => "flex h-14 w-full items-center justify-center rounded-button bg-brand text-title-sm font-bold text-ink hover:bg-brand-hover disabled:opacity-60",
     }
 }
 

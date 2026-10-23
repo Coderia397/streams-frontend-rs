@@ -95,7 +95,7 @@ pub fn CheckNetwork() -> impl IntoView {
     view! {
         <div class="max-w-xl">
             <p class="mb-6 text-body-md text-ink/70">{move || t_args("set-check-intro", &[("brand", crate::brand::NAME.into())])}</p>
-            <button type="button" on:click=start disabled=move || busy.get() class="btn-ink mb-6 rounded-control px-8 py-3 disabled:opacity-50">{move || if busy.get() { t("set-check-running") } else { t("set-check-start") }}</button>
+            <button type="button" on:click=start disabled=move || busy.get() class="btn-ink mb-6 px-8 py-3 disabled:opacity-50">{move || if busy.get() { t("set-check-running") } else { t("set-check-start") }}</button>
             {move || results.get().map(|list| {
                 let all_ok = list.iter().all(|o| o.ok);
                 view! {
@@ -196,7 +196,7 @@ pub fn PlaybackSpec() -> impl IntoView {
                             <SpecRow label=t("set-spec-codecs") value=if s.codecs.is_empty() { t("set-spec-none") } else { s.codecs.join(", ") } />
                             <SpecRow label=t("set-spec-hdr") value=yes_no(s.hdr) />
                         </Section>
-                        <a href=routes::HELP class="inline-block rounded-control border border-ink/40 px-6 py-3 text-body-md font-bold hover:bg-ink/10">{t("set-spec-help")}</a>
+                        <a href=routes::HELP class="inline-block rounded-button border border-ink/40 px-6 py-3 text-body-md font-bold hover:bg-ink/10">{t("set-spec-help")}</a>
                     }
                     .into_any()
                 }
@@ -242,7 +242,7 @@ pub fn SpeedTest() -> impl IntoView {
                 <span class="text-title text-ink/70">{t("set-speed-unit")}</span>
             </div>
             <Show when=move || failed.get()><p class="mb-6 text-body-md text-danger">{t("set-speed-failed")}</p></Show>
-            <button type="button" on:click=start disabled=move || busy.get() class="btn-ink rounded-control px-8 py-3 disabled:opacity-50">{move || if busy.get() { t("set-speed-running") } else if mbps.get().is_some() { t("set-speed-again") } else { t("set-check-start") }}</button>
+            <button type="button" on:click=start disabled=move || busy.get() class="btn-ink px-8 py-3 disabled:opacity-50">{move || if busy.get() { t("set-speed-running") } else if mbps.get().is_some() { t("set-speed-again") } else { t("set-check-start") }}</button>
         </div>
     }
 }

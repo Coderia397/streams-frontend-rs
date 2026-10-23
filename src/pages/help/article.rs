@@ -115,7 +115,7 @@ pub fn ArticlePage() -> impl IntoView {
                             <div class="max-w-[680px]">
                                 <h1 class="mb-4 text-heading-xl font-extrabold text-paper-ink">{tr("help-ui-not-found-title")}</h1>
                                 <p class="mb-6 text-body-md leading-7 text-paper-mute">{tr("help-ui-not-found-body")}</p>
-                                <a href="/help" class="inline-block rounded-control bg-void px-5 py-3 text-body-sm font-bold text-ink hover:bg-brand-deep">{tr("help-ui-back")}</a>
+                                <a href="/help" class="inline-block rounded-button bg-void px-5 py-3 text-body-sm font-bold text-ink hover:bg-brand-deep">{tr("help-ui-back")}</a>
                             </div>
                         }
                         .into_any()

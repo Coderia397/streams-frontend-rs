@@ -41,6 +41,15 @@
   --color-line: #333333;
   --color-line-strong: #4d4d4d;
 
+  /* Buttons on Netflix's redesigned pages (note 111): the grey see through fill of More Info and of every round button, lighter on hover;
+     the white Play button's hover; the thin edge of the Genres dropdown; the dark fill and edge of a text field over a picture. */
+  --color-glass: rgb(128 128 128 / 0.4);
+  --color-glass-hover: rgb(128 128 128 / 0.3);
+  --color-glass-edge: rgb(128 128 128 / 0.4);
+  --color-ink-hover: rgb(255 255 255 / 0.7);
+  --color-scrim-field: rgb(22 22 22 / 0.7);
+  --color-scrim-edge: rgb(128 128 128 / 0.7);
+
   /* Light paper used by the help center (Netflix's help site is a light page under a dark bar) */
   --color-paper: #ffffff;
   --color-paper-tint: #f3f4fb;
@@ -108,6 +117,15 @@
   --radius-billboard: 24px;
   --radius-sheet: 1rem;
   --radius-tile: var(--tile-radius);
+  /* Buttons, dropdowns and text fields: this one value sets all of them, in the app and the Help Centre. 9999px draws pills, as Netflix's
+     newer screens do (measured 2026-10-23, note 111: Play, More Info, Genres, the nav tabs, Join now, the search field). Use rounded-button
+     on every button with text and every link drawn as a button; text fields and dropdowns take --radius-input from components.css without
+     a class. Icon buttons stay circles (rounded-full). scripts/check_radius.py flags a button drawn with another radius. */
+  --radius-button: 9999px;
+  --radius-input: var(--radius-button);
+  /* Menus that open from a button, and the rows inside them (Netflix's profile and Genres menus: a 12px panel with 8px rows) */
+  --radius-menu: 12px;
+  --radius-menu-item: 8px;
 
   /* Type scale (font sizes only; line heights stay with the element) */
   --text-pico: 8px;

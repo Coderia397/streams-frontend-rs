@@ -312,7 +312,7 @@ pub fn LandingPage() -> impl IntoView {
                 <a href="/" aria-label=crate::brand::NAME><img src=crate::brand::LOGO_WORDMARK alt=crate::brand::NAME class="h-7 w-auto md:h-9" /></a>
                 <button
                     on:click=move |_| nav_login("/login", Default::default())
-                    class="rounded-control bg-brand px-4 py-1.5 text-fine font-bold text-ink hover:bg-brand-hover md:px-5 md:py-2 md:text-body-sm"
+                    class="rounded-button bg-brand px-4 py-1.5 text-fine font-bold text-ink hover:bg-brand-hover md:px-5 md:py-2 md:text-body-sm"
                 >
                     {crate::i18n::t("login-sign-in")}
                 </button>
@@ -349,7 +349,7 @@ pub fn LandingPage() -> impl IntoView {
                         <p class="text-body-md font-bold">{crate::pages::help::tr("landing-promo-title")}</p>
                         <p class="text-body-sm text-ink-body">{crate::i18n::t("landing-promo-body")}</p>
                     </div>
-                    <a href="/help/article/free-to-use" class="w-fit rounded-control bg-ink/15 px-4 py-2 text-body-sm font-bold hover:bg-ink/25">{crate::i18n::t("landing-learn-more")}</a>
+                    <a href="/help/article/free-to-use" class="w-fit rounded-button bg-ink/15 px-4 py-2 text-body-sm font-bold hover:bg-ink/25">{crate::i18n::t("landing-learn-more")}</a>
                 </div>
             </section>
 
@@ -411,11 +411,11 @@ fn LandingForm(email: ReadSignal<String>, set_email: WriteSignal<String>, on_sub
                 on:input=move |e| set_email.set(event_target_value(&e))
                 placeholder=crate::i18n::t("login-email-address")
                 aria-label=crate::i18n::t("auth-email")
-                class="h-12 w-full rounded-control border border-ink/30 bg-void/50 px-4 text-body-md text-ink backdrop-blur-md transition-colors placeholder:text-ink/50 focus:border-ink focus:outline-none sm:h-14 sm:w-[65%]"
+                class="h-12 w-full border border-ink/30 bg-void/50 px-4 text-body-md text-ink backdrop-blur-md transition-colors placeholder:text-ink/50 focus:border-ink focus:outline-none sm:h-14 sm:w-[65%]"
             />
             <button
                 type="submit"
-                class="flex h-12 w-full items-center justify-center gap-2 whitespace-nowrap rounded-control bg-brand text-body-lg font-bold text-ink transition-all duration-(--motion-fast) hover:bg-brand-hover active:scale-95 sm:h-14 sm:w-[35%] sm:text-title"
+                class="flex h-12 w-full items-center justify-center gap-2 whitespace-nowrap rounded-button bg-brand text-body-lg font-bold text-ink transition-all duration-(--motion-fast) hover:bg-brand-hover active:scale-95 sm:h-14 sm:w-[35%] sm:text-title"
             >
                 {crate::i18n::t("login-get-started")}
                 <i class="ph-bold ph-caret-right" aria-hidden="true"></i>
@@ -513,7 +513,7 @@ fn MobileWelcome() -> impl IntoView {
             <div class="px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
                 <button
                     on:click=move |_| nav_start("/login", Default::default())
-                    class="flex h-12 w-full items-center justify-center rounded-control bg-brand text-body-lg font-bold text-ink active:scale-[0.98]"
+                    class="flex h-12 w-full items-center justify-center rounded-button bg-brand text-body-lg font-bold text-ink active:scale-[0.98]"
                 >
                     {crate::i18n::t("login-get-started")}
                 </button>

@@ -46,9 +46,9 @@ pub fn CategorySubNavMobile(
 
     // one look for every pill: filled when it is the page in use, a glass pill otherwise
     let pill = |active: bool| if active {
-        "flex items-center justify-center h-12 px-4 rounded-modal text-body-lg font-medium whitespace-nowrap active:scale-95 transition-all leading-none shrink-0 cursor-pointer bg-ink text-void border border-ink"
+        "flex items-center justify-center h-12 px-4 rounded-button text-body-lg font-medium whitespace-nowrap active:scale-95 transition-all leading-none shrink-0 cursor-pointer bg-ink text-void border border-ink"
     } else {
-        "flex items-center justify-center h-12 px-4 rounded-modal text-body-lg font-medium whitespace-nowrap active:scale-95 transition-all leading-none shrink-0 cursor-pointer bg-ink/[0.08] text-ink-dim border border-ink/15"
+        "flex items-center justify-center h-12 px-4 rounded-button text-body-lg font-medium whitespace-nowrap active:scale-95 transition-all leading-none shrink-0 cursor-pointer bg-ink/[0.08] text-ink-dim border border-ink/15"
     };
 
     view! {
@@ -82,7 +82,7 @@ pub fn CategorySubNavMobile(
                     <button
                         on:click=move |_| set_genre_menu_open.update(|o| *o = !*o)
                         aria-haspopup="listbox"
-                        class="flex items-center gap-3 h-[52px] ps-5 pe-4 rounded-pill border border-ink/35 bg-transparent text-title font-medium leading-none whitespace-nowrap active:scale-95 transition-transform cursor-pointer text-ink"
+                        class="flex items-center gap-3 h-[52px] ps-5 pe-4 rounded-button border border-ink/35 bg-transparent text-title font-medium leading-none whitespace-nowrap active:scale-95 transition-transform cursor-pointer text-ink"
                     >
                         <span>{move || active_genre_label.get()}</span>
                         <i class="ph-fill ph-caret-down text-base opacity-80"></i>
@@ -94,7 +94,7 @@ pub fn CategorySubNavMobile(
             <Show when=move || genre_menu_open.get()>
                 <div class="fixed inset-0 z-(--z-drawer)">
                     <div on:click=move |_| set_genre_menu_open.set(false) class="absolute inset-0 bg-void/60"></div>
-                    <div class=move || format!("absolute {} top-[calc(env(safe-area-inset-top)+8px)] w-[min(66vw,320px)] max-h-[calc(100dvh-24px)] overflow-y-auto rounded-2xl bg-raised py-2 shadow-2xl scrollbar-hide", if on_home() { "right-2" } else { "left-2" }) role="listbox">
+                    <div class=move || format!("absolute {} top-[calc(env(safe-area-inset-top)+8px)] w-[min(66vw,320px)] max-h-[calc(100dvh-24px)] overflow-y-auto rounded-menu bg-raised py-2 shadow-2xl scrollbar-hide", if on_home() { "right-2" } else { "left-2" }) role="listbox">
                         <button
                             on:click=move |_| { set_genre_menu_open.set(false); on_genre_select.run(None); }
                             class=move || if selected_genre.get().is_none() { "block w-full text-left px-4 py-3 text-title font-bold text-ink cursor-pointer" } else { "block w-full text-left px-4 py-3 text-title text-ink/85 cursor-pointer" }

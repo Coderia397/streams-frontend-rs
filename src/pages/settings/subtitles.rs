@@ -41,7 +41,7 @@ fn Pick(label_key: &'static str, value: Signal<String>, options: Vec<(String, St
             <select
                 on:change=move |ev| on_pick.run(event_target_value(&ev))
                 prop:value=move || value.get()
-                class="max-w-1/2 rounded-control border border-ink/20 bg-ink/10 px-3 py-2 text-body-md text-ink focus:border-ink focus:outline-none"
+                class="max-w-1/2 border border-ink/20 bg-ink/10 px-3 py-2 text-body-md text-ink focus:border-ink focus:outline-none"
             >
                 {options.into_iter().map(|(v, l)| view! { <option value=v class="bg-page text-ink">{l}</option> }).collect_view()}
             </select>
@@ -89,7 +89,7 @@ pub fn Subtitles(id: String) -> impl IntoView {
                                 aria-checked=move || (style.get().size == n).to_string()
                                 aria-label=t(key)
                                 on:click=move |_| set(Box::new(move |s| s.size = n))
-                                class="flex h-11 w-11 items-center justify-center rounded-control border font-bold"
+                                class="flex h-11 w-11 items-center justify-center rounded-button border font-bold"
                                 class=("border-ink", move || style.get().size == n)
                                 class=("bg-ink", move || style.get().size == n)
                                 class=("text-void", move || style.get().size == n)
@@ -113,7 +113,7 @@ pub fn Subtitles(id: String) -> impl IntoView {
                 <SwatchPicker label=t("set-sub-window") colors=swatches(true) selected=Signal::derive(move || style.get().window) on_pick=Callback::new(move |v: String| set(Box::new(move |s| s.window = v))) />
                 <SwitchRow icon="circle-half" title=t("set-sub-transparent") checked=Signal::derive(move || style.get().window_clear) on_change=Callback::new(move |v| set(Box::new(move |s| s.window_clear = v))) />
             </Section>
-            <button type="button" on:click=move |_| set(Box::new(|s| *s = SubtitleStyle::default())) class="rounded-control border border-ink/40 px-6 py-3 text-body-md font-bold hover:bg-ink/10">{t("set-reset")}</button>
+            <button type="button" on:click=move |_| set(Box::new(|s| *s = SubtitleStyle::default())) class="rounded-button border border-ink/40 px-6 py-3 text-body-md font-bold hover:bg-ink/10">{t("set-reset")}</button>
         </div>
     }
 }

@@ -99,6 +99,11 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
     let email = RwSignal::new(String::new());
     let hero_ref = NodeRef::<leptos::html::Div>::new();
     let form_ref = NodeRef::<leptos::html::Div>::new();
+    // the blurred copy of the trailer behind the page (computers only: a phone would decode two videos); it follows the main trailer's time
+    let wide = web_sys::window().and_then(|w| w.match_media("(min-width: 48rem)").ok().flatten()).is_some_and(|m| m.matches());
+    let main_time = StoredValue::new(0.0f64);
+    let glow_seek = RwSignal::new(None::<f64>);
+    let glow_synced_at = StoredValue::new(0.0f64);
 
     if let Some(w) = web_sys::window() {
         w.scroll_to_with_x_and_y(0.0, 0.0);
@@ -161,95 +166,136 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
         details.get().flatten().and_then(|d| d.backdrop_path).map(|p| format!("{}/original{}", crate::config::TMDB_IMAGE_URL, p)).unwrap_or_default()
     };
     let title_text = move || details.get().flatten().map(|d| d.display_title().to_string()).unwrap_or_default();
+    // the mark above the title is the title's own network or studio (Netflix over Stranger Things, HBO over Game of Thrones), as Netflix shows its own mark over its shows
+    let maker = move || {
+        details.get().flatten().and_then(|d| {
+            let pick = |list: Option<Vec<crate::services::tmdb::Company>>| list.unwrap_or_default().into_iter().find(|c| c.logo_path.as_deref().is_some_and(|p| !p.is_empty()));
+            let company = if is_tv { pick(d.networks.clone()).or_else(|| pick(d.production_companies.clone())) } else { pick(d.production_companies.clone()) };
+            company.map(|c| (c.name, format!("{}/w300{}", crate::config::TMDB_IMAGE_URL, c.logo_path.unwrap_or_default())))
+        })
+    };
 
     view! {
-        <div class="min-h-screen bg-void font-sans text-ink">
-            <header class="flex items-center justify-between px-4 py-3 md:px-12 md:py-5">
+        <div class="relative min-h-screen overflow-x-clip bg-[#0f0f0f] font-sans text-ink">
+            // the trailer's colours round the panel: Netflix blurs a second copy of the video; ours blurs the title's backdrop (a second trailer would load twice)
+            <div class="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[520px] overflow-hidden md:h-[910px]" aria-hidden="true" inert>
+                <img src=backdrop alt="" class="h-full w-full scale-110 object-cover" />
+                {wide.then(|| view! {
+                    // a small player (YouTube then sends a small, cheap picture) scaled up to 121 % of the page's width, as Netflix's copy, then blurred
+                    <div class="hero-glow-video absolute inset-0">
+                        <div class="absolute left-1/2 top-0 aspect-video w-[12.14vw] origin-top -translate-x-1/2 scale-[10]">
+                            <TrailerPlayer
+                                video_key=Signal::derive(move || hero_key.get())
+                                is_teaser=Signal::derive(move || hero_teaser.get())
+                                is_playing=Signal::derive(move || !paused.get() && !ended.get() && !hero_out.get())
+                                is_muted=Signal::derive(|| true)
+                                seek_time=Signal::derive(move || glow_seek.get())
+                                variant="hero".to_string()
+                                iframe_id="title-glow-iframe".to_string()
+                                on_time_update=Callback::new(move |t: f64| {
+                                    let m = main_time.get_value();
+                                    let now = js_sys::Date::now();
+                                    if m > 0.0 && (t - m).abs() > 1.5 && now - glow_synced_at.get_value() > 3000.0 {
+                                        glow_synced_at.set_value(now);
+                                        glow_seek.set(Some(m));
+                                    }
+                                })
+                            />
+                        </div>
+                    </div>
+                })}
+            </div>
+
+            <header class="relative z-10 flex h-14 items-center justify-between px-6 md:h-[72px] md:px-12">
                 <a href="/" aria-label=crate::brand::NAME><img src=crate::brand::LOGO_WORDMARK alt=crate::brand::NAME class="h-7 w-auto md:h-9" /></a>
-                <a href=sign_in class="rounded-control bg-brand px-4 py-1.5 text-fine font-bold text-ink hover:bg-brand-hover md:px-5 md:py-2 md:text-body-sm">
-                    {t("login-sign-in")}
-                </a>
+                <a href=sign_in class="btn-ink btn-pill btn-pill-sm">{t("login-sign-in")}</a>
             </header>
 
-            // jump links: a strip on phones, a pill over the top of the hero from a tablet up
-            <nav aria-label=t("title-jump-label") class="relative z-20 border-b border-ink/10 md:-mb-5 md:flex md:justify-center md:border-0">
-                <div class="flex gap-1 overflow-x-auto px-2 [scrollbar-width:none] md:rounded-full md:bg-panel/90 md:px-3 md:shadow-lg md:backdrop-blur [&::-webkit-scrollbar]:hidden">
+            // jump links: a strip across a phone, a pill centred over the hero from a tablet up (Netflix: 41 px, links 14 px, 70 % white)
+            <nav aria-label=t("title-jump-label") class="relative z-10 md:flex md:justify-center">
+                <div class="flex overflow-x-auto px-4 [scrollbar-width:none] md:rounded-button md:bg-void/70 [&::-webkit-scrollbar]:hidden">
                     {move || (!trailer_list(&videos.get().unwrap_or_default()).is_empty()).then(|| view! {
-                        <button type="button" on:click=move |_| jump_to("title-trailers") class="shrink-0 cursor-pointer px-3 py-3 text-body-sm font-semibold text-ink/90 hover:text-ink md:py-2">{t("title-trailers")}</button>
+                        <button type="button" on:click=move |_| jump_to("title-trailers") class=JUMP_LINK>{t("title-trailers")}</button>
                     })}
                     {is_tv.then(|| view! {
-                        <button type="button" on:click=move |_| jump_to("title-episodes") class="shrink-0 cursor-pointer px-3 py-3 text-body-sm font-semibold text-ink/90 hover:text-ink md:py-2">{t("media-episodes")}</button>
+                        <button type="button" on:click=move |_| jump_to("title-episodes") class=JUMP_LINK>{t("media-episodes")}</button>
                     })}
-                    <button type="button" on:click=move |_| jump_to("title-more-to-watch") class="shrink-0 cursor-pointer px-3 py-3 text-body-sm font-semibold text-ink/90 hover:text-ink md:py-2">{t("title-more-to-watch")}</button>
+                    <button type="button" on:click=move |_| jump_to("title-more-to-watch") class=JUMP_LINK>{t("title-more-to-watch")}</button>
                 </div>
             </nav>
 
-            // hero: the trailer in a rounded panel; the sign up form sits over it from a tablet up and under it on a phone
-            <section class="relative px-3 pt-3 md:px-[3.5%] md:pt-0">
-                <div node_ref=hero_ref class="relative aspect-video w-full overflow-hidden rounded-card bg-raised [container-type:size] md:aspect-auto md:h-[min(72vh,36rem)] md:rounded-[1.5rem]">
-                    <img
-                        src=backdrop
-                        alt=""
-                        class="absolute inset-0 h-full w-full object-cover transition-opacity duration-(--motion-slowest)"
-                        class=("opacity-0", move || ready.get() && !ended.get() && !paused.get())
-                    />
-                    // a 16:9 box that covers the panel at any shape (the panel is wider than the video on a computer and taller on a tablet), so YouTube never adds bars
-                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" style="width: max(100cqw, 177.78cqh); height: max(100cqh, 56.25cqw)">
-                        <TrailerPlayer
-                            video_key=Signal::derive(move || hero_key.get())
-                            is_teaser=Signal::derive(move || hero_teaser.get())
-                            is_playing=Signal::derive(move || !paused.get() && !ended.get() && !hero_out.get())
-                            is_muted=Signal::derive(move || muted.get())
-                            variant="hero".to_string()
-                            iframe_id="title-trailer-iframe".to_string()
-                            on_ready=Callback::new(move |_| ready.set(true))
-                            on_ended=Callback::new(move |_| {
-                                ended.set(true);
-                                ready.set(false);
-                            })
-                        />
-                    </div>
-                    <div class="pointer-events-none absolute inset-0 bg-linear-to-t from-void/70 via-transparent to-transparent md:bg-linear-to-r md:from-void/85 md:via-void/30"></div>
-
-                    {move || hero_key.get().is_some().then(|| view! {
-                        <div class="absolute bottom-3 end-3 z-20 flex gap-2 md:bottom-10 md:end-10">
-                            {move || (!ended.get()).then(|| view! {
-                                <button
-                                    type="button"
-                                    on:click=move |_| paused.update(|p| *p = !*p)
-                                    class="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border-2 border-ink/60 bg-void/40 text-ink hover:border-ink"
-                                    title=move || if paused.get() { t("media-play") } else { t("title-pause") }
-                                    aria-label=move || if paused.get() { t("media-play") } else { t("title-pause") }
-                                >
-                                    <i class=move || if paused.get() { "ph-fill ph-play text-lg" } else { "ph-fill ph-pause text-lg" }></i>
-                                </button>
-                            })}
-                            <crate::components::media::action_buttons::MuteReplayButton
-                                is_muted=Signal::derive(move || muted.get())
-                                is_ended=Signal::derive(move || ended.get())
-                                on_toggle=Callback::new(move |_| {
-                                    if ended.get_untracked() {
-                                        ended.set(false);
-                                        paused.set(false);
-                                    } else {
-                                        muted.update(|m| *m = !*m);
-                                    }
-                                })
-                                size="md".to_string()
+            // hero: the trailer in a rounded panel whose bottom edge curves up; the sign up form sits over it from a tablet up and under it on a phone
+            <section class="relative mt-2 px-3 md:mt-4 md:px-12">
+                <div class="hero-drop">
+                    <div node_ref=hero_ref class="hero-panel relative aspect-video w-full overflow-hidden rounded-[10px] [container-type:size] md:aspect-auto md:h-[606px] md:rounded-[20px]">
+                        <div class="hero-video absolute inset-0">
+                            <img
+                                src=backdrop
+                                alt=""
+                                class="absolute inset-0 h-full w-full object-cover transition-opacity duration-(--motion-slowest)"
+                                class=("opacity-0", move || ready.get() && !ended.get() && !paused.get())
                             />
+                            // a 16:9 box that covers the panel at any shape (the panel is wider than the video on a computer), so YouTube never adds bars
+                            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" style="width: max(100cqw, 177.78cqh); height: max(100cqh, 56.25cqw)">
+                                <TrailerPlayer
+                                    video_key=Signal::derive(move || hero_key.get())
+                                    is_teaser=Signal::derive(move || hero_teaser.get())
+                                    is_playing=Signal::derive(move || !paused.get() && !ended.get() && !hero_out.get())
+                                    is_muted=Signal::derive(move || muted.get())
+                                    variant="hero".to_string()
+                                    iframe_id="title-trailer-iframe".to_string()
+                                    on_time_update=Callback::new(move |t: f64| main_time.set_value(t))
+                                    on_ready=Callback::new(move |_| ready.set(true))
+                                    on_ended=Callback::new(move |_| {
+                                        ended.set(true);
+                                        ready.set(false);
+                                    })
+                                />
+                            </div>
                         </div>
-                    })}
+                        <div class="hero-shade pointer-events-none absolute inset-0"></div>
+
+                        {move || hero_key.get().is_some().then(|| view! {
+                            <div class="absolute bottom-5 start-3 z-20 flex gap-3 md:bottom-[72px] md:end-14 md:start-auto">
+                                {move || (!ended.get()).then(|| view! {
+                                    <button
+                                        type="button"
+                                        on:click=move |_| paused.update(|p| *p = !*p)
+                                        class="btn-circle btn-circle-md"
+                                        title=move || if paused.get() { t("media-play") } else { t("title-pause") }
+                                        aria-label=move || if paused.get() { t("media-play") } else { t("title-pause") }
+                                    >
+                                        <i class=move || if paused.get() { "ph-fill ph-play" } else { "ph-fill ph-pause" }></i>
+                                    </button>
+                                })}
+                                <crate::components::media::action_buttons::MuteReplayButton
+                                    is_muted=Signal::derive(move || muted.get())
+                                    is_ended=Signal::derive(move || ended.get())
+                                    on_toggle=Callback::new(move |_| {
+                                        if ended.get_untracked() {
+                                            ended.set(false);
+                                            paused.set(false);
+                                        } else {
+                                            muted.update(|m| *m = !*m);
+                                        }
+                                    })
+                                    size="md".to_string()
+                                />
+                            </div>
+                        })}
+                    </div>
                 </div>
 
-                <div node_ref=form_ref class="relative z-10 mx-auto mt-6 w-full max-w-[22rem] space-y-4 px-2 text-center md:absolute md:bottom-10 md:start-[calc(3.5%+2.5rem)] md:mt-0 md:px-0">
-                    <img src=crate::brand::LOGO_WORDMARK alt="" class="mx-auto h-5 w-auto md:h-6" />
-                    <h1 class="flex min-h-16 items-center justify-center">
+                // Netflix: a 312 px column 56 px inside the panel and 72 px above its bottom (258 px and centred under the panel on a phone)
+                <div node_ref=form_ref class="relative z-10 mx-auto mt-5 flex w-full max-w-[258px] flex-col items-center text-center md:absolute md:bottom-[72px] md:start-[104px] md:mt-0 md:max-w-[312px]">
+                    {move || maker().map(|(name, src)| view! { <img src=src alt=name class="h-5 w-auto max-w-[120px] object-contain brightness-0 invert" /> })}
+                    <h1 class="mt-3 flex w-full items-center justify-center md:mt-6">
                         {move || match logo.get().flatten() {
-                            Some(src) => view! { <img src=src alt=title_text class="mx-auto max-h-24 max-w-full object-contain drop-shadow-text md:max-h-28" /> }.into_any(),
-                            None => view! { <span class="text-heading-xl font-black leading-tight drop-shadow-text">{title_text}</span> }.into_any(),
+                            Some(src) => view! { <img src=src alt=title_text class="max-h-[60px] max-w-[180px] object-contain drop-shadow-text md:max-h-[100px] md:max-w-full" /> }.into_any(),
+                            None => view! { <span class="text-[28px] font-black leading-tight drop-shadow-text md:text-[40px]">{title_text}</span> }.into_any(),
                         }}
                     </h1>
-                    <form on:submit=on_submit class="space-y-3">
+                    <form on:submit=on_submit class="mt-3 flex w-full flex-col items-center md:mt-8">
                         <input
                             type="email"
                             autocomplete="email"
@@ -257,35 +303,35 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
                             on:input=move |e| email.set(event_target_value(&e))
                             placeholder=t("login-email-address")
                             aria-label=t("auth-email")
-                            class="h-12 w-full rounded-control border border-ink/40 bg-void/60 px-4 text-body-md text-ink backdrop-blur-md placeholder:text-ink/60 focus:border-ink focus:outline-none"
+                            class="h-10 w-full border border-scrim-edge bg-scrim-field px-4 text-[16px] text-ink placeholder:text-ink/70 focus:border-ink focus:outline-none md:h-14"
                         />
-                        <button type="submit" class="mx-auto flex h-12 w-full max-w-[14rem] cursor-pointer items-center justify-center gap-2 rounded-control bg-brand text-body-lg font-bold text-ink transition-colors hover:bg-brand-hover active:scale-95">
+                        <button type="submit" class="btn-brand btn-pill btn-pill-lg mt-2 h-10 w-[200px] md:mt-3 md:h-12 md:w-60 md:text-[18px]">
                             {t("login-get-started")}
-                            <i class="ph-bold ph-caret-right rtl:rotate-180" aria-hidden="true"></i>
                         </button>
                     </form>
-                    <p class="text-body-sm text-ink/90">{t("auth-tick-free")}</p>
+                    <p class="mt-2 text-[14px] md:text-[16px]">{t("title-free-line")}</p>
                 </div>
             </section>
 
-            <main class="mx-auto w-full max-w-[1130px] px-4 pb-6 md:px-8">
-                <Suspense fallback=|| view! { <div class="mt-10 h-40 animate-pulse rounded-card bg-panel/60"></div> }>
+            // Netflix: content 1119 px wide, 24 px from the edges of a phone
+            <main class="mx-auto w-full max-w-[1167px] px-6 pb-6">
+                <Suspense fallback=|| view! { <div class=format!("{CARD} mt-8 h-40 animate-pulse md:mt-[52px]")></div> }>
                     {move || details.get().map(|res| match res {
                         Some(d) => view! { <TitleBody details=d id=id is_tv=is_tv videos=videos play_video=play_video /> }.into_any(),
                         None => view! {
-                            <p class="mt-10 rounded-card bg-panel/60 p-6 text-center text-body-md">{t("info-modal-error-loading-details")}</p>
+                            <p class=format!("{CARD} mt-8 p-6 text-center text-[16px] md:mt-[52px]")>{t("info-modal-error-loading-details")}</p>
                         }.into_any(),
                     })}
                 </Suspense>
 
                 <PosterRow id="title-trending" heading=t("media-badge-trending-now") source=PosterSource::Trending exclude=(is_tv, id) />
 
-                <section class="relative mt-12 overflow-hidden rounded-card">
+                <section class="relative mt-8 overflow-hidden rounded-2xl md:mt-10">
                     <img src=crate::pages::login::wall("wide") alt="" class="absolute inset-0 h-full w-full object-cover opacity-40" />
                     <div class="absolute inset-0 bg-linear-to-r from-void/80 to-void/30"></div>
-                    <div class="relative flex flex-col gap-4 p-6 md:flex-row md:items-center md:justify-between md:px-8">
-                        <p class="text-title font-bold md:text-heading">{t("login-unlimited-films-series-and-more")}</p>
-                        <a href="/" class="w-fit shrink-0 rounded-full border border-ink/40 bg-void/60 px-5 py-2 text-body-sm font-bold hover:bg-void/80">{t("landing-learn-more")}</a>
+                    <div class="relative flex flex-col gap-4 p-6 md:flex-row md:items-center md:justify-between md:px-6">
+                        <p class="text-[20px] font-bold md:text-[24px]">{t("login-unlimited-films-series-and-more")}</p>
+                        <a href="/" class="btn-glass btn-pill btn-pill-sm w-fit shrink-0">{t("landing-learn-more")}</a>
                     </div>
                 </section>
             </main>
@@ -301,17 +347,20 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
                 class=("opacity-0", move || !show_join.get())
                 class=("translate-y-4", move || !show_join.get())
             >
-                <button
-                    type="button"
-                    on:click=move |_| go_signup.run(())
-                    class="cursor-pointer rounded-full bg-brand px-12 py-3 text-body-lg font-bold text-ink shadow-2xl hover:bg-brand-hover active:scale-95"
-                >
+                <button type="button" on:click=move |_| go_signup.run(()) class="btn-brand btn-pill btn-pill-lg w-60 text-[18px] shadow-2xl">
                     {t("login-get-started")}
                 </button>
             </div>
         </div>
     }
 }
+
+/// The page's cards (summary, episodes, More Details): Netflix's 16 px corners, 10 % white with a faint 2 px edge (radius: cards, not buttons).
+const CARD: &str = "rounded-2xl border-2 border-ink/[0.04] bg-ink/10";
+/// A jump link: 14 px, 70 % white, 41 px tall.
+const JUMP_LINK: &str = "shrink-0 cursor-pointer px-5 pb-3 pt-[11.2px] text-[14px] font-medium leading-[17.8px] text-ink/70 hover:text-ink";
+/// A section heading: 20 px on a phone, 32 px from a tablet up, the line 1.25 of the size (Netflix Sans' normal line).
+const SECTION_HEADING: &str = "mb-2.5 text-[20px] font-bold leading-[1.25] md:mb-3.5 md:text-[32px]";
 
 /// Everything under the hero that needs the title's details: the summary card, trailers, episodes, more details and titles like it.
 #[component]
@@ -338,23 +387,26 @@ fn TitleBody(
         .map(|l| crate::i18n::t_args("title-original-audio", &[("language", fluent_bundle::FluentValue::from(crate::i18n::language_name(l)))]));
     let genre_names = genres.iter().map(|(_, n)| n.clone()).collect::<Vec<_>>().join(", ");
     let vibe_heading = if is_tv { heading("media-this-show-is") } else { heading("media-this-movie-is") };
+    // each dot travels with the item after it, so a wrapped line never ends on a dot
     let dot = || view! { <span class="text-ink/50" aria-hidden="true">"•"</span> };
+    let detail = "text-[14px] font-medium";
 
     view! {
         // summary card
-        <section class="mt-8 rounded-card border border-ink/10 bg-panel/80 p-5 md:mt-10 md:p-6">
-            <h2 class="text-title font-bold md:text-title-lg">{title.clone()}</h2>
-            <p class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-body-sm font-semibold text-ink-soft">
+        <section class=format!("{CARD} mt-8 p-4 md:mt-[52px] md:px-8 md:py-6")>
+            <h2 class="text-[20px] font-medium leading-[1.25] md:text-[24px]">{title.clone()}</h2>
+            <p class="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] font-medium leading-[21px]">
                 {(!year.is_empty()).then(|| view! { <span>{year.clone()}</span> })}
-                {(seasons > 0).then(|| view! { {dot()}<span>{crate::i18n::t_args("media-seasons", &[("n", fluent_bundle::FluentValue::from(seasons as i64))])}</span> })}
-                {dot()}<RatingBadge id=id is_tv=is_tv size="xs".to_string() />
-                {first_genre.map(|g| view! { {dot()}<span>{g}</span> })}
+                {(seasons > 0).then(|| view! { <span class="inline-flex items-center gap-2">{dot()}<span>{crate::i18n::t_args("media-seasons", &[("n", fluent_bundle::FluentValue::from(seasons as i64))])}</span></span> })}
+                <span class="inline-flex items-center gap-2">{dot()}<RatingBadge id=id is_tv=is_tv size="xs".to_string() /></span>
+                {first_genre.map(|g| view! { <span class="inline-flex items-center gap-2">{dot()}<span>{g}</span></span> })}
             </p>
-            <div class="mt-4 grid gap-4 md:grid-cols-2">
-                <p class="text-body-md leading-relaxed">{details.overview.clone()}</p>
-                <div class="space-y-1 text-body-sm md:border-s md:border-ink/20 md:ps-5">
-                    {(!starring.is_empty()).then(|| view! { <p><span class="font-semibold text-ink-ash">{t("title-starring")}" "</span>{starring}</p> })}
-                    {(!creators.is_empty()).then(|| view! { <p><span class="font-semibold text-ink-ash">{t("title-creators")}" "</span>{creators}</p> })}
+            <div class="mt-3 md:grid md:grid-cols-[1fr_1px_1fr] md:gap-x-4">
+                <p class="text-[16px] leading-normal">{details.overview.clone()}</p>
+                <div class="hidden bg-ink/20 md:block" aria-hidden="true"></div>
+                <div class="mt-4 space-y-1 text-[14px] leading-[21px] md:mt-0">
+                    {(!starring.is_empty()).then(|| view! { <p><span class="font-medium">{t("title-starring")}" "</span>{starring}</p> })}
+                    {(!creators.is_empty()).then(|| view! { <p><span class="font-medium">{t("title-creators")}" "</span>{creators}</p> })}
                 </div>
             </div>
         </section>
@@ -363,8 +415,8 @@ fn TitleBody(
         {move || {
             let list = trailer_list(&videos.get().unwrap_or_default());
             (!list.is_empty()).then(|| view! {
-                <section id="title-trailers" class="mt-10">
-                    <h2 class="mb-3 text-title font-bold md:text-heading">{t("title-trailers")}</h2>
+                <section id="title-trailers" class="mt-8 md:mt-10">
+                    <h2 class=SECTION_HEADING>{t("title-trailers")}</h2>
                     <Rail>
                         {list.into_iter().map(|v| {
                             let key = v.key.clone();
@@ -374,13 +426,13 @@ fn TitleBody(
                                 _ => t("title-video-clip"),
                             };
                             view! {
-                                <button type="button" on:click=move |_| play_video.run(key.clone()) class="group w-[72vw] max-w-[20rem] shrink-0 cursor-pointer snap-start text-start sm:w-[20rem]">
-                                    <div class="relative aspect-video overflow-hidden rounded-card bg-raised">
+                                <button type="button" on:click=move |_| play_video.run(key.clone()) class="group w-[225px] shrink-0 cursor-pointer snap-start text-start md:w-[327px]">
+                                    <div class="relative aspect-video overflow-hidden rounded-lg bg-ink/10">
                                         <img src=format!("https://i.ytimg.com/vi/{}/hqdefault.jpg", v.key) alt="" loading="lazy" class="h-full w-full object-cover transition-transform duration-(--motion-base) group-hover:scale-105" />
-                                        <span class="absolute bottom-3 start-3 flex h-9 w-9 items-center justify-center rounded-full border-2 border-ink bg-void/40"><i class="ph-fill ph-play text-body-md"></i></span>
+                                        <span class="btn-circle btn-circle-md absolute bottom-3 start-3"><i class="ph-fill ph-play"></i></span>
                                     </div>
-                                    <p class="mt-2 text-caption font-bold uppercase tracking-widest text-ink-ash">{label}</p>
-                                    <p class="line-clamp-2 text-body-sm font-semibold">{v.name.clone().unwrap_or_default()}</p>
+                                    <p class="mt-2 text-[13px] font-bold uppercase leading-none tracking-[0.16em] text-ink/70">{label}</p>
+                                    <p class="mt-[3px] line-clamp-2 text-[16px] font-medium leading-normal">{v.name.clone().unwrap_or_default()}</p>
                                 </button>
                             }
                         }).collect_view()}
@@ -392,23 +444,21 @@ fn TitleBody(
         {(is_tv && seasons > 0).then(|| view! { <Episodes id=id seasons=seasons /> })}
 
         // more details
-        <section class="mt-10">
-            <h2 class="mb-3 text-title font-bold md:text-heading">{t("title-more-details")}</h2>
+        <section class="mt-8 md:mt-10">
+            <h2 class=SECTION_HEADING>{t("title-more-details")}</h2>
             <div class="grid gap-3 md:grid-cols-3">
-                <div class="space-y-3 rounded-card border border-ink/10 bg-panel/80 p-5 text-body-sm">
-                    {(!genre_names.is_empty()).then(|| view! { <div><h3 class="font-bold">{heading("media-genres")}</h3><p class="text-ink-soft">{genre_names}</p></div> })}
-                    <div><h3 class="font-bold">{vibe_heading}</h3><p class="text-ink-soft">{vibe}</p></div>
+                <div class=format!("{CARD} flex flex-col gap-2.5 px-4 py-8 md:px-6")>
+                    {(!genre_names.is_empty()).then(|| view! { <div class=detail><h3>{heading("media-genres")}</h3><p class="mt-0.5 text-ink/70">{genre_names}</p></div> })}
+                    <div class=detail><h3>{vibe_heading}</h3><p class="mt-0.5 text-ink/70">{vibe}</p></div>
                 </div>
                 {audio.map(|a| view! {
-                    <div class="rounded-card border border-ink/10 bg-panel/80 p-5 text-body-sm">
-                        <h3 class="font-bold">{t("player-audio")}</h3>
-                        <p class="text-ink-soft">{a}</p>
+                    <div class=format!("{CARD} flex flex-col gap-2.5 px-4 py-8 md:px-6")>
+                        <div class=detail><h3>{t("player-audio")}</h3><p class="mt-0.5 text-ink/70">{a}</p></div>
                     </div>
                 })}
                 {(!cast.is_empty()).then(|| view! {
-                    <div class="rounded-card border border-ink/10 bg-panel/80 p-5 text-body-sm">
-                        <h3 class="font-bold">{heading("media-cast")}</h3>
-                        <p class="text-ink-soft">{cast.join(", ")}</p>
+                    <div class=format!("{CARD} flex flex-col gap-2.5 px-4 py-8 md:px-6")>
+                        <div class=detail><h3>{heading("media-cast")}</h3><p class="mt-0.5 text-ink/70">{cast.join(", ")}</p></div>
                     </div>
                 })}
             </div>
@@ -427,15 +477,15 @@ fn Episodes(id: u32, seasons: u32) -> impl IntoView {
         async move { fetch_season_details(id, s).await.map(|d| d.episodes).unwrap_or_default() }
     });
     view! {
-        <section id="title-episodes" class="mt-10">
-            <div class="mb-3 flex flex-wrap items-center gap-4">
-                <h2 class="text-title font-bold md:text-heading">{t("media-episodes")}</h2>
+        <section id="title-episodes" class="mt-8 md:mt-10">
+            <div class="mb-2.5 flex flex-wrap items-center gap-4 md:mb-3.5">
+                <h2 class="text-[20px] font-bold leading-[1.25] md:text-[32px]">{t("media-episodes")}</h2>
                 {(seasons > 1).then(|| view! {
                     <div class="relative">
                         <select
                             aria-label=t("title-season-label")
                             on:change=move |e| { if let Ok(n) = event_target_value(&e).parse::<u32>() { season.set(n); } }
-                            class="cursor-pointer appearance-none rounded-full border border-ink/40 bg-void py-1.5 ps-4 pe-10 text-body-sm font-semibold text-ink hover:border-ink"
+                            class="h-10 cursor-pointer appearance-none border border-scrim-edge bg-scrim-field ps-3 pe-9 text-[16px] text-ink hover:border-ink"
                         >
                             {(1..=seasons).map(|n| view! {
                                 <option value=n.to_string() selected=move || season.get() == n class="bg-paper text-paper-ink">
@@ -447,20 +497,20 @@ fn Episodes(id: u32, seasons: u32) -> impl IntoView {
                     </div>
                 })}
             </div>
-            <Suspense fallback=|| view! { <div class="h-64 animate-pulse rounded-card bg-panel/60"></div> }>
+            <Suspense fallback=|| view! { <div class=format!("{CARD} h-[337px] animate-pulse md:h-[367px]")></div> }>
                 {move || episodes.get().map(|list| view! {
                     <Rail>
                         {list.into_iter().map(|ep| view! {
-                            <div class="w-[72vw] max-w-[20rem] shrink-0 snap-start overflow-hidden rounded-card border border-ink/10 bg-panel/80 p-2 sm:w-[20rem]">
-                                <div class="relative aspect-video overflow-hidden rounded-control bg-raised">
+                            <div class="w-[246px] shrink-0 snap-start overflow-hidden rounded-xl border-2 border-ink/[0.04] bg-ink/10 p-2 md:w-[327px] md:rounded-2xl">
+                                <div class="relative aspect-video overflow-hidden rounded-xl bg-[#161616] md:rounded-2xl">
                                     {ep.still_url("w300").map(|src| view! { <img src=src alt="" loading="lazy" class="h-full w-full object-cover" /> })}
                                     {ep.runtime.filter(|r| *r > 0).map(|r| view! {
-                                        <span class="absolute bottom-2 end-2 rounded-tick bg-void/80 px-1.5 py-0.5 text-caption font-semibold">{format!("{r}m")}</span>
+                                        <span class="absolute bottom-[9px] end-5 rounded-tick bg-void/70 px-1.5 py-0.5 text-[13px] font-medium text-ink/70">{format!("{r}m")}</span>
                                     })}
                                 </div>
-                                <div class="px-2 pb-2 pt-3">
-                                    <p class="text-body-sm font-bold">{format!("{}. {}", ep.episode_number, ep.name)}</p>
-                                    <p class="mt-1 line-clamp-4 text-body-sm text-ink-soft">{ep.overview.clone()}</p>
+                                <div class="px-4 pb-4 pt-[18px]">
+                                    <p class="text-[16px] font-medium leading-6">{format!("{}. {}", ep.episode_number, ep.name)}</p>
+                                    <p class="mt-2 line-clamp-4 text-[14px] leading-[21px] text-ink/70">{ep.overview.clone()}</p>
                                 </div>
                             </div>
                         }).collect_view()}
@@ -478,7 +528,7 @@ enum PosterSource {
     Trending,
 }
 
-/// A row of posters, each a link to that title's own page.
+/// A row of posters, each a link to that title's own page (Netflix: 184 x 258 on a computer, 132 x 185 on a phone, 16 px corners).
 #[component]
 fn PosterRow(id: &'static str, heading: String, source: PosterSource, exclude: (bool, u32)) -> impl IntoView {
     let items = LocalResource::new(move || async move {
@@ -505,16 +555,16 @@ fn PosterRow(id: &'static str, heading: String, source: PosterSource, exclude: (
     });
     view! {
         {move || items.get().filter(|l| !l.is_empty()).map(|list| view! {
-            <section id=id class="mt-10">
-                <h2 class="mb-3 text-title font-bold md:text-heading">{heading.clone()}</h2>
-                <Rail>
+            <section id=id class="mt-8 md:mt-10">
+                <h2 class=SECTION_HEADING>{heading.clone()}</h2>
+                <Rail inset=true>
                     {list.into_iter().map(|(tv, m)| view! {
-                        <a href=format!("/title/{}", slug_for(tv, m.id)) class="w-[30vw] max-w-[11.5rem] shrink-0 snap-start sm:w-[11.5rem]">
+                        <a href=format!("/title/{}", slug_for(tv, m.id)) class="w-[132px] shrink-0 snap-start md:w-[184px]">
                             <img
                                 src=m.poster_url("w342").unwrap_or_default()
                                 alt=m.display_title().to_string()
                                 loading="lazy"
-                                class="aspect-[2/3] w-full rounded-card bg-raised object-cover transition-transform duration-(--motion-base) hover:scale-[1.03]"
+                                class="aspect-[184/258] w-full rounded-2xl bg-[#232323] object-cover transition-transform duration-(--motion-base) hover:scale-[1.03]"
                             />
                         </a>
                     }).collect_view()}
@@ -524,29 +574,53 @@ fn PosterRow(id: &'static str, heading: String, source: PosterSource, exclude: (
     }
 }
 
-/// A row that scrolls sideways: swipe on a phone, arrows on the sides from a tablet up.
+/// A row that scrolls sideways: swipe on a phone; Netflix's grey 24 x 80 arrows at the ends, each shown while there is more that way
+/// (from a computer up they sit 8 px outside the row). `inset` starts the row 8 px in, as Netflix's poster rows.
 #[component]
-fn Rail(children: Children) -> impl IntoView {
+fn Rail(children: Children, #[prop(optional)] inset: bool) -> impl IntoView {
     let track = NodeRef::<leptos::html::Div>::new();
-    let by = move |forward: bool| {
+    let can_back = RwSignal::new(false);
+    let can_fwd = RwSignal::new(false);
+    let rtl = move || web_sys::window().and_then(|w| w.document()).and_then(|d| d.document_element()).is_some_and(|e| e.get_attribute("dir").as_deref() == Some("rtl"));
+    let update = move || {
         if let Some(el) = track.get_untracked() {
-            let rtl = web_sys::window().and_then(|w| w.document()).and_then(|d| d.document_element()).is_some_and(|e| e.get_attribute("dir").as_deref() == Some("rtl"));
-            let step = el.client_width() as f64 * 0.8;
-            el.scroll_by_with_x_and_y(if forward != rtl { step } else { -step }, 0.0);
+            // scrollLeft counts down from 0 in a right to left page
+            let left = (el.scroll_left() as f64).abs();
+            let room = (el.scroll_width() - el.client_width()) as f64;
+            let (b, f) = (left > 2.0, left < room - 2.0);
+            if can_back.get_untracked() != b { can_back.set(b); }
+            if can_fwd.get_untracked() != f { can_fwd.set(f); }
         }
     };
-    let arrow = "absolute top-1/2 z-10 hidden h-14 w-9 -translate-y-1/2 cursor-pointer items-center justify-center rounded-control bg-lift/90 text-ink opacity-0 shadow-lg transition-opacity group-hover/rail:opacity-100 hover:bg-line-strong focus-visible:opacity-100 md:flex";
+    // measured once the row is laid out (a frame after it is placed), and again when the window changes size
+    Effect::new(move |_| {
+        if track.get().is_some() {
+            request_animation_frame(update);
+        }
+    });
+    crate::utils::listen::listen_window(leptos::ev::resize, move |_| update());
+    let by = move |forward: bool| {
+        if let Some(el) = track.get_untracked() {
+            let step = el.client_width() as f64 * 0.8;
+            el.scroll_by_with_x_and_y(if forward != rtl() { step } else { -step }, 0.0);
+        }
+    };
+    let arrow = "absolute top-1/2 z-10 flex h-20 w-6 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-glass text-ink transition-colors hover:bg-glass-hover";
     view! {
-        <div class="group/rail relative">
-            <div node_ref=track class="flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div class="relative">
+            <div node_ref=track on:scroll=move |_| update() class=format!("flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden {}", if inset { "ps-2 scroll-ps-2" } else { "" })>
                 {children()}
             </div>
-            <button type="button" on:click=move |_| by(false) class=format!("{arrow} -start-4") aria-label=t("vibe-row-scroll-left")>
-                <i class="ph-bold ph-caret-left text-title rtl:rotate-180"></i>
-            </button>
-            <button type="button" on:click=move |_| by(true) class=format!("{arrow} -end-4") aria-label=t("vibe-row-scroll-right")>
-                <i class="ph-bold ph-caret-right text-title rtl:rotate-180"></i>
-            </button>
+            <Show when=move || can_back.get()>
+                <button type="button" on:click=move |_| by(false) class=format!("{arrow} start-1 lg:-start-8") aria-label=t("vibe-row-scroll-left")>
+                    <i class="ph-bold ph-caret-left text-[16px] rtl:rotate-180"></i>
+                </button>
+            </Show>
+            <Show when=move || can_fwd.get()>
+                <button type="button" on:click=move |_| by(true) class=format!("{arrow} end-1 lg:-end-8") aria-label=t("vibe-row-scroll-right")>
+                    <i class="ph-bold ph-caret-right text-[16px] rtl:rotate-180"></i>
+                </button>
+            </Show>
         </div>
     }
 }

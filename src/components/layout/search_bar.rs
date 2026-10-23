@@ -151,7 +151,7 @@ pub fn SearchBar() -> impl IntoView {
         <div node_ref=container_ref class="relative flex items-center">
             <div 
                 // Netflix: closed = 40x40 icon button, open = 400x56 field, radius 28, #161616, 1px grey 70% border
-                class="relative flex items-center transition-all duration-(--motion-slow) ease-out overflow-hidden rounded-full"
+                class="relative flex items-center transition-all duration-(--motion-slow) ease-out overflow-hidden rounded-input"
                 class=("bg-raised", effective_active)
                 class=("border", effective_active)
                 class=("border-mute/70", effective_active)

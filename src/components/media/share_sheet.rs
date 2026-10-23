@@ -153,7 +153,7 @@ pub fn ShareSheet(
                                 <button
                                     type="button"
                                     on:click=on_close
-                                    class="w-9 h-9 rounded-full bg-ink/10 flex items-center justify-center text-ink shrink-0 hover:bg-ink/20 transition-colors cursor-pointer"
+                                    class="btn-circle btn-circle-sm"
                                     title=crate::i18n::t("action-buttons-close")
                                 >
                                     <i class="ph-bold ph-x text-lg"></i>

@@ -72,9 +72,9 @@ pub fn SubtitleDrawer(
                         <div class="mt-[14px] flex items-center justify-between border-t border-line-strong px-[10px] pt-[14px] text-title-sm text-[#b3b3b3]">
                             <span>{crate::i18n::t("subtitle-drawer-subtitle-timing-offset")}</span>
                             <span class="flex items-center gap-4 text-ink">
-                                <button on:click=move |_| on_change_delay.run(sub_delay.get() - 0.5) class="h-9 w-12 rounded-control hover:bg-lift">"-0.5s"</button>
+                                <button on:click=move |_| on_change_delay.run(sub_delay.get() - 0.5) class="h-9 w-12 rounded-button hover:bg-lift">"-0.5s"</button>
                                 <span class="w-14 text-center">{move || format!("{:+.1}s", sub_delay.get())}</span>
-                                <button on:click=move |_| on_change_delay.run(sub_delay.get() + 0.5) class="h-9 w-12 rounded-control hover:bg-lift">"+0.5s"</button>
+                                <button on:click=move |_| on_change_delay.run(sub_delay.get() + 0.5) class="h-9 w-12 rounded-button hover:bg-lift">"+0.5s"</button>
                             </span>
                         </div>
                     </Show>

@@ -85,13 +85,13 @@ fn AccountMenu(name: Signal<String>, dark: bool) -> impl IntoView {
                 aria-haspopup="menu"
                 aria-expanded=move || open.get().to_string()
                 on:click=move |_| set_open.update(|o| *o = !*o)
-                class=format!("flex items-center gap-2 rounded-control border-2 border-transparent px-2 py-1 text-body-md focus-visible:border-brand-active {text}")
+                class=format!("flex items-center gap-2 rounded-button border-2 border-transparent px-2 py-1 text-body-md focus-visible:border-brand-active {text}")
             >
                 <span class="underline-offset-2 hover:underline">{move || name.get()}</span>
                 <i class="ph-fill ph-caret-down text-fine text-brand" aria-hidden="true"></i>
             </button>
             <Show when=move || open.get()>
-                <div role="menu" class="absolute end-0 top-full z-(--z-dialog) mt-2 w-56 rounded-field border border-paper-line bg-paper py-2 shadow-popover">
+                <div role="menu" class="absolute end-0 top-full z-(--z-dialog) mt-2 w-56 rounded-menu border border-paper-line bg-paper py-2 shadow-popover">
                     <a role="menuitem" href=crate::config::app_link("/settings/account") class="flex items-center gap-2 px-4 py-2 text-body-md text-paper-ink hover:bg-paper-soft">
                         {tr("help-ui-account")}
                         <i class="ph-bold ph-caret-right text-fine text-brand" aria-hidden="true"></i>
@@ -151,8 +151,8 @@ pub fn HelpShell(children: Children, #[prop(default = Look::Dark)] look: Look, #
                             view! { <AccountMenu name=active_name dark=dark /> }.into_any()
                         } else {
                             view! {
-                                <a href=crate::config::app_link("/browse") class=format!("hidden rounded-control border px-4 py-1.5 text-fine font-semibold sm:block {outline}")>{tr("help-ui-browse")}</a>
-                                <a href=crate::config::app_link("/login") class="rounded-control bg-brand px-4 py-1.5 text-fine font-semibold text-ink hover:bg-brand-hover">{tr("help-ui-signin")}</a>
+                                <a href=crate::config::app_link("/browse") class=format!("hidden rounded-button border px-4 py-1.5 text-fine font-semibold sm:block {outline}")>{tr("help-ui-browse")}</a>
+                                <a href=crate::config::app_link("/login") class="rounded-button bg-brand px-4 py-1.5 text-fine font-semibold text-ink hover:bg-brand-hover">{tr("help-ui-signin")}</a>
                             }
                             .into_any()
                         }}
@@ -165,7 +165,7 @@ pub fn HelpShell(children: Children, #[prop(default = Look::Dark)] look: Look, #
             {(contact_band && !dark).then(|| view! {
                 <section class="px-6 pb-16 pt-6 text-center">
                     <h2 class="mb-6 text-title font-bold text-paper-ink">{tr("help-ui-need-more")}</h2>
-                    <a href="/help/contact" class="inline-block min-w-52 rounded-control bg-void px-10 py-3.5 text-body-md font-bold text-ink hover:bg-brand-deep">{tr("help-ui-contact-us")}</a>
+                    <a href="/help/contact" class="inline-block min-w-52 rounded-button bg-void px-10 py-3.5 text-body-md font-bold text-ink hover:bg-brand-deep">{tr("help-ui-contact-us")}</a>
                 </section>
             })}
 
@@ -174,7 +174,7 @@ pub fn HelpShell(children: Children, #[prop(default = Look::Dark)] look: Look, #
                     {(contact_band && dark).then(|| view! {
                         <div class="mb-8 flex flex-wrap items-center gap-6 border-b border-ink/20 pb-8">
                             <h2 class="text-heading font-bold">{tr("help-ui-need-more")}</h2>
-                            <a href="/help/contact" class="rounded-control bg-ink px-6 py-3 text-body-sm font-bold text-void hover:bg-ink-soft">{tr("help-ui-contact-us")}</a>
+                            <a href="/help/contact" class="rounded-button bg-ink px-6 py-3 text-body-sm font-bold text-void hover:bg-ink-soft">{tr("help-ui-contact-us")}</a>
                         </div>
                     })}
                     <label for="help-language" class="sr-only">{tr("help-ui-language-label")}</label>
@@ -182,7 +182,7 @@ pub fn HelpShell(children: Children, #[prop(default = Look::Dark)] look: Look, #
                         <select
                             id="help-language"
                             on:change=on_language
-                            class=format!("min-w-48 cursor-pointer appearance-none rounded-control border py-2.5 ps-4 pe-10 text-body-sm focus:outline-none {select_look}")
+                            class=format!("min-w-48 cursor-pointer appearance-none border py-2.5 ps-4 pe-10 text-body-sm focus:outline-none {select_look}")
                         >
                             {crate::i18n::AVAILABLE
                                 .iter()

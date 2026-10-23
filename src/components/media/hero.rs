@@ -665,8 +665,8 @@ pub fn HeroSection(
                         send_yt_command("hero-trailer-iframe", "seekTo");
                         send_yt_command("hero-trailer-iframe", "playVideo");
                     })
-                    size="md".to_string()
-                    class="absolute top-5 right-5 z-30 pointer-events-auto".to_string()
+                    size="sm".to_string()
+                    class="absolute top-10 right-10 z-30 pointer-events-auto".to_string()
                 />
 
                 // ── Bottom Content Layer ─────────────────────────────────────────

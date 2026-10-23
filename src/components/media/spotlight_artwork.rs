@@ -147,7 +147,7 @@ pub fn SpotlightArtwork(movie_id: u32, is_tv: bool, #[prop(into)] backdrop_src: 
                 <button
                     on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); ui_store.set_preview_muted(!ui_store.preview_muted.get_untracked()); }
                     aria-label=move || if ui_store.preview_muted.get() { crate::i18n::t("media-unmute") } else { crate::i18n::t("media-mute") }
-                    class="absolute right-2.5 bottom-2.5 z-30 w-[28px] h-[28px] rounded-full bg-void/70 flex items-center justify-center text-ink"
+                    class="absolute right-2.5 bottom-2.5 z-30 btn-circle btn-circle-sm"
                 >
                     <i class=move || if ui_store.preview_muted.get() { "ph-fill ph-speaker-slash text-body" } else { "ph-fill ph-speaker-high text-body" }></i>
                 </button>

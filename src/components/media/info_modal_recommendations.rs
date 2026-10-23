@@ -268,7 +268,7 @@ pub fn InfoModalRecommendations(
                                                     visible_count.set(BATCH_REC);
                                                 }
                                             }
-                                            class="w-10 h-10 rounded-full border border-ink/20 bg-menu hover:border-ink/50 hover:bg-lift flex items-center justify-center transition-all duration-(--motion-base) hover:scale-110 active:scale-95 group/btn cursor-pointer"
+                                            class="btn-circle btn-circle-md group/btn"
                                         >
                                             <i class=if has_more {
                                                 "ph-bold ph-caret-down text-ink/60 group-hover/btn:text-ink transition-colors"

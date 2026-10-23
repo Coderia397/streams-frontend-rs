@@ -250,6 +250,19 @@ pub struct DetailedMediaItem {
     /// the people who created a series (TMDB gives none for films)
     #[serde(default)]
     pub created_by: Option<Vec<CastMember>>,
+    /// where a series first aired (Netflix, HBO ...), with their logos
+    #[serde(default)]
+    pub networks: Option<Vec<Company>>,
+    /// the companies that made a film or series, with their logos
+    #[serde(default)]
+    pub production_companies: Option<Vec<Company>>,
+}
+
+#[derive(Clone, Debug, Default, serde::Deserialize, serde::Serialize)]
+pub struct Company {
+    pub name: String,
+    #[serde(default)]
+    pub logo_path: Option<String>,
 }
 
 impl DetailedMediaItem {

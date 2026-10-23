@@ -27,8 +27,8 @@ pub fn ConfirmDialog(
                     <h2 class="mb-2 text-heading font-bold text-ink">{title.clone()}</h2>
                     <p class="mb-6 text-body-md text-ink/70">{body.clone()}</p>
                     <div class="flex justify-end gap-3">
-                        <button type="button" on:click=move |_| open.set(false) class="rounded-control px-5 py-2.5 text-body-md font-bold text-ink hover:bg-ink/10">{t("set-cancel")}</button>
-                        <button type="button" on:click=move |_| { open.set(false); on_confirm.run(()); } class=format!("rounded-control px-5 py-2.5 text-body-md font-bold {confirm_look}")>{confirm_label.clone()}</button>
+                        <button type="button" on:click=move |_| open.set(false) class="rounded-button px-5 py-2.5 text-body-md font-bold text-ink hover:bg-ink/10">{t("set-cancel")}</button>
+                        <button type="button" on:click=move |_| { open.set(false); on_confirm.run(()); } class=format!("rounded-button px-5 py-2.5 text-body-md font-bold {confirm_look}")>{confirm_label.clone()}</button>
                     </div>
                 </div>
             </div>

@@ -106,7 +106,7 @@ pub fn PhoneProfilePicker(
                     })}
                 </div>
                 <div class="mt-6 flex justify-center">
-                    <button type="button" on:click=move |_| on_manage.run(()) class="flex h-10 cursor-pointer items-center gap-2 rounded-full border border-ink/80 bg-void/60 px-5 text-body-md font-medium text-ink active:scale-95 transition-transform">
+                    <button type="button" on:click=move |_| on_manage.run(()) class="flex h-10 cursor-pointer items-center gap-2 rounded-button border border-ink/80 bg-void/60 px-5 text-body-md font-medium text-ink active:scale-95 transition-transform">
                         {move || if editing.get() || manage { view! { {crate::i18n::t("common-done")} }.into_any() } else { view! { <i class="ph ph-pencil-simple text-title-sm"></i>{crate::i18n::t("profile-manage")} }.into_any() }}
                     </button>
                 </div>

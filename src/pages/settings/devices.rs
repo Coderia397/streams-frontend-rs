@@ -135,7 +135,7 @@ pub fn Access() -> impl IntoView {
                         }).collect_view()}
                     </div>
                     {(total > shown.get()).then(|| view! {
-                        <button type="button" on:click=move |_| shown.update(|n| *n += DEVICES_SHOWN) class="mb-6 w-full rounded-control bg-ink/10 px-6 py-3 text-body-md font-bold hover:bg-ink/15">{t("set-show-more")}</button>
+                        <button type="button" on:click=move |_| shown.update(|n| *n += DEVICES_SHOWN) class="mb-6 w-full rounded-button bg-ink/10 px-6 py-3 text-body-md font-bold hover:bg-ink/15">{t("set-show-more")}</button>
                     })}
                 }
                 .into_any()

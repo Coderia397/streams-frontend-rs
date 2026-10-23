@@ -1162,6 +1162,7 @@ title-video-teaser = Teaser
 title-video-clip = Clip
 title-pause = Pause
 title-season-label = Season
+title-free-line = Free. No card, no commitments.
 settings-no-history = No recent history to display.
 login-more-reasons = More reasons to join
 login-reason-screens-title = Watch on any screen

@@ -96,7 +96,7 @@ pub fn ClipCard(
             <div class="relative z-20 pt-4 px-4 flex items-center justify-between">
                 <a
                     href="/browse"
-                    class="w-10 h-10 rounded-full bg-void/40 backdrop-blur-md flex items-center justify-center text-ink cursor-pointer"
+                    class="btn-circle btn-circle-md"
                 >
                     <i class="ph-bold ph-arrow-left text-xl"></i>
                 </a>

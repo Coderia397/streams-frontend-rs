@@ -2,39 +2,31 @@ use leptos::prelude::*;
 use crate::components::media::movie_card_rating::{RatingIcon, MovieRating};
 use crate::components::media::tooltip_wrapper::TooltipWrapper;
 
+/// The pill size classes (the .btn-pill presets in style/components.css): sm 32 px, md 40 px, lg 48 px, as Netflix's redesigned pages.
+fn pill_size(size: &str) -> &'static str {
+    match size {
+        "sm" => "btn-pill btn-pill-sm",
+        "lg" => "btn-pill btn-pill-lg",
+        _ => "btn-pill btn-pill-md",
+    }
+}
+
 // ── Pill Play Button ──────────────────────────────────────────────────────────
-// Used in Hero (pill: rounded-full) and InfoModal (shape="rounded-control": rounded-field).
+// Used in Hero and InfoModal: Netflix's white Play pill (btn-ink), the icon and the word.
 #[component]
 pub fn PlayPillButton(
     #[prop(optional, into)] href: Option<Signal<String>>,
     #[prop(optional, into)] on_click: Option<Callback<()>>,
     #[prop(default = Signal::derive(|| false), into)] is_resume: Signal<bool>,
     #[prop(default = "md".to_string(), into)] size: String,
+    /// kept for the callers; every Play button now has the same look
     #[prop(default = "pill".to_string(), into)] shape: String,
     #[prop(optional, into)] class: Option<String>,
 ) -> impl IntoView {
-    let (pad_classes, text_classes, icon_classes) = match size.as_str() {
-        "sm" => ("px-3.5 py-1", "text-xs", "text-sm"),
-        "lg" => ("px-5 h-12", "text-title-sm leading-[18px]", "text-heading"),
-        _ => ("px-4 sm:px-5 py-1.5 sm:py-2", "text-label sm:text-sm", "text-base sm:text-lg"),
-    };
-
-    let radius_classes = match shape.as_str() {
-        "rounded-control" | "rect" => match size.as_str() {
-            "sm" => "rounded-control",
-            "lg" => "rounded-card",
-            _ => "rounded-field",
-        },
-        _ => "rounded-full",
-    };
-
+    let _ = shape;
     let extra_class = class.unwrap_or_default();
     let is_link = href.is_some();
-    let base_classes = format!(
-        "bg-ink text-void font-medium flex items-center justify-center gap-2 hover:bg-ink/70 active:scale-95 transition-all cursor-pointer select-none {} {} {} {} {}",
-        pad_classes, text_classes, radius_classes, extra_class,
-        if is_link { "no-underline" } else { "" }
-    );
+    let base_classes = format!("btn-ink {} {} {}", pill_size(&size), extra_class, if is_link { "no-underline" } else { "" });
 
     view! {
         {if let Some(url_sig) = href {
@@ -44,7 +36,7 @@ pub fn PlayPillButton(
                     class=base_classes
                     title=move || if is_resume.get() { crate::i18n::t("media-resume") } else { crate::i18n::t("media-play") }
                 >
-                    <i class=format!("ph-fill ph-play {}", icon_classes)></i>
+                    <i class="ph-fill ph-play"></i>
                     <span>{move || if is_resume.get() { crate::i18n::t("media-resume") } else { crate::i18n::t("media-play") }}</span>
                 </a>
             }.into_any()
@@ -57,7 +49,7 @@ pub fn PlayPillButton(
                     class=base_classes
                     title=move || if is_resume.get() { crate::i18n::t("media-resume") } else { crate::i18n::t("media-play") }
                 >
-                    <i class=format!("ph-fill ph-play {}", icon_classes)></i>
+                    <i class="ph-fill ph-play"></i>
                     <span>{move || if is_resume.get() { crate::i18n::t("media-resume") } else { crate::i18n::t("media-play") }}</span>
                 </button>
             }.into_any()
@@ -66,43 +58,20 @@ pub fn PlayPillButton(
 }
 
 // ── Pill More Info Button ─────────────────────────────────────────────────────
-// Used in Hero billboard. Stadium pill (rounded-full) with authentic Netflix #6d6d6e semi-transparency. Text only (no icon), the same size as PlayPillButton.
+// Used in Hero billboard: Netflix's grey see through pill (btn-glass), text only, the same size as the Play button beside it.
 #[component]
 pub fn MoreInfoPillButton(
     on_click: Callback<()>,
     #[prop(default = crate::i18n::t("action-buttons-more-info"), into)] label: String,
     #[prop(default = "md".to_string(), into)] size: String,
+    /// kept for the callers; every More Info button now has the same look
     #[prop(default = "pill".to_string(), into)] shape: String,
     #[prop(optional, into)] class: Option<String>,
 ) -> impl IntoView {
-    // text only, as in the app, and the same padding and text size as the Play button next to it, so it never grows wider than Play
-    let (pad_classes, text_classes, _icon_classes) = match size.as_str() {
-        "sm" => ("px-3.5 py-1", "text-xs", "text-sm"),
-        "lg" => ("px-5 h-12", "text-title-sm leading-[18px]", "text-heading"),
-        _ => ("px-4 sm:px-5 py-1.5 sm:py-2", "text-label sm:text-sm", "text-base sm:text-lg"),
-    };
-
-    let (bg_classes, radius_classes) = match shape.as_str() {
-        "rounded-control" | "rect" => (
-            "bg-ink/20 hover:bg-ink/30 backdrop-blur-md",
-            match size.as_str() {
-                "sm" => "rounded-control",
-                "lg" => "rounded-card",
-                _ => "rounded-field",
-            },
-        ),
-        _ => (
-            "bg-mute/40 hover:bg-mute/30",
-            "rounded-full",
-        ),
-    };
-
+    let _ = shape;
     let extra_class = class.unwrap_or_default();
     let label_title = label.clone();
-    let base_classes = format!(
-        "{} text-ink font-medium flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer select-none {} {} {} {} {}",
-        bg_classes, pad_classes, text_classes, radius_classes, extra_class, ""
-    );
+    let base_classes = format!("btn-glass {} {}", pill_size(&size), extra_class);
 
     view! {
         <button
@@ -137,7 +106,7 @@ pub fn PlayCircleButton(
                 on_click.run(());
             }
             class=format!(
-                "rounded-full bg-ink text-void flex items-center justify-center hover:bg-ink/80 active:scale-95 transition-all shadow-md cursor-pointer select-none shrink-0 {} {}",
+                "btn-circle btn-circle-solid shadow-md {} {}",
                 dim_classes, extra_class
             )
             title=move || if is_resume.get() { crate::i18n::t("media-resume") } else { crate::i18n::t("media-play") }
@@ -150,19 +119,18 @@ pub fn PlayCircleButton(
 // ── Shared Circular Button Styling ───────────────────────────────────────────
 // Guarantees that MyList, Rating, Mute/Replay, Close, and Caret buttons share 100%
 // identical geometry, background, border, hover states, and animations across all surfaces.
+/// The round button sizes (the .btn-circle presets in style/components.css): the size class, an icon class (empty: the icon takes the
+/// preset's size, half the disc) and the icon size in pixels for icons drawn as SVG.
 fn circular_button_specs(size: &str) -> (&'static str, &'static str, u32) {
     match size {
-        "xs" | "sm" => ("w-7 h-7", "text-xs", 12),
-        "lg" => ("w-11 h-11 md:w-12 md:h-12", "text-xl md:text-2xl", 22),
-        _ => ("w-[38px] h-[38px]", "text-title-sm", 18),
+        "xs" | "sm" => ("btn-circle-sm", "", 16),
+        "lg" => ("btn-circle-lg", "", 24),
+        _ => ("btn-circle-md", "", 20),
     }
 }
 
 fn circular_button_classes(dim_classes: &str, extra_class: &str) -> String {
-    format!(
-        "rounded-full border-[1.8px] border-ink/50 bg-menu/60 hover:bg-ink/15 hover:border-ink text-ink flex items-center justify-center transition-all duration-(--motion-fast) active:scale-95 cursor-pointer select-none shrink-0 {} {}",
-        dim_classes, extra_class
-    )
+    format!("btn-circle {} {}", dim_classes, extra_class)
 }
 
 // ── Round icon button ─────────────────────────────────────────────────────────

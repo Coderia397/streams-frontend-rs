@@ -24,7 +24,7 @@ pub fn Field(
                 inputmode=inputmode
                 prop:value=move || value.get()
                 on:input=move |ev| value.set(event_target_value(&ev))
-                class="w-full rounded-control border border-set-edge bg-set-card px-4 py-3 text-body-md text-ink focus:border-ink focus:outline-none max-lg:h-14"
+                class="w-full border border-set-edge bg-set-card px-4 py-3 text-body-md text-ink focus:border-ink focus:outline-none max-lg:h-14"
             />
         </label>
     }
@@ -57,11 +57,11 @@ pub fn FormButtons(#[prop(into)] save_label: String, on_save: Callback<()>, #[pr
                 type="button"
                 on:click=move |_| on_save.run(())
                 disabled=move || busy.map(|b| b.get()).unwrap_or(false)
-                class="btn-ink rounded-control px-8 py-3 disabled:opacity-50 lg:py-2.5"
+                class="btn-ink px-8 py-3 disabled:opacity-50 lg:py-2.5"
             >
                 {save_label}
             </button>
-            <a href=cancel_href class="rounded-control px-6 py-2.5 text-center text-body-md font-bold text-ink/80 hover:bg-ink/10">{t("set-cancel")}</a>
+            <a href=cancel_href class="rounded-button px-6 py-2.5 text-center text-body-md font-bold text-ink/80 hover:bg-ink/10">{t("set-cancel")}</a>
         </div>
     }
 }
@@ -71,7 +71,7 @@ pub fn FormButtons(#[prop(into)] save_label: String, on_save: Callback<()>, #[pr
 pub fn OutlineButton(#[prop(into)] label: String, on_click: Callback<()>, #[prop(optional)] danger: bool) -> impl IntoView {
     let look = if danger { "border-danger/60 text-danger hover:bg-danger/10" } else { "border-ink/40 text-ink hover:bg-ink/10" };
     view! {
-        <button type="button" on:click=move |_| on_click.run(()) class=format!("w-full rounded-control border px-6 py-3 text-body-md font-bold {look}")>{label}</button>
+        <button type="button" on:click=move |_| on_click.run(()) class=format!("w-full rounded-button border px-6 py-3 text-body-md font-bold {look}")>{label}</button>
     }
 }
 

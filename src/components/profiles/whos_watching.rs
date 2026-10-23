@@ -176,7 +176,7 @@ pub fn WhosWatchingGate(
                 <button
                     type="button"
                     on:click={ let navigate = navigate.clone(); move |_| if manage { navigate("/browse", Default::default()) } else { set_edit_mode.update(|e| *e = !*e) } }
-                    class="flex h-10 cursor-pointer items-center gap-2 rounded-full border border-ink bg-void/70 px-5 text-body-md font-medium text-ink transition-colors hover:bg-ink hover:text-void active:scale-95"
+                    class="flex h-10 cursor-pointer items-center gap-2 rounded-button border border-ink bg-void/70 px-5 text-body-md font-medium text-ink transition-colors hover:bg-ink hover:text-void active:scale-95"
                 >
                     {move || if edit_mode.get() { view! { {crate::i18n::t("common-done")} }.into_any() } else { view! { <i class="ph ph-pencil-simple text-title-sm"></i>{crate::i18n::t("profile-manage")} }.into_any() }}
                 </button>

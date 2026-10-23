@@ -74,7 +74,7 @@ pub fn Hub() -> impl IntoView {
                         <img src=avatar_of(&p) alt="" class="h-24 w-24 rounded-card object-cover" />
                         <span class="max-w-full truncate text-heading font-bold">{p.name.clone()}</span>
                     </a>
-                    <a href=Screen::Profile(p.id.clone()).path() class="absolute end-4 top-4 flex h-10 w-10 items-center justify-center rounded-full text-ink hover:bg-ink/10" aria-label=t("set-title-edit-profile")>
+                    <a href=Screen::Profile(p.id.clone()).path() class="absolute end-4 top-4 btn-circle btn-circle-clear btn-circle-md" aria-label=t("set-title-edit-profile")>
                         <i class="ph-bold ph-pencil-simple text-2xl" aria-hidden="true"></i>
                     </a>
                 </div>
@@ -93,7 +93,7 @@ pub fn Hub() -> impl IntoView {
                 }).collect_view()}
             </ul>
             <div class="mb-10 flex justify-center">
-                <a href=Screen::Profiles.path() class="rounded-full bg-set-sheet-tile px-6 py-3 text-body-md font-bold hover:bg-ink/20 lg:bg-ink/10">{t("set-manage-profiles")}</a>
+                <a href=Screen::Profiles.path() class="rounded-button bg-set-sheet-tile px-6 py-3 text-body-md font-bold hover:bg-ink/20 lg:bg-ink/10">{t("set-manage-profiles")}</a>
             </div>
             <Section>
                 <LinkRow icon="gear-six" title=t("set-nav-app") href=Screen::App.path() />
@@ -137,7 +137,7 @@ pub fn AddProfile() -> impl IntoView {
     view! {
         <div class="px-5 pb-5 pt-2">
             <Show when=move || can_add_profile(store)>
-                <button type="button" on:click=move |_| adding.set(true) class="h-12 w-full rounded-control bg-[rgba(128,128,128,0.3)] text-title-sm font-medium hover:bg-[rgba(128,128,128,0.4)]">{t("set-add-profile-button")}</button>
+                <button type="button" on:click=move |_| adding.set(true) class="h-12 w-full rounded-button bg-[rgba(128,128,128,0.3)] text-title-sm font-medium hover:bg-[rgba(128,128,128,0.4)]">{t("set-add-profile-button")}</button>
                 <p class="mt-4 text-center text-body-sm text-chrome/70">{crate::i18n::t_args("set-add-profile-limit", &[("max", (MAX_PROFILES as i64).into())])}</p>
             </Show>
             <Show when=move || adding.get()>
@@ -243,7 +243,7 @@ pub fn ProfileSheet(open: RwSignal<bool>) -> impl IntoView {
                 <div class="relative flex h-14 shrink-0 items-center justify-center">
                     <span class="absolute left-1/2 top-2 h-1 w-9 -translate-x-1/2 rounded-full bg-ink/30" aria-hidden="true"></span>
                     <h2 class="text-heading font-bold text-ink/80">{t("set-profile-sheet")}</h2>
-                    <button type="button" on:click=move |_| open.set(false) class="absolute end-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-ink/15" aria-label=t("action-buttons-close")>
+                    <button type="button" on:click=move |_| open.set(false) class="absolute end-3 top-1/2 -translate-y-1/2 btn-circle btn-circle-md" aria-label=t("action-buttons-close")>
                         <i class="ph-bold ph-x text-body-lg" aria-hidden="true"></i>
                     </button>
                 </div>

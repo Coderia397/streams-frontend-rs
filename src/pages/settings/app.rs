@@ -117,7 +117,7 @@ pub fn Licences() -> impl IntoView {
                 aria-label=move || t("set-licences-search")
                 prop:value=move || query.get()
                 on:input=move |ev| { query.set(event_target_value(&ev)); shown.set(crate::config::LICENCES_PAGE); }
-                class="mb-5 w-full rounded-control border border-ink/20 bg-ink/10 px-4 py-3 text-body-md text-ink focus:border-ink focus:outline-none"
+                class="mb-5 w-full border border-ink/20 bg-ink/10 px-4 py-3 text-body-md text-ink focus:border-ink focus:outline-none"
             />
             <Section>
                 {move || filtered.get().into_iter().take(shown.get()).map(|p| view! {
@@ -128,7 +128,7 @@ pub fn Licences() -> impl IntoView {
                 }).collect_view()}
             </Section>
             {move || (filtered.with(|f| f.len()) > shown.get()).then(|| view! {
-                <button type="button" on:click=move |_| shown.update(|n| *n += crate::config::LICENCES_PAGE) class="mb-6 w-full rounded-control bg-ink/10 px-6 py-3 text-body-md font-bold hover:bg-ink/15">{t("set-show-more")}</button>
+                <button type="button" on:click=move |_| shown.update(|n| *n += crate::config::LICENCES_PAGE) class="mb-6 w-full rounded-button bg-ink/10 px-6 py-3 text-body-md font-bold hover:bg-ink/15">{t("set-show-more")}</button>
             })}
             <p class="text-label text-ink/50">{t("set-licences-tmdb")}</p>
         </div>

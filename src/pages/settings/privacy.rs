@@ -73,7 +73,7 @@ pub fn PersonalInfo() -> impl IntoView {
                 {["account", "profiles", "lists", "history", "settings", "security"].iter().map(|k| view! { <li>{t(&format!("set-personal-info-{k}"))}</li> }).collect_view()}
             </ul>
             <Message text=note />
-            <button type="button" on:click=download disabled=move || busy.get() class="btn-ink rounded-control px-8 py-3 disabled:opacity-50">{t("set-privacy-export")}</button>
+            <button type="button" on:click=download disabled=move || busy.get() class="btn-ink px-8 py-3 disabled:opacity-50">{t("set-privacy-export")}</button>
             <p class="mt-4 text-body-sm text-ink/60">{t("set-personal-info-note")}</p>
         </div>
     }
@@ -101,7 +101,7 @@ pub fn Testing() -> impl IntoView {
             <Section>
                 <SwitchRow icon="flask" title=t("set-testing-switch") hint=t("set-testing-hint") checked=Signal::derive(move || prefs.account.get().test_participation) on_change=set />
             </Section>
-            <a href=Screen::AccountSecurity.path() class="btn-ink inline-block rounded-control px-8 py-3">{t("set-done")}</a>
+            <a href=Screen::AccountSecurity.path() class="btn-ink inline-block px-8 py-3">{t("set-done")}</a>
         </div>
     }
 }

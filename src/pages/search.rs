@@ -64,7 +64,7 @@ fn SearchListRow(item: MediaItem) -> impl IntoView {
                 <img src=picture alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" draggable="false" />
             </div>
             <span class="flex-1 min-w-0 text-body-md font-bold leading-tight text-ink line-clamp-2">{title.clone()}</span>
-            <button on:click=play aria-label=crate::i18n::t("media-play") class="flex-none w-[26px] h-[26px] rounded-full border-[1.5px] border-ink/70 flex items-center justify-center active:scale-95 transition-transform">
+            <button on:click=play aria-label=crate::i18n::t("media-play") class="btn-circle btn-circle-sm">
                 <i class="ph-fill ph-play text-ink text-body-sm ms-px"></i>
             </button>
         </div>

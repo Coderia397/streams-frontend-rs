@@ -21,7 +21,7 @@ pub fn IconPicker(
     view! {
         <div class="text-ink">
             <div class="px-[var(--app-x)] pt-[26px]">
-                <button type="button" on:click=move |_| on_back.run(()) aria-label=t("choose-icon-back") class="-ms-2 flex h-10 w-10 items-center justify-center rounded-full hover:bg-ink/10">
+                <button type="button" on:click=move |_| on_back.run(()) aria-label=t("choose-icon-back") class="-ms-2 btn-circle btn-circle-clear btn-circle-md">
                     <i class="ph ph-arrow-left text-heading-lg rtl:-scale-x-100" aria-hidden="true"></i>
                 </button>
                 <h1 class="mt-[30px] text-icon font-bold leading-[46px]">{t("profile-choose-icon")}</h1>

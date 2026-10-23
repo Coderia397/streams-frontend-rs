@@ -129,7 +129,7 @@ pub fn CollectionRow(row: FeedRow) -> impl IntoView {
                     }}
                     {(!description.is_empty()).then(|| view! { <p class="mt-5 text-body md:text-title-sm leading-snug text-ink max-w-[30ch]" style=if is_kids { "font-family: 'Logo Kids','Fredoka',ui-rounded,sans-serif; font-weight: 500;" } else { "" }>{description}</p> })}
                     {link.map(|href| view! {
-                        <a href=href class=if is_kids { "mt-5 inline-flex h-11 items-center rounded-full bg-white px-7 text-body-md font-bold text-[#e30b15] shadow-lg hover:scale-105 transition-transform" } else { "mt-5 inline-flex h-11 items-center rounded-full bg-chrome-ink px-6 text-body-md font-semibold text-chrome hover:bg-chrome-ink/85 transition-colors" }>
+                        <a href=href class=if is_kids { "mt-5 inline-flex h-11 items-center rounded-button bg-white px-7 text-body-md font-bold text-[#e30b15] shadow-lg hover:scale-105 transition-transform" } else { "mt-5 inline-flex h-11 items-center rounded-button bg-chrome-ink px-6 text-body-md font-semibold text-chrome hover:bg-chrome-ink/85 transition-colors" }>
                             {crate::i18n::t("collection-explore-all")}
                         </a>
                     })}

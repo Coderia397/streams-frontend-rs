@@ -70,7 +70,7 @@ pub fn Activity() -> impl IntoView {
                                         <a href=title_path(&r) class="block truncate text-body-md font-semibold text-ink hover:underline">{title}</a>
                                         <a href=routes::HELP_CONTACT class="text-body-sm text-ink/70 underline underline-offset-2 hover:text-ink">{t("set-activity-report")}</a>
                                     </span>
-                                    <button type="button" aria-label=t("set-activity-hide") on:click=move |_| { watch.remove_record(id, tv); toast(t("set-activity-hidden")); } class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-ink/70 hover:bg-ink/10">
+                                    <button type="button" aria-label=t("set-activity-hide") on:click=move |_| { watch.remove_record(id, tv); toast(t("set-activity-hidden")); } class="btn-circle btn-circle-clear btn-circle-md text-ink/70">
                                         <i class="ph-bold ph-prohibit text-xl" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -78,10 +78,10 @@ pub fn Activity() -> impl IntoView {
                         }).collect_view()}
                     </Section>
                     {(total > shown.get()).then(|| view! {
-                        <button type="button" on:click=move |_| shown.update(|n| *n += VIEWING_PAGE) class="mb-8 w-full rounded-control bg-ink/10 px-6 py-3 text-body-md font-bold hover:bg-ink/15">{t("set-show-more")}</button>
+                        <button type="button" on:click=move |_| shown.update(|n| *n += VIEWING_PAGE) class="mb-8 w-full rounded-button bg-ink/10 px-6 py-3 text-body-md font-bold hover:bg-ink/15">{t("set-show-more")}</button>
                     })}
                     <div class="flex flex-wrap gap-3">
-                        <button type="button" on:click=move |_| download.run(()) class="rounded-control border border-ink/40 px-6 py-3 text-body-md font-bold hover:bg-ink/10">{t("set-activity-download")}</button>
+                        <button type="button" on:click=move |_| download.run(()) class="rounded-button border border-ink/40 px-6 py-3 text-body-md font-bold hover:bg-ink/10">{t("set-activity-download")}</button>
                         <OutlineButton label=t("set-activity-hide-all") danger=true on_click=Callback::new(move |_| confirm.set(true)) />
                     </div>
                 }

@@ -37,7 +37,7 @@ pub fn SideMenu(screen: Memo<Screen>, signout_open: RwSignal<bool>) -> impl Into
     let row = "flex h-settings-menu-item items-center gap-3 rounded-control px-3 text-body-md font-medium hover:bg-ink/5 lg:px-4";
     view! {
         <aside class="hidden shrink-0 lg:block lg:w-[27.55%]">
-            <a href=routes::BROWSE class="mb-[33px] flex h-settings-menu-item items-center gap-2 rounded-control px-4 text-body-sm hover:bg-ink/5">
+            <a href=routes::BROWSE class="mb-[33px] flex h-settings-menu-item items-center gap-2 rounded-button px-4 text-body-sm hover:bg-ink/5">
                 <i class="ph-bold ph-arrow-left text-xl rtl:-scale-x-100" aria-hidden="true"></i>
                 {move || crate::i18n::t_args("set-back-to-app", &[("brand", crate::brand::NAME.into())])}
             </a>
@@ -79,7 +79,7 @@ pub fn PageHeading(screen: Memo<Screen>, gate_active: RwSignal<bool>, light_phon
             <a
                 href=move || screen.get().parent()
                 aria-label=move || t("set-back")
-                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-ink hover:bg-ink/10 lg:hidden"
+                class="btn-circle btn-circle-clear btn-circle-md lg:hidden"
                 class=("max-lg:hidden", move || light_phone.get())
             >
                 <i class="ph-bold ph-arrow-left text-2xl rtl:-scale-x-100" aria-hidden="true"></i>
@@ -87,7 +87,7 @@ pub fn PageHeading(screen: Memo<Screen>, gate_active: RwSignal<bool>, light_phon
             <a
                 href=move || screen.get().parent_wide()
                 aria-label=move || t("set-back")
-                class="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full text-ink hover:bg-ink/10 lg:flex"
+                class="hidden btn-circle btn-circle-clear btn-circle-md lg:flex"
                 class=("lg:hidden", move || matches!(screen.get(), Screen::Account | Screen::Hub | Screen::AccountSecurity | Screen::AccountDevices | Screen::AccountProfiles))
                 class=("lg:absolute", move || screen.get().standalone())
                 class=("lg:left-[210px]", move || screen.get().standalone())

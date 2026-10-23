@@ -48,7 +48,7 @@ pub fn InfoModalEpisodes(
                             <button
                                 type="button"
                                 on:click=toggle_dropdown
-                                class="flex items-center bg-transparent border border-ink/30 hover:border-ink/70 rounded-control px-4 py-1.5 text-sm font-bold transition min-w-[130px] justify-between text-ink cursor-pointer"
+                                class="flex items-center bg-transparent border border-ink/30 hover:border-ink/70 rounded-button px-4 py-1.5 text-sm font-bold transition min-w-[130px] justify-between text-ink cursor-pointer"
                             >
                                 <span>{move || crate::i18n::t_args("media-season-n", &[("n", fluent_bundle::FluentValue::from(selected_season.get() as i64))])}</span>
                                 <i class=move || if dropdown_open.get() { "ph-bold ph-caret-up ml-2 text-xs" } else { "ph-bold ph-caret-down ml-2 text-xs" }></i>
@@ -56,7 +56,7 @@ pub fn InfoModalEpisodes(
 
                             {move || if dropdown_open.get() {
                                 view! {
-                                    <div class="absolute right-0 top-full mt-1 w-32 bg-field border border-gray-700 rounded-control shadow-xl z-50 max-h-60 overflow-y-auto scrollbar-hide">
+                                    <div class="absolute right-0 top-full mt-1 w-32 bg-field border border-gray-700 rounded-menu shadow-xl z-50 max-h-60 overflow-y-auto scrollbar-hide">
                                         {(1..=total_seasons).map(|s| {
                                             let is_selected = move || selected_season.get() == s;
                                             view! {
@@ -205,7 +205,7 @@ pub fn InfoModalEpisodes(
                                                             visible_count.set(BATCH_SIZE);
                                                         }
                                                     }
-                                                    class="w-10 h-10 rounded-full border border-ink/20 bg-menu hover:border-ink/50 hover:bg-lift flex items-center justify-center transition-all duration-(--motion-base) hover:scale-110 active:scale-95 group/btn cursor-pointer"
+                                                    class="btn-circle btn-circle-md group/btn"
                                                 >
                                                     <i class=if has_more {
                                                         "ph-bold ph-caret-down text-ink/60 group-hover/btn:text-ink transition-colors"
