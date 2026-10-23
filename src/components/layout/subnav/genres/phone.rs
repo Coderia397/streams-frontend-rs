@@ -92,14 +92,15 @@ pub fn CategorySubNavMobile(
                 </div>
             </Show>
 
-            // The list of genres: a card over a dimmed page, on the side of the pill that opened it (right for Categories on Home, left for the pill of the Series and Films pages)
+            // The list of genres: a card over a dimmed page, on the side of the pill that opened it (right for Categories on Home, left for the pill of the Series and Films pages);
+            // as the app's (note 116): 260 px wide, 16 px in, from the top of the screen over the bar, #212121 at 95 %, rows 56 px with the text 12 px in
             <Show when=move || genre_menu_open.get()>
                 <div class="fixed inset-0 z-(--z-drawer)">
                     <div on:click=move |_| set_genre_menu_open.set(false) class="absolute inset-0 bg-void/60"></div>
-                    <div class=move || format!("absolute {} top-[calc(env(safe-area-inset-top)+8px)] w-[min(66vw,320px)] max-h-[calc(100dvh-24px)] overflow-y-auto rounded-menu bg-raised py-2 shadow-2xl scrollbar-hide", if on_home() { "right-2" } else { "left-2" }) role="listbox">
+                    <div class=move || format!("absolute {} top-[env(safe-area-inset-top)] w-[260px] max-h-[calc(100dvh-env(safe-area-inset-top)-16px)] overflow-y-auto rounded-menu bg-sheet/95 shadow-2xl scrollbar-hide", if on_home() { "right-4" } else { "left-4" }) role="listbox">
                         <button
                             on:click=move |_| { set_genre_menu_open.set(false); on_genre_select.run(None); }
-                            class=move || if selected_genre.get().is_none() { "block w-full text-left px-4 py-3 text-title font-bold text-ink cursor-pointer" } else { "block w-full text-left px-4 py-3 text-title text-ink/85 cursor-pointer" }
+                            class=move || if selected_genre.get().is_none() { "flex h-14 w-full items-center text-left px-3 text-title font-bold text-ink cursor-pointer" } else { "flex h-14 w-full items-center text-left px-3 text-title text-ink/85 cursor-pointer" }
                         >
                             {crate::i18n::t("nav-all-categories")}
                         </button>
@@ -110,7 +111,7 @@ pub fn CategorySubNavMobile(
                             view! {
                                 <button
                                     on:click=move |_| { set_genre_menu_open.set(false); on_genre_select.run(Some(g.clone())); }
-                                    class=move || if is_sel() { "block w-full text-left px-4 py-3 text-title font-bold text-ink cursor-pointer" } else { "block w-full text-left px-4 py-3 text-title text-ink/85 cursor-pointer" }
+                                    class=move || if is_sel() { "flex h-14 w-full items-center text-left px-3 text-title font-bold text-ink cursor-pointer" } else { "flex h-14 w-full items-center text-left px-3 text-title text-ink/85 cursor-pointer" }
                                 >
                                     {crate::i18n::genre_label(&genre.name)}
                                 </button>
