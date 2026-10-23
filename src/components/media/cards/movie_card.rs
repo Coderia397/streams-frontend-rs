@@ -69,6 +69,8 @@ pub fn MovieCard(
     } else {
         poster_path.clone().unwrap_or_default()
     };
+    // the same picture at every width TMDB has it (a backdrop, or the poster standing in for one)
+    let img_set = if !backdrop_path.is_empty() { crate::utils::images::backdrop_srcset(&img_src) } else { crate::utils::images::poster_srcset(&img_src) };
 
     let title_stored = StoredValue::new(title);
     let backdrop_stored = StoredValue::new(backdrop_path);
@@ -76,7 +78,11 @@ pub fn MovieCard(
     let genre_ids_stored = StoredValue::new(genre_ids);
     let vibe_pills_stored = StoredValue::new(vibe_pills);
     
+    // the title's logo over the backdrop; phones show posters (their titles are on them), so the phone form never asks for it
     let logo_resource = LocalResource::new(move || async move {
+        if crate::form::current().is_phone() {
+            return None;
+        }
         fetch_movie_logo(movie_id, is_tv).await.ok().flatten()
     });
 
@@ -191,8 +197,14 @@ pub fn MovieCard(
             <div class="w-full h-full relative rounded-tile overflow-hidden movie-card-glow">
                 // Phones show 5:7 posters like the Netflix app, wider screens show the backdrop.
                 <picture class="block w-full h-full">
-                    {phone_poster.clone().map(|ps| view! { <source media="(max-width: 599px)" srcset=ps /> })}
+                    {phone_poster.clone().map(|ps| {
+                        let set = crate::utils::images::poster_srcset(&ps);
+                        view! { <source media="(max-width: 599px)" srcset=if set.is_empty() { ps } else { set } sizes=crate::utils::images::PHONE_POSTER_SIZES /> }
+                    })}
+                    // the backdrop in the size this screen needs (utils/images.rs)
                     <img
+                        srcset=img_set
+                        sizes=crate::utils::images::TILE_SIZES
                         src=img_src
                         alt=title_stored.with_value(|t| t.clone())
                         class="w-full h-full object-cover object-center rounded-tile backdrop-pop"
@@ -229,6 +241,7 @@ pub fn MovieCard(
                                                     src=url
                                                     alt=t
                                                     class="w-auto max-w-[80%] max-h-[44px] object-contain origin-bottom drop-shadow-text-soft"
+                                                    loading="lazy"
                                                     decoding="async"
                                                     draggable="false"
                                                 />

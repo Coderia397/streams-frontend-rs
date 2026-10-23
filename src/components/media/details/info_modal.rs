@@ -451,8 +451,10 @@ pub fn InfoModal() -> impl IntoView {
                                         node_ref=modal_trailer_banner_ref
                                         class="relative aspect-video w-full bg-void group overflow-hidden"
                                     >
-                                        // Static Backdrop Image
+                                        // Static Backdrop Image, in the size this screen needs (utils/images.rs)
                                         <img
+                                            srcset=crate::utils::images::backdrop_srcset(&backdrop)
+                                            sizes="(min-width: 850px) 850px, 100vw"
                                             src=backdrop
                                             class="w-full h-full object-cover scale-[1.05] transition-opacity duration-(--motion-slowest)"
                                             class=("opacity-0", move || is_trailer_ready.get() && is_playing_trailer.get() && !has_ended.get() && !is_trailer_out_of_view.get())

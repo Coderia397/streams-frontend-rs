@@ -466,6 +466,9 @@ pub fn WebsiteHero(items: Vec<MediaItem>) -> impl IntoView {
 
                 // ── Backdrop image with smooth cross-fade ────────────────────────
                 <img
+                    // the backdrop in the size this screen needs (a poster standing in for one keeps its single size)
+                    srcset=move || if current_item().backdrop_path.is_some_and(|p| !p.is_empty()) { crate::utils::images::backdrop_srcset(&current_backdrop()) } else { String::new() }
+                    sizes=crate::utils::images::WIDE_SIZES
                     src=move || current_backdrop()
                     fetchpriority="high"
                     loading="eager"

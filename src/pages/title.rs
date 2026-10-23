@@ -186,7 +186,8 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
         <div class="relative min-h-screen overflow-x-clip bg-title-page font-sans text-ink">
             // the trailer's colours round the panel: a blurred copy of the trailer (computers) over the title's backdrop, as Netflix's page
             <div class="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[520px] overflow-hidden md:h-[910px]" aria-hidden="true" inert>
-                <img src=backdrop alt="" class="h-full w-full scale-110 object-cover" />
+                // blurred and faint: the 780 px picture is as good as the original here
+                <img src=move || backdrop().replace("/original/", "/w780/") alt="" class="h-full w-full scale-110 object-cover" />
                 {wide.then(|| view! {
                     // a small player (YouTube then sends a small, cheap picture) scaled up to 121 % of the page's width, as Netflix's copy, then blurred
                     <div class="hero-glow-video absolute inset-0">
@@ -238,6 +239,8 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
                     <div node_ref=hero_ref class="hero-panel relative aspect-video w-full overflow-hidden rounded-[10px] [container-type:size] md:aspect-[1327/606] md:rounded-[20px]">
                         <div class="hero-video absolute inset-0">
                             <img
+                                srcset=move || crate::utils::images::backdrop_srcset(&backdrop())
+                                sizes=crate::utils::images::WIDE_SIZES
                                 src=backdrop
                                 alt=""
                                 class="absolute inset-0 h-full w-full object-cover transition-opacity duration-(--motion-slowest)"

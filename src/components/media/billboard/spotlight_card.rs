@@ -154,7 +154,7 @@ pub fn SpotlightCard(
                 <div on:click=move |_| on_card_click(()) class="px-5 pb-6 pt-4 flex flex-col flex-grow gap-3 cursor-pointer">
                     // The title as its logo (a title without one shows its name), then what is happening: coming on a day, or the title's own name when it is out
                     {move || logo.get().flatten().map(|url| view! {
-                        <img src=url alt=logo_alt.clone() class="max-h-[74px] max-w-[70%] w-auto object-contain object-left" decoding="async" />
+                        <img src=url alt=logo_alt.clone() class="max-h-[74px] max-w-[70%] w-auto object-contain object-left" loading="lazy" decoding="async" />
                     })}
                     {if is_coming_soon && !coming_soon_label.is_empty() {
                         view! {
