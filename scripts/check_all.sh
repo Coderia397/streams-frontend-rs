@@ -12,5 +12,6 @@ echo "== translations";    python3 scripts/check_i18n.py | tail -20
 echo "== corner radius";   python3 scripts/check_radius.py
 echo "== class names";     python3 scripts/check_classes.py
 echo "== colours";         python3 scripts/check_colours.py
+echo "== icons";           python3 scripts/subset_icons.py --check
 if [ "${SMOKE:-1}" != "0" ]; then echo "== browser smoke test"; uv run --quiet --with websockets python3 scripts/smoke_test.py; fi
 echo "all checks done"

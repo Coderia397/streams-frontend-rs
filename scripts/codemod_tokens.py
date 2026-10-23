@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """One time codemod: replace hardcoded colors and radii in Tailwind class strings with the tokens in style/brand.css.
-Run from the frontend root: python3 scripts/tokenize.py [--dry]"""
+Run from the frontend root: python3 scripts/codemod_tokens.py [--dry]"""
 import re, sys, pathlib
 
 DRY = "--dry" in sys.argv
