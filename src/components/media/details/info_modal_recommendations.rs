@@ -193,7 +193,7 @@ pub fn InfoModalRecommendations(
     view! {
         <Suspense fallback=move || view! {
             <div class="mt-12">
-                <h3 class="mb-4 text-[24px] font-bold leading-[1.25] text-ink">{crate::i18n::t("media-more-like-this")}</h3>
+                <h3 class="mb-4 text-[24px] font-medium leading-[1.25] text-ink">{crate::i18n::t("media-more-like-this")}</h3>
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {(0..6).map(|_| view! {
                         <div class="surface-card aspect-[4/5] animate-pulse" />
@@ -210,7 +210,7 @@ pub fn InfoModalRecommendations(
 
                     view! {
                         <div class="mt-12">
-                            <h3 class="mb-4 text-[24px] font-bold leading-[1.25] text-ink">{crate::i18n::t("media-more-like-this")}</h3>
+                            <h3 class="mb-4 text-[24px] font-medium leading-[1.25] text-ink">{crate::i18n::t("media-more-like-this")}</h3>
                             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                                 {visible_items.into_iter().map(|item| {
                                     let movie = Movie::from(item);

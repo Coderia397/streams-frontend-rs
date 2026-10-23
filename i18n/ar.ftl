@@ -1131,7 +1131,6 @@ media-add-to-list = إضافة إلى قائمتي
 media-in-list = في قائمتي
 media-series = مسلسلات
 media-film = فيلم
-media-genre-fallback = أكشن
 media-seasons =
     { $n ->
         [one] موسم واحد

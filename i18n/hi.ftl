@@ -1119,7 +1119,6 @@ media-add-to-list = मेरी सूची में जोड़ें
 media-in-list = मेरी सूची में
 media-series = सीरीज
 media-film = फिल्म
-media-genre-fallback = कार्यक्रम
 media-seasons =
     { $n ->
         [one] 1 सीजन

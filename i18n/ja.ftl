@@ -1110,7 +1110,6 @@ media-add-to-list = マイリストに追加
 media-in-list = マイリストにあります
 media-series = シリーズ
 media-film = 映画
-media-genre-fallback = アクション
 media-seasons =
     { $n ->
        *[other] { $n } シーズン

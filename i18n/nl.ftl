@@ -1115,7 +1115,6 @@ media-add-to-list = Toevoegen aan Mijn Lijst
 media-in-list = In Mijn Lijst
 media-series = Reeks
 media-film = Film
-media-genre-fallback = Actie
 media-seasons =
     { $n ->
         [one] 1 Seizoen

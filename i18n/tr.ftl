@@ -1115,7 +1115,6 @@ media-add-to-list = İzleme Listemize Ekle
 media-in-list = İzleme Listemde
 media-series = Seriler
 media-film = Film
-media-genre-fallback = Aksiyon
 media-seasons =
     { $n ->
         [one] 1 Sezon

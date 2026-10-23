@@ -260,47 +260,40 @@ pub fn HeroSection(
         if current_is_tv() { crate::i18n::t("media-series") } else { crate::i18n::t("media-film") }
     };
 
-    let genre_label = move || {
-        details_resource.get().and_then(|d| {
-            d.and_then(|item| item.genres.and_then(|g| g.first().map(|x| x.name.clone())))
-        }).unwrap_or_else(|| crate::i18n::t("media-genre-fallback"))
+    // The facts of the line under the title. A fact not known yet (details still loading, or not answered) is left out: the line used to say
+    // "Action", "2024", "1 Season" or "1h 45m" instead, so Bones read "Action · 1 Season" until its details came.
+    let genre_label = move || -> Option<String> {
+        let from_details = details_resource.get().flatten().and_then(|d| d.genres.and_then(|g| g.first().map(|x| x.name.clone())));
+        from_details
+            .or_else(|| current_item().genre_ids.iter().find_map(|id| crate::data::page_genres::genre_name(*id)).map(str::to_string))
+            .map(|name| crate::i18n::genre_label(&name))
     };
 
-    let year_label = move || {
+    let year_label = move || -> Option<String> {
+        let year = |date: Option<&String>| date.filter(|d| d.len() >= 4).map(|d| d.chars().take(4).collect::<String>());
         if let Some(Some(ref d)) = details_resource.get() {
-            if let Some(ref date) = d.release_date.as_ref().or(d.first_air_date.as_ref()) {
-                if date.len() >= 4 {
-                    return date.chars().take(4).collect::<String>();
-                }
+            if let Some(y) = year(d.release_date.as_ref().or(d.first_air_date.as_ref())) {
+                return Some(y);
             }
         }
         let item = current_item();
-        if let Some(ref date) = item.release_date.as_ref().or(item.first_air_date.as_ref()) {
-            if date.len() >= 4 {
-                return date.chars().take(4).collect::<String>();
-            }
-        }
-        "2024".to_string()
+        year(item.release_date.as_ref().or(item.first_air_date.as_ref()))
     };
 
-    let duration_or_seasons_label = move || {
+    let duration_or_seasons_label = move || -> Option<String> {
+        let details = details_resource.get().flatten()?;
         if current_is_tv() {
-            let seasons = details_resource.get()
-                .and_then(|d| d.and_then(|x| x.number_of_seasons))
-                .unwrap_or(1);
-            crate::i18n::t_args("media-seasons", &[("n", fluent_bundle::FluentValue::from(seasons as i64))])
+            let seasons = details.number_of_seasons.filter(|n| *n > 0)?;
+            Some(crate::i18n::t_args("media-seasons", &[("n", fluent_bundle::FluentValue::from(seasons as i64))]))
         } else {
-            let runtime = details_resource.get()
-                .and_then(|d| d.and_then(|x| x.runtime))
-                .unwrap_or(105);
-            if runtime >= 60 {
-                format!("{}h {}m", runtime / 60, runtime % 60)
-            } else {
-                format!("{}m", runtime)
-            }
+            let runtime = details.runtime.filter(|m| *m > 0)?;
+            Some(if runtime >= 60 { format!("{}h {}m", runtime / 60, runtime % 60) } else { format!("{}m", runtime) })
         }
     };
 
+    let meta_facts = move || -> Vec<String> {
+        [Some(media_type_label()), genre_label(), year_label(), duration_or_seasons_label()].into_iter().flatten().collect()
+    };
 
     // The lines the engine chose for this title (a mix of news, credits, fame, feel and season); the two old badges below are the fallback
     let engine_hooks = move || -> Vec<(String, String, String)> {
@@ -329,7 +322,7 @@ pub fn HeroSection(
 
     // Left badge, when the engine sent no lines: high acclaim or a well rated recent release
     let badge_left = move || {
-        let yr = year_label().parse::<u32>().unwrap_or(2024);
+        let yr = year_label().and_then(|y| y.parse::<u32>().ok()).unwrap_or(0);
         let vote = current_item().vote_average;
         if vote >= 8.2 {
             Some(("clapper".to_string(), crate::i18n::t("media-badge-masterpiece")))
@@ -666,14 +659,10 @@ pub fn HeroSection(
 
                         // Metadata line: Series • Action • 2017 • 5 Seasons • [15]
                         <div class="flex items-center flex-wrap gap-2 mt-4 text-body-md text-ink font-medium select-none">
-                            <span>{media_type_label}</span>
-                            <span class="text-ink/40 text-body-md">"•"</span>
-                            <span>{genre_label}</span>
-                            <span class="text-ink/40 text-body-md">"•"</span>
-                            <span>{year_label}</span>
-                            <span class="text-ink/40 text-body-md">"•"</span>
-                            <span>{duration_or_seasons_label}</span>
-                            <span class="text-ink/40 text-body-md">"•"</span>
+                            {move || meta_facts().into_iter().map(|fact| view! {
+                                <span>{fact}</span>
+                                <span class="text-ink/40 text-body-md">"•"</span>
+                            }).collect_view()}
                             <div class="inline-flex items-center">
                                 {move || {
                                     let item = current_item();

@@ -486,8 +486,9 @@ pub fn InfoModal() -> impl IntoView {
                                         // Cinematic Gradient Overlay (bottom 40% blend)
                                         <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-raised to-transparent z-10 pointer-events-none" />
 
-                                        // Title / Logo & Action Buttons Overlay
-                                        <div class="absolute bottom-6 left-6 md:left-12 w-[340px] max-w-[70%] z-20 pointer-events-auto">
+                                        // Title / Logo & Action Buttons Overlay: on a computer 13 % of the trailer's height above its bottom, as Netflix's (measured 2026-10-23 at
+                                        // 1736 wide: Play centred 86.5 px above the trailer's bottom edge, 481 tall)
+                                        <div class="absolute bottom-6 left-6 md:bottom-[13%] md:left-12 w-[340px] max-w-[70%] z-20 pointer-events-auto">
                                             // Logo or Title
                                             <div class="relative flex items-end mb-6">
                                                 <Suspense fallback=move || view! { <h2 class="text-ink text-3xl sm:text-4xl font-bold mb-4">{fallback_title.clone()}</h2> }>
@@ -596,7 +597,8 @@ pub fn InfoModal() -> impl IntoView {
                                                         }
                                                     })
                                                     size="md".to_string()
-                                                    class="absolute bottom-6 right-6 z-30 pointer-events-auto".to_string()
+                                                    // on the Play row's centre line and at the content's right edge (48 px), as Netflix's
+                                                    class="absolute bottom-6 right-6 md:bottom-[calc(13%+4px)] md:right-12 z-30 pointer-events-auto".to_string()
                                                 />
                                             }.into_any()
                                         } else {
@@ -625,7 +627,8 @@ pub fn InfoModal() -> impl IntoView {
                                                     _ => None,
                                                 }).map(|line| view! { <p class="text-ink font-bold text-title-md leading-tight">{line}</p> })}
 
-                                                <p class="text-ink font-normal text-body-sm leading-6 pt-1">
+                                                // Netflix's synopsis here: 16 px on 26 px lines
+                                                <p class="text-ink font-normal text-body-md leading-[26px] pt-1">
                                                     {overview}
                                                 </p>
                                             </div>

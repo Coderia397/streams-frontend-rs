@@ -1104,7 +1104,6 @@ media-add-to-list = Agregar a Mi lista
 media-in-list = En Mi lista
 media-series = Serie
 media-film = Película
-media-genre-fallback = Acción
 media-seasons =
     { $n ->
         [one] 1 Temporada

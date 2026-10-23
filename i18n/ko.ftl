@@ -1109,7 +1109,6 @@ media-add-to-list = 마이 리스트에 추가
 media-in-list = 마이 리스트에 있습니다
 media-series = 시리즈
 media-film = 영화
-media-genre-fallback = 액션
 media-seasons =
     { $n ->
        *[other] 시즌 { $n }

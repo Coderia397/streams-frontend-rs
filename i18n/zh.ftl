@@ -1112,7 +1112,6 @@ media-add-to-list = 加入片单
 media-in-list = 已在片单中
 media-series = 电视剧
 media-film = 电影
-media-genre-fallback = 动作
 media-seasons =
     { $n ->
        *[other] { $n } 季
