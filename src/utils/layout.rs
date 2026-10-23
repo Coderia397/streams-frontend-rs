@@ -5,17 +5,17 @@ pub fn app_x() -> f64 {
     css_px("--app-x").unwrap_or(48.0)
 }
 
+/// The nav's search field when open, in px (`--search-open-w`).
+pub fn search_open_w() -> f64 {
+    css_px("--search-open-w").unwrap_or(400.0)
+}
+
 fn css_px(name: &str) -> Option<f64> {
     let window = web_sys::window()?;
     let root = window.document()?.document_element()?;
     let style = window.get_computed_style(&root).ok()??;
     let raw = style.get_property_value(name).ok()?;
     raw.trim().trim_end_matches("px").trim().parse().ok()
-}
-
-/// True on a phone layout (narrower than the `md` breakpoint, 768px). The hero banner plays no trailer there.
-pub fn is_phone() -> bool {
-    web_sys::window().and_then(|w| w.match_media("(max-width: 767.98px)").ok().flatten()).is_some_and(|m| m.matches())
 }
 
 /// How long the pointer must rest on a card (a tile, a Top 10 card) before its hover card opens, in milliseconds: moving across a row on the way to a button opens nothing.

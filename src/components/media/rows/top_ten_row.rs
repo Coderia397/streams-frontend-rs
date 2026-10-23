@@ -199,9 +199,9 @@ fn TopTenCard(
             data-loop-first=(loop_role == 1).then_some("1")
             data-loop-clone=(loop_role == 2).then_some("1")
             class=format!("relative flex-none flex items-end tile-width topten-card cursor-pointer{}", if loop_role >= 2 { " max-md:hidden" } else { "" })
-            // a finger is not a hover: touch browsers fire mouse events after a tap, so only a mouse or pen opens the popup
-            on:pointerenter=move |e: leptos::ev::PointerEvent| if e.pointer_type() != "touch" { mouse_enter_cb.run(()) }
-            on:pointerleave=move |e: leptos::ev::PointerEvent| if e.pointer_type() != "touch" { mouse_leave_cb.run(()) }
+            // only a mouse or a pen opens the hover card, and never on the phone form (form::opens_hover_card)
+            on:pointerenter=move |e: leptos::ev::PointerEvent| if crate::form::opens_hover_card(&e) { mouse_enter_cb.run(()) }
+            on:pointerleave=move |e: leptos::ev::PointerEvent| if crate::form::opens_hover_card(&e) { mouse_leave_cb.run(()) }
             on:click=open_modal
         >
             <RankNumber index=index />

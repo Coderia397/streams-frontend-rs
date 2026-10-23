@@ -2,6 +2,11 @@
 @import "tailwindcss" source(none);
 @import "./brand.css";
 @import "./components.css";
+
+/* Hover follows the input in use (src/form/input.rs keeps it on the root as data-input): a hover style shows while a mouse or a pen is
+   used, on any device (an iPad with a mouse included), and never sticks after a finger's tap (a touch laptop included). Tailwind's own
+   rule asked the device instead (hover: hover), which is false on an iPad with a mouse and true on a touch laptop used with a finger. */
+@custom-variant hover (&:where(:root[data-input="mouse"] *, :root[data-input="pen"] *):hover);
 @source "../src/**/*.rs";
 @source "../index.html";
 
@@ -30,6 +35,11 @@
   --app-x: 12px;
   --tile-gap: 6px;
   --tile-radius: 6px;
+  /* the nav's search field when open (Netflix: 400 x 56), narrower below 960 px; the nav reads it too (utils::layout::search_open_w) */
+  --search-open-w: 220px;
+}
+@media (min-width: 960px) {
+  :root { --search-open-w: 400px; }
 }
 @media (min-width: 600px) {
   :root { --app-x: 36px; --tile-gap: 8px; --tile-radius: 8px; }
@@ -666,7 +676,7 @@ button,
 .edge-btn { background: transparent; transition: opacity 0.25s ease; }
 .edge-pill { display: flex; align-items: center; justify-content: center; width: 30px; height: 58px; border-radius: 999px; background: rgba(38, 38, 38, 0.96); color: #fff; font-size: 20px;
   transition: background-color 0.7s ease, backdrop-filter 0.7s ease, transform 0.15s ease; }
-.edge-btn:hover .edge-pill { background: rgba(38, 38, 38, 0.8); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transform: scale(1.12); transition: background-color 0.12s ease, backdrop-filter 0.12s ease, transform 0.15s ease; }
+:root:is([data-input="mouse"], [data-input="pen"]) .edge-btn:hover .edge-pill { background: rgba(38, 38, 38, 0.8); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transform: scale(1.12); transition: background-color 0.12s ease, backdrop-filter 0.12s ease, transform 0.15s ease; }
 
 
 /* The description of the hero banner: it fades (700ms) a little faster than it slides down (1000ms) and gives up its space, so the logo and the line under it slide down with it. */
@@ -688,7 +698,7 @@ button,
 
 /* The rating pill (action_buttons.rs RatingPill): closed until the pointer rests on the round button, then it grows out of it. */
 .rating-pill { opacity: 0; pointer-events: none; transform: translate(-50%, -50%) scale(0.55); transition: opacity 0.14s ease, transform 0.16s cubic-bezier(0.2, 0.8, 0.2, 1); }
-.rating-pill-wrap:hover .rating-pill, .rating-pill-wrap:focus-within .rating-pill { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+:root:is([data-input="mouse"], [data-input="pen"]) .rating-pill-wrap:hover .rating-pill, .rating-pill-wrap:focus-within .rating-pill { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
 
 /* the phone and tablet profile switch (Netflix app): a red arc turning under the picture, and the picture's flight to its place in the bar */
 @keyframes sw-phone-spin { to { transform: rotate(360deg); } }

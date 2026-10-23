@@ -3,7 +3,7 @@ use crate::models::profile::Profile;
 use crate::store::use_profile_store;
 use crate::components::profiles::pin_prompt::ProfilePinPrompt;
 use crate::components::profiles::add_edit_modal::{AddEditProfileModal, ProfileFormData};
-use crate::components::profiles::switch_overlay::{begin_switch, is_compact, ProfileSwitchOverlay};
+use crate::components::profiles::switch_overlay::{begin_switch, is_app_switch, ProfileSwitchOverlay};
 use crate::components::profiles::phone_picker::PhoneProfilePicker;
 
 fn save_profiles_to_storage(profiles: &[Profile], active_id: Option<&str>) {
@@ -37,8 +37,8 @@ pub fn WhosWatchingGate(
     let perform_switch = move |p: Profile| {
         let pid = p.id.clone();
         save_profiles_to_storage(&profiles_signal.get_untracked(), Some(&pid));
-        // a phone or a tablet: the switch is drawn at the root of the app and flies the picture to the bar (it outlives this screen); the others use the screen's own overlay
-        if is_compact() && !p.is_kids { begin_switch(p); } else { set_switching_target.set(Some(p)); }
+        // the phone form: the switch is drawn at the root of the app and flies the picture to the bar (it outlives this screen); the website uses the screen's own overlay
+        if is_app_switch() && !p.is_kids { begin_switch(p); } else { set_switching_target.set(Some(p)); }
     };
 
     let on_select_tile = move |p: Profile| {

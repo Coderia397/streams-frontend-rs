@@ -21,7 +21,7 @@
     cursor: pointer;
     transition: background-color var(--motion-base);
   }
-  .btn-brand:hover { background-color: var(--color-brand-active); }
+  :root:is([data-input="mouse"], [data-input="pen"]) .btn-brand:hover { background-color: var(--color-brand-active); }
 
   .btn-ink {
     border-radius: var(--radius-button);
@@ -31,7 +31,7 @@
     cursor: pointer;
     transition: background-color var(--motion-base);
   }
-  .btn-ink:hover { background-color: var(--color-ink-hover); }
+  :root:is([data-input="mouse"], [data-input="pen"]) .btn-ink:hover { background-color: var(--color-ink-hover); }
 
   .btn-glass {
     border-radius: var(--radius-button);
@@ -41,7 +41,7 @@
     cursor: pointer;
     transition: background-color var(--motion-base);
   }
-  .btn-glass:hover { background-color: var(--color-glass-hover); }
+  :root:is([data-input="mouse"], [data-input="pen"]) .btn-glass:hover { background-color: var(--color-glass-hover); }
 
   /* Pills: buttons with text. Sizes from Netflix's pages (note 111): sm 32 px (Sign In), md 40 px (Genres), lg 48 px with 18 px text (Play, More Info),
      xl 56 px (Get Started beside a 56 px field). Pair a size with a colour (btn-ink white, btn-glass grey, btn-brand) or the element's own colours. Weight 500, as Netflix's;
@@ -71,7 +71,7 @@
   .btn-pill-xl > i { font-size: 24px; }
   /* the Genres dropdown's look: a faint fill with a thin grey edge */
   .btn-outline { background-color: rgb(0 0 0 / 0.1); color: var(--color-ink); box-shadow: inset 0 0 0 1px var(--color-glass-edge); }
-  .btn-outline:hover { background-color: var(--color-glass-hover); }
+  :root:is([data-input="mouse"], [data-input="pen"]) .btn-outline:hover { background-color: var(--color-glass-hover); }
 
   /* Round buttons: every icon button (sound, replay, add, rate, more, close, pause). Netflix's redesigned pages draw them as a grey see
      through disc with no outline and no blur, the icon half the disc (the billboard's sound button, note 111). Sizes sm 32, md 40, lg 48;
@@ -89,15 +89,15 @@
     user-select: none;
     transition: background-color var(--motion-fast), transform var(--motion-fast);
   }
-  .btn-circle:hover { background-color: var(--color-glass-hover); }
+  :root:is([data-input="mouse"], [data-input="pen"]) .btn-circle:hover { background-color: var(--color-glass-hover); }
   .btn-circle:active { transform: scale(0.95); }
   .btn-circle-sm { width: 32px; height: 32px; font-size: 16px; }
   .btn-circle-md { width: 40px; height: 40px; font-size: 20px; }
   .btn-circle-lg { width: 48px; height: 48px; font-size: 24px; }
   .btn-circle-solid { background-color: var(--color-ink); color: var(--color-void); }
-  .btn-circle-solid:hover { background-color: var(--color-ink-hover); }
+  :root:is([data-input="mouse"], [data-input="pen"]) .btn-circle-solid:hover { background-color: var(--color-ink-hover); }
   .btn-circle-clear { background-color: transparent; }
-  .btn-circle-clear:hover { background-color: var(--color-glass); }
+  :root:is([data-input="mouse"], [data-input="pen"]) .btn-circle-clear:hover { background-color: var(--color-glass); }
 }
 
 /* Light page for the settings screens that Netflix draws white: the account pages on a phone (page grey, cards white) and every
@@ -271,5 +271,5 @@
     background-color: rgb(255 255 255 / 0.1);
   }
   .surface-card-hover { transition: background-color var(--motion-fast); }
-  .surface-card-hover:hover { background-color: rgb(255 255 255 / 0.14); }
+  :root:is([data-input="mouse"], [data-input="pen"]) .surface-card-hover:hover { background-color: rgb(255 255 255 / 0.14); }
 }

@@ -52,6 +52,8 @@ web-sys = { version = "0.3", features = [
     "Performance",
     "History",
     "MediaQueryList",
+    "PointerEvent",
+    "AddEventListenerOptions",
     "Element",
     "Screen",
     "File",

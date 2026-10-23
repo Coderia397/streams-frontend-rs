@@ -101,7 +101,7 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
     let hero_ref = NodeRef::<leptos::html::Div>::new();
     let form_ref = NodeRef::<leptos::html::Div>::new();
     // the blurred copy of the trailer behind the page (computers only: a phone would decode two videos); it follows the main trailer's time
-    let wide = web_sys::window().and_then(|w| w.match_media("(min-width: 48rem)").ok().flatten()).is_some_and(|m| m.matches());
+    let wide = crate::form::current().is_desktop();
     let main_time = StoredValue::new(0.0f64);
     let glow_seek = RwSignal::new(None::<f64>);
     let glow_synced_at = StoredValue::new(0.0f64);

@@ -28,8 +28,4 @@ pub fn local_date(millis: f64) -> String {
     js_sys::Date::new(&wasm_bindgen::JsValue::from_f64(millis)).to_locale_date_string(&crate::i18n::language(), &wasm_bindgen::JsValue::UNDEFINED).as_string().unwrap_or_default()
 }
 
-/// True from the 1024 px width, where the website layout is used.
-pub fn is_wide() -> bool {
-    web_sys::window().and_then(|w| w.match_media("(min-width: 64rem)").ok().flatten()).is_some_and(|m| m.matches())
-}
 

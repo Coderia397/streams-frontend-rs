@@ -48,9 +48,10 @@ pub fn ProfileSwitchOverlay(
     }.into_any()
 }
 
-/// Phones and tablets (narrower than a desktop window): the profile switch is the app's, a picture that flies to its place in the bar.
-pub fn is_compact() -> bool {
-    web_sys::window().and_then(|w| w.inner_width().ok()).and_then(|v| v.as_f64()).is_some_and(|w| w < 1024.0)
+/// The phone form (src/form): the profile switch is the app's, a picture that flies to its place in the bar; the website (tablet and
+/// desktop) shows the loading screen above.
+pub fn is_app_switch() -> bool {
+    crate::form::current().is_phone()
 }
 
 /// How long the picture stays in the middle before the profile is opened and the picture leaves, in milliseconds.
@@ -157,8 +158,8 @@ pub fn provide_switch() {
 
 /// Starts the switch to `profile` with the loading screen.
 pub fn begin_switch(profile: Profile) {
-    // a phone or a tablet: the picture flies to the bar (plain elements, no component involved)
-    if is_compact() && !profile.is_kids {
+    // the phone form: the picture flies to the bar (plain elements, no component involved)
+    if is_app_switch() && !profile.is_kids {
         let id = profile.id.clone();
         run_compact_switch(&profile, move || crate::store::activate_profile(&id));
         return;

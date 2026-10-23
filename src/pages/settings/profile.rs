@@ -3,7 +3,7 @@
 //! take over later (public.profiles: name, avatar, kind, has_pin, is_main; the rating limit is in profile_settings.age_rating).
 use super::hub::persist_profiles;
 use super::prefs::use_prefs;
-use super::widgets::{is_wide, toast, ConfirmDialog, DigitBoxes, Field, FormButtons, LinkRow, Message, OutlineButton, Section, SwitchRow, Tone};
+use super::widgets::{toast, ConfirmDialog, DigitBoxes, Field, FormButtons, LinkRow, Message, OutlineButton, Section, SwitchRow, Tone};
 use super::Screen;
 use crate::config::{GAME_HANDLE_MAX, GAME_HANDLE_MIN, PIN_LENGTH, PROFILE_NAME_MAX};
 use crate::data::settings::{rating, HANDLE_ADJECTIVES, HANDLE_NOUNS, PROFILE_DATA_USAGE};
@@ -95,7 +95,7 @@ pub fn EditProfile(id: String, #[prop(optional)] edit_page: bool) -> impl IntoVi
                             <i class="ph-bold ph-pencil-simple text-fine" aria-hidden="true"></i>
                         </span>
                     </a>
-                    <div class="w-full min-w-0 max-lg:max-w-75 lg:flex-1" on:focusout=move |_| if !is_wide() { save_name() } on:keydown=move |ev| if ev.key() == "Enter" { save_name() }>
+                    <div class="w-full min-w-0 max-lg:max-w-75 lg:flex-1" on:focusout=move |_| if !crate::form::current().is_desktop() { save_name() } on:keydown=move |ev| if ev.key() == "Enter" { save_name() }>
                         <Field label=t("set-profile-name") label_wide_only=true value=name maxlength=PROFILE_NAME_MAX as u32 />
                         // the website saves with a button; the app saves when you leave the field
                         <div class="hidden gap-3 lg:flex">

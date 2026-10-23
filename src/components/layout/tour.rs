@@ -64,7 +64,7 @@ fn target_box(targets: &[&str]) -> Option<(f64, f64, f64, f64)> {
 /// Whether this browser should show a tour: a desktop width (the top bar is only there from 640 px; the tour is for 1024 px and wider) on a browsing page.
 fn can_show() -> bool {
     let Some(win) = web_sys::window() else { return false };
-    let wide = win.inner_width().ok().and_then(|w| w.as_f64()).is_some_and(|w| w >= 1024.0);
+    let wide = crate::form::current().is_desktop();
     let path = win.location().pathname().unwrap_or_default();
     wide && (path.starts_with("/browse") || path.starts_with("/latest"))
 }

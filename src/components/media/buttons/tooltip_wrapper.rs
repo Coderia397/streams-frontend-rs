@@ -10,8 +10,9 @@ pub fn TooltipWrapper(
     let show = RwSignal::new(false);
     let timer_handle = RwSignal::new_local(None::<leptos::leptos_dom::helpers::TimeoutHandle>);
 
-    let handle_mouse_enter = move |_| {
-        if timer_handle.get_untracked().is_some() {
+    // a tooltip is for a pointer that rests (a mouse or a pen); a tap fires pointer and mouse events too, and its tooltip stuck
+    let handle_mouse_enter = move |e: leptos::ev::PointerEvent| {
+        if !crate::form::input::hovers(&e) || timer_handle.get_untracked().is_some() {
             return;
         }
         let handle = leptos::leptos_dom::helpers::set_timeout_with_handle(
@@ -26,7 +27,7 @@ pub fn TooltipWrapper(
         }
     };
 
-    let handle_mouse_leave = move |_| {
+    let handle_mouse_leave = move |_: leptos::ev::PointerEvent| {
         if let Some(h) = timer_handle.get_untracked() {
             h.clear();
             timer_handle.set(None);
@@ -39,8 +40,8 @@ pub fn TooltipWrapper(
     view! {
         <div
             class=format!("relative flex items-center justify-center {}", class)
-            on:mouseenter=handle_mouse_enter
-            on:mouseleave=handle_mouse_leave
+            on:pointerenter=handle_mouse_enter
+            on:pointerleave=handle_mouse_leave
         >
             <div
                 class="absolute bottom-full left-1/2 mb-3 flex flex-col items-center z-(--z-tooltip) pointer-events-none transition-all duration-(--motion-quick)"
@@ -53,7 +54,7 @@ pub fn TooltipWrapper(
                 <div class="bg-ink-soft text-page text-body font-extrabold px-5 py-3 rounded-micro shadow-card whitespace-nowrap leading-none select-none">
                     {label_stored.get_value()}
                 </div>
-                <div class="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-[#e6e6e6] -mt-[1px]" />
+                <div class="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-ink-soft -mt-[1px]" />
             </div>
             {children()}
         </div>

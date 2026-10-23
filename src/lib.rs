@@ -3,6 +3,7 @@ pub mod components;
 pub mod config;
 pub mod consent;
 pub mod data;
+pub mod form;
 pub mod i18n;
 pub mod keys;
 pub mod legacy_keys;
@@ -27,6 +28,8 @@ pub fn App() -> impl IntoView {
     if crate::store::orphaned_account_data() {
         crate::store::forget_account_data();
     }
+    // the form of the site (phone, tablet, desktop) and the input in use follow the window from here on (note 114)
+    crate::form::start();
     crate::store::provide_ui_store();
     crate::store::provide_profile_store();
     crate::store::provide_library_store();

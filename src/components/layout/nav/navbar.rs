@@ -79,7 +79,7 @@ pub fn Navbar(
     ];
     let browse_items = nav_items.clone();
 
-    // With the search open, the tabs fold into the Browse menu when the field would cover them: the field grows to 400 px (220 below 960 wide)
+    // With the search open, the tabs fold into the Browse menu when the field would cover them: the field grows to --search-open-w (400 px, 220 below 960 wide)
     // towards the tabs, and with our logo it reached Browse by language at 1440 wide. Measured when the field opens or closes and on resize.
     let links_ref = NodeRef::<leptos::html::Ul>::new();
     let cluster_ref = NodeRef::<leptos::html::Div>::new();
@@ -89,8 +89,7 @@ pub fn Navbar(
         let fits = (|| {
             let ul = links_ref.get_untracked()?;
             let cluster = cluster_ref.get_untracked()?;
-            let w = web_sys::window()?.inner_width().ok()?.as_f64()?;
-            let open_w = if w >= 960.0 { 400.0 } else { 220.0 };
+            let open_w = crate::utils::layout::search_open_w();
             let field = cluster.first_element_child()?.get_bounding_client_rect().width();
             let cluster_left = cluster.get_bounding_client_rect().left() - (open_w - field).max(0.0);
             Some(ul.get_bounding_client_rect().right() + 16.0 <= cluster_left)
