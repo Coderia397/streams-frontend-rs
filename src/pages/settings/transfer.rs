@@ -115,7 +115,7 @@ pub fn TransferSetting() -> impl IntoView {
         toast(t("set-saved"));
     };
     view! {
-        <div class="-mx-4 -mt-4 flex min-h-settings-hero flex-col items-center justify-center bg-linear-to-b from-chrome via-danger-deep to-chrome px-6 py-10 text-center text-chrome-ink sm:-mx-8 lg:mx-0 lg:rounded-card">
+        <div class="-mx-4 -mt-4 flex min-h-settings-hero-min flex-col items-center justify-center bg-linear-to-b from-chrome via-danger-deep to-chrome px-6 py-10 text-center text-chrome-ink sm:-mx-8 lg:mx-0 lg:rounded-card">
             <i class="ph-bold ph-arrows-left-right mb-6 text-8xl text-chrome-ink/90" aria-hidden="true"></i>
             <h2 class="mb-4 max-w-xl text-heading-lg font-bold leading-tight">{move || if on.get() { t("set-transfer-on-title") } else { t("set-transfer-off-title") }}</h2>
             <p class="mb-8 max-w-md text-body-md text-chrome-ink/80">

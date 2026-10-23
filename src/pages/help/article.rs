@@ -56,7 +56,7 @@ fn Feedback(slug: &'static str) -> impl IntoView {
 
 fn related(a: &'static Article) -> impl IntoView {
     view! {
-        <aside class="border-t-4 border-brand bg-paper px-5 pb-5 pt-4 shadow-raise/10 ring-1 ring-paper-line" aria-labelledby="related-title">
+        <aside class="border-t-4 border-brand bg-paper px-5 pb-5 pt-4 shadow-[0_4px_12px_rgb(0_0_0/0.1)] ring-1 ring-paper-line" aria-labelledby="related-title">
             <h2 id="related-title" class="mb-4 text-body-md font-bold text-paper-ink">{tr("help-ui-related")}</h2>
             <ul class="space-y-3">
                 {a.related

@@ -116,7 +116,7 @@ fn RatingSystemChoice() -> impl IntoView {
     ];
     view! {
         <div class="mt-8">
-            <h2 class="mb-1 text-heading-sm font-bold">{t("set-rating-system-title")}</h2>
+            <h2 class="mb-1 text-title font-bold">{t("set-rating-system-title")}</h2>
             <p class="mb-4 text-body-md text-ink/60">{t("set-rating-system-hint")}</p>
             <ChoiceList
                 options=options

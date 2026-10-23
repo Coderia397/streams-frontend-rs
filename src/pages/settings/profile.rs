@@ -490,7 +490,7 @@ pub fn Lock(id: String) -> impl IntoView {
     let confirm_reset = RwSignal::new(false);
 
     view! {
-        <div class="max-lg:flex max-lg:min-h-settings-hero max-lg:flex-col max-lg:justify-center">
+        <div class="max-lg:flex max-lg:min-h-settings-hero-min max-lg:flex-col max-lg:justify-center">
             <div class="mb-6 flex flex-col items-center gap-4 text-center">
                 <span class="flex h-36 w-36 items-center justify-center rounded-full bg-ink/10 lg:h-24 lg:w-24"><i class="ph-bold ph-lock-simple text-7xl lg:text-5xl" aria-hidden="true"></i></span>
                 <h2 class="text-heading-lg font-bold lg:text-title">{move || if has_pin.get() { t("set-lock-title-on") } else { t("set-lock-title-off") }}</h2>

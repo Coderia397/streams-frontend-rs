@@ -211,7 +211,7 @@ pub fn HelpPage() -> impl IntoView {
     let label = if personal { tr("help-ui-recommended-inline") } else { tr("help-ui-popular") };
     view! {
         <HelpShell look=Look::Light>
-            <div class="bg-linear-to-b from-paper-tint to-paper bg-size-[100%_calc(100dvh-4rem)] bg-no-repeat">
+            <div class="bg-linear-to-b from-paper-tint to-paper bg-[length:100%_calc(100dvh-4rem)] bg-no-repeat">
                 <div class="flex h-[calc((100dvh-4rem)/2-1.75rem)] items-end justify-center px-6 pb-6">
                     <h1 class="text-center text-heading-xl font-black text-paper-ink md:text-display-sm">{tr("help-ui-hero-title")}</h1>
                 </div>
