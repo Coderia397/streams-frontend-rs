@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 use leptos_router::hooks::use_navigate;
-use crate::components::layout::navbar::Navbar;
+use crate::components::layout::nav::Navbar;
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct DimensionConfig {

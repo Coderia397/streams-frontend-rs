@@ -1,10 +1,13 @@
+//! The app's navigation on phones (note 114): the header (logo or back arrow, the page's name, search and the profile) and the bottom bar.
 use leptos::prelude::*;
 use leptos_router::hooks::{use_location, use_navigate};
-use crate::components::layout::bottom_nav_mobile::{BottomNavMobile, BottomNavItem};
+pub mod bottom_bar;
+
+use bottom_bar::{BottomNavItem, BottomNavMobile};
 use crate::store::use_profile_store;
 
 #[component]
-pub fn NavbarMobile(
+pub fn PhoneNav(
     /// How far the page is scrolled; the header goes from transparent to solid with it
     #[prop(into)] scroll_y: Signal<f64>,
     #[prop(optional)] _search_query: Option<ReadSignal<String>>,
@@ -146,7 +149,7 @@ pub fn NavbarMobile(
 
 
     view! {
-        <div class="sm:hidden select-none">
+        <div class="select-none">
             // ── Top Brand Header ───────────────────────────────────────────────
             <header
                 class:hidden=on_search

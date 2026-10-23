@@ -1,21 +1,20 @@
+//! The website's top bar (tablets and computers, note 114): logo, the tabs (computers) or the Browse menu (tablets, and computers while the
+//! open search would cover the tabs), search, notifications, Kids and the profile menu.
 use leptos::prelude::*;
 use leptos_router::hooks::use_location;
-use crate::components::layout::search_bar::SearchBar;
-use crate::components::layout::notifications_dropdown::NotificationsDropdown;
-use crate::components::layout::navbar_mobile::NavbarMobile;
+pub mod notifications;
+pub mod search_bar;
+
+use notifications::NotificationsDropdown;
+use search_bar::SearchBar;
 
 #[component]
-pub fn Navbar(
-    #[prop(optional)] scroll_y: Option<f64>,
+pub fn WebsiteNav(
+    /// How far the page is scrolled (the bar darkens with it)
+    #[prop(into)] scroll_y: Signal<f64>,
 ) -> impl IntoView {
-    let (scroll_y_sig, set_scroll_y_sig) = signal(scroll_y.unwrap_or(0.0));
-
-    // Dynamic window scroll listener (Task 085)
-    if scroll_y.is_none() {
-        crate::utils::listen::listen_window(leptos::ev::scroll, move |_| {
-            set_scroll_y_sig.set(web_sys::window().and_then(|w| w.scroll_y().ok()).unwrap_or(0.0));
-        });
-    }
+    let scroll_y_sig = scroll_y;
+    let form = crate::form::use_form();
 
     // Scroll opacity formula and transparent top-to-bottom gradient (Task 085)
     let scroll_style = move || {
@@ -108,7 +107,7 @@ pub fn Navbar(
         <>
             // ── Desktop Primary Nav (Task 085 & 086) ──────────────────────────
             <nav
-                class="fixed inset-x-0 top-0 z-(--z-nav) h-(--nav-h) hidden sm:flex items-center px-[var(--app-x)] transition-colors duration-(--motion-base)"
+                class="fixed inset-x-0 top-0 z-(--z-nav) h-(--nav-h) flex items-center px-[var(--app-x)] transition-colors duration-(--motion-base)"
                 style=scroll_style
             >
                 // Logo
@@ -121,8 +120,8 @@ pub fn Navbar(
                 </a>
 
                 // Nav links — exact spacing and typography (Task 086)
-                // below 1024 px the tabs do not fit next to the search, bell and profile, so they sit in a Browse menu
-                <div class="relative ms-4" class=("lg:hidden", move || !crowded.get())>
+                // on a tablet the tabs do not fit next to the search, bell and profile, so they sit in a Browse menu (also on a computer while the open search would cover them)
+                <div class="relative ms-4" class=("hidden", move || form.get().is_desktop() && !crowded.get())>
                     <button type="button" on:click=move |_| set_browse_open.update(|o| *o = !*o) aria-haspopup="menu" aria-expanded=move || browse_open.get().to_string() class="inline-flex h-[40px] items-center gap-2 rounded-button px-4 text-body-md text-ink hover:bg-mute/40">
                         {crate::i18n::t("nav-browse")}
                         <i class="ph-fill ph-caret-down text-fine transition-transform duration-(--motion-base)" class=("rotate-180", move || browse_open.get())></i>
@@ -136,7 +135,7 @@ pub fn Navbar(
                         </ul>
                     </Show>
                 </div>
-                <ul node_ref=links_ref class="hidden items-center gap-[6px] ml-6 text-body-md font-normal text-ink lg:flex" class=("invisible", move || crowded.get())>
+                <ul node_ref=links_ref class="flex items-center gap-[6px] ml-6 text-body-md font-normal text-ink" class=("hidden", move || !form.get().is_desktop()) class=("invisible", move || crowded.get())>
                     {nav_items.into_iter().map(|(id, label, href)| {
                         let is_active = move || active_tab() == id;
                         view! {
@@ -157,7 +156,7 @@ pub fn Navbar(
             </nav>
 
             // ── Secondary nav: search + notifications + kids + profile ─────
-            <div node_ref=cluster_ref class="fixed top-0 right-[var(--app-x)] z-(--z-nav-menu) h-(--nav-h) hidden sm:flex items-center gap-3">
+            <div node_ref=cluster_ref class="fixed top-0 right-[var(--app-x)] z-(--z-nav-menu) h-(--nav-h) flex items-center gap-3">
                 // Expandable Search Bar (Task 089 & 090)
                 <SearchBar on_open=Callback::new(move |open| set_search_open.set(open)) />
 
@@ -210,11 +209,8 @@ pub fn Navbar(
             </div>
 
             <Show when=move || is_kids.get()>
-                <div class="pointer-events-none fixed bottom-4 right-[var(--app-x)] z-(--z-nav) hidden sm:block"><crate::components::profiles::kids_splash::KidsWordmark class="h-8 w-auto" /></div>
+                <div class="pointer-events-none fixed bottom-4 right-[var(--app-x)] z-(--z-nav)"><crate::components::profiles::kids_splash::KidsWordmark class="h-8 w-auto" /></div>
             </Show>
-
-            // ── Mobile Header & Bottom Nav (Task 087 & 088) ───────────────────
-            <NavbarMobile scroll_y=scroll_y_sig />
         </>
     }
 }

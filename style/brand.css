@@ -3,6 +3,11 @@
    --radius-card gives rounded-card, --font-brand gives font-brand. Change a value here and the whole app follows.
    The product name, logo paths and contact details are in src/brand.rs. */
 @theme {
+  /* Breakpoints: `sm` is where the phone form ends and the website starts, `lg` where the desktop form starts (src/form, note 114:
+     TABLET_FROM and DESKTOP_FROM). Tailwind's own sm was 640, so between 600 and 640 the site was half phone and half website. */
+  --breakpoint-sm: 600px;
+  --breakpoint-lg: 1024px;
+
   /* Brand accent */
   --color-brand: #2f6bff;
   --color-brand-hover: #4a82ff;
