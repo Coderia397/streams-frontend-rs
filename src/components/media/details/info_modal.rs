@@ -115,6 +115,28 @@ pub fn InfoModal() -> impl IntoView {
     }
 }
 
+thread_local! {
+    /// Whether this page added the open title's entry to the history: closing then goes back to the entry before it, otherwise it
+    /// rewrites the address (see `keep_title_in_address`, `close_title_in_place`)
+    static PUSHED: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
+}
+
+/// Closes the open title for a move elsewhere (a tab of the phone's bottom bar): the address loses its title in place, without a step
+/// back that would land after the move and open the title again.
+pub fn close_title_in_place() {
+    let ui_store = use_ui_store();
+    if !ui_store.info_modal_open.get_untracked() {
+        return;
+    }
+    PUSHED.with(|p| p.set(false));
+    if let Some(w) = web_sys::window() {
+        if let (Ok(path), Ok(search), Ok(history)) = (w.location().pathname(), w.location().search(), w.history()) {
+            let _ = history.replace_state_with_url(&JsValue::NULL, "", Some(&with_title(&path, &search, None)));
+        }
+    }
+    ui_store.info_modal_open.set(false);
+}
+
 /// The open title is in the address (`title=tv-1399`), as Netflix's website keeps it in `jbv`: opening a title adds an entry, so Back
 /// (and a phone's back gesture, which left the page before) closes the title instead of leaving the page; closing takes it out; a
 /// reload, Forward or a shared address opens it again (SharedTitleOpener). The same address shows the window on a computer and the
@@ -122,8 +144,6 @@ pub fn InfoModal() -> impl IntoView {
 fn keep_title_in_address() {
     let ui_store = use_ui_store();
     let location = leptos_router::hooks::use_location();
-    // whether this page added the title's entry: closing then goes back to the entry before it, otherwise it rewrites the address
-    let pushed = StoredValue::new(false);
     Effect::new(move |_| {
         let open = ui_store.info_modal_open.get();
         let wanted = ui_store.info_modal_movie_id.get().filter(|_| open).map(|id| crate::pages::title::slug_for(ui_store.info_modal_is_tv.get(), id));
@@ -133,13 +153,13 @@ fn keep_title_in_address() {
         match (current, wanted) {
             (None, Some(slug)) => {
                 let _ = history.push_state_with_url(&JsValue::NULL, "", Some(&with_title(&path, &search, Some(&slug))));
-                pushed.set_value(true);
+                PUSHED.with(|p| p.set(true));
             }
             (Some(now), Some(slug)) if now != slug => {
                 let _ = history.replace_state_with_url(&JsValue::NULL, "", Some(&with_title(&path, &search, Some(&slug))));
             }
-            (Some(_), None) if pushed.get_value() => {
-                pushed.set_value(false);
+            (Some(_), None) if PUSHED.with(|p| p.get()) => {
+                PUSHED.with(|p| p.set(false));
                 let _ = history.back();
             }
             (Some(_), None) => {
@@ -154,11 +174,11 @@ fn keep_title_in_address() {
         let search = web_sys::window().and_then(|w| w.location().search().ok()).unwrap_or_default();
         match title_param(&search).and_then(|v| crate::pages::title::parse_slug(&v)) {
             None if ui_store.info_modal_open.get_untracked() => {
-                pushed.set_value(false);
+                PUSHED.with(|p| p.set(false));
                 ui_store.info_modal_open.set(false);
             }
             Some((tv, id)) if !ui_store.info_modal_open.get_untracked() || ui_store.info_modal_movie_id.get_untracked() != Some(id) => {
-                pushed.set_value(false);
+                PUSHED.with(|p| p.set(false));
                 ui_store.info_modal_is_tv.set(tv);
                 ui_store.info_modal_movie_id.set(Some(id));
                 ui_store.info_modal_open.set(true);
@@ -170,7 +190,7 @@ fn keep_title_in_address() {
     Effect::new(move |prev: Option<String>| {
         let path = location.pathname.get();
         if prev.is_some_and(|p| p != path) && ui_store.info_modal_open.get_untracked() {
-            pushed.set_value(false);
+            PUSHED.with(|p| p.set(false));
             ui_store.info_modal_open.set(false);
         }
         path

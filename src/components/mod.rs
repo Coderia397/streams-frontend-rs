@@ -6,4 +6,5 @@ pub mod profiles;
 pub mod skeleton;
 pub mod video_player;
 pub mod trailer_player;
+pub mod trailer_controls;
 pub mod hls_adapter;

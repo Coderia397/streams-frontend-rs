@@ -10,6 +10,25 @@ pub struct BottomNavItem {
     pub shown: Signal<bool>,
 }
 
+/// A tab of the bar, as Netflix's app: whatever is open over the page (a title) closes, and the tab's page opens at its start; a tap on
+/// the tab in use, with nothing open, goes back to the top of its page.
+fn tab_tapped(active: bool, go: Callback<()>) {
+    let title_open = crate::store::use_ui_store().info_modal_open.get_untracked();
+    crate::components::media::info_modal::close_title_in_place();
+    let path = web_sys::window().and_then(|w| w.location().pathname().ok()).unwrap_or_default();
+    let at_root = matches!(path.as_str(), "/browse" | "/" | "/clips" | "/search" | "/browse/my-list");
+    if active && !title_open && at_root {
+        if let Some(w) = web_sys::window() {
+            let opts = web_sys::ScrollToOptions::new();
+            opts.set_top(0.0);
+            opts.set_behavior(web_sys::ScrollBehavior::Smooth);
+            w.scroll_to_with_scroll_to_options(&opts);
+        }
+        return;
+    }
+    go.run(());
+}
+
 #[component]
 pub fn BottomNavMobile(
     items: Vec<BottomNavItem>,
@@ -32,7 +51,7 @@ pub fn BottomNavMobile(
 
                     view! {
                         <button
-                            on:click=move |_| on_click.run(())
+                            on:click=move |_| tab_tapped(is_active(), on_click)
                             class="relative flex flex-col items-center justify-center gap-0.5 rounded-full w-[76px] h-12 select-none transition-colors duration-(--motion-base) active:scale-95"
                             class=("hidden", move || !shown.get())
                             class=("bg-lift", move || is_active())

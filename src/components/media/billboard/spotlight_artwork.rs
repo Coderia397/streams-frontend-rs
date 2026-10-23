@@ -3,11 +3,6 @@ use wasm_bindgen::prelude::*;
 use crate::components::trailer_player::TrailerPlayer;
 use crate::store::use_ui_store;
 
-fn mmss(seconds: f64) -> String {
-    let s = seconds.max(0.0).round() as u64;
-    format!("{:02}:{:02}", s / 60, s % 60)
-}
-
 /// The picture area of a card on the New & Hot page: the artwork, and over it the trailer, which starts by itself (muted) while the card is mostly on screen and stops when another
 /// card takes over or the card scrolls away. A red line under it shows how far the trailer is, the round button at the bottom right mutes it, and a tap shows the pause button, the
 /// scrubber and the time left for three seconds. A title without a trailer shows a round play button that opens its details.
@@ -28,10 +23,8 @@ pub fn SpotlightArtwork(movie_id: u32, is_tv: bool, #[prop(into)] backdrop_src: 
     let (ready, set_ready) = signal(false);
     let (time, set_time) = signal(0.0f64);
     let (duration, set_duration) = signal(0.0f64);
-    let (paused, set_paused) = signal(false);
-    let (overlay, set_overlay) = signal(false);
-    let (seek, set_seek) = signal(None::<f64>);
-    let overlay_timer = StoredValue::new_local(None::<i32>);
+    let paused = RwSignal::new(false);
+    let seek = RwSignal::new(None::<f64>);
 
     // the card is "visible" when 60 percent of it is on screen
     let me_for_observer = me.clone();
@@ -90,7 +83,7 @@ pub fn SpotlightArtwork(movie_id: u32, is_tv: bool, #[prop(into)] backdrop_src: 
             set_ready.set(false);
             set_time.set(0.0);
             set_duration.set(0.0);
-            set_paused.set(false);
+            paused.set(false);
         }
         key
     });
@@ -100,33 +93,8 @@ pub fn SpotlightArtwork(movie_id: u32, is_tv: bool, #[prop(into)] backdrop_src: 
     let playing = Signal::derive(move || active.get() && !paused.get());
     let has_trailer = move || video_key.get().is_some();
 
-    let show_overlay = move || {
-        set_overlay.set(true);
-        if let Some(win) = web_sys::window() {
-            if let Some(t) = overlay_timer.get_value() { win.clear_timeout_with_handle(t); }
-            let cb = Closure::once_into_js(move || set_overlay.set(false));
-            overlay_timer.set_value(win.set_timeout_with_callback_and_timeout_and_arguments_0(cb.unchecked_ref(), 3000).ok());
-        }
-    };
-    let on_tap = move |e: leptos::ev::MouseEvent| {
-        e.stop_propagation();
-        if has_trailer() { show_overlay(); }
-    };
-    let fraction = move || if duration.get() > 0.0 { (time.get() / duration.get()).clamp(0.0, 1.0) } else { 0.0 };
-    let on_scrub = move |e: leptos::ev::MouseEvent| {
-        e.stop_propagation();
-        let Some(target) = e.current_target().and_then(|t| t.dyn_into::<web_sys::Element>().ok()) else { return };
-        let rect = target.get_bounding_client_rect();
-        if rect.width() > 0.0 && duration.get_untracked() > 0.0 {
-            let f = ((e.client_x() as f64 - rect.left()) / rect.width()).clamp(0.0, 1.0);
-            set_seek.set(Some(f * duration.get_untracked()));
-            set_time.set(f * duration.get_untracked());
-            show_overlay();
-        }
-    };
-
     view! {
-        <div node_ref=root on:click=on_tap class="relative w-full aspect-video overflow-hidden bg-void shrink-0">
+        <div node_ref=root class="relative w-full aspect-video overflow-hidden bg-void shrink-0">
             {(!backdrop_src.is_empty()).then(|| view! {
                 <img src=backdrop_src.clone() alt=title.clone() class=move || format!("absolute inset-0 w-full h-full object-cover transition-opacity duration-(--motion-slow) {}", if ready.get() && playing.get() { "opacity-0" } else { "opacity-100" }) loading="lazy" />
             })}
@@ -135,49 +103,27 @@ pub fn SpotlightArtwork(movie_id: u32, is_tv: bool, #[prop(into)] backdrop_src: 
                     video_key=Signal::derive(move || video_key.get())
                     is_playing=playing
                     is_muted=ui_store.preview_muted
-                    seek_time=seek
+                    seek_time=Signal::derive(move || seek.get())
                     variant="card".to_string()
                     crop_factor=1.12f32
                     iframe_id=iframe_id.clone()
                     on_ready=Callback::new(move |_| set_ready.set(true))
-                    on_ended=Callback::new(move |_| { set_paused.set(true); })
+                    on_ended=Callback::new(move |_| { paused.set(true); })
                     on_unplayable=Callback::new(|_| {})
                     on_time_update=Callback::new(move |t| set_time.set(t))
                     on_duration=Callback::new(move |d| set_duration.set(d))
                 />
             })}
 
-            // over the player, so that a tap is ours (the YouTube frame would swallow it)
-            <Show when=has_trailer><div class="absolute inset-0 z-10"></div></Show>
-
-            // without a trailer: nothing to play, the picture stays still
-            // a tap on a playing card: pause or play in the middle, the time left and the scrubber
-            <Show when=move || overlay.get() && has_trailer()>
-                <div class="absolute inset-0 z-20 bg-void/25 flex items-center justify-center">
-                    <button on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); set_paused.update(|p| *p = !*p); show_overlay(); } aria-label=crate::i18n::t("media-play") class="text-ink">
-                        <i class=move || if playing.get() { "ph-fill ph-pause text-icon-xl" } else { "ph-fill ph-play text-icon-xl" }></i>
-                    </button>
-                    <div class="absolute left-4 right-4 bottom-3 flex items-center gap-3">
-                        <div on:click=on_scrub class="relative flex-1 h-9 flex items-center cursor-pointer">
-                            <div class="w-full h-[3px] bg-ink/35 rounded-full"></div>
-                            <div class="absolute left-0 h-[3px] bg-brand rounded-full" style=move || format!("width:{}%", fraction() * 100.0)></div>
-                            <div class="absolute w-[22px] h-[22px] -ml-[11px] rounded-full bg-brand" style=move || format!("left:{}%", fraction() * 100.0)></div>
-                        </div>
-                        <span class="text-ink text-body-lg tabular-nums w-[58px] text-right">{move || mmss(duration.get() - time.get())}</span>
-                    </div>
-                </div>
-            </Show>
-
-            // the mute button and the red line under the picture
+            // the app's controls (tap: pause, scrubber, time, sound); without a trailer the picture stays still
             <Show when=has_trailer>
-                <button
-                    on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); ui_store.set_preview_muted(!ui_store.preview_muted.get_untracked()); }
-                    aria-label=move || if ui_store.preview_muted.get() { crate::i18n::t("media-unmute") } else { crate::i18n::t("media-mute") }
-                    class="absolute right-2.5 bottom-2.5 z-30 btn-circle btn-circle-sm"
-                >
-                    <i class=move || if ui_store.preview_muted.get() { "ph-fill ph-speaker-slash text-body" } else { "ph-fill ph-speaker-high text-body" }></i>
-                </button>
-                <div class="absolute left-0 bottom-0 z-30 h-[3px] bg-brand" style=move || format!("width:{}%", fraction() * 100.0)></div>
+                <crate::components::trailer_controls::TrailerControls
+                    time=Signal::derive(move || time.get())
+                    duration=Signal::derive(move || duration.get())
+                    paused=paused
+                    seek=seek
+                    on_scrub=Callback::new(move |t| set_time.set(t))
+                />
             </Show>
         </div>
     }

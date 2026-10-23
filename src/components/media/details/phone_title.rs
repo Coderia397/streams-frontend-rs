@@ -31,6 +31,35 @@ pub fn PhoneTitle() -> impl IntoView {
     let (ended, set_ended) = signal(false);
     let (time, set_time) = signal(0.0f64);
     let (duration, set_duration) = signal(0.0f64);
+    let paused = RwSignal::new(false);
+    let seek = RwSignal::new(None::<f64>);
+    // the trailer's frame is at least half in view (it pauses when the page is scrolled past it, and goes on when it comes back)
+    let frame = NodeRef::<Div>::new();
+    let in_view = RwSignal::new(true);
+    Effect::new(move |_| {
+        use wasm_bindgen::JsCast;
+        let Some(el) = frame.get() else { return };
+        let cb = wasm_bindgen::closure::Closure::<dyn Fn(js_sys::Array)>::new(move |entries: js_sys::Array| {
+            for e in entries.iter() {
+                if let Ok(entry) = e.dyn_into::<web_sys::IntersectionObserverEntry>() {
+                    in_view.try_set(entry.intersection_ratio() >= 0.5);
+                }
+            }
+        });
+        let init = web_sys::IntersectionObserverInit::new();
+        init.set_threshold(&wasm_bindgen::JsValue::from_f64(0.5));
+        if let Ok(obs) = web_sys::IntersectionObserver::new_with_options(cb.as_ref().unchecked_ref(), &init) {
+            obs.observe(&el);
+            let kept = StoredValue::new_local(Some((obs, cb)));
+            on_cleanup(move || {
+                kept.try_update_value(|k| {
+                    if let Some((obs, _)) = k.take() {
+                        obs.disconnect();
+                    }
+                });
+            });
+        }
+    });
 
     // another title (from More Like This, or opened anew): its own tab, season and trailer, from the top of the page
     Effect::new(move |_| {
@@ -41,6 +70,7 @@ pub fn PhoneTitle() -> impl IntoView {
         set_ended.set(false);
         set_time.set(0.0);
         set_duration.set(0.0);
+        paused.set(false);
         if let Some(el) = scroller.get_untracked() {
             el.set_scroll_top(0);
         }
@@ -91,8 +121,7 @@ pub fn PhoneTitle() -> impl IntoView {
         }
         key
     });
-    let playing = Signal::derive(move || is_open.get() && !ended.get());
-    let fraction = move || if duration.get() > 0.0 { (time.get() / duration.get()).clamp(0.0, 1.0) } else { 0.0 };
+    let playing = Signal::derive(move || is_open.get() && !ended.get() && !paused.get() && in_view.get());
 
     let close = move || is_open.set(false);
 
@@ -119,7 +148,7 @@ pub fn PhoneTitle() -> impl IntoView {
                 </div>
 
                 // the trailer's frame: the backdrop until the trailer plays, then the trailer, muted unless the viewer turns the sound on
-                <div class="relative aspect-video w-full overflow-hidden bg-void">
+                <div node_ref=frame class="relative aspect-video w-full overflow-hidden bg-void">
                     {move || details.get().flatten().and_then(|d| d.backdrop_path.clone()).map(|p| {
                         let src = format!("{}/w1280{}", crate::config::TMDB_IMAGE_URL, p);
                         view! {
@@ -138,6 +167,7 @@ pub fn PhoneTitle() -> impl IntoView {
                             video_key=Signal::derive(move || video_key.get())
                             is_playing=playing
                             is_muted=ui_store.preview_muted
+                            seek_time=Signal::derive(move || seek.get())
                             variant="card".to_string()
                             iframe_id="phone-title-trailer".to_string()
                             on_ready=Callback::new(move |_| {
@@ -150,18 +180,15 @@ pub fn PhoneTitle() -> impl IntoView {
                             on_duration=Callback::new(move |d| set_duration.set(d))
                         />
                     })}
+                    // the app's controls (tap: pause, scrubber, time, sound), as on New & Hot
                     <Show when=move || video_key.get().is_some() && !ended.get()>
-                        <button
-                            type="button"
-                            on:click=move |_| ui_store.set_preview_muted(!ui_store.preview_muted.get_untracked())
-                            class="absolute bottom-1 right-1 z-10 flex h-11 w-11 items-center justify-center text-ink cursor-pointer"
-                            aria-label=move || if ui_store.preview_muted.get() { crate::i18n::t("media-unmute") } else { crate::i18n::t("media-mute") }
-                        >
-                            <span class="flex h-9 w-9 items-center justify-center rounded-full bg-void/60">
-                                <i class=move || if ui_store.preview_muted.get() { "ph-fill ph-speaker-slash text-xl" } else { "ph-fill ph-speaker-high text-xl" }></i>
-                            </span>
-                        </button>
-                        <div class="absolute bottom-0 left-0 z-10 h-[3px] bg-brand" style=move || format!("width:{:.2}%", fraction() * 100.0)></div>
+                        <crate::components::trailer_controls::TrailerControls
+                            time=Signal::derive(move || time.get())
+                            duration=Signal::derive(move || duration.get())
+                            paused=paused
+                            seek=seek
+                            on_scrub=Callback::new(move |t| set_time.set(t))
+                        />
                     </Show>
                 </div>
 
