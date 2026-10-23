@@ -13,6 +13,9 @@ fn parse_yt_number(s: &str, key: &str) -> Option<f64> {
     val_str[..end_idx].trim().parse::<f64>().ok()
 }
 
+/// How long after YouTube reports playing the frame is shown (see the playing event).
+const REVEAL_AFTER_PLAYING_MS: u64 = 400;
+
 fn send_yt_cmd(iframe_id: &str, func: &str) {
     if let Some(win) = web_sys::window() {
         if let Some(doc) = win.document() {
@@ -512,7 +515,22 @@ pub fn TrailerPlayer(
             || s.contains(r#""data": 1"#);
 
         if is_playing_event {
-            set_is_frame_ready.set(true);
+            // YouTube says "playing" a moment before its first picture is drawn (on a phone about a quarter of a second of black): the
+            // frame is shown a little later, so the still picture stays until the video is on screen, as Netflix's cards do
+            // (and the owner hears "ready", which takes its picture away, at the same moment)
+            if !is_frame_ready.get_untracked() {
+                leptos::leptos_dom::helpers::set_timeout(
+                    move || {
+                        if is_playing.try_get_untracked() == Some(true) {
+                            set_is_frame_ready.try_set(true);
+                            if let Some(cb) = on_ready_cb {
+                                cb.run(());
+                            }
+                        }
+                    },
+                    std::time::Duration::from_millis(REVEAL_AFTER_PLAYING_MS),
+                );
+            }
 
             // Sound is restored here, now that playback is confirmed active.
             // Unmuting an already-playing element does NOT trip browser autoplay restrictions!
@@ -529,9 +547,6 @@ pub fn TrailerPlayer(
                     playback_anchor_epoch.set_value(js_sys::Date::now());
                     send_yt_seek(&target_id, init_t);
                 }
-            }
-            if let Some(cb) = on_ready_cb {
-                cb.run(());
             }
         }
 

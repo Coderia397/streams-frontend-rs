@@ -103,23 +103,46 @@ fn pills_bottom(doc: &web_sys::Document) -> f64 {
     doc.get_element_by_id("nh-pills").map(|e| e.get_bounding_client_rect().bottom()).unwrap_or(150.0)
 }
 
-/// The cards slide into darkness as they leave and come out of it as they arrive: each card is shaded in step with how far its middle is from the middle of the screen (up to about two thirds dark),
-/// by the variable `--dim` that the shade of the card reads.
-fn dim_cards(doc: &web_sys::Document) {
+/// Which card plays its trailer and which are dimmed, as Netflix's app (recorded on a Pixel 8, 2026-10-24, note 116): the first card,
+/// from the top, whose trailer is at least half in view between the pills and the bottom bar plays; a card whose trailer has slid more
+/// than half under the pills gives way to the next one. Every other card is dimmed. One choice for the page, made on every scroll,
+/// so two cards never play at once (each card chose for itself before, and the one coming in from below took the trailer while the one
+/// above was still in view).
+fn choose_spotlight(doc: &web_sys::Document, ui_store: crate::store::UIStore) {
     let Some(height) = doc.document_element().map(|e| e.client_height() as f64).filter(|h| *h > 0.0) else { return };
+    let top_edge = pills_bottom(doc);
+    // the bottom bar's room (its top edge, 8 px over the screen's foot)
+    let bottom_edge = height - 72.0;
+    let Ok(frames) = doc.query_selector_all("[data-spot]") else { return };
+    let mut chosen: Option<String> = None;
+    for i in 0..frames.length() {
+        let Some(el) = frames.item(i).and_then(|n| n.dyn_into::<web_sys::Element>().ok()) else { continue };
+        let r = el.get_bounding_client_rect();
+        if r.height() <= 0.0 {
+            continue;
+        }
+        let seen = (r.bottom().min(bottom_edge) - r.top().max(top_edge)).max(0.0) / r.height();
+        if seen >= 0.5 {
+            chosen = el.get_attribute("data-spot");
+            break;
+        }
+    }
+    if !ui_store.spotlight_hold.get_untracked() && ui_store.spotlight_playing.get_untracked() != chosen {
+        ui_store.spotlight_playing.set(chosen.clone());
+    }
     let Ok(cards) = doc.query_selector_all(".spot-card") else { return };
     for i in 0..cards.length() {
         let Some(el) = cards.item(i).and_then(|n| n.dyn_into::<web_sys::HtmlElement>().ok()) else { continue };
-        let rect = el.get_bounding_client_rect();
-        let away = ((rect.top() + rect.height() / 2.0 - height / 2.0).abs() / (height * 0.75)).max(0.0);
-        let dim = ((away - 0.2) / 0.6).clamp(0.0, 1.0) * 0.65;
-        let _ = el.style().set_property("--dim", &format!("{dim:.3}"));
+        let own = el.query_selector("[data-spot]").ok().flatten().and_then(|f| f.get_attribute("data-spot"));
+        let lit = chosen.is_some() && own == chosen;
+        let _ = el.style().set_property("--dim", if lit { "0" } else { "0.55" });
     }
 }
 
 #[component]
 pub fn PhoneNewPopular() -> impl IntoView {
     let (active_tab, set_active_tab) = signal(NewPopularTab::ComingSoon);
+    let ui_store = crate::store::use_ui_store();
 
     // the pill follows the scrolling: the last tab whose top has reached the pills is the one in use
     crate::utils::listen::listen_window(leptos::ev::scroll, move |_| {
@@ -131,13 +154,13 @@ pub fn PhoneNewPopular() -> impl IntoView {
             }
         }
         if active_tab.get_untracked() != current { set_active_tab.set(current); }
-        dim_cards(&doc);
+        choose_spotlight(&doc, ui_store);
     });
-    // the cards load one after the other: the shades are set again while they come in (and on every scroll, above)
-    if let Ok(handle) = set_interval_with_handle(move || { if let Some(doc) = web_sys::window().and_then(|w| w.document()) { dim_cards(&doc); } }, std::time::Duration::from_millis(400)) {
+    // the cards load one after the other, and a jump between tabs holds the trailers for a moment: the choice is made again while
+    // they come in (and on every scroll, above)
+    if let Ok(handle) = set_interval_with_handle(move || { if let Some(doc) = web_sys::window().and_then(|w| w.document()) { choose_spotlight(&doc, ui_store); } }, std::time::Duration::from_millis(400)) {
         on_cleanup(move || handle.clear());
     }
-    let ui_store = crate::store::use_ui_store();
     let jump_to = Callback::new(move |tab: NewPopularTab| {
         set_active_tab.set(tab);
         let Some(win) = web_sys::window() else { return };

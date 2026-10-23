@@ -27,21 +27,18 @@ pub fn SpotlightArtwork(movie_id: u32, is_tv: bool, #[prop(into)] backdrop_src: 
     let seek = RwSignal::new(None::<f64>);
 
     // the card is "visible" when 60 percent of it is on screen
-    let me_for_observer = me.clone();
     Effect::new(move |_| {
         let Some(el) = root.get() else { return };
-        let me = me_for_observer.clone();
         let cb = Closure::<dyn Fn(js_sys::Array)>::wrap(Box::new(move |entries: js_sys::Array| {
             for e in entries.iter() {
                 if let Ok(entry) = e.dyn_into::<web_sys::IntersectionObserverEntry>() {
-                    let on = entry.is_intersecting() && entry.intersection_ratio() >= 0.6;
-                    set_visible.try_set(on);
-                    if on && !ui_store.spotlight_hold.get_untracked() { ui_store.spotlight_playing.set(Some(me.clone())); }
+                    // on screen at all: its trailer is looked up, so it is ready when the page gives it the turn (pages/new_popular/phone.rs)
+                    set_visible.try_set(entry.is_intersecting());
                 }
             }
         }));
         let init = web_sys::IntersectionObserverInit::new();
-        init.set_threshold(&js_sys::Array::of2(&JsValue::from_f64(0.0), &JsValue::from_f64(0.6)));
+        init.set_threshold(&JsValue::from_f64(0.0));
         if let Ok(obs) = web_sys::IntersectionObserver::new_with_options(cb.as_ref().unchecked_ref(), &init) {
             obs.observe(&el);
             // the observer and its callback go with the card (they ran on for good before, writing to a card that was gone)
@@ -53,14 +50,6 @@ pub fn SpotlightArtwork(movie_id: u32, is_tv: bool, #[prop(into)] backdrop_src: 
                     }
                 });
             });
-        }
-    });
-
-    // when the page has arrived at a tab, the card on screen takes the trailer
-    let me_for_hold = me.clone();
-    Effect::new(move |_| {
-        if !ui_store.spotlight_hold.get() && visible.get_untracked() && ui_store.spotlight_playing.get_untracked().is_none() {
-            ui_store.spotlight_playing.set(Some(me_for_hold.clone()));
         }
     });
 
@@ -89,12 +78,12 @@ pub fn SpotlightArtwork(movie_id: u32, is_tv: bool, #[prop(into)] backdrop_src: 
     });
 
     let me_for_active = me.clone();
-    let active = Signal::derive(move || visible.get() && ui_store.spotlight_playing.get().as_deref() == Some(me_for_active.as_str()));
+    let active = Signal::derive(move || ui_store.spotlight_playing.get().as_deref() == Some(me_for_active.as_str()));
     let playing = Signal::derive(move || active.get() && !paused.get());
     let has_trailer = move || video_key.get().is_some();
 
     view! {
-        <div node_ref=root class="relative w-full aspect-video overflow-hidden bg-void shrink-0">
+        <div node_ref=root data-spot=me.clone() class="relative w-full aspect-video overflow-hidden bg-void shrink-0">
             {(!backdrop_src.is_empty()).then(|| view! {
                 <img src=backdrop_src.clone() alt=title.clone() class=move || format!("absolute inset-0 w-full h-full object-cover transition-opacity duration-(--motion-slow) {}", if ready.get() && playing.get() { "opacity-0" } else { "opacity-100" }) loading="lazy" />
             })}
