@@ -171,8 +171,8 @@ pub fn NewPopularPage() -> impl IntoView {
     view! {
         <Layout>
             <div class="relative min-h-screen bg-void md:bg-page">
-                // Top spacing under fixed navbar
-                <div class="h-16 sm:h-20 md:h-28" />
+                // Top spacing under fixed navbar: the first row title 20 px under the nav, as on Netflix's My Netflix (its New & Popular is still the old page)
+                <div class="h-16 sm:h-20 md:h-[calc(var(--nav-h)+20px)]" />
 
                 // ── MOBILE: ONE LONG PAGE OF TABS (< md) ───────────────────
                 <div class="block md:hidden">
