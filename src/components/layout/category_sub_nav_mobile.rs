@@ -8,7 +8,7 @@ use crate::components::layout::category_sub_nav::SubNavGenre;
 pub fn CategorySubNavMobile(
     #[prop(optional)] _title: Option<String>,
     genres: Vec<SubNavGenre>,
-    selected_genre: ReadSignal<Option<SubNavGenre>>,
+    #[prop(into)] selected_genre: Signal<Option<SubNavGenre>>,
     on_genre_select: Callback<Option<SubNavGenre>>,
     #[prop(optional)] dropdown_label: Option<String>,
     /// Home: the last pill, Categories, that opens the list of genres (the pill of the Series and Films pages shows whatever this says)

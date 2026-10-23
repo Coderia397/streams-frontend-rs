@@ -153,6 +153,10 @@
 @media (min-width: 600px) {
   .row-block { gap: 10px; }
 }
+/* from 1280 wide the cards start 14 px under the row title's line, as Netflix's (measured at 1736: title 854, cards 899); the strip adds 2 */
+@media (min-width: 1280px) {
+  .row-block { gap: 12px; }
+}
 .row-title {
   font-size: 22px;
   line-height: 30px;

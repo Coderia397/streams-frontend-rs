@@ -12,7 +12,7 @@ pub struct SubNavGenre {
 pub fn CategorySubNav(
     #[prop(into)] title: String,
     genres: Vec<SubNavGenre>,
-    selected_genre: ReadSignal<Option<SubNavGenre>>,
+    #[prop(into)] selected_genre: Signal<Option<SubNavGenre>>,
     on_genre_select: Callback<Option<SubNavGenre>>,
     #[prop(optional, default = false)] hide_genres_on_desktop: bool,
     #[prop(optional)] dropdown_label: Option<String>,
@@ -76,7 +76,7 @@ use leptos_router::hooks::use_query_map;
 fn CategorySubNavDesktop(
     title: String,
     genres: Vec<SubNavGenre>,
-    selected_genre: ReadSignal<Option<SubNavGenre>>,
+    #[prop(into)] selected_genre: Signal<Option<SubNavGenre>>,
     on_genre_select: Callback<Option<SubNavGenre>>,
     dropdown_label: Option<String>,
 ) -> impl IntoView {
@@ -138,9 +138,10 @@ fn CategorySubNavDesktop(
             class="fixed inset-x-0 top-(--nav-h) z-(--z-subnav) pointer-events-none transition-colors duration-(--motion-base)"
             style=scroll_bg_style
         >
-            <div class="pointer-events-none relative z-30 flex items-center justify-between px-(--app-x) h-(--subnav-h) select-none w-full">
+            // the title and Genres sit 4 px above the bar's middle: Netflix centres them at 113 with the billboard at 154, as ours (measured at 1736 wide)
+            <div class="pointer-events-none relative z-30 flex items-center justify-between px-(--app-x) pb-2 h-(--subnav-h) select-none w-full">
                 <div node_ref=container_ref class="pointer-events-auto flex items-center gap-4">
-                <h1 class="text-heading-lg md:text-display-sm font-bold tracking-[-0.5px] text-ink leading-none flex items-center">
+                <h1 class="flex items-center text-[20px] font-medium leading-[31px] text-ink md:text-[24px]">
                     {
                         let t_c = title_clone.clone();
                         move || {
@@ -150,7 +151,7 @@ fn CategorySubNavDesktop(
                                     <>
                                         <span
                                             on:click=move |_| on_genre_click_reset.run(None)
-                                            class="cursor-pointer hover:underline text-ink/40 hover:text-ink/80 transition-colors whitespace-nowrap text-body md:text-title-lg font-normal"
+                                            class="cursor-pointer whitespace-nowrap text-ink/40 transition-colors hover:text-ink/80 hover:underline"
                                         >
                                             {t_c.clone()}
                                         </span>
@@ -183,17 +184,18 @@ fn CategorySubNavDesktop(
                             let on_select = on_genre_select;
 
                             view! {
-                                <div class="relative ml-3 md:ml-5">
+                                <div class="relative">
                                     <button
                                         on:click=toggle_menu
-                                        class="flex items-center justify-between min-w-[100px] md:min-w-[125px] px-4 py-2 leading-none text-label md:text-body-sm font-semibold tracking-[-0.2px] text-ink bg-ink/10 hover:bg-ink/20 border border-ink/20 backdrop-blur-md transition-all rounded-button active:scale-95 gap-x-2.5 cursor-pointer shadow-sm"
-                                        class=("!bg-ink/25 !border-ink/40", move || genre_menu_open.get())
+                                        // Netflix's Genres button: the medium pill with a faint fill and a thin grey edge (note 111), 16 px after the title
+                                        class="btn-outline btn-pill btn-pill-md"
+                                        class=("!bg-glass", move || genre_menu_open.get())
                                         aria-haspopup="listbox"
                                         aria-expanded=move || genre_menu_open.get()
                                     >
                                         <span>{label}</span>
                                         <i
-                                            class="ph-fill ph-caret-down text-fine text-ink/80 transition-transform duration-(--motion-base) shrink-0"
+                                            class="ph-fill ph-caret-down shrink-0 transition-transform duration-(--motion-base)"
                                             class=("rotate-180", move || genre_menu_open.get())
                                         ></i>
                                     </button>

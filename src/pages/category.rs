@@ -44,59 +44,63 @@ pub fn GenreRoute() -> impl IntoView {
             _ => {}
         }
     });
-    move || {
+    // Which page the address shows. A genre of the Series or Films page is that page with another hero and other rows, so moving between its genres (the menu, Back,
+    // Forward) keeps the page and its header, and only the address says which genre is shown.
+    let shown = Memo::new(move |_| {
         let id = params.read().get("id").unwrap_or_default();
         let bc = query.read().get("bc").map(|b| format!("?bc={b}")).unwrap_or_default();
         let kind = page_kind_of_genre_route(&format!("/browse/genre/{id}"), &bc);
         let has_bc = !bc.is_empty();
         match (id.parse::<u32>(), kind) {
             // the page of a mood collection (Explore all): a number made from its id, and the id
-            (Ok(n), _) if n >= 20_000 && query.read().get("c").is_some() => {
-                let id = query.read().get("c").unwrap_or_default();
-                view! { <crate::pages::browse::BrowseHome collection=id /> }.into_any()
-            }
-            (Ok(SERIES_PAGE_ID) | Ok(KIDS_SERIES_PAGE_ID), _) => view! { <CategoryPage kind="tv" /> }.into_any(),
-            (Ok(FILMS_PAGE_ID) | Ok(KIDS_FILMS_PAGE_ID), _) => view! { <CategoryPage kind="movie" /> }.into_any(),
+            (Ok(n), _) if n >= 20_000 && query.read().get("c").is_some() => Shown::Collection(query.read().get("c").unwrap_or_default()),
+            (Ok(n @ (SERIES_PAGE_ID | KIDS_SERIES_PAGE_ID)), _) => Shown::Category("tv", n),
+            (Ok(n @ (FILMS_PAGE_ID | KIDS_FILMS_PAGE_ID)), _) => Shown::Category("movie", n),
             // the page of an event without a page to belong to (Halloween, Christmas) mixes films and series, like Home
-            (Ok(n), _) if !has_bc && is_event_page_id(n) => view! { <crate::pages::browse::BrowseHome event=(n, event_name(n).unwrap_or("Event")) /> }.into_any(),
+            (Ok(n), _) if !has_bc && is_event_page_id(n) => Shown::Event(n),
             (Ok(n), Some(k)) if MOVIE_GENRES.iter().chain(TV_GENRES.iter()).any(|g| g.id == n) || is_kids_genre_id(n) || is_event_page_id(n) => {
-                view! { <CategoryPage kind=if k == "tv" { "tv" } else { "movie" } genre_id=n /> }.into_any()
+                let kind = if k == "tv" { "tv" } else { "movie" };
+                let page = query.read().get("bc").and_then(|b| b.parse().ok()).unwrap_or(if kind == "tv" { SERIES_PAGE_ID } else { FILMS_PAGE_ID });
+                Shown::Category(kind, page)
             }
-            _ => view! { <crate::pages::browse_grid::BrowseGridPage /> }.into_any(),
+            _ => Shown::Grid,
         }
+    });
+    move || match shown.get() {
+        Shown::Collection(id) => view! { <crate::pages::browse::BrowseHome collection=id /> }.into_any(),
+        Shown::Category(kind, _) => view! { <CategoryPage kind=kind /> }.into_any(),
+        Shown::Event(n) => view! { <crate::pages::browse::BrowseHome event=(n, event_name(n).unwrap_or("Event")) /> }.into_any(),
+        Shown::Grid => view! { <crate::pages::browse_grid::BrowseGridPage /> }.into_any(),
     }
 }
 
+/// The page an address under `/browse/genre/` shows; `Category` carries the kind and the page the genres belong to (Series, Films or the Kids profile's own).
+#[derive(Clone, PartialEq)]
+enum Shown {
+    Collection(String),
+    Category(&'static str, u32),
+    Event(u32),
+    Grid,
+}
+
+/// The Series or Films page and its genre pages. The genre shown is the address's (`/browse/genre/<genre id>?bc=<page id>`, none on the page's own address), so Back
+/// and Forward move between genres as between pages.
 #[component]
 pub fn CategoryPage(
     kind: &'static str, // "movie" or "tv"
-    /// The genre of the address (`/browse/genre/<id>`), when the page was opened that way
-    #[prop(optional)] genre_id: Option<u32>,
 ) -> impl IntoView {
+    use crate::data::page_genres::{FILMS_PAGE_ID, KIDS_FILMS_PAGE_ID, KIDS_SERIES_PAGE_ID, SERIES_PAGE_ID};
     let genres: Vec<SubNavGenre> = if kind == "tv" {
         TV_GENRES.iter().map(|g| SubNavGenre { id: g.id as u32, name: g.name.to_string() }).collect()
     } else {
         MOVIE_GENRES.iter().map(|g| SubNavGenre { id: g.id as u32, name: g.name.to_string() }).collect()
     };
 
+    let params = leptos_router::hooks::use_params_map();
     let query_map = leptos_router::hooks::use_query_map();
-    let genres_clone = genres.clone();
-    let initial_genre = query_map.with_untracked(|q| {
-        if let Some(gid) = genre_id {
-            genres_clone.iter().find(|g| g.id == gid).cloned()
-        } else if let Some(gid_str) = q.get("genre") {
-            if let Ok(gid) = gid_str.parse::<u32>() {
-                genres_clone.iter().find(|g| g.id == gid).cloned()
-            } else {
-                let lower = gid_str.to_lowercase();
-                genres_clone.iter().find(|g| g.name.to_lowercase() == lower).cloned()
-            }
-        } else {
-            None
-        }
+    let genre_id = Memo::new(move |_| {
+        params.read().get("id").and_then(|i| i.parse::<u32>().ok()).filter(|i| !matches!(*i, SERIES_PAGE_ID | FILMS_PAGE_ID | KIDS_SERIES_PAGE_ID | KIDS_FILMS_PAGE_ID))
     });
-
-    let (selected_genre, set_selected_genre) = signal(initial_genre);
 
     // The genre pages come from the engine (ids, order, surface, the page their addresses hang under, and whether this profile is offered the page); the page's own list is
     // the fallback when the engine cannot be reached
@@ -112,39 +116,30 @@ pub fn CategoryPage(
             _ => kind,
         }
     };
-    // a genre the page's own list does not know (a Kids genre, an event) is taken from the engine's menu once it arrives
-    Effect::new(move |_| {
-        if let (Some(gid), None, Some(Some(m))) = (genre_id, selected_genre.get_untracked(), menu.get()) {
-            if let Some(g) = m.genres.into_iter().find(|g| g.id == gid) {
-                set_selected_genre.set(Some(SubNavGenre { id: g.id, name: g.name }));
-            }
+    // the genre shown: the address's, from the page's own list, else (a Kids genre, an event) from the engine's menu once it arrives; older addresses carry it as
+    // `?genre=` (an id or a name)
+    let own_genres = genres.clone();
+    let selected_genre = Memo::new(move |_| {
+        let by_id = |gid: u32| {
+            own_genres.iter().find(|g| g.id == gid).cloned().or_else(|| {
+                menu.get().flatten().and_then(|m| m.genres.into_iter().find(|g| g.id == gid)).map(|g| SubNavGenre { id: g.id, name: g.name })
+            })
+        };
+        if let Some(gid) = genre_id.get() {
+            return by_id(gid);
+        }
+        let named = query_map.read().get("genre")?;
+        match named.parse::<u32>() {
+            Ok(gid) => by_id(gid),
+            Err(_) => own_genres.iter().find(|g| g.name.eq_ignore_ascii_case(&named)).cloned(),
         }
     });
 
-    let genres_for_effect = genres.clone();
-    Effect::new(move |_| {
-        let q = query_map.get();
-        if let Some(gid_str) = q.get("genre") {
-            let matched = if let Ok(gid) = gid_str.parse::<u32>() {
-                genres_for_effect.iter().find(|g| g.id == gid).cloned()
-            } else {
-                let lower = gid_str.to_lowercase();
-                genres_for_effect.iter().find(|g| g.name.to_lowercase() == lower).cloned()
-            };
-            if matched != selected_genre.get_untracked() {
-                set_selected_genre.set(matched);
-            }
-        }
-    });
-
+    // picking a genre goes to its address through the router, so the browser's history and the page agree
+    let navigate = StoredValue::new_local(leptos_router::hooks::use_navigate());
     let on_genre_select_cb = Callback::new(move |opt_g: Option<SubNavGenre>| {
-        set_selected_genre.set(opt_g.clone());
-        if let Some(win) = web_sys::window() {
-            if let Ok(history) = win.history() {
-                let new_url = crate::data::page_genres::genre_url_on(page_id(), opt_g.map(|g| g.id));
-                let _ = history.push_state_with_url(&wasm_bindgen::JsValue::NULL, "", Some(&new_url));
-            }
-        }
+        let url = crate::data::page_genres::genre_url_on(page_id(), opt_g.map(|g| g.id));
+        navigate.with_value(|go| go(&url, Default::default()));
     });
 
     let title = if kind == "tv" { crate::i18n::t("category-series") } else { crate::i18n::t("category-films") };
@@ -189,7 +184,7 @@ pub fn CategoryPage(
     let feed = LocalResource::new(move || {
         let sel = selected_genre.get();
         // a genre page opened by an address the page's own list does not know waits for the engine's menu rather than showing the whole surface first
-        let waiting = genre_id.is_some() && sel.is_none() && menu.get().is_none();
+        let waiting = genre_id.get().is_some() && sel.is_none() && menu.get().is_none();
         let surface = sel.as_ref().map(|g| surface_of(g.id)).unwrap_or(kind).to_string();
         let g_opt = sel.map(|g| g.name);
         async move {

@@ -23,16 +23,14 @@ pub fn BrowseHome(#[prop(optional)] event: Option<(u32, &'static str)>, #[prop(o
         .collect();
     let query_map = leptos_router::hooks::use_query_map();
     let genres_for_init = genres.clone();
-    let initial_genre = query_map.with_untracked(|q| {
+    // the genre shown is the address's (`?genre=<name>`), so Back and Forward move between genres; an event page is its event's
+    let selected_genre = Memo::new(move |_| {
         if let Some((id, name)) = event {
             return Some(SubNavGenre { id, name: name.to_string() });
         }
-        q.get("genre").and_then(|n| {
-            let lower = n.to_lowercase();
-            genres_for_init.iter().find(|g| g.name.to_lowercase() == lower).cloned()
-        })
+        let named = query_map.read().get("genre")?;
+        genres_for_init.iter().find(|g| g.name.eq_ignore_ascii_case(&named)).cloned()
     });
-    let (selected_genre, set_selected_genre) = signal(initial_genre);
     // the page of a collection: its header (instead of the hero) and its own rows; an event page has its header only
     let collection_page = LocalResource::new({
         let collection = collection.clone();
@@ -47,21 +45,16 @@ pub fn BrowseHome(#[prop(optional)] event: Option<(u32, &'static str)>, #[prop(o
         match event { Some((_, name)) => crate::services::ai_engine::fetch_page_header(name).await, None => None }
     });
     let page_header = Signal::derive(move || collection_page.get().flatten().and_then(|p| p.header).or_else(|| event_header.get().flatten()));
+    // picking a genre goes to its address through the router, so the browser's history and the page agree
+    let navigate = StoredValue::new_local(leptos_router::hooks::use_navigate());
+    let pathname = leptos_router::hooks::use_location().pathname;
     let on_genre_select_cb = Callback::new(move |opt_g: Option<SubNavGenre>| {
-        set_selected_genre.set(opt_g.clone());
-        if let Some(win) = web_sys::window() {
-            if let Ok(history) = win.history() {
-                let pathname = win.location().pathname().unwrap_or_default();
-                let new_url = match opt_g {
-                    Some(g) => {
-                        let encoded: String = js_sys::encode_uri_component(&g.name).into();
-                        format!("{}?genre={}", pathname, encoded)
-                    }
-                    None => pathname,
-                };
-                let _ = history.push_state_with_url(&wasm_bindgen::JsValue::NULL, "", Some(&new_url));
-            }
-        }
+        let path = pathname.get_untracked();
+        let url = match opt_g {
+            Some(g) => format!("{path}?genre={}", String::from(js_sys::encode_uri_component(&g.name))),
+            None => path,
+        };
+        navigate.with_value(|go| go(&url, Default::default()));
     });
 
     // Hero: pull AI-curated home feed with trending fallback
