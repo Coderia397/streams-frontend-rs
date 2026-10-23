@@ -78,6 +78,7 @@ pub fn App() -> impl IntoView {
                 <Route path=path!("/dev/badges") view=|| if is_local_host() { view! { <crate::pages::dev_badges::DevBadgesPage /> }.into_any() } else { view! { <crate::pages::not_found::NotFoundPage /> }.into_any() } />
                 <Route path=path!("/dev/logos") view=|| if is_local_host() { view! { <crate::components::media::collection_logo::LogoGalleryPage /> }.into_any() } else { view! { <crate::pages::not_found::NotFoundPage /> }.into_any() } />
                 <Route path=path!("/browse/genre/:id") view=crate::pages::category::GenreRoute />
+                <Route path=path!("/title/:slug") view=crate::pages::title::TitlePage />
                 <Route path=path!("/watch/:id") view=crate::pages::player::PlayerPage />
                 <Route path=path!("/watch/:kind/:id") view=crate::pages::player::PlayerPage />
                 <Route

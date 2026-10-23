@@ -426,7 +426,7 @@ fn LandingForm(email: ReadSignal<String>, set_email: WriteSignal<String>, on_sub
 
 /// The wall of posters behind the landing page: real posters from the catalogue laid out in a few ways (`assets/landing/walls`, made by rendering the poster pages, so every title is right).
 /// One is chosen at random for each visit; the rest of the set (noir, kids, fantasy) is kept for other pages.
-fn wall(size: &str) -> String {
+pub(crate) fn wall(size: &str) -> String {
     const NAMES: [&str; 5] = ["diagonal-popular", "perspective-cinema", "diagonal-animation", "columns-scifi", "perspective-romcom"];
     let pick = ((js_sys::Math::random() * NAMES.len() as f64) as usize).min(NAMES.len() - 1);
     format!("/assets/landing/walls/{}-{size}.webp", NAMES[pick])

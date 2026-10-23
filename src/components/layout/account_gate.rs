@@ -1,4 +1,4 @@
-//! The account gate: everything in the app needs an account, except the pages a visitor may see (the landing page, signing in and up, help, the legal pages). A visitor who opens any other
+//! The account gate: everything in the app needs an account, except the pages a visitor may see (the landing page, a title's own page, signing in and up, help, the legal pages). A visitor who opens any other
 //! address is taken to the sign in page, which sends them back where they were going after they sign in. The engine can switch the gate off for a while (`accounts_required: false` in
 //! `features.json`, read by `/api/features`); an engine that cannot be reached counts as "required".
 
@@ -7,7 +7,7 @@ use leptos_router::hooks::{use_location, use_navigate};
 
 /// Pages a visitor may open without an account.
 pub fn is_open_to_visitors(path: &str) -> bool {
-    const OPEN: [&str; 14] = ["/login", "/signup", "/forgot", "/auth", "/help", "/privacy", "/terms", "/cookies", "/dmca", "/credits", "/disclaimer", "/contact", "/welcome", "/reads"];
+    const OPEN: [&str; 15] = ["/title", "/login", "/signup", "/forgot", "/auth", "/help", "/privacy", "/terms", "/cookies", "/dmca", "/credits", "/disclaimer", "/contact", "/welcome", "/reads"];
     path == "/" || path.is_empty() || OPEN.iter().any(|p| path == *p || path.starts_with(&format!("{p}/")))
 }
 

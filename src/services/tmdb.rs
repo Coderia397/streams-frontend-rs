@@ -247,6 +247,9 @@ pub struct DetailedMediaItem {
     pub genres: Option<Vec<Genre>>,
     #[serde(default)]
     pub original_language: Option<String>,
+    /// the people who created a series (TMDB gives none for films)
+    #[serde(default)]
+    pub created_by: Option<Vec<CastMember>>,
 }
 
 impl DetailedMediaItem {

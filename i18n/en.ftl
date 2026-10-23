@@ -1148,6 +1148,20 @@ share-copied-snapchat = Link copied — paste it into Snapchat
 share-messages = Messages
 share-copy-link = Copy link
 share-button = Share
+title-page-doc = Watch { $title } | { $brand }
+title-jump-label = Sections of this page
+title-trailers = Trailers
+title-more-to-watch = More to watch
+title-more-details = More Details
+title-you-might-like = You might also like
+title-starring = Starring:
+title-creators = Creators:
+title-original-audio = { $language } [Original]
+title-video-trailer = Trailer
+title-video-teaser = Teaser
+title-video-clip = Clip
+title-pause = Pause
+title-season-label = Season
 settings-no-history = No recent history to display.
 login-more-reasons = More reasons to join
 login-reason-screens-title = Watch on any screen
@@ -1657,7 +1671,7 @@ help-art-share-body =
     2. Choose <b>WhatsApp</b>, <b>Messages</b> or <b>X</b> to send the link, or <b>Copy link</b> to paste it anywhere.
     3. For Instagram and Snapchat the link is copied, then you paste it into the app.
 
-    The link opens the title's details on { $brand }. The person who opens it needs to sign in, or create a free account, to watch.
+    The link opens the title's own page on { $brand }, with its trailers, episodes and details, even for someone without an account. To watch, they sign in or create a free account. If they already have an account, the link opens the title's details.
 
 help-art-title-details-title = The title details window
 help-art-title-details-summary = What you can read and do before you press play.

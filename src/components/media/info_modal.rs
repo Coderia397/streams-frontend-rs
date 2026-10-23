@@ -42,7 +42,7 @@ fn clear_timeout_id(id: Option<i32>) {
     }
 }
 
-fn derive_vibe_tags(genres: &[(u32, String)], overview: &str) -> Vec<&'static str> {
+pub(crate) fn derive_vibe_tags(genres: &[(u32, String)], overview: &str) -> Vec<&'static str> {
     let lower_ov = overview.to_lowercase();
     let has_genre = |id: u32, name: &str| {
         genres.iter().any(|(gid, gn)| *gid == id || gn.to_lowercase().contains(name))
@@ -422,12 +422,7 @@ pub fn InfoModal() -> impl IntoView {
 
                             // Share opens the device's share sheet with a link that opens this title (see SharedTitleOpener)
                             let share_open = RwSignal::new(false);
-                            let share_url = format!(
-                                "{}/browse?title={}-{}",
-                                web_sys::window().and_then(|w| w.location().origin().ok()).unwrap_or_default(),
-                                if is_tv_val { "tv" } else { "movie" },
-                                current_movie_id
-                            );
+                            let share_url = crate::pages::title::share_url(is_tv_val, current_movie_id);
                             let share_title = title.clone();
 
                             let watch_store = crate::store::use_watch_store();
@@ -738,9 +733,10 @@ pub fn InfoModal() -> impl IntoView {
     }
 }
 
-/// A shared link (`/browse?title=tv-1399`, made by the Share button) opens that title's details once a profile is chosen. A browser
-/// without an account opens it only when the engine says accounts are optional (the gate's rule); otherwise the gate sends it to
-/// sign in, which keeps the whole address in `next`. The parameter is then taken out of the address so a reload does not open it again.
+/// `/browse?title=tv-1399` opens that title's details once a profile is chosen. A shared link (`/title/tv-1399`) comes here when the
+/// browser holds an account, and so does signing in from a title's page. Without an account it opens only when the engine says accounts
+/// are optional (the gate's rule); otherwise the gate sends it to sign in, which keeps the whole address in `next`. The parameter is then
+/// taken out of the address so a reload does not open it again.
 #[component]
 pub fn SharedTitleOpener() -> impl IntoView {
     let location = leptos_router::hooks::use_location();

@@ -15,3 +15,4 @@ pub mod login;
 pub mod help;
 pub mod not_found;
 pub mod games;
+pub mod title;
