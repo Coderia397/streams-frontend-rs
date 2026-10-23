@@ -4,7 +4,7 @@ use crate::services::tmdb::fetch_trending;
 use crate::components::media::row::Row;
 use crate::components::media::top_ten_row::TopTenRow;
 use crate::components::media::hero::HeroSection;
-use crate::components::layout::category_sub_nav::{CategorySubNav, SubNavGenre};
+use crate::components::layout::subnav::genres::{CategorySubNav, SubNavGenre};
 use crate::data::{MOVIE_GENRES, TV_GENRES};
 
 /// The page behind `/browse/genre/<id>`: the Series page (83), the Films page (34399), or a genre page of one of them (`?bc=` says which; without it the genre decides). An id that

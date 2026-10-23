@@ -4,7 +4,7 @@ use crate::components::layout::Layout;
 use crate::components::media::row::Row;
 use crate::components::media::top_ten_row::TopTenRow;
 use crate::components::media::spotlight_card::SpotlightCard;
-use crate::components::layout::new_popular_sub_nav_mobile::{NewPopularSubNavMobile, NewPopularTab};
+use crate::components::layout::subnav::new_popular_phone::{NewPopularSubNavMobile, NewPopularTab};
 use crate::services::tmdb::{fetch_trending, fetch_top_rated, fetch_row_content};
 
 /// The titles of one tab of the phone layout: the engine's row for the tab, TMDB when the engine cannot be reached.

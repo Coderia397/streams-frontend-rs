@@ -1,79 +1,12 @@
+//! The genre header on tablets and computers (note 114): fixed under the top bar, the title and the Genres pill (website.rs of `genres`).
 use leptos::prelude::*;
 use leptos::html::Div;
-use crate::components::layout::category_sub_nav_mobile::CategorySubNavMobile;
-
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub struct SubNavGenre {
-    pub id: u32,
-    pub name: String,
-}
-
-#[component]
-pub fn CategorySubNav(
-    #[prop(into)] title: String,
-    genres: Vec<SubNavGenre>,
-    #[prop(into)] selected_genre: Signal<Option<SubNavGenre>>,
-    on_genre_select: Callback<Option<SubNavGenre>>,
-    #[prop(optional, default = false)] hide_genres_on_desktop: bool,
-    #[prop(optional)] dropdown_label: Option<String>,
-    #[prop(optional, default = true)] show_categories: bool,
-) -> impl IntoView {
-    if hide_genres_on_desktop {
-        return view! { <div class="hidden"></div> }.into_any();
-    }
-
-    let mobile_title = title.clone();
-    let mobile_genres = genres.clone();
-    let mobile_dropdown_label = dropdown_label.clone();
-
-    let dt_title = title.clone();
-    let dt_genres = genres.clone();
-    let dt_dropdown_label = dropdown_label.clone();
-
-    view! {
-        // Mobile layout: render in-flow
-        <div class="mobile-subnav block sm:hidden pt-[calc(var(--nav-h-mobile)+env(safe-area-inset-top))]">
-            {if let Some(lbl) = mobile_dropdown_label {
-                view! {
-                    <CategorySubNavMobile
-                        _title=mobile_title
-                        genres=mobile_genres
-                        selected_genre=selected_genre
-                        on_genre_select=on_genre_select
-                        dropdown_label=lbl
-                        show_categories=show_categories
-                    />
-                }.into_any()
-            } else {
-                view! {
-                    <CategorySubNavMobile
-                        _title=mobile_title
-                        genres=mobile_genres
-                        selected_genre=selected_genre
-                        on_genre_select=on_genre_select
-                        show_categories=show_categories
-                    />
-                }.into_any()
-            }}
-        </div>
-
-        // Desktop layout: fixed sub-navigation directly below navbar (no portal desync)
-        <div class="hidden sm:block">
-            <CategorySubNavDesktop
-                title=dt_title
-                genres=dt_genres
-                selected_genre=selected_genre
-                on_genre_select=on_genre_select
-                dropdown_label=dt_dropdown_label
-            />
-        </div>
-    }.into_any()
-}
-
+use super::SubNavGenre;
 use leptos_router::hooks::use_query_map;
 
+/// The website's genre header: the page's title (or the strip and the genre picked), the Genres pill and its menu.
 #[component]
-fn CategorySubNavDesktop(
+pub fn CategorySubNavDesktop(
     title: String,
     genres: Vec<SubNavGenre>,
     #[prop(into)] selected_genre: Signal<Option<SubNavGenre>>,

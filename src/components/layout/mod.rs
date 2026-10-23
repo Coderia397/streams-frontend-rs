@@ -4,7 +4,6 @@ pub mod subnav;
 pub mod footer;
 pub mod tour;
 
-pub use subnav::{category_sub_nav, category_sub_nav_mobile, new_popular_sub_nav_mobile};
 
 use leptos::prelude::*;
 use nav::Navbar;

@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 use leptos_router::hooks::{use_navigate, use_location};
-use crate::components::layout::category_sub_nav::SubNavGenre;
+use super::SubNavGenre;
 
 /// The pills under the header of the phone layout, as in the app: on Home the pills Series, Films, Games, the events in season (Halloween while it is on) and New & Hot;
 /// then Categories, as in the app; on the Series and Films pages one outlined pill, All Categories, that opens the list of genres; on the page of an event nothing.
@@ -10,7 +10,7 @@ pub fn CategorySubNavMobile(
     genres: Vec<SubNavGenre>,
     #[prop(into)] selected_genre: Signal<Option<SubNavGenre>>,
     on_genre_select: Callback<Option<SubNavGenre>>,
-    #[prop(optional)] dropdown_label: Option<String>,
+    #[prop(default = None)] dropdown_label: Option<String>,
     /// Home: the last pill, Categories, that opens the list of genres (the pill of the Series and Films pages shows whatever this says)
     #[prop(optional, default = true)] show_categories: bool,
 ) -> impl IntoView {

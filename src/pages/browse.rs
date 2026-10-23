@@ -4,7 +4,7 @@ use crate::components::media::row::Row;
 use crate::components::media::top_ten_row::TopTenRow;
 use crate::components::media::hero::HeroSection;
 use crate::components::media::continue_watching_row::ContinueWatchingRow;
-use crate::components::layout::category_sub_nav::{CategorySubNav, SubNavGenre};
+use crate::components::layout::subnav::genres::{CategorySubNav, SubNavGenre};
 use crate::data::HOME_MOBILE_GENRES;
 
 /// The Home page; opened for an event in season (`event`: genre id and name, for example Halloween) it is the same page for that event: films and series mixed, with the hero, rows and collections of the event.
@@ -124,18 +124,17 @@ pub fn BrowseHome(#[prop(optional)] event: Option<(u32, &'static str)>, #[prop(o
                     style=ambient_bg_style
                 />
 
-                // Genre picker, mobile only (`contents`: the pills stick to the page, not to this box)
-                <div class="sm:hidden contents">
-                    {move || view! {
-                        <CategorySubNav
-                            title=crate::i18n::t("browse-home").to_string()
-                            genres=offered()
-                            selected_genre=selected_genre
-                            on_genre_select=on_genre_select_cb
-                            show_categories=true
-                        />
-                    }}
-                </div>
+                // Genre picker: phones only (the website has none on Home)
+                {move || view! {
+                    <CategorySubNav
+                        title=crate::i18n::t("browse-home").to_string()
+                        genres=offered()
+                        selected_genre=selected_genre
+                        on_genre_select=on_genre_select_cb
+                        show_categories=true
+                        phone_only=true
+                    />
+                }}
 
                 // The page of a collection (Explore all on Halloween) opens with the collection's own header in place of the hero
                 {move || page_header.get().map(|c| view! { <crate::components::media::collection_row::CollectionHero collection=c /> })}
