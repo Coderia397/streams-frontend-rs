@@ -60,6 +60,14 @@ pub fn App() -> impl IntoView {
         let cb = wasm_bindgen::closure::Closure::<dyn Fn()>::wrap(Box::new(|| crate::services::sync::sync_in_background()));
         let _ = win.add_event_listener_with_callback("focus", wasm_bindgen::JsCast::unchecked_ref(cb.as_ref()));
         cb.forget();
+        // another tab signed in or out (it changed the session in local storage, or cleared it): this tab follows, through the account gate
+        let on_storage = wasm_bindgen::closure::Closure::<dyn Fn(web_sys::StorageEvent)>::wrap(Box::new(|e: web_sys::StorageEvent| {
+            if e.key().is_none_or(|k| k == crate::keys::SESSION) {
+                crate::services::account::announce();
+            }
+        }));
+        let _ = win.add_event_listener_with_callback("storage", wasm_bindgen::JsCast::unchecked_ref(on_storage.as_ref()));
+        on_storage.forget();
     }
 
     view! {

@@ -43,8 +43,8 @@
   }
   .btn-glass:hover { background-color: var(--color-glass-hover); }
 
-  /* Pills: buttons with text. Sizes from Netflix's redesigned pages (note 111): sm 32 px (Sign In), md 40 px (Genres), lg 48 px (Play,
-     More Info). Pair a size with a colour (btn-ink white, btn-glass grey, btn-brand) or the element's own colours. Weight 500, as Netflix's;
+  /* Pills: buttons with text. Sizes from Netflix's pages (note 111): sm 32 px (Sign In), md 40 px (Genres), lg 48 px (Play, More Info),
+     xl 56 px (Get Started beside a 56 px field). Pair a size with a colour (btn-ink white, btn-glass grey, btn-brand) or the element's own colours. Weight 500, as Netflix's;
      these come after the colour classes so the weight wins over theirs. */
   .btn-pill {
     display: inline-flex;
@@ -63,9 +63,12 @@
   .btn-pill-sm { height: 32px; padding-inline: 16px; font-size: 14px; }
   .btn-pill-md { height: 40px; padding-inline: 16px; font-size: 16px; }
   .btn-pill-lg { height: 48px; padding-inline: 20px; font-size: 16px; }
+  /* xl: 56 px, beside a 56 px text field (Netflix's landing Get Started: 24 px text, 24 px padding) */
+  .btn-pill-xl { height: 56px; padding-inline: 24px; font-size: 24px; }
   .btn-pill-sm > i { font-size: 16px; }
   .btn-pill-md > i { font-size: 20px; }
   .btn-pill-lg > i { font-size: 24px; }
+  .btn-pill-xl > i { font-size: 24px; }
   /* the Genres dropdown's look: a faint fill with a thin grey edge */
   .btn-outline { background-color: rgb(0 0 0 / 0.1); color: var(--color-ink); box-shadow: inset 0 0 0 1px var(--color-glass-edge); }
   .btn-outline:hover { background-color: var(--color-glass-hover); }

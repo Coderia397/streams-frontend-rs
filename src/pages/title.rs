@@ -36,12 +36,13 @@ pub fn share_url(is_tv: bool, id: u32) -> String {
 #[component]
 pub fn TitlePage() -> impl IntoView {
     let params = use_params_map();
+    let signed_in = crate::services::account::signed_in();
     move || {
         let raw = params.with(|p| p.get("slug").unwrap_or_default());
         match parse_slug(&raw) {
             None => view! { <crate::pages::not_found::NotFoundPage /> }.into_any(),
-            // the opener on Home shows the details window once a profile is chosen
-            Some(_) if crate::services::account::has_account() => view! { <leptos_router::components::Redirect path=format!("/browse?title={raw}") /> }.into_any(),
+            // the opener on Home shows the details window once a profile is chosen (also when this browser signs in while the page is open)
+            Some(_) if signed_in.get() => view! { <leptos_router::components::Redirect path=format!("/browse?title={raw}") /> }.into_any(),
             Some((is_tv, id)) => view! { <PublicTitle id=id is_tv=is_tv /> }.into_any(),
         }
     }
@@ -166,6 +167,7 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
         details.get().flatten().and_then(|d| d.backdrop_path).map(|p| format!("{}/original{}", crate::config::TMDB_IMAGE_URL, p)).unwrap_or_default()
     };
     let title_text = move || details.get().flatten().map(|d| d.display_title().to_string()).unwrap_or_default();
+
     // the mark above the title is the title's own network or studio (Netflix over Stranger Things, HBO over Game of Thrones), as Netflix shows its own mark over its shows
     let maker = move || {
         details.get().flatten().and_then(|d| {
@@ -177,7 +179,7 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
 
     view! {
         <div class="relative min-h-screen overflow-x-clip bg-[#0f0f0f] font-sans text-ink">
-            // the trailer's colours round the panel: Netflix blurs a second copy of the video; ours blurs the title's backdrop (a second trailer would load twice)
+            // the trailer's colours round the panel: a blurred copy of the trailer (computers) over the title's backdrop, as Netflix's page
             <div class="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[520px] overflow-hidden md:h-[910px]" aria-hidden="true" inert>
                 <img src=backdrop alt="" class="h-full w-full scale-110 object-cover" />
                 {wide.then(|| view! {
@@ -224,10 +226,10 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
                 </div>
             </nav>
 
-            // hero: the trailer in a rounded panel whose bottom edge curves up; the sign up form sits over it from a tablet up and under it on a phone
+            // hero: the trailer in a rounded panel whose bottom edge curves up (16:9 on a phone; Netflix's 2.19:1 from a tablet up, 606 px tall at 1327 wide); the sign up form sits over it from a tablet up and under it on a phone
             <section class="relative mt-2 px-3 md:mt-4 md:px-12">
                 <div class="hero-drop">
-                    <div node_ref=hero_ref class="hero-panel relative aspect-video w-full overflow-hidden rounded-[10px] [container-type:size] md:aspect-auto md:h-[606px] md:rounded-[20px]">
+                    <div node_ref=hero_ref class="hero-panel relative aspect-video w-full overflow-hidden rounded-[10px] [container-type:size] md:aspect-[1327/606] md:rounded-[20px]">
                         <div class="hero-video absolute inset-0">
                             <img
                                 src=backdrop

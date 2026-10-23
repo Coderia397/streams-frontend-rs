@@ -5,9 +5,9 @@ export interface AmbientRGB {
 }
 
 const cache = new Map<string, AmbientRGB>();
-// version 2: brighter colours, close to the artwork's own (the app tints the top of the page with it)
-const STORAGE_PREFIX = 'streams-ambient2:';
-const LAST_KEY = 'streams-ambient2:last';
+// version 3: the artwork's second colour (its first when there is no distinct second), a little more saturated (the app tints the top of the page with it)
+const STORAGE_PREFIX = 'streams-ambient3:';
+const LAST_KEY = 'streams-ambient3:last';
 
 export function getCachedAmbientColor(imageUrl: string): AmbientRGB | null {
   if (!imageUrl) return null;
@@ -56,39 +56,53 @@ export function extractAmbientColor(imageUrl: string): Promise<AmbientRGB | null
         const ctx = canvas.getContext('2d', { willReadFrequently: true });
         if (!ctx) return resolve(null);
 
-        canvas.width = 16;
-        canvas.height = 16;
-        ctx.drawImage(img, 0, 0, 16, 16);
-        const data = ctx.getImageData(0, 0, 16, 16).data;
+        canvas.width = 32;
+        canvas.height = 32;
+        ctx.drawImage(img, 0, 0, 32, 32);
+        const data = ctx.getImageData(0, 0, 32, 32).data;
 
-        let r = 0, g = 0, b = 0, count = 0;
-        let maxSat = 0, vibR = 0, vibG = 0, vibB = 0;
-
+        // Group the pixels into colours (3 bits a channel, 512 groups), leaving out see through, near black and near white pixels
+        const groups = new Map<number, { n: number; r: number; g: number; b: number }>();
+        let total = 0;
         for (let i = 0; i < data.length; i += 4) {
           const pr = data[i] ?? 0, pg = data[i + 1] ?? 0, pb = data[i + 2] ?? 0, pa = data[i + 3] ?? 0;
           if (pa <= 180) continue;
           const brightness = (pr * 299 + pg * 587 + pb * 114) / 1000;
-          if (brightness <= 25 || brightness >= 230) continue;
-          r += pr; g += pg; b += pb; count++;
-
-          const max = Math.max(pr, pg, pb);
-          const min = Math.min(pr, pg, pb);
-          const sat = max === 0 ? 0 : (max - min) / max;
-          if (sat > maxSat) { maxSat = sat; vibR = pr; vibG = pg; vibB = pb; }
+          if (brightness <= 20 || brightness >= 235) continue;
+          const key = ((pr >> 5) << 6) | ((pg >> 5) << 3) | (pb >> 5);
+          const grp = groups.get(key) ?? { n: 0, r: 0, g: 0, b: 0 };
+          grp.n++; grp.r += pr; grp.g += pg; grp.b += pb;
+          groups.set(key, grp);
+          total++;
         }
+        if (total === 0) return resolve(null);
 
-        if (count === 0) return resolve(null);
+        const colours = [...groups.values()]
+          .map((c) => ({ n: c.n, r: c.r / c.n, g: c.g / c.n, b: c.b / c.n }))
+          .sort((a, b) => b.n - a.n);
+        const sat = (c: { r: number; g: number; b: number }) => {
+          const max = Math.max(c.r, c.g, c.b), min = Math.min(c.r, c.g, c.b);
+          return max === 0 ? 0 : (max - min) / max;
+        };
+        const dist = (a: { r: number; g: number; b: number }, b: { r: number; g: number; b: number }) =>
+          Math.hypot(a.r - b.r, a.g - b.g, a.b - b.b);
+        const first = colours[0]!;
+        // the second colour: the most common one that covers at least 6 % of the picture and is clearly different from the first and not grey;
+        // failing that, a weaker difference; failing that, the first colour
+        const second =
+          colours.find((c) => c !== first && c.n >= total * 0.06 && dist(c, first) > 60 && sat(c) >= 0.2) ??
+          colours.find((c) => c !== first && c.n >= total * 0.04 && dist(c, first) > 40) ??
+          first;
 
-        // Weighted blend favoring balanced atmospheric average
-        let ar = Math.round((r / count) * 0.70 + vibR * 0.30);
-        let ag = Math.round((g / count) * 0.70 + vibG * 0.30);
-        let ab = Math.round((b / count) * 0.70 + vibB * 0.30);
+        let ar = Math.round(second.r);
+        let ag = Math.round(second.g);
+        let ab = Math.round(second.b);
 
-        // Soften the colour a little toward grey (25 percent), keep it close to the artwork's own tone
+        // a little more saturated than before: pulled 12 % toward grey (version 2 pulled 25 %), so it keeps the artwork's own tone
         const mean = (ar + ag + ab) / 3;
-        ar = Math.round(ar * 0.75 + mean * 0.25);
-        ag = Math.round(ag * 0.75 + mean * 0.25);
-        ab = Math.round(ab * 0.75 + mean * 0.25);
+        ar = Math.round(ar * 0.88 + mean * 0.12);
+        ag = Math.round(ag * 0.88 + mean * 0.12);
+        ab = Math.round(ab * 0.88 + mean * 0.12);
 
         // Luminance between 34 and 112: a bright poster gives a clearly lit top of the page, a dark one a deep tint
         const lum = (ar * 299 + ag * 587 + ab * 114) / 1000;

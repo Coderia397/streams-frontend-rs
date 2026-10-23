@@ -2,6 +2,7 @@
 //! browser (local storage when the person asks to stay signed in, session storage otherwise) and is counted as essential in the
 //! cookie manager. Profiles still live in this browser; the database side is in streams-backend-rs/supabase.
 use gloo_net::http::Request;
+use leptos::prelude::{ArcRwSignal, GetUntracked, Set};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 
@@ -116,6 +117,38 @@ fn save(session: &Session, remember: bool) {
     if let (Some(s), Ok(raw)) = (storage(remember), serde_json::to_string(session)) {
         let _ = s.set_item(crate::keys::SESSION, &raw);
     }
+    announce();
+}
+
+/// Removes the session from this browser (both storages). Every sign out goes through here, so the signed in signal always follows.
+fn clear_session() {
+    for persistent in [true, false] {
+        if let Some(st) = storage(persistent) {
+            let _ = st.remove_item(crate::keys::SESSION);
+        }
+    }
+    announce();
+}
+
+thread_local! {
+    /// Whether this browser holds an account session, as a signal: the account gate and the pages that differ for members follow it.
+    static SIGNED_IN: ArcRwSignal<bool> = ArcRwSignal::new(has_account());
+}
+
+/// The signed in signal. It changes when this tab signs in or out (`save`, `clear_session`) and when another tab does (`announce`
+/// from the window's storage event, set up in `lib.rs`).
+pub fn signed_in() -> ArcRwSignal<bool> {
+    SIGNED_IN.with(|s| s.clone())
+}
+
+/// Brings the signed in signal up to date with what the browser holds.
+pub fn announce() {
+    let now = has_account();
+    SIGNED_IN.with(|s| {
+        if s.get_untracked() != now {
+            s.set(now);
+        }
+    });
 }
 
 /// The saved session, if there is one that has not expired.
@@ -177,11 +210,7 @@ pub fn sign_out() {
             let _ = post("/auth/v1/logout", &json!({}), Some(&s.access_token)).await;
         });
     }
-    for persistent in [true, false] {
-        if let Some(st) = storage(persistent) {
-            let _ = st.remove_item(crate::keys::SESSION);
-        }
-    }
+    clear_session();
 }
 
 #[wasm_bindgen::prelude::wasm_bindgen(module = "/interop/dist/streams-interop.js")]
@@ -210,11 +239,7 @@ pub async fn sign_out_async() {
                 if let (Some(st), Ok(raw)) = (storage(true), serde_json::to_string(&resume)) {
                     let _ = st.set_item(RESUME_KEY, &raw);
                 }
-                for persistent in [true, false] {
-                    if let Some(st) = storage(persistent) {
-                        let _ = st.remove_item(crate::keys::SESSION);
-                    }
-                }
+                clear_session();
                 return;
             }
         }
@@ -368,7 +393,7 @@ pub async fn ensure_fresh() -> Option<Session> {
             Some(fresh)
         }
         Ok((400..=403, _)) => {
-            for p in [true, false] { if let Some(st) = storage(p) { let _ = st.remove_item(crate::keys::SESSION); } }
+            clear_session();
             None
         }
         // no connection: keep what there is, try again later
@@ -445,11 +470,7 @@ pub async fn sign_out_everywhere() -> Result<(), AuthError> {
         return Err(classify(status, &body));
     }
     clear_resume();
-    for persistent in [true, false] {
-        if let Some(st) = storage(persistent) {
-            let _ = st.remove_item(crate::keys::SESSION);
-        }
-    }
+    clear_session();
     Ok(())
 }
 
