@@ -49,6 +49,15 @@ fn avatar_of(p: &Profile) -> String {
     p.avatar_url.clone().unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string())
 }
 
+/// A profile's picture: its own, or the Kids picture for a Kids profile without one (not the empty silhouette).
+fn picture(p: &Profile, size: f64, class: &'static str) -> AnyView {
+    if p.is_kids && p.avatar_url.is_none() {
+        view! { <span class=class><crate::components::profiles::kids_avatar::KidsAvatar size=size /></span> }.into_any()
+    } else {
+        view! { <img src=avatar_of(p) alt="" class=class /> }.into_any()
+    }
+}
+
 #[component]
 pub fn Hub() -> impl IntoView {
     let store = use_profile_store();
@@ -64,7 +73,7 @@ pub fn Hub() -> impl IntoView {
             {move || active.get().map(|p| view! {
                 <div class="relative mb-6 flex flex-col items-center gap-3 rounded-modal bg-set-sheet-tile p-6 lg:bg-set-card">
                     <a href=Screen::Profile(p.id.clone()).path() class="flex flex-col items-center gap-3" aria-label=t("set-title-edit-profile")>
-                        <img src=avatar_of(&p) alt="" class="h-24 w-24 rounded-card object-cover" />
+                        {picture(&p, 96.0, "block h-24 w-24 overflow-hidden rounded-card object-cover")}
                         <span class="max-w-full truncate text-heading font-bold">{p.name.clone()}</span>
                     </a>
                     <a href=Screen::Profile(p.id.clone()).path() class="absolute end-4 top-4 btn-circle btn-circle-clear btn-circle-md" aria-label=t("set-title-edit-profile")>
@@ -78,7 +87,7 @@ pub fn Hub() -> impl IntoView {
                     view! {
                         <li>
                             <button type="button" on:click=move |_| switch_to(store, &target) class="flex w-20 flex-col items-center gap-2 text-label text-ink/80 hover:text-ink">
-                                <img src=avatar_of(&p) alt="" class="h-16 w-16 rounded-control object-cover" />
+                                {picture(&p, 64.0, "block h-16 w-16 overflow-hidden rounded-control object-cover")}
                                 <span class="w-full truncate text-center">{p.name.clone()}</span>
                             </button>
                         </li>
@@ -158,7 +167,7 @@ pub fn ManageProfiles() -> impl IntoView {
                     <li>
                         <a href=Screen::Profile(p.id.clone()).path() class="group flex flex-col items-center gap-3 text-center">
                             <span class="relative block h-28 w-28 overflow-hidden rounded-card">
-                                <img src=avatar_of(&p) alt="" class="h-full w-full object-cover opacity-70" />
+                                {picture(&p, 112.0, "block h-full w-full object-cover opacity-70")}
                                 <span class="absolute inset-0 flex items-center justify-center bg-void/40">
                                     <i class="ph-bold ph-pencil-simple text-3xl text-ink" aria-hidden="true"></i>
                                 </span>
@@ -226,13 +235,13 @@ fn ImportProfile() -> impl IntoView {
     }
 }
 
-/// The Profile sheet of the phone app: a sheet rising from the bottom over the page, with a handle, the title "Profile", a close button and the same content as the settings hub.
+/// The Profile sheet of the phone app: a sheet rising from the bottom to the top of the screen (as the app, note 116), with a handle, the title "Profile", a close button and the same content as the settings hub.
 #[component]
 pub fn ProfileSheet(open: RwSignal<bool>) -> impl IntoView {
     view! {
         <Show when=move || open.get()>
             <div class="fixed inset-0 z-(--z-sheet-backdrop) lg:hidden" on:click=move |_| open.set(false)></div>
-            <div role="dialog" aria-label=t("set-profile-sheet") class="set-tiles theme-paper-wide fixed inset-x-0 bottom-0 top-[7vh] z-(--z-sheet) flex flex-col overflow-hidden rounded-t-sheet bg-set-sheet text-ink shadow-popover lg:hidden">
+            <div role="dialog" aria-label=t("set-profile-sheet") class="set-tiles theme-paper-wide fixed inset-x-0 bottom-0 top-[env(safe-area-inset-top)] z-(--z-sheet) flex flex-col overflow-hidden rounded-t-sheet bg-set-sheet text-ink shadow-popover lg:hidden">
                 <div class="relative flex h-14 shrink-0 items-center justify-center">
                     <span class="absolute left-1/2 top-2 h-1 w-9 -translate-x-1/2 rounded-full bg-ink/30" aria-hidden="true"></span>
                     <h2 class="text-heading font-bold text-ink/80">{t("set-profile-sheet")}</h2>
