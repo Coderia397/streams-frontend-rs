@@ -75,7 +75,9 @@ pub fn PhoneProfilePicker(
                 <p class="mb-5 text-center text-body-lg text-ink/70">
                     {move || if editing.get() { crate::i18n::t("profile-manage-title") } else { crate::i18n::t("whos-watching-choose") }}
                 </p>
-                <div class="mx-auto flex max-w-[520px] flex-wrap justify-center gap-x-[4%] gap-y-5">
+                // the app's grid (measured on a Pixel 8, note 116): 100 px tiles with 72 px pictures, 12 px apart, rows 16 px apart, three to a row
+                // centred; the last tile is Edit
+                <div class="mx-auto flex max-w-[324px] flex-wrap justify-center gap-x-3 gap-y-4">
                     {move || profiles.get().into_iter().map(|profile| {
                         let p = profile.clone();
                         let name = profile.name.clone();
@@ -83,16 +85,16 @@ pub fn PhoneProfilePicker(
                         let kids_default = profile.is_kids && profile.avatar_url.is_none();
                         let locked = profile.pin.is_some();
                         view! {
-                            <button type="button" on:click=move |_| on_select.run(p.clone()) class="flex w-[28%] max-w-[150px] cursor-pointer flex-col items-center gap-2 focus:outline-none active:scale-95 transition-transform">
-                                <span class="relative block aspect-square w-full overflow-hidden rounded-[14%] shadow-[0_6px_14px_rgba(0,0,0,0.45)]">
+                            <button type="button" on:click=move |_| on_select.run(p.clone()) class="flex w-[100px] cursor-pointer flex-col items-center gap-[13px] focus:outline-none active:scale-95 transition-transform">
+                                <span class="relative block h-[72px] w-[72px] overflow-hidden rounded-[8px] shadow-[0_6px_14px_rgba(0,0,0,0.45)]">
                                     {if kids_default {
-                                        view! { <crate::components::profiles::kids_avatar::KidsAvatar size=150.0 /> }.into_any()
+                                        view! { <crate::components::profiles::kids_avatar::KidsAvatar size=72.0 /> }.into_any()
                                     } else {
                                         view! { <img src=avatar alt=name.clone() class="h-full w-full object-cover" /> }.into_any()
                                     }}
                                     {move || editing.get().then(|| view! { <span class="absolute inset-0 flex items-center justify-center bg-void/55"><i class="ph-bold ph-pencil-simple text-heading text-ink"></i></span> })}
                                 </span>
-                                <span class="flex max-w-full items-center gap-1 text-body-md font-semibold text-ink">
+                                <span class="flex max-w-full items-center gap-1 text-[17px] font-bold leading-tight text-ink">
                                     <span class="truncate">{name}</span>
                                     {(locked && !editing.get_untracked()).then(|| view! { <i class="ph ph-lock-key text-body-md"></i> })}
                                 </span>
@@ -100,17 +102,27 @@ pub fn PhoneProfilePicker(
                         }
                     }).collect::<Vec<_>>()}
                     {move || (profiles.get().len() < 5).then(|| view! {
-                        <button type="button" on:click=move |_| on_add.run(()) class="flex w-[28%] max-w-[150px] cursor-pointer flex-col items-center gap-2 focus:outline-none active:scale-95 transition-transform">
-                            <span class="flex aspect-square w-full items-center justify-center rounded-[14%] bg-gate-tile shadow-[0_6px_14px_rgba(0,0,0,0.45)]"><i class="ph ph-plus text-icon-lg text-ink"></i></span>
-                            <span class="text-body-md font-semibold text-ink">{crate::i18n::t("whos-watching-add-profile")}</span>
+                        <button type="button" on:click=move |_| on_add.run(()) class="flex w-[100px] cursor-pointer flex-col items-center gap-[13px] focus:outline-none active:scale-95 transition-transform">
+                            <span class="flex h-[72px] w-[72px] items-center justify-center rounded-[8px] bg-ink/15"><i class="ph ph-plus text-heading text-ink"></i></span>
+                            <span class="text-[17px] font-normal leading-tight text-ink">{crate::i18n::t("whos-watching-add-profile")}</span>
                         </button>
                     })}
+                    // Edit: a pencil on a 15 % white square (it takes the sheet's tint, as the app's), the label in regular weight
+                    <Show when=move || !editing.get() && !manage>
+                        <button type="button" on:click=move |_| on_manage.run(()) class="flex w-[100px] cursor-pointer flex-col items-center gap-[13px] focus:outline-none active:scale-95 transition-transform">
+                            <span class="flex h-[72px] w-[72px] items-center justify-center rounded-[8px] bg-ink/15"><i class="ph ph-pencil-simple text-heading text-ink"></i></span>
+                            <span class="text-[17px] font-normal leading-tight text-ink">{crate::i18n::t("whos-watching-edit")}</span>
+                        </button>
+                    </Show>
                 </div>
-                <div class="mt-6 flex justify-center">
-                    <button type="button" on:click=move |_| on_manage.run(()) class="flex h-10 cursor-pointer items-center gap-2 rounded-button border border-ink/80 bg-void/60 px-5 text-body-md font-medium text-ink active:scale-95 transition-transform">
-                        {move || if editing.get() || manage { view! { {crate::i18n::t("common-done")} }.into_any() } else { view! { <i class="ph ph-pencil-simple text-title-sm"></i>{crate::i18n::t("profile-manage")} }.into_any() }}
-                    </button>
-                </div>
+                // while editing (or on Manage profiles), Done under the grid
+                <Show when=move || editing.get() || manage>
+                    <div class="mt-6 flex justify-center">
+                        <button type="button" on:click=move |_| on_manage.run(()) class="flex h-10 cursor-pointer items-center gap-2 rounded-button border border-ink/80 bg-void/60 px-5 text-body-md font-medium text-ink active:scale-95 transition-transform">
+                            {crate::i18n::t("common-done")}
+                        </button>
+                    </div>
+                </Show>
             </div>
         </div>
     }
