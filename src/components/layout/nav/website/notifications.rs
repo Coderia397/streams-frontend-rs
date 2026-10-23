@@ -14,7 +14,8 @@ pub struct AppNotification {
     pub relative_time: String,
 }
 
-fn load_read_ids() -> HashSet<String> {
+/// The notices this browser has opened (shared with the phone's Notifications page).
+pub(crate) fn load_read_ids() -> HashSet<String> {
     let mut set = HashSet::new();
     if let Some(storage) = web_sys::window().and_then(|w| w.local_storage().ok().flatten()) {
         if let Ok(Some(raw)) = storage.get_item(crate::keys::NOTIFICATIONS_READ) {
@@ -28,13 +29,33 @@ fn load_read_ids() -> HashSet<String> {
     set
 }
 
-fn save_read_ids(ids: &HashSet<String>) {
+pub(crate) fn save_read_ids(ids: &HashSet<String>) {
     if let Some(storage) = web_sys::window().and_then(|w| w.local_storage().ok().flatten()) {
         let vec: Vec<&String> = ids.iter().collect();
         if let Ok(json) = serde_json::to_string(&vec) {
             let _ = storage.set_item(crate::keys::NOTIFICATIONS_READ, &json);
         }
     }
+}
+
+/// The current notices with a picture, newest first: the website's bell list and the phone's Notifications page.
+pub async fn load_notifications() -> Vec<AppNotification> {
+    crate::services::notifications::fetch()
+        .await
+        .into_iter()
+        .filter_map(|n| {
+            let backdrop = n.item.backdrop_url("w300").or_else(|| n.item.poster_url("w300"))?;
+            Some(AppNotification {
+                id: format!("notif-{}-{}", if n.item.is_tv() { "tv" } else { "movie" }, n.item.id),
+                movie_id: n.item.id,
+                is_tv: n.item.is_tv(),
+                headline: n.headline(),
+                body: n.item.display_title().to_string(),
+                backdrop,
+                relative_time: n.time_label(),
+            })
+        })
+        .collect()
 }
 
 /// How many of the current notices this browser has not opened yet (for the bell of the mobile header).
@@ -59,23 +80,7 @@ pub fn NotificationsDropdown() -> impl IntoView {
     // Real arrivals: new releases, titles due soon and what is trending (see services/notifications.rs)
     Effect::new(move |_| {
         leptos::task::spawn_local(async move {
-            let list: Vec<AppNotification> = crate::services::notifications::fetch()
-                .await
-                .into_iter()
-                .filter_map(|n| {
-                    let backdrop = n.item.backdrop_url("w300").or_else(|| n.item.poster_url("w300"))?;
-                    Some(AppNotification {
-                        id: format!("notif-{}-{}", if n.item.is_tv() { "tv" } else { "movie" }, n.item.id),
-                        movie_id: n.item.id,
-                        is_tv: n.item.is_tv(),
-                        headline: n.headline(),
-                        body: n.item.display_title().to_string(),
-                        backdrop,
-                        relative_time: n.time_label(),
-                    })
-                })
-                .collect();
-            set_items.set(list);
+            set_items.set(load_notifications().await);
             set_is_loading.set(false);
         });
     });

@@ -59,6 +59,7 @@ pub fn PhoneNav(
         else if p.starts_with("/browse/films") || p.starts_with("/browse/movies") { crate::i18n::t("nav-films") }
         else if p.starts_with("/browse/games") || p.starts_with("/games") { crate::i18n::t("nav-games") }
         else if p.starts_with("/latest") { crate::i18n::t("nav-new-hot") }
+        else if p.starts_with("/notifications") { crate::i18n::t("notifications-dropdown-notifications") }
         else if let Some(id) = p.strip_prefix("/browse/genre/").and_then(|r| r.split('/').next()).and_then(|r| r.parse::<u32>().ok()) {
             match id {
                 crate::data::page_genres::SERIES_PAGE_ID => crate::i18n::t("nav-series"),
@@ -73,8 +74,15 @@ pub fn PhoneNav(
     // The pages under Home (Series, Films, a genre) have a back arrow instead of the logo and no icons on the right
     let on_sub_page = move || {
         let p = location.pathname.get();
-        p.starts_with("/browse/series") || p.starts_with("/browse/shows") || p.starts_with("/browse/films") || p.starts_with("/browse/movies") || p.starts_with("/browse/genre/") || p.starts_with("/latest")
+        p.starts_with("/browse/series") || p.starts_with("/browse/shows") || p.starts_with("/browse/films") || p.starts_with("/browse/movies") || p.starts_with("/browse/genre/") || p.starts_with("/latest") || p.starts_with("/notifications")
     };
+    // the bell (and its unread count) on Home and My Streams, as the app (note 116)
+    let shows_bell = move || {
+        let p = location.pathname.get();
+        p == "/browse" || p == "/" || p.is_empty() || p.starts_with("/browse/my-list")
+    };
+    let unread = LocalResource::new(|| async { crate::components::layout::nav::website::notifications::unread_count().await });
+    let nav_to_bell = navigate.clone();
     let on_search = move || location.pathname.get().starts_with("/search");
     let go_back = {
         let navigate = navigate.clone();
@@ -155,7 +163,7 @@ pub fn PhoneNav(
             // ── Top Brand Header ───────────────────────────────────────────────
             <header
                 class:hidden=on_search
-                class="fixed top-0 left-0 right-0 z-(--z-nav) pr-1 pt-[env(safe-area-inset-top)] h-[calc(var(--nav-h-mobile)+env(safe-area-inset-top))] box-content flex items-center justify-between pointer-events-auto transition-colors duration-(--motion-base)"
+                class="fixed top-0 left-0 right-0 z-(--z-nav) pt-[env(safe-area-inset-top)] h-[calc(var(--nav-h-mobile)+env(safe-area-inset-top))] box-content flex items-center justify-between pointer-events-auto transition-colors duration-(--motion-base)"
                 style=scroll_style
             >
                 // Logo mark and page title on Home, a back arrow and the page title on the pages under it, as in the app header
@@ -213,6 +221,21 @@ pub fn PhoneNav(
                         }
                     }}
                 </div>
+                <Show when=shows_bell>
+                    <button
+                        type="button"
+                        on:click={let nav = nav_to_bell.clone(); move |_| nav("/notifications", Default::default())}
+                        class="relative flex h-11 w-11 shrink-0 items-center justify-center text-ink cursor-pointer active:scale-95 transition-transform"
+                        aria-label=crate::i18n::t("notifications-dropdown-notifications")
+                    >
+                        <i class="ph ph-bell text-[24px]"></i>
+                        {move || unread.get().filter(|n| *n > 0).map(|n| view! {
+                            <span class="absolute top-[2px] right-[3px] flex h-5 min-w-5 items-center justify-center rounded-full bg-brand px-1 text-micro font-bold leading-none text-ink">
+                                {if n > 99 { "99+".to_string() } else { n.to_string() }}
+                            </span>
+                        })}
+                    </button>
+                </Show>
             </header>
 
             <crate::pages::settings::hub::ProfileSheet open=profile_sheet />

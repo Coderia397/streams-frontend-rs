@@ -3,6 +3,7 @@ pub mod dev_badges;
 pub mod player;
 pub mod search;
 pub mod my_list;
+pub mod notifications;
 pub mod category;
 pub mod language;
 pub mod new_popular;
