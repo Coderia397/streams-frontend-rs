@@ -25,9 +25,9 @@ pub struct LegalDoc {
 }
 
 pub const LEGAL: &[LegalDoc] = &[
-    LegalDoc { id: "privacy", path: "/privacy", sections: 8 },
-    LegalDoc { id: "terms", path: "/terms", sections: 10 },
-    LegalDoc { id: "cookie-policy", path: "/cookies", sections: 1 },
+    LegalDoc { id: "privacy", path: "/privacy", sections: 14 },
+    LegalDoc { id: "terms", path: "/terms", sections: 18 },
+    LegalDoc { id: "cookie-policy", path: "/cookies", sections: 4 },
     LegalDoc { id: "dmca", path: "/dmca", sections: 6 },
     LegalDoc { id: "disclaimer", path: "/disclaimer", sections: 5 },
     LegalDoc { id: "credits", path: "/credits", sections: 6 },

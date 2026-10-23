@@ -420,6 +420,16 @@ pub fn InfoModal() -> impl IntoView {
 
                             let (modal_rating, set_modal_rating) = signal(crate::store::ratings::get(current_movie_id, is_tv_val));
 
+                            // Share opens the device's share sheet with a link that opens this title (see SharedTitleOpener)
+                            let share_open = RwSignal::new(false);
+                            let share_url = format!(
+                                "{}/browse?title={}-{}",
+                                web_sys::window().and_then(|w| w.location().origin().ok()).unwrap_or_default(),
+                                if is_tv_val { "tv" } else { "movie" },
+                                current_movie_id
+                            );
+                            let share_title = title.clone();
+
                             let watch_store = crate::store::use_watch_store();
                             let watch_record = watch_store.get_record(current_movie_id, is_tv_val);
                             let has_progress = watch_record.as_ref().map(|r| r.percentage > 0.0).unwrap_or(false);
@@ -562,7 +572,17 @@ pub fn InfoModal() -> impl IntoView {
                                                     })
                                                     size="md".to_string()
                                                 />
+
+                                                // Share: phones only, as in Netflix's apps (its website has none)
+                                                <div class="md:hidden">
+                                                    <crate::components::media::action_buttons::CircleIconButton
+                                                        icon="ph-share-network"
+                                                        on_click=Callback::new(move |_| share_open.set(true))
+                                                        title=crate::i18n::t("share-button")
+                                                    />
+                                                </div>
                                             </div>
+                                            <crate::components::media::share_sheet::ShareSheet open=share_open title=share_title url=share_url />
                                         </div>
 
                                         // Mute / Replay Button
@@ -716,4 +736,45 @@ pub fn InfoModal() -> impl IntoView {
             </div>
         </div>
     }
+}
+
+/// A shared link (`/browse?title=tv-1399`, made by the Share button) opens that title's details once a profile is chosen. A browser
+/// without an account opens it only when the engine says accounts are optional (the gate's rule); otherwise the gate sends it to
+/// sign in, which keeps the whole address in `next`. The parameter is then taken out of the address so a reload does not open it again.
+#[component]
+pub fn SharedTitleOpener() -> impl IntoView {
+    let location = leptos_router::hooks::use_location();
+    let ui_store = use_ui_store();
+    let profile_store = crate::store::use_profile_store();
+    let handled = StoredValue::new(String::new());
+    let open = move |id: u32, is_tv: bool| {
+        ui_store.modal_initial_time.set(0.0);
+        ui_store.modal_current_time.set(0.0);
+        ui_store.info_modal_movie_id.set(Some(id));
+        ui_store.info_modal_is_tv.set(is_tv);
+        ui_store.info_modal_open.set(true);
+        if let Some(h) = web_sys::window().and_then(|w| w.history().ok()) {
+            let _ = h.replace_state_with_url(&JsValue::NULL, "", Some("/browse"));
+        }
+    };
+    Effect::new(move |_| {
+        let path = location.pathname.get();
+        let search = location.search.get();
+        if path != "/browse" || profile_store.active_profile_id.get().is_none() || handled.with_value(|h| *h == search) {
+            return;
+        }
+        let Some((kind, id)) = search.trim_start_matches('?').split('&').find_map(|kv| kv.strip_prefix("title=")).and_then(|v| v.split_once('-')) else { return };
+        let (Ok(id), true) = (id.parse::<u32>(), kind == "tv" || kind == "movie") else { return };
+        let is_tv = kind == "tv";
+        handled.set_value(search.clone());
+        if crate::services::account::has_account() {
+            open(id, is_tv);
+        } else {
+            leptos::task::spawn_local(async move {
+                if crate::services::ai_engine::fetch_features().await.get("accounts_required") == Some(&false) {
+                    open(id, is_tv);
+                }
+            });
+        }
+    });
 }

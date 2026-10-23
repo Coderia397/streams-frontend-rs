@@ -70,6 +70,7 @@ pub fn App() -> impl IntoView {
         </Show>
         <Router>
             <HostGuard />
+            <crate::components::media::info_modal::SharedTitleOpener />
             <Routes fallback=crate::pages::not_found::NotFoundPage>
                 <Route path=path!("/browse") view=|| view! { <HomeRoute kids=false /> } />
                 <Route path=path!("/kids") view=|| view! { <HomeRoute kids=true /> } />

@@ -245,10 +245,10 @@ help-art-kids-profile-body =
     @@ profiles
 
 help-art-need-account-title = Do I need an account?
-help-art-need-account-summary = Yes, a free account. Here is what it keeps for you.
+help-art-need-account-summary = Yes, a free account for adults. Here is what it keeps for you.
 help-art-need-account-keywords = account sign up register login required membership
 help-art-need-account-body =
-    Yes. You need a free account to watch on { $brand }. Creating one takes a minute and never asks for payment details.
+    Yes. You need a free account to watch on { $brand }, and you must be 18 or older to create one. Creating one takes a minute and never asks for payment details.
 
     1. On the { $brand } home page, enter your email address and choose <b>Get Started</b>.
     2. Enter your first and last name and choose a password of at least 8 characters.
@@ -1147,6 +1147,7 @@ share-copied-instagram = Link copied — paste it into Instagram
 share-copied-snapchat = Link copied — paste it into Snapchat
 share-messages = Messages
 share-copy-link = Copy link
+share-button = Share
 settings-no-history = No recent history to display.
 login-more-reasons = More reasons to join
 login-reason-screens-title = Watch on any screen
@@ -1298,70 +1299,127 @@ nf-zone-5 = Void Sentinels
 nf-zone-6 = Cosmic Drift
 legal-privacy-title = Privacy Policy
 legal-privacy-updated = Last updated: October 2026
-legal-privacy-1-title = 1. Introduction
-legal-privacy-1-body = { $brand } is a link aggregator and search engine. This Privacy Policy explains how we collect, use, and protect your personal information when you use our service.
-legal-privacy-2-title = 2. Information We Collect
-legal-privacy-2-body = We collect limited personal information to provide and improve the service:
+legal-privacy-1-title = 1. Who we are
+legal-privacy-1-body = { $brand } is run by Ibrahim Ali, who is the controller of your personal information. You can reach us at { $support_email }. This policy explains what we collect, why we collect it, who we share it with, how long we keep it and the rights you have. { $brand } is a link aggregator and search engine: it does not host the films and series it shows.
+legal-privacy-2-title = 2. Information we collect
+legal-privacy-2-body = We collect only what the service needs:
 legal-privacy-2-b1 = <strong>Account information:</strong> your first and last name, email address and password (kept only in scrambled form by our sign in provider), and a mobile number if you add one.
-legal-privacy-2-b2 = <strong>Profiles and activity:</strong> your profiles and their settings, My List, ratings, viewing progress and viewing activity. They are linked to your account so they follow you to every device.
-legal-privacy-2-b3 = <strong>Security records:</strong> recent sign ins and changes to your account, with the browser, system and country they came from, so we can show you your devices and warn you about a new sign in.
+legal-privacy-2-b2 = <strong>Profiles and activity:</strong> your profiles and their settings, profile PINs (kept only in scrambled form), My List, ratings, viewing progress and viewing activity. They are linked to your account, so they follow you to every device.
+legal-privacy-2-b3 = <strong>Security records:</strong> recent sign ins and changes to your account, with the browser, system and country they came from. Our sign in provider also keeps the IP address and browser of each signed in session.
 legal-privacy-2-b4 = <strong>Storage on your device:</strong> what keeps you signed in, a copy of your profiles and settings so pages open fast, and your cookie choices. See the Cookie Policy.
-legal-privacy-3-title = 3. What We Do Not Do
-legal-privacy-3-body = We are committed to your privacy:
-legal-privacy-3-b1 = <strong>Share Your Data:</strong> We do not share personal data with advertisers or data brokers.
-legal-privacy-3-b2 = <strong>Sell Your Data:</strong> We do not sell, rent, or trade any personal data to third parties, ever.
-legal-privacy-3-b3 = <strong>Track You:</strong> We do not use advertising or analytics cookies, we do not fingerprint browsers, and we do not follow you across other websites.
-legal-privacy-4-title = 4. Lawful Basis for Processing (UK GDPR)
-legal-privacy-4-body = Under the UK General Data Protection Regulation (UK GDPR), the lawful bases we rely on for processing this information are:
-legal-privacy-4-b1 = <strong>Contract:</strong> to provide your account, your profiles and the features you use.
-legal-privacy-4-b2 = <strong>Legitimate interests:</strong> to keep accounts secure (sign in records) and to keep the service running and improving.
-legal-privacy-4-b3 = <strong>Consent:</strong> to use what you watch for personalised recommendations. You can withdraw it at any time in Privacy and data settings.
-legal-privacy-5-title = 5. How We Store Your Data
-legal-privacy-5-body = Your account data is stored with Supabase, our database provider, with row level security so that only your account can read it. Each browser where you sign in keeps a copy for speed. When you delete your account, its data is deleted straight away.
-legal-privacy-6-title = 6. Third-Party Services
-legal-privacy-6-body = We use these providers, each under its own privacy policy: Supabase (accounts and data storage), Cloudflare (hosting the site and forwarding email), Hugging Face (hosting the recommendation service), Resend (sending account emails), TMDB (film and series information and pictures) and YouTube (trailers). Video streams come from independent third party sources, which see your IP address like any website you visit.
-legal-privacy-7-title = 7. Your Data Protection Rights
-legal-privacy-7-body = Under UK GDPR, you have the following rights:
-legal-privacy-7-b1 = <strong>Right of access:</strong> download a copy of your data at any time in Account, under Personal information access.
-legal-privacy-7-b2 = <strong>Right to erasure:</strong> delete your account at any time in Account, under Delete account. Everything in it is deleted straight away.
-legal-privacy-7-b3 = <strong>Right to rectification:</strong> change your name, email address and phone number in Account, or ask us to correct anything else.
-legal-privacy-7-b4 = <strong>Right to object:</strong> turn off personalised recommendations, or write to us to object to processing based on legitimate interests.
-legal-privacy-8-title = 8. Contact
-legal-privacy-8-body = If you have questions about this Privacy Policy or want to use your rights, write to us at { $support_email }.
+legal-privacy-2-b5 = <strong>Messages you send us:</strong> your emails to our addresses and what they contain, such as a problem report with your browser details.
+legal-privacy-3-title = 3. Where it comes from
+legal-privacy-3-body = Almost everything comes from you: what you type when you sign up, the profiles and settings you create and what you do in the app. When you sign in, your browser tells us its type, your system and the country of your connection. We do not buy information about you or receive it from other companies.
+legal-privacy-4-title = 4. How we use it
+legal-privacy-4-body = Under the UK GDPR each use needs a lawful basis, shown in brackets. We use your information to:
+legal-privacy-4-b1 = create and run your account, profiles, My List, ratings and Continue Watching on every device (contract);
+legal-privacy-4-b2 = keep your account safe: confirm it is you, show your devices, lock a profile after too many wrong PINs and tell you about new sign ins (legitimate interests);
+legal-privacy-4-b3 = send the emails your account needs, such as confirmation links, sign in codes and security alerts (contract);
+legal-privacy-4-b4 = personalise your rows from what you watch, if you allow it (consent);
+legal-privacy-4-b5 = answer your messages and fix the problems you report (legitimate interests).
+legal-privacy-5-title = 5. What we do not do
+legal-privacy-5-body = We are committed to your privacy:
+legal-privacy-5-b1 = <strong>Share Your Data:</strong> We do not share personal data with advertisers or data brokers.
+legal-privacy-5-b2 = <strong>Sell Your Data:</strong> We do not sell, rent, or trade any personal data to third parties, ever.
+legal-privacy-5-b3 = <strong>Track You:</strong> We do not use advertising or analytics cookies, we do not fingerprint browsers, and we do not follow you across other websites.
+legal-privacy-6-title = 6. Who we share it with
+legal-privacy-6-body = We use these providers to run the service. Each handles your information only to provide its part, under its own privacy policy:
+legal-privacy-6-b1 = <strong>Supabase:</strong> accounts and the account database, stored in the European Union (Ireland).
+legal-privacy-6-b2 = <strong>Cloudflare:</strong> hosting the site and forwarding email to our inboxes.
+legal-privacy-6-b3 = <strong>Hugging Face:</strong> hosting the recommendation service, which receives the titles you start and a random session number when personalisation is on.
+legal-privacy-6-b4 = <strong>Resend:</strong> sending account emails.
+legal-privacy-6-b5 = <strong>TMDB and YouTube:</strong> film and series information, pictures and trailers, which your browser loads directly from them.
+legal-privacy-6-b6 = <strong>Stream sources:</strong> video comes from independent third party sources, which see your IP address like any website you visit. We may also share information when the law requires it.
+legal-privacy-7-title = 7. International transfers
+legal-privacy-7-body = Your account database is kept in the European Union (Ireland). Some of the providers above are based in, or process data in, the United States and other countries outside the UK. When personal information leaves the UK, we rely on the protections UK law provides, such as adequacy regulations (including the UK Extension to the EU-US Data Privacy Framework where a provider is certified) or the standard contractual clauses in the provider's terms.
+legal-privacy-8-title = 8. How long we keep it
+legal-privacy-8-body = We keep information only as long as we need it:
+legal-privacy-8-b1 = <strong>Your account:</strong> account information, profiles, My List, ratings and viewing activity stay while your account exists. Deleting your account deletes them at once.
+legal-privacy-8-b2 = <strong>Hidden viewing activity:</strong> titles you hide are no longer shown or used for recommendations; they are deleted with the profile or the account.
+legal-privacy-8-b3 = <strong>Security events:</strong> 365 days.
+legal-privacy-8-b4 = <strong>Signed in sessions:</strong> while the session is active. Signing out of a device, or of all devices, ends it.
+legal-privacy-8-b5 = <strong>Recommendation sessions:</strong> about 24 hours after your last activity.
+legal-privacy-8-b6 = <strong>Emails you send us:</strong> as long as we need them to answer and resolve your request.
+legal-privacy-8-b7 = <strong>Copies in your browser:</strong> until you sign out or clear this site's data.
+legal-privacy-9-title = 9. How we keep it safe
+legal-privacy-9-body = We protect your information with:
+legal-privacy-9-b1 = row level security, so the database lets only your own account read or change your data;
+legal-privacy-9-b2 = passwords and profile PINs kept only in scrambled (hashed) form;
+legal-privacy-9-b3 = encrypted connections (HTTPS) for every page and request;
+legal-privacy-9-b4 = a lockout after too many wrong PINs, and an email when a new device signs in.
+legal-privacy-9-b5 = No system is perfectly secure. If you think your account has been misused, change your password and write to us.
+legal-privacy-10-title = 10. Your account and profiles
+legal-privacy-10-body = Everyone who can sign in to your account can open its profiles and see their My List, ratings and viewing activity, unless a profile is locked with a PIN. The account holder can manage, transfer or delete every profile. Choose carefully who you share your sign in with, and lock the profiles you want to keep private.
+legal-privacy-11-title = 11. Your rights
+legal-privacy-11-body = Under the UK GDPR you have these rights:
+legal-privacy-11-b1 = <strong>Right of access:</strong> download a copy of your data at any time in Account, under Personal information access.
+legal-privacy-11-b2 = <strong>Right to erasure:</strong> delete your account at any time in Account, under Delete account. Everything in it is deleted straight away.
+legal-privacy-11-b3 = <strong>Right to rectification:</strong> change your name, email address and phone number in Account, or ask us to correct anything else.
+legal-privacy-11-b4 = <strong>Right to object:</strong> turn off personalised recommendations, or write to us to object to processing based on legitimate interests.
+legal-privacy-11-b5 = <strong>Rights to restriction and portability:</strong> ask us to pause using your information while a question is settled, or take your data with you: the file from Personal information access is in a common machine readable format (JSON).
+legal-privacy-11-b6 = <strong>Withdrawing consent:</strong> turn off Personalised recommendations at any time. This does not affect what happened before.
+legal-privacy-11-b7 = <strong>Complaints:</strong> if you are unhappy with how we handle your information, write to us first. You can also complain to the Information Commissioner's Office at <a href="https://ico.org.uk/make-a-complaint/" target="_blank" rel="noopener">ico.org.uk</a>.
+legal-privacy-12-title = 12. Children
+legal-privacy-12-body = You must be 18 or older to create an account. Children can watch through a Kids profile, or a profile with age limits, that the account holder sets up and supervises. We do not knowingly collect information from children beyond the profile details the account holder enters. If you think a child has created an account, write to us at { $support_email } and we will delete it.
+legal-privacy-13-title = 13. Changes to this policy
+legal-privacy-13-body = We may update this policy when the service or the law changes. The date at the top shows the latest version. If a change affects how we use your information, we will tell you by email or in the app before it takes effect.
+legal-privacy-14-title = 14. Contact
+legal-privacy-14-body = For questions about this policy, or to use your rights, write to { $support_email }. We answer requests about your rights within one month.
 legal-terms-title = Terms of Service
 legal-terms-updated = Last updated: October 2026
 legal-terms-1-title = 1. Acceptance of Terms
 legal-terms-1-body = By accessing or using { $brand }, you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree, do not use the service.
-legal-terms-2-title = 2. Nature of the Service
-legal-terms-2-body = { $brand } is a link aggregator and search engine. We do not host, upload, transmit, or control any video content on our servers. All media is sourced from third-party platforms.
-legal-terms-3-title = 3. User Accounts
-legal-terms-3-body = You need a free account to use { $brand }. You are responsible for keeping your password safe and for what happens on your account. Tell us at once if you think someone else is using it.
-legal-terms-4-title = 4. Acceptable Use
-legal-terms-4-body = You agree not to use the service to:
-legal-terms-4-b1 = Circumvent, disable, or interfere with security-related features of the service.
-legal-terms-4-b2 = Use automated tools (such as bots, scrapers, or crawlers) to access or query the service at a rate that could impair performance.
-legal-terms-4-b3 = Attempt to probe, scan, or test the vulnerability of the service's infrastructure.
-legal-terms-4-b4 = Engage in any conduct that is unlawful, harmful, or that we determine to be inappropriate.
-legal-terms-5-title = 5. Intellectual Property
-legal-terms-5-body = The { $brand } brand, interface design, and original software code are protected by copyright. All media content accessible via { $brand } remains the property of its respective rights holders.
-legal-terms-6-title = 6. Disclaimers and Limitation of Liability
-legal-terms-6-body = The service is provided "as is" and "as available" without any warranty of any kind. { $brand } does not guarantee continuous availability and is not liable for any indirect or consequential damages.
-legal-terms-7-title = 7. Third-Party Content
-legal-terms-7-body = { $brand } provides access to links pointing to content hosted on independent third-party servers. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party sites.
-legal-terms-8-title = 8. Termination
-legal-terms-8-body = We reserve the right to suspend or terminate your account and access to the service at our sole discretion, without prior notice, for conduct that we believe violates these Terms or is harmful to other users, us, or third parties.
-legal-terms-9-title = 9. Governing Law
-legal-terms-9-body = These Terms of Service shall be governed by and construed in accordance with the laws of England and Wales, without regard to conflict-of-law provisions.
-legal-terms-10-title = 10. Contact
-legal-terms-10-body = For any questions regarding these Terms of Service, please contact us via the Contact page.
+legal-terms-2-title = 2. Who we are
+legal-terms-2-body = { $brand } is run by Ibrahim Ali. You can reach us at { $support_email }.
+legal-terms-3-title = 3. Nature of the Service
+legal-terms-3-body = { $brand } is a link aggregator and search engine. We do not host, upload, transmit, or control any video content on our servers. All media is sourced from third-party platforms.
+legal-terms-4-title = 4. Your Account
+legal-terms-4-body = You need a free account to use { $brand }, and you must be 18 or older to create one. You are responsible for keeping your password safe and for what happens on your account. Tell us at once if you think someone else is using it.
+legal-terms-5-title = 5. Profiles and Household Use
+legal-terms-5-body = An account can have up to 5 profiles for the people in your household. Anyone signed in to the account can open a profile and see its activity unless it is locked with a PIN. Children may use the service only through a profile that an adult account holder sets up and supervises.
+legal-terms-6-title = 6. Personal Use
+legal-terms-6-body = { $brand } is for your personal, non commercial use. You may not sell, rent, publicly show or charge for access to it, or copy or reuse its interface, data or code beyond what the law allows.
+legal-terms-7-title = 7. Acceptable Use
+legal-terms-7-body = You agree not to use the service to:
+legal-terms-7-b1 = Circumvent, disable, or interfere with security-related features of the service.
+legal-terms-7-b2 = Use automated tools (such as bots, scrapers, or crawlers) to access or query the service at a rate that could impair performance.
+legal-terms-7-b3 = Attempt to probe, scan, or test the vulnerability of the service's infrastructure.
+legal-terms-7-b4 = Engage in any conduct that is unlawful, harmful, or that we determine to be inappropriate.
+legal-terms-8-title = 8. Availability and Changes to the Service
+legal-terms-8-body = We may add, change or remove features, titles and languages at any time, and the service may be unavailable while we work on it. Titles come from independent sources and can stop working without notice.
+legal-terms-9-title = 9. Technical Requirements and Updates
+legal-terms-9-body = You need an internet connection and a current browser; the Help Centre lists the supported ones. { $brand } is a web app that updates itself. An installed app is the same website and updates the same way.
+legal-terms-10-title = 10. Emails From Us
+legal-terms-10-body = We send the emails your account needs, such as confirmation links, sign in codes and security alerts. You cannot turn these off while you have an account. We do not send marketing emails.
+legal-terms-11-title = 11. Ideas and Feedback
+legal-terms-11-body = If you send us ideas, translations, fixes or other feedback, you allow us to use them to improve { $brand } without payment, unless we agree otherwise in writing.
+legal-terms-12-title = 12. Intellectual Property
+legal-terms-12-body = The { $brand } brand, interface design, and original software code are protected by copyright. All media content accessible via { $brand } remains the property of its respective rights holders.
+legal-terms-13-title = 13. Disclaimers and Limitation of Liability
+legal-terms-13-body = The service is provided "as is" and "as available" without any warranty of any kind. { $brand } does not guarantee continuous availability and is not liable for any indirect or consequential damages. Nothing in these terms limits liability that cannot be limited by law, such as for death or personal injury caused by negligence, or for fraud.
+legal-terms-14-title = 14. Third-Party Content
+legal-terms-14-body = { $brand } provides access to links pointing to content hosted on independent third-party servers. We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party sites.
+legal-terms-15-title = 15. Termination
+legal-terms-15-body = You can stop using the service and delete your account at any time. We reserve the right to suspend or terminate your account and access to the service at our sole discretion, without prior notice, for conduct that we believe violates these Terms or is harmful to other users, us, or third parties.
+legal-terms-16-title = 16. Changes to These Terms
+legal-terms-16-body = We may update these terms. The date at the top shows the latest version. If a change matters, we will tell you by email or in the app before it takes effect. If you keep using { $brand } after that, the new terms apply.
+legal-terms-17-title = 17. Governing Law
+legal-terms-17-body = These Terms of Service shall be governed by and construed in accordance with the laws of England and Wales, without regard to conflict-of-law provisions. If you live in Scotland or Northern Ireland, you can also bring a claim in your local courts.
+legal-terms-18-title = 18. Contact
+legal-terms-18-body = For any questions regarding these Terms of Service, write to { $support_email } or use the Contact page.
 legal-cookie-policy-title = Cookie Policy
 legal-cookie-policy-updated = Last updated: October 2026
-legal-cookie-policy-1-title = How we use cookies and storage
+legal-cookie-policy-1-title = 1. What we keep in your browser
 legal-cookie-policy-1-body = { $brand } does not use advertising or analytics cookies. We use your browser's local storage, a place on your device that only this site can read, for:
 legal-cookie-policy-1-b1 = <strong>Signing in:</strong> what keeps you signed in on this browser.
 legal-cookie-policy-1-b2 = <strong>Speed:</strong> a copy of your profiles, settings and viewing progress, so pages open at once.
 legal-cookie-policy-1-b3 = <strong>Your choices:</strong> your cookie and personalisation choices and your display language.
-legal-cookie-policy-1-b4 = <strong>Other sites:</strong> trailers are played from YouTube, which may set its own cookies when a trailer plays. You can change your choices at any time in Privacy and data settings. Deleting this site's data in your browser signs you out on that browser; your account keeps everything.
+legal-cookie-policy-2-title = 2. Other sites
+legal-cookie-policy-2-body = Trailers are played from YouTube, which may set its own cookies when a trailer plays. Posters and details come from a public film catalog, and streams from independent sources; those sites can set their own cookies when your browser loads from them. We do not control them.
+legal-cookie-policy-3-title = 3. Your choices
+legal-cookie-policy-3-body = Open Cookie Preferences, at the bottom of the Help Centre and sign in pages or in Privacy and data settings, to see every item we keep and to turn personalisation on or off. Deleting this site's data in your browser signs you out on that browser; your account keeps everything.
+legal-cookie-policy-4-title = 4. Changes to this policy
+legal-cookie-policy-4-body = When what we keep in your browser changes, we update this policy and the list in Cookie Preferences.
 legal-dmca-title = DMCA Safe Harbor Notice
 legal-dmca-updated = Last updated: August 2026
 legal-dmca-1-title = 1. Our Role — Link Aggregator, Not a Host
@@ -1589,15 +1647,17 @@ help-art-episodes-body =
     - Select <b>Episodes</b> in the player controls to open the list without leaving.
     - Select <b>Next Episode</b>, or let it start by itself. See <a=/help/article/skip-intro-next>Skip Intro and Next Episode</a>.
 
-help-art-share-title = How to share a title
-help-art-share-summary = Send a link to a title to a friend.
-help-art-share-keywords = share link whatsapp messages instagram snapchat copy send friend
+help-art-share-title = How to share a title from your phone
+help-art-share-summary = Send a friend a link to a title from your phone.
+help-art-share-keywords = share link whatsapp messages instagram snapchat x twitter copy send friend phone mobile
 help-art-share-body =
-    1. Open a title's details and select <b>Share</b>.
-    2. Choose <b>WhatsApp</b> or <b>Messages</b> to send the link, or <b>Copy link</b> to paste it anywhere.
+    Sharing works on a phone.
+
+    1. Open a title's details and select the <b>Share</b> button.
+    2. Choose <b>WhatsApp</b>, <b>Messages</b> or <b>X</b> to send the link, or <b>Copy link</b> to paste it anywhere.
     3. For Instagram and Snapchat the link is copied, then you paste it into the app.
 
-    The link opens the title on { $brand }. The person who opens it needs to sign in, or create a free account, to watch.
+    The link opens the title's details on { $brand }. The person who opens it needs to sign in, or create a free account, to watch.
 
 help-art-title-details-title = The title details window
 help-art-title-details-summary = What you can read and do before you press play.
@@ -1721,7 +1781,7 @@ auth-last-name = Last name
 auth-password-rule = At least { $min } characters.
 auth-create = Create account
 auth-creating = Creating your account…
-auth-terms = By creating an account you agree to the <a=/terms>Terms of Service</a> and the <a=/privacy>Privacy Policy</a>.
+auth-terms = By creating an account you confirm you are 18 or older and agree to the <a=/terms>Terms of Service</a> and the <a=/privacy>Privacy Policy</a>.
 auth-check-title = Check your email
 auth-check-body = We sent a link to { $email }. Open it to confirm your address, then sign in.
 auth-check-spam = Not there? Look in your spam folder.

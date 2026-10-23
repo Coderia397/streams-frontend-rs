@@ -44,19 +44,18 @@ pub fn ShareSheet(
         }
     };
 
-    // Body scroll lock effect
+    // Body scroll lock while open. The page's own value is kept and put back on close, so a sheet opened over the details
+    // window (which locks the page itself) does not unlock it.
+    let saved_overflow = StoredValue::new(None::<String>);
     Effect::new(move |_| {
         let is_open = open.get();
-        if let Some(w) = web_sys::window() {
-            if let Some(doc) = w.document() {
-                if let Some(body) = doc.body() {
-                    if is_open {
-                        let _ = body.style().set_property("overflow", "hidden");
-                    } else {
-                        let _ = body.style().set_property("overflow", "");
-                    }
-                }
-            }
+        let Some(body) = web_sys::window().and_then(|w| w.document()).and_then(|d| d.body()) else { return };
+        if is_open {
+            saved_overflow.set_value(Some(body.style().get_property_value("overflow").unwrap_or_default()));
+            let _ = body.style().set_property("overflow", "hidden");
+        } else if let Some(prev) = saved_overflow.get_value() {
+            let _ = body.style().set_property("overflow", &prev);
+            saved_overflow.set_value(None);
         }
     });
 
