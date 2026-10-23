@@ -1173,6 +1173,8 @@ login-reason-subs-body = Choose from 40+ languages. Customise font size, colour,
 login-reason-place-body = Continue Watching picks up exactly where you left off — across every show and season, on any device.
 login-ready = Ready to watch? Enter your email to create or log in to your account.
 search-results-for = Results for “{ $query }”
+# the line over the search results that lists related searches (Netflix: "More to explore:")
+search-more-to-explore = More to explore:
 search-no-matches = No matches found
 search-try-another = Try a different keyword.
 search-explore = Explore titles

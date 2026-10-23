@@ -206,7 +206,7 @@ pub fn SearchPage() -> impl IntoView {
                                 <div class="sm:hidden flex flex-col gap-3">
                                     {items.iter().take(12).cloned().map(|it| view! { <SearchListRow item=it /> }).collect::<Vec<_>>()}
                                 </div>
-                                <div class="hidden sm:grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-2.5 gap-y-6">
+                                <div class="hidden sm:grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-2 gap-y-5">
                                     {items.into_iter().take(15).map(|item| tile(item)).collect::<Vec<_>>()}
                                 </div>
                             }.into_any(),
@@ -241,10 +241,25 @@ pub fn SearchPage() -> impl IntoView {
                                         <div class="mt-6"><VibeRow title=crate::i18n::t_args("search-more-like", &[("title", fluent_bundle::FluentValue::from(name))]) items=recs /></div>
                                     })}
                                 </div>
-                                // wider: the grid
+                                // wider: the grid, under Netflix's "More to explore" line (16 px; the titles found that carry the words searched, each a search of
+                                // its own, 8 px either side of a thin bar; the grid 24 px below, measured 2026-10-23)
                                 <div class="hidden sm:block">
-                                    <h1 class="text-ink/70 text-lg mb-6">{crate::i18n::t_args("search-results-for", &[("query", fluent_bundle::FluentValue::from(q()))])}</h1>
-                                    <div class="grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-2.5 gap-y-6">
+                                    <h1 class="sr-only">{crate::i18n::t_args("search-results-for", &[("query", fluent_bundle::FluentValue::from(q()))])}</h1>
+                                    {
+                                        let related = more_to_explore(&media, &q());
+                                        (!related.is_empty()).then(|| view! {
+                                            <div class="mb-6 flex items-start gap-2 text-body-md leading-6">
+                                                <span class="shrink-0 text-ink/50">{crate::i18n::t("search-more-to-explore")}</span>
+                                                <ul class="flex flex-wrap gap-y-3">
+                                                    {related.into_iter().map(|name| {
+                                                        let href = format!("/search?q={}", String::from(js_sys::encode_uri_component(&name)));
+                                                        view! { <li class="me-2 border-e border-ink/50 pe-2 last:me-0 last:border-e-0 last:pe-0"><a href=href class="text-ink hover:underline">{name}</a></li> }
+                                                    }).collect::<Vec<_>>()}
+                                                </ul>
+                                            </div>
+                                        })
+                                    }
+                                    <div class="grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-2 gap-y-5">
                                         {media.into_iter().map(|item| tile(item)).collect::<Vec<_>>()}
                                     </div>
                                 </div>
@@ -255,6 +270,22 @@ pub fn SearchPage() -> impl IntoView {
             </div>
         </Layout>
     }
+}
+
+/// The titles found that carry every word searched, once each, at most ten: Netflix's "More to explore" line.
+fn more_to_explore(media: &[MediaItem], query: &str) -> Vec<String> {
+    let words: Vec<String> = query.split_whitespace().map(str::to_lowercase).collect();
+    if words.is_empty() {
+        return Vec::new();
+    }
+    let mut seen = std::collections::HashSet::new();
+    media
+        .iter()
+        .map(|m| m.display_title().trim().to_string())
+        .filter(|name| !name.is_empty() && words.iter().all(|w| name.to_lowercase().contains(w.as_str())))
+        .filter(|name| seen.insert(name.to_lowercase()))
+        .take(10)
+        .collect()
 }
 
 /// A tile of the grid (wider screens).
@@ -278,5 +309,22 @@ fn tile(item: MediaItem) -> impl IntoView {
             is_new=item.badges.iter().any(|b| b == "new")
             is_grid=true
         />
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn titled(name: &str) -> MediaItem {
+        MediaItem { title: Some(name.to_string()), ..Default::default() }
+    }
+
+    #[test]
+    fn more_to_explore_lists_titles_with_every_word_once() {
+        let found = [titled("The Office"), titled("Office Space"), titled("Suits"), titled("the office"), titled("Office Christmas Party")];
+        assert_eq!(more_to_explore(&found, "office"), vec!["The Office", "Office Space", "Office Christmas Party"]);
+        assert_eq!(more_to_explore(&found, "office party"), vec!["Office Christmas Party"]);
+        assert!(more_to_explore(&found, "  ").is_empty());
     }
 }
