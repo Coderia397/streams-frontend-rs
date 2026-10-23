@@ -359,6 +359,20 @@ button,
   -webkit-text-fill-color: transparent;
 }
 
+/* Entrances. `animate-in` plays one when the element appears; `fade-in` starts it transparent, `zoom-in-90` and `zoom-in-95` start it smaller; Tailwind's
+   `duration-*` sets its length (through --tw-duration). These names were used on six screens before any rule existed for them, so none of those
+   entrances played. */
+@keyframes enter {
+  from { opacity: var(--enter-opacity, 1); transform: scale(var(--enter-scale, 1)); }
+}
+.animate-in { animation: enter var(--tw-duration, 150ms) ease both; }
+.fade-in { --enter-opacity: 0; }
+.zoom-in-90 { --enter-scale: 0.9; }
+.zoom-in-95 { --enter-scale: 0.95; }
+@media (prefers-reduced-motion: reduce) {
+  .animate-in { animation: none; }
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;

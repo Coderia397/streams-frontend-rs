@@ -118,7 +118,7 @@ pub fn WhosWatchingGate(
         // the page on Netflix: a dark red glow at the top fading to black, the logo top left, the question centred, tiles 160 px wide (picture 128 px), a pill under them
         // Netflix's Who's watching (measured 2026-10-23, note 113): black with a red glow from above the top, heading 32 px, tiles 168 px apart,
         // 32 px under the heading, names 23 px under the pictures, the button 52 px under the names
-        <div class="fixed inset-0 z-(--z-screen) flex select-none flex-col items-center justify-center text-ink animate-in fade-in duration-(--motion-slower)" style="background: #000 radial-gradient(2170px at 50% -54dvh, rgba(111, 24, 29, 0.8) 19%, rgba(56, 12, 15, 0.4) 60%, transparent 100%);">
+        <div class="fixed inset-0 z-(--z-screen) flex select-none flex-col items-center justify-center text-ink" style="background: #000 radial-gradient(2170px at 50% -54dvh, rgba(111, 24, 29, 0.8) 19%, rgba(56, 12, 15, 0.4) 60%, transparent 100%);">
             <PhoneProfilePicker
                 profiles=profiles_signal
                 editing=edit_mode
@@ -129,6 +129,8 @@ pub fn WhosWatchingGate(
             />
             <div class="hidden md:flex md:h-full md:w-full md:flex-col md:items-center md:justify-center">
             <img src=crate::brand::LOGO_WORDMARK alt=crate::brand::NAME class="absolute left-[var(--app-x,56px)] top-[26px] h-[24px] w-auto" />
+            // the question, the profiles and the button come in together, as on Netflix: from 90 % and transparent, over 0.45 s (the page itself is there at once)
+            <div class="flex flex-col items-center animate-in fade-in zoom-in-90 duration-[450ms]">
             {move || profile_store.notice.get().map(|m| view! { <p role="status" class="mb-8 max-w-[85vw] rounded-control border border-danger/50 bg-danger/10 px-4 py-3 text-center text-body-sm text-danger md:max-w-xl">{m}</p> })}
             <h1 class="text-center text-heading-xl font-bold leading-[38px] text-ink">
                 {move || if edit_mode.get() { crate::i18n::t("profile-manage-title") } else { crate::i18n::t("profile-whos-watching") }}
@@ -182,6 +184,7 @@ pub fn WhosWatchingGate(
                 >
                     {move || if edit_mode.get() { view! { {crate::i18n::t("common-done")} }.into_any() } else { view! { <i class="ph ph-pencil-simple text-title-sm"></i>{crate::i18n::t("profile-manage")} }.into_any() }}
                 </button>
+            </div>
             </div>
             </div>
 
