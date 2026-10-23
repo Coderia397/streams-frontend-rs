@@ -3,7 +3,10 @@ use leptos::html::{Div, Input};
 use leptos_router::hooks::{use_navigate, use_query_map};
 
 #[component]
-pub fn SearchBar() -> impl IntoView {
+pub fn SearchBar(
+    /// Told when the field opens and closes (the nav folds its tabs when the open field would cover them).
+    #[prop(optional)] on_open: Option<Callback<bool>>,
+) -> impl IntoView {
     let query_map = use_query_map();
     let query_val = move || query_map.read().get("q").unwrap_or_default();
     
@@ -111,6 +114,9 @@ pub fn SearchBar() -> impl IntoView {
     };
 
     let effective_active = move || is_active.get() || is_search_page() || !input_val.get().is_empty();
+    if let Some(cb) = on_open {
+        Effect::new(move |_| cb.run(effective_active()));
+    }
 
     view! {
         <div node_ref=container_ref class="relative flex items-center">

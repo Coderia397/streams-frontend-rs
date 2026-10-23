@@ -79,6 +79,32 @@ pub fn Navbar(
     ];
     let browse_items = nav_items.clone();
 
+    // With the search open, the tabs fold into the Browse menu when the field would cover them: the field grows to 400 px (220 below 960 wide)
+    // towards the tabs, and with our logo it reached Browse by language at 1440 wide. Measured when the field opens or closes and on resize.
+    let links_ref = NodeRef::<leptos::html::Ul>::new();
+    let cluster_ref = NodeRef::<leptos::html::Div>::new();
+    let (search_open, set_search_open) = signal(false);
+    let (crowded, set_crowded) = signal(false);
+    let measure = move || {
+        let fits = (|| {
+            let ul = links_ref.get_untracked()?;
+            let cluster = cluster_ref.get_untracked()?;
+            let w = web_sys::window()?.inner_width().ok()?.as_f64()?;
+            let open_w = if w >= 960.0 { 400.0 } else { 220.0 };
+            let field = cluster.first_element_child()?.get_bounding_client_rect().width();
+            let cluster_left = cluster.get_bounding_client_rect().left() - (open_w - field).max(0.0);
+            Some(ul.get_bounding_client_rect().right() + 16.0 <= cluster_left)
+        })()
+        .unwrap_or(true);
+        set_crowded.set(search_open.get_untracked() && !fits);
+    };
+    Effect::new(move |_| {
+        search_open.track();
+        // after the frame is laid out (a page that opens with the field open, such as search, measured nothing before)
+        request_animation_frame(measure);
+    });
+    crate::utils::listen::listen_window(leptos::ev::resize, move |_| measure());
+
     view! {
         <>
             // ── Desktop Primary Nav (Task 085 & 086) ──────────────────────────
@@ -97,7 +123,7 @@ pub fn Navbar(
 
                 // Nav links — exact spacing and typography (Task 086)
                 // below 1024 px the tabs do not fit next to the search, bell and profile, so they sit in a Browse menu
-                <div class="relative ms-4 lg:hidden">
+                <div class="relative ms-4" class=("lg:hidden", move || !crowded.get())>
                     <button type="button" on:click=move |_| set_browse_open.update(|o| *o = !*o) aria-haspopup="menu" aria-expanded=move || browse_open.get().to_string() class="inline-flex h-[40px] items-center gap-2 rounded-button px-4 text-body-md text-ink hover:bg-mute/40">
                         {crate::i18n::t("nav-browse")}
                         <i class="ph-fill ph-caret-down text-fine transition-transform duration-(--motion-base)" class=("rotate-180", move || browse_open.get())></i>
@@ -111,7 +137,7 @@ pub fn Navbar(
                         </ul>
                     </Show>
                 </div>
-                <ul class="hidden items-center gap-[6px] ml-6 text-body-md font-normal text-ink lg:flex">
+                <ul node_ref=links_ref class="hidden items-center gap-[6px] ml-6 text-body-md font-normal text-ink lg:flex" class=("invisible", move || crowded.get())>
                     {nav_items.into_iter().map(|(id, label, href)| {
                         let is_active = move || active_tab() == id;
                         view! {
@@ -132,9 +158,9 @@ pub fn Navbar(
             </nav>
 
             // ── Secondary nav: search + notifications + kids + profile ─────
-            <div class="fixed top-0 right-[var(--app-x)] z-(--z-nav-menu) h-(--nav-h) hidden sm:flex items-center gap-3">
+            <div node_ref=cluster_ref class="fixed top-0 right-[var(--app-x)] z-(--z-nav-menu) h-(--nav-h) hidden sm:flex items-center gap-3">
                 // Expandable Search Bar (Task 089 & 090)
-                <SearchBar />
+                <SearchBar on_open=Callback::new(move |open| set_search_open.set(open)) />
 
                 // Notifications Dropdown (Task 094), not in the Kids frame
                 <Show when=move || !is_kids.get()><NotificationsDropdown /></Show>
