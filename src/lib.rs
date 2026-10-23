@@ -150,7 +150,14 @@ pub fn App() -> impl IntoView {
                 <Route path=path!("/browse/original-audio") view=crate::pages::language::BrowseLanguagePage />
                 <Route path=path!("/browse/language") view=|| view! { <leptos_router::components::Redirect path="/browse/original-audio" /> } />
                 <Route path=path!("/latest") view=crate::pages::new_popular::NewPopularPage />
-                <Route path=path!("/clips") view=crate::pages::clips::ClipsPage />
+                // Clips is the app's alone (Netflix's website has none): at a computer or tablet width the address goes Home, also when a phone
+                // is switched to a big screen while on it (note 116)
+                <Route path=path!("/clips") view=|| view! {
+                    <crate::form::ByForm
+                        phone=|| view! { <crate::pages::clips::ClipsPage /> }
+                        desktop=|| view! { <leptos_router::components::Redirect path="/browse" /> }
+                    />
+                } />
                 <Route path=path!("/reads") view=crate::pages::reads::ReadsPage />
                 <Route path=path!("/settings") view=crate::pages::settings::SettingsPage />
                 <Route path=path!("/settings/*any") view=crate::pages::settings::SettingsPage />

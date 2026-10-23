@@ -154,8 +154,9 @@
 @media (min-width: 1280px) {
   .row-block { gap: 12px; }
 }
+/* phone: Netflix's Android app sets row titles at 18 sp, 21 px at the owner's 1.15 font scale (cap height 38 px on a Pixel 8), on a 30 px line (note 116) */
 .row-title {
-  font-size: 22px;
+  font-size: 21px;
   line-height: 30px;
   font-weight: 700;
   color: #fff;
