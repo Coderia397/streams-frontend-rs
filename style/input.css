@@ -70,26 +70,19 @@
 
 /* Ranked (Top 10) card: one slot wide, numeral left half, poster right half. Phones use 47% of the row (about 2 cards). */
 .topten-card { container-type: inline-size; }
-/* On phones (measured on the app's Top 10 row): a slot is 43.7 percent of the row, the poster is as wide as a normal tile (28.2 percent of the row), and the numeral is a
-   little under half the height of the poster, at the bottom left, partly behind the poster, drawn as a thin light outline on black. */
+/* The numeral (a shape, see top_ten_numerals.rs): page coloured fill, outline from the component's gradient. From a tablet up it fills the
+   left half of the slot and tucks under the poster. On phones (measured on the app's Top 10 row): a slot is 43.7 percent of the row, the
+   poster as wide as a normal tile (28.2 percent of the row), and the numeral a little under half the poster's height (cap height 38.5 percent
+   of the slot, so its box is 40.7), at the bottom left, partly behind the poster, a thin light outline. */
+.topten-num { fill: var(--color-page); stroke: var(--tt-stroke); }
+.topten-card .topten-svgwrap { display: block; height: 100%; margin-right: -9cqw; }
+.topten-card .topten-svgwrap > svg { display: block; height: 100%; width: auto; max-width: none; overflow: visible; }
 @media (max-width: 599.98px) {
   .tile-width.topten-card { width: 43.67cqw; }
   .topten-card .topten-poster { margin-left: 22.4%; width: 64.6%; }
   .topten-card .topten-rank { left: 4.5%; width: auto; align-items: flex-end; justify-content: flex-start; }
-  .topten-card .topten-rank span { font-size: 53cqw; letter-spacing: -1cqw !important; -webkit-text-stroke-width: 0.8cqw !important; line-height: 0.74 !important; }
-  /* "10" is squeezed sideways (scaleX in the component); on phones the numeral starts at the left, so it is squeezed towards the left, not towards the poster */
-  .topten-card .topten-rank span { transform-origin: left center !important; }
-  .topten-card .topten-rank span:last-child { -webkit-text-stroke-width: 0 !important; }
-  .topten-card .topten-rank span:first-child { -webkit-text-stroke-color: #b8b8b8 !important; }
-  .topten-card .topten-rank > div { transform-origin: left bottom; }
-}
-
-/* From tablet width up the digits are narrower, as the numerals of the app are, and tuck right against the poster ("10" has its own squeeze in the component). */
-.topten-card .topten-svgwrap { display: none; }
-.topten-card .topten-svgwrap > svg { height: 100%; width: auto; max-width: none; overflow: visible; }
-@media (min-width: 600px) {
-  .topten-card .topten-svgwrap { display: block; height: 100%; margin-right: -9cqw; }
-  .topten-card .topten-rank > .topten-spans { display: none; }
+  .topten-card .topten-svgwrap { height: 40.7cqw; margin-right: 0; }
+  .topten-card .topten-num { stroke: #b8b8b8; }
 }
 
 /* Landscape rows on phones (continue watching) keep 2.15 tiles of 16:9. */

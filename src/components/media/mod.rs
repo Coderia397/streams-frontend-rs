@@ -4,6 +4,7 @@ pub mod movie_card;
 pub mod hero;
 pub mod info_modal;
 pub mod top_ten_row;
+pub mod top_ten_numerals;
 pub mod movie_card_popup;
 pub mod movie_card_badges;
 pub mod movie_card_rating;

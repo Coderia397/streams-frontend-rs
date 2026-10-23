@@ -22,63 +22,32 @@ fn clear_timeout_id(id: Option<i32>) {
     }
 }
 
+/// The rank beside a Top 10 poster: the numeral as a shape cut from the site's font (`top_ten_numerals`), so it is the same in every browser
+/// and never reaches past its box. From a tablet up it fills the left half of the slot, its outline fading from light on the left to dark on
+/// the right, tucked under the poster; on phones it is a little under half the poster's height at the bottom left, a thin light outline
+/// (style/input.css).
 #[component]
 fn RankNumber(index: usize) -> impl IntoView {
-    // Netflix ranked card: the numeral fills the left half of the slot (145 x 207 at 290 wide), the poster the right half.
-    // Sizes use container query units of `.topten-card`, so the numeral scales with the slot. "10" is squeezed
-    // horizontally to fit the half slot, like the SVG numerals do.
-    let is_ten = index == 9;
-    let text_class = "font-bold text-[83cqw]";
-    let letter_spacing = "-1.7cqw";
-    let squeeze = if is_ten { "transform: scaleX(0.56); transform-origin: right center;" } else { "" };
-    let stroke_style = format!(
-        "line-height: 0.75; letter-spacing: {}; -webkit-text-stroke: 1.4cqw #6e6e6e; font-family: var(--font-brand); {}",
-        letter_spacing, squeeze
-    );
-    let fill_style = format!(
-        "line-height: 0.75; letter-spacing: {}; font-family: var(--font-brand); color: var(--color-page); {}",
-        letter_spacing, squeeze
-    );
-    let num_str = (index + 1).to_string();
-
-    // From tablet width up the numeral is drawn as an outline whose line fades from light on the left to dark on the right (`topten-svg`); phones keep the text numeral (`topten-spans`)
+    let (width, path) = super::top_ten_numerals::NUMERALS[index.min(9)];
     let gradient_id = {
         use std::sync::atomic::{AtomicUsize, Ordering};
         static NEXT: AtomicUsize = AtomicUsize::new(0);
         format!("tt-grad-{}-{}", index, NEXT.fetch_add(1, Ordering::Relaxed))
     };
-    let (view_w, text_w) = if is_ten { (112.0, 108.0) } else { (62.0, 60.0) };
-    let svg_box = format!("0 0 {} 100", view_w);
-    let num_for_svg = num_str.clone();
+    // built as text so that the gradient keeps its <stop> children (the view macro wraps them in <g>, which empties the gradient); the line
+    // is drawn under the fill (`paint-order`), so only its outer half shows and the inner contours of the digits stay hidden
     let svg_markup = format!(
-        "<svg class=\"topten-svg\" viewBox=\"{svg_box}\" preserveAspectRatio=\"xMaxYMid meet\" aria-hidden=\"true\">\
+        "<svg class=\"topten-svg\" viewBox=\"0 0 {width} {height}\" preserveAspectRatio=\"xMaxYMax meet\" aria-hidden=\"true\" style=\"--tt-stroke:url(#{gradient_id})\">\
          <defs><linearGradient id=\"{gradient_id}\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"0\">\
          <stop offset=\"0\" stop-color=\"#aaaaaa\"/><stop offset=\"0.5\" stop-color=\"#666666\"/><stop offset=\"1\" stop-color=\"#262626\"/></linearGradient></defs>\
-         <text x=\"{view_w}\" y=\"97.5\" text-anchor=\"end\" style=\"fill:var(--color-page);font-family:var(--font-brand)\" stroke=\"url(#{gradient_id})\" stroke-width=\"2.2\" stroke-linejoin=\"round\" paint-order=\"stroke\" \
-         font-size=\"134\" font-weight=\"700\" textLength=\"{text_w}\" lengthAdjust=\"spacingAndGlyphs\">{num_for_svg}</text></svg>"
+         <path class=\"topten-num\" d=\"{path}\" stroke-width=\"{stroke}\" stroke-linejoin=\"round\" paint-order=\"stroke\"/></svg>",
+        height = super::top_ten_numerals::BOX_HEIGHT,
+        stroke = super::top_ten_numerals::STROKE,
     );
 
     view! {
-        <div class=format!("topten-rank absolute left-0 top-0 bottom-0 w-1/2 flex justify-end items-center pointer-events-none z-0{}", if is_ten { " topten-rank-ten" } else { "" })>
-            // built as text so that the gradient keeps its <stop> children (the view macro wraps them in <g>, which makes the gradient empty). The line is drawn under the fill (`paint-order="stroke"`),
-    // so only its outer half shows and the overlapping inner contours of the font stay hidden (no skeleton lines); hence the doubled width.
+        <div class="topten-rank pointer-events-none absolute bottom-0 left-0 top-0 z-0 flex w-1/2 items-center justify-end" aria-hidden="true">
             <div class="topten-svgwrap" inner_html=svg_markup></div>
-            <div class="topten-spans relative flex items-center justify-center">
-                // Background thick stroke
-                <span
-                    class=format!("{} text-transparent absolute select-none", text_class)
-                    style=stroke_style
-                >
-                    {num_str.clone()}
-                </span>
-                // Foreground sharp fill
-                <span
-                    class=format!("{} relative select-none", text_class)
-                    style=fill_style
-                >
-                    {num_str}
-                </span>
-            </div>
         </div>
     }
 }
