@@ -131,7 +131,7 @@ fn CategorySubNavDesktop(
     };
 
     let title_clone = title.clone();
-    let on_genre_click_reset = on_genre_select;
+    let all_label = crate::i18n::t_args("category-all", &[("page", fluent_bundle::FluentValue::from(title.clone()))]);
 
     view! {
         <div
@@ -141,35 +141,13 @@ fn CategorySubNavDesktop(
             // the title and Genres sit 4 px above the bar's middle: Netflix centres them at 113 with the billboard at 154, as ours (measured at 1736 wide)
             <div class="pointer-events-none relative z-30 flex items-center justify-between px-(--app-x) pb-2 h-(--subnav-h) select-none w-full">
                 <div node_ref=container_ref class="pointer-events-auto flex items-center gap-4">
+                // A picked genre is a page of its own, as on Netflix: the genre's name after a short strip in the brand colour (Netflix: 4 x 28 at 70 %, 16 px before the
+                // title). The Genres pill stays beside it, so another genre or the whole page is one click away (Netflix drops it and leaves only the nav tab).
                 <h1 class="flex items-center text-[20px] font-medium leading-[31px] text-ink md:text-[24px]">
+                    {move || selected_genre.get().map(|_| view! { <span aria-hidden="true" class="me-4 h-7 w-1 shrink-0 bg-brand/70" /> })}
                     {
-                        let t_c = title_clone.clone();
-                        move || {
-                            if let Some(genre) = selected_genre.get() {
-                                let g_name = genre.name.clone();
-                                view! {
-                                    <>
-                                        <span
-                                            on:click=move |_| on_genre_click_reset.run(None)
-                                            class="cursor-pointer whitespace-nowrap text-ink/40 transition-colors hover:text-ink/80 hover:underline"
-                                        >
-                                            {t_c.clone()}
-                                        </span>
-                                        <span class="text-ink/20 font-normal text-xs md:text-body-md mx-1.5 md:mx-2.5 whitespace-nowrap">
-                                            ">"
-                                        </span>
-                                        <span class="whitespace-nowrap">
-                                            {crate::i18n::genre_label(&g_name)}
-                                        </span>
-                                    </>
-                                }.into_any()
-                            } else {
-                                let t = t_c.clone();
-                                view! {
-                                    <span>{t}</span>
-                                }.into_any()
-                            }
-                        }
+                        let page_title = title_clone.clone();
+                        move || selected_genre.get().map(|g| crate::i18n::genre_label(&g.name)).unwrap_or_else(|| page_title.clone())
                     }
                 </h1>
 
@@ -178,7 +156,7 @@ fn CategorySubNavDesktop(
                     let t_g = transposed_genres.clone();
                     let d_l = dropdown_label.clone();
                     move || {
-                        if selected_genre.get().is_none() && !s_g.is_empty() {
+                        if !s_g.is_empty() {
                             let label = d_l.clone().unwrap_or_else(|| crate::i18n::t("nav-genres"));
                             let transposed = t_g.clone();
                             let on_select = on_genre_select;
@@ -210,19 +188,39 @@ fn CategorySubNavDesktop(
                                         role="listbox"
                                     >
                                         <div class="w-max max-w-[90vw] md:max-w-none max-h-[65vh] md:max-h-[460px] overflow-y-auto bg-page/95 backdrop-blur-2xl border border-ink/15 rounded-menu p-4 md:p-6 scrollbar-hide shadow-2xl">
+                                            // on a genre's page the menu starts with the whole page (All Series, All Films)
+                                            {
+                                                let all_label = all_label.clone();
+                                                move || selected_genre.get().is_some().then(|| view! {
+                                                    <button
+                                                        on:click=move |_| {
+                                                            set_genre_menu_open.set(false);
+                                                            on_select.run(None);
+                                                        }
+                                                        role="option"
+                                                        aria-selected="false"
+                                                        class="mb-2 flex w-full items-center gap-2 px-3 py-1.5 rounded-menu-item text-left text-body-sm md:text-body font-medium text-ink/80 hover:bg-ink/15 hover:text-ink whitespace-nowrap cursor-pointer"
+                                                    >
+                                                        <i class="ph-bold ph-arrow-left shrink-0 rtl:-scale-x-100" aria-hidden="true"></i>
+                                                        {all_label.clone()}
+                                                    </button>
+                                                })
+                                            }
                                             <div class="grid grid-cols-[repeat(3,max-content)] gap-x-6 md:gap-x-10 gap-y-1">
                                                 {transposed.into_iter().enumerate().map(|(_idx, opt)| {
                                                     if let Some(genre) = opt {
                                                         let g_clone = genre.clone();
+                                                        let id = genre.id;
+                                                        let current = move || selected_genre.get().is_some_and(|s| s.id == id);
                                                         view! {
                                                             <button
                                                                 on:click=move |_| {
                                                                     set_genre_menu_open.set(false);
-                                                                    on_select.run(Some(g_clone.clone()));
+                                                                    if !current() { on_select.run(Some(g_clone.clone())); }
                                                                 }
                                                                 role="option"
-                                                                aria-selected="false"
-                                                                class="text-left text-body-sm md:text-body font-medium transition-all px-3 py-1.5 rounded-menu-item hover:bg-ink/15 whitespace-nowrap text-ink/80 hover:text-ink cursor-pointer"
+                                                                aria-selected=move || current().to_string()
+                                                                class="text-left text-body-sm md:text-body font-medium transition-all px-3 py-1.5 rounded-menu-item hover:bg-ink/15 whitespace-nowrap text-ink/80 hover:text-ink cursor-pointer aria-selected:bg-ink/10 aria-selected:text-ink"
                                                             >
                                                                 {crate::i18n::genre_label(&genre.name)}
                                                             </button>

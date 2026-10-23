@@ -1894,6 +1894,8 @@ mood-political = Political
 browse-grid-empty = Nothing to show here yet.
 category-series = Series
 category-films = Films
+# the first entry of the Genres menu on a genre page: back to the whole Series or Films page
+category-all = All { $page }
 category-top10-movies = Top 10 Movies Today
 category-top10-series = Top 10 TV Shows Today
 reads-title = Comics & Manga
