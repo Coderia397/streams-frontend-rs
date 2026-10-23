@@ -1157,6 +1157,7 @@ title-starring = Starring:
 title-creators = Creators:
 title-directors = Director:
 title-more = more
+phone-title-more-like-this = More like this
 title-original-audio = { $language } [Original]
 title-video-trailer = Trailer
 title-video-teaser = Teaser

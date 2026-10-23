@@ -110,7 +110,7 @@ pub fn PhoneTitle() -> impl IntoView {
                         <button
                             type="button"
                             on:click=move |_| close()
-                            class="ms-1 flex h-11 w-11 items-center justify-center text-ink active:scale-95 transition-transform cursor-pointer"
+                            class="ms-2.5 flex h-11 w-11 items-center justify-center text-ink active:scale-95 transition-transform cursor-pointer"
                             aria-label=crate::i18n::t("navbar-mobile-back")
                         >
                             <i class="ph-bold ph-arrow-left text-heading"></i>
@@ -154,10 +154,12 @@ pub fn PhoneTitle() -> impl IntoView {
                         <button
                             type="button"
                             on:click=move |_| ui_store.set_preview_muted(!ui_store.preview_muted.get_untracked())
-                            class="absolute bottom-1 right-1 z-10 flex h-11 w-11 items-center justify-center text-ink drop-shadow-md cursor-pointer"
+                            class="absolute bottom-1 right-1 z-10 flex h-11 w-11 items-center justify-center text-ink cursor-pointer"
                             aria-label=move || if ui_store.preview_muted.get() { crate::i18n::t("media-unmute") } else { crate::i18n::t("media-mute") }
                         >
-                            <i class=move || if ui_store.preview_muted.get() { "ph-fill ph-speaker-slash text-title" } else { "ph-fill ph-speaker-high text-title" }></i>
+                            <span class="flex h-9 w-9 items-center justify-center rounded-full bg-void/60">
+                                <i class=move || if ui_store.preview_muted.get() { "ph-fill ph-speaker-slash text-xl" } else { "ph-fill ph-speaker-high text-xl" }></i>
+                            </span>
                         </button>
                         <div class="absolute bottom-0 left-0 z-10 h-[3px] bg-brand" style=move || format!("width:{:.2}%", fraction() * 100.0)></div>
                     </Show>
@@ -166,7 +168,7 @@ pub fn PhoneTitle() -> impl IntoView {
                 <Suspense fallback=|| view! { <PhoneTitleSkeleton /> }>
                     {move || details.get().map(|d| match d {
                         Some(d) => view! { <TitleBody details=d season=season tab=tab /> }.into_any(),
-                        None => view! { <p class="px-2.5 py-10 text-center text-ink-ash">{crate::i18n::t("info-modal-error-loading-details")}</p> }.into_any(),
+                        None => view! { <p class="px-2.5 py-10 text-center text-ink-body">{crate::i18n::t("info-modal-error-loading-details")}</p> }.into_any(),
                     })}
                 </Suspense>
                 // room for the bottom bar, which stays over the page
@@ -240,56 +242,60 @@ fn TitleBody(details: DetailedMediaItem, season: RwSignal<u32>, tab: RwSignal<Ta
     };
     let share_open = RwSignal::new(false);
     let share_url = crate::pages::title::share_url(is_tv, id);
+    // a film has no episodes: More Like This is its tab
+    if !is_tv {
+        tab.set(Tab::MoreLikeThis);
+    }
 
     view! {
-        <div class="px-2.5 pt-2">
+        <div class="px-2.5 pt-0.5">
             <h1 class="text-[28px] font-bold leading-[1.2] text-ink">{title.clone()}</h1>
             // year, age rating, length, picture quality
-            <div class="mt-1 flex items-center gap-2.5 text-[15px] text-ink-ash">
+            <div class="mt-2 flex items-center gap-2.5 text-[15px] text-ink-body">
                 {(!year.is_empty()).then(|| view! { <span>{year}</span> })}
                 <RatingBadge id=id is_tv=is_tv size="xs".to_string() />
                 {length.map(|l| view! { <span>{l}</span> })}
                 <span class="rounded-tick border border-ink/40 px-[5px] text-caption-sm leading-[16px] text-ink/90">"HD"</span>
             </div>
 
-            <a href=watch_url class="btn-pill btn-ink mt-3 h-12 w-full text-[17px]">
+            <a href=watch_url class="btn-pill btn-ink mt-2.5 h-12 w-full text-[17px]">
                 <i class="ph-fill ph-play text-2xl"></i>
                 <span>{if started { crate::i18n::t("media-resume") } else { crate::i18n::t("media-play") }}</span>
             </a>
 
-            <p class="mt-3 text-[16px] leading-[20.7px] text-ink">{details.overview.clone()}</p>
+            <p class="mt-2 text-[16px] leading-[20.7px] text-ink">{details.overview.clone()}</p>
 
             {(!cast.is_empty()).then(|| {
                 let short = cast.iter().take(3).cloned().collect::<Vec<_>>().join(", ");
                 let all = cast.join(", ");
                 let more = cast.len() > 3;
                 view! {
-                    <p class="mt-2.5 text-[14px] leading-[17.6px] text-ink-ash">
+                    <p class="mt-2.5 text-[14px] leading-[17.6px] text-ink-body">
                         {crate::i18n::t("title-starring")}" "
                         {move || if cast_open.get() { all.clone() } else { short.clone() }}
                         {move || (more && !cast_open.get()).then(|| view! {
                             "… "
-                            <button type="button" on:click=move |_| cast_open.set(true) class="font-bold text-ink-ash cursor-pointer">{crate::i18n::t("title-more")}</button>
+                            <button type="button" on:click=move |_| cast_open.set(true) class="text-ink-soft cursor-pointer">{crate::i18n::t("title-more")}</button>
                         })}
                     </p>
                 }
             })}
             {(!makers.is_empty()).then(|| view! {
-                <p class="text-[14px] leading-[17.6px] text-ink-ash">
+                <p class="text-[14px] leading-[17.6px] text-ink-body">
                     {if is_tv { crate::i18n::t("title-creators") } else { crate::i18n::t("title-directors") }}" "{makers.join(", ")}
                 </p>
             })}
 
-            // My List, Rate and Share: an icon over its label, 96 px apart, as in the app
-            <div class="mt-4 flex items-start">
-                <button type="button" on:click=toggle_list class="flex w-24 flex-col items-center gap-1.5 py-2 text-ink cursor-pointer active:scale-95 transition-transform">
+            // My List, Rate and Share: an icon over its label, 96 px wide and 8 px apart from 14 px in, as in the app
+            <div class="mt-4 flex items-start gap-2 ps-1">
+                <button type="button" on:click=toggle_list class="flex w-24 flex-col items-center gap-2.5 py-2 text-ink cursor-pointer active:scale-95 transition-transform">
                     <i class=move || if in_list.get() { "ph-bold ph-check text-[22px]" } else { "ph-bold ph-plus text-[22px]" }></i>
-                    <span class="text-[13px] text-ink-ash">{crate::i18n::t("my-list")}</span>
+                    <span class="text-[13px] text-ink-body">{crate::i18n::t("my-list")}</span>
                 </button>
                 <div class="relative">
-                    <button type="button" on:click=move |_| rate_open.update(|o| *o = !*o) class="flex w-24 flex-col items-center gap-1.5 py-2 text-ink cursor-pointer active:scale-95 transition-transform">
+                    <button type="button" on:click=move |_| rate_open.update(|o| *o = !*o) class="flex w-24 flex-col items-center gap-2.5 py-2 text-ink cursor-pointer active:scale-95 transition-transform">
                         {move || view! { <RatingIcon rating=rating.get() size=22 mask_color="var(--color-void)".to_string() /> }}
-                        <span class="text-[13px] text-ink-ash">{move || if rating.get().is_some() { crate::i18n::t("rating-rated") } else { crate::i18n::t("action-buttons-rate") }}</span>
+                        <span class="text-[13px] text-ink-body">{move || if rating.get().is_some() { crate::i18n::t("rating-rated") } else { crate::i18n::t("action-buttons-rate") }}</span>
                     </button>
                     // the three choices in a bubble over the button
                     <Show when=move || rate_open.get()>
@@ -307,19 +313,20 @@ fn TitleBody(details: DetailedMediaItem, season: RwSignal<u32>, tab: RwSignal<Ta
                         </div>
                     </Show>
                 </div>
-                <button type="button" on:click=move |_| share_open.set(true) class="flex w-24 flex-col items-center gap-1.5 py-2 text-ink cursor-pointer active:scale-95 transition-transform">
+                <button type="button" on:click=move |_| share_open.set(true) class="flex w-24 flex-col items-center gap-2.5 py-2 text-ink cursor-pointer active:scale-95 transition-transform">
                     <i class="ph-bold ph-share-network text-[22px]"></i>
-                    <span class="text-[13px] text-ink-ash">{crate::i18n::t("share-button")}</span>
+                    <span class="text-[13px] text-ink-body">{crate::i18n::t("share-button")}</span>
                 </button>
             </div>
             <crate::components::media::share_sheet::ShareSheet open=share_open title=title.clone() url=share_url />
         </div>
 
         // the tabs: a line across the page, the chosen tab marked by a bar over it
-        <div class="mt-4 border-t border-ink/15">
-            <div class="flex px-2.5">
+        // Netflix's tabs: boxes 48 px high with 12 px either side of the label, from 8 px in; the bar over the chosen one spans its box
+        <div class="mt-8 border-t border-ink/15">
+            <div class="flex px-2">
                 {is_tv.then(|| view! { <TabButton label=crate::i18n::t("media-episodes") me=Tab::Episodes tab=tab /> })}
-                <TabButton label=crate::i18n::t("media-more-like-this") me=Tab::MoreLikeThis tab=tab />
+                <TabButton label=crate::i18n::t("phone-title-more-like-this") me=Tab::MoreLikeThis tab=tab />
             </div>
         </div>
         {move || if is_tv && tab.get() == Tab::Episodes {
@@ -336,7 +343,7 @@ fn TabButton(label: String, me: Tab, tab: RwSignal<Tab>) -> impl IntoView {
         <button
             type="button"
             on:click=move |_| tab.set(me)
-            class=move || format!("relative me-5 pt-5 pb-3 text-[16px] font-bold cursor-pointer {}", if tab.get() == me { "text-ink" } else { "text-ink-ash" })
+            class=move || format!("relative flex h-12 items-center px-3 text-[16px] font-bold cursor-pointer {}", if tab.get() == me { "text-ink" } else { "text-ink-soft" })
         >
             <span class="absolute inset-x-0 top-0 h-1 bg-brand transition-opacity" class=("opacity-0", move || tab.get() != me)></span>
             {label}
@@ -370,7 +377,7 @@ fn Episodes(series_id: u32, seasons: u32, season: RwSignal<u32>) -> impl IntoVie
                         view! {
                             <a href=href class="block py-3">
                                 <div class="flex items-center gap-3">
-                                    <div class="relative aspect-[130/80] w-[130px] shrink-0 overflow-hidden rounded-[4px] bg-raised">
+                                    <div class="relative aspect-[130/80] w-[130px] shrink-0 overflow-hidden rounded-tile bg-raised">
                                         {still.map(|s| view! { <img src=s alt="" loading="lazy" class="h-full w-full object-cover" /> })}
                                         <span class="absolute inset-0 flex items-center justify-center">
                                             <span class="flex h-9 w-9 items-center justify-center rounded-full border border-ink/80 bg-void/40"><i class="ph-fill ph-play text-base text-ink"></i></span>
@@ -378,10 +385,10 @@ fn Episodes(series_id: u32, seasons: u32, season: RwSignal<u32>) -> impl IntoVie
                                     </div>
                                     <div class="min-w-0 flex-1">
                                         <p class="text-[16px] font-bold leading-tight text-ink">{format!("{}. {}", ep.episode_number, ep.name)}</p>
-                                        {ep.runtime.filter(|r| *r > 0).map(|r| view! { <p class="mt-0.5 text-[14px] text-ink-ash">{format!("{r}m")}</p> })}
+                                        {ep.runtime.filter(|r| *r > 0).map(|r| view! { <p class="mt-0.5 text-[14px] text-ink-body">{format!("{r}m")}</p> })}
                                     </div>
                                 </div>
-                                {(!ep.overview.is_empty()).then(|| view! { <p class="mt-2 text-[14px] leading-[18px] text-ink-ash">{ep.overview.clone()}</p> })}
+                                {(!ep.overview.is_empty()).then(|| view! { <p class="mt-2 text-[14px] leading-[18px] text-ink-body">{ep.overview.clone()}</p> })}
                             </a>
                         }
                     }).collect_view())}
@@ -396,7 +403,7 @@ fn Episodes(series_id: u32, seasons: u32, season: RwSignal<u32>) -> impl IntoVie
                         <button
                             type="button"
                             on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); season.set(n); menu_open.set(false); }
-                            class=move || format!("px-6 py-3 cursor-pointer {}", if season.get() == n { "text-[22px] font-bold text-ink" } else { "text-[18px] text-ink-ash" })
+                            class=move || format!("px-6 py-3 cursor-pointer {}", if season.get() == n { "text-[22px] font-bold text-ink" } else { "text-[18px] text-ink-body" })
                         >
                             {crate::i18n::t_args("media-season-n", &[("n", fluent_bundle::FluentValue::from(n as i64))])}
                         </button>
@@ -418,7 +425,7 @@ fn MoreLikeThis(id: u32, is_tv: bool) -> impl IntoView {
     view! {
         <Suspense fallback=|| view! {
             <div class="grid grid-cols-3 gap-2 px-2.5 pt-3" role="status" aria-busy="true">
-                {(0..6).map(|_| view! { <Bone class="aspect-[2/3] rounded-[4px]" /> }).collect_view()}
+                {(0..6).map(|_| view! { <Bone class="aspect-[2/3] rounded-tile" /> }).collect_view()}
             </div>
         }>
             <div class="grid grid-cols-3 gap-2 px-2.5 pt-3">
@@ -431,7 +438,8 @@ fn MoreLikeThis(id: u32, is_tv: bool) -> impl IntoView {
                         <button
                             type="button"
                             on:click=move |_| { ui_store.info_modal_is_tv.set(tv); ui_store.info_modal_movie_id.set(Some(mid)); }
-                            class="aspect-[2/3] overflow-hidden rounded-[4px] bg-raised cursor-pointer"
+                            // radius: a poster tile, the rows' tile corners
+                            class="aspect-[2/3] overflow-hidden rounded-tile bg-raised cursor-pointer"
                         >
                             <img src=poster alt=name loading="lazy" class="h-full w-full object-cover" />
                         </button>

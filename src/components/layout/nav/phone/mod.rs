@@ -162,7 +162,7 @@ pub fn PhoneNav(
                         view! {
                             <button
                                 on:click=move |_| go_back.run(())
-                                class="flex h-11 w-11 flex-shrink-0 items-center justify-center ms-1 text-ink active:scale-95 transition-transform cursor-pointer"
+                                class="flex h-11 w-11 flex-shrink-0 items-center justify-center ms-2.5 text-ink active:scale-95 transition-transform cursor-pointer"
                                 aria-label=crate::i18n::t("navbar-mobile-back")
                             >
                                 <i class="ph-bold ph-arrow-left text-heading"></i>
@@ -185,7 +185,8 @@ pub fn PhoneNav(
                         if is_kids.get() && (p == "/browse" || p == "/" || p.is_empty()) {
                             view! { <crate::components::profiles::kids_splash::KidsWordmark class="-ms-1 h-8 w-auto" /> }.into_any()
                         } else {
-                            view! { <span class="ms-1 truncate text-heading font-bold leading-none tracking-tight text-ink">{page_title()}</span> }.into_any()
+                            // the app: the title 52 px in after the logo on Home, 68 px in after the back arrow on the pages under it (note 116)
+                            view! { <span class=move || format!("{} truncate text-heading font-bold leading-none tracking-tight text-ink", if on_sub_page() { "ms-3.5" } else { "ms-1" })>{page_title()}</span> }.into_any()
                         }
                     }}
                 </div>
