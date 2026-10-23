@@ -102,8 +102,98 @@ pub(crate) fn derive_vibe_tags(genres: &[(u32, String)], overview: &str) -> Vec<
     tags
 }
 
+/// The details of a title, opened from any card, row or billboard: the website's window, or on the phone form the app's title page
+/// (phone_title.rs). Both show the title open in the UI store; the address carries it (`keep_title_in_address`, run by SharedTitleOpener,
+/// which sits inside the router; this component is mounted outside it, above every page).
 #[component]
 pub fn InfoModal() -> impl IntoView {
+    view! {
+        <crate::form::ByForm
+            phone=|| view! { <super::phone_title::PhoneTitle /> }
+            desktop=|| view! { <WebsiteDetails /> }
+        />
+    }
+}
+
+/// The open title is in the address (`title=tv-1399`), as Netflix's website keeps it in `jbv`: opening a title adds an entry, so Back
+/// (and a phone's back gesture, which left the page before) closes the title instead of leaving the page; closing takes it out; a
+/// reload, Forward or a shared address opens it again (SharedTitleOpener). The same address shows the window on a computer and the
+/// title page on a phone, so a phone switched to a big screen keeps the title open.
+fn keep_title_in_address() {
+    let ui_store = use_ui_store();
+    let location = leptos_router::hooks::use_location();
+    // whether this page added the title's entry: closing then goes back to the entry before it, otherwise it rewrites the address
+    let pushed = StoredValue::new(false);
+    Effect::new(move |_| {
+        let open = ui_store.info_modal_open.get();
+        let wanted = ui_store.info_modal_movie_id.get().filter(|_| open).map(|id| crate::pages::title::slug_for(ui_store.info_modal_is_tv.get(), id));
+        let Some(w) = web_sys::window() else { return };
+        let (Ok(path), Ok(search), Ok(history)) = (w.location().pathname(), w.location().search(), w.history()) else { return };
+        let current = title_param(&search);
+        match (current, wanted) {
+            (None, Some(slug)) => {
+                let _ = history.push_state_with_url(&JsValue::NULL, "", Some(&with_title(&path, &search, Some(&slug))));
+                pushed.set_value(true);
+            }
+            (Some(now), Some(slug)) if now != slug => {
+                let _ = history.replace_state_with_url(&JsValue::NULL, "", Some(&with_title(&path, &search, Some(&slug))));
+            }
+            (Some(_), None) if pushed.get_value() => {
+                pushed.set_value(false);
+                let _ = history.back();
+            }
+            (Some(_), None) => {
+                let _ = history.replace_state_with_url(&JsValue::NULL, "", Some(&with_title(&path, &search, None)));
+            }
+            _ => {}
+        }
+    });
+    // Back took the title out of the address: the title closes; Forward brought one back: it opens. Read from the window's own event:
+    // the router does not report a move between entries it did not make
+    crate::utils::listen::listen_window(leptos::ev::popstate, move |_| {
+        let search = web_sys::window().and_then(|w| w.location().search().ok()).unwrap_or_default();
+        match title_param(&search).and_then(|v| crate::pages::title::parse_slug(&v)) {
+            None if ui_store.info_modal_open.get_untracked() => {
+                pushed.set_value(false);
+                ui_store.info_modal_open.set(false);
+            }
+            Some((tv, id)) if !ui_store.info_modal_open.get_untracked() || ui_store.info_modal_movie_id.get_untracked() != Some(id) => {
+                pushed.set_value(false);
+                ui_store.info_modal_is_tv.set(tv);
+                ui_store.info_modal_movie_id.set(Some(id));
+                ui_store.info_modal_open.set(true);
+            }
+            _ => {}
+        }
+    });
+    // another page (a tab of the phone's bottom bar, a genre link in the window): the title closes there, without going back
+    Effect::new(move |prev: Option<String>| {
+        let path = location.pathname.get();
+        if prev.is_some_and(|p| p != path) && ui_store.info_modal_open.get_untracked() {
+            pushed.set_value(false);
+            ui_store.info_modal_open.set(false);
+        }
+        path
+    });
+}
+
+/// The `title` parameter of an address's query (`?title=tv-1399`).
+fn title_param(search: &str) -> Option<String> {
+    search.trim_start_matches('?').split('&').find_map(|kv| kv.strip_prefix("title=")).filter(|v| !v.is_empty()).map(str::to_string)
+}
+
+/// The address with its `title` parameter set to `slug`, or taken out; the other parameters stay in their order.
+fn with_title(path: &str, search: &str, slug: Option<&str>) -> String {
+    let mut parts: Vec<String> = search.trim_start_matches('?').split('&').filter(|kv| !kv.is_empty() && !kv.starts_with("title=")).map(str::to_string).collect();
+    if let Some(slug) = slug {
+        parts.push(format!("title={slug}"));
+    }
+    if parts.is_empty() { path.to_string() } else { format!("{path}?{}", parts.join("&")) }
+}
+
+/// The website's details window (Netflix's, measured on its website; note 111).
+#[component]
+fn WebsiteDetails() -> impl IntoView {
     let ui_store = use_ui_store();
     let form = crate::form::use_form();
     let library_store = use_library_store();
@@ -127,7 +217,8 @@ pub fn InfoModal() -> impl IntoView {
     let modal_scroll_timer = StoredValue::new(None::<i32>);
     let (is_modal_unmounted_by_scroll, set_is_modal_unmounted_by_scroll) = signal(false);
 
-    let close_cb = Callback::new(move |_| {
+    let close_cb = Callback::new(move |_| is_open.set(false));
+    let reset_on_close = move || {
         let cur_t = ui_store.modal_current_time.get_untracked();
         let effective_t = if cur_t > 0.0 {
             cur_t
@@ -146,12 +237,20 @@ pub fn InfoModal() -> impl IntoView {
         ui_store.modal_video_key.set(None);
         ui_store.modal_initial_time.set(0.0);
         ui_store.modal_current_time.set(0.0);
-        is_open.set(false);
         set_is_playing_trailer.set(false);
         set_is_trailer_ready.set(false);
         set_video_key.set(None);
         set_is_teaser.set(false);
         set_has_ended.set(false);
+    };
+    // whatever closed the window (its button, Escape, a click beside it, Back): the trailer's time goes back to the billboard and the
+    // window's state is cleared
+    Effect::new(move |was_open: Option<bool>| {
+        let open = is_open.get();
+        if was_open == Some(true) && !open {
+            reset_on_close();
+        }
+        open
     });
     let on_close = move |_| close_cb.run(());
 
@@ -761,36 +860,36 @@ pub fn InfoModal() -> impl IntoView {
     }
 }
 
-/// `/browse?title=tv-1399` opens that title's details once a profile is chosen. A shared link (`/title/tv-1399`) comes here when the
-/// browser holds an account, and so does signing in from a title's page. Without an account it opens only when the engine says accounts
-/// are optional (the gate's rule); otherwise the gate sends it to sign in, which keeps the whole address in `next`. The parameter is then
-/// taken out of the address so a reload does not open it again.
+/// An address with `title=tv-1399` opens that title's details once a profile is chosen: a reload, Forward, or a shared link (`/title/tv-1399`
+/// comes to `/browse?title=` when the browser holds an account, and so does signing in from a title's page). Without an account it opens
+/// only when the engine says accounts are optional (the gate's rule); otherwise the gate sends it to sign in, which keeps the whole address
+/// in `next`. The parameter stays in the address while the title is open (see `keep_title_in_address`).
 #[component]
 pub fn SharedTitleOpener() -> impl IntoView {
+    keep_title_in_address();
     let location = leptos_router::hooks::use_location();
     let ui_store = use_ui_store();
     let profile_store = crate::store::use_profile_store();
-    let handled = StoredValue::new(String::new());
     let open = move |id: u32, is_tv: bool| {
         ui_store.modal_initial_time.set(0.0);
         ui_store.modal_current_time.set(0.0);
         ui_store.info_modal_movie_id.set(Some(id));
         ui_store.info_modal_is_tv.set(is_tv);
         ui_store.info_modal_open.set(true);
-        if let Some(h) = web_sys::window().and_then(|w| w.history().ok()) {
-            let _ = h.replace_state_with_url(&JsValue::NULL, "", Some("/browse"));
-        }
     };
     Effect::new(move |_| {
         let path = location.pathname.get();
         let search = location.search.get();
-        if path != "/browse" || profile_store.active_profile_id.get().is_none() || handled.with_value(|h| *h == search) {
+        if profile_store.active_profile_id.get().is_none() || !crate::components::layout::account_gate::access(&path).eq(&crate::components::layout::account_gate::Access::Members) {
             return;
         }
-        let Some((kind, id)) = search.trim_start_matches('?').split('&').find_map(|kv| kv.strip_prefix("title=")).and_then(|v| v.split_once('-')) else { return };
+        let Some((kind, id)) = title_param(&search).and_then(|v| v.split_once('-').map(|(k, i)| (k.to_string(), i.to_string()))) else { return };
         let (Ok(id), true) = (id.parse::<u32>(), kind == "tv" || kind == "movie") else { return };
         let is_tv = kind == "tv";
-        handled.set_value(search.clone());
+        // the title shown already (it was opened on this page and put in the address)
+        if ui_store.info_modal_open.get_untracked() && ui_store.info_modal_movie_id.get_untracked() == Some(id) && ui_store.info_modal_is_tv.get_untracked() == is_tv {
+            return;
+        }
         if crate::services::account::has_account() {
             open(id, is_tv);
         } else {
