@@ -98,55 +98,45 @@ pub fn RecCard(
         }
     };
 
+    // the shared content card (as the title page's): the picture inset 8 px with its own corners, a round Play over it, then the line of
+    // facts with the My List button, and the synopsis
     view! {
-        <div class="bg-panel rounded-control overflow-hidden group">
-            // Image area - click to play
-            <div
-                class="relative aspect-video bg-raised overflow-hidden cursor-pointer"
-                on:click=on_image_click
-            >
+        <div class="surface-card surface-card-hover group flex flex-col overflow-hidden p-2">
+            // picture: click to play
+            <div class="relative aspect-video cursor-pointer overflow-hidden rounded-xl bg-raised" on:click=on_image_click>
                 {if let Some(src) = backdrop {
                     view! {
                         <img
                             src=src
                             alt=title.clone()
-                            class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-(--motion-base)"
+                            class="h-full w-full object-cover transition-transform duration-(--motion-base) group-hover:scale-[1.03]"
                             loading="lazy"
                         />
                     }.into_any()
                 } else {
-                    view! {
-                        <div class="w-full h-full bg-placeholder" />
-                    }.into_any()
+                    view! { <div class="h-full w-full bg-placeholder" /> }.into_any()
                 }}
+                <div class="pointer-events-none absolute inset-0 bg-linear-to-t from-void/60 via-transparent to-transparent"></div>
 
-                // Play icon overlay on hover
-                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-(--motion-base) pointer-events-none">
-                    <div class="w-11 h-11 rounded-full bg-void/50 border border-ink/50 flex items-center justify-center">
-                        <i class="ph-fill ph-play text-ink ml-0.5 text-lg"></i>
-                    </div>
+                // Play: the round preset, shown under the pointer (always on a touch screen, which has no pointer to rest)
+                <div class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-(--motion-base) group-hover:opacity-100 [@media(hover:none)]:opacity-100">
+                    <span class="btn-circle btn-circle-lg"><i class="ph-fill ph-play"></i></span>
                 </div>
 
-                // Bottom-left title/logo
-                <div class="absolute bottom-2 left-2 right-2 max-w-[78%]">
-                    <Suspense fallback=move || view! { <div class="h-6 w-20 rounded-control bg-ink/10 animate-pulse" /> }>
+                // the title's logo, or its name
+                <div class="absolute bottom-2.5 start-3 end-3 max-w-[78%]">
+                    <Suspense fallback=move || view! { <div class="h-6 w-20 animate-pulse rounded-tick bg-ink/10" /> }>
                         {
                             let tc = title.clone();
                             move || {
                                 let t = tc.clone();
                                 logo_resource.get().map(|res| match res {
                                     Some(url) if !url.is_empty() => view! {
-                                        <img
-                                            src=url
-                                            alt=t.clone()
-                                            class="max-h-12 max-w-full object-contain object-left-bottom drop-shadow-lg"
-                                        />
+                                        <img src=url alt=t.clone() class="max-h-11 max-w-full object-contain object-left-bottom drop-shadow-lg rtl:object-right-bottom" />
                                     }.into_any(),
                                     _ => view! {
-                                        <p class="text-ink font-bold text-sm leading-tight drop-shadow-md line-clamp-2">
-                                            {t.clone()}
-                                        </p>
-                                    }.into_any()
+                                        <p class="line-clamp-2 text-[16px] font-bold leading-tight text-ink drop-shadow-md">{t.clone()}</p>
+                                    }.into_any(),
                                 })
                             }
                         }
@@ -154,37 +144,19 @@ pub fn RecCard(
                 </div>
             </div>
 
-            // Card body - click opens InfoModal
-            <div
-                class="p-4 cursor-pointer hover:bg-lift transition-colors duration-(--motion-fast)"
-                on:click=on_body_click
-            >
-                <div class="flex items-center justify-between gap-2 mb-2.5">
-                    <div class="flex items-center gap-2 flex-wrap">
-                        <span class="text-success font-bold text-xs">
+            // facts and synopsis: click opens the title's details
+            <div class="flex flex-1 cursor-pointer flex-col px-2 pb-2 pt-3" on:click=on_body_click>
+                <div class="flex items-center justify-between gap-2">
+                    <div class="flex min-w-0 items-center gap-x-1.5 overflow-hidden whitespace-nowrap text-[14px] font-medium leading-[21px]">
+                        <span class="text-success">
                             {crate::i18n::t_args("media-percent-match", &[("pct", fluent_bundle::FluentValue::from(match_score as i64))])}
                         </span>
                         <RatingBadge id=rec.id_u32() is_tv=rec.is_tv() gb=rec.rating_gb.clone() us=rec.rating_us.clone() size="sm".to_string() />
-                        {if !year.is_empty() {
-                            view! {
-                                <span class="text-gray-300 text-xs font-medium px-0.5">{year}</span>
-                            }.into_any()
-                        } else {
-                            view! { <span /> }.into_any()
-                        }}
+                        {(!year.is_empty()).then(|| view! { <span class="text-ink/70">{year}</span> })}
                     </div>
-
-                    // Add/remove from list button
-                    <MyListButton
-                        is_in_list=is_added
-                        on_toggle=toggle_my_list_cb
-                        size="sm".to_string()
-                    />
+                    <MyListButton is_in_list=is_added on_toggle=toggle_my_list_cb size="sm".to_string() />
                 </div>
-
-                <p class="text-ink-light text-body-sm leading-5 line-clamp-5 min-h-[100px]">
-                    {overview}
-                </p>
+                <p class="mt-2 line-clamp-4 text-[14px] leading-[21px] text-ink/70">{overview}</p>
             </div>
         </div>
     }
@@ -221,10 +193,10 @@ pub fn InfoModalRecommendations(
     view! {
         <Suspense fallback=move || view! {
             <div class="mt-12">
-                <h3 class="text-2xl font-medium text-ink mb-5">{crate::i18n::t("media-more-like-this")}</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <h3 class="mb-4 text-[24px] font-bold leading-[1.25] text-ink">{crate::i18n::t("media-more-like-this")}</h3>
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {(0..6).map(|_| view! {
-                        <div class="bg-panel rounded-control aspect-[4/5] animate-pulse" />
+                        <div class="surface-card aspect-[4/5] animate-pulse" />
                     }).collect_view()}
                 </div>
             </div>
@@ -238,8 +210,8 @@ pub fn InfoModalRecommendations(
 
                     view! {
                         <div class="mt-12">
-                            <h3 class="text-2xl font-medium text-ink mb-5">{crate::i18n::t("media-more-like-this")}</h3>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <h3 class="mb-4 text-[24px] font-bold leading-[1.25] text-ink">{crate::i18n::t("media-more-like-this")}</h3>
+                            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                                 {visible_items.into_iter().map(|item| {
                                     let movie = Movie::from(item);
                                     let on_rec_click = on_recommendation_click;

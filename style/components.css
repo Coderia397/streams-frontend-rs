@@ -261,3 +261,15 @@
     background-image: var(--bottom), linear-gradient(136deg, rgb(15 15 15 / 0) 45.72%, rgb(0 0 0 / 0.6) 63.85%, #000 87.47%);
   }
 }
+
+/* Content cards (the title page's summary, episode and detail cards, More Like This): Netflix's 16 px corners, 10 % white with a faint
+   2 px edge (note 111). One class, so every card on the site reads the same; -hover lightens it under the pointer. */
+@layer components {
+  .surface-card {
+    border-radius: 16px;
+    border: 2px solid rgb(255 255 255 / 0.04);
+    background-color: rgb(255 255 255 / 0.1);
+  }
+  .surface-card-hover { transition: background-color var(--motion-fast); }
+  .surface-card-hover:hover { background-color: rgb(255 255 255 / 0.14); }
+}

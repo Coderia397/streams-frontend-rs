@@ -357,8 +357,8 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
     }
 }
 
-/// The page's cards (summary, episodes, More Details): Netflix's 16 px corners, 10 % white with a faint 2 px edge (radius: cards, not buttons).
-const CARD: &str = "rounded-2xl border-2 border-ink/[0.04] bg-ink/10";
+/// The page's cards (summary, episodes, More Details): the shared `.surface-card` in style/components.css.
+const CARD: &str = "surface-card";
 /// A jump link: 14 px, 70 % white, 41 px tall.
 const JUMP_LINK: &str = "shrink-0 cursor-pointer px-5 pb-3 pt-[11.2px] text-[14px] font-medium leading-[17.8px] text-ink/70 hover:text-ink";
 /// A section heading: 20 px on a phone, 32 px from a tablet up, the line 1.25 of the size (Netflix Sans' normal line).
@@ -503,7 +503,7 @@ fn Episodes(id: u32, seasons: u32) -> impl IntoView {
                 {move || episodes.get().map(|list| view! {
                     <Rail>
                         {list.into_iter().map(|ep| view! {
-                            <div class="w-[246px] shrink-0 snap-start overflow-hidden rounded-xl border-2 border-ink/[0.04] bg-ink/10 p-2 md:w-[327px] md:rounded-2xl">
+                            <div class="surface-card w-[246px] shrink-0 snap-start overflow-hidden p-2 max-md:rounded-xl md:w-[327px]">
                                 <div class="relative aspect-video overflow-hidden rounded-xl bg-[#161616] md:rounded-2xl">
                                     {ep.still_url("w300").map(|src| view! { <img src=src alt="" loading="lazy" class="h-full w-full object-cover" /> })}
                                     {ep.runtime.filter(|r| *r > 0).map(|r| view! {
