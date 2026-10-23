@@ -21,7 +21,8 @@ pub fn PhoneNav(
     let loc_tab = use_location();
     Effect::new(move |_| {
         let p = loc_tab.pathname.get();
-        let tab = if p.starts_with("/search") { "search" } else if p.starts_with("/clips") || p.starts_with("/latest") { "clips" } else if p.starts_with("/browse/my-list") { "settings" } else { "home" };
+        // New & Hot is a chip of Home in the app, so its tab is Home
+        let tab = if p.starts_with("/search") { "search" } else if p.starts_with("/clips") { "clips" } else if p.starts_with("/browse/my-list") { "settings" } else { "home" };
         set_active_bottom_nav.set(tab);
     });
 
@@ -102,7 +103,7 @@ pub fn PhoneNav(
     let profile_sheet = RwSignal::new(false);
 
     let nav_to_browse = navigate.clone();
-    let nav_to_latest = navigate.clone();
+    let nav_to_clips = navigate.clone();
     let nav_to_search = navigate.clone();
     let nav_to_settings = navigate.clone();
 
@@ -123,7 +124,7 @@ pub fn PhoneNav(
             label: "nav-clips",
             on_click: Callback::new(move |_| {
                 set_active_bottom_nav.set("clips");
-                nav_to_latest("/latest", Default::default());
+                nav_to_clips("/clips", Default::default());
             }),
             shown: Signal::derive(move || !is_kids.get()),
         },
