@@ -11,7 +11,7 @@ pub mod clips;
 pub mod reads;
 pub mod settings;
 pub mod auth;
-pub mod login;
+pub mod landing;
 pub mod help;
 pub mod not_found;
 pub mod games;

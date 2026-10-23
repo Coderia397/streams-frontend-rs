@@ -337,7 +337,7 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
                 <PosterRow id="title-trending" heading=t("media-badge-trending-now") source=PosterSource::Trending exclude=(is_tv, id) />
 
                 <section class="relative mt-8 overflow-hidden rounded-2xl md:mt-10">
-                    <img src=crate::pages::login::wall("wide") alt="" class="absolute inset-0 h-full w-full object-cover opacity-40" />
+                    <img src=crate::pages::landing::wall("wide") alt="" class="absolute inset-0 h-full w-full object-cover opacity-40" />
                     <div class="absolute inset-0 bg-linear-to-r from-void/80 to-void/30"></div>
                     <div class="relative flex flex-col gap-4 p-6 md:flex-row md:items-center md:justify-between md:px-6">
                         <p class="text-[20px] font-bold md:text-[24px]">{t("login-unlimited-films-series-and-more")}</p>

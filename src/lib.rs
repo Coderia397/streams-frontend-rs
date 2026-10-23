@@ -125,7 +125,7 @@ pub fn App() -> impl IntoView {
                         } else if crate::services::account::is_returning() {
                             view! { <leptos_router::components::Redirect path="/browse" /> }.into_any()
                         } else {
-                            view! { <crate::pages::login::LandingPage /> }.into_any()
+                            view! { <crate::pages::landing::LandingPage /> }.into_any()
                         }
                     }
                 />
