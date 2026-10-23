@@ -358,7 +358,7 @@ pub fn InfoModal() -> impl IntoView {
                     class="absolute top-4 right-4 z-50".to_string()
                 />
 
-                <Suspense fallback=move || view! { <div class="w-full h-[50vh] bg-raised animate-pulse"></div> }>
+                <Suspense fallback=move || view! { <crate::components::skeleton::DetailsSkeleton /> }>
                     {move || details_resource.get().map(|res| match res {
                         Some(details) => {
                             let title = details.display_title().to_string();

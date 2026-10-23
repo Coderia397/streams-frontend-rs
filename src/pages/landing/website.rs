@@ -147,7 +147,7 @@ fn LandingTopTenRow(#[prop(into)] title: String) -> impl IntoView {
                 <Suspense fallback=move || view! {
                     <div class="flex gap-2 overflow-x-auto overflow-y-hidden py-4 -my-4" style="scrollbar-width:none">
                         {(0..6).map(|_| view! {
-                            <div class=format!("{} flex-none bg-line rounded-control animate-pulse", CARD_CLASS) />
+                            <div class=format!("{} skeleton flex-none rounded-control", CARD_CLASS) aria-hidden="true" />
                         }).collect::<Vec<_>>()}
                     </div>
                 }>

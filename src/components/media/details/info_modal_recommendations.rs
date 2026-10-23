@@ -125,7 +125,7 @@ pub fn RecCard(
 
                 // the title's logo, or its name
                 <div class="absolute bottom-2.5 start-3 end-3 max-w-[78%]">
-                    <Suspense fallback=move || view! { <div class="h-6 w-20 animate-pulse rounded-tick bg-ink/10" /> }>
+                    <Suspense fallback=move || view! { <crate::components::skeleton::Bone class="h-6 w-20 rounded-tick" /> }>
                         {
                             let tc = title.clone();
                             move || {
@@ -196,7 +196,7 @@ pub fn InfoModalRecommendations(
                 <h3 class="mb-4 text-[24px] font-medium leading-[1.25] text-ink">{crate::i18n::t("media-more-like-this")}</h3>
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                     {(0..6).map(|_| view! {
-                        <div class="surface-card aspect-[4/5] animate-pulse" />
+                        <div class="skeleton aspect-[4/5] rounded-card" aria-hidden="true" />
                     }).collect_view()}
                 </div>
             </div>

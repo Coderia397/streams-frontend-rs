@@ -90,21 +90,7 @@ pub fn InfoModalEpisodes(
 
             // Episode list
             <div class="space-y-1">
-                <Suspense fallback=move || view! {
-                    <div class="space-y-2">
-                        {(0..4).map(|_| view! {
-                            <div class="flex items-start p-4 rounded-control border-b border-ink/5 gap-4">
-                                <div class="w-8 h-5 bg-ink/[0.06] rounded-control animate-pulse shrink-0" />
-                                <div class="w-28 md:w-36 h-16 md:h-20 bg-ink/[0.06] rounded-control animate-pulse shrink-0" />
-                                <div class="flex-1 space-y-2 py-1">
-                                    <div class="h-3 bg-ink/[0.08] rounded-full w-2/3 animate-pulse" />
-                                    <div class="h-2.5 bg-ink/[0.05] rounded-full w-full animate-pulse" />
-                                    <div class="h-2.5 bg-ink/[0.05] rounded-full w-4/5 animate-pulse" />
-                                </div>
-                            </div>
-                        }).collect_view()}
-                    </div>
-                }>
+                <Suspense fallback=move || view! { <crate::components::skeleton::EpisodeRowsSkeleton /> }>
                     {move || season_resource.get().map(|res| match res {
                         Some(details) if !details.episodes.is_empty() => {
                             let episodes = details.episodes;

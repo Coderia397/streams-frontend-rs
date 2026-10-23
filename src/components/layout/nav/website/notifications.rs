@@ -144,11 +144,7 @@ pub fn NotificationsDropdown() -> impl IntoView {
                     </div>
                     <Show
                         when=move || !is_loading.get()
-                        fallback=move || view! {
-                            <div class="flex justify-center py-10">
-                                <div class="w-6 h-6 border-2 border-ink/20 border-t-ink rounded-full animate-spin"></div>
-                            </div>
-                        }
+                        fallback=move || view! { <crate::components::skeleton::NotificationsSkeleton /> }
                     >
                         <Show
                             when=move || !items.get().is_empty()

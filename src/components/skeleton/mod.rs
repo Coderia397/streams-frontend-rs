@@ -150,3 +150,75 @@ pub fn CardsSkeleton(#[prop(default = 2)] count: usize) -> impl IntoView {
         </div>
     }
 }
+
+/// The details window while the title loads: the trailer's area with the logo and the buttons where they stand (13 % up on computers),
+/// then the facts, the synopsis and the column of names (media/details/info_modal.rs).
+#[component]
+pub fn DetailsSkeleton() -> impl IntoView {
+    view! {
+        <div role="status" aria-busy="true">
+            <div class="relative aspect-video w-full bg-void">
+                <div class="absolute bottom-6 left-6 flex w-[340px] max-w-[70%] flex-col gap-6 md:bottom-[13%] md:left-12">
+                    <Bone class="h-16 w-3/4 rounded-card" />
+                    <div class="flex items-center gap-2">
+                        <Bone class="h-12 w-28 rounded-button" />
+                        <Bone class="h-10 w-10 rounded-full" />
+                        <Bone class="h-10 w-10 rounded-full" />
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-8 px-6 pb-8 pt-3 md:grid-cols-[2fr_1fr] md:px-12">
+                <div class="flex flex-col gap-3">
+                    <Bone class="h-4 w-1/2 rounded-control" />
+                    <Bone class="h-4 w-full rounded-control" />
+                    <Bone class="h-4 w-11/12 rounded-control" />
+                    <Bone class="h-4 w-3/4 rounded-control" />
+                </div>
+                <div class="flex flex-col gap-3">
+                    <Bone class="h-3.5 w-full rounded-control" />
+                    <Bone class="h-3.5 w-4/5 rounded-control" />
+                    <Bone class="h-3.5 w-2/3 rounded-control" />
+                </div>
+            </div>
+        </div>
+    }
+}
+
+/// Episode rows (the details window): the number, the picture and three lines, as an episode row.
+#[component]
+pub fn EpisodeRowsSkeleton(#[prop(default = 4)] rows: usize) -> impl IntoView {
+    view! {
+        <div class="space-y-2" role="status" aria-busy="true">
+            {(0..rows).map(|_| view! {
+                <div class="flex items-start gap-4 rounded-control border-b border-ink/5 p-4">
+                    <Bone class="h-5 w-8 shrink-0 rounded-control" />
+                    <Bone class="aspect-video w-28 shrink-0 rounded-control md:w-36" />
+                    <div class="flex-1 space-y-2 py-1">
+                        <Bone class="h-3 w-2/3 rounded-full" />
+                        <Bone class="h-2.5 w-full rounded-full" />
+                        <Bone class="h-2.5 w-4/5 rounded-full" />
+                    </div>
+                </div>
+            }).collect::<Vec<_>>()}
+        </div>
+    }
+}
+
+/// Notifications (the bell's panel): the picture and three lines, as a notification.
+#[component]
+pub fn NotificationsSkeleton(#[prop(default = 4)] rows: usize) -> impl IntoView {
+    view! {
+        <div class="flex flex-col" role="status" aria-busy="true">
+            {(0..rows).map(|_| view! {
+                <div class="mx-1 flex items-start gap-3 px-3 py-3">
+                    <Bone class="h-[63px] w-[112px] shrink-0 rounded-field" />
+                    <div class="flex flex-1 flex-col gap-2 pt-1">
+                        <Bone class="h-3.5 w-1/2 rounded-control" />
+                        <Bone class="h-3 w-3/4 rounded-control" />
+                        <Bone class="h-3 w-1/3 rounded-control" />
+                    </div>
+                </div>
+            }).collect::<Vec<_>>()}
+        </div>
+    }
+}

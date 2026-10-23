@@ -325,7 +325,7 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
 
             // Netflix: content 1119 px wide, 24 px from the edges of a phone
             <main class="mx-auto w-full max-w-[1167px] px-6 pb-6">
-                <Suspense fallback=|| view! { <div class=format!("{CARD} mt-8 h-40 animate-pulse md:mt-[52px]")></div> }>
+                <Suspense fallback=|| view! { <crate::components::skeleton::Bone class="mt-8 h-40 rounded-2xl md:mt-[52px]" /> }>
                     {move || details.get().map(|res| match res {
                         Some(d) => view! { <TitleBody details=d id=id is_tv=is_tv videos=videos play_video=play_video /> }.into_any(),
                         None => view! {
@@ -507,7 +507,7 @@ fn Episodes(id: u32, seasons: u32) -> impl IntoView {
                     </div>
                 })}
             </div>
-            <Suspense fallback=|| view! { <div class=format!("{CARD} h-[337px] animate-pulse md:h-[367px]")></div> }>
+            <Suspense fallback=|| view! { <crate::components::skeleton::Bone class="h-[337px] rounded-2xl md:h-[367px]" /> }>
                 {move || episodes.get().map(|list| view! {
                     <Rail>
                         {list.into_iter().map(|ep| view! {

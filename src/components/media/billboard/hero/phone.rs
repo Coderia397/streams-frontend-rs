@@ -146,7 +146,7 @@ pub fn MobileHero(
                 <div class="absolute inset-x-0 bottom-0 px-4 pb-3.5 pt-12 flex flex-col items-center text-center z-10 w-full">
                     // Logo or Title
                     <div class="relative inline-flex items-end mb-4 max-w-[71%] max-h-[108px] w-full justify-center">
-                        <Suspense fallback=move || view! { <div class="h-10 w-32 bg-ink/10 animate-pulse rounded-control" /> }>
+                        <Suspense fallback=move || view! { <crate::components::skeleton::Bone class="h-10 w-32 rounded-control" /> }>
                             {
                                 let tc = title.clone();
                                 move || {
