@@ -98,13 +98,13 @@ pub fn BillboardSkeleton() -> impl IntoView {
 pub fn PhoneHeroSkeleton() -> impl IntoView {
     view! {
         <div class="relative w-full px-5 pb-5 pt-[calc(124px+env(safe-area-inset-top))]" role="status" aria-busy="true">
-            <div class="relative mx-auto flex w-full max-w-[560px] flex-col justify-end overflow-hidden rounded-poster border border-ink/20 bg-raised p-4 aspect-[5/7]">
+            <div class="relative mx-auto flex w-full max-w-[560px] flex-col justify-end overflow-hidden rounded-poster border-[1.2px] border-ink/35 bg-raised p-4 aspect-[978/1374]">
                 <div class="flex w-full flex-col items-center gap-3">
                     <Bone class="h-10 w-1/2 rounded-field" />
                     <Bone class="h-3 w-1/3 rounded-control" />
                     <div class="mt-2 flex w-full gap-3">
-                        <Bone class="h-[50px] flex-1 rounded-button" />
-                        <Bone class="h-[50px] flex-1 rounded-button" />
+                        <Bone class="h-11 flex-1 rounded-button" />
+                        <Bone class="h-11 flex-1 rounded-button" />
                     </div>
                 </div>
             </div>

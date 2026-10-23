@@ -126,10 +126,10 @@ pub fn MobileHero(
                 style=mobile_ambient_style
             />
 
-            // Floating Centered Card
+            // Floating Centered Card: Netflix's app measures 978 x 1374 px on a Pixel 8 (381.7 x 536.2 dp) with a 1 dp edge of about 35 % white (note 116)
             <div
                 on:click=handle_card_click
-                class="w-full max-w-[560px] aspect-[5/7] relative rounded-poster overflow-hidden border border-ink/20 cursor-pointer active:scale-[0.98] transition-all duration-(--motion-base)"
+                class="w-full max-w-[560px] aspect-[978/1374] relative rounded-poster overflow-hidden border-[1.2px] border-ink/35 cursor-pointer active:scale-[0.98] transition-all duration-(--motion-base)"
             >
                 <img
                     src=poster_url
@@ -138,9 +138,9 @@ pub fn MobileHero(
                     loading="eager"
                 />
 
-                // Vignette overlays (Tuned down for backdrop vibrancy)
-                <div class="absolute inset-0 bg-gradient-to-t from-void/80 via-void/45 to-transparent pointer-events-none" />
-                <div class="absolute inset-0 bg-gradient-to-r from-void/65 via-void/20 to-transparent pointer-events-none" />
+                // Shade under the logo, tags and buttons only, as Netflix's app: the art stays as it is down to about half the card and shows
+                // through behind the buttons (note 116); no shade from the side
+                <div class="absolute inset-0 bg-linear-to-t from-void/60 from-0% via-void/25 via-30% to-transparent to-60% pointer-events-none" />
 
                 // Details Container
                 <div class="absolute inset-x-0 bottom-0 px-4 pb-3.5 pt-12 flex flex-col items-center text-center z-10 w-full">
@@ -171,10 +171,11 @@ pub fn MobileHero(
                     </div>
 
                     // Kind and tags of the title (the engine's tone words and genres), as on the app: Series · Romantic · Social Experiment · Dating
-                    <div class="flex items-center justify-center flex-wrap gap-x-2 gap-y-1 mb-3.5 text-body-sm font-medium text-ink-warm select-none">
+                    // one grey for all, the kind in bold and the tags in regular weight, dots at half white (Netflix's app, note 116)
+                    <div class="flex items-center justify-center flex-wrap gap-x-1.5 gap-y-1 mb-3.5 text-body-sm font-normal text-ink-tag select-none">
                         <span class="font-bold">{if is_tv { crate::i18n::t("media-series") } else { crate::i18n::t("media-film") }}</span>
                         {tags.iter().map(|t| view! {
-                            <span class="text-ink/30">"•"</span>
+                            <span class="text-ink/50">"•"</span>
                             <span>{t.clone()}</span>
                         }).collect::<Vec<_>>()}
                     </div>
@@ -185,7 +186,7 @@ pub fn MobileHero(
                         <button
                             type="button"
                             on:click=handle_play
-                            class="btn-ink flex-1 flex items-center justify-center h-12 text-lg gap-2 transition-all active:scale-95"
+                            class="btn-ink flex-1 flex items-center justify-center h-11 text-lg gap-2 transition-all active:scale-95"
                         >
                             <i class="ph-fill ph-play text-2xl"></i>
                             <span>{move || {
@@ -203,7 +204,7 @@ pub fn MobileHero(
                         <button
                             type="button"
                             on:click=toggle_my_list
-                            class="btn-glass flex-1 flex items-center justify-center h-12 text-lg gap-2 transition-all active:scale-95"
+                            class="btn-glass flex-1 flex items-center justify-center h-11 text-lg gap-2 transition-all active:scale-95"
                         >
                             <i class=move || if is_added.get() { "ph-bold ph-check text-2xl" } else { "ph-bold ph-plus text-2xl" }></i>
                             <span>{crate::i18n::t("my-list")}</span>

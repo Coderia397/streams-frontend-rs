@@ -165,6 +165,8 @@
   --color-ink-silver-alt: #c0c0c0;
   --color-ink-body: #b3b3b3;
   --color-ink-warm: #d4d4d1;
+  /* the phone billboard's tag line (Series · Irreverent · Sitcom), measured on Netflix's Android app (note 116) */
+  --color-ink-tag: #c8c6c6;
   --color-ink-ash: #777777;
   --color-mute: #808080;
   --color-button-secondary: #6d6d6e;
@@ -181,7 +183,8 @@
   --radius-chip-inner: 12px;
   --radius-chip: 20px;
   --radius-pill: 14px;
-  --radius-poster: 18px;
+  /* the phone billboard card: 12 dp, as Netflix's Android app (fitted on a Pixel 8 capture, note 116) */
+  --radius-poster: 12px;
   --radius-billboard: 24px;
   --radius-sheet: 1rem;
   --radius-tile: var(--tile-radius);
