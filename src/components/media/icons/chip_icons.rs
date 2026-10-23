@@ -1,3 +1,4 @@
+//! colour: art. The chips' small drawings; the Top 10 square takes --color-top10-badge.
 //! The small coloured glyphs of the New & Hot pills (Coming Soon, Everyone's Watching, Games, Top 10), drawn as SVG so they look the same on every device (an emoji font draws
 //! its own). Shapes and gradients follow the glyphs of the app: a striped popcorn bucket, a flame with an inner flame, a pink controller, a red TOP 10 label.
 use leptos::prelude::*;
@@ -61,7 +62,7 @@ pub fn Controller(#[prop(default = 24)] size: u32) -> impl IntoView {
 pub fn Top10(#[prop(default = 24)] size: u32) -> impl IntoView {
     view! {
         <svg width=size height=size viewBox="0 0 32 32" aria-hidden="true">
-            <rect x="1.5" y="1.5" width="29" height="29" rx="3.6" fill="#e50914" />
+            <rect x="1.5" y="1.5" width="29" height="29" rx="3.6" style="fill: var(--color-top10-badge)" />
             <text x="16" y="12.6" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="800" font-size="8.6" fill="#fff" letter-spacing=".3">TOP</text>
             <text x="16" y="26.4" text-anchor="middle" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="900" font-size="15.6" fill="#fff">10</text>
         </svg>

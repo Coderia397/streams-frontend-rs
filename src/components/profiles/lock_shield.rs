@@ -1,3 +1,4 @@
+//! colour: art. The lock's drawing.
 use leptos::prelude::*;
 
 #[component]

@@ -1,3 +1,4 @@
+//! colour: art. A developer page that previews badges on light and dark.
 //! Developer preview of the age badges (route /dev/badges, debug builds only): both rating systems, every label, every size, on light, dark and
 //! picture like backgrounds. Used to look at the badges, not part of the product.
 use crate::components::media::movie_card_badges::AgeBadge;

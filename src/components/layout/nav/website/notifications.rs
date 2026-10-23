@@ -165,7 +165,7 @@ pub fn NotificationsDropdown() -> impl IntoView {
                                             class="w-full flex items-start gap-3 px-3 py-3 text-left hover:bg-ink/[0.08] rounded-menu-item mx-1 transition-colors cursor-pointer group"
                                         >
                                             // Backdrop thumbnail (16:9)
-                                            <div class="w-[112px] h-[63px] rounded-field overflow-hidden bg-zinc-800 shrink-0">
+                                            <div class="w-[112px] h-[63px] rounded-field overflow-hidden bg-field shrink-0">
                                                 <img
                                                     src=n.backdrop.clone()
                                                     alt=n.body.clone()

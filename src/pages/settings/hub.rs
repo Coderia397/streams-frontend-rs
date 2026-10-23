@@ -130,7 +130,7 @@ pub fn AddProfile() -> impl IntoView {
     view! {
         <div class="px-5 pb-5 pt-2">
             <Show when=move || can_add_profile(store)>
-                <button type="button" on:click=move |_| adding.set(true) class="h-12 w-full rounded-button bg-[rgba(128,128,128,0.3)] text-title-sm font-medium hover:bg-[rgba(128,128,128,0.4)]">{t("set-add-profile-button")}</button>
+                <button type="button" on:click=move |_| adding.set(true) class="h-12 w-full rounded-button bg-glass-hover text-title-sm font-medium hover:bg-glass">{t("set-add-profile-button")}</button>
                 <p class="mt-4 text-center text-body-sm text-chrome/70">{crate::i18n::t_args("set-add-profile-limit", &[("max", (MAX_PROFILES as i64).into())])}</p>
             </Show>
             <Show when=move || adding.get()>

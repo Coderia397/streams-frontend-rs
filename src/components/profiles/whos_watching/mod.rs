@@ -126,7 +126,7 @@ pub fn WhosWatchingGate(
         // the page on Netflix: a dark red glow at the top fading to black, the logo top left, the question centred, tiles 160 px wide (picture 128 px), a pill under them
         // Netflix's Who's watching (measured 2026-10-23, note 113): black with a red glow from above the top, heading 32 px, tiles 168 px apart,
         // 32 px under the heading, names 23 px under the pictures, the button 52 px under the names
-        <div class="fixed inset-0 z-(--z-screen) flex select-none flex-col items-center justify-center text-ink" style="background: #000 radial-gradient(2170px at 50% -54dvh, rgba(111, 24, 29, 0.8) 19%, rgba(56, 12, 15, 0.4) 60%, transparent 100%);">
+        <div class="fixed inset-0 z-(--z-screen) flex select-none flex-col items-center justify-center text-ink" style="background: var(--color-void) radial-gradient(2170px at 50% -54dvh, var(--color-gate-glow) 19%, var(--color-gate-glow-far) 60%, transparent 100%);">
             // the profiles themselves, one form at a time (note 114): the website's screen or the phone's picker
             <crate::form::ByForm
                 phone=move || view! {

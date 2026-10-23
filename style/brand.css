@@ -14,6 +14,11 @@
   --color-brand-active: #2358d6;
   --color-brand-deep: #1d4bbd;
   --color-brand-glow: #7aa6ff;
+  /* lighter and brighter steps of the brand, for drawings (shelf pictures) */
+  --color-brand-soft: #6e9bff;
+  --color-brand-bright: #3f78ff;
+  /* the red square of Top 10 marks */
+  --color-top10-badge: #e50914;
   --color-accent: #ff0055;
   --color-accent-alt: #ff007f;
 
@@ -38,6 +43,56 @@
   --color-field: #262626;
   --color-panel: #2f2f2f;
   --color-menu: #2a2a2a;
+  /* Colours of particular places (scripts/check_colours.py keeps the components on tokens; 2026-10-23) */
+  /* Kids: the red of the Kids pills and buttons */
+  --color-kids-red: #e30b15;
+  /* Who's watching (Netflix's): the Add Profile tile, the phone picker's page, the glow from above the screen */
+  --color-gate-tile: #3b2527;
+  --color-gate-phone: #0b0a0b;
+  --color-gate-phone-sheet: #0f0e10;
+  --color-gate-glow: rgb(111 24 29 / 0.8);
+  --color-gate-glow-far: rgb(56 12 15 / 0.4);
+  /* the signed out title page (Netflix's #0f0f0f) and its deepest fields */
+  --color-title-page: #0f0f0f;
+  --color-field-deep: #161616;
+  /* the player: drawers and pictures, the loaded part of the timeline */
+  --color-player-panel: #1a1a1a;
+  --color-ink-mist: #b8b8b8;
+  /* warnings and links (settings) */
+  --color-warning: #da7516;
+  --color-link: #0080ff;
+  /* the landing page's reason cards (Netflix's navy to plum) and questions (Netflix's FAQ rows) */
+  --color-reason-from: rgb(25 34 71);
+  --color-reason-to: rgb(33 14 23);
+  --color-faq-item: #2d2d2d;
+  --color-faq-item-hover: #414141;
+  /* scroll bars, and the arrow pill of a row while pointed at */
+  --color-scrollbar: #4e4e4e;
+  --color-scrollbar-hover: #888888;
+  --color-edge-pill-hover: rgb(38 38 38 / 0.8);
+  /* Explore All beside a row title */
+  --color-explore: var(--color-cyan-500);
+  /* the billboard's lines: the icon's colour by kind of line */
+  --color-hook-top10: var(--color-orange-400);
+  --color-hook-credit: var(--color-pink-300);
+  --color-hook-award: var(--color-amber-300);
+  --color-hook-gem: var(--color-cyan-300);
+  --color-hook-favourite: var(--color-rose-400);
+  --color-hook-classic: var(--color-yellow-200);
+  --color-hook-feel: var(--color-amber-200);
+  --color-hook-mood: var(--color-fuchsia-300);
+  --color-hook-late: var(--color-indigo-300);
+  --color-hook-season: var(--color-orange-300);
+  --color-hook-family: var(--color-sky-300);
+  --color-hook-story: var(--color-emerald-300);
+  /* other companies' marks on the share sheet */
+  --color-whatsapp: #25d366;
+  --color-messages: #2f8ff0;
+  --color-instagram-from: #f9ce34;
+  --color-instagram-via: #ee2a7b;
+  --color-instagram-to: #6228d7;
+  --color-snapchat: #fffc00;
+
   /* Skeletons (src/components/skeleton): the surface of a place holder and the light that sweeps over it */
   --color-skeleton: rgb(255 255 255 / 0.07);
   --color-skeleton-sheen: rgb(255 255 255 / 0.07);
@@ -70,6 +125,8 @@
   --color-paper-ink: #1f1f1f;
   --color-paper-mute: #5f5f5f;
   --color-paper-card-edge: #cccccc;
+  --color-paper-danger: #c11119;
+  --color-paper-heading: #333333;
 
   /* Settings screens. Values measured on the Netflix account pages (notes/netflix-reference/09 and 08). The set-* colors follow
      --color-ink, so they flip with the light scope in components.css. chrome is for bars that stay black on a white page. */

@@ -1,3 +1,4 @@
+//! colour: art. The Kids screen's bands and lettering (the lettering in --color-kids-red).
 //! The screen shown while a Kids profile opens: four bands of colour (green, orange to red, pink, blue to lavender) behind the word "kids" in rounded red letters with a white
 //! edge. The bands are vectors in a 2000 x 1120 box that fills the page; the word is set in a real font (Fredoka Bold, see `style/input.css`), not drawn by hand.
 use leptos::prelude::*;
@@ -9,7 +10,7 @@ fn Lettering(cx: f64, base: f64, size: f64, edge: f64) -> impl IntoView {
     view! {
         // the edge first (white letters grown by a round stroke), then the red letters on top
         <text x=cx y=base text-anchor="middle" font-family=font font-weight="500" font-size=size fill="#ffffff" stroke="#ffffff" stroke-width=edge stroke-linejoin="round" stroke-linecap="round" letter-spacing=size * 0.03>"kids"</text>
-        <text x=cx y=base text-anchor="middle" font-family=font font-weight="500" font-size=size fill="#e30b15" stroke="#e30b15" stroke-width=size * 0.03 stroke-linejoin="round" letter-spacing=size * 0.03>"kids"</text>
+        <text x=cx y=base text-anchor="middle" font-family=font font-weight="500" font-size=size style="fill: var(--color-kids-red); stroke: var(--color-kids-red)" stroke-width=size * 0.03 stroke-linejoin="round" letter-spacing=size * 0.03>"kids"</text>
     }
 }
 

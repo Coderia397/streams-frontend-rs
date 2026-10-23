@@ -51,9 +51,9 @@ pub fn DeleteAccount() -> impl IntoView {
                         <input type="checkbox" prop:checked=move || agreed.get() on:change=move |ev| agreed.set(event_target_checked(&ev)) class="mt-0 h-6 w-6 shrink-0 cursor-pointer appearance-none rounded-hairline border border-ink/60 bg-page checked:border-ink checked:bg-ink" />
                         <span>{crate::i18n::t_args("set-del-check", &[("brand", brand.into())])}</span>
                     </label>
-                    <button type="button" disabled=move || !agreed.get() on:click=move |_| delete.run(()) class="mb-[10px] mt-4 h-10 w-full rounded-button border border-ink/30 bg-page px-4 text-body-md font-medium text-[#c11119] disabled:cursor-not-allowed">{t("set-del-button")}</button>
+                    <button type="button" disabled=move || !agreed.get() on:click=move |_| delete.run(()) class="mb-[10px] mt-4 h-10 w-full rounded-button border border-ink/30 bg-page px-4 text-body-md font-medium text-danger disabled:cursor-not-allowed">{t("set-del-button")}</button>
                 </CollapsibleCard>
-                <p class="mt-9 text-label text-ink/70">{t("set-del-questions")}" "<a href=routes::HELP class="text-[#0080ff]">{t("set-del-help")}</a>"."</p>
+                <p class="mt-9 text-label text-ink/70">{t("set-del-questions")}" "<a href=routes::HELP class="text-link">{t("set-del-help")}</a>"."</p>
             </div>
         </div>
     }

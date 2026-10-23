@@ -153,7 +153,7 @@ pub fn Gate(account: bool, children: ChildrenFn) -> impl IntoView {
                             <DigitBoxes label=t("set-code-label") value=code length=CODE_LENGTH one_time_code=true plain=true />
                             <div class="flex flex-col gap-2">
                                 <button type="submit" disabled=move || busy.get() || code.with(|c| c.chars().count() != CODE_LENGTH) class="h-10 w-full rounded-button bg-ink px-4 text-body-md font-medium text-void disabled:opacity-50">{t("set-code-submit")}</button>
-                                <button type="button" on:click=move |_| send_code.run(()) disabled=move || busy.get() class="h-10 w-full rounded-button bg-[rgba(128,128,128,0.3)] px-4 text-body-md font-medium text-ink disabled:opacity-50">{t("set-code-resend")}</button>
+                                <button type="button" on:click=move |_| send_code.run(()) disabled=move || busy.get() class="h-10 w-full rounded-button bg-glass-hover px-4 text-body-md font-medium text-ink disabled:opacity-50">{t("set-code-resend")}</button>
                                 <button type="button" on:click=move |_| { note.set(None); step.set(Step::Choose) } class="h-10 w-full rounded-button px-4 text-body-md font-medium text-ink">{t("set-try-another-way")}</button>
                             </div>
                         </form>

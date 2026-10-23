@@ -123,13 +123,13 @@ pub fn CollectionRow(row: FeedRow) -> impl IntoView {
                         view! { <CollectionLogo text=heading hue=h design=design size=46.0 /> }.into_any()
                     }}
                     {if is_kids {
-                        view! { <p class="mt-3 rounded-full bg-white px-4 py-1 text-caption md:text-xs font-bold uppercase tracking-[0.2em] text-[#e30b15] shadow-md">{eyebrow_text}</p> }.into_any()
+                        view! { <p class="mt-3 rounded-full bg-ink px-4 py-1 text-caption md:text-xs font-bold uppercase tracking-[0.2em] text-kids-red shadow-md">{eyebrow_text}</p> }.into_any()
                     } else {
                         view! { <div class="mt-5 w-[min(260px,70%)] border-y border-ink/40 py-1.5"><p class="text-caption md:text-xs font-semibold uppercase tracking-[0.3em] text-ink/85">{eyebrow_text}</p></div> }.into_any()
                     }}
                     {(!description.is_empty()).then(|| view! { <p class="mt-5 text-body md:text-title-sm leading-snug text-ink max-w-[30ch]" style=if is_kids { "font-family: 'Logo Kids','Fredoka',ui-rounded,sans-serif; font-weight: 500;" } else { "" }>{description}</p> })}
                     {link.map(|href| view! {
-                        <a href=href class=if is_kids { "mt-5 inline-flex h-11 items-center rounded-button bg-white px-7 text-body-md font-bold text-[#e30b15] shadow-lg hover:scale-105 transition-transform" } else { "mt-5 inline-flex h-11 items-center rounded-button bg-chrome-ink px-6 text-body-md font-semibold text-chrome hover:bg-chrome-ink/85 transition-colors" }>
+                        <a href=href class=if is_kids { "mt-5 inline-flex h-11 items-center rounded-button bg-ink px-7 text-body-md font-bold text-kids-red shadow-lg hover:scale-105 transition-transform" } else { "mt-5 inline-flex h-11 items-center rounded-button bg-chrome-ink px-6 text-body-md font-semibold text-chrome hover:bg-chrome-ink/85 transition-colors" }>
                             {crate::i18n::t("collection-explore-all")}
                         </a>
                     })}
@@ -181,7 +181,7 @@ pub fn CollectionHero(collection: crate::services::ai_engine::Collection) -> imp
             >{is_kids.then(|| view! { <KidsBackdrop seed=h images=frames.clone() /> })}</div>
             <div class="absolute inset-x-0 bottom-24 md:bottom-32 px-[var(--app-x,56px)] max-w-[820px]">
                 {if is_kids {
-                    view! { <div class="inline-block w-[min(460px,90%)]"><KidsCollectionLogo text=logo_text hue=h /></div><p class="mt-4 inline-block rounded-full bg-white px-4 py-1 text-caption md:text-xs font-bold uppercase tracking-[0.2em] text-[#e30b15] shadow-md">{eyebrow_text}</p> }.into_any()
+                    view! { <div class="inline-block w-[min(460px,90%)]"><KidsCollectionLogo text=logo_text hue=h /></div><p class="mt-4 inline-block rounded-full bg-ink px-4 py-1 text-caption md:text-xs font-bold uppercase tracking-[0.2em] text-kids-red shadow-md">{eyebrow_text}</p> }.into_any()
                 } else {
                     view! { <div class="inline-block"><CollectionLogo text=heading hue=h design=design size=62.0 /></div><p class="mt-5 text-caption md:text-xs font-semibold uppercase tracking-[0.3em] text-ink/85">{eyebrow_text}</p> }.into_any()
                 }}

@@ -123,6 +123,7 @@ pub fn NotFoundPage() -> impl IntoView {
             <Navbar />
 
             // CRT scanlines overlay
+            // colour: the error page's scan lines (decoration in red, green and blue)
             <div class="fixed inset-0 pointer-events-none z-(--z-grain) opacity-[0.25] mix-blend-overlay bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.3)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[size:100%_4px,6px_100%]" />
 
             // SubNav Header: "Alternate Dimensions" + "Glitch Zones ▾"
@@ -260,7 +261,7 @@ pub fn NotFoundPage() -> impl IntoView {
                                 }
                                 class=move || {
                                     format!(
-                                        "relative flex-none w-[200px] sm:w-[240px] md:w-[280px] aspect-video rounded-field overflow-hidden cursor-pointer transition-all duration-(--motion-slow) transform hover:scale-105 border-2 bg-zinc-900 {}",
+                                        "relative flex-none w-[200px] sm:w-[240px] md:w-[280px] aspect-video rounded-field overflow-hidden cursor-pointer transition-all duration-(--motion-slow) transform hover:scale-105 border-2 bg-raised {}",
                                         if is_sel() { "border-brand shadow-brand-glow" } else { "border-transparent hover:border-ink/30" }
                                     )
                                 }

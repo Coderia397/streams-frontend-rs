@@ -142,7 +142,7 @@ pub fn SearchBar(
                 >
                     <i class="ph ph-magnifying-glass text-heading cursor-pointer select-none transition-colors duration-(--motion-slow)"
                        class=("text-ink", effective_active)
-                       class=("hover:text-gray-300", move || !effective_active())>
+                       class=("hover:text-ink-light", move || !effective_active())>
                     </i>
                 </button>
 

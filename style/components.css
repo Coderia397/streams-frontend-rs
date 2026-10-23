@@ -126,7 +126,7 @@
     --color-ink: var(--color-paper-ink);
     --color-void: var(--color-paper-wash);
     --color-page: var(--color-paper-wash);
-    --color-danger: #c11119;
+    --color-danger: var(--color-paper-danger);
     --color-set-card: var(--color-paper);
     --color-set-edge: var(--color-paper-card-edge);
     --color-set-line: var(--color-paper-line);
@@ -136,10 +136,10 @@
       --color-ink: #000000;
       --color-void: var(--color-paper);
       --color-page: var(--color-paper);
-      --color-danger: #c11119;
+      --color-danger: var(--color-paper-danger);
       --color-set-card: var(--color-paper);
-      --color-set-edge: rgba(128, 128, 128, 0.4);
-      --color-set-line: rgba(128, 128, 128, 0.4);
+      --color-set-edge: var(--color-glass);
+      --color-set-line: var(--color-glass);
     }
   }
 }
@@ -240,7 +240,7 @@
 
 /* Section titles of the website's account pages are regular weight 18 px grey, not bold. */
 @media (min-width: 1024px) {
-  .theme-paper-wide .set-section-title { font-weight: 400; color: #333333; }
+  .theme-paper-wide .set-section-title { font-weight: 400; color: var(--color-paper-heading); }
 }
 
 /* The title page's hero, copied layer by layer from Netflix's signed out title page (note 111): the trailer's colours spill round the panel

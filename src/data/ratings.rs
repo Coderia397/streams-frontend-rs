@@ -101,14 +101,14 @@ pub fn limit_label(system: RatingSystem, key: &str) -> String {
 // Colours. The British ratings use the colours the classification is known by (green U, yellow PG, orange 12, pink 15, red 18, blue R18).
 // The American ratings have no official colours, so they use the same logical scale: green for all ages, yellow, orange, red, and a dark red
 // for NC-17. Where white text on the official colour is too faint to read, the text is near black instead (each pair is tested).
-const GREEN: (&str, &str) = ("#00a826", "#0b0b0c");
-const YELLOW: (&str, &str) = ("#f5a800", "#0b0b0c");
-const ORANGE: (&str, &str) = ("#f05a1a", "#0b0b0c");
-const PINK: (&str, &str) = ("#eb287f", "#0b0b0c");
-const RED: (&str, &str) = ("#dc1420", "#ffffff");
-const DARK_RED: (&str, &str) = ("#7f1d1d", "#ffffff");
-const BLUE: (&str, &str) = ("#0060cf", "#ffffff");
-const GREY: (&str, &str) = ("#6b6b72", "#ffffff");
+const GREEN: (&str, &str) = ("#00a826", "#0b0b0c"); // colour: the classification board\'s own colour (a value, for the contrast test)
+const YELLOW: (&str, &str) = ("#f5a800", "#0b0b0c"); // colour: the classification board\'s own colour (a value, for the contrast test)
+const ORANGE: (&str, &str) = ("#f05a1a", "#0b0b0c"); // colour: the classification board\'s own colour (a value, for the contrast test)
+const PINK: (&str, &str) = ("#eb287f", "#0b0b0c"); // colour: the classification board\'s own colour (a value, for the contrast test)
+const RED: (&str, &str) = ("#dc1420", "#ffffff"); // colour: the classification board\'s own colour (a value, for the contrast test)
+const DARK_RED: (&str, &str) = ("#7f1d1d", "#ffffff"); // colour: the classification board\'s own colour (a value, for the contrast test)
+const BLUE: (&str, &str) = ("#0060cf", "#ffffff"); // colour: the classification board\'s own colour (a value, for the contrast test)
+const GREY: (&str, &str) = ("#6b6b72", "#ffffff"); // colour: the classification board\'s own colour (a value, for the contrast test)
 /// Every colour pair in use, for the contrast test.
 pub const PALETTE: [(&str, &str); 8] = [GREEN, YELLOW, ORANGE, PINK, RED, DARK_RED, BLUE, GREY];
 

@@ -51,7 +51,7 @@ pub fn EpisodeDrawer(
                         {move || (1..=seasons_resource.get().flatten().unwrap_or(1)).map(|n| view! {
                             <button
                                 on:click=move |_| { set_selected_season.set(n); set_show_seasons.set(false); }
-                                class=format!("{row_base} h-[85px] justify-center text-row font-medium hover:bg-[#404040] {}", if n == current_season { "text-ink" } else { "text-[#d2d2d2]" })
+                                class=format!("{row_base} h-[85px] justify-center text-row font-medium hover:bg-lift-strong {}", if n == current_season { "text-ink" } else { "text-ink-light" })
                             >
                                 {crate::i18n::t_args("media-season-n", &[("n", fluent_bundle::FluentValue::from(n as i64))])}
                             </button>
@@ -72,7 +72,7 @@ pub fn EpisodeDrawer(
                                     let name = ep.name.clone();
                                     let overview = ep.overview.clone();
                                     let percent = watch_store.episode_percent(series_id, s_num, ep_num).clamp(0.0, 100.0);
-                                    let open_class = if is_current { "bg-raised" } else { "hover:bg-[#404040] focus-visible:bg-raised focus-visible:outline-2 focus-visible:outline-ink" };
+                                    let open_class = if is_current { "bg-raised" } else { "hover:bg-lift-strong focus-visible:bg-raised focus-visible:outline-2 focus-visible:outline-ink" };
                                     view! {
                                         <button
                                             on:click=move |_| { on_select_episode.run((s_num, ep_num)); on_close.run(()); }
@@ -86,7 +86,7 @@ pub fn EpisodeDrawer(
                                             </span>
                                             // the open part: thumbnail and four lines of the summary
                                             <span class=format!("w-full gap-[26px] pb-[22px] pt-[12px] {}", if is_current { "flex" } else { "hidden group-focus-visible:flex" })>
-                                                <span class="relative h-[140px] w-[248px] shrink-0 overflow-hidden bg-[#1a1a1a]">
+                                                <span class="relative h-[140px] w-[248px] shrink-0 overflow-hidden bg-player-panel">
                                                     {still_url.map(|u| view! { <img src=u alt=name.clone() class="h-full w-full object-cover" loading="lazy" /> })}
                                                     <span class="absolute inset-0 flex items-center justify-center bg-void/30 text-ink">
                                                         {if is_current {
@@ -101,7 +101,7 @@ pub fn EpisodeDrawer(
                                         </button>
                                     }
                                 }).collect::<Vec<_>>().into_any(),
-                                _ => view! { <div class="py-16 text-center text-title-sm text-[#b3b3b3]">{crate::i18n::t("episode-drawer-no-episodes-available-for-this")}</div> }.into_any(),
+                                _ => view! { <div class="py-16 text-center text-title-sm text-ink-body">{crate::i18n::t("episode-drawer-no-episodes-available-for-this")}</div> }.into_any(),
                             })}
                         </Suspense>
                     </Show>

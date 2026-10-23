@@ -80,7 +80,7 @@ pub fn run_compact_switch(profile: &Profile, on_activate: impl Fn() + 'static) {
     put(&root, "position:fixed;inset:0;z-index:10100;");
     put(&veil, "position:absolute;inset:0;background:#000;opacity:0;transition:opacity .15s ease-out;");
     put(&arc, "position:absolute;left:50%;top:50%;width:min(46vw,280px);height:min(46vw,280px);transform:translate(-50%,calc(-50% + min(50vw,300px)));opacity:0;transition:opacity .2s;");
-    arc.set_inner_html(r##"<svg class="sw-phone-arc" style="width:100%;height:100%" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="sw-phone-g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e50914" stop-opacity="0"/><stop offset="1" stop-color="#e50914"/></linearGradient></defs><circle cx="50" cy="50" r="44" fill="none" stroke="url(#sw-phone-g)" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="190 276"/></svg>"##);
+    arc.set_inner_html(r##"<svg class="sw-phone-arc" style="width:100%;height:100%" viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="sw-phone-g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--color-brand)" stop-opacity="0"/><stop offset="1" style="stop-color:var(--color-brand)"/></linearGradient></defs><circle cx="50" cy="50" r="44" fill="none" stroke="url(#sw-phone-g)" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="190 276"/></svg>"##);
     put(&tile, "position:absolute;left:50%;top:44%;width:min(42vw,260px);height:min(42vw,260px);overflow:hidden;border-radius:10%;opacity:0;transform:translate(-50%,-50%);transition:opacity .12s ease-out;will-change:transform;");
     let _ = img.set_attribute("src", &avatar);
     let _ = img.set_attribute("alt", "");

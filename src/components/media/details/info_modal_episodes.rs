@@ -56,7 +56,7 @@ pub fn InfoModalEpisodes(
 
                             {move || if dropdown_open.get() {
                                 view! {
-                                    <div class="absolute right-0 top-full mt-1 w-32 bg-field border border-gray-700 rounded-menu shadow-xl z-50 max-h-60 overflow-y-auto scrollbar-hide">
+                                    <div class="absolute right-0 top-full mt-1 w-32 bg-field border border-line-strong rounded-menu shadow-xl z-50 max-h-60 overflow-y-auto scrollbar-hide">
                                         {(1..=total_seasons).map(|s| {
                                             let is_selected = move || selected_season.get() == s;
                                             view! {
@@ -70,7 +70,7 @@ pub fn InfoModalEpisodes(
                                                     class=("bg-line", is_selected)
                                                     class=("font-bold", is_selected)
                                                     class=("text-ink", is_selected)
-                                                    class=("text-gray-300", move || !is_selected())
+                                                    class=("text-ink-light", move || !is_selected())
                                                 >
                                                     {crate::i18n::t_args("media-season-n", &[("n", fluent_bundle::FluentValue::from(s as i64))])}
                                                 </div>
@@ -136,7 +136,7 @@ pub fn InfoModalEpisodes(
                                                 </div>
 
                                                 // Thumbnail + play icon overlay
-                                                <div class="relative w-[130px] h-[73px] bg-gray-800 shrink-0 rounded-control overflow-hidden mr-4">
+                                                <div class="relative w-[130px] h-[73px] bg-field shrink-0 rounded-control overflow-hidden mr-4">
                                                     {if let Some(url) = still_url {
                                                         view! {
                                                             <img
@@ -148,7 +148,7 @@ pub fn InfoModalEpisodes(
                                                         }.into_any()
                                                     } else {
                                                         view! {
-                                                            <div class="w-full h-full flex items-center justify-center text-gray-600 text-xs">
+                                                            <div class="w-full h-full flex items-center justify-center text-ink-ash text-xs">
                                                                 {crate::i18n::t("info-modal-episodes-no-image")}
                                                             </div>
                                                         }.into_any()
@@ -208,7 +208,7 @@ pub fn InfoModalEpisodes(
                             }.into_any()
                         },
                         _ => view! {
-                            <div class="text-gray-500 text-center py-6">{crate::i18n::t("media-no-episodes")}</div>
+                            <div class="text-mute text-center py-6">{crate::i18n::t("media-no-episodes")}</div>
                         }.into_any()
                     })}
                 </Suspense>

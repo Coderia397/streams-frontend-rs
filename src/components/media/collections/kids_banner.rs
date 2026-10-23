@@ -1,3 +1,4 @@
+//! colour: art. The Kids banner's drawings and the logo's hue based colours.
 //! The parts of a Kids collection banner that give it its own look: the name set in the Kids lettering (round letters in bright colours with a white edge, each line tilted a little, a few
 //! stars) and a scatter of confetti behind the panel. Everything is drawn from the collection's name and colour, so each banner differs and the same banner is the same every visit.
 use leptos::prelude::*;

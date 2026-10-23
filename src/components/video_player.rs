@@ -176,7 +176,7 @@ pub fn VideoPlayer(
                 <div class="flex flex-col gap-6 pointer-events-auto pb-4 px-4">
                     <div
                         node_ref=progress_bar_ref
-                        class="w-full h-1.5 bg-gray-600 rounded-full cursor-pointer relative group/progress"
+                        class="w-full h-1.5 bg-line-strong rounded-full cursor-pointer relative group/progress"
                         on:click=seek
                     >
                         <div 

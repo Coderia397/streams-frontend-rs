@@ -160,7 +160,7 @@ pub fn Row(
             <div class="flex items-center justify-between px-[var(--app-x,56px)]">
                 <h2 class="row-title cursor-pointer flex items-center group/title w-fit">
                     {title}
-                    <span class="text-xs text-cyan-500 ml-2 opacity-0 group-hover/title:opacity-100 transition-opacity duration-(--motion-slow) flex items-center font-semibold">
+                    <span class="text-xs text-explore ml-2 opacity-0 group-hover/title:opacity-100 transition-opacity duration-(--motion-slow) flex items-center font-semibold">
                         {crate::i18n::t("row-explore-all")}
                     </span>
                 </h2>

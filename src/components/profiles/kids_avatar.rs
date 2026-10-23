@@ -1,3 +1,4 @@
+//! colour: art. The Kids profile's face.
 use leptos::prelude::*;
 
 #[component]

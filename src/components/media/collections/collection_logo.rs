@@ -1,3 +1,4 @@
+//! colour: art. Collection logos are drawn from each collection's hue.
 //! The logo of a collection, made to look hand made: lettering on a sticker or a paper cut out, as the logos of the app's collections are. The title is set in a hand lettered face
 //! and given a finish (a die cut sticker border, a paper cut out, marker on a highlighter swipe, a rough ink stamp, a double outline), a little tilt, and a second colour for the last word.
 //! Ten lettering treatments x five finishes make 50 designs; a collection always has the same one (it follows its id) and its colours come from its hue. The gallery of all 50 is at `/dev/logos`.
@@ -247,12 +248,12 @@ pub fn LogoGalleryPage() -> impl IntoView {
                         <crate::components::media::kids_banner::KidsBackdrop seed=hue />
                         <div class="relative flex w-[40%] flex-none flex-col items-center px-5 text-center">
                             <crate::components::media::kids_banner::KidsCollectionLogo text=name hue=hue />
-                            <p class="mt-3 rounded-full bg-white px-4 py-1 text-caption font-bold uppercase tracking-[0.2em] text-[#e30b15] shadow-md">{DEV_KIDS_BADGE}</p>
+                            <p class="mt-3 rounded-full bg-ink px-4 py-1 text-caption font-bold uppercase tracking-[0.2em] text-kids-red shadow-md">{DEV_KIDS_BADGE}</p>
                             <p class="mt-4 max-w-[26ch] text-body leading-snug text-ink" style="font-family: 'Logo Kids','Fredoka',ui-rounded,sans-serif; font-weight: 500;">{sentence}</p>
-                            <span class="mt-4 inline-flex h-10 items-center rounded-full bg-white px-6 text-body-md font-bold text-[#e30b15] shadow-lg">{DEV_EXPLORE_ALL}</span>
+                            <span class="mt-4 inline-flex h-10 items-center rounded-full bg-ink px-6 text-body-md font-bold text-kids-red shadow-lg">{DEV_EXPLORE_ALL}</span>
                         </div>
                         <div class="relative flex flex-1 gap-3 overflow-hidden pe-3">
-                            {(0..4).map(|i| view! { <div class="aspect-video w-[30%] flex-none rounded-tile bg-black/35" style=format!("opacity: {}", 1.0 - i as f32 * 0.12)></div> }).collect::<Vec<_>>()}
+                            {(0..4).map(|i| view! { <div class="aspect-video w-[30%] flex-none rounded-tile bg-void/35" style=format!("opacity: {}", 1.0 - i as f32 * 0.12)></div> }).collect::<Vec<_>>()}
                         </div>
                     </div>
                 }).collect::<Vec<_>>()}

@@ -67,6 +67,7 @@ pub fn rating_allows(max: &str, gb: Option<&str>, us: Option<&str>) -> bool {
 }
 
 /// Subtitle colours: id (also the end of the translation key set-color-<id>) and the colour shown.
+// colour: the colours a viewer may pick for subtitles (values the player applies), not the site's
 pub const SUBTITLE_COLORS: &[(&str, &str)] = &[("white", "#ffffff"), ("yellow", "#ffe600"), ("green", "#2fd45a"), ("cyan", "#22d3ee"), ("blue", "#3b82f6"), ("magenta", "#e879f9"), ("red", "#ef4444"), ("black", "#000000")];
 /// Text edge styles; the key is set-edge-<id>.
 pub const SUBTITLE_EDGES: &[&str] = &["none", "raised", "depressed", "uniform", "shadow"];

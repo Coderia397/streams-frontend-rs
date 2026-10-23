@@ -1,5 +1,6 @@
 //! The landing page (signed out, `/`), one form at a time (note 114): `phone` (the app's first screens, slides swiped through) or
 //! `website` (the long page).
+pub mod art;
 pub mod phone;
 pub mod website;
 

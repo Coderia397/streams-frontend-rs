@@ -133,7 +133,7 @@ pub fn ControlsOverlay(
                                     <div class="pointer-events-none fixed bottom-[94px] right-0 z-30 hidden w-[min(700px,100vw)] flex-col bg-field shadow-2xl group-hover/next:flex">
                                         <span class="flex h-[73px] items-center px-[24px] text-heading-2xl font-medium text-ink bg-line">{crate::i18n::t("controls-overlay-next-episode")}</span>
                                         <span class="flex gap-[26px] px-[35px] py-[24px]">
-                                            <span class="relative h-[140px] w-[248px] shrink-0 overflow-hidden bg-[#1a1a1a]">
+                                            <span class="relative h-[140px] w-[248px] shrink-0 overflow-hidden bg-player-panel">
                                                 {still.map(|u| view! { <img src=u alt="" class="h-full w-full object-cover" /> })}
                                                 <span class="absolute inset-0 flex items-center justify-center"><i class="ph-fill ph-play text-display text-ink"></i></span>
                                             </span>

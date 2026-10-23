@@ -104,7 +104,7 @@ pub fn TimelineScrubber(
             // Track
             <div class="relative w-full h-[4px] bg-mute pointer-events-none">
                 // Buffered range
-                <div class="absolute top-0 bottom-0 left-0 bg-[#b8b8b8]" style=move || format!("width: {}%;", buffer_pct()) />
+                <div class="absolute top-0 bottom-0 left-0 bg-ink-mist" style=move || format!("width: {}%;", buffer_pct()) />
                 // Played part
                 <div class="absolute top-0 bottom-0 left-0 bg-brand" style=move || format!("width: {}%;", progress_pct()) />
             </div>

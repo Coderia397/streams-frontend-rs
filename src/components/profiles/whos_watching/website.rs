@@ -53,7 +53,7 @@ pub fn WebsiteGate(
                 // Add Profile tile
                 {move || (profiles.get().len() < 5).then(|| view! {
                     <button type="button" on:click=move |_| on_add.run(()) class="group flex w-[160px] cursor-pointer flex-col items-center gap-[23px] p-[16px] focus:outline-none">
-                        <div class="flex h-[128px] w-[128px] items-center justify-center rounded-modal bg-[#3b2527] outline outline-[3px] outline-transparent transition-[outline-color] group-hover:outline-ink/70">
+                        <div class="flex h-[128px] w-[128px] items-center justify-center rounded-modal bg-gate-tile outline outline-[3px] outline-transparent transition-[outline-color] group-hover:outline-ink/70">
                             <i class="ph ph-plus text-icon-lg text-ink"></i>
                         </div>
                         <span class="text-title-sm font-medium leading-[23px] text-ink/70 transition-colors group-hover:text-ink">{crate::i18n::t("whos-watching-add-profile")}</span>

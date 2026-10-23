@@ -1,3 +1,4 @@
+//! colour: art. The shelf pictures are drawn in the brand's blues (tokens) and white.
 //! The four pictures of the My page, drawn as vectors in the brand colour (blue): a clock, a treasure chest, a clapperboard and a thumbs up.
 //! Each is 80 px and has a soft gradient and a light edge so it reads as a small solid object.
 use leptos::prelude::*;
@@ -27,14 +28,14 @@ pub fn ShelfPicture(icon: ShelfIcon) -> impl IntoView {
             <rect x="12" y="38" width="56" height="30" rx="5" fill="url(#shelf-chest-dark)" />
             <rect x="12" y="34" width="56" height="8" fill="#ffffff" fill-opacity="0.35" />
             <rect x="33" y="40" width="14" height="16" rx="3" fill="#ffffff" fill-opacity="0.9" />
-            <circle cx="40" cy="47" r="2.4" fill="#2358d6" />
+            <circle cx="40" cy="47" r="2.4" style="fill: var(--color-brand-active)" />
             <g fill="#ffffff"><path d="M60 10 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2z" /><path d="M20 26 l1.5 3.5 3.5 1.5 -3.5 1.5 -1.5 3.5 -1.5 -3.5 -3.5 -1.5 3.5 -1.5z" /></g>
         }.into_any()),
         ShelfIcon::Clapper => ("clapper", view! {
             <g transform="rotate(-12 40 40)">
                 <rect x="12" y="32" width="56" height="34" rx="4" fill="url(#shelf-clap)" />
                 <rect x="12" y="20" width="56" height="12" rx="3" fill="#ffffff" fill-opacity="0.92" />
-                <path d="M20 20 l8 12 M34 20 l8 12 M48 20 l8 12 M62 20 l6 9" stroke="#2f6bff" stroke-width="6" />
+                <path d="M20 20 l8 12 M34 20 l8 12 M48 20 l8 12 M62 20 l6 9" style="stroke: var(--color-brand)" stroke-width="6" />
             </g>
         }.into_any()),
         ShelfIcon::ThumbsUp => ("thumb", view! {
@@ -47,11 +48,11 @@ pub fn ShelfPicture(icon: ShelfIcon) -> impl IntoView {
     view! {
         <svg width="80" height="80" viewBox="0 0 80 80" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <radialGradient id="shelf-clock" cx="35%" cy="30%" r="80%"><stop offset="0" stop-color="#7fa6ff" /><stop offset="1" stop-color="#1d4bbd" /></radialGradient>
-                <linearGradient id="shelf-chest" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6e9bff" /><stop offset="1" stop-color="#2f6bff" /></linearGradient>
-                <linearGradient id="shelf-chest-dark" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f78ff" /><stop offset="1" stop-color="#1d4bbd" /></linearGradient>
-                <linearGradient id="shelf-clap" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6e9bff" /><stop offset="1" stop-color="#1d4bbd" /></linearGradient>
-                <linearGradient id="shelf-thumb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fa6ff" /><stop offset="1" stop-color="#2358d6" /></linearGradient>
+                <radialGradient id="shelf-clock" cx="35%" cy="30%" r="80%"><stop offset="0" style="stop-color: var(--color-brand-glow)" /><stop offset="1" style="stop-color: var(--color-brand-deep)" /></radialGradient>
+                <linearGradient id="shelf-chest" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color: var(--color-brand-soft)" /><stop offset="1" style="stop-color: var(--color-brand)" /></linearGradient>
+                <linearGradient id="shelf-chest-dark" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color: var(--color-brand-bright)" /><stop offset="1" style="stop-color: var(--color-brand-deep)" /></linearGradient>
+                <linearGradient id="shelf-clap" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color: var(--color-brand-soft)" /><stop offset="1" style="stop-color: var(--color-brand-deep)" /></linearGradient>
+                <linearGradient id="shelf-thumb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color: var(--color-brand-glow)" /><stop offset="1" style="stop-color: var(--color-brand-active)" /></linearGradient>
             </defs>
             {body}
         </svg>

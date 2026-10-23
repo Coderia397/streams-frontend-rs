@@ -54,7 +54,7 @@ pub fn CategorySubNavDesktop(
         } else {
             (0.5 + (y - 40.0) / 160.0).min(1.0)
         };
-        format!("background-color: rgba(20, 20, 20, {:.3});", op)
+        format!("background-color: color-mix(in srgb, var(--color-page) {:.1}%, transparent);", op * 100.0)
     };
 
     let toggle_menu = move |e: leptos::ev::MouseEvent| {

@@ -46,7 +46,7 @@ pub fn PhoneProfilePicker(
     let count = move || heroes.get().map(|h| h.len()).unwrap_or(0);
 
     view! {
-        <div class="absolute inset-0 flex flex-col overflow-hidden bg-[#0b0a0b]">
+        <div class="absolute inset-0 flex flex-col overflow-hidden bg-gate-phone">
             // the picture
             <div class="relative min-h-0 flex-1 overflow-hidden">
                 {move || (0..count()).map(|i| view! {
@@ -65,12 +65,12 @@ pub fn PhoneProfilePicker(
                 </div>
             </div>
             // the panel: a curved top, the colour of the picture
-            <div class="relative z-10 -mt-[30px] overflow-hidden pb-[max(20px,env(safe-area-inset-bottom))] pt-[34px]" style="margin-inline: -12%; padding-inline: 12%; border-radius: 50% 50% 0 0 / 56px 56px 0 0; background: #0f0e10;">
+            <div class="relative z-10 -mt-[30px] overflow-hidden pb-[max(20px,env(safe-area-inset-bottom))] pt-[34px]" style="margin-inline: -12%; padding-inline: 12%; border-radius: 50% 50% 0 0 / 56px 56px 0 0; background: var(--color-gate-phone-sheet);">
                 <div class="absolute inset-0 -z-10" aria-hidden="true">
                     {move || (0..count()).map(|i| view! {
                         <img src=picture(i) alt="" class="absolute inset-0 h-full w-full scale-150 object-cover object-bottom blur-[38px] transition-opacity duration-[900ms]" style=move || format!("opacity: {};", if idx.get() == i { 0.55 } else { 0.0 }) />
                     }).collect::<Vec<_>>()}
-                    <div class="absolute inset-0 bg-black/45"></div>
+                    <div class="absolute inset-0 bg-void/45"></div>
                 </div>
                 <p class="mb-5 text-center text-body-lg text-ink/70">
                     {move || if editing.get() { crate::i18n::t("profile-manage-title") } else { crate::i18n::t("whos-watching-choose") }}
@@ -101,7 +101,7 @@ pub fn PhoneProfilePicker(
                     }).collect::<Vec<_>>()}
                     {move || (profiles.get().len() < 5).then(|| view! {
                         <button type="button" on:click=move |_| on_add.run(()) class="flex w-[28%] max-w-[150px] cursor-pointer flex-col items-center gap-2 focus:outline-none active:scale-95 transition-transform">
-                            <span class="flex aspect-square w-full items-center justify-center rounded-[14%] bg-[#3b2527] shadow-[0_6px_14px_rgba(0,0,0,0.45)]"><i class="ph ph-plus text-icon-lg text-ink"></i></span>
+                            <span class="flex aspect-square w-full items-center justify-center rounded-[14%] bg-gate-tile shadow-[0_6px_14px_rgba(0,0,0,0.45)]"><i class="ph ph-plus text-icon-lg text-ink"></i></span>
                             <span class="text-body-md font-semibold text-ink">{crate::i18n::t("whos-watching-add-profile")}</span>
                         </button>
                     })}

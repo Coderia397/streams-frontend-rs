@@ -168,7 +168,7 @@ pub fn ShareSheet(
                                     on:click=handle_whatsapp
                                     class="flex flex-col items-center gap-2 active:scale-95 transition-transform cursor-pointer"
                                 >
-                                    <div class="w-14 h-14 rounded-full flex items-center justify-center shadow-md bg-[#25D366]">
+                                    <div class="w-14 h-14 rounded-full flex items-center justify-center shadow-md bg-whatsapp">
                                         <i class="ph-fill ph-whatsapp-logo text-ink text-2xl"></i>
                                     </div>
                                     <span class="text-ink/85 text-caption text-center leading-tight">"WhatsApp"</span>
@@ -180,7 +180,7 @@ pub fn ShareSheet(
                                     on:click=handle_messages
                                     class="flex flex-col items-center gap-2 active:scale-95 transition-transform cursor-pointer"
                                 >
-                                    <div class="w-14 h-14 rounded-full flex items-center justify-center shadow-md bg-[#2f8ff0]">
+                                    <div class="w-14 h-14 rounded-full flex items-center justify-center shadow-md bg-messages">
                                         <i class="ph-fill ph-chat-teardrop-dots text-ink text-2xl"></i>
                                     </div>
                                     <span class="text-ink/85 text-caption text-center leading-tight">{crate::i18n::t("share-messages")}</span>
@@ -192,7 +192,7 @@ pub fn ShareSheet(
                                     on:click=handle_instagram
                                     class="flex flex-col items-center gap-2 active:scale-95 transition-transform cursor-pointer"
                                 >
-                                    <div class="w-14 h-14 rounded-full flex items-center justify-center shadow-md bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7]">
+                                    <div class="w-14 h-14 rounded-full flex items-center justify-center shadow-md bg-gradient-to-tr from-instagram-from via-instagram-via to-instagram-to">
                                         <i class="ph ph-instagram-logo text-ink text-2xl"></i>
                                     </div>
                                     <span class="text-ink/85 text-caption text-center leading-tight">"Instagram"</span>
@@ -204,7 +204,7 @@ pub fn ShareSheet(
                                     on:click=handle_snapchat
                                     class="flex flex-col items-center gap-2 active:scale-95 transition-transform cursor-pointer"
                                 >
-                                    <div class="w-14 h-14 rounded-full flex items-center justify-center shadow-md bg-[#FFFC00]">
+                                    <div class="w-14 h-14 rounded-full flex items-center justify-center shadow-md bg-snapchat">
                                         <i class="ph-fill ph-snapchat-logo text-void text-2xl"></i>
                                     </div>
                                     <span class="text-ink/85 text-caption text-center leading-tight">"Snapchat"</span>
@@ -238,7 +238,7 @@ pub fn ShareSheet(
                             // Toast notification
                             {move || toast.get().map(|msg| view! {
                                 <div class="mt-5 flex items-center justify-center gap-2 text-ink/90 text-label font-medium animate-fadeIn">
-                                    <i class="ph-bold ph-check text-green-400"></i>
+                                    <i class="ph-bold ph-check text-success"></i>
                                     <span>{msg}</span>
                                 </div>
                             })}

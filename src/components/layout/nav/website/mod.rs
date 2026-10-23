@@ -26,9 +26,10 @@ pub fn WebsiteNav(
         };
         // Netflix at the top of the page: black 80% to transparent over the full 80px height.
         let top_alpha = 0.80 * (1.0 - op);
+        // the bar's own colour is the page's, more of it as the page scrolls
         format!(
-            "background: linear-gradient(to bottom, rgba(0,0,0,{:.3}) 0%, rgba(0,0,0,0) 100%), rgba(20,20,20,{:.3});",
-            top_alpha, op
+            "background: linear-gradient(to bottom, rgba(0,0,0,{:.3}) 0%, rgba(0,0,0,0) 100%), color-mix(in srgb, var(--color-page) {:.1}%, transparent);",
+            top_alpha, op * 100.0
         )
     };
 

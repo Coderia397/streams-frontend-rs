@@ -183,7 +183,7 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
     };
 
     view! {
-        <div class="relative min-h-screen overflow-x-clip bg-[#0f0f0f] font-sans text-ink">
+        <div class="relative min-h-screen overflow-x-clip bg-title-page font-sans text-ink">
             // the trailer's colours round the panel: a blurred copy of the trailer (computers) over the title's backdrop, as Netflix's page
             <div class="hero-glow pointer-events-none absolute inset-x-0 top-0 h-[520px] overflow-hidden md:h-[910px]" aria-hidden="true" inert>
                 <img src=backdrop alt="" class="h-full w-full scale-110 object-cover" />
@@ -512,7 +512,7 @@ fn Episodes(id: u32, seasons: u32) -> impl IntoView {
                     <Rail>
                         {list.into_iter().map(|ep| view! {
                             <div class="surface-card w-[246px] shrink-0 snap-start overflow-hidden p-2 max-md:rounded-xl md:w-[327px]">
-                                <div class="relative aspect-video overflow-hidden rounded-xl bg-[#161616] md:rounded-2xl">
+                                <div class="relative aspect-video overflow-hidden rounded-xl bg-field-deep md:rounded-2xl">
                                     {ep.still_url("w300").map(|src| view! { <img src=src alt="" loading="lazy" class="h-full w-full object-cover" /> })}
                                     {ep.runtime.filter(|r| *r > 0).map(|r| view! {
                                         <span class="absolute bottom-[9px] end-5 rounded-tick bg-void/70 px-1.5 py-0.5 text-[13px] font-medium text-ink/70">{format!("{r}m")}</span>
@@ -574,7 +574,7 @@ fn PosterRow(id: &'static str, heading: String, source: PosterSource, exclude: (
                                 src=m.poster_url("w342").unwrap_or_default()
                                 alt=m.display_title().to_string()
                                 loading="lazy"
-                                class="aspect-[184/258] w-full rounded-2xl bg-[#232323] object-cover transition-transform duration-(--motion-base) hover:scale-[1.03]"
+                                class="aspect-[184/258] w-full rounded-2xl bg-popover object-cover transition-transform duration-(--motion-base) hover:scale-[1.03]"
                             />
                         </a>
                     }).collect_view()}

@@ -238,7 +238,7 @@ pub fn FloatField(
     #[prop(optional)] icon: Option<&'static str>,
 ) -> impl IntoView {
     view! {
-        <label class="relative flex h-[56px] w-full cursor-text items-center gap-4 rounded-control border border-[rgba(128,128,128,0.7)] bg-page px-4 focus-within:border-ink">
+        <label class="relative flex h-[56px] w-full cursor-text items-center gap-4 rounded-control border border-scrim-edge bg-page px-4 focus-within:border-ink">
             {icon.map(|i| view! { <i class=format!("ph ph-{i} shrink-0 text-heading") aria-hidden="true"></i> })}
             <span class="flex min-w-0 flex-1 flex-col">
                 <span class="text-fine leading-[14px] text-ink/70">{label}</span>

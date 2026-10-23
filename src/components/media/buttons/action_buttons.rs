@@ -178,7 +178,7 @@ pub fn MyListButton(
             title=title_text
         >
             {move || if is_in_list.get() {
-                view! { <i class=format!("ph-bold ph-check text-green-400 {}", icon_classes)></i> }.into_any()
+                view! { <i class=format!("ph-bold ph-check text-success {}", icon_classes)></i> }.into_any()
             } else {
                 view! { <i class=format!("ph-bold ph-plus {}", icon_classes)></i> }.into_any()
             }}
@@ -276,7 +276,7 @@ pub fn RatingPill(
                                 type="button"
                                 on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); on_set.run(if rating.get_untracked() == Some(option) { None } else { Some(option) }); }
                                 aria-label=crate::i18n::t(label_key)
-                                class=format!("flex items-center justify-center rounded-full text-ink transition-colors hover:bg-[#3b3b3b] cursor-pointer {dim_classes}")
+                                class=format!("flex items-center justify-center rounded-full text-ink transition-colors hover:bg-lift cursor-pointer {dim_classes}")
                             >
                                 {move || {
                                     let on = is_set();
@@ -288,9 +288,9 @@ pub fn RatingPill(
                                 }}
                             </button>
                             // the bubble over the option
-                            <span class="rating-bubble pointer-events-none absolute bottom-[calc(100%+10px)] left-1/2 -translate-x-1/2 whitespace-nowrap rounded-control bg-[#e6e6e6] px-3 py-1.5 text-body font-semibold leading-none text-chrome opacity-0 transition-opacity duration-(--motion-fast) group-hover/opt:opacity-100">
+                            <span class="rating-bubble pointer-events-none absolute bottom-[calc(100%+10px)] left-1/2 -translate-x-1/2 whitespace-nowrap rounded-control bg-ink-soft px-3 py-1.5 text-body font-semibold leading-none text-chrome opacity-0 transition-opacity duration-(--motion-fast) group-hover/opt:opacity-100">
                                 {move || if is_set() { crate::i18n::t("rating-rated") } else { crate::i18n::t(label_key) }}
-                                <span class="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-[6px] border-t-[6px] border-x-transparent border-t-[#e6e6e6]"></span>
+                                <span class="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 border-x-[6px] border-t-[6px] border-x-transparent border-t-ink-soft"></span>
                             </span>
                         </div>
                     }

@@ -95,7 +95,7 @@
   .topten-card .topten-poster { margin-left: 22.4%; width: 64.6%; }
   .topten-card .topten-rank { left: 4.5%; width: auto; align-items: flex-end; justify-content: flex-start; }
   .topten-card .topten-svgwrap { height: 40.7cqw; margin-right: 0; }
-  .topten-card .topten-num { stroke: #b8b8b8; }
+  .topten-card .topten-num { stroke: var(--color-ink-mist); }
 }
 
 /* Landscape rows on phones (continue watching) keep 2.15 tiles of 16:9. */
@@ -189,7 +189,7 @@
 html {
   scroll-behavior: smooth;
   scrollbar-width: auto;
-  scrollbar-color: #4e4e4e var(--color-page);
+  scrollbar-color: var(--color-scrollbar) var(--color-page);
   -webkit-tap-highlight-color: transparent;
   /* Fix blue highlight on mobile */
   -webkit-text-size-adjust: 100%;
@@ -288,7 +288,7 @@ button,
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #888;
+  background-color: var(--color-scrollbar-hover);
 }
 
 ::-webkit-scrollbar-corner {
@@ -679,7 +679,7 @@ button,
 .edge-btn { background: transparent; transition: opacity 0.25s ease; }
 .edge-pill { display: flex; align-items: center; justify-content: center; width: 30px; height: 58px; border-radius: 999px; background: rgba(38, 38, 38, 0.96); color: #fff; font-size: 20px;
   transition: background-color 0.7s ease, backdrop-filter 0.7s ease, transform 0.15s ease; }
-:root:is([data-input="mouse"], [data-input="pen"]) .edge-btn:hover .edge-pill { background: rgba(38, 38, 38, 0.8); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transform: scale(1.12); transition: background-color 0.12s ease, backdrop-filter 0.12s ease, transform 0.15s ease; }
+:root:is([data-input="mouse"], [data-input="pen"]) .edge-btn:hover .edge-pill { background: var(--color-edge-pill-hover); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transform: scale(1.12); transition: background-color 0.12s ease, backdrop-filter 0.12s ease, transform 0.15s ease; }
 
 
 /* The description of the hero banner: it fades (700ms) a little faster than it slides down (1000ms) and gives up its space, so the logo and the line under it slide down with it. */

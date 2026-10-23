@@ -30,7 +30,7 @@ pub fn SkipButton(
     // "Watch credits" hides the end of episode offer for the rest of this play
     let (credits_dismissed, set_credits_dismissed) = signal(false);
     let base = "flex h-[2.36vw] items-center justify-center gap-[0.6vw] rounded-control px-[1.4vw] text-[1vw] font-medium select-none transition-colors duration-(--motion-fast)";
-    let grey = "bg-[rgba(109,109,110,0.7)] text-ink hover:bg-[rgba(109,109,110,0.4)]";
+    let grey = "bg-button-secondary/70 text-ink hover:bg-button-secondary/40";
 
     view! {
         <div class="fixed bottom-[3.54vw] right-[3vw] z-30 flex items-center gap-[0.75vw] pointer-events-auto">
