@@ -206,8 +206,8 @@ pub fn ContinueWatchingRow(
                                                 />
                                             </div>
 
-                                            // How far you are: a short bar under the picture, not touching it, red for what is watched and white for what is left
-                                            <div class="mx-auto mt-2 h-[3px] w-[60%] flex overflow-hidden rounded-full bg-ink" aria-label=pct_label.clone()>
+                                            // How far you are: a short bar under the picture (Netflix's: 60 % of the card, 3 px, 5 px under it), the brand colour for what is watched and white for what is left
+                                            <div class="mx-auto mt-[5px] h-[3px] w-[60%] flex overflow-hidden rounded-full bg-ink" aria-label=pct_label.clone()>
                                                 <div class="h-full bg-brand" style=format!("width: {:.1}%;", percentage.clamp(2.0, 100.0)) />
                                             </div>
                                         </div>

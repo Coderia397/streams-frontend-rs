@@ -21,7 +21,8 @@ fn Shelf(
     children: ChildrenFn,
 ) -> impl IntoView {
     view! {
-        <section class="row-block">
+        // a row that brings its own heading is a whole row already (its spacing would count twice)
+        <section class=move || if own_heading && has_items.get() { "" } else { "row-block" }>
             <h2 class="row-title px-[var(--app-x,56px)]" class=("hidden", move || own_heading && has_items.get())>{title}</h2>
             <Show
                 when=move || has_items.get()
