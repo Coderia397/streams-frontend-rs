@@ -98,11 +98,16 @@ pub struct ProfileStore {
 
 /// The profiles of a browser that has saved none: the main profile and the Kids profile.
 pub fn default_profiles() -> Vec<crate::models::profile::Profile> {
+    default_profiles_with(crate::data::avatars::random_smile())
+}
+
+/// The first profiles of a browser, with the main profile's picture given (the random smile needs the browser, so tests pass one).
+pub fn default_profiles_with(main_avatar: String) -> Vec<crate::models::profile::Profile> {
     vec![
         crate::models::profile::Profile {
             id: "p1".to_string(),
             name: crate::i18n::t("profile-default-main"),
-            avatar_url: Some(crate::data::avatars::random_smile()),
+            avatar_url: Some(main_avatar),
             is_kids: false,
             is_default: Some(true),
             pin: None,

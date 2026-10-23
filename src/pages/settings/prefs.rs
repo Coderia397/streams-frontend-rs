@@ -223,7 +223,7 @@ mod tests {
 
     #[test]
     fn the_default_kids_profile_is_a_kids_profile() {
-        let kids: Vec<_> = crate::store::default_profiles().into_iter().filter(|p| p.is_kids).collect();
+        let kids: Vec<_> = crate::store::default_profiles_with("x".into()).into_iter().filter(|p| p.is_kids).collect();
         assert_eq!(kids.len(), 1);
         assert_eq!(kids[0].id, "p2");
     }

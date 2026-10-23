@@ -177,27 +177,26 @@ mod tests {
     #[test]
     fn test_avatar_counts() {
         assert_eq!(AVATAR_CATEGORIES.len(), 5);
-        assert_eq!(ALL_AVATARS.len(), 41);
         let total_nested: usize = AVATAR_CATEGORIES.iter().map(|c| c.avatars.len()).sum();
-        assert_eq!(total_nested, 41);
+        assert_eq!(ALL_AVATARS.len(), total_nested);
     }
 
+    /// The flat list holds every picture of the sets once; it starts with the classic smiles (a new profile gets one), so its order is not the sets' order.
     #[test]
     fn test_avatar_urls_match() {
-        let mut idx = 0;
-        for cat in AVATAR_CATEGORIES {
-            for av in cat.avatars {
-                assert_eq!(av.url, ALL_AVATARS[idx]);
-                idx += 1;
-            }
-        }
+        let mut nested: Vec<&str> = AVATAR_CATEGORIES.iter().flat_map(|c| c.avatars.iter().map(|a| a.url)).collect();
+        let mut flat: Vec<&str> = ALL_AVATARS.to_vec();
+        nested.sort_unstable();
+        flat.sort_unstable();
+        assert_eq!(nested, flat);
+        assert!(ALL_AVATARS[0].ends_with("classic-red-smile.webp"));
     }
 
     #[test]
     fn test_avatar_lookups() {
         let default_av = get_avatar_by_url(DEFAULT_AVATAR);
         assert!(default_av.is_some());
-        assert_eq!(default_av.unwrap().name, "Anthony Bridgerton");
+        assert_eq!(default_av.unwrap().name, "Red Smile");
 
         assert!(get_avatar_by_url("https://invalid.url").is_none());
 
