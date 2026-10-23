@@ -46,7 +46,7 @@ pub fn PhoneProfilePicker(
     let count = move || heroes.get().map(|h| h.len()).unwrap_or(0);
 
     view! {
-        <div class="absolute inset-0 flex flex-col overflow-hidden bg-[#0b0a0b] md:hidden">
+        <div class="absolute inset-0 flex flex-col overflow-hidden bg-[#0b0a0b]">
             // the picture
             <div class="relative min-h-0 flex-1 overflow-hidden">
                 {move || (0..count()).map(|i| view! {

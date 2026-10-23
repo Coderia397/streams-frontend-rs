@@ -9,4 +9,3 @@ pub mod kids_avatar;
 pub mod icon_row;
 pub mod icon_picker;
 pub mod kids_splash;
-pub mod phone_picker;

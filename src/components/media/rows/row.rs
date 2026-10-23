@@ -172,7 +172,7 @@ pub fn Row(
                         let pages = (count / 4).clamp(2, 6);
                         let current = page_index.get();
                         view! {
-                            <div class="hidden md:flex items-center gap-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-(--motion-slow)">
+                            <div class="hover-only hidden sm:flex items-center gap-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-(--motion-slow)">
                                 {(0..pages).map(|i| {
                                     let is_active = i == current;
                                     view! {

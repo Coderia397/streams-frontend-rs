@@ -57,7 +57,7 @@ fn TopTenCard(
     item: MediaItem,
     index: usize,
     is_tv: bool,
-    /// 1 for the first card of the row, 2 for the first card of its copy at the end (see row_scroll.rs), 3 for the other cards of the copy (the copy is for desktop only), 0 otherwise
+    /// 1 for the first card of the row, 2 for the first card of its copy at the end (see row_scroll.rs), 3 for the other cards of the copy (the copy is for the website form only), 0 otherwise
     #[prop(default = 0)] loop_role: u8,
 ) -> impl IntoView {
     let ui_store = use_ui_store();
@@ -198,7 +198,7 @@ fn TopTenCard(
             data-card-id=my_card_id
             data-loop-first=(loop_role == 1).then_some("1")
             data-loop-clone=(loop_role == 2).then_some("1")
-            class=format!("relative flex-none flex items-end tile-width topten-card cursor-pointer{}", if loop_role >= 2 { " max-md:hidden" } else { "" })
+            class=format!("relative flex-none flex items-end tile-width topten-card cursor-pointer{}", if loop_role >= 2 { " max-sm:hidden" } else { "" })
             // only a mouse or a pen opens the hover card, and never on the phone form (form::opens_hover_card)
             on:pointerenter=move |e: leptos::ev::PointerEvent| if crate::form::opens_hover_card(&e) { mouse_enter_cb.run(()) }
             on:pointerleave=move |e: leptos::ev::PointerEvent| if crate::form::opens_hover_card(&e) { mouse_leave_cb.run(()) }

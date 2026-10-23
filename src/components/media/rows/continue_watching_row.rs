@@ -221,7 +221,7 @@ pub fn ContinueWatchingRow(
                             <button
                                 type="button"
                                 class=move || if can_scroll_left.get() {
-                                    "hidden md:flex absolute top-0 bottom-4 left-0 z-30 items-center justify-center cursor-pointer bg-transparent hover:bg-void/70 transition-all duration-(--motion-base) opacity-0 group-hover/row:opacity-100 group-hover/row:pointer-events-auto select-none border-none outline-none"
+                                    "hover-only hidden sm:flex absolute top-0 bottom-4 left-0 z-30 items-center justify-center cursor-pointer bg-transparent hover:bg-void/70 transition-all duration-(--motion-base) opacity-0 group-hover/row:opacity-100 group-hover/row:pointer-events-auto select-none border-none outline-none"
                                 } else {
                                     "hidden !pointer-events-none !opacity-0"
                                 }
@@ -236,7 +236,7 @@ pub fn ContinueWatchingRow(
                             <button
                                 type="button"
                                 class=move || if can_scroll_right.get() {
-                                    "hidden md:flex absolute top-0 bottom-4 right-0 z-30 items-center justify-center cursor-pointer bg-transparent hover:bg-void/70 transition-all duration-(--motion-base) opacity-0 group-hover/row:opacity-100 group-hover/row:pointer-events-auto select-none border-none outline-none"
+                                    "hover-only hidden sm:flex absolute top-0 bottom-4 right-0 z-30 items-center justify-center cursor-pointer bg-transparent hover:bg-void/70 transition-all duration-(--motion-base) opacity-0 group-hover/row:opacity-100 group-hover/row:pointer-events-auto select-none border-none outline-none"
                                 } else {
                                     "hidden !pointer-events-none !opacity-0"
                                 }

@@ -40,7 +40,7 @@ pub fn EdgeButton(
         <button
             type="button"
             class=move || format!(
-                "edge-btn hidden md:flex absolute {inset} {side} z-30 items-center justify-center cursor-pointer select-none border-none outline-none opacity-0 group-hover/row:opacity-100 {}",
+                "edge-btn hover-only hidden sm:flex absolute {inset} {side} z-30 items-center justify-center cursor-pointer select-none border-none outline-none opacity-0 group-hover/row:opacity-100 {}",
                 if visible.get() { "" } else { "!pointer-events-none !opacity-0" }
             )
             style="width: calc(var(--app-x, 56px) + 14px);"

@@ -7,6 +7,9 @@
    used, on any device (an iPad with a mouse included), and never sticks after a finger's tap (a touch laptop included). Tailwind's own
    rule asked the device instead (hover: hover), which is false on an iPad with a mouse and true on a touch laptop used with a finger. */
 @custom-variant hover (&:where(:root[data-input="mouse"] *, :root[data-input="pen"] *):hover);
+/* Controls that only make sense for a pointer that rests (row arrows, page dots): gone while a finger is used, so an invisible arrow
+   never catches a tap at a row's edge. */
+:root[data-input="touch"] .hover-only { display: none !important; }
 @source "../src/**/*.rs";
 @source "../index.html";
 

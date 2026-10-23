@@ -105,6 +105,7 @@ pub(crate) fn derive_vibe_tags(genres: &[(u32, String)], overview: &str) -> Vec<
 #[component]
 pub fn InfoModal() -> impl IntoView {
     let ui_store = use_ui_store();
+    let form = crate::form::use_form();
     let library_store = use_library_store();
     let is_open = ui_store.info_modal_open;
     let movie_id = ui_store.info_modal_movie_id;
@@ -591,14 +592,14 @@ pub fn InfoModal() -> impl IntoView {
                                                     size="md".to_string()
                                                 />
 
-                                                // Share: phones only, as in Netflix's apps (its website has none)
-                                                <div class="md:hidden">
+                                                // Share: the phone form only, as in Netflix's apps (its website has none)
+                                                <Show when=move || form.get().is_phone()>
                                                     <crate::components::media::action_buttons::CircleIconButton
                                                         icon="ph-share-network"
                                                         on_click=Callback::new(move |_| share_open.set(true))
                                                         title=crate::i18n::t("share-button")
                                                     />
-                                                </div>
+                                                </Show>
                                             </div>
                                             <crate::components::media::share_sheet::ShareSheet open=share_open title=share_title url=share_url />
                                         </div>
