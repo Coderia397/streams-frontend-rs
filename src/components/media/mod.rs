@@ -13,6 +13,6 @@ pub use buttons::{action_buttons, tooltip_wrapper};
 pub use cards::{movie_card, movie_card_badges, movie_card_popup, movie_card_rating};
 pub use collections::{collection_logo, collection_row, kids_banner};
 pub use details::{info_modal, info_modal_episodes, info_modal_recommendations, share_sheet};
-pub use billboard::{hero, hero_skeleton, mobile_hero, spotlight_card, spotlight_artwork};
+pub use billboard::{hero, hero_skeleton, spotlight_card, spotlight_artwork};
 pub use icons::{chip_icons, shelf_icons};
 pub use rows::{row, row_scroll, feed_row, top_ten_row, top_ten_numerals, continue_watching_row, continue_watching_options_sheet, vibe_row, title_strip};

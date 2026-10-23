@@ -1,12 +1,11 @@
+//! The billboard on tablets and computers (note 114).
 use leptos::prelude::*;
 use wasm_bindgen::prelude::*;
 use crate::services::tmdb::{fetch_movie_logo, fetch_videos, fetch_details, MediaItem};
 use crate::store::use_ui_store;
-use crate::components::media::mobile_hero::MobileHero;
 use crate::components::media::movie_card_badges::RatingBadge;
 use crate::components::media::action_buttons::{PlayPillButton, MoreInfoPillButton, MuteReplayButton};
 use crate::components::trailer_player::TrailerPlayer;
-use crate::models::movie::Movie;
 
 fn set_timeout_ms<F: FnOnce() + 'static>(cb: F, ms: i32) -> Option<i32> {
     let window = web_sys::window()?;
@@ -104,45 +103,11 @@ fn hook_color(kind: &str) -> &'static str {
     }
 }
 
+/// The website's billboard (tablets and computers, note 114): the titles in turn, each with its trailer, logo, facts, lines and buttons.
 #[component]
-pub fn HeroSection(
-    #[prop(optional)] movies: Option<Vec<MediaItem>>,
-    #[prop(optional, default = 0)] movie_id: u32,
-    #[prop(optional, default = false)] is_tv: bool,
-    #[prop(optional, default = String::new())] title: String,
-    #[prop(optional, default = String::new())] backdrop: String,
-    #[prop(optional, default = String::new())] overview: String,
-) -> impl IntoView {
+pub fn WebsiteHero(items: Vec<MediaItem>) -> impl IntoView {
     let ui_store = use_ui_store();
-
-    // Prepare items list: either passed movies or synthetic single-item list
-    let initial_items = if let Some(ref m) = movies {
-        if !m.is_empty() {
-            m.clone()
-        } else {
-            vec![MediaItem {
-                id: movie_id,
-                title: if !is_tv { Some(title.clone()) } else { None },
-                name: if is_tv { Some(title.clone()) } else { None },
-                overview: overview.clone(),
-                backdrop_path: Some(backdrop.clone()),
-                media_type: Some(if is_tv { "tv".to_string() } else { "movie".to_string() }),
-                ..Default::default()
-            }]
-        }
-    } else {
-        vec![MediaItem {
-            id: movie_id,
-            title: if !is_tv { Some(title.clone()) } else { None },
-            name: if is_tv { Some(title.clone()) } else { None },
-            overview: overview.clone(),
-            backdrop_path: Some(backdrop.clone()),
-            media_type: Some(if is_tv { "tv".to_string() } else { "movie".to_string() }),
-            ..Default::default()
-        }]
-    };
-
-    let items_stored = StoredValue::new(initial_items);
+    let items_stored = StoredValue::new(items);
     let active_index = RwSignal::new(0usize);
 
     let (show_video, set_show_video) = signal(false);
@@ -314,7 +279,7 @@ pub fn HeroSection(
         if let Some(Some(details)) = details_resource.get() {
             if let Some(credits) = details.credits {
                 if let Some(director) = credits.crew.iter().find(|c| c.job.as_deref() == Some("Director") || c.job.as_deref() == Some("Creator")) {
-                    let key = if is_tv { "media-created-by" } else { "media-directed-by" };
+                    let key = if current_is_tv() { "media-created-by" } else { "media-directed-by" };
                     return Some(("clapper".to_string(), crate::i18n::t_args(key, &[("name", fluent_bundle::FluentValue::from(director.name.clone()))])));
                 }
             }
@@ -521,28 +486,11 @@ pub fn HeroSection(
 
     view! {
         <>
-            // Mobile Hero (< 768px)
-            <div class="block md:hidden">
-                {move || {
-                    let item = current_item();
-                    let movie = Movie::from(item);
-                    let on_select_cb = Callback::new(move |_| {
-                        trigger_open_modal();
-                    });
-                    view! {
-                        <MobileHero
-                            movie=movie
-                            on_select=on_select_cb
-                        />
-                    }
-                }}
-            </div>
-
-        // Desktop Hero (>= 768px)
+        // the billboard
         <div
             id="hero-container"
             node_ref=hero_container_ref
-            class="hidden md:block w-full billboard-margin"
+            class="w-full billboard-margin"
         >
             <div class="relative w-full aspect-[2.18/1] rounded-billboard overflow-hidden bg-raised border border-ink/[0.04] group">
                 // ── Background Video Layer ──────────────────────────────────────
