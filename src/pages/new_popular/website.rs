@@ -12,12 +12,7 @@ pub fn WebsiteNewPopular() -> impl IntoView {
             // the first row title 20 px under the nav, as on Netflix's My Netflix (its New & Popular is still the old page)
             <div class="h-[calc(var(--nav-h)+20px)]" />
                 <main class="relative z-10 pb-16 rows-stack">
-                    <Suspense fallback=move || view! {
-                        <div class="space-y-6">
-                            <div class="h-40 bg-ink/[0.02] rounded-card animate-pulse mx-[var(--app-x,56px)]" />
-                            <div class="h-40 bg-ink/[0.02] rounded-card animate-pulse mx-[var(--app-x,56px)]" />
-                        </div>
-                    }>
+                    <Suspense fallback=move || view! { <crate::components::skeleton::RowsSkeleton /> }>
                         {move || desktop_feed.get().map(|rows| {
                             if rows.is_empty() {
                                 view! { <FallbackRows /> }.into_any()

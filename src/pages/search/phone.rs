@@ -169,7 +169,7 @@ pub fn PhoneSearch(#[prop(into)] q: Signal<String>, results: Found, recommended:
                 // Nothing typed: the recommendations, as a list
                 <Show when=move || q.get().trim().is_empty()>
                     <h1 class="text-title-md font-bold text-ink mb-3 mt-1 ps-1">{crate::i18n::t("search-recommended")}</h1>
-                    <Suspense fallback=move || view! { <div class="space-y-3 animate-pulse">{(0..6).map(|_| view! { <div class="h-[84px] bg-card rounded-field"></div> }).collect::<Vec<_>>()}</div> }>
+                    <Suspense fallback=move || view! { <crate::components::skeleton::ListSkeleton /> }>
                         {move || recommended.get().map(|items| match items {
                             Some(items) if !items.is_empty() => view! {
                                 <div class="flex flex-col gap-3">
@@ -188,7 +188,7 @@ pub fn PhoneSearch(#[prop(into)] q: Signal<String>, results: Found, recommended:
 
                 // Something typed: Top Results and More like, as rows of the app's tiles
                 <Show when=move || !q.get().trim().is_empty()>
-                    <Suspense fallback=move || view! { <div class="grid grid-cols-2 gap-2.5 animate-pulse">{(0..10).map(|_| view! { <div class="aspect-video bg-card rounded-control"></div> }).collect::<Vec<_>>()}</div> }>
+                    <Suspense fallback=move || view! { <div class="-mx-3"><crate::components::skeleton::RowsSkeleton rows=2 /></div> }>
                         {move || results.get().map(|media| {
                             if media.is_empty() {
                                 return view! {

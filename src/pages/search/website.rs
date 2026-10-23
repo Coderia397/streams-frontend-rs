@@ -5,13 +5,9 @@ use crate::components::media::movie_card::MovieCard;
 use crate::services::tmdb::MediaItem;
 use leptos::prelude::*;
 
-/// The grid's place holders while the titles load: the grid's own columns and tiles.
+/// The grid's place holders while the titles load: the grid's own columns.
 fn grid_skeleton() -> impl IntoView {
-    view! {
-        <div class="grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-2 gap-y-5 animate-pulse" aria-hidden="true">
-            {(0..10).map(|_| view! { <div class="aspect-video rounded-tile bg-card"></div> }).collect::<Vec<_>>()}
-        </div>
-    }
+    view! { <crate::components::skeleton::GridSkeleton columns="grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-2 gap-y-5" /> }
 }
 
 #[component]

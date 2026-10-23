@@ -224,7 +224,7 @@ pub fn CategoryPage(
                 }
 
                 <Suspense fallback=move || view! {
-                    <crate::components::media::hero_skeleton::HeroSkeleton />
+                    <crate::components::skeleton::HeroSkeleton />
                 }>
                     {move || hero.get().map(|result| {
                         let movies = result;
@@ -239,12 +239,7 @@ pub fn CategoryPage(
                 </Suspense>
 
                 <div class="relative z-30 rows-stack">
-                    <Suspense fallback=move || view! {
-                        <div class="space-y-6">
-                            <div class="h-40 bg-ink/[0.02] rounded-card animate-pulse mx-[var(--app-x,56px)]" />
-                            <div class="h-40 bg-ink/[0.02] rounded-card animate-pulse mx-[var(--app-x,56px)]" />
-                        </div>
-                    }>
+                    <Suspense fallback=move || view! { <crate::components::skeleton::RowsSkeleton /> }>
                         {move || feed.get().map(|rows| {
                             if rows.is_empty() {
                                 let default_top10_title = if kind == "movie" { crate::i18n::t("category-top10-movies") } else { crate::i18n::t("category-top10-series") };

@@ -205,13 +205,7 @@ pub fn BrowseLanguagePage() -> impl IntoView {
                     </div>
 
                     // Content grid — exact 6-column Netflix desktop grid with tight horizontal gap and full aspect-video cards
-                    <Suspense fallback=move || view! {
-                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-1.5 md:gap-x-2 gap-y-6 md:gap-y-5 animate-pulse">
-                            {(0..18).map(|_| view! {
-                                <div class="aspect-video bg-card rounded-control border border-ink/[0.04]"></div>
-                            }).collect::<Vec<_>>()}
-                        </div>
-                    }>
+                    <Suspense fallback=move || view! { <crate::components::skeleton::GridSkeleton columns="grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-1.5 md:gap-x-2 gap-y-6 md:gap-y-5" count=18 /> }>
                         {move || items_resource.get().map(|items| {
                             if items.is_empty() {
                                 view! {

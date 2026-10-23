@@ -200,18 +200,7 @@ pub fn Row(
                         view! {
                             <div class="flex overflow-x-scroll scrollbar-hide w-full pointer-events-auto relative z-10 py-[2px] gap-[var(--tile-gap)]">
                                 <div class="row-edge" />
-                                {(0..6).map(|_| view! {
-                                    <div
-                                        class=format!("movie-card-container relative flex-none {} aspect-video bg-card rounded-tile overflow-hidden border border-ink/[0.04] pointer-events-auto", card_width_class)
-                                    >
-                                        <div class="absolute inset-0 -translate-x-full animate-[shimmer_1.8s_ease-in-out_infinite] bg-gradient-to-r from-transparent via-ink/[0.05] to-transparent" />
-                                        <div class="absolute inset-0 bg-gradient-to-b from-field via-card to-raised" />
-                                        <div class="absolute bottom-4 left-3 space-y-2">
-                                            <div class="h-2.5 bg-ink/[0.08] rounded-full w-16" />
-                                            <div class="h-1.5 bg-ink/[0.05] rounded-full w-10" />
-                                        </div>
-                                    </div>
-                                }).collect::<Vec<_>>()}
+                                <crate::components::skeleton::TilesSkeleton tiles=6 />
                                 <div class="row-edge" />
                             </div>
                         }.into_any()

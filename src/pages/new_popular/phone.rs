@@ -72,11 +72,7 @@ fn NewHotSection(tab: NewPopularTab) -> impl IntoView {
     let items = LocalResource::new(move || async move { tab_items(tab).await });
     view! {
         <section id=section_id(tab) class="space-y-6 scroll-mt-[150px]">
-            <Suspense fallback=move || view! {
-                <div class="space-y-4 animate-pulse">
-                    {(0..2).map(|_| view! { <div class="w-full aspect-video bg-card rounded-modal"></div> }).collect::<Vec<_>>()}
-                </div>
-            }>
+            <Suspense fallback=move || view! { <crate::components::skeleton::CardsSkeleton /> }>
                 {move || items.get().map(|items| {
                     let is_top10 = tab == NewPopularTab::Top10Movies || tab == NewPopularTab::Top10Series;
                     let is_coming = tab == NewPopularTab::ComingSoon;

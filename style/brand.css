@@ -38,6 +38,9 @@
   --color-field: #262626;
   --color-panel: #2f2f2f;
   --color-menu: #2a2a2a;
+  /* Skeletons (src/components/skeleton): the surface of a place holder and the light that sweeps over it */
+  --color-skeleton: rgb(255 255 255 / 0.07);
+  --color-skeleton-sheen: rgb(255 255 255 / 0.07);
   /* Netflix's redesigned menus (profile, notifications): rgb(35, 35, 35), measured 2026-10-23 */
   --color-popover: #232323;
   --color-lift: #3a3a3a;

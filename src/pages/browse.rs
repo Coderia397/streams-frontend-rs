@@ -141,7 +141,7 @@ pub fn BrowseHome(#[prop(optional)] event: Option<(u32, &'static str)>, #[prop(o
 
                 // Hero Carousel driven by real TMDB / AI feed
                 <Suspense fallback=move || view! {
-                    <crate::components::media::hero_skeleton::HeroSkeleton />
+                    <crate::components::skeleton::HeroSkeleton />
                 }>
                     {move || hero.get().map(|result| if page_header.get().is_some() { view! { <span /> }.into_any() } else {
                         let movies = result;
@@ -159,12 +159,7 @@ pub fn BrowseHome(#[prop(optional)] event: Option<(u32, &'static str)>, #[prop(o
                     // Continue Watching belongs to Home, not to the page of a collection or an event
                     {(event.is_none() && collection.is_none()).then(|| view! { <ContinueWatchingRow /> })}
 
-                    <Suspense fallback=move || view! {
-                        <div class="space-y-6">
-                            <div class="h-40 bg-ink/[0.02] rounded-card animate-pulse mx-[var(--app-x,56px)]" />
-                            <div class="h-40 bg-ink/[0.02] rounded-card animate-pulse mx-[var(--app-x,56px)]" />
-                        </div>
-                    }>
+                    <Suspense fallback=move || view! { <crate::components::skeleton::RowsSkeleton /> }>
                         {move || feed.get().map(|rows| {
                             if rows.is_empty() {
                                 view! {

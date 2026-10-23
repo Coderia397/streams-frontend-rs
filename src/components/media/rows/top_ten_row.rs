@@ -418,18 +418,7 @@ pub fn TopTenRow(
                 >
                     <div data-loop-spacer="1" class="row-edge" />
 
-                    <Suspense fallback=move || view! {
-                        { (0..6).map(|_| view! {
-                            <div class="relative flex-none flex items-end pl-[75px] sm:pl-[85px] md:pl-[95px] lg:pl-[125px] pr-1 md:pr-1.5 lg:pr-2">
-                                <div class="absolute left-0 top-0 bottom-0 h-full w-[95px] sm:w-[105px] md:w-[115px] lg:w-[145px] flex justify-end items-center pointer-events-none z-0">
-                                    <div class="h-[85%] w-[80%] bg-placeholder rounded-control opacity-40 skew-x-[-6deg]" />
-                                </div>
-                                <div class="relative flex-none h-[128px] w-[89px] sm:h-[138px] sm:w-[96px] md:h-[148px] md:w-[103px] lg:h-[195px] lg:w-[135px] z-10 bg-placeholder rounded-tile border border-ink/5 overflow-hidden mb-1 sm:mb-1.5 md:mb-2">
-                                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-ink/5 to-transparent -translate-x-full animate-[shimmer_1.5s_infinite]" />
-                                </div>
-                            </div>
-                        }).collect::<Vec<_>>() }
-                    }>
+                    <Suspense fallback=move || view! { <crate::components::skeleton::TopTenSlotsSkeleton /> }>
                         {move || items_res.get().map(|media| {
                             // the cards, with a copy of the last ones in front (`order: -2`, so it comes first whatever its place in the markup) and a copy of the first ones behind,
                             // so that the row can be paged round (see row_scroll.rs)
