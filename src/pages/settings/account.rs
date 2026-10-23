@@ -112,13 +112,15 @@ pub fn Account() -> impl IntoView {
     view! {
         <div>
             <SignInBanner />
-            <div class="lg:hidden">
+            // phones and tablets: the app's account list; computers: the website's overview (note 114, one mounted)
+            <crate::form::DesktopOr
+                compact=|| view! {
                 <AccountDetails />
                 <DevicesSection />
                 <ProfilesSection />
                 {delete_button()}
-            </div>
-            <div class="hidden lg:block">
+                }
+                desktop=move || view! {
                 <Section title=t("set-overview-quick")>
                     <LinkRow icon="devices" title=t("set-qlink-access") href=Screen::Access.path() />
                     <LinkRow icon="lock-simple" title=t("set-overview-update-password") href=Screen::Password.path() />
@@ -129,7 +131,8 @@ pub fn Account() -> impl IntoView {
                     <LinkRow icon="sliders-horizontal" title=t("set-overview-edit") hint=t("set-overview-edit-hint") href=Screen::Profile(active_profile_id()).path() />
                     <LinkRow icon="users-three" title=t("set-nav-profiles") hint=crate::i18n::t_args("set-overview-profiles", &[("count", profile_count.get_untracked().into())]) href=Screen::Profiles.path() />
                 </Section>
-            </div>
+                }
+            />
         </div>
     }
 }

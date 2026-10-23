@@ -108,6 +108,15 @@ pub fn ByForm(
     }
 }
 
+/// Mounts `desktop` on the desktop form and `compact` on phones and tablets, for pages whose compact design serves both (Settings: the
+/// app's lists below 1024 px, the website's pages from there).
+#[component]
+pub fn DesktopOr(#[prop(into)] compact: ViewFn, #[prop(into)] desktop: ViewFn) -> impl IntoView {
+    let form = use_form();
+    let wide = Memo::new(move |_| form.get().is_desktop());
+    move || if wide.get() { desktop.run() } else { compact.run() }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

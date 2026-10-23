@@ -355,28 +355,24 @@ pub fn SettingsPage() -> impl IntoView {
     }
 }
 
-/// The content of one screen. The hub is two things at once: on phones it is the list, from 1024 px it is the profile screen.
+/// The content of one screen. Some addresses are two screens, one per form (note 114, only one is mounted): phones and tablets get
+/// the app's list, computers the website's page.
 fn screen_body(screen: Screen) -> AnyView {
+    use crate::form::DesktopOr;
     match screen {
-        // phones: the hub list; from 1024 px the hub address shows the account overview
-        Screen::Hub => view! {
-            <div class="lg:hidden"><hub::Hub /></div>
-            <div class="hidden lg:block"><account::Account /></div>
-        }
-        .into_any(),
+        // phones and tablets: the hub list; computers: the hub address shows the account overview
+        Screen::Hub => view! { <DesktopOr compact=|| view! { <hub::Hub /> } desktop=|| view! { <account::Account /> } /> }.into_any(),
         Screen::Profiles => view! { <hub::ManageProfiles /> }.into_any(),
-        // phones: the Edit profile list of the app; from 1024 px the address shows "Manage profile and preferences" like the website, and Edit profile is its own page
-        Screen::Profile(id) => view! {
-            <div class="lg:hidden"><profile::EditProfile id=id.clone() /></div>
-            <div class="hidden lg:block"><profile::ProfileOverview id=id /></div>
+        // phones and tablets: the Edit profile list of the app; computers: "Manage profile and preferences" like the website, and Edit profile is its own page
+        Screen::Profile(id) => {
+            let (a, b) = (id.clone(), id);
+            view! { <DesktopOr compact=move || view! { <profile::EditProfile id=a.clone() /> } desktop=move || view! { <profile::ProfileOverview id=b.clone() /> } /> }.into_any()
         }
-        .into_any(),
-        // phones: the Edit profile list; from 1024 px the Edit Profile page of the website, a page of its own
-        Screen::ProfileEdit(id) => view! {
-            <div class="lg:hidden"><profile::EditProfile id=id.clone() /></div>
-            <div class="hidden lg:block"><edit_profile_page::EditProfilePage id=id /></div>
+        // phones and tablets: the Edit profile list; computers: the Edit Profile page of the website
+        Screen::ProfileEdit(id) => {
+            let (a, b) = (id.clone(), id);
+            view! { <DesktopOr compact=move || view! { <profile::EditProfile id=a.clone() /> } desktop=move || view! { <edit_profile_page::EditProfilePage id=b.clone() /> } /> }.into_any()
         }
-        .into_any(),
         Screen::Avatar(id) => view! { <profile::AvatarPicker id=id /> }.into_any(),
         Screen::Restrictions(id) => view! { <restrictions::Restrictions id=id /> }.into_any(),
         Screen::Ratings(id) => view! { <restrictions::Ratings id=id /> }.into_any(),

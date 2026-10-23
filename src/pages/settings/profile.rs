@@ -124,15 +124,20 @@ pub fn EditProfile(id: String, #[prop(optional)] edit_page: bool) -> impl IntoVi
                     <LinkRow icon="translate" title=t("set-title-language") hint=t("set-language-hint") href=screen(Screen::Language) value=language_value />
                     <LinkRow icon="subtitles" title=t("set-title-audio-subtitles") hint=t("set-audio-subtitles-hint") href=screen(Screen::AudioSubtitles) />
                     <LinkRow icon="text-aa" title=t("set-title-subtitles") hint=t("set-subtitles-hint") href=screen(Screen::Subtitles) />
-                    // phones and tablets list the autoplay switches here; the website has them on a Playback page
-                    <div class="contents lg:hidden"><AutoplaySwitches id=id.get_value() /></div>
-                    <div class="hidden lg:contents">
-                        <LinkRow icon="play-circle" title=t("set-title-playback") hint=t("set-playback-hint") href=screen(Screen::Playback) />
-                        <LinkRow icon="bell" title=t("set-title-notifications") hint=t("set-notifications-hint") href=screen(Screen::Notifications) />
-                        <LinkRow icon="clock-counter-clockwise" title=t("set-title-activity") hint=t("set-privacy-activity-hint") href=Screen::Activity.path() />
-                        <LinkRow icon="shield-check" title=t("set-title-privacy") hint=t("set-privacy-hint") href=Screen::Privacy.path() />
-                        <LinkRow icon="arrows-left-right" title=t("set-title-transfer-profile") hint=t("set-transfer-profile-hint") href=screen(Screen::TransferProfile) />
-                    </div>
+                    // phones and tablets list the autoplay switches here; the website has them on a Playback page (note 114, one mounted)
+                    <crate::form::DesktopOr
+                        compact=move || view! { <AutoplaySwitches id=id.get_value() /> }
+                        desktop={
+                            let screen = screen.clone();
+                            move || view! {
+                            <LinkRow icon="play-circle" title=t("set-title-playback") hint=t("set-playback-hint") href=screen(Screen::Playback) />
+                            <LinkRow icon="bell" title=t("set-title-notifications") hint=t("set-notifications-hint") href=screen(Screen::Notifications) />
+                            <LinkRow icon="clock-counter-clockwise" title=t("set-title-activity") hint=t("set-privacy-activity-hint") href=Screen::Activity.path() />
+                            <LinkRow icon="shield-check" title=t("set-title-privacy") hint=t("set-privacy-hint") href=Screen::Privacy.path() />
+                            <LinkRow icon="arrows-left-right" title=t("set-title-transfer-profile") hint=t("set-transfer-profile-hint") href=screen(Screen::TransferProfile) />
+                            }
+                        }
+                    />
                     {can_be_main.then(|| view! { <LinkRow icon="crown-simple" title=t("set-main-profile") hint=t("set-main-profile-hint") href=screen(Screen::MainProfile) /> })}
                 </Section>
                 {removable.then(|| view! { <OutlineButton label=t("set-delete-profile") danger=true on_click=Callback::new(move |_| confirm_delete.set(true)) /> })}
