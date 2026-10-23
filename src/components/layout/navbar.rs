@@ -119,9 +119,9 @@ pub fn Navbar(
                                 class:hidden=move || id == "games" && (!games_on() || is_kids.get())
                                 data-tour=format!("nav-{id}")
                                 class=move || if is_active() {
-                                    "cursor-pointer transition-all duration-(--motion-base) whitespace-nowrap text-ink font-medium text-body-md rounded-full bg-ink/20 h-[40px] px-4 inline-flex items-center justify-center"
+                                    "cursor-pointer transition-all duration-(--motion-base) whitespace-nowrap text-ink font-medium text-body-md rounded-full bg-ink/20 h-[41px] px-4 inline-flex items-center justify-center"
                                 } else {
-                                    "cursor-pointer transition-all duration-(--motion-base) whitespace-nowrap text-ink/70 hover:text-ink text-body-md rounded-full bg-transparent hover:bg-mute/40 h-[40px] px-4 font-normal inline-flex items-center justify-center"
+                                    "cursor-pointer transition-all duration-(--motion-base) whitespace-nowrap text-ink/70 hover:text-ink text-body-md rounded-full bg-transparent hover:bg-mute/40 h-[41px] px-4 font-normal inline-flex items-center justify-center"
                                 }
                             >
                                 <a href=href class="no-underline text-inherit flex items-center justify-center w-full h-full">{crate::i18n::t(label)}</a>

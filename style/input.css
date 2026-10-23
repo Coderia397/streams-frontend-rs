@@ -128,15 +128,23 @@
 @media (min-width: 1280px) {
   .billboard-synopsis { font-size: 20px; line-height: 28px; max-width: 568px; }
 }
+@media (min-width: 1600px) {
+  .billboard-synopsis { max-width: 625px; }
+}
 @media (min-width: 1920px) {
   .billboard-synopsis { font-size: 24px; }
 }
 
 /* Row block and row title (Netflix: title to tiles gap 10, 32 between rows; 16 / 18 / 24 weight 500). */
-.rows-stack > * + * { margin-top: 12px; }
+/* the space between rows: only real rows count (an empty placeholder first in the list gave the first row a second gap under the billboard, 64 px where Netflix has 32) */
+.rows-stack > :not(:empty) ~ :not(:empty) { margin-top: 12px; }
 @media (min-width: 600px) {
-  .rows-stack > * + * { margin-top: 32px; }
+  .rows-stack > :not(:empty) ~ :not(:empty) { margin-top: 32px; }
 }
+/* The margin before a row's first card and after its last: the page margin less one gap, because the row's gap follows it, so the first card
+   starts exactly at the page margin as on Netflix (it started one gap further in) and where an endless row pages to. */
+.row-edge { flex: none; height: 100%; pointer-events: none; width: calc(var(--app-x, 56px) - var(--tile-gap, 8px)); }
+
 .row-block {
   display: flex;
   flex-direction: column;
@@ -155,7 +163,8 @@
   .row-title { font-size: 18px; line-height: 1.27; font-weight: 500; }
 }
 @media (min-width: 1280px) {
-  .row-title { font-size: 24px; }
+  /* Netflix's 24 px row title takes a 31 px line (measured 2026-10-23 at 1736 wide: title 854, cards 899) */
+  .row-title { font-size: 24px; line-height: 31px; }
 }
 
 html {

@@ -228,11 +228,11 @@ pub fn VibeRow(
                                 >
                                     // the copy of the last cards in front of the row: not shown until the row is paged for the first time (see row_scroll.rs)
                                     <div data-loop-lead="1" class="flex-none gap-[var(--tile-gap)]" style="display: none;">{lead_views}</div>
-                                    <div data-loop-spacer="1" class="flex-none h-full pointer-events-none" style="width: var(--app-x, 56px);" />
+                                    <div data-loop-spacer="1" class="row-edge" />
 
                                     {card_views}
 
-                                    <div class="flex-none h-full pointer-events-none" style="width: var(--app-x, 56px);" />
+                                    <div class="row-edge" />
                                 </div>
 
                                 <crate::components::media::row_scroll::EdgeButton edge=crate::components::media::row_scroll::Edge::Left visible=Signal::derive(move || can_scroll_left.get() || looping.get()) on_click=Callback::new(move |_| scroll_left("left")) label=crate::i18n::t("vibe-row-scroll-left") />

@@ -119,7 +119,7 @@ pub fn ContinueWatchingRow(
                                 class="row-scroll-strip flex overflow-x-scroll scrollbar-hide w-full pointer-events-auto relative z-10 py-[2px] gap-[var(--tile-gap)]"
                                 style="scroll-behavior: smooth;"
                             >
-                                <div class="flex-none h-full pointer-events-none" style="width: var(--app-x, 56px);" />
+                                <div class="row-edge" />
 
                                 {items.into_iter().map(|rec| {
                                     let nav_play = navigate.clone();
@@ -214,7 +214,7 @@ pub fn ContinueWatchingRow(
                                     }
                                 }).collect::<Vec<_>>()}
 
-                                <div class="flex-none h-full pointer-events-none" style="width: var(--app-x, 56px);" />
+                                <div class="row-edge" />
                             </div>
 
                             // Left Chevron

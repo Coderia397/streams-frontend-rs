@@ -626,7 +626,7 @@ pub fn HeroSection(
                 />
 
                 // ── Bottom Content Layer ─────────────────────────────────────────
-                <div class="absolute inset-x-0 bottom-0 z-20 p-9 flex flex-col md:flex-row md:items-end md:justify-between gap-6 pointer-events-none">
+                <div class="absolute inset-x-0 bottom-0 z-20 p-9 lg:p-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6 pointer-events-none">
 
                     // Left Column: Logo/Title, Meta, Synopsis, CTA Buttons
                     <div class="flex flex-col items-start pointer-events-auto">

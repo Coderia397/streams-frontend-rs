@@ -199,7 +199,7 @@ pub fn Row(
                     if m.is_empty() && is_fetching.get() {
                         view! {
                             <div class="flex overflow-x-scroll scrollbar-hide w-full pointer-events-auto relative z-10 py-[2px] gap-[var(--tile-gap)]">
-                                <div class="flex-none h-full pointer-events-none" style="width: var(--app-x, 56px);" />
+                                <div class="row-edge" />
                                 {(0..6).map(|_| view! {
                                     <div
                                         class=format!("movie-card-container relative flex-none {} aspect-video bg-card rounded-tile overflow-hidden border border-ink/[0.04] pointer-events-auto", card_width_class)
@@ -212,7 +212,7 @@ pub fn Row(
                                         </div>
                                     </div>
                                 }).collect::<Vec<_>>()}
-                                <div class="flex-none h-full pointer-events-none" style="width: var(--app-x, 56px);" />
+                                <div class="row-edge" />
                             </div>
                         }.into_any()
                     } else if m.is_empty() {
@@ -229,7 +229,7 @@ pub fn Row(
                                     class="row-scroll-strip flex overflow-x-scroll scrollbar-hide w-full pointer-events-auto relative z-10 py-[2px] gap-[var(--tile-gap)]"
                                     style="scroll-behavior: smooth;"
                                 >
-                                    <div class="flex-none h-full pointer-events-none" style="width: var(--app-x, 56px);" />
+                                    <div class="row-edge" />
 
                                     {m.into_iter().map(|item| {
                                         let movie_id = item.id;
@@ -268,7 +268,7 @@ pub fn Row(
                                         view! { <div /> }.into_any()
                                     }}
 
-                                    <div class="flex-none h-full pointer-events-none" style="width: var(--app-x, 56px);" />
+                                    <div class="row-edge" />
                                 </div>
 
                                 <crate::components::media::row_scroll::EdgeButton edge=crate::components::media::row_scroll::Edge::Left visible=Signal::derive(move || can_scroll_left.get() || looping.get()) on_click=Callback::new(move |_| scroll_left("left")) label=crate::i18n::t("continue-watching-row-scroll-left") />
