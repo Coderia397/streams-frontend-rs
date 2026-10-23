@@ -127,17 +127,18 @@ pub fn default_profiles_with(main_avatar: String) -> Vec<crate::models::profile:
 
 pub fn provide_profile_store() {
     let storage = web_sys::window().and_then(|w| w.local_storage().ok().flatten());
-    let initial_profile = storage
-        .as_ref()
-        .and_then(|s| s.get_item(crate::keys::ACTIVE_PROFILE).ok().flatten())
-        .or_else(|| Some("p1".to_string()));
-
     let mut initial_profiles = storage
         .as_ref()
         .and_then(|s| s.get_item(crate::keys::PROFILES).ok().flatten())
         .and_then(|raw| serde_json::from_str::<Vec<crate::models::profile::Profile>>(&raw).ok())
         .unwrap_or_else(default_profiles);
     crate::models::profile_rules::normalize(&mut initial_profiles);
+    // the profile in use: the one this browser chose, if it still exists. Without one, a browser that holds an account shows Who's watching
+    // (as Netflix does after signing in or reloading before a choice); a browser without an account uses its first profile.
+    let saved = storage.as_ref().and_then(|s| s.get_item(crate::keys::ACTIVE_PROFILE).ok().flatten());
+    let initial_profile = saved.filter(|id| initial_profiles.iter().any(|p| &p.id == id)).or_else(|| {
+        if crate::services::account::has_account() { None } else { initial_profiles.first().map(|p| p.id.clone()) }
+    });
     for p in initial_profiles.iter_mut() {
         p.avatar_url = p.avatar_url.take().map(|u| crate::data::avatars::fast_avatar(&u));
     }

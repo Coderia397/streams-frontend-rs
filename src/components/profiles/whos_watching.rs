@@ -116,7 +116,9 @@ pub fn WhosWatchingGate(
 
     view! {
         // the page on Netflix: a dark red glow at the top fading to black, the logo top left, the question centred, tiles 160 px wide (picture 128 px), a pill under them
-        <div class="fixed inset-0 z-(--z-screen) flex select-none flex-col items-center justify-center text-ink animate-in fade-in duration-(--motion-slower)" style="background: radial-gradient(ellipse 90% 100% at 50% 0%, #481a1a 0%, #1a0a0a 55%, #0b0405 100%);">
+        // Netflix's Who's watching (measured 2026-10-23, note 113): black with a red glow from above the top, heading 32 px, tiles 168 px apart,
+        // 32 px under the heading, names 23 px under the pictures, the button 52 px under the names
+        <div class="fixed inset-0 z-(--z-screen) flex select-none flex-col items-center justify-center text-ink animate-in fade-in duration-(--motion-slower)" style="background: #000 radial-gradient(2170px at 50% -54dvh, rgba(111, 24, 29, 0.8) 19%, rgba(56, 12, 15, 0.4) 60%, transparent 100%);">
             <PhoneProfilePicker
                 profiles=profiles_signal
                 editing=edit_mode
@@ -132,7 +134,7 @@ pub fn WhosWatchingGate(
                 {move || if edit_mode.get() { crate::i18n::t("profile-manage-title") } else { crate::i18n::t("profile-whos-watching") }}
             </h1>
 
-            <div class="mx-auto flex max-w-[85vw] flex-wrap items-start justify-center gap-[8px] px-4">
+            <div class="mx-auto mt-4 flex max-w-[85vw] flex-wrap items-start justify-center gap-[8px] px-4">
                 {move || profiles_signal.get().into_iter().map(|profile| {
                     let p_clone = profile.clone();
                     let name = profile.name.clone();
@@ -140,8 +142,8 @@ pub fn WhosWatchingGate(
                     let has_pin = profile.pin.is_some();
                     let avatar = profile.avatar_url.clone().unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string());
                     view! {
-                        <button type="button" on:click=move |_| on_select_tile(p_clone.clone()) class="group flex w-[160px] cursor-pointer flex-col items-center gap-[10px] p-[16px] focus:outline-none">
-                            <div class="relative h-[128px] w-[128px] overflow-hidden rounded-modal outline outline-[3px] outline-transparent transition-[outline-color] group-hover:outline-ink group-focus-visible:outline-ink">
+                        <button type="button" on:click=move |_| on_select_tile(p_clone.clone()) class="group flex w-[160px] cursor-pointer flex-col items-center gap-[23px] p-[16px] focus:outline-none">
+                            <div class="relative h-[128px] w-[128px] overflow-hidden rounded-modal outline outline-[3px] outline-transparent transition-[outline-color] group-hover:outline-ink/70 group-focus-visible:outline-ink/70">
                                 {if is_kids && p_clone.avatar_url.is_none() {
                                     view! { <crate::components::profiles::kids_avatar::KidsAvatar size=128.0 /> }.into_any()
                                 } else {
@@ -162,8 +164,8 @@ pub fn WhosWatchingGate(
 
                 // Add Profile tile
                 {move || (profiles_signal.get().len() < 5).then(|| view! {
-                    <button type="button" on:click=move |_| set_modal_state.set(Some(("add".to_string(), None))) class="group flex w-[160px] cursor-pointer flex-col items-center gap-[10px] p-[16px] focus:outline-none">
-                        <div class="flex h-[128px] w-[128px] items-center justify-center rounded-modal bg-[#3b2527] outline outline-[3px] outline-transparent transition-[outline-color] group-hover:outline-ink">
+                    <button type="button" on:click=move |_| set_modal_state.set(Some(("add".to_string(), None))) class="group flex w-[160px] cursor-pointer flex-col items-center gap-[23px] p-[16px] focus:outline-none">
+                        <div class="flex h-[128px] w-[128px] items-center justify-center rounded-modal bg-[#3b2527] outline outline-[3px] outline-transparent transition-[outline-color] group-hover:outline-ink/70">
                             <i class="ph ph-plus text-icon-lg text-ink"></i>
                         </div>
                         <span class="text-title-sm font-medium leading-[23px] text-ink/70 transition-colors group-hover:text-ink">{crate::i18n::t("whos-watching-add-profile")}</span>
@@ -172,11 +174,11 @@ pub fn WhosWatchingGate(
             </div>
 
             // Manage Profiles opens the editing mode; Done goes back
-            <div class="mt-[20px] mb-10">
+            <div class="mb-10 mt-[36px]">
                 <button
                     type="button"
                     on:click={ let navigate = navigate.clone(); move |_| if manage { navigate("/browse", Default::default()) } else { set_edit_mode.update(|e| *e = !*e) } }
-                    class="flex h-10 cursor-pointer items-center gap-2 rounded-button border border-ink bg-void/70 px-5 text-body-md font-medium text-ink transition-colors hover:bg-ink hover:text-void active:scale-95"
+                    class="btn-pill btn-pill-md bg-void/70 text-ink shadow-[inset_0_0_0_1px_rgb(128_128_128/0.7)] hover:bg-ink hover:text-void"
                 >
                     {move || if edit_mode.get() { view! { {crate::i18n::t("common-done")} }.into_any() } else { view! { <i class="ph ph-pencil-simple text-title-sm"></i>{crate::i18n::t("profile-manage")} }.into_any() }}
                 </button>
