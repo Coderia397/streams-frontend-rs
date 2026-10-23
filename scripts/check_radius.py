@@ -45,6 +45,32 @@ for f in sorted((ROOT / "src").rglob("*.rs")):
                 continue
             problems.append(f"{where}  <{tag}> with {cls}: fields take --radius-input from components.css; remove the class")
 
+# A button or link drawn with a full border and no corners at all (a square box among pills: the language menus copied Netflix's old page
+# until 2026-10-23). A btn-* class carries its own corners; a `radius:` comment allows a real exception.
+SQUARE = re.compile(r'<(button|a)\b')
+for f in sorted((ROOT / "src").rglob("*.rs")):
+    text = f.read_text(encoding="utf-8")
+    lines = text.split("\n")
+    for m in SQUARE.finditer(text):
+        rest = text[m.end():m.end() + 900]
+        stop = rest.find("<")
+        head = rest[:stop if stop >= 0 else len(rest)]
+        at = head.find("class=")
+        if at < 0:
+            continue
+        # every string of the class attribute (a plain string, or the branches of an if), up to the end of its line
+        strings = re.findall(r'"([^"]*)"', head[at:].split("\n")[0])
+        def square(s):
+            bare = [t.split(":")[-1] for t in s.split()]
+            bordered = any(t == "border" or re.fullmatch(r"border-[0-9]+|border-\[[0-9.]+px\]", t) for t in bare)
+            return bordered and not any(t.startswith("rounded") or t.startswith("btn-") for t in bare)
+        if not any(square(x) for x in strings):
+            continue
+        line_no = text.count("\n", 0, m.start()) + 1
+        if any("radius:" in lines[i] for i in range(max(0, line_no - 4), min(len(lines), line_no + 3))):
+            continue
+        problems.append(f"{f.relative_to(ROOT)}:{line_no}  <{m.group(1)}> with a border and square corners: use a btn-* preset or rounded-button")
+
 for p in problems:
     print(p)
 print(f"{len(problems)} problem(s)")
