@@ -1,7 +1,6 @@
 use leptos::prelude::*;
 use leptos::html::{Div, Input};
 use leptos_router::hooks::{use_navigate, use_query_map};
-use wasm_bindgen::JsCast;
 
 #[component]
 pub fn SearchBar() -> impl IntoView {
@@ -35,34 +34,19 @@ pub fn SearchBar() -> impl IntoView {
         }
     });
 
-    // Handle outside clicks to collapse search if empty and not on /search
-    Effect::new(move |_| {
-        let window = web_sys::window();
-        if let Some(win) = window {
-            let document = win.document();
-            if let Some(doc) = document {
-                let cb = wasm_bindgen::closure::Closure::<dyn Fn(web_sys::MouseEvent)>::wrap(Box::new(move |e: web_sys::MouseEvent| {
-                    if let Some(container) = container_ref.get() {
-                        let target = e.target();
-                        if let Some(target_node) = target.and_then(|t| t.dyn_into::<web_sys::Node>().ok()) {
-                            let container_node: &web_sys::Node = container.as_ref();
-                            if !container_node.contains(Some(&target_node)) {
-                                if !is_search_page() && input_val.get().trim().is_empty() {
-                                    set_is_active.set(false);
-                                }
-                            }
-                        }
-                    }
-                }));
-
-                let _ = doc.add_event_listener_with_callback("mousedown", cb.as_ref().unchecked_ref());
-                cb.forget();
+    // a press anywhere else folds an empty search away (not on the search page)
+    crate::utils::listen::on_press_outside(
+        move |target| crate::utils::listen::contains(container_ref, target),
+        move || {
+            if !is_search_page() && input_val.get_untracked().trim().is_empty() {
+                set_is_active.set(false);
             }
-        }
-    });
+        },
+    );
 
     let navigate = use_navigate();
-    let timer_id = StoredValue::new(None::<i32>);
+    let timer_id = StoredValue::new(None::<leptos::leptos_dom::helpers::TimeoutHandle>);
+    on_cleanup(move || if let Some(h) = timer_id.get_value() { h.clear() });
     
     // 300ms live debounced search query execution (Task 090)
     let navigate_debounced = navigate.clone();
@@ -70,33 +54,26 @@ pub fn SearchBar() -> impl IntoView {
         let val = event_target_value(&e);
         set_input_val.set(val.clone());
         
-        // Cancel previous timer
-        timer_id.update_value(|id| {
-            if let Some(handle) = id.take() {
-                if let Some(win) = web_sys::window() {
-                    win.clear_timeout_with_handle(handle);
-                }
-            }
-        });
-
+        // the framework's timer: the previous one is cleared, the closure freed after it runs (one leaked per key press before), and none
+        // is left when the bar goes
+        if let Some(h) = timer_id.get_value() {
+            h.clear();
+        }
         let nav = navigate_debounced.clone();
         let query = val.clone();
-        let cb = wasm_bindgen::closure::Closure::<dyn Fn()>::wrap(Box::new(move || {
-            let target_url = if query.trim().is_empty() {
-                "/search".to_string()
-            } else {
-                let encoded = js_sys::encode_uri_component(&query).as_string().unwrap_or(query.clone());
-                format!("/search?q={}", encoded)
-            };
-            nav(&target_url, Default::default());
-        }));
-
-        if let Some(win) = web_sys::window() {
-            if let Ok(id) = win.set_timeout_with_callback_and_timeout_and_arguments_0(cb.as_ref().unchecked_ref(), 300) {
-                timer_id.set_value(Some(id));
-            }
-        }
-        cb.forget();
+        let handle = leptos::leptos_dom::helpers::set_timeout_with_handle(
+            move || {
+                let target_url = if query.trim().is_empty() {
+                    "/search".to_string()
+                } else {
+                    let encoded = js_sys::encode_uri_component(&query).as_string().unwrap_or(query.clone());
+                    format!("/search?q={}", encoded)
+                };
+                nav(&target_url, Default::default());
+            },
+            std::time::Duration::from_millis(300),
+        );
+        timer_id.set_value(handle.ok());
     };
 
     let navigate_toggle = navigate.clone();
@@ -116,13 +93,7 @@ pub fn SearchBar() -> impl IntoView {
     // Instant clear (X) button (Task 090)
     let stored_navigate = StoredValue::new(navigate.clone());
     let clear_search = move |_| {
-        timer_id.update_value(|id| {
-            if let Some(handle) = id.take() {
-                if let Some(win) = web_sys::window() {
-                    win.clear_timeout_with_handle(handle);
-                }
-            }
-        });
+        timer_id.update_value(|id| if let Some(h) = id.take() { h.clear() });
         set_input_val.set("".to_string());
         stored_navigate.with_value(|n| n("/search", Default::default()));
         if let Some(input_el) = input_ref.get() {
@@ -132,13 +103,7 @@ pub fn SearchBar() -> impl IntoView {
 
     let on_keydown = move |e: leptos::ev::KeyboardEvent| {
         if e.key() == "Escape" {
-            timer_id.update_value(|id| {
-                if let Some(handle) = id.take() {
-                    if let Some(win) = web_sys::window() {
-                        win.clear_timeout_with_handle(handle);
-                    }
-                }
-            });
+            timer_id.update_value(|id| if let Some(h) = id.take() { h.clear() });
             set_input_val.set("".to_string());
             stored_navigate.with_value(|n| n("/browse", Default::default()));
             set_is_active.set(false);

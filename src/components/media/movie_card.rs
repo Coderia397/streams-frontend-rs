@@ -121,7 +121,7 @@ pub fn MovieCard(
         crate::services::rating::prefetch(movie_id, is_tv);
         let timer_id = set_timeout_ms(move || {
             show_timer.set_value(None);
-            if let Some(el) = card_ref.get() {
+            if let Some(el) = card_ref.get_untracked() {
                 let r = el.get_bounding_client_rect();
                 let win = web_sys::window().unwrap();
                 let win_w = win.inner_width().unwrap().as_f64().unwrap_or(1200.0);

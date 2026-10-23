@@ -37,7 +37,7 @@ pub fn SpotlightArtwork(movie_id: u32, is_tv: bool, #[prop(into)] backdrop_src: 
             for e in entries.iter() {
                 if let Ok(entry) = e.dyn_into::<web_sys::IntersectionObserverEntry>() {
                     let on = entry.is_intersecting() && entry.intersection_ratio() >= 0.6;
-                    set_visible.set(on);
+                    set_visible.try_set(on);
                     if on && !ui_store.spotlight_hold.get_untracked() { ui_store.spotlight_playing.set(Some(me.clone())); }
                 }
             }
@@ -46,8 +46,16 @@ pub fn SpotlightArtwork(movie_id: u32, is_tv: bool, #[prop(into)] backdrop_src: 
         init.set_threshold(&js_sys::Array::of2(&JsValue::from_f64(0.0), &JsValue::from_f64(0.6)));
         if let Ok(obs) = web_sys::IntersectionObserver::new_with_options(cb.as_ref().unchecked_ref(), &init) {
             obs.observe(&el);
+            // the observer and its callback go with the card (they ran on for good before, writing to a card that was gone)
+            let kept = StoredValue::new_local(Some((obs, cb)));
+            on_cleanup(move || {
+                kept.try_update_value(|k| {
+                    if let Some((obs, _cb)) = k.take() {
+                        obs.disconnect();
+                    }
+                });
+            });
         }
-        cb.forget();
     });
 
     // when the page has arrived at a tab, the card on screen takes the trailer

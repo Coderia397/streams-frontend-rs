@@ -127,22 +127,16 @@ pub fn NewPopularPage() -> impl IntoView {
     let (active_tab, set_active_tab) = signal(NewPopularTab::ComingSoon);
 
     // the pill follows the scrolling: the last tab whose top has reached the pills is the one in use
-    Effect::new(move |_| {
-        if let Some(win) = web_sys::window() {
-            let cb = wasm_bindgen::closure::Closure::<dyn Fn()>::wrap(Box::new(move || {
-                let Some(doc) = web_sys::window().and_then(|w| w.document()) else { return };
-                let mut current = SECTIONS[0];
-                for tab in SECTIONS {
-                    if let Some(el) = doc.get_element_by_id(section_id(tab)) {
-                        if el.get_bounding_client_rect().top() <= pills_bottom(&doc) + 24.0 { current = tab; }
-                    }
-                }
-                if active_tab.get_untracked() != current { set_active_tab.set(current); }
-                dim_cards(&doc);
-            }));
-            let _ = win.add_event_listener_with_callback("scroll", cb.as_ref().unchecked_ref());
-            cb.forget();
+    crate::utils::listen::listen_window(leptos::ev::scroll, move |_| {
+        let Some(doc) = web_sys::window().and_then(|w| w.document()) else { return };
+        let mut current = SECTIONS[0];
+        for tab in SECTIONS {
+            if let Some(el) = doc.get_element_by_id(section_id(tab)) {
+                if el.get_bounding_client_rect().top() <= pills_bottom(&doc) + 24.0 { current = tab; }
+            }
         }
+        if active_tab.get_untracked() != current { set_active_tab.set(current); }
+        dim_cards(&doc);
     });
     // the cards load one after the other: the shades are set again while they come in (and on every scroll, above)
     if let Ok(handle) = set_interval_with_handle(move || { if let Some(doc) = web_sys::window().and_then(|w| w.document()) { dim_cards(&doc); } }, std::time::Duration::from_millis(400)) {

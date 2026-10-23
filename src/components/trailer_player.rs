@@ -305,79 +305,68 @@ pub fn TrailerPlayer(
     }
 
     // ── Universal Tab Visibility & 15-Second Inactivity Lifecycle (All OS) ───
-    Effect::new(move |_| {
-        let on_vis_change = Closure::wrap(Box::new(move || {
-            let is_hidden = web_sys::window().and_then(|w| w.document()).map(|doc| {
-                let state = js_sys::Reflect::get(&doc, &wasm_bindgen::JsValue::from_str("visibilityState"))
-                    .ok()
-                    .and_then(|v| v.as_string());
-                let hidden = js_sys::Reflect::get(&doc, &wasm_bindgen::JsValue::from_str("hidden"))
-                    .ok()
-                    .and_then(|v| v.as_bool())
-                    .unwrap_or(false);
-                hidden || state.as_deref() == Some("hidden")
-            }).unwrap_or(false);
+    // the tab hidden or shown (visibilitychange), and Safari's page cache (pagehide, pageshow); the listeners go with the player
+    let on_vis_change = std::rc::Rc::new(move || {
+        let is_hidden = web_sys::window().and_then(|w| w.document()).map(|doc| {
+            let state = js_sys::Reflect::get(&doc, &wasm_bindgen::JsValue::from_str("visibilityState"))
+                .ok()
+                .and_then(|v| v.as_string());
+            let hidden = js_sys::Reflect::get(&doc, &wasm_bindgen::JsValue::from_str("hidden"))
+                .ok()
+                .and_then(|v| v.as_bool())
+                .unwrap_or(false);
+            hidden || state.as_deref() == Some("hidden")
+        }).unwrap_or(false);
 
-            let target_id = iframe_id_stored.get_value();
+        let target_id = iframe_id_stored.get_value();
 
-            if is_hidden {
-                // Tab switched / App backgrounded: PAUSE IMMEDIATELY across all OS!
-                let currently_playing = is_playing.get_untracked() && !is_unmounted_by_inactivity.get_untracked();
-                if currently_playing {
-                    set_was_playing_before_tab_hidden.set(true);
-                }
-                set_is_tab_hidden.set(true);
-                send_yt_cmd(&target_id, "pauseVideo");
-
-                // Start 15-second inactivity timer to unmount iframe & free system RAM / GPU
-                clear_timeout_id(tab_inactivity_timer.get_value());
-                let t = set_timeout_ms(move || {
-                    set_is_unmounted_by_inactivity.set(true);
-                    set_has_ever_started.set(false);
-                    set_is_frame_ready.set(false);
-                }, 15_000);
-                tab_inactivity_timer.set_value(t);
-            } else {
-                // Tab / App foregrounded: cancel 15s unmount timer
-                clear_timeout_id(tab_inactivity_timer.get_value());
-                tab_inactivity_timer.set_value(None);
-                set_is_tab_hidden.set(false);
-
-                let was_unmounted = is_unmounted_by_inactivity.get_untracked();
-                let should_resume = was_playing_before_tab_hidden.get_untracked() && is_playing.get_untracked();
-                set_was_playing_before_tab_hidden.set(false);
-
-                if was_unmounted {
-                    // Left > 15 seconds: unmounted to free RAM, now re-mount and resume from saved timestamp
-                    set_is_unmounted_by_inactivity.set(false);
-                    if should_resume {
-                        set_has_ever_started.set(true);
-                    }
-                } else if should_resume {
-                    // Left < 15 seconds: iframe was kept warm in DOM, resume immediately!
-                    send_yt_cmd(&target_id, "playVideo");
-                }
+        if is_hidden {
+            // Tab switched / App backgrounded: PAUSE IMMEDIATELY across all OS!
+            let currently_playing = is_playing.get_untracked() && !is_unmounted_by_inactivity.get_untracked();
+            if currently_playing {
+                set_was_playing_before_tab_hidden.set(true);
             }
-        }) as Box<dyn FnMut()>);
+            set_is_tab_hidden.set(true);
+            send_yt_cmd(&target_id, "pauseVideo");
 
-        if let Some(win) = web_sys::window() {
-            if let Some(doc) = win.document() {
-                let _ = doc.add_event_listener_with_callback(
-                    "visibilitychange",
-                    on_vis_change.as_ref().unchecked_ref(),
-                );
+            // Start 15-second inactivity timer to unmount iframe & free system RAM / GPU
+            clear_timeout_id(tab_inactivity_timer.get_value());
+            let t = set_timeout_ms(move || {
+                set_is_unmounted_by_inactivity.set(true);
+                set_has_ever_started.set(false);
+                set_is_frame_ready.set(false);
+            }, 15_000);
+            tab_inactivity_timer.set_value(t);
+        } else {
+            // Tab / App foregrounded: cancel 15s unmount timer
+            clear_timeout_id(tab_inactivity_timer.get_value());
+            tab_inactivity_timer.set_value(None);
+            set_is_tab_hidden.set(false);
+
+            let was_unmounted = is_unmounted_by_inactivity.get_untracked();
+            let should_resume = was_playing_before_tab_hidden.get_untracked() && is_playing.get_untracked();
+            set_was_playing_before_tab_hidden.set(false);
+
+            if was_unmounted {
+                // Left > 15 seconds: unmounted to free RAM, now re-mount and resume from saved timestamp
+                set_is_unmounted_by_inactivity.set(false);
+                if should_resume {
+                    set_has_ever_started.set(true);
+                }
+            } else if should_resume {
+                // Left < 15 seconds: iframe was kept warm in DOM, resume immediately!
+                send_yt_cmd(&target_id, "playVideo");
             }
-            let _ = win.add_event_listener_with_callback(
-                "pagehide",
-                on_vis_change.as_ref().unchecked_ref(),
-            );
-            let _ = win.add_event_listener_with_callback(
-                "pageshow",
-                on_vis_change.as_ref().unchecked_ref(),
-            );
         }
-        on_vis_change.forget();
     });
+    {
+        let f = on_vis_change.clone();
+        crate::utils::listen::listen_document("visibilitychange", move |_| f());
+        let f = on_vis_change.clone();
+        crate::utils::listen::listen_window(leptos::ev::pagehide, move |_| f());
+        let f = on_vis_change;
+        crate::utils::listen::listen_window(leptos::ev::pageshow, move |_| f());
+    }
 
     on_cleanup(move || {
         clear_timeout_id(tab_inactivity_timer.get_value());
@@ -424,145 +413,132 @@ pub fn TrailerPlayer(
     });
 
     // ── YouTube iframe event listener (Ready, Playing, Ending, Outro-Cutoff, Time-Update) ─
-    Effect::new(move |_| {
-        let on_ready_cb = on_ready;
-        let on_ended_cb = on_ended;
-        let on_time_update_cb = on_time_update;
+    // one listener for the player's life (it went on the window for good before, so every player ever shown kept reading every message)
+    let on_ready_cb = on_ready;
+    let on_ended_cb = on_ended;
+    let on_time_update_cb = on_time_update;
 
-        let on_message = Closure::wrap(Box::new(move |e: web_sys::MessageEvent| {
-            let s: String = if let Ok(txt) = e.data().dyn_into::<js_sys::JsString>() {
-                txt.into()
-            } else if let Ok(json_str) = js_sys::JSON::stringify(&e.data()) {
-                json_str.into()
-            } else {
-                String::new()
-            };
+    crate::utils::listen::listen_window(leptos::ev::message, move |e: web_sys::MessageEvent| {
+        let s: String = if let Ok(txt) = e.data().dyn_into::<js_sys::JsString>() {
+            txt.into()
+        } else if let Ok(json_str) = js_sys::JSON::stringify(&e.data()) {
+            json_str.into()
+        } else {
+            String::new()
+        };
 
-            if s.is_empty() {
-                return;
-            }
-
-            let target_id = iframe_id_stored.get_value();
-
-            // Verify that this postMessage actually originated from THIS player's iframe window!
-            if let Some(source) = e.source() {
-                if let Ok(source_win) = source.dyn_into::<web_sys::Window>() {
-                    if let Some(win) = web_sys::window() {
-                        if let Some(doc) = win.document() {
-                            if let Some(el) = doc.get_element_by_id(&target_id) {
-                                if let Ok(iframe) = el.dyn_into::<web_sys::HtmlIFrameElement>() {
-                                    if let Some(cw) = iframe.content_window() {
-                                        if source_win != cw {
-                                            return;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Kick stalled player if stuck in CUED (5), UNSTARTED (-1), or onReady
-            let is_stalled_cued = s.contains(r#""playerState":5"#)
-                || s.contains(r#""playerState": 5"#)
-                || s.contains(r#""info":5"#)
-                || s.contains(r#""info": 5"#)
-                || s.contains(r#""data":5"#)
-                || s.contains(r#""data": 5"#)
-                || s.contains(r#""playerState":-1"#)
-                || s.contains(r#""playerState": -1"#)
-                || s.contains(r#""info":-1"#)
-                || s.contains(r#""info": -1"#)
-                || s.contains(r#""data":-1"#)
-                || s.contains(r#""data": -1"#)
-                || s.contains(r#""onReady""#);
-
-            if is_stalled_cued && is_playing.get_untracked() {
-                send_yt_cmd(&target_id, "playVideo");
-            }
-
-            // Playing confirmed: playerState 1, data 1, info 1
-            let is_playing_event = s.contains(r#""info":1"#)
-                || s.contains(r#""info": 1"#)
-                || s.contains(r#""playerState":1"#)
-                || s.contains(r#""playerState": 1"#)
-                || s.contains(r#""data":1"#)
-                || s.contains(r#""data": 1"#);
-
-            if is_playing_event {
-                set_is_frame_ready.set(true);
-
-                // Sound is restored here, now that playback is confirmed active.
-                // Unmuting an already-playing element does NOT trip browser autoplay restrictions!
-                if !is_muted.get_untracked() {
-                    send_yt_cmd(&target_id, "unMute");
-                }
-
-                // Initial seek performed ONCE upon playback start
-                if !has_initial_seek_done.get_value() {
-                    let init_t = initial_seek_time.get_untracked();
-                    if init_t > 0.5 {
-                        has_initial_seek_done.set_value(true);
-                        playback_anchor_sec.set_value(init_t);
-                        playback_anchor_epoch.set_value(js_sys::Date::now());
-                        send_yt_seek(&target_id, init_t);
-                    }
-                }
-                if let Some(cb) = on_ready_cb {
-                    cb.run(());
-                }
-            }
-
-            // Normal End: playerState 0, data 0, info 0
-            let is_ended_event = s.contains(r#""info":0"#)
-                || s.contains(r#""info": 0"#)
-                || s.contains(r#""playerState":0"#)
-                || s.contains(r#""playerState": 0"#)
-                || s.contains(r#""data":0"#)
-                || s.contains(r#""data": 0"#);
-
-            if is_ended_event {
-                if let Some(cb) = on_ended_cb {
-                    cb.run(());
-                }
-            }
-
-            // Live Time Update Reporting (for seamless handoff to modal and back)
-            if s.contains(r#""currentTime""#) {
-                if let Some(cur) = parse_yt_number(&s, "currentTime") {
-                    set_is_frame_ready.set(true);
-                    last_tracked_time.set_value(cur);
-                    if cur > 0.0 {
-                        playback_anchor_sec.set_value(cur);
-                        playback_anchor_epoch.set_value(js_sys::Date::now());
-                    }
-                    if let Some(cb) = on_time_update_cb {
-                        cb.run(cur);
-                    }
-                }
-            }
-
-            if let (Some(cb), Some(dur)) = (on_duration_stored.get_value(), parse_yt_number(&s, "duration")) {
-                if dur > 0.0 { cb.run(dur); }
-            }
-
-            // Smart Outro Cutoff: If remaining < 7.0s, end before YouTube shows recommendation tiles
-            if s.contains(r#""currentTime""#) && s.contains(r#""duration""#) {
-                if let (Some(cur), Some(dur)) = (parse_yt_number(&s, "currentTime"), parse_yt_number(&s, "duration")) {
-                    if dur > 25.0 && (dur - cur) < 7.0 && (dur - cur) > 0.0 {
-                        if let Some(cb) = on_ended_cb {
-                            cb.run(());
-                        }
-                    }
-                }
-            }
-        }) as Box<dyn FnMut(web_sys::MessageEvent)>);
-
-        if let Some(win) = web_sys::window() {
-            let _ = win.add_event_listener_with_callback("message", on_message.as_ref().unchecked_ref());
+        if s.is_empty() {
+            return;
         }
-        on_message.forget();
+
+        let target_id = iframe_id_stored.get_value();
+
+        // only messages from this player's own frame: another player's, or any once this player's frame has gone, are not ours
+        let own = web_sys::window()
+            .and_then(|w| w.document())
+            .and_then(|d| d.get_element_by_id(&target_id))
+            .and_then(|el| el.dyn_into::<web_sys::HtmlIFrameElement>().ok())
+            .and_then(|f| f.content_window());
+        let Some(own) = own else { return };
+        match e.source().and_then(|src| src.dyn_into::<web_sys::Window>().ok()) {
+            Some(src) if src == own => {}
+            _ => return,
+        }
+
+        // Kick stalled player if stuck in CUED (5), UNSTARTED (-1), or onReady
+        let is_stalled_cued = s.contains(r#""playerState":5"#)
+            || s.contains(r#""playerState": 5"#)
+            || s.contains(r#""info":5"#)
+            || s.contains(r#""info": 5"#)
+            || s.contains(r#""data":5"#)
+            || s.contains(r#""data": 5"#)
+            || s.contains(r#""playerState":-1"#)
+            || s.contains(r#""playerState": -1"#)
+            || s.contains(r#""info":-1"#)
+            || s.contains(r#""info": -1"#)
+            || s.contains(r#""data":-1"#)
+            || s.contains(r#""data": -1"#)
+            || s.contains(r#""onReady""#);
+
+        if is_stalled_cued && is_playing.get_untracked() {
+            send_yt_cmd(&target_id, "playVideo");
+        }
+
+        // Playing confirmed: playerState 1, data 1, info 1
+        let is_playing_event = s.contains(r#""info":1"#)
+            || s.contains(r#""info": 1"#)
+            || s.contains(r#""playerState":1"#)
+            || s.contains(r#""playerState": 1"#)
+            || s.contains(r#""data":1"#)
+            || s.contains(r#""data": 1"#);
+
+        if is_playing_event {
+            set_is_frame_ready.set(true);
+
+            // Sound is restored here, now that playback is confirmed active.
+            // Unmuting an already-playing element does NOT trip browser autoplay restrictions!
+            if !is_muted.get_untracked() {
+                send_yt_cmd(&target_id, "unMute");
+            }
+
+            // Initial seek performed ONCE upon playback start
+            if !has_initial_seek_done.get_value() {
+                let init_t = initial_seek_time.get_untracked();
+                if init_t > 0.5 {
+                    has_initial_seek_done.set_value(true);
+                    playback_anchor_sec.set_value(init_t);
+                    playback_anchor_epoch.set_value(js_sys::Date::now());
+                    send_yt_seek(&target_id, init_t);
+                }
+            }
+            if let Some(cb) = on_ready_cb {
+                cb.run(());
+            }
+        }
+
+        // Normal End: playerState 0, data 0, info 0
+        let is_ended_event = s.contains(r#""info":0"#)
+            || s.contains(r#""info": 0"#)
+            || s.contains(r#""playerState":0"#)
+            || s.contains(r#""playerState": 0"#)
+            || s.contains(r#""data":0"#)
+            || s.contains(r#""data": 0"#);
+
+        if is_ended_event {
+            if let Some(cb) = on_ended_cb {
+                cb.run(());
+            }
+        }
+
+        // Live Time Update Reporting (for seamless handoff to modal and back)
+        if s.contains(r#""currentTime""#) {
+            if let Some(cur) = parse_yt_number(&s, "currentTime") {
+                set_is_frame_ready.set(true);
+                last_tracked_time.set_value(cur);
+                if cur > 0.0 {
+                    playback_anchor_sec.set_value(cur);
+                    playback_anchor_epoch.set_value(js_sys::Date::now());
+                }
+                if let Some(cb) = on_time_update_cb {
+                    cb.run(cur);
+                }
+            }
+        }
+
+        if let (Some(cb), Some(dur)) = (on_duration_stored.get_value(), parse_yt_number(&s, "duration")) {
+            if dur > 0.0 { cb.run(dur); }
+        }
+
+        // Smart Outro Cutoff: If remaining < 7.0s, end before YouTube shows recommendation tiles
+        if s.contains(r#""currentTime""#) && s.contains(r#""duration""#) {
+            if let (Some(cur), Some(dur)) = (parse_yt_number(&s, "currentTime"), parse_yt_number(&s, "duration")) {
+                if dur > 25.0 && (dur - cur) < 7.0 && (dur - cur) > 0.0 {
+                    if let Some(cb) = on_ended_cb {
+                        cb.run(());
+                    }
+                }
+            }
+        }
     });
 
     let extra_class = class.unwrap_or_default();

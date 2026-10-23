@@ -368,9 +368,38 @@ pub async fn fetch_genre_menu(kind: &str) -> Option<GenreMenu> {
 
 /// The switches the engine sets for the product (`games`): anything not on is off, also when the engine cannot be reached.
 pub async fn fetch_features() -> std::collections::HashMap<String, bool> {
-    let Ok(resp) = engine_get(&format!("{}/api/features", base())).await else { return Default::default() };
-    if !resp.ok() { return Default::default(); }
-    resp.json().await.unwrap_or_default()
+    use futures::future::{FutureExt, LocalBoxFuture, Shared};
+    type Answer = std::collections::HashMap<String, bool>;
+    thread_local! {
+        // one request answers every caller (the navbar, the account gate, the phone bars, the details window asked it separately before),
+        // kept for five minutes; a failed answer is not kept, so the next caller asks again
+        static FEATURES: std::cell::RefCell<Option<(f64, Shared<LocalBoxFuture<'static, Option<Answer>>>)>> = const { std::cell::RefCell::new(None) };
+    }
+    let now = js_sys::Date::now();
+    let pending = FEATURES.with(|f| {
+        let mut f = f.borrow_mut();
+        if let Some((at, fut)) = f.as_ref() {
+            if now - at < 300_000.0 {
+                return fut.clone();
+            }
+        }
+        let fut: LocalBoxFuture<'static, Option<Answer>> = async {
+            let resp = engine_get(&format!("{}/api/features", base())).await.ok()?;
+            if !resp.ok() { return None; }
+            resp.json::<Answer>().await.ok()
+        }
+        .boxed_local();
+        let shared = fut.shared();
+        *f = Some((now, shared.clone()));
+        shared
+    });
+    match pending.await {
+        Some(answer) => answer,
+        None => {
+            FEATURES.with(|f| *f.borrow_mut() = None);
+            Default::default()
+        }
+    }
 }
 
 /// A game of the Games tab (from the engine's `games.json`).
@@ -708,31 +737,6 @@ pub async fn search_semantic(query: &str) -> Option<Vec<VibeItem>> {
     }
     let data: SemanticSearchResponse = resp.json().await.ok()?;
     Some(data.results)
-}
-
-#[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq)]
-pub struct HeroHighlight {
-    pub id: Option<u32>,
-    pub title: Option<String>,
-    pub primary_hook: Option<String>,
-    pub primary_icon: Option<String>,
-    pub secondary_hook: Option<String>,
-    pub secondary_icon: Option<String>,
-}
-
-/// Fetches dynamic creator-aware hero hook and distinction badge from local recommendation engine
-pub async fn fetch_hero_highlight(id: u32, title: Option<&str>) -> Option<HeroHighlight> {
-    let mut url = format!("{}/api/hero-highlight?id={}", base(), id);
-    if let Some(t) = title {
-        let encoded = js_sys::encode_uri_component(t);
-        let encoded_str: String = encoded.into();
-        url.push_str(&format!("&title={}", encoded_str));
-    }
-    let resp = engine_get(&url).await.ok()?;
-    if !resp.ok() {
-        return None;
-    }
-    resp.json().await.ok()
 }
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq)]

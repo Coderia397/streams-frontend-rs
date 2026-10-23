@@ -17,15 +17,10 @@ pub fn ProfileSwitchOverlay(
     let avatar = profile.avatar_url.clone().unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string());
     let is_kids = profile.is_kids;
 
-    Effect::new(move |_| {
-        if let Some(win) = web_sys::window() {
-            let cb = wasm_bindgen::closure::Closure::<dyn Fn()>::wrap(Box::new(move || {
-                on_finish.run(());
-            }));
-            let _ = win.set_timeout_with_callback_and_timeout_and_arguments_0(cb.as_ref().unchecked_ref(), SHOWN_MS);
-            cb.forget();
-        }
-    });
+    // the framework's timer: cleared if the screen goes first, and its closure is freed (the old one leaked once per switch)
+    if let Ok(handle) = leptos::leptos_dom::helpers::set_timeout_with_handle(move || on_finish.run(()), std::time::Duration::from_millis(SHOWN_MS as u64)) {
+        on_cleanup(move || handle.clear());
+    }
 
     // a Kids profile opens behind the Kids screen (bands of colour and the word); the others show the logo, the square and the ring
     if is_kids {
@@ -62,11 +57,8 @@ pub fn is_compact() -> bool {
 const HOLD_MS: i32 = 1100;
 
 fn after(ms: i32, f: impl Fn() + 'static) {
-    if let Some(win) = web_sys::window() {
-        let cb = wasm_bindgen::closure::Closure::<dyn Fn()>::wrap(Box::new(f));
-        let _ = win.set_timeout_with_callback_and_timeout_and_arguments_0(cb.as_ref().unchecked_ref(), ms);
-        cb.forget();
-    }
+    // the framework's timer frees its closure once it has run
+    leptos::leptos_dom::helpers::set_timeout(f, std::time::Duration::from_millis(ms.max(0) as u64));
 }
 
 fn put(el: &web_sys::Element, css: &str) {

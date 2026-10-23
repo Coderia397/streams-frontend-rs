@@ -1,6 +1,5 @@
 use leptos::prelude::*;
 use leptos_router::hooks::use_location;
-use wasm_bindgen::JsCast;
 use crate::components::layout::search_bar::SearchBar;
 use crate::components::layout::notifications_dropdown::NotificationsDropdown;
 use crate::components::layout::navbar_mobile::NavbarMobile;
@@ -12,19 +11,11 @@ pub fn Navbar(
     let (scroll_y_sig, set_scroll_y_sig) = signal(scroll_y.unwrap_or(0.0));
 
     // Dynamic window scroll listener (Task 085)
-    Effect::new(move |_| {
-        if scroll_y.is_none() {
-            if let Some(win) = web_sys::window() {
-                let win_clone = win.clone();
-                let cb = wasm_bindgen::closure::Closure::<dyn Fn()>::wrap(Box::new(move || {
-                    let y = win_clone.scroll_y().unwrap_or(0.0);
-                    set_scroll_y_sig.set(y);
-                }));
-                let _ = win.add_event_listener_with_callback("scroll", cb.as_ref().unchecked_ref());
-                cb.forget();
-            }
-        }
-    });
+    if scroll_y.is_none() {
+        crate::utils::listen::listen_window(leptos::ev::scroll, move |_| {
+            set_scroll_y_sig.set(web_sys::window().and_then(|w| w.scroll_y().ok()).unwrap_or(0.0));
+        });
+    }
 
     // Scroll opacity formula and transparent top-to-bottom gradient (Task 085)
     let scroll_style = move || {

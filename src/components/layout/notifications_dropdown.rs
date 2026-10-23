@@ -1,6 +1,5 @@
 use leptos::prelude::*;
 use leptos::html::Div;
-use wasm_bindgen::JsCast;
 use std::collections::HashSet;
 use crate::store::use_ui_store;
 
@@ -81,30 +80,11 @@ pub fn NotificationsDropdown() -> impl IntoView {
         });
     });
 
-    // Close on click outside
-    Effect::new(move |_| {
-        if open.get() {
-            let window = web_sys::window();
-            if let Some(win) = window {
-                let document = win.document();
-                if let Some(doc) = document {
-                    let cb = wasm_bindgen::closure::Closure::<dyn Fn(web_sys::MouseEvent)>::wrap(Box::new(move |e: web_sys::MouseEvent| {
-                        if let Some(root) = root_ref.get() {
-                            let target = e.target();
-                            if let Some(target_node) = target.and_then(|t| t.dyn_into::<web_sys::Node>().ok()) {
-                                let root_node: &web_sys::Node = root.as_ref();
-                                if !root_node.contains(Some(&target_node)) {
-                                    set_open.set(false);
-                                }
-                            }
-                        }
-                    }));
-                    let _ = doc.add_event_listener_with_callback("mousedown", cb.as_ref().unchecked_ref());
-                    cb.forget();
-                }
-            }
-        }
-    });
+    // a press anywhere else closes the list
+    crate::utils::listen::on_press_outside(
+        move |target| crate::utils::listen::contains(root_ref, target),
+        move || if open.get_untracked() { set_open.set(false) },
+    );
 
     let unread_count = move || {
         let current_reads = read_ids.get();

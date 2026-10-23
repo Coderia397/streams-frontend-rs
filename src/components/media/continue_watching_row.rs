@@ -26,7 +26,7 @@ pub fn ContinueWatchingRow(
     let (can_scroll_right, set_can_scroll_right) = signal(true);
 
     let update_scroll_state = Callback::new(move |_: ()| {
-        if let Some(el) = scroll_ref.get() {
+        if let Some(el) = scroll_ref.get_untracked() {
             let cur = el.scroll_left() as f64;
             let client_w = el.client_width() as f64;
             let scroll_w = el.scroll_width() as f64;
@@ -42,19 +42,10 @@ pub fn ContinueWatchingRow(
     };
 
     // Window resize listener
-    Effect::new({
+    {
         let update = update_scroll_state.clone();
-        move |_| {
-            if let Some(win) = web_sys::window() {
-                let update_c = update.clone();
-                let cb = wasm_bindgen::closure::Closure::<dyn Fn()>::wrap(Box::new(move || {
-                    update_c.run(());
-                }));
-                let _ = win.add_event_listener_with_callback("resize", cb.as_ref().unchecked_ref());
-                cb.forget();
-            }
-        }
-    });
+        crate::utils::listen::listen_window(leptos::ev::resize, move |_| update.run(()));
+    }
 
     // Content change / initial render listener
     Effect::new({

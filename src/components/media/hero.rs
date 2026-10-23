@@ -302,16 +302,6 @@ pub fn HeroSection(
     };
 
 
-    // Intelligent Hero Highlights from local recommendation engine & creator vectors
-    let highlight_resource = LocalResource::new(move || {
-        let item = current_item();
-        let id = item.id;
-        let title = item.display_title().to_string();
-        async move {
-            crate::services::ai_engine::fetch_hero_highlight(id, Some(&title)).await
-        }
-    });
-
     // The lines the engine chose for this title (a mix of news, credits, fame, feel and season); the two old badges below are the fallback
     let engine_hooks = move || -> Vec<(String, String, String)> {
         current_item()
@@ -324,20 +314,8 @@ pub fn HeroSection(
             .collect()
     };
 
-    // Right Badge: Creator Hook (e.g. "Directed by Denis Villeneuve", "From Creator Kane Parsons") or Marquee Stars
+    // Right badge, when the engine sent no lines: the director or creator from TMDB's credits
     let badge_right = move || {
-        if let Some(opt_highlight) = highlight_resource.get() {
-            if let Some(highlight) = opt_highlight {
-                if let Some(hook) = highlight.primary_hook {
-                    let icon = highlight.primary_icon.unwrap_or_else(|| "clapper".to_string());
-                    return Some((icon, hook));
-                }
-                // Evaluated by AI engine with no notable creator/star hook
-                return None;
-            }
-        }
-
-        // Offline fallback only: check TMDb credits crew for Director/Creator
         if let Some(Some(details)) = details_resource.get() {
             if let Some(credits) = details.credits {
                 if let Some(director) = credits.crew.iter().find(|c| c.job.as_deref() == Some("Director") || c.job.as_deref() == Some("Creator")) {
@@ -349,20 +327,8 @@ pub fn HeroSection(
         None
     };
 
-    // Left Badge: Distinction / Cinematic Hook (e.g. "Visual Masterpiece", "Viral Sci-Fi Phenomenon")
+    // Left badge, when the engine sent no lines: high acclaim or a well rated recent release
     let badge_left = move || {
-        if let Some(opt_highlight) = highlight_resource.get() {
-            if let Some(highlight) = opt_highlight {
-                if let Some(hook) = highlight.secondary_hook {
-                    let icon = highlight.secondary_icon.unwrap_or_else(|| "clapper".to_string());
-                    return Some((icon, hook));
-                }
-                // Evaluated by AI engine with no notable distinction hook
-                return None;
-            }
-        }
-
-        // Offline fallback only: high critical acclaim or genuine recent release
         let yr = year_label().parse::<u32>().unwrap_or(2024);
         let vote = current_item().vote_average;
         if vote >= 8.2 {
@@ -398,60 +364,50 @@ pub fn HeroSection(
 
     // Scroll observer: immediate pause when scrolled out of view + 15-second RAM unmount
     let hero_container_ref = NodeRef::<leptos::html::Div>::new();
-    Effect::new(move |_| {
-        let on_scroll = Closure::wrap(Box::new(move || {
-            if let Some(el) = hero_container_ref.get() {
-                let rect = el.get_bounding_client_rect();
-                let height = rect.height();
-                if height > 0.0 {
-                    let visible_px = rect.bottom().min(height) - rect.top().max(0.0);
-                    let visible_fraction = (visible_px / height).max(0.0);
-                    let out = visible_fraction < 0.45;
-                    let was_out = is_out_of_view.get_untracked();
+    crate::utils::listen::listen_window(leptos::ev::scroll, move |_| {
+        if let Some(el) = hero_container_ref.get_untracked() {
+            let rect = el.get_bounding_client_rect();
+            let height = rect.height();
+            if height > 0.0 {
+                let visible_px = rect.bottom().min(height) - rect.top().max(0.0);
+                let visible_fraction = (visible_px / height).max(0.0);
+                let out = visible_fraction < 0.45;
+                let was_out = is_out_of_view.get_untracked();
 
-                    if out != was_out {
-                        set_is_out_of_view.set(out);
+                if out != was_out {
+                    set_is_out_of_view.set(out);
 
-                        if out {
-                            // Scrolled past hero: immediate pause
-                            send_yt_command("hero-trailer-iframe", "pauseVideo");
+                    if out {
+                        // Scrolled past hero: immediate pause
+                        send_yt_command("hero-trailer-iframe", "pauseVideo");
 
-                            // Start 15-second timer to unmount iframe & free system RAM / GPU
-                            clear_timeout_id(scroll_inactivity_timer.get_value());
-                            let t = set_timeout_ms(move || {
-                                set_is_unmounted_by_scroll.set(true);
-                                set_show_video.set(false);
-                                set_is_video_ready.set(false);
-                            }, 15_000);
-                            scroll_inactivity_timer.set_value(t);
+                        // Start 15-second timer to unmount iframe & free system RAM / GPU
+                        clear_timeout_id(scroll_inactivity_timer.get_value());
+                        let t = set_timeout_ms(move || {
+                            set_is_unmounted_by_scroll.set(true);
+                            set_show_video.set(false);
+                            set_is_video_ready.set(false);
+                        }, 15_000);
+                        scroll_inactivity_timer.set_value(t);
+                    } else {
+                        // Scrolled back into view
+                        clear_timeout_id(scroll_inactivity_timer.get_value());
+                        scroll_inactivity_timer.set_value(None);
+
+                        if is_unmounted_by_scroll.get_untracked() {
+                            // Was away > 15s: re-mount player cleanly
+                            set_is_unmounted_by_scroll.set(false);
+                            set_show_video.set(true);
                         } else {
-                            // Scrolled back into view
-                            clear_timeout_id(scroll_inactivity_timer.get_value());
-                            scroll_inactivity_timer.set_value(None);
-
-                            if is_unmounted_by_scroll.get_untracked() {
-                                // Was away > 15s: re-mount player cleanly
-                                set_is_unmounted_by_scroll.set(false);
-                                set_show_video.set(true);
-                            } else {
-                                // Was away < 15s: iframe was kept warm in DOM, resume immediately!
-                                if show_video.get_untracked() && !has_video_ended.get_untracked() && !ui_store.info_modal_open.get_untracked() && ui_store.active_popup_id.get_untracked().is_none() {
-                                    send_yt_command("hero-trailer-iframe", "playVideo");
-                                }
+                            // Was away < 15s: iframe was kept warm in DOM, resume immediately!
+                            if show_video.get_untracked() && !has_video_ended.get_untracked() && !ui_store.info_modal_open.get_untracked() && ui_store.active_popup_id.get_untracked().is_none() {
+                                send_yt_command("hero-trailer-iframe", "playVideo");
                             }
                         }
                     }
                 }
             }
-        }) as Box<dyn FnMut()>);
-
-        if let Some(win) = web_sys::window() {
-            let _ = win.add_event_listener_with_callback(
-                "scroll",
-                on_scroll.as_ref().unchecked_ref(),
-            );
         }
-        on_scroll.forget();
     });
 
     on_cleanup(move || {

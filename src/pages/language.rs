@@ -1,6 +1,5 @@
 use leptos::prelude::*;
 use leptos::html::Div;
-use wasm_bindgen::JsCast;
 use crate::components::layout::Layout;
 use crate::components::media::movie_card::MovieCard;
 use crate::services::tmdb::fetch_by_language;
@@ -49,34 +48,15 @@ pub fn BrowseLanguagePage() -> impl IntoView {
     let pref_container_ref = NodeRef::<Div>::new();
     let lang_container_ref = NodeRef::<Div>::new();
 
-    // Close dropdowns on outside click
-    Effect::new(move |_| {
-        if pref_dropdown_open.get() || lang_dropdown_open.get() {
-            if let Some(win) = web_sys::window() {
-                if let Some(doc) = win.document() {
-                    let cb = wasm_bindgen::closure::Closure::<dyn Fn(web_sys::MouseEvent)>::wrap(Box::new(move |e: web_sys::MouseEvent| {
-                        let target = e.target();
-                        if let Some(target_node) = target.and_then(|t| t.dyn_into::<web_sys::Node>().ok()) {
-                            if let Some(pref_el) = pref_container_ref.get() {
-                                let pref_node: &web_sys::Node = pref_el.as_ref();
-                                if !pref_node.contains(Some(&target_node)) {
-                                    set_pref_dropdown_open.set(false);
-                                }
-                            }
-                            if let Some(lang_el) = lang_container_ref.get() {
-                                let lang_node: &web_sys::Node = lang_el.as_ref();
-                                if !lang_node.contains(Some(&target_node)) {
-                                    set_lang_dropdown_open.set(false);
-                                }
-                            }
-                        }
-                    }));
-                    let _ = doc.add_event_listener_with_callback("mousedown", cb.as_ref().unchecked_ref());
-                    cb.forget();
-                }
-            }
-        }
-    });
+    // a press outside a dropdown closes it
+    crate::utils::listen::on_press_outside(
+        move |target| crate::utils::listen::contains(pref_container_ref, target),
+        move || if pref_dropdown_open.get_untracked() { set_pref_dropdown_open.set(false) },
+    );
+    crate::utils::listen::on_press_outside(
+        move |target| crate::utils::listen::contains(lang_container_ref, target),
+        move || if lang_dropdown_open.get_untracked() { set_lang_dropdown_open.set(false) },
+    );
 
     let active_label = move || {
         let code = selected_lang.get();

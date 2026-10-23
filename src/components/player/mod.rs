@@ -171,12 +171,13 @@ pub fn StreamsPlayer(
                         if let Ok(play_promise) = video.play() {
                             let v_clone = video.clone();
                             let is_muted_sig = set_is_muted;
-                            let on_reject = Closure::wrap(Box::new(move |_err: JsValue| {
+                            // a one shot closure handed to JS, freed after it runs (it leaked once per start before)
+                            let on_reject = Closure::once(move |_err: JsValue| {
                                 leptos::logging::warn!("Unmuted autoplay blocked by browser policy, falling back to muted autoplay...");
                                 v_clone.set_muted(true);
                                 is_muted_sig.set(true);
                                 let _ = v_clone.play();
-                            }) as Box<dyn FnMut(JsValue)>);
+                            });
                             let _ = play_promise.catch(&on_reject);
                             on_reject.forget();
                         }
@@ -365,47 +366,53 @@ pub fn StreamsPlayer(
         }
     };
 
-    // Keyboard shortcuts
-    Effect::new(move |_| {
-        let on_keydown = Closure::wrap(Box::new(move |e: KeyboardEvent| {
-            let key = e.key();
-            match key.as_str() {
-                " " | "k" | "K" => {
-                    e.prevent_default();
-                    do_toggle_play();
-                }
-                "ArrowLeft" | "j" | "J" => {
-                    e.prevent_default();
-                    do_skip_by(-10.0);
-                }
-                "ArrowRight" | "l" | "L" => {
-                    e.prevent_default();
-                    do_skip_by(10.0);
-                }
-                "ArrowUp" => {
-                    e.prevent_default();
-                    do_set_volume(volume.get_untracked() + 0.10);
-                }
-                "ArrowDown" => {
-                    e.prevent_default();
-                    do_set_volume(volume.get_untracked() - 0.10);
-                }
-                "m" | "M" => {
-                    e.prevent_default();
-                    do_toggle_mute();
-                }
-                "f" | "F" => {
-                    e.prevent_default();
-                    do_toggle_fullscreen();
-                }
-                _ => {}
-            }
-        }) as Box<dyn FnMut(KeyboardEvent)>);
-
-        if let Some(win) = web_sys::window() {
-            let _ = win.add_event_listener_with_callback("keydown", on_keydown.as_ref().unchecked_ref());
+    // Keyboard shortcuts, for the player's life. The browser's and the system's own shortcuts (Cmd or Ctrl with a key, Alt) and typing in a
+    // field are left alone, and Space on a focused button is the button's (it toggled twice before: the button, then this).
+    crate::utils::listen::listen_window(leptos::ev::keydown, move |e: KeyboardEvent| {
+        if e.meta_key() || e.ctrl_key() || e.alt_key() {
+            return;
         }
-        on_keydown.forget();
+        if let Some(el) = e.target().and_then(|t| t.dyn_into::<web_sys::HtmlElement>().ok()) {
+            let tag = el.tag_name();
+            if matches!(tag.as_str(), "INPUT" | "TEXTAREA" | "SELECT") || el.is_content_editable() {
+                return;
+            }
+            if e.key() == " " && tag == "BUTTON" {
+                return;
+            }
+        }
+        let key = e.key();
+        match key.as_str() {
+            " " | "k" | "K" => {
+                e.prevent_default();
+                do_toggle_play();
+            }
+            "ArrowLeft" | "j" | "J" => {
+                e.prevent_default();
+                do_skip_by(-10.0);
+            }
+            "ArrowRight" | "l" | "L" => {
+                e.prevent_default();
+                do_skip_by(10.0);
+            }
+            "ArrowUp" => {
+                e.prevent_default();
+                do_set_volume(volume.get_untracked() + 0.10);
+            }
+            "ArrowDown" => {
+                e.prevent_default();
+                do_set_volume(volume.get_untracked() - 0.10);
+            }
+            "m" | "M" => {
+                e.prevent_default();
+                do_toggle_mute();
+            }
+            "f" | "F" => {
+                e.prevent_default();
+                do_toggle_fullscreen();
+            }
+            _ => {}
+        }
     });
 
     on_cleanup(move || {

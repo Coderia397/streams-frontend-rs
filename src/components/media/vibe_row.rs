@@ -82,19 +82,10 @@ pub fn VibeRow(
         }
     });
 
-    Effect::new({
+    {
         let update = update_scroll_state.clone();
-        move |_| {
-            if let Some(win) = web_sys::window() {
-                let update_c = update.clone();
-                let cb = wasm_bindgen::closure::Closure::<dyn Fn()>::wrap(Box::new(move || {
-                    update_c.run(());
-                }));
-                let _ = win.add_event_listener_with_callback("resize", cb.as_ref().unchecked_ref());
-                cb.forget();
-            }
-        }
-    });
+        crate::utils::listen::listen_window(leptos::ev::resize, move |_| update.run(()));
+    }
 
     let on_scroll = {
         let update = update_scroll_state.clone();

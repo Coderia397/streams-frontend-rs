@@ -104,14 +104,8 @@ pub fn TourHost() -> impl IntoView {
     Effect::new(move |_| {
         if let Some(card) = card_ref.get() { let _ = card.focus(); }
     });
-    Effect::new(move |_| {
-        if let Some(win) = web_sys::window() {
-            let cb = wasm_bindgen::closure::Closure::<dyn Fn()>::wrap(Box::new(move || {
-                if open.get_untracked() { set_boxed.set(target_box(tour.steps[step.get_untracked().min(tour.steps.len() - 1)].targets)); }
-            }));
-            let _ = win.add_event_listener_with_callback("resize", cb.as_ref().unchecked_ref());
-            cb.forget();
-        }
+    crate::utils::listen::listen_window(leptos::ev::resize, move |_| {
+        if open.get_untracked() { set_boxed.set(target_box(tour.steps[step.get_untracked().min(tour.steps.len() - 1)].targets)); }
     });
 
     let close = move || {

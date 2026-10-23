@@ -225,6 +225,9 @@ pub fn MovieCardPopup(
 
     let movie_id = movie.id_u32();
     let is_tv_for_video = is_tv;
+    // each popup's own frame id: two popups overlap for a moment while one closes and the next opens
+    let frame_id = format!("card-trailer-iframe-{}-{}", if is_tv { "tv" } else { "movie" }, movie_id);
+    let frame_id_for_sound = frame_id.clone();
 
     Effect::new(move |_| {
         let mid = movie_id;
@@ -233,8 +236,9 @@ pub fn MovieCardPopup(
             leptos::task::spawn_local(async move {
                 if let Ok(videos) = crate::services::tmdb::fetch_videos(mid, is_tv_val).await {
                     if let Some((key, teaser)) = crate::services::tmdb::select_best_tmdb_trailer(&videos) {
-                        set_video_key.set(Some(key));
-                        set_is_teaser.set(teaser);
+                        // the popup may have closed while this was on its way
+                        set_video_key.try_set(Some(key));
+                        set_is_teaser.try_set(teaser);
                     }
                 }
             });
@@ -242,10 +246,10 @@ pub fn MovieCardPopup(
 
         if let Some(window) = web_sys::window() {
             let cb = Closure::once_into_js(move || {
-                set_is_playing.set(true);
+                set_is_playing.try_set(true);
                 if let Some(w) = web_sys::window() {
                     let ready_cb = Closure::once_into_js(move || {
-                        set_is_frame_ready.set(true);
+                        set_is_frame_ready.try_set(true);
                     });
                     let _ = w.set_timeout_with_callback_and_timeout_and_arguments_0(ready_cb.as_ref().unchecked_ref(), 1200);
                 }
@@ -258,7 +262,7 @@ pub fn MovieCardPopup(
         if is_frame_ready.get() && !ui_store.preview_muted.get() {
             if let Some(win) = web_sys::window() {
                 if let Some(doc) = win.document() {
-                    if let Some(el) = doc.get_element_by_id("card-trailer-iframe") {
+                    if let Some(el) = doc.get_element_by_id(&frame_id_for_sound) {
                         if let Ok(iframe) = el.dyn_into::<web_sys::HtmlIFrameElement>() {
                             if let Some(cw) = iframe.content_window() {
                                 let cmd = r#"{"event":"command","func":"unMute","args":[]}"#;
@@ -319,7 +323,7 @@ pub fn MovieCardPopup(
                         is_playing=Signal::derive(move || is_playing.get())
                         is_muted=ui_store.preview_muted
                         variant="card".to_string()
-                        iframe_id="card-trailer-iframe".to_string()
+                        iframe_id=frame_id.clone()
                         on_ready=Callback::new(move |_| {
                             set_is_frame_ready.set(true);
                         })

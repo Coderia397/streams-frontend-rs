@@ -1,6 +1,5 @@
 use leptos::prelude::*;
 use leptos::html::Input;
-use wasm_bindgen::JsCast;
 use crate::models::profile::Profile;
 
 #[component]
@@ -48,14 +47,8 @@ pub fn ProfilePinPrompt(
             set_digits.set(vec!["".to_string(), "".to_string(), "".to_string(), "".to_string()]);
             focus_input(0);
             
-            // Clear shake after 500ms
-            if let Some(win) = web_sys::window() {
-                let cb = wasm_bindgen::closure::Closure::<dyn Fn()>::wrap(Box::new(move || {
-                    set_shake.set(false);
-                }));
-                let _ = win.set_timeout_with_callback_and_timeout_and_arguments_0(cb.as_ref().unchecked_ref(), 500);
-                cb.forget();
-            }
+            // Clear shake after 500ms (the prompt may have closed by then)
+            leptos::leptos_dom::helpers::set_timeout(move || { set_shake.try_set(false); }, std::time::Duration::from_millis(500));
         };
         if on_account {
             // the account checks the PIN (and counts the wrong tries)

@@ -1,6 +1,5 @@
 use leptos::prelude::*;
 use leptos::html::Div;
-use wasm_bindgen::JsCast;
 use crate::components::layout::category_sub_nav_mobile::CategorySubNavMobile;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -87,29 +86,11 @@ fn CategorySubNavDesktop(
     let container_ref = NodeRef::<Div>::new();
 
     // Close on outside click
-    Effect::new(move |_| {
-        if genre_menu_open.get() {
-            let window = web_sys::window();
-            if let Some(win) = window {
-                let document = win.document();
-                if let Some(doc) = document {
-                    let cb = wasm_bindgen::closure::Closure::<dyn Fn(web_sys::MouseEvent)>::wrap(Box::new(move |e: web_sys::MouseEvent| {
-                        if let Some(container) = container_ref.get() {
-                            let target = e.target();
-                            if let Some(target_node) = target.and_then(|t| t.dyn_into::<web_sys::Node>().ok()) {
-                                let container_node: &web_sys::Node = container.as_ref();
-                                if !container_node.contains(Some(&target_node)) {
-                                    set_genre_menu_open.set(false);
-                                }
-                            }
-                        }
-                    }));
-                    let _ = doc.add_event_listener_with_callback("mousedown", cb.as_ref().unchecked_ref());
-                    cb.forget();
-                }
-            }
-        }
-    });
+    // a press anywhere else closes the menu
+    crate::utils::listen::on_press_outside(
+        move |target| crate::utils::listen::contains(container_ref, target),
+        move || if genre_menu_open.get_untracked() { set_genre_menu_open.set(false) },
+    );
 
     // 3-column transposed layout matching Netflix
     let mut sorted_genres = genres.clone();
@@ -129,15 +110,8 @@ fn CategorySubNavDesktop(
     }
 
     let (scroll_y, set_scroll_y) = signal(0.0);
-    Effect::new(move |_| {
-        if let Some(win) = web_sys::window() {
-            let win_c = win.clone();
-            let cb = wasm_bindgen::closure::Closure::<dyn Fn()>::wrap(Box::new(move || {
-                set_scroll_y.set(win_c.scroll_y().unwrap_or(0.0));
-            }));
-            let _ = win.add_event_listener_with_callback("scroll", cb.as_ref().unchecked_ref());
-            cb.forget();
-        }
+    crate::utils::listen::listen_window(leptos::ev::scroll, move |_| {
+        set_scroll_y.set(web_sys::window().and_then(|w| w.scroll_y().ok()).unwrap_or(0.0));
     });
 
     let scroll_bg_style = move || {

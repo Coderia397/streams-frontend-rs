@@ -2,7 +2,7 @@
 //! foot, changing every few seconds; below it a dark panel with a curved top, tinted by the picture, the words "Choose your profile" and the profiles three in a row, the rest centred under them.
 use leptos::prelude::*;
 use crate::models::profile::Profile;
-use crate::services::ai_engine::{fetch_hero_feed, fetch_hero_highlight};
+use crate::services::ai_engine::fetch_hero_feed;
 use crate::services::tmdb::{fetch_movie_logo, MediaItem};
 
 /// How long each title stays, in milliseconds.
@@ -23,7 +23,7 @@ pub fn PhoneProfilePicker(
     Effect::new(move |_| {
         let handle = leptos::leptos_dom::helpers::set_interval_with_handle(
             move || {
-                let n = heroes.get().map(|h| h.len()).unwrap_or(0);
+                let n = heroes.get_untracked().map(|h| h.len()).unwrap_or(0);
                 if n > 1 { idx.update(|i| *i = (*i + 1) % n); }
             },
             std::time::Duration::from_millis(ROTATE_MS),
@@ -36,7 +36,8 @@ pub fn PhoneProfilePicker(
         async move {
             let Some(it) = item else { return (None::<String>, None::<String>) };
             let logo = fetch_movie_logo(it.id, it.is_tv()).await.ok().flatten();
-            let hook = fetch_hero_highlight(it.id, Some(it.display_title())).await.and_then(|h| h.primary_hook);
+            // the first of the lines the hero feed chose for this title (the billboard shows the same ones)
+            let hook = it.hooks.first().map(|h| crate::services::ai_engine::engine_text(&h.key, Some(&h.args)).unwrap_or_else(|| h.text.clone()));
             (logo, hook)
         }
     });
