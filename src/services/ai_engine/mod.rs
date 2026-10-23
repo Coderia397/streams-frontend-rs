@@ -30,6 +30,56 @@ pub(crate) async fn engine_get(url: &str) -> Result<gloo_net::http::Response, gl
 }
 
 /// The profile in use as the browser remembers it.
+/// An engine answer on its way or arrived (the body as text; none when the request failed).
+type Answer = futures::future::Shared<futures::future::LocalBoxFuture<'static, Option<std::rc::Rc<str>>>>;
+
+thread_local! {
+    /// Engine answers by profile and address, with when they were asked (see `engine_json`).
+    static ANSWERS: std::cell::RefCell<std::collections::HashMap<String, (f64, Answer)>> = std::cell::RefCell::new(std::collections::HashMap::new());
+}
+
+/// How long a page's rows stay fresh: opening Home again within a minute (after Series, a title, Back) draws it at once.
+pub(crate) const FEED_FRESH_MS: f64 = 60_000.0;
+/// How long menus and lists that change rarely stay fresh (genre menus, season pages, games).
+pub(crate) const MENU_FRESH_MS: f64 = 600_000.0;
+
+/// A request to the engine whose answer is shared while fresh: two parts of a page that ask the same thing make one request, and a page
+/// opened again shortly after draws without waiting. The profile in use is part of the key (the engine answers per profile); signing out
+/// reloads the page, which empties this. A failed request is forgotten so the next caller asks again.
+pub(crate) async fn engine_json<T: serde::de::DeserializeOwned>(url: &str, fresh_ms: f64) -> Option<T> {
+    use futures::FutureExt;
+    let key = format!("{}|{url}", active_profile_id().unwrap_or_default());
+    let now = js_sys::Date::now();
+    let answer = ANSWERS.with(|a| {
+        let mut a = a.borrow_mut();
+        a.retain(|_, (at, _)| now - *at < MENU_FRESH_MS);
+        if let Some((at, ans)) = a.get(&key) {
+            if now - *at < fresh_ms {
+                return ans.clone();
+            }
+        }
+        let address = url.to_string();
+        let ans: Answer = async move {
+            let resp = engine_get(&address).await.ok()?;
+            if !resp.ok() {
+                return None;
+            }
+            resp.text().await.ok().map(std::rc::Rc::from)
+        }
+        .boxed_local()
+        .shared();
+        a.insert(key.clone(), (now, ans.clone()));
+        ans
+    });
+    match answer.await {
+        Some(text) => serde_json::from_str(&text).ok(),
+        None => {
+            ANSWERS.with(|a| a.borrow_mut().remove(&key));
+            None
+        }
+    }
+}
+
 fn active_profile_id() -> Option<String> {
     web_sys::window()?.local_storage().ok().flatten()?.get_item(crate::keys::ACTIVE_PROFILE).ok().flatten().filter(|p| !p.is_empty())
 }

@@ -17,10 +17,7 @@ async fn hidden_pages(route: &str, param: &str, field: &str, surface: &str, name
     }
     let joined: String = js_sys::encode_uri_component(&names.join(",")).into();
     let url = format!("{}/api/{}?surface={}&{}={}&rating={}", base(), route, surface, param, joined, limit);
-    let Some(v) = (match engine_get(&url).await {
-        Ok(r) if r.ok() => r.json::<serde_json::Value>().await.ok(),
-        _ => None,
-    }) else { return Default::default() };
+    let Some(v) = engine_json::<serde_json::Value>(&url, MENU_FRESH_MS).await else { return Default::default() };
     let hidden: std::collections::HashSet<String> = v
         .get(field)
         .and_then(|g| g.as_object())
@@ -64,9 +61,7 @@ pub async fn fetch_genre_list(kind: &str) -> Option<Vec<GenreEntry>> {
 /// The genre menu of a surface with the page its addresses hang under (the Kids profile has pages of its own, 20000 and 21000). None when the engine cannot be reached.
 pub async fn fetch_genre_menu(kind: &str) -> Option<GenreMenu> {
     let url = format!("{}/api/genre-list?surface={}&rating={}", base(), kind, crate::pages::settings::prefs::active_rating().unwrap_or("18"));
-    let resp = engine_get(&url).await.ok()?;
-    if !resp.ok() { return None; }
-    let m: GenreMenu = resp.json().await.ok()?;
+    let m: GenreMenu = engine_json(&url, MENU_FRESH_MS).await?;
     (!m.genres.is_empty()).then_some(m)
 }
 
@@ -119,9 +114,7 @@ pub struct SeasonChip {
 pub async fn fetch_season_chips() -> Vec<SeasonChip> {
     #[derive(Deserialize)]
     struct Answer { chips: Vec<SeasonChip> }
-    let Ok(resp) = engine_get(&format!("{}/api/season-chips", base())).await else { return Vec::new() };
-    if !resp.ok() { return Vec::new(); }
-    resp.json::<Answer>().await.map(|a| a.chips).unwrap_or_default()
+    engine_json::<Answer>(&format!("{}/api/season-chips", base()), MENU_FRESH_MS).await.map(|a| a.chips).unwrap_or_default()
 }
 
 /// The genre pages a limited profile should not be offered (see `hidden_pages`).

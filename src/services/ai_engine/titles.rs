@@ -29,9 +29,7 @@ pub async fn fetch_skip_marks(is_tv: bool, id: u32, episode: Option<u32>, last: 
     let mut url = format!("{}/api/skip-marks?type={}&id={}", base(), if is_tv { "tv" } else { "movie" }, id);
     if let Some(e) = episode { url.push_str(&format!("&episode={e}")); }
     if last { url.push_str("&last=1"); }
-    let Ok(resp) = engine_get(&url).await else { return SkipMarks::default() };
-    if !resp.ok() { return SkipMarks::default(); }
-    resp.json::<SkipMarks>().await.unwrap_or_default()
+    engine_json::<SkipMarks>(&url, MENU_FRESH_MS).await.unwrap_or_default()
 }
 
 /// The content reasons of one video (words of the fixed list of 20, in list order), from the engine's guesses (note 69); empty when there is no answer, so only the rating shows.
@@ -41,18 +39,14 @@ pub async fn fetch_content_reasons(is_tv: bool, id: u32, season: Option<u32>, ep
     let mut url = format!("{}/api/content-reasons?type={}&id={}", base(), if is_tv { "tv" } else { "movie" }, id);
     if let Some(s) = season { url.push_str(&format!("&season={s}")); }
     if let Some(e) = episode { url.push_str(&format!("&episode={e}")); }
-    let Ok(resp) = engine_get(&url).await else { return Vec::new() };
-    if !resp.ok() { return Vec::new(); }
-    resp.json::<Answer>().await.ok().and_then(|a| a.reasons).unwrap_or_default()
+    engine_json::<Answer>(&url, MENU_FRESH_MS).await.and_then(|a| a.reasons).unwrap_or_default()
 }
 
 /// The games the engine offers; empty while Games is off.
 pub async fn fetch_games() -> Vec<Game> {
     #[derive(Deserialize)]
     struct Answer { games: Vec<Game> }
-    let Ok(resp) = engine_get(&format!("{}/api/games", base())).await else { return Vec::new() };
-    if !resp.ok() { return Vec::new(); }
-    resp.json::<Answer>().await.map(|a| a.games).unwrap_or_default()
+    engine_json::<Answer>(&format!("{}/api/games", base()), MENU_FRESH_MS).await.map(|a| a.games).unwrap_or_default()
 }
 
 /// Search from the engine: titles by words (the last one may be unfinished), by director or cast, and near misses for typos, with the real
@@ -71,11 +65,7 @@ pub async fn fetch_search_suggestions(limit: usize) -> Option<Vec<MediaItem>> {
 
 /// A `{ "results": [...] }` answer of the engine (search, suggestions) as media items; titles with no picture are left out.
 async fn fetch_result_list(url: &str) -> Option<Vec<MediaItem>> {
-    let resp = engine_get(url).await.ok()?;
-    if !resp.ok() {
-        return None;
-    }
-    let v: serde_json::Value = resp.json().await.ok()?;
+    let v: serde_json::Value = engine_json(url, FEED_FRESH_MS).await?;
     let text = |r: &serde_json::Value, k: &str| r.get(k).and_then(|x| x.as_str()).map(str::to_string);
     let items = v
         .get("results")?
@@ -109,11 +99,7 @@ async fn fetch_result_list(url: &str) -> Option<Vec<MediaItem>> {
 /// The titles of a language page (original language) as rows from the engine, the Top 10 rows left out so the page reads as one ranked grid.
 pub async fn fetch_language_titles(lang: &str) -> Option<Vec<MediaItem>> {
     let url = format!("{}/api/feed?language={}&limit=12&session_id={}{}", base(), lang, get_or_create_session_id(), rating_query());
-    let resp = engine_get(&url).await.ok()?;
-    if !resp.ok() {
-        return None;
-    }
-    let data: FeedResponse = resp.json().await.ok()?;
+    let data: FeedResponse = engine_json(&url, FEED_FRESH_MS).await?;
     let mut seen = std::collections::HashSet::new();
     let items: Vec<MediaItem> = data
         .rows

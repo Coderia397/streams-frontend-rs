@@ -251,11 +251,7 @@ pub async fn fetch_new_popular_n(tab: Option<&str>, limit: Option<usize>) -> Opt
     if let Some(n) = limit {
         url.push_str(&format!("&limit={n}"));
     }
-    let resp = engine_get(&url).await.ok()?;
-    if !resp.ok() {
-        return None;
-    }
-    let data: FeedResponse = resp.json().await.ok()?;
+    let data: FeedResponse = engine_json(&url, FEED_FRESH_MS).await?;
     (!data.rows.is_empty()).then_some(data.rows)
 }
 
@@ -306,9 +302,7 @@ pub async fn fetch_dynamic_feed(surface: &str, genre: Option<&str>, limit: Optio
 pub async fn fetch_page_header(genre: &str) -> Option<Collection> {
     let encoded: String = js_sys::encode_uri_component(genre).into();
     let url = format!("{}/api/feed?surface=all&limit=8&genre={}&session_id={}{}", base(), encoded, get_or_create_session_id(), rating_query());
-    let resp = engine_get(&url).await.ok()?;
-    if !resp.ok() { return None; }
-    resp.json::<FeedResponse>().await.ok()?.header
+    engine_json::<FeedResponse>(&url, FEED_FRESH_MS).await?.header
 }
 
 /// The page of a mood collection (what Explore all opens): its header and rows, from the engine.
@@ -316,9 +310,7 @@ pub async fn fetch_collection_page(collection: &str, limit: usize, signals: &str
     let encoded: String = js_sys::encode_uri_component(collection).into();
     let q = format!("surface=all&limit={}&collection={}&session_id={}{}{}", limit, encoded, get_or_create_session_id(), rating_query(), signals);
     let url = format!("{}/api/feed?{q}", base());
-    let resp = engine_get(&url).await.ok()?;
-    if !resp.ok() { return None; }
-    let mut data = resp.json::<FeedResponse>().await.ok()?;
+    let mut data = engine_json::<FeedResponse>(&url, FEED_FRESH_MS).await?;
     for r in &mut data.rows {
         r.page_query = Some(q.clone());
     }
@@ -347,11 +339,7 @@ fn feed_query(surface: &str, genre: Option<&str>, limit: usize, signals: &str) -
 pub async fn fetch_feed_page(surface: &str, genre: Option<&str>, limit: Option<usize>, signals: &str) -> Option<FeedResponse> {
     let q = feed_query(surface, genre, limit.unwrap_or(18), signals);
     let url = format!("{}/api/feed?{q}", base());
-    let resp = engine_get(&url).await.ok()?;
-    if !resp.ok() {
-        return None;
-    }
-    let mut data: FeedResponse = resp.json().await.ok()?;
+    let mut data: FeedResponse = engine_json(&url, FEED_FRESH_MS).await?;
     if data.rows.is_empty() {
         return None;
     }
@@ -365,11 +353,7 @@ pub async fn fetch_feed_page(surface: &str, genre: Option<&str>, limit: Option<u
 pub async fn fetch_row_items(page_query: &str, row: &str, item_offset: usize, item_limit: usize) -> Option<RowItems> {
     let encoded: String = js_sys::encode_uri_component(row).into();
     let url = format!("{}/api/feed/row?{}&row={}&item_offset={}&item_limit={}", base(), page_query, encoded, item_offset, item_limit);
-    let resp = engine_get(&url).await.ok()?;
-    if !resp.ok() {
-        return None;
-    }
-    resp.json::<RowItems>().await.ok()
+    engine_json::<RowItems>(&url, FEED_FRESH_MS).await
 }
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq)]
@@ -391,11 +375,7 @@ pub async fn fetch_hero_feed(surface: &str, genre: Option<&str>) -> Option<Vec<M
             url.push_str(&format!("&genre={}", encoded_str));
         }
     }
-    let resp = engine_get(&url).await.ok()?;
-    if !resp.ok() {
-        return None;
-    }
-    let data: HeroFeedResponse = resp.json().await.ok()?;
+    let data: HeroFeedResponse = engine_json(&url, FEED_FRESH_MS).await?;
     if data.items.is_empty() {
         return None;
     }
@@ -414,11 +394,7 @@ pub struct RecommendationsResponse {
 pub async fn fetch_ai_recommendations(id: u32, is_tv: bool) -> Option<Vec<VibeItem>> {
     // TMDB ids repeat across movies and series, so the media type is part of the identity
     let url = format!("{}/api/recommendations?id={}&media_type={}{}", base(), id, if is_tv { "tv" } else { "movie" }, rating_query());
-    let resp = engine_get(&url).await.ok()?;
-    if !resp.ok() {
-        return None;
-    }
-    let data: RecommendationsResponse = resp.json().await.ok()?;
+    let data: RecommendationsResponse = engine_json(&url, FEED_FRESH_MS).await?;
     if data.recommendations.is_empty() {
         return None;
     }
