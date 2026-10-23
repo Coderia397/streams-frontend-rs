@@ -18,7 +18,12 @@ pub fn SpotlightArtwork(movie_id: u32, is_tv: bool, #[prop(into)] backdrop_src: 
     let iframe_id = format!("spot-{me}");
     let root = NodeRef::<leptos::html::Div>::new();
     let (visible, set_visible) = signal(false);
-    let (video_key, set_video_key) = signal(None::<String>);
+    let (videos, set_videos) = signal(Vec::<crate::services::tmdb::VideoResult>::new());
+    // the best trailer YouTube has not refused here, chosen again when it refuses the one playing (services/unplayable.rs)
+    let video_key = Memo::new(move |_| {
+        crate::services::unplayable::track();
+        crate::services::tmdb::select_best_tmdb_trailer(&videos.get()).map(|(k, _)| k)
+    });
     let (looked_up, set_looked_up) = signal(false);
     let (ready, set_ready) = signal(false);
     let (time, set_time) = signal(0.0f64);
@@ -71,11 +76,23 @@ pub fn SpotlightArtwork(movie_id: u32, is_tv: bool, #[prop(into)] backdrop_src: 
         if visible.get() && !looked_up.get_untracked() {
             set_looked_up.set(true);
             leptos::task::spawn_local(async move {
-                if let Ok(videos) = crate::services::tmdb::fetch_videos(movie_id, is_tv).await {
-                    if let Some((key, _)) = crate::services::tmdb::select_best_tmdb_trailer(&videos) { set_video_key.set(Some(key)); }
+                if let Ok(found) = crate::services::tmdb::fetch_videos(movie_id, is_tv).await {
+                    set_videos.set(found);
                 }
             });
         }
+    });
+
+    // another trailer starts from the picture, at its own beginning
+    Effect::new(move |previous: Option<Option<String>>| {
+        let key = video_key.get();
+        if previous.is_some_and(|p| p != key) {
+            set_ready.set(false);
+            set_time.set(0.0);
+            set_duration.set(0.0);
+            set_paused.set(false);
+        }
+        key
     });
 
     let me_for_active = me.clone();
@@ -124,6 +141,7 @@ pub fn SpotlightArtwork(movie_id: u32, is_tv: bool, #[prop(into)] backdrop_src: 
                     iframe_id=iframe_id.clone()
                     on_ready=Callback::new(move |_| set_ready.set(true))
                     on_ended=Callback::new(move |_| { set_paused.set(true); })
+                    on_unplayable=Callback::new(|_| {})
                     on_time_update=Callback::new(move |t| set_time.set(t))
                     on_duration=Callback::new(move |d| set_duration.set(d))
                 />
