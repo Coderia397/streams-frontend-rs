@@ -85,30 +85,12 @@ pub fn MyListPage() -> impl IntoView {
     let trailers_list = Signal::derive(move || trailers.get().unwrap_or_default());
     let liked_list = Signal::derive(move || liked.get().unwrap_or_default());
 
-    let profiles = crate::store::use_profile_store();
-    let form = crate::form::use_form();
-    let sheet = RwSignal::new(false);
-    let active = Memo::new(move |_| profiles.profiles.with(|l| profiles.active_profile_id.with(|id| l.iter().find(|p| Some(&p.id) == id.as_ref()).or(l.first()).cloned())));
 
     view! {
         <Layout>
-            // Netflix's first row title sits 20 px under the nav (100 at 1736 wide)
-            <div class="relative min-h-screen pb-16 pt-28 sm:pt-[calc(var(--nav-h)+20px)]">
-                // On a phone the page opens with the profile in use and a caret; it opens the Profile sheet (the phone form only, note 114)
-                <Show when=move || form.get().is_phone()>
-                <button type="button" on:click=move |_| sheet.set(true) class="mb-6 flex items-center gap-3 px-4" aria-haspopup="dialog">
-                    <span class="h-8 w-8 overflow-hidden rounded-control">
-                        {move || match active.get() {
-                            Some(p) if p.is_kids && p.avatar_url.is_none() => view! { <crate::components::profiles::kids_avatar::KidsAvatar size=32.0 /> }.into_any(),
-                            Some(p) => view! { <img src=p.avatar_url.unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string()) alt="" class="h-full w-full object-cover" /> }.into_any(),
-                            None => view! { <span /> }.into_any(),
-                        }}
-                    </span>
-                    <span class="text-heading font-bold">{move || active.get().map(|p| p.name).unwrap_or_default()}</span>
-                    <i class="ph-fill ph-caret-down text-body-md text-ink-silver" aria-hidden="true"></i>
-                </button>
-                <crate::pages::settings::hub::ProfileSheet open=sheet />
-                </Show>
+            // Netflix's first row title sits 20 px under the nav (100 at 1736 wide); on a phone the first part starts 10 px under the bar, which
+            // carries the profile and its sheet (layout/nav/phone)
+            <div class="relative min-h-screen pb-16 pt-[calc(var(--nav-h-mobile)+10px+env(safe-area-inset-top))] sm:pt-[calc(var(--nav-h)+20px)]">
                 <div class="rows-stack">
                 <Shelf title=t("my-continue") icon=ShelfIcon::Clock empty=t("my-continue-empty") has_items=continuing own_heading=true>
                     <ContinueWatchingRow title=t("my-continue") />

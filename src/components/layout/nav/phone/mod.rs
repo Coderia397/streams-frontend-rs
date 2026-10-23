@@ -91,6 +91,7 @@ pub fn PhoneNav(
     };
     let current_avatar = move || active_profile().and_then(|p| p.avatar_url).unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string());
     let is_kids = Signal::derive(move || active_profile().is_some_and(|p| p.is_kids));
+    let profile_sheet = RwSignal::new(false);
 
     let nav_to_browse = navigate.clone();
     let nav_to_latest = navigate.clone();
@@ -154,12 +155,25 @@ pub fn PhoneNav(
             // ── Top Brand Header ───────────────────────────────────────────────
             <header
                 class:hidden=on_search
-                class="fixed top-0 left-0 right-0 z-(--z-nav) pl-1 pr-1 pt-[env(safe-area-inset-top)] h-[calc(var(--nav-h-mobile)+env(safe-area-inset-top))] box-content flex items-center justify-between pointer-events-auto transition-colors duration-(--motion-base)"
+                class="fixed top-0 left-0 right-0 z-(--z-nav) pr-1 pt-[env(safe-area-inset-top)] h-[calc(var(--nav-h-mobile)+env(safe-area-inset-top))] box-content flex items-center justify-between pointer-events-auto transition-colors duration-(--motion-base)"
                 style=scroll_style
             >
                 // Logo mark and page title on Home, a back arrow and the page title on the pages under it, as in the app header
                 <div class="flex items-center min-w-0">
-                    {move || if on_sub_page() {
+                    {move || if location.pathname.get().starts_with("/browse/my-list") {
+                        // My Streams: the profile's picture where the logo is (it opens the Profile sheet too)
+                        view! {
+                            <button type="button" on:click=move |_| profile_sheet.set(true) class="flex h-11 w-11 flex-shrink-0 items-center justify-center ms-1 cursor-pointer" aria-label=crate::i18n::t("set-profile-sheet")>
+                                <span class="h-7 w-7 overflow-hidden rounded-control">
+                                    {move || if active_profile().is_some_and(|p| p.is_kids && p.avatar_url.is_none()) {
+                                        view! { <crate::components::profiles::kids_avatar::KidsAvatar size=28.0 /> }.into_any()
+                                    } else {
+                                        view! { <img src=current_avatar() alt="" class="h-full w-full object-cover" /> }.into_any()
+                                    }}
+                                </span>
+                            </button>
+                        }.into_any()
+                    } else if on_sub_page() {
                         view! {
                             <button
                                 on:click=move |_| go_back.run(())
@@ -180,10 +194,18 @@ pub fn PhoneNav(
                             </a>
                         }.into_any()
                     }}
-                    // the Kids app puts the word "kids" in its own lettering where Home says "Home"
+                    // the Kids app puts the word "kids" in its own lettering where Home says "Home"; My Streams shows the profile in use with
+                    // a caret in place of the title, which opens the Profile sheet (the app's My Netflix, note 116)
                     {move || {
                         let p = location.pathname.get();
-                        if is_kids.get() && (p == "/browse" || p == "/" || p.is_empty()) {
+                        if p.starts_with("/browse/my-list") {
+                            view! {
+                                <button type="button" on:click=move |_| profile_sheet.set(true) class="ms-1 flex min-w-0 items-center gap-2 cursor-pointer" aria-haspopup="dialog">
+                                    <span class="truncate text-heading font-bold leading-none tracking-tight text-ink">{move || active_profile().map(|p| p.name).unwrap_or_default()}</span>
+                                    <i class="ph-fill ph-caret-down text-body-md text-ink" aria-hidden="true"></i>
+                                </button>
+                            }.into_any()
+                        } else if is_kids.get() && (p == "/browse" || p == "/" || p.is_empty()) {
                             view! { <crate::components::profiles::kids_splash::KidsWordmark class="-ms-1 h-8 w-auto" /> }.into_any()
                         } else {
                             // the app: the title 52 px in after the logo on Home, 68 px in after the back arrow on the pages under it (note 116)
@@ -192,6 +214,8 @@ pub fn PhoneNav(
                     }}
                 </div>
             </header>
+
+            <crate::pages::settings::hub::ProfileSheet open=profile_sheet />
 
             // ── Bottom Nav ───────────────────────────────────────────────────
             <BottomNavMobile items=bottom_nav_items active_id=active_bottom_nav />
