@@ -1,5 +1,5 @@
 //! The trailers a person has watched, newest first, kept per profile in this browser: the "Trailers You've Watched" shelf of the My page.
-const KEY: &str = "streams_trailers_watched_v1";
+const KEY: &str = crate::store::scoped::TRAILERS_WATCHED;
 /// The shelf keeps this many.
 const KEEP: usize = 40;
 

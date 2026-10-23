@@ -9,7 +9,7 @@ use crate::services::tmdb::{fetch_details, MediaItem};
 use crate::store::{use_library_store, use_watch_store};
 use leptos::prelude::*;
 
-/// One shelf: the heading and, below, the content or the empty card.
+/// One shelf: the heading and, below, the content or the empty card. Laid out as every other row (Netflix's My Netflix rows are its Home rows).
 #[component]
 fn Shelf(
     #[prop(into)] title: String,
@@ -21,8 +21,8 @@ fn Shelf(
     children: ChildrenFn,
 ) -> impl IntoView {
     view! {
-        <section class="mb-[42px]">
-            <h2 class="mb-[16px] px-[var(--app-x,56px)] text-heading font-bold leading-[31px] text-ink" class=("hidden", move || own_heading && has_items.get())>{title}</h2>
+        <section class="row-block">
+            <h2 class="row-title px-[var(--app-x,56px)]" class=("hidden", move || own_heading && has_items.get())>{title}</h2>
             <Show
                 when=move || has_items.get()
                 fallback=move || view! {
@@ -90,7 +90,8 @@ pub fn MyListPage() -> impl IntoView {
 
     view! {
         <Layout>
-            <div class="relative min-h-screen pb-16 pt-28 md:pt-[110px]">
+            // Netflix's first row title sits 20 px under the nav (100 at 1736 wide)
+            <div class="relative min-h-screen pb-16 pt-28 md:pt-[calc(var(--nav-h)+20px)]">
                 // On a phone the page opens with the profile in use and a caret; it opens the Profile sheet
                 <button type="button" on:click=move |_| sheet.set(true) class="mb-6 flex items-center gap-3 px-4 sm:hidden" aria-haspopup="dialog">
                     <span class="h-8 w-8 overflow-hidden rounded-control">
@@ -104,6 +105,7 @@ pub fn MyListPage() -> impl IntoView {
                     <i class="ph-fill ph-caret-down text-body-md text-ink-silver" aria-hidden="true"></i>
                 </button>
                 <crate::pages::settings::hub::ProfileSheet open=sheet />
+                <div class="rows-stack">
                 <Shelf title=t("my-continue") icon=ShelfIcon::Clock empty=t("my-continue-empty") has_items=continuing own_heading=true>
                     <ContinueWatchingRow title=t("my-continue") />
                 </Shelf>
@@ -116,6 +118,7 @@ pub fn MyListPage() -> impl IntoView {
                 <Shelf title=t("my-liked") icon=ShelfIcon::ThumbsUp empty=t("my-liked-empty") has_items=Signal::derive(move || !liked_list.get().is_empty())>
                     {move || view! { <TitleStrip items=liked_list.get() /> }}
                 </Shelf>
+                </div>
             </div>
         </Layout>
     }

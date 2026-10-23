@@ -145,15 +145,17 @@
    starts exactly at the page margin as on Netflix (it started one gap further in) and where an endless row pages to. */
 .row-edge { flex: none; height: 100%; pointer-events: none; width: calc(var(--app-x, 56px) - var(--tile-gap, 8px)); }
 
+/* Netflix's cards sit in a strip with 4 px above and below them; ours has 2 (the strips' own padding), and the row adds the other 2 below */
 .row-block {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  padding-bottom: 2px;
 }
 @media (min-width: 600px) {
   .row-block { gap: 10px; }
 }
-/* from 1280 wide the cards start 14 px under the row title's line, as Netflix's (measured at 1736: title 854, cards 899); the strip adds 2 */
+/* from 1280 wide the cards start 14 px under the row title's line, as Netflix's (measured 2026-10-23 at 1736 on Films: title 920.4, cards 964.9); the strip adds 2 */
 @media (min-width: 1280px) {
   .row-block { gap: 12px; }
 }
@@ -167,8 +169,8 @@
   .row-title { font-size: 18px; line-height: 1.27; font-weight: 500; }
 }
 @media (min-width: 1280px) {
-  /* Netflix's 24 px row title takes a 31 px line (measured 2026-10-23 at 1736 wide: title 854, cards 899) */
-  .row-title { font-size: 24px; line-height: 31px; }
+  /* Netflix's 24 px row title takes a 30.5 px line (measured 2026-10-23 at 1736 wide on Films; a row is 194.6 tall with its cards, 32 px apart) */
+  .row-title { font-size: 24px; line-height: 30.5px; }
 }
 
 html {

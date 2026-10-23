@@ -15,8 +15,12 @@ pub fn key(base: &str) -> String {
     format!("{base}:{}", active())
 }
 
+/// The trailers a profile has watched (store/trailers.rs).
+pub const TRAILERS_WATCHED: &str = "streams_trailers_watched_v1";
+
 /// The bases of the keys above, so that signing out can remove every profile's copy.
-pub const BASES: [&str; 7] = [
+pub const BASES: [&str; 8] = [
+    TRAILERS_WATCHED,
     "streams_watch_progress_v1",
     "streams_episode_progress_v1",
     "streams_my_list_v1",
