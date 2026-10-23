@@ -99,15 +99,15 @@ pub fn BrowseLanguagePage() -> impl IntoView {
         set_lang_dropdown_open.update(|o| *o = !*o);
     };
 
-    // a Kids profile gets the dropdowns of the rest of the app (the pill of the Genres menu), not the boxes of the website
-    let kids = crate::pages::settings::prefs::active_is_kids();
     view! {
         <Layout>
-            <div class="bg-void md:bg-page min-h-screen pb-20 pt-[calc(4rem+env(safe-area-inset-top))] md:pt-[96px]">
+            // the header as the Series and Films pages' (Netflix's own Browse by Language is still its old page with square, outlined menus): title 24 px
+            // weight 500 at 98, the menus as the Genres pill, centred at 113
+            <div class="bg-void md:bg-page min-h-screen pb-20 pt-[calc(4rem+env(safe-area-inset-top))] md:pt-[93px]">
                 <div class="px-6 md:px-[var(--app-x,56px)] pt-2 md:pt-0">
                     // Header with title and Netflix-matching preference dropdowns
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 md:mb-[110px]">
-                        <h1 class="select-none text-heading-lg font-bold leading-tight tracking-tight text-ink md:text-page-title md:font-normal md:leading-[36px] md:tracking-normal">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                        <h1 class="select-none text-heading-lg font-bold leading-tight tracking-tight text-ink md:text-[24px] md:font-medium md:leading-[31px] md:tracking-normal">
                             {crate::i18n::t("language-browse-by-language")}
                         </h1>
 
@@ -120,10 +120,11 @@ pub fn BrowseLanguagePage() -> impl IntoView {
                             <div node_ref=pref_container_ref class="relative" >
                                 <button
                                     on:click=toggle_pref_dropdown
-                                    class=if kids { "flex items-center justify-between min-w-[125px] px-4 py-2 leading-none text-body-sm font-semibold tracking-[-0.2px] text-ink bg-ink/10 hover:bg-ink/20 border border-ink/20 backdrop-blur-md transition-all rounded-button active:scale-95 gap-x-2.5 cursor-pointer shadow-sm" } else { "flex h-[35px] items-center justify-between min-w-[100px] md:min-w-[224px] cursor-pointer select-none gap-x-2.5 border border-ink/55 bg-void px-3 text-label font-medium leading-none text-ink hover:border-ink md:text-select" }
+                                    class="btn-outline btn-pill btn-pill-md select-none"
+                                    class=("!bg-glass", move || pref_dropdown_open.get())
                                 >
                                     <span>{move || crate::i18n::t(selected_pref_type.get())}</span>
-                                    <i class="ph-fill ph-caret-down text-fine text-ink/80 shrink-0 transition-transform duration-(--motion-base)"
+                                    <i class="ph-fill ph-caret-down shrink-0 transition-transform duration-(--motion-base)"
                                        class=("rotate-180", move || pref_dropdown_open.get())></i>
                                 </button>
 
@@ -161,10 +162,11 @@ pub fn BrowseLanguagePage() -> impl IntoView {
                             <div node_ref=lang_container_ref class="relative">
                                 <button
                                     on:click=toggle_lang_dropdown
-                                    class=if kids { "flex items-center justify-between min-w-[125px] px-4 py-2 leading-none text-body-sm font-semibold tracking-[-0.2px] text-ink bg-ink/10 hover:bg-ink/20 border border-ink/20 backdrop-blur-md transition-all rounded-button active:scale-95 gap-x-2.5 cursor-pointer shadow-sm" } else { "flex h-[35px] items-center justify-between min-w-[100px] md:min-w-[240px] cursor-pointer select-none gap-x-2.5 border border-ink/55 bg-void px-3 text-label font-medium leading-none text-ink hover:border-ink md:text-select" }
+                                    class="btn-outline btn-pill btn-pill-md select-none"
+                                    class=("!bg-glass", move || lang_dropdown_open.get())
                                 >
                                     <span>{active_label}</span>
-                                    <i class="ph-fill ph-caret-down text-fine text-ink/80 shrink-0 transition-transform duration-(--motion-base)"
+                                    <i class="ph-fill ph-caret-down shrink-0 transition-transform duration-(--motion-base)"
                                        class=("rotate-180", move || lang_dropdown_open.get())></i>
                                 </button>
 
@@ -204,7 +206,7 @@ pub fn BrowseLanguagePage() -> impl IntoView {
 
                     // Content grid — exact 6-column Netflix desktop grid with tight horizontal gap and full aspect-video cards
                     <Suspense fallback=move || view! {
-                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-1.5 md:gap-x-2 gap-y-10 md:gap-y-12 animate-pulse">
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-1.5 md:gap-x-2 gap-y-6 md:gap-y-5 animate-pulse">
                             {(0..18).map(|_| view! {
                                 <div class="aspect-video bg-card rounded-control border border-ink/[0.04]"></div>
                             }).collect::<Vec<_>>()}
@@ -220,7 +222,7 @@ pub fn BrowseLanguagePage() -> impl IntoView {
                                 }.into_any()
                             } else {
                                 view! {
-                                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-1.5 md:gap-x-[4px] gap-y-10 md:gap-y-[75px]">
+                                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-1.5 md:gap-x-2 gap-y-6 md:gap-y-5">
                                         {items.into_iter().map(|item| {
                                             let movie_id = item.id;
                                             let is_tv = item.is_tv();
