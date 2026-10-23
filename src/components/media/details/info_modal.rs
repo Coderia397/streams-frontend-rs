@@ -478,6 +478,28 @@ pub fn InfoModal() -> impl IntoView {
                                                 set_is_playing_trailer.set(false);
                                                 set_is_trailer_ready.set(false);
                                             })
+                                            // a trailer YouTube refuses here gives way to the title's next one (if the window still shows that title),
+                                            // or ends as above
+                                            on_unplayable=Callback::new(move |_| {
+                                                set_is_trailer_ready.set(false);
+                                                let (Some(id), tv) = (movie_id.get_untracked(), is_tv.get_untracked()) else { return };
+                                                leptos::task::spawn_local(async move {
+                                                    let next = crate::services::unplayable::next_trailer(id, tv).await;
+                                                    if movie_id.try_get_untracked() != Some(Some(id)) {
+                                                        return;
+                                                    }
+                                                    match next {
+                                                        Some((key, teaser)) => {
+                                                            set_is_teaser.try_set(teaser);
+                                                            set_video_key.try_set(Some(key));
+                                                        }
+                                                        None => {
+                                                            set_has_ended.try_set(true);
+                                                            set_is_playing_trailer.try_set(false);
+                                                        }
+                                                    }
+                                                });
+                                            })
                                             on_time_update=Callback::new(move |t| {
                                                 ui_store.modal_current_time.set(t);
                                             })

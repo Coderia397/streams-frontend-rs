@@ -63,3 +63,9 @@ pub fn track() {
 pub fn is_lasting(code: u32) -> bool {
     matches!(code, 100 | 101 | 150 | 153)
 }
+
+/// The best trailer of a title that YouTube has not refused here (a player whose trailer was refused asks for the next one).
+pub async fn next_trailer(id: u32, is_tv: bool) -> Option<(String, bool)> {
+    let videos = crate::services::tmdb::fetch_videos(id, is_tv).await.ok()?;
+    crate::services::tmdb::select_best_tmdb_trailer(&videos)
+}

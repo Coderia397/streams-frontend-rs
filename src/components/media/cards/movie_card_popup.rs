@@ -330,6 +330,20 @@ pub fn MovieCardPopup(
                         on_ended=Callback::new(move |_| {
                             set_is_playing.set(false);
                         })
+                        // a trailer YouTube refuses here gives way to the title's next one, or to the picture
+                        on_unplayable=Callback::new(move |_| {
+                            leptos::task::spawn_local(async move {
+                                match crate::services::unplayable::next_trailer(movie_id, is_tv).await {
+                                    Some((key, teaser)) => {
+                                        set_is_teaser.try_set(teaser);
+                                        set_video_key.try_set(Some(key));
+                                    }
+                                    None => {
+                                        set_is_playing.try_set(false);
+                                    }
+                                }
+                            });
+                        })
                         on_time_update=Callback::new(move |t| {
                             set_card_trailer_time.set(t);
                         })
