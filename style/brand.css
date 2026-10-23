@@ -177,7 +177,8 @@
   --radius-field: 0.375rem;
   --radius-card: 0.5rem;
   --radius-modal: 0.75rem;
-  --radius-chip-inner: 10px;
+  /* Netflix Android app chips: 12 dp inside a chip row, also its dropdown chip (fitted on a Pixel 8 capture, note 116) */
+  --radius-chip-inner: 12px;
   --radius-chip: 20px;
   --radius-pill: 14px;
   --radius-poster: 18px;
@@ -248,7 +249,12 @@
   --drop-shadow-accent-violet: 0 1px 3px rgba(155, 93, 229, 0.5);
 
   /* Fonts */
-  --font-brand: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* The device's own interface font (Roboto on Android, SF on Apple devices, Segoe on Windows): its widths match Netflix Sans to 1 px on
+     the phone chips (measured 2026-10-23, note 116), and it needs no download. font-sans and font-brand are the same font. Inter was
+     declared here before but the page frame's font-sans replaced it, so pages drew in the system font and only the windows outside the
+     frame (details, profile gate) drew in Inter. */
+  --font-brand: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: var(--font-brand);
 }
 
 /* Layout dimensions. Used as h-(--nav-h), top-(--nav-h) and in input.css. */

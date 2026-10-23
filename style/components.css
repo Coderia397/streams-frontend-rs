@@ -65,6 +65,13 @@
   .btn-pill-lg { height: 48px; padding-inline: 20px; font-size: 18px; }
   /* xl: 56 px, beside a 56 px text field (Netflix's landing Get Started: 24 px text, 24 px padding) */
   .btn-pill-xl { height: 56px; padding-inline: 24px; font-size: 24px; }
+  /* Phone chips (Home's Series, Films, events, New & Hot, Categories) drawn as one group, as in Netflix's Android app (measured on a
+     Pixel 8, 2026-10-23, note 116): 49 px high, 12 px corners inside the row, the row's two outer ends round (half the height: a larger
+     value would make the browser scale every corner of that chip down). Logical corners, so the round ends follow the reading direction. */
+  .chip-group { --chip-h: 49px; }
+  .chip-group > * { height: var(--chip-h); border-radius: var(--radius-chip-inner); }
+  .chip-group > :first-child { border-start-start-radius: calc(var(--chip-h) / 2); border-end-start-radius: calc(var(--chip-h) / 2); }
+  .chip-group > :last-child { border-start-end-radius: calc(var(--chip-h) / 2); border-end-end-radius: calc(var(--chip-h) / 2); }
   .btn-pill-sm > i { font-size: 16px; }
   .btn-pill-md > i { font-size: 20px; }
   .btn-pill-lg > i { font-size: 24px; }

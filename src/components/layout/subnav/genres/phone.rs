@@ -44,11 +44,12 @@ pub fn CategorySubNavMobile(
         selected_genre.get().map(|g| crate::i18n::genre_label(&g.name)).unwrap_or_else(|| dropdown_label.clone().unwrap_or_else(|| crate::i18n::t("nav-all-categories")))
     });
 
-    // one look for every pill: filled when it is the page in use, a glass pill otherwise
+    // one look for every chip: filled when it is the page in use, glass otherwise. Netflix's Android app (note 116): 15 px padding, 10 %
+    // white with a 10 % white edge; height and corners come from `chip-group` on the row
     let pill = |active: bool| if active {
-        "flex items-center justify-center h-12 px-4 rounded-button text-body-lg font-medium whitespace-nowrap active:scale-95 transition-all leading-none shrink-0 cursor-pointer bg-ink text-void border border-ink"
+        "flex items-center justify-center px-[15px] text-body-lg font-medium whitespace-nowrap active:scale-95 transition-all leading-none shrink-0 cursor-pointer bg-ink text-void border border-ink"
     } else {
-        "flex items-center justify-center h-12 px-4 rounded-button text-body-lg font-medium whitespace-nowrap active:scale-95 transition-all leading-none shrink-0 cursor-pointer bg-ink/[0.08] text-ink-dim border border-ink/15"
+        "flex items-center justify-center px-[15px] text-body-lg font-medium whitespace-nowrap active:scale-95 transition-all leading-none shrink-0 cursor-pointer bg-ink/10 text-ink-dim border border-ink/10"
     };
 
     view! {
@@ -56,7 +57,7 @@ pub fn CategorySubNavMobile(
             // Home: Series, Films, Games, events in season, New & Hot
             <Show when=on_home>
                 <div class="pt-2 pb-4 px-4 flex items-center justify-start overflow-x-auto scrollbar-hide max-w-full">
-                    <div class="flex items-center gap-[6px] shrink-0">
+                    <div class="chip-group flex items-center gap-[6px] shrink-0">
                         <button on:click=on_series.clone() class=move || pill(false)>{crate::i18n::t("category-sub-nav-mobile-series")}</button>
                         <button on:click=on_films.clone() class=move || pill(false)>{crate::i18n::t("category-sub-nav-mobile-films")}</button>
                         <Show when=games_on><button on:click=move |_| navigate_event.with_value(|n| n("/browse/games", Default::default())) class=move || pill(is_games_active())>{crate::i18n::t("nav-games")}</button></Show>
@@ -82,7 +83,8 @@ pub fn CategorySubNavMobile(
                     <button
                         on:click=move |_| set_genre_menu_open.update(|o| *o = !*o)
                         aria-haspopup="listbox"
-                        class="flex items-center gap-3 h-[52px] ps-5 pe-4 rounded-button border border-ink/35 bg-transparent text-title font-medium leading-none whitespace-nowrap active:scale-95 transition-transform cursor-pointer text-ink"
+                        // radius: a dropdown chip, 12 px corners as in Netflix's Android app (43 px high, 40 % white edge; note 116)
+                        class="flex items-center gap-3 h-[43px] ps-5 pe-4 rounded-chip-inner border border-ink/40 bg-transparent text-title font-medium leading-none whitespace-nowrap active:scale-95 transition-transform cursor-pointer text-ink"
                     >
                         <span>{move || active_genre_label.get()}</span>
                         <i class="ph-fill ph-caret-down text-base opacity-80"></i>
