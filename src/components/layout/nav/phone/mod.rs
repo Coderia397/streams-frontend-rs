@@ -25,8 +25,9 @@ pub fn PhoneNav(
         set_active_bottom_nav.set(tab);
     });
 
-    // The header and the pills under it leave when the page is scrolled down and come back at the first swipe up (not only at the very top), as in the app. The state is on the root element
-    // as `--nav-shown` (1 or 0) and `--hdr-solid` (0 to 1, solid black by 60px) so the pills under the header follow it.
+    // The pills under the header leave when the page is scrolled down and come back at the first swipe up (not only at the very top); the
+    // header stays, as in the app (note 116). The state is on the root element as `--nav-shown` (1 or 0) and `--hdr-solid` (0 to 1, solid
+    // black by 60px) so the pill rows follow it.
     Effect::new(move |prev: Option<f64>| {
         let y = scroll_y.get();
         let last = prev.unwrap_or(y);
@@ -153,7 +154,7 @@ pub fn PhoneNav(
             // ── Top Brand Header ───────────────────────────────────────────────
             <header
                 class:hidden=on_search
-                class="mobile-header fixed top-0 left-0 right-0 z-(--z-nav) pl-1 pr-1 pt-[env(safe-area-inset-top)] h-[calc(var(--nav-h-mobile)+env(safe-area-inset-top))] box-content flex items-center justify-between pointer-events-auto transition-colors duration-(--motion-base)"
+                class="fixed top-0 left-0 right-0 z-(--z-nav) pl-1 pr-1 pt-[env(safe-area-inset-top)] h-[calc(var(--nav-h-mobile)+env(safe-area-inset-top))] box-content flex items-center justify-between pointer-events-auto transition-colors duration-(--motion-base)"
                 style=scroll_style
             >
                 // Logo mark and page title on Home, a back arrow and the page title on the pages under it, as in the app header

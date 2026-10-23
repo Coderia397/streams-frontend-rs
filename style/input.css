@@ -651,10 +651,11 @@ button,
   }
 }
 
-/* Phone header and the pill rows under it: they slide away when the page is scrolled down and come back at the first swipe up. The state (--nav-shown, --hdr-solid) is set by navbar_mobile.rs. */
-.mobile-header { transform: translateY(calc(-100% * (1 - var(--nav-shown, 1)))); transition: transform 0.25s ease; }
-.mobile-subnav { position: sticky; top: calc((var(--nav-h-mobile) + env(safe-area-inset-top)) * (var(--nav-shown, 1) - 1)); z-index: 40; background: rgba(0, 0, 0, var(--hdr-solid, 0)); transition: top 0.25s ease; }
-.mobile-pills-sticky { position: sticky; top: calc((var(--nav-h-mobile) + env(safe-area-inset-top)) * var(--nav-shown, 1)); z-index: 40; background: #000; transition: top 0.25s ease; }
+/* Phone header and the pill rows under it, as Netflix's Android app (recorded on a Pixel 8, note 116): the header stays; the pill row under
+   it slides up behind the header when the page is scrolled down and comes back at the first swipe up, mid page included. The state
+   (--nav-shown, --hdr-solid) is set by layout/nav/phone/mod.rs. */
+.mobile-subnav { position: sticky; top: 0; z-index: 40; background: rgba(0, 0, 0, var(--hdr-solid, 0)); transform: translateY(calc(-100% * (1 - var(--nav-shown, 1)))); transition: transform 0.25s ease; }
+.mobile-pills-sticky { position: sticky; top: calc(var(--nav-h-mobile) + env(safe-area-inset-top)); z-index: 40; background: #000; transform: translateY(calc(-100% * (1 - var(--nav-shown, 1)))); transition: transform 0.25s ease; }
 
 /* Edge buttons of a row (row_scroll.rs): the button is a tall clickable area over the margin (it has no look of its own, as the old rectangular button used to fill that space); everything visible
    belongs to the round pill in its middle: nearly solid at rest, blurred and more transparent while hovered, and easing back to solid slowly when the pointer leaves. */
