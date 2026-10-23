@@ -16,7 +16,7 @@ ATTR = re.compile(r'\b(aria-label|title|placeholder|alt|aria-description|aria-pl
 TEXT_LINE = re.compile(r'^\s*"([^"{}]*)"\s*$')
 TEXT_INLINE = re.compile(r'>\s*"([^"{}]*)"\s*<')
 LETTERS = re.compile(r"[A-Za-zÀ-ɏЀ-ӿ؀-ۿ぀-ヿ一-鿿]{2,}")
-SKIP_VALUES = {"HD", "4K", "UHD", "NR", "U", "PG", "12", "15", "18", "TV", "PIN", "OK", "VPN", "DNS", "HLS", "Streams"}
+SKIP_VALUES = {"HD", "4K", "UHD", "NR", "U", "PG", "12", "15", "18", "TV", "PIN", "OK", "VPN", "DNS", "HLS", "Streams", "TOP 10"}
 
 
 def real_text(s: str) -> bool:
