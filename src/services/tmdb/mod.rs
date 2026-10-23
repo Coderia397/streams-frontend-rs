@@ -29,6 +29,52 @@ fn get(url: &str) -> gloo_net::http::RequestBuilder {
     Request::get(&localised(url))
 }
 
+/// An answer on its way or arrived: the body as text, or why it failed.
+type Pending = futures::future::Shared<futures::future::LocalBoxFuture<'static, Result<std::rc::Rc<str>, std::rc::Rc<str>>>>;
+
+thread_local! {
+    /// Every TMDB address asked for in this session and its answer (or the request still on its way). Before, each card asked for its
+    /// title's logo itself and a title in three rows asked three times: opening Home made 233 TMDB requests, most of them repeats.
+    static RESPONSES: std::cell::RefCell<std::collections::HashMap<String, Pending>> = std::cell::RefCell::new(std::collections::HashMap::new());
+}
+
+/// The most answers kept; past it the store starts again (a session that browses for hours).
+const KEEP_RESPONSES: usize = 2000;
+
+/// A TMDB request made once per address for the session: a second caller gets the same answer, or joins the request on its way; a failed
+/// request is forgotten so the next caller tries again. TMDB's data does not change within a visit.
+async fn get_json<T: serde::de::DeserializeOwned>(url: &str) -> Result<T, gloo_net::Error> {
+    use futures::FutureExt;
+    let address = localised(url);
+    let pending = RESPONSES.with(|r| {
+        let mut r = r.borrow_mut();
+        if r.len() >= KEEP_RESPONSES {
+            r.clear();
+        }
+        r.entry(address.clone())
+            .or_insert_with(|| {
+                let a = address.clone();
+                async move {
+                    let resp = Request::get(&a).send().await.map_err(|e| std::rc::Rc::from(e.to_string()))?;
+                    if !resp.ok() {
+                        return Err(std::rc::Rc::from(format!("{} {}", resp.status(), resp.status_text())));
+                    }
+                    resp.text().await.map(std::rc::Rc::from).map_err(|e| std::rc::Rc::from(e.to_string()))
+                }
+                .boxed_local()
+                .shared()
+            })
+            .clone()
+    });
+    match pending.await {
+        Ok(text) => serde_json::from_str(&text).map_err(gloo_net::Error::SerdeError),
+        Err(why) => {
+            RESPONSES.with(|r| r.borrow_mut().remove(&address));
+            Err(gloo_net::Error::GlooError(why.to_string()))
+        }
+    }
+}
+
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct TmdbResponse<T> {
     pub page: u32,

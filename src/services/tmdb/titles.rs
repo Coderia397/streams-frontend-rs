@@ -12,13 +12,80 @@ pub struct TmdbImage {
     pub iso_639_1: Option<String>,
 }
 
+/// Title logos already looked up, kept in this browser for two weeks (title -> logo address, or none, and when it was learnt): a card
+/// shows its logo at once on a later visit instead of asking TMDB for every title on the page (about 120 lookups on Home).
+const LOGOS_KEY: &str = "streams_logos_v1";
+const LOGOS_KEEP_MS: f64 = 14.0 * 24.0 * 3600.0 * 1000.0;
+const LOGOS_MAX: usize = 3000;
+
+type LogoMap = std::collections::HashMap<String, (Option<String>, f64)>;
+
+thread_local! {
+    static LOGOS: std::cell::RefCell<Option<LogoMap>> = const { std::cell::RefCell::new(None) };
+    static LOGOS_SAVE_PENDING: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
+}
+
+fn with_logos<T>(f: impl FnOnce(&mut LogoMap) -> T) -> T {
+    LOGOS.with(|l| {
+        let mut l = l.borrow_mut();
+        let map = l.get_or_insert_with(|| {
+            let now = js_sys::Date::now();
+            let mut map: LogoMap = web_sys::window()
+                .and_then(|w| w.local_storage().ok().flatten())
+                .and_then(|s| s.get_item(LOGOS_KEY).ok().flatten())
+                .and_then(|raw| serde_json::from_str(&raw).ok())
+                .unwrap_or_default();
+            map.retain(|_, (_, at)| now - *at < LOGOS_KEEP_MS);
+            map
+        });
+        f(map)
+    })
+}
+
+/// Writes the logos to the browser a moment after the last one learnt (a page learns dozens at once; one write for them all).
+fn save_logos_soon() {
+    if LOGOS_SAVE_PENDING.with(|p| p.replace(true)) {
+        return;
+    }
+    leptos::leptos_dom::helpers::set_timeout(
+        || {
+            LOGOS_SAVE_PENDING.with(|p| p.set(false));
+            let raw = with_logos(|map| {
+                if map.len() > LOGOS_MAX {
+                    let mut by_age: Vec<(String, f64)> = map.iter().map(|(k, (_, at))| (k.clone(), *at)).collect();
+                    by_age.sort_by(|a, b| a.1.total_cmp(&b.1));
+                    for (k, _) in by_age.into_iter().take(map.len() - LOGOS_MAX) {
+                        map.remove(&k);
+                    }
+                }
+                serde_json::to_string(map).ok()
+            });
+            if let (Some(raw), Some(s)) = (raw, web_sys::window().and_then(|w| w.local_storage().ok().flatten())) {
+                let _ = s.set_item(LOGOS_KEY, &raw);
+            }
+        },
+        std::time::Duration::from_millis(1500),
+    );
+}
+
 pub async fn fetch_movie_logo(id: u32, is_tv: bool) -> Result<Option<String>, gloo_net::Error> {
     let kind = if is_tv { "tv" } else { "movie" };
+    let key = format!("{kind}:{id}");
+    if let Some((logo, _)) = with_logos(|map| map.get(&key).cloned()) {
+        return Ok(logo);
+    }
+    let logo = fetch_logo_from_tmdb(kind, id).await?;
+    with_logos(|map| map.insert(key, (logo.clone(), js_sys::Date::now())));
+    save_logos_soon();
+    Ok(logo)
+}
+
+async fn fetch_logo_from_tmdb(kind: &str, id: u32) -> Result<Option<String>, gloo_net::Error> {
     let url = format!(
         "{}/{}/{}/images?api_key={}",
         TMDB_BASE_URL, kind, id, TMDB_API_KEY
     );
-    let resp: TmdbImages = get(&url).send().await?.json().await?;
+    let resp: TmdbImages = get_json(&url).await?;
     
     // Find english logo or first available
     let logo = resp.logos.iter().find(|l| l.iso_639_1.as_deref() == Some("en"))
@@ -94,7 +161,7 @@ pub async fn fetch_details(id: u32, is_tv: bool) -> Result<DetailedMediaItem, gl
         "{}/{}/{}?api_key={}&append_to_response=credits",
         TMDB_BASE_URL, kind, id, TMDB_API_KEY
     );
-    get(&url).send().await?.json().await
+    get_json(&url).await
 }
 
 #[derive(Clone, Debug, serde::Deserialize, serde::Serialize)]
@@ -133,5 +200,5 @@ pub async fn fetch_season_details(series_id: u32, season_number: u32) -> Result<
         "{}/tv/{}/season/{}?api_key={}&language=en-US",
         TMDB_BASE_URL, series_id, season_number, TMDB_API_KEY
     );
-    get(&url).send().await?.json().await
+    get_json(&url).await
 }

@@ -7,7 +7,7 @@ pub async fn fetch_trending(kind: &str) -> Result<Vec<MediaItem>, gloo_net::Erro
         "{}/trending/{}/week?api_key={}&language=en-US",
         TMDB_BASE_URL, kind, TMDB_API_KEY
     );
-    let resp: TmdbResponse<MediaItem> = get(&url).send().await?.json::<TmdbResponse<MediaItem>>().await?.rated().await;
+    let resp: TmdbResponse<MediaItem> = get_json::<TmdbResponse<MediaItem>>(&url).await?.rated().await;
     let items = resp.results.into_iter().filter(|i| !i.is_nsfw() && (i.backdrop_path.is_some() || i.poster_path.is_some())).collect();
     Ok(items)
 }
@@ -18,7 +18,7 @@ pub async fn fetch_top_rated(kind: &str) -> Result<Vec<MediaItem>, gloo_net::Err
         "{}/{}/top_rated?api_key={}&language=en-US",
         TMDB_BASE_URL, kind, TMDB_API_KEY
     );
-    let resp: TmdbResponse<MediaItem> = get(&url).send().await?.json::<TmdbResponse<MediaItem>>().await?.rated().await;
+    let resp: TmdbResponse<MediaItem> = get_json::<TmdbResponse<MediaItem>>(&url).await?.rated().await;
     let items = resp.results.into_iter().filter(|i| !i.is_nsfw() && (i.backdrop_path.is_some() || i.poster_path.is_some())).collect();
     Ok(items)
 }
@@ -29,7 +29,7 @@ pub async fn fetch_by_genre(kind: &str, genre_id: u32) -> Result<Vec<MediaItem>,
         "{}/discover/{}?api_key={}&with_genres={}&language=en-US&sort_by=popularity.desc",
         TMDB_BASE_URL, kind, TMDB_API_KEY, genre_id
     );
-    let resp: TmdbResponse<MediaItem> = get(&url).send().await?.json::<TmdbResponse<MediaItem>>().await?.rated().await;
+    let resp: TmdbResponse<MediaItem> = get_json::<TmdbResponse<MediaItem>>(&url).await?.rated().await;
     Ok(resp.results)
 }
 
@@ -39,7 +39,7 @@ pub async fn fetch_british_tv() -> Result<Vec<MediaItem>, gloo_net::Error> {
         "{}/discover/tv?api_key={}&with_origin_country=GB&language=en-US&sort_by=popularity.desc",
         TMDB_BASE_URL, TMDB_API_KEY
     );
-    let resp: TmdbResponse<MediaItem> = get(&url).send().await?.json::<TmdbResponse<MediaItem>>().await?.rated().await;
+    let resp: TmdbResponse<MediaItem> = get_json::<TmdbResponse<MediaItem>>(&url).await?.rated().await;
     Ok(resp.results)
 }
 
@@ -72,7 +72,7 @@ pub async fn search_media(query: &str) -> Result<Vec<MediaItem>, gloo_net::Error
         "{}/search/multi?api_key={}&language=en-US&query={}&page=1&include_adult=false",
         TMDB_BASE_URL, TMDB_API_KEY, encoded_query
     );
-    let resp: TmdbResponse<MediaItem> = get(&url).send().await?.json::<TmdbResponse<MediaItem>>().await?.rated().await;
+    let resp: TmdbResponse<MediaItem> = get_json::<TmdbResponse<MediaItem>>(&url).await?.rated().await;
     // Filter out people, nsfw content, and items without artwork
     let filtered = resp.results.into_iter().filter(|i| {
         i.media_type.as_deref() != Some("person")
@@ -89,7 +89,7 @@ pub async fn fetch_recommendations(id: u32, is_tv: bool) -> Result<Vec<MediaItem
         "{}/{}/{}/recommendations?api_key={}&language=en-US&page=1",
         TMDB_BASE_URL, kind, id, TMDB_API_KEY
     );
-    let resp: TmdbResponse<MediaItem> = get(&url).send().await?.json::<TmdbResponse<MediaItem>>().await?.rated().await;
+    let resp: TmdbResponse<MediaItem> = get_json::<TmdbResponse<MediaItem>>(&url).await?.rated().await;
     let filtered = resp.results.into_iter().filter(|i| {
         !i.is_nsfw() && (i.backdrop_path.is_some() || i.poster_path.is_some())
     }).collect();

@@ -106,6 +106,6 @@ pub async fn fetch_videos(id: u32, is_tv: bool) -> Result<Vec<VideoResult>, gloo
         "{}/{}/{}/videos?api_key={}&language=en-US",
         TMDB_BASE_URL, kind, id, TMDB_API_KEY
     );
-    let resp: TmdbVideos = get(&url).send().await?.json().await?;
+    let resp: TmdbVideos = get_json(&url).await?;
     Ok(resp.results)
 }

@@ -1,6 +1,7 @@
-import Hls from 'hls.js';
+// The video bridge Rust binds to (src/components/hls_adapter.rs). Plain video files play in the element itself; HLS streams use hls.js,
+// which is loaded the first time a stream plays (interop/hls-player.ts, its own file), not with every page.
 
-interface HlsInstance {
+export interface HlsInstance {
   destroy(): void;
   loadSource(url: string): void;
   attachMedia(video: HTMLVideoElement): void;
@@ -14,107 +15,58 @@ interface HlsInstance {
 const instances = new Map<string, HlsInstance>();
 let counter = 0;
 
+type Player = typeof import('./hls-player');
+let player: Promise<Player> | null = null;
+
+/** hls.js, fetched once. The address is made at run time so the bundler leaves the library out of this file. */
+function loadPlayer(): Promise<Player> {
+  const src = new URL('/hls-player.js', location.origin).href;
+  return (player ??= import(/* @vite-ignore */ src) as Promise<Player>);
+}
+
+/** The browser plays `url` in `video` by itself (a plain file, or HLS where the browser has it built in, as Safari). */
+function native(video: HTMLVideoElement, url: string): HlsInstance {
+  video.src = url;
+  return {
+    destroy: () => { video.src = ""; video.removeAttribute("src"); video.load(); },
+    loadSource: (u: string) => { video.src = u; },
+    attachMedia: () => {},
+    audioTrack: 0,
+    currentLevel: -1,
+    _native: true,
+    _video: video,
+  };
+}
+
 export function hlsAttach(videoId: string, streamUrl: string): string {
   const video = document.getElementById(videoId) as HTMLVideoElement | null;
   if (!video) return "";
   const handle = "hls_" + (++counter);
 
-  const isExplicitDirect = /\.(mp4|m4v|webm|mkv|mov)(\?.*)?$/i.test(streamUrl);
-  if (isExplicitDirect) {
-    video.src = streamUrl;
-    instances.set(handle, {
-      destroy: () => { video.src = ""; video.removeAttribute("src"); video.load(); },
-      loadSource: (url: string) => { video.src = url; },
-      attachMedia: () => {},
-      audioTrack: 0,
-      currentLevel: -1,
-      _native: true,
-      _video: video,
-    });
+  if (/\.(mp4|m4v|webm|mkv|mov)(\?.*)?$/i.test(streamUrl)) {
+    instances.set(handle, native(video, streamUrl));
     return handle;
   }
 
-  if (typeof Hls !== 'undefined' && Hls.isSupported()) {
-    const hls = new Hls({
-      enableWorker: true,
-      capLevelToPlayerSize: true,
-      maxBufferLength: 30,
-      maxMaxBufferLength: 60,
-      backBufferLength: 30,
-    });
-
-    let mediaRecoveryAttempts = 0;
-    let networkRecoveryAttempts = 0;
-
-    hls.on(Hls.Events.ERROR, (_event, data) => {
-      if (data.fatal) {
-        switch (data.type) {
-          case Hls.ErrorTypes.NETWORK_ERROR:
-            if (networkRecoveryAttempts < 3) {
-              networkRecoveryAttempts++;
-              console.warn('[HLS] Network error encountered, recovery attempt', networkRecoveryAttempts);
-              hls.startLoad();
-            } else {
-              console.error('[HLS] Fatal network error, falling back to native if supported...');
-              if (video && video.canPlayType('application/vnd.apple.mpegurl')) {
-                hls.destroy();
-                video.src = streamUrl;
-                video.play().catch(() => {});
-              } else {
-                video.dispatchEvent(new Event('error'));
-              }
-            }
-            break;
-          case Hls.ErrorTypes.MEDIA_ERROR:
-            if (mediaRecoveryAttempts < 2) {
-              mediaRecoveryAttempts++;
-              console.warn('[HLS] Media error encountered (stall/video freeze), recovering...');
-              hls.recoverMediaError();
-            } else if (mediaRecoveryAttempts === 2) {
-              mediaRecoveryAttempts++;
-              console.warn('[HLS] Media error recovery #2, swapping audio codec...');
-              hls.swapAudioCodec();
-              hls.recoverMediaError();
-            } else {
-              console.error('[HLS] Fatal media error unrecoverable, falling back to native...');
-              if (video && video.canPlayType('application/vnd.apple.mpegurl')) {
-                hls.destroy();
-                video.src = streamUrl;
-                video.play().catch(() => {});
-              } else {
-                video.dispatchEvent(new Event('error'));
-              }
-            }
-            break;
-          default:
-            console.error('[HLS] Fatal unrecoverable error:', data);
-            if (video && video.canPlayType('application/vnd.apple.mpegurl')) {
-              hls.destroy();
-              video.src = streamUrl;
-              video.play().catch(() => {});
-            } else {
-              video.dispatchEvent(new Event('error'));
-            }
-            break;
-        }
-      }
-    });
-
-    hls.loadSource(streamUrl);
-    hls.attachMedia(video);
-    instances.set(handle, hls);
-  } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-    video.src = streamUrl;
-    instances.set(handle, {
-      destroy: () => { video.src = ""; video.removeAttribute("src"); video.load(); },
-      loadSource: (url: string) => { video.src = url; },
-      attachMedia: () => {},
-      audioTrack: 0,
-      currentLevel: -1,
-      _native: true,
-      _video: video,
-    });
-  }
+  // Until hls.js has arrived the handle stands for the video element (seek and time read it); an audio or quality choice made
+  // meanwhile is kept and applied when the stream starts.
+  const waiting: HlsInstance = { destroy: () => {}, loadSource: () => {}, attachMedia: () => {}, audioTrack: 0, currentLevel: -1, media: video };
+  instances.set(handle, waiting);
+  const useNativeOrFail = () => {
+    if (instances.get(handle) !== waiting) return;
+    if (video.canPlayType('application/vnd.apple.mpegurl')) instances.set(handle, native(video, streamUrl));
+    else video.dispatchEvent(new Event('error'));
+  };
+  loadPlayer()
+    .then((p) => {
+      if (instances.get(handle) !== waiting) return; // closed meanwhile
+      const real = p.attach(video, streamUrl);
+      if (!real) return useNativeOrFail();
+      if (waiting.audioTrack) real.audioTrack = waiting.audioTrack;
+      if (waiting.currentLevel !== -1) real.currentLevel = waiting.currentLevel;
+      instances.set(handle, real);
+    })
+    .catch(useNativeOrFail);
   return handle;
 }
 
