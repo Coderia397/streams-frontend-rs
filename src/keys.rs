@@ -10,7 +10,6 @@ pub const USER_AFFINITY: &str = "streams_user_affinity";
 pub const TITLE_RATINGS: &str = "streams_title_ratings_v1";
 pub const LANGUAGE: &str = "streams_language";
 pub const NOTIFICATIONS_READ: &str = "streams-notifications-read:default";
-pub const AMBIENT_LAST: &str = "streams-ambient:last";
 pub const SESSION: &str = "streams_session";
 pub const CONSENT: &str = "streams_consent";
 pub const CONSENT_DISMISSED: &str = "streams_consent_dismissed";

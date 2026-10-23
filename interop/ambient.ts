@@ -4,25 +4,56 @@ export interface AmbientRGB {
   b: number;
 }
 
-const cache = new Map<string, AmbientRGB>();
 // version 3: the artwork's second colour (its first when there is no distinct second), a little more saturated (the app tints the top of the page with it)
-const STORAGE_PREFIX = 'streams-ambient3:';
+// All colours live in one stored map, keyed by the picture's file name (the same picture at another size has the same colour), the newest
+// KEEP of them; the colour of the last billboard shown has a key of its own, read at start for the first tint.
+const STORE_KEY = 'streams-ambient3';
 const LAST_KEY = 'streams-ambient3:last';
+const KEEP = 400;
+// before the map, every picture had a key of its own ('streams-ambient2:<url>', 'streams-ambient3:<url>'), never removed
+const OLD_PREFIXES = ['streams-ambient2:', 'streams-ambient3:'];
+
+let cache: Map<string, AmbientRGB> | null = null;
+
+function fileKey(imageUrl: string): string {
+  return imageUrl.includes('image.tmdb.org/t/p/') ? imageUrl.slice(imageUrl.lastIndexOf('/') + 1) : imageUrl;
+}
+
+function load(): Map<string, AmbientRGB> {
+  if (cache) return cache;
+  cache = new Map();
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (raw) {
+      for (const [k, v] of JSON.parse(raw) as [string, AmbientRGB][]) cache.set(k, v);
+    } else {
+      // first start with the map: keep the version 3 colours, drop the version 2 ones, remove the old keys
+      const old: string[] = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k !== LAST_KEY && OLD_PREFIXES.some((p) => k.startsWith(p))) old.push(k);
+      }
+      for (const k of old) {
+        if (k.startsWith('streams-ambient3:')) {
+          try { cache.set(fileKey(k.slice('streams-ambient3:'.length)), JSON.parse(localStorage.getItem(k) ?? '')); } catch {}
+        }
+        localStorage.removeItem(k);
+      }
+      save();
+    }
+  } catch {}
+  return cache;
+}
+
+function save(): void {
+  if (!cache) return;
+  while (cache.size > KEEP) cache.delete(cache.keys().next().value as string);
+  try { localStorage.setItem(STORE_KEY, JSON.stringify([...cache])); } catch {}
+}
 
 export function getCachedAmbientColor(imageUrl: string): AmbientRGB | null {
   if (!imageUrl) return null;
-  const inMem = cache.get(imageUrl);
-  if (inMem) return inMem;
-
-  try {
-    const raw = localStorage.getItem(STORAGE_PREFIX + imageUrl);
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      cache.set(imageUrl, parsed);
-      return parsed;
-    }
-  } catch {}
-  return null;
+  return load().get(fileKey(imageUrl)) ?? null;
 }
 
 export function getLastAmbientColor(): AmbientRGB | null {
@@ -113,11 +144,11 @@ export function extractAmbientColor(imageUrl: string): Promise<AmbientRGB | null
         ab = Math.min(255, Math.round(ab * scale));
 
         const rgb = { r: ar, g: ag, b: ab };
-        cache.set(imageUrl, rgb);
-        try {
-          localStorage.setItem(STORAGE_PREFIX + imageUrl, JSON.stringify(rgb));
-          localStorage.setItem(LAST_KEY, JSON.stringify(rgb));
-        } catch {}
+        const map = load();
+        map.delete(fileKey(imageUrl));
+        map.set(fileKey(imageUrl), rgb);
+        save();
+        try { localStorage.setItem(LAST_KEY, JSON.stringify(rgb)); } catch {}
         resolve(rgb);
       } catch {
         resolve(null);
