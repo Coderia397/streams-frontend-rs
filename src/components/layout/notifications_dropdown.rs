@@ -118,6 +118,8 @@ pub fn NotificationsDropdown() -> impl IntoView {
             <button
                 on:click=toggle_open
                 class="relative btn-circle btn-circle-clear btn-circle-md"
+                // open: the grey disc of the other round buttons, as Netflix's bell
+                class=("!bg-glass", move || open.get())
                 title=crate::i18n::t("notifications-dropdown-notifications")
                 aria-label=crate::i18n::t("notifications-dropdown-notifications")
             >
@@ -134,7 +136,8 @@ pub fn NotificationsDropdown() -> impl IntoView {
 
             // Dropdown panel
             <Show when=move || open.get()>
-                <div class="absolute right-0 top-[calc(100%+8px)] w-[360px] sm:w-[420px] max-h-[560px] overflow-y-auto bg-menu rounded-menu shadow-2xl z-50 scrollbar-hide">
+                // Netflix's redesigned menus (measured 2026-10-23): 6 px under the button, #232323, 12 px corners, a soft shadow
+                <div class="absolute right-0 top-[calc(100%+6px)] w-[360px] sm:w-[420px] max-h-[560px] overflow-y-auto bg-popover rounded-menu shadow-menu z-50 scrollbar-hide">
                     // Header
                     <div class="px-4 py-3">
                         <p class="text-ink font-bold text-body">{crate::i18n::t("notif-title")}</p>
@@ -150,7 +153,7 @@ pub fn NotificationsDropdown() -> impl IntoView {
                         <Show
                             when=move || !items.get().is_empty()
                             fallback=move || view! {
-                                <p class="text-ink/40 text-center text-label py-10 px-6">
+                                <p class="text-ink/50 text-center text-body-md py-10 px-6">
                                     {crate::i18n::t("notifications-dropdown-youre-all-caught-up-new")}
                                 </p>
                             }

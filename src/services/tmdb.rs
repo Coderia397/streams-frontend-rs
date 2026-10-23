@@ -362,6 +362,8 @@ pub fn select_best_tmdb_trailer(videos: &[VideoResult]) -> Option<(String, bool)
     let yt_videos: Vec<&VideoResult> = videos
         .iter()
         .filter(|v| v.site.eq_ignore_ascii_case("youtube") && !v.key.trim().is_empty())
+        // a video YouTube refused here before is not offered again (services/unplayable.rs)
+        .filter(|v| !crate::services::unplayable::is_unplayable(&v.key))
         .collect();
 
     if yt_videos.is_empty() {

@@ -49,8 +49,9 @@ fn send_yt_listening(iframe_id: &str) {
             if let Some(el) = doc.get_element_by_id(iframe_id) {
                 if let Ok(iframe) = el.dyn_into::<web_sys::HtmlIFrameElement>() {
                     if let Some(cw) = iframe.content_window() {
-                        let cmd = r#"{"event":"listening"}"#;
-                        let _ = cw.post_message(&wasm_bindgen::JsValue::from_str(cmd), "*");
+                        // the form YouTube's own player API sends (id and channel), which the frame answers with its state and events
+                        let cmd = format!(r#"{{"event":"listening","id":"{iframe_id}","channel":"widget"}}"#);
+                        let _ = cw.post_message(&wasm_bindgen::JsValue::from_str(&cmd), "*");
                     }
                 }
             }
@@ -111,6 +112,9 @@ pub fn TrailerPlayer(
     #[prop(optional, into)] crop_factor: Option<f32>,
     #[prop(optional, into)] on_ready: Option<Callback<()>>,
     #[prop(optional, into)] on_ended: Option<Callback<()>>,
+    /// Called instead of `on_ended` when YouTube refuses the video; a caller that picks its trailer again (services/unplayable.rs) keeps
+    /// playing with the next one
+    #[prop(optional, into)] on_unplayable: Option<Callback<()>>,
     #[prop(optional, into)] on_time_update: Option<Callback<f64>>,
     /// The length of the video in seconds, when the player has told it
     #[prop(optional, into)] on_duration: Option<Callback<f64>>,
@@ -396,7 +400,7 @@ pub fn TrailerPlayer(
     });
 
     // ── Safety Fallback Timer for Frame Visibility ──────────────────────────
-    // When no message at all has come from the frame after 1.2 s (the browser blocks them), the frame is shown anyway so the video is never
+    // When no message at all has come from the frame after 3 s (the browser blocks them), the frame is shown anyway so the video is never
     // stuck behind the picture. Once the frame talks, its messages decide: a video that cannot play sends an error and no time, and stays
     // hidden. The framework's timer, cleared when the video changes or the player goes (the old one ran on after both).
     Effect::new(move |_| {
@@ -415,7 +419,7 @@ pub fn TrailerPlayer(
                         cb.run(());
                     }
                 },
-                std::time::Duration::from_millis(1200),
+                std::time::Duration::from_millis(3000),
             );
             reveal_timer.set_value(handle.ok());
         } else {
@@ -466,7 +470,12 @@ pub fn TrailerPlayer(
         if s.contains(r#""onError""#) {
             set_failed.set(true);
             set_is_frame_ready.set(false);
-            if let Some(cb) = on_ended_cb {
+            if let (Some(code), Some(key)) = (parse_yt_number(&s, "info"), video_key.get_untracked()) {
+                if crate::services::unplayable::is_lasting(code as u32) {
+                    crate::services::unplayable::mark(&key);
+                }
+            }
+            if let Some(cb) = on_unplayable.or(on_ended_cb) {
                 cb.run(());
             }
             return;
@@ -610,9 +619,26 @@ pub fn TrailerPlayer(
                         );
 
                         let rendered_id = iframe_id_stored.get_value();
+                        // Ask the frame for its events once it has loaded, again every 250 ms until it answers (at most 5 s), as YouTube's own API
+                        // does: asked only when playback was requested, before the frame had loaded, it never answered, so its errors went unseen
+                        // and the reveal timer showed whatever it held, "Video unavailable" included
+                        let on_load = {
+                            let id = rendered_id.clone();
+                            move |_| {
+                                fn ask(id: String, heard: StoredValue<bool>, left: u32) {
+                                    if heard.try_get_value() != Some(false) || left == 0 {
+                                        return;
+                                    }
+                                    send_yt_listening(&id);
+                                    leptos::leptos_dom::helpers::set_timeout(move || ask(id, heard, left - 1), std::time::Duration::from_millis(250));
+                                }
+                                ask(id.clone(), heard, 20);
+                            }
+                        };
                         view! {
                             <div class="w-full h-full pointer-events-none flex items-center justify-center overflow-hidden">
                                 <iframe
+                                    on:load=on_load
                                     id=rendered_id
                                     class="pointer-events-none object-cover"
                                     style=sizing_style.clone()

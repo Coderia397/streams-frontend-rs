@@ -229,7 +229,9 @@ pub fn HeroSection(
         }
     });
 
+    // chosen again when YouTube refuses the one playing (services/unplayable.rs): the next trailer plays in its place
     let best_trailer = move || {
+        crate::services::unplayable::track();
         videos_resource.get().and_then(|videos| {
             crate::services::tmdb::select_best_tmdb_trailer(&videos)
         })
@@ -563,6 +565,8 @@ pub fn HeroSection(
                     on_ended=Callback::new(move |_| {
                         set_has_video_ended.set(true);
                     })
+                    // a refused trailer is replaced by the next one (best_trailer), so the billboard does not count it as ended
+                    on_unplayable=Callback::new(|_| {})
                     on_time_update=Callback::new(move |t| {
                         set_hero_trailer_time.set(t);
                         // Consume the one-shot seek signal once we confirm playback is updating

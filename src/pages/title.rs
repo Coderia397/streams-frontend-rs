@@ -110,13 +110,18 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
         w.scroll_to_with_x_and_y(0.0, 0.0);
     }
 
-    // the best trailer plays in the hero, muted, once the list is in (Netflix does the same)
+    // the best trailer plays in the hero, muted, once the list is in (Netflix does the same); one YouTube refuses here is replaced by the
+    // next best (services/unplayable.rs), or by the picture when there is none
     Effect::new(move |_| {
+        crate::services::unplayable::track();
         let Some(list) = videos.get() else { return };
-        if hero_key.get_untracked().is_none() {
-            if let Some((key, teaser)) = select_best_tmdb_trailer(&list) {
-                hero_teaser.set(teaser);
-                hero_key.set(Some(key));
+        let current = hero_key.get_untracked();
+        if current.as_deref().is_none_or(crate::services::unplayable::is_unplayable) {
+            let best = select_best_tmdb_trailer(&list);
+            hero_teaser.set(best.as_ref().is_some_and(|(_, t)| *t));
+            let next = best.map(|(k, _)| k);
+            if next != current {
+                hero_key.set(next);
             }
         }
     });
@@ -192,6 +197,7 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
                                 is_playing=Signal::derive(move || !paused.get() && !ended.get() && !hero_out.get())
                                 is_muted=Signal::derive(|| true)
                                 seek_time=Signal::derive(move || glow_seek.get())
+                                on_unplayable=Callback::new(|_| {})
                                 variant="hero".to_string()
                                 iframe_id="title-glow-iframe".to_string()
                                 on_time_update=Callback::new(move |t: f64| {
@@ -252,6 +258,8 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
                                         ended.set(true);
                                         ready.set(false);
                                     })
+                                    // a refused trailer is replaced by the next best (the effect above), not counted as ended
+                                    on_unplayable=Callback::new(move |_| ready.set(false))
                                 />
                             </div>
                         </div>
