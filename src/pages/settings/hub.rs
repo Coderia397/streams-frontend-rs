@@ -73,6 +73,7 @@ pub fn Hub() -> impl IntoView {
             {move || active.get().map(|p| view! {
                 <div class="relative mb-6 flex flex-col items-center gap-3 rounded-modal bg-set-sheet-tile p-6 lg:bg-set-card">
                     <a href=Screen::Profile(p.id.clone()).path() class="flex flex-col items-center gap-3" aria-label=t("set-title-edit-profile")>
+                        // radius: a profile picture, not the link's shape
                         {picture(&p, 96.0, "block h-24 w-24 overflow-hidden rounded-card object-cover")}
                         <span class="max-w-full truncate text-heading font-bold">{p.name.clone()}</span>
                     </a>
@@ -87,6 +88,7 @@ pub fn Hub() -> impl IntoView {
                     view! {
                         <li>
                             <button type="button" on:click=move |_| switch_to(store, &target) class="flex w-20 flex-col items-center gap-2 text-label text-ink/80 hover:text-ink">
+                                // radius: a profile picture, not the button's shape
                                 {picture(&p, 64.0, "block h-16 w-16 overflow-hidden rounded-control object-cover")}
                                 <span class="w-full truncate text-center">{p.name.clone()}</span>
                             </button>
