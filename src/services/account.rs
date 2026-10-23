@@ -120,8 +120,31 @@ fn save(session: &Session, remember: bool) {
     announce();
 }
 
+/// Why the session in this tab ended: decides where the tab goes once the account's data is cleared (see `lib.rs`).
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum SessionEnd {
+    /// the person signed out here: the start page
+    SignedOut,
+    /// signed out of every device (or after a password change): sign in
+    Everywhere,
+    /// the account refused the session (password changed elsewhere, signed out elsewhere, account gone): sign in, then back to the page
+    Refused,
+    /// another tab ended it: the start page
+    Elsewhere,
+}
+
+thread_local! {
+    static ENDED_BY: std::cell::Cell<SessionEnd> = const { std::cell::Cell::new(SessionEnd::Elsewhere) };
+}
+
+/// The reason the last session ended in this tab, read once (a session ended by another tab reads `Elsewhere`).
+pub fn take_session_end() -> SessionEnd {
+    ENDED_BY.with(|c| c.replace(SessionEnd::Elsewhere))
+}
+
 /// Removes the session from this browser (both storages). Every sign out goes through here, so the signed in signal always follows.
-fn clear_session() {
+fn clear_session(why: SessionEnd) {
+    ENDED_BY.with(|c| c.set(why));
     for persistent in [true, false] {
         if let Some(st) = storage(persistent) {
             let _ = st.remove_item(crate::keys::SESSION);
@@ -210,7 +233,7 @@ pub fn sign_out() {
             let _ = post("/auth/v1/logout", &json!({}), Some(&s.access_token)).await;
         });
     }
-    clear_session();
+    clear_session(SessionEnd::SignedOut);
 }
 
 #[wasm_bindgen::prelude::wasm_bindgen(module = "/interop/dist/streams-interop.js")]
@@ -239,7 +262,7 @@ pub async fn sign_out_async() {
                 if let (Some(st), Ok(raw)) = (storage(true), serde_json::to_string(&resume)) {
                     let _ = st.set_item(RESUME_KEY, &raw);
                 }
-                clear_session();
+                clear_session(SessionEnd::SignedOut);
                 return;
             }
         }
@@ -393,7 +416,7 @@ pub async fn ensure_fresh() -> Option<Session> {
             Some(fresh)
         }
         Ok((400..=403, _)) => {
-            clear_session();
+            clear_session(SessionEnd::Refused);
             None
         }
         // no connection: keep what there is, try again later
@@ -470,7 +493,7 @@ pub async fn sign_out_everywhere() -> Result<(), AuthError> {
         return Err(classify(status, &body));
     }
     clear_resume();
-    clear_session();
+    clear_session(SessionEnd::Everywhere);
     Ok(())
 }
 

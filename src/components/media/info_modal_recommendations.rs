@@ -151,7 +151,7 @@ pub fn RecCard(
                         <span class="text-success">
                             {crate::i18n::t_args("media-percent-match", &[("pct", fluent_bundle::FluentValue::from(match_score as i64))])}
                         </span>
-                        <RatingBadge id=rec.id_u32() is_tv=rec.is_tv() gb=rec.rating_gb.clone() us=rec.rating_us.clone() size="sm".to_string() />
+                        <RatingBadge id=rec.id_u32() is_tv=rec.is_tv() gb=rec.rating_gb.clone() us=rec.rating_us.clone() size="xs".to_string() />
                         {(!year.is_empty()).then(|| view! { <span class="text-ink/70">{year}</span> })}
                     </div>
                     <MyListButton is_in_list=is_added on_toggle=toggle_my_list_cb size="sm".to_string() />

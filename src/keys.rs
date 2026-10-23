@@ -20,6 +20,9 @@ pub const HELP_VOTES: &str = "streams_help_votes";
 pub const PROFILE_PREFS: &str = "streams_profile_prefs";
 pub const APP_PREFS: &str = "streams_app_prefs";
 pub const ACCOUNT_PREFS: &str = "streams_account_prefs";
+/// The account (user id) whose data this browser holds, so a session that ended while the browser was closed, or a sign in to
+/// another account, clears it (see store::forget_account_data).
+pub const DATA_OWNER: &str = "streams_data_owner";
 /// When the app last started in this browser (milliseconds); index.html reads it to decide whether to show the start animation.
 /// Random id this browser keeps so an account can recognise it again (see services/device.rs).
 pub const DEVICE_KEY: &str = "streams_device_key";

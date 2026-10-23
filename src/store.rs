@@ -148,8 +148,41 @@ pub fn provide_profile_store() {
 
 /// Called after sign in or sign up. The first time on this browser it creates the main profile, named after the first name, and
 /// the Kids profile; then it shows the Who's watching screen. Profiles are kept in this browser until the account stores them.
-pub fn start_account(store: ProfileStore, first_name: &str) {
+/// Removes everything in this browser that belongs to the signed in account: each profile's data (`scoped`), the profiles and the profile
+/// in use, the profiles' and the account's settings, the taste session and the read notifications. What belongs to the browser stays
+/// (language, cookie choices, Help Centre history, the device key, the app's own settings, a sealed "Remember me" session).
+pub fn forget_account_data() {
+    scoped::clear_all();
+    let Some(storage) = web_sys::window().and_then(|w| w.local_storage().ok().flatten()) else { return };
+    for k in [crate::keys::PROFILE_PREFS, crate::keys::ACCOUNT_PREFS, crate::keys::USER_AFFINITY, crate::keys::SESSION_ID, crate::keys::DATA_OWNER] {
+        let _ = storage.remove_item(k);
+    }
+    let len = storage.length().unwrap_or(0);
+    let read: Vec<String> = (0..len).filter_map(|i| storage.key(i).ok().flatten()).filter(|k| k.starts_with("streams-notifications-read:")).collect();
+    for k in read {
+        let _ = storage.remove_item(&k);
+    }
+}
+
+/// True when this browser holds an account's data but no session for it: the session ended while the browser was closed, or a session
+/// kept for this tab only ended with its tab. The app clears it at start (`lib.rs`).
+pub fn orphaned_account_data() -> bool {
+    let owner = web_sys::window().and_then(|w| w.local_storage().ok().flatten()).and_then(|s| s.get_item(crate::keys::DATA_OWNER).ok().flatten());
+    owner.is_some() && !crate::services::account::has_account()
+}
+
+pub fn start_account(store: ProfileStore, session: &crate::services::account::Session) {
+    let first_name = session.first_name.as_str();
+    // another account's data never mixes with this one's
+    let owner = web_sys::window().and_then(|w| w.local_storage().ok().flatten()).and_then(|s| s.get_item(crate::keys::DATA_OWNER).ok().flatten());
+    if owner.as_deref().is_some_and(|o| o != session.user_id) {
+        forget_account_data();
+        store.profiles.set(Vec::new());
+    }
     let storage = web_sys::window().and_then(|w| w.local_storage().ok().flatten());
+    if let Some(s) = storage.as_ref() {
+        let _ = s.set_item(crate::keys::DATA_OWNER, &session.user_id);
+    }
     let has_saved = storage.as_ref().and_then(|s| s.get_item(crate::keys::PROFILES).ok().flatten()).is_some();
     if !has_saved {
         let name = if first_name.trim().is_empty() { "Me".to_string() } else { first_name.trim().chars().take(30).collect() };

@@ -52,7 +52,7 @@ pub fn ConfirmPage() -> impl IntoView {
                     }
                     "email_change" => crate::pages::settings::Screen::Account.path(),
                     _ => {
-                        crate::store::start_account(profiles, &session.first_name);
+                        crate::store::start_account(profiles, &session);
                         routes::BROWSE.to_string()
                     }
                 };

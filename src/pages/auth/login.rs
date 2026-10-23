@@ -55,7 +55,7 @@ pub fn LoginPage() -> impl IntoView {
             leptos::task::spawn_local(async move {
                 match account::resume_sign_in(&e).await {
                     Some(session) => {
-                        crate::store::start_account(profiles, &session.first_name);
+                        crate::store::start_account(profiles, &session);
                         nav(&crate::components::layout::account_gate::after_sign_in(), Default::default());
                     }
                     None => set_step.set(Step::Password),
@@ -81,7 +81,7 @@ pub fn LoginPage() -> impl IntoView {
         leptos::task::spawn_local(async move {
             match account::sign_in(&e, &p, r).await {
                 Ok(session) => {
-                    crate::store::start_account(profiles, &session.first_name);
+                    crate::store::start_account(profiles, &session);
                     nav(&crate::components::layout::account_gate::after_sign_in(), Default::default());
                 }
                 Err(err) => {

@@ -29,15 +29,8 @@ pub fn persist_profiles(store: ProfileStore) {
 /// Signs out of the account and returns to the landing page with nothing left of this person's choices in the page.
 pub fn sign_out_now() {
     leptos::task::spawn_local(async {
+        // the session ends; the rule in lib.rs clears this person's data from the browser and loads the start page
         crate::services::account::sign_out_async().await;
-        // nothing of this person's data stays in the browser
-        crate::store::scoped::clear_all();
-        if let Some(window) = web_sys::window() {
-            if let Some(storage) = window.local_storage().ok().flatten() {
-                let _ = storage.remove_item(crate::keys::ACTIVE_PROFILE);
-            }
-            let _ = window.location().set_href(crate::config::routes::HOME);
-        }
     });
 }
 

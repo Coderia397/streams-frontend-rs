@@ -23,6 +23,10 @@ use pages::browse::BrowseHome;
 
 #[component]
 pub fn App() -> impl IntoView {
+    // an account's data left without its session (it ended while the browser was closed, or with its tab) is cleared before any store reads it
+    if crate::store::orphaned_account_data() {
+        crate::store::forget_account_data();
+    }
     crate::store::provide_ui_store();
     crate::store::provide_profile_store();
     crate::store::provide_library_store();
@@ -51,6 +55,27 @@ pub fn App() -> impl IntoView {
         watch_store.reload();
         library_store.reload();
         crate::services::sync::sync_in_background();
+    });
+    // when the session ends while the page is open (signed out here or in another tab, signed out everywhere, refused by the account), the
+    // account's data leaves this browser and the tab loads afresh (nothing stays in memory): the start page, or sign in (and back) when the
+    // account ended it
+    let signed_in = crate::services::account::signed_in();
+    let was_signed_in = StoredValue::new(signed_in.get_untracked());
+    Effect::new(move |_| {
+        let now = signed_in.get();
+        if was_signed_in.get_value() && !now {
+            crate::store::forget_account_data();
+            let here = web_sys::window().and_then(|w| Some(format!("{}{}", w.location().pathname().ok()?, w.location().search().ok()?))).unwrap_or_default();
+            let target = match crate::services::account::take_session_end() {
+                crate::services::account::SessionEnd::Everywhere => crate::config::routes::LOGIN.to_string(),
+                crate::services::account::SessionEnd::Refused => format!("{}?next={}", crate::config::routes::LOGIN, js_sys::encode_uri_component(&here)),
+                _ => crate::config::routes::HOME.to_string(),
+            };
+            if let Some(w) = web_sys::window() {
+                let _ = w.location().replace(&target);
+            }
+        }
+        was_signed_in.set_value(now);
     });
     // a browser that already holds an account takes the account's profiles at start, and looks for changes whenever the tab comes back
     if crate::services::account::has_account() {
