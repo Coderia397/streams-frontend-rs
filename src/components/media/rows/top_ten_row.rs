@@ -210,7 +210,7 @@ fn TopTenCard(
             // not the outer div (which includes the wide number padding-left).
             <div
                 node_ref=card_ref
-                class="topten-poster relative flex-none ml-auto w-1/2 aspect-[5/7] z-10 rounded-l-none rounded-r-[3.6cqw] overflow-hidden">
+                class="topten-poster relative flex-none ml-auto w-1/2 aspect-[7/10] z-10 rounded-l-none rounded-r-[3.6cqw] overflow-hidden">
                 <img
                     src=poster_src
                     alt=title_for_img.clone()
@@ -382,7 +382,7 @@ pub fn TopTenRow(
                 let current_scroll = el.scroll_left() as f64;
                 let scroll_width = el.scroll_width() as f64;
                 let step = client_width * 0.9;
-                if crate::components::media::row_scroll::turn_page(&el, direction != "left", crate::utils::layout::app_x() - 6.0) {
+                if crate::components::media::row_scroll::turn_page(&el, direction != "left", crate::utils::layout::app_x()) {
                     let update_c = update.clone();
                     let _ = set_timeout_ms(move || { update_c.run(()); }, 600);
                     return;
@@ -411,10 +411,12 @@ pub fn TopTenRow(
                 <div
                     node_ref=scroll_ref
                     on:scroll=on_scroll
-                    class="flex overflow-x-scroll [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pt-2 pb-10 -mb-10 w-full items-end pointer-events-auto relative z-10"
+                    // from 600 wide the same columns as every other row (Netflix: slots 8 px apart from the page margin, measured 2026-10-23); phones keep the app's slots
+                    // side by side; the extra room below is for the badges
+                    class="flex min-[600px]:gap-[var(--tile-gap)] overflow-x-scroll [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden pt-[2px] pb-[42px] -mb-10 w-full items-end pointer-events-auto relative z-10"
                     style="scroll-behavior: smooth;"
                 >
-                    <div data-loop-spacer="1" class="flex-none h-full pointer-events-none" style="width: calc(var(--app-x, 56px) - 6px);" />
+                    <div data-loop-spacer="1" class="row-edge" />
 
                     <Suspense fallback=move || view! {
                         { (0..6).map(|_| view! {
@@ -442,12 +444,12 @@ pub fn TopTenRow(
                                 view! { <TopTenCard item=item index=idx is_tv=is_tv loop_role=if idx == 0 { 2 } else { 3 } /> }.into_any()
                             }));
                             let lead_views: Vec<AnyView> = leads.into_iter().map(|(idx, item)| view! { <TopTenCard item=item index=idx is_tv=is_tv loop_role=3 /> }.into_any()).collect();
-                            views.push(view! { <div data-loop-lead="1" class="flex-none flex" style="display: none; order: -2;">{lead_views}</div> }.into_any());
+                            views.push(view! { <div data-loop-lead="1" class="flex-none flex min-[600px]:gap-[var(--tile-gap)]" style="display: none; order: -2;">{lead_views}</div> }.into_any());
                             views
                         })}
                     </Suspense>
 
-                    <div class="flex-none pointer-events-none" style="width: var(--app-x, 56px);" />
+                    <div class="row-edge" />
                 </div>
 
                 <crate::components::media::row_scroll::EdgeButton edge=crate::components::media::row_scroll::Edge::Left visible=Signal::derive(move || can_scroll_left.get() || looping.get()) on_click=Callback::new({ let sl = scroll.clone(); move |_| sl("left") }) label=crate::i18n::t("continue-watching-row-scroll-left") inset="-top-3 bottom-5" />
