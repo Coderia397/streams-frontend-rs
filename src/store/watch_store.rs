@@ -116,15 +116,15 @@ fn save_to_storage(records: &HashMap<String, WatchRecord>) {
 pub fn provide_watch_store() {
     let initial_records = load_from_storage();
     let records_signal = RwSignal::new(initial_records);
-
-    provide_context(WatchStore {
+    let store = WatchStore {
         records: records_signal,
         episodes: RwSignal::new(load_episodes()),
-    });
+    };
+    crate::store::provide_and_keep(store);
 }
 
 pub fn use_watch_store() -> WatchStore {
-    use_context::<WatchStore>().expect("WatchStore not provided in context")
+    crate::store::use_kept::<WatchStore>("WatchStore")
 }
 
 impl WatchStore {

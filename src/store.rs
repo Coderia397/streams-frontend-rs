@@ -60,10 +60,29 @@ impl UIStore {
     }
 }
 
+thread_local! {
+    static KEPT: std::cell::RefCell<std::collections::HashMap<std::any::TypeId, Box<dyn std::any::Any>>> = std::cell::RefCell::new(std::collections::HashMap::new());
+}
+
+/// Provides an app store as context and keeps a copy of it here. The stores are made once, when the app starts, and live as long as
+/// the page, so code that runs without a component around it (a click handler, a timer, a view closure that runs once more as its
+/// component is taken down) still finds them: the context lookup alone panicked there (the phone's Who's watching, 2026-10-23).
+pub(crate) fn provide_and_keep<T: Clone + Send + Sync + 'static>(store: T) {
+    KEPT.with(|k| k.borrow_mut().insert(std::any::TypeId::of::<T>(), Box::new(store.clone())));
+    provide_context(store);
+}
+
+/// A store from the context, or the copy kept when it was provided.
+pub(crate) fn use_kept<T: Clone + Send + Sync + 'static>(name: &str) -> T {
+    use_context::<T>()
+        .or_else(|| KEPT.with(|k| k.borrow().get(&std::any::TypeId::of::<T>()).and_then(|b| b.downcast_ref::<T>()).cloned()))
+        .unwrap_or_else(|| panic!("{name} not provided"))
+}
+
 pub fn provide_ui_store() {
     let initial_ambient = crate::utils::ambient::get_last_ambient_color().unwrap_or((16, 21, 25));
     let initial_muted = get_session_preview_muted(None, false);
-    provide_context(UIStore {
+    provide_and_keep(UIStore {
         info_modal_open: RwSignal::new(false),
         info_modal_movie_id: RwSignal::new(None),
         info_modal_is_tv: RwSignal::new(false),
@@ -83,7 +102,7 @@ pub fn provide_ui_store() {
 }
 
 pub fn use_ui_store() -> UIStore {
-    use_context::<UIStore>().expect("UIStore not provided")
+    use_kept::<UIStore>("UIStore")
 }
 
 #[derive(Clone, Copy)]
@@ -144,7 +163,7 @@ pub fn provide_profile_store() {
         p.avatar_url = p.avatar_url.take().map(|u| crate::data::avatars::fast_avatar(&u));
     }
 
-    provide_context(ProfileStore {
+    provide_and_keep(ProfileStore {
         active_profile_id: RwSignal::new(initial_profile),
         profiles: RwSignal::new(initial_profiles),
         is_authenticated: RwSignal::new(true),
@@ -233,7 +252,7 @@ pub fn home_of(id: &str) -> &'static str {
 }
 
 pub fn use_profile_store() -> ProfileStore {
-    use_context::<ProfileStore>().expect("ProfileStore not provided")
+    use_kept::<ProfileStore>("ProfileStore")
 }
 
 #[derive(Clone, Debug)]
@@ -282,7 +301,7 @@ pub fn provide_library_store() {
             crate::services::sync::schedule_push();
         }
     });
-    provide_context(LibraryStore { my_list });
+    provide_and_keep(LibraryStore { my_list });
 }
 
 impl LibraryStore {
@@ -293,7 +312,7 @@ impl LibraryStore {
 }
 
 pub fn use_library_store() -> LibraryStore {
-    use_context::<LibraryStore>().expect("LibraryStore not provided")
+    use_kept::<LibraryStore>("LibraryStore")
 }
 
 pub mod ratings;

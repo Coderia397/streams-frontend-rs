@@ -56,7 +56,11 @@ pub fn App() -> impl IntoView {
     crate::services::sync::init(profile_store, library_store, watch_store);
     crate::services::sync::init_prefs(crate::pages::settings::use_prefs());
     Effect::new(move |_| {
-        let _active = profile_store.active_profile_id.get();
+        // no profile in use (Who's watching is up): nothing to read, and picking one loads the page afresh. Reading then also woke the
+        // views of the page being taken down, which panicked on their disposed signals (2026-10-23)
+        if profile_store.active_profile_id.get().is_none() {
+            return;
+        }
         watch_store.reload();
         library_store.reload();
         crate::services::sync::sync_in_background();
