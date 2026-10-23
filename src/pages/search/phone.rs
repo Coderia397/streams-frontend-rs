@@ -1,15 +1,14 @@
-//! The Search page. On a phone it is the app's search screen: a bar at the top (back arrow, field, microphone or clear), "Recommended series & films" as a list of rows before
-//! anything is typed, and "Top Results" with a row "More like <title>" after. From 640 px the bar of the top navigation is the field and the results are a grid.
-use leptos::prelude::*;
+//! Search on phones (note 114): the app's search screen, with its own bar (back, field, voice, clear), the recommendations as a list
+//! of rows, and Top Results and More like as rows of tiles.
+use super::{Found, Recommended};
+use crate::components::media::vibe_row::VibeRow;
+use crate::services::tmdb::MediaItem;
+use crate::store::use_ui_store;
 use leptos::html::Input;
-use leptos_router::hooks::{use_navigate, use_query_map};
+use leptos::prelude::*;
+use leptos_router::hooks::use_navigate;
 use leptos_router::NavigateOptions;
 use wasm_bindgen::{closure::Closure, JsCast, JsValue};
-use crate::components::layout::Layout;
-use crate::components::media::movie_card::MovieCard;
-use crate::components::media::vibe_row::VibeRow;
-use crate::services::tmdb::{search_media, MediaItem};
-use crate::store::use_ui_store;
 
 /// Starts the browser's speech recognition (when it has one) and hands the spoken text to `on_text`. Returns false when the browser cannot listen.
 fn listen(on_text: impl Fn(String) + 'static) -> bool {
@@ -72,15 +71,12 @@ fn SearchListRow(item: MediaItem) -> impl IntoView {
 }
 
 #[component]
-pub fn SearchPage() -> impl IntoView {
-    let query_map = use_query_map();
+pub fn PhoneSearch(#[prop(into)] q: Signal<String>, results: Found, recommended: Recommended) -> impl IntoView {
     let navigate = use_navigate();
-    let q = move || query_map.read().get("q").unwrap_or_default();
-
     // the field: kept in step with the address, and the address follows what is typed (after a short pause, replacing the entry so Back leaves the page)
-    let (draft, set_draft) = signal(q());
+    let (draft, set_draft) = signal(q.get_untracked());
     Effect::new(move |_| {
-        let cur = q();
+        let cur = q.get();
         if cur != draft.get_untracked() { set_draft.set(cur); }
     });
     let timer = StoredValue::new_local(None::<i32>);
@@ -121,35 +117,9 @@ pub fn SearchPage() -> impl IntoView {
         if can { if let Some(h) = web_sys::window().and_then(|w| w.history().ok()) { let _ = h.back(); } } else { nav_back("/browse", Default::default()); }
     };
 
-    // what is shown: the search, or the recommendations before anything is typed
-    let results = LocalResource::new(move || {
-        let current_q = q();
-        async move {
-            if current_q.trim().is_empty() {
-                vec![]
-            } else {
-                match crate::services::ai_engine::search_titles(&current_q).await {
-                    Some(items) => items,
-                    None => search_media(&current_q).await.unwrap_or_default(),
-                }
-            }
-        }
-    });
-    // before anything is typed: the engine's suggestions for this session, with the Home feed's picks row as the fallback
-    let recommended = LocalResource::new(move || {
-        let signals = crate::services::ai_engine::personal_signals();
-        async move {
-            if let Some(items) = crate::services::ai_engine::fetch_search_suggestions(12).await.filter(|v| !v.is_empty()) {
-                return Some(items);
-            }
-            let page = crate::services::ai_engine::fetch_feed_page("home", None, Some(6), &signals).await?;
-            let row = page.rows.into_iter().find(|r| r.title_key.as_deref() == Some("row.todays_top_picks"))?;
-            Some(row.to_media_items())
-        }
-    });
     // "More like" the first result
     let more_like = LocalResource::new(move || {
-        let current_q = q();
+        let current_q = q.get();
         async move {
             if current_q.trim().is_empty() { return None; }
             let first = match crate::services::ai_engine::search_titles(&current_q).await { Some(v) => v.into_iter().next()?, None => return None };
@@ -159,9 +129,8 @@ pub fn SearchPage() -> impl IntoView {
     });
 
     view! {
-        <Layout>
             // ── The bar of the phone layout ─────────────────────────────────────
-            <div class="sm:hidden fixed top-0 inset-x-0 z-(--z-nav) bg-field pt-[env(safe-area-inset-top)]">
+            <div class="fixed top-0 inset-x-0 z-(--z-nav) bg-field pt-[env(safe-area-inset-top)]">
                 <div class="flex items-center h-[52px] ps-1 pe-1">
                     <button on:click=on_back aria-label=crate::i18n::t("navbar-mobile-back") class="w-12 h-12 flex items-center justify-center text-ink flex-none">
                         <i class="ph ph-arrow-left text-heading-md"></i>
@@ -196,18 +165,15 @@ pub fn SearchPage() -> impl IntoView {
                 </div>
             </div>
 
-            <div class="pt-[calc(60px+env(safe-area-inset-top))] sm:pt-28 px-3 sm:px-[var(--app-x,56px)] pb-28 sm:pb-12 min-h-screen bg-void sm:bg-page">
-                // Nothing typed: the recommendations
-                <Show when=move || q().trim().is_empty()>
+            <div class="pt-[calc(60px+env(safe-area-inset-top))] px-3 pb-28 min-h-screen bg-void">
+                // Nothing typed: the recommendations, as a list
+                <Show when=move || q.get().trim().is_empty()>
                     <h1 class="text-title-md font-bold text-ink mb-3 mt-1 ps-1">{crate::i18n::t("search-recommended")}</h1>
                     <Suspense fallback=move || view! { <div class="space-y-3 animate-pulse">{(0..6).map(|_| view! { <div class="h-[84px] bg-card rounded-field"></div> }).collect::<Vec<_>>()}</div> }>
                         {move || recommended.get().map(|items| match items {
                             Some(items) if !items.is_empty() => view! {
-                                <div class="sm:hidden flex flex-col gap-3">
-                                    {items.iter().take(12).cloned().map(|it| view! { <SearchListRow item=it /> }).collect::<Vec<_>>()}
-                                </div>
-                                <div class="hidden sm:grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-2 gap-y-5">
-                                    {items.into_iter().take(15).map(|item| tile(item)).collect::<Vec<_>>()}
+                                <div class="flex flex-col gap-3">
+                                    {items.into_iter().take(12).map(|it| view! { <SearchListRow item=it /> }).collect::<Vec<_>>()}
                                 </div>
                             }.into_any(),
                             _ => view! {
@@ -220,9 +186,9 @@ pub fn SearchPage() -> impl IntoView {
                     </Suspense>
                 </Show>
 
-                // Something typed: Top Results and More like
-                <Show when=move || !q().trim().is_empty()>
-                    <Suspense fallback=move || view! { <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 animate-pulse">{(0..10).map(|_| view! { <div class="aspect-video bg-card rounded-control"></div> }).collect::<Vec<_>>()}</div> }>
+                // Something typed: Top Results and More like, as rows of the app's tiles
+                <Show when=move || !q.get().trim().is_empty()>
+                    <Suspense fallback=move || view! { <div class="grid grid-cols-2 gap-2.5 animate-pulse">{(0..10).map(|_| view! { <div class="aspect-video bg-card rounded-control"></div> }).collect::<Vec<_>>()}</div> }>
                         {move || results.get().map(|media| {
                             if media.is_empty() {
                                 return view! {
@@ -232,99 +198,17 @@ pub fn SearchPage() -> impl IntoView {
                                     </div>
                                 }.into_any();
                             }
-                            let for_row = media.clone();
                             view! {
-                                // phone: rows with the tiles of the app
-                                <div class="sm:hidden -mx-3">
-                                    <VibeRow title=crate::i18n::t("search-top-results") items=for_row />
+                                <div class="-mx-3">
+                                    <VibeRow title=crate::i18n::t("search-top-results") items=media />
                                     {move || more_like.get().flatten().map(|(name, recs)| view! {
                                         <div class="mt-6"><VibeRow title=crate::i18n::t_args("search-more-like", &[("title", fluent_bundle::FluentValue::from(name))]) items=recs /></div>
                                     })}
-                                </div>
-                                // wider: the grid, under Netflix's "More to explore" line (16 px; the titles found that carry the words searched, each a search of
-                                // its own, 8 px either side of a thin bar; the grid 24 px below, measured 2026-10-23)
-                                <div class="hidden sm:block">
-                                    <h1 class="sr-only">{crate::i18n::t_args("search-results-for", &[("query", fluent_bundle::FluentValue::from(q()))])}</h1>
-                                    {
-                                        let related = more_to_explore(&media, &q());
-                                        (!related.is_empty()).then(|| view! {
-                                            <div class="mb-6 flex items-start gap-2 text-body-md leading-6">
-                                                <span class="shrink-0 text-ink/50">{crate::i18n::t("search-more-to-explore")}</span>
-                                                <ul class="flex flex-wrap gap-y-3">
-                                                    {related.into_iter().map(|name| {
-                                                        let href = format!("/search?q={}", String::from(js_sys::encode_uri_component(&name)));
-                                                        view! { <li class="me-2 border-e border-ink/50 pe-2 last:me-0 last:border-e-0 last:pe-0"><a href=href class="text-ink hover:underline">{name}</a></li> }
-                                                    }).collect::<Vec<_>>()}
-                                                </ul>
-                                            </div>
-                                        })
-                                    }
-                                    <div class="grid grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-2 gap-y-5">
-                                        {media.into_iter().map(|item| tile(item)).collect::<Vec<_>>()}
-                                    </div>
                                 </div>
                             }.into_any()
                         })}
                     </Suspense>
                 </Show>
             </div>
-        </Layout>
-    }
-}
-
-/// The titles found that carry every word searched, once each, at most ten: Netflix's "More to explore" line.
-fn more_to_explore(media: &[MediaItem], query: &str) -> Vec<String> {
-    let words: Vec<String> = query.split_whitespace().map(str::to_lowercase).collect();
-    if words.is_empty() {
-        return Vec::new();
-    }
-    let mut seen = std::collections::HashSet::new();
-    media
-        .iter()
-        .map(|m| m.display_title().trim().to_string())
-        .filter(|name| !name.is_empty() && words.iter().all(|w| name.to_lowercase().contains(w.as_str())))
-        .filter(|name| seen.insert(name.to_lowercase()))
-        .take(10)
-        .collect()
-}
-
-/// A tile of the grid (wider screens).
-fn tile(item: MediaItem) -> impl IntoView {
-    let is_tv = item.is_tv();
-    let title = item.display_title().to_string();
-    let poster = item.poster_url("w342").unwrap_or_default();
-    // a title without a wide picture shows its poster (cropped to the tile) instead of a broken image
-    let backdrop = item.backdrop_url("w780").or_else(|| item.poster_url("w500")).unwrap_or_default();
-    view! {
-        <MovieCard
-            movie_id=item.id
-            is_tv=is_tv
-            title=title
-            backdrop_path=backdrop
-            poster_path=poster
-            vote_average=item.vote_average
-            overview=item.overview.clone()
-            genre_ids=item.genre_ids.clone()
-            vibe_pills=item.vibe_pills.clone()
-            is_new=item.badges.iter().any(|b| b == "new")
-            is_grid=true
-        />
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    fn titled(name: &str) -> MediaItem {
-        MediaItem { title: Some(name.to_string()), ..Default::default() }
-    }
-
-    #[test]
-    fn more_to_explore_lists_titles_with_every_word_once() {
-        let found = [titled("The Office"), titled("Office Space"), titled("Suits"), titled("the office"), titled("Office Christmas Party")];
-        assert_eq!(more_to_explore(&found, "office"), vec!["The Office", "Office Space", "Office Christmas Party"]);
-        assert_eq!(more_to_explore(&found, "office party"), vec!["Office Christmas Party"]);
-        assert!(more_to_explore(&found, "  ").is_empty());
     }
 }
