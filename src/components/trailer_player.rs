@@ -125,6 +125,9 @@ pub fn TrailerPlayer(
     /// The length of the video in seconds, when the player has told it
     #[prop(optional, into)] on_duration: Option<Callback<f64>>,
     #[prop(optional, default = "trailer-iframe".to_string(), into)] iframe_id: String,
+    /// Keep the picture while paused (Clips: a tap pauses on the frame, as Netflix's), once the video has shown; otherwise a paused
+    /// trailer fades out
+    #[prop(optional)] show_paused: bool,
     #[prop(optional, into)] class: Option<String>,
 ) -> impl IntoView {
     let (is_frame_ready, set_is_frame_ready) = signal(false);
@@ -431,7 +434,8 @@ pub fn TrailerPlayer(
                 std::time::Duration::from_millis(3000),
             );
             reveal_timer.set_value(handle.ok());
-        } else {
+        } else if !show_paused {
+            // stopped: hidden until it plays again, unless the caller keeps a paused picture
             set_is_frame_ready.set(false);
         }
     });
@@ -619,8 +623,8 @@ pub fn TrailerPlayer(
     view! {
         <div
             class=format!("absolute inset-0 overflow-hidden pointer-events-none transition-opacity duration-(--motion-slowest) ease-in-out {}", extra_class)
-            class:opacity-100=move || is_frame_ready.get() && is_playing.get() && !failed.get()
-            class:opacity-0=move || !is_frame_ready.get() || !is_playing.get() || failed.get()
+            class:opacity-100=move || is_frame_ready.get() && (is_playing.get() || show_paused) && !failed.get()
+            class:opacity-0=move || !is_frame_ready.get() || (!is_playing.get() && !show_paused) || failed.get()
         >
             {move || {
                 if let Some(key) = video_key.get() {

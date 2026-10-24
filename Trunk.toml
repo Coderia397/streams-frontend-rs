@@ -6,6 +6,10 @@ ignore = [
     "style/output.css",
     "public/sitemap.xml",
     "interop/dist",
+    # another dev server's output (the desktop one writes dist/ while the phone one serves from elsewhere): without these, each
+    # build of one server started a build of the other
+    "dist",
+    ".wrangler",
 ]
 
 [[hooks]]

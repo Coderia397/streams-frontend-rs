@@ -117,6 +117,9 @@
   /* the black under the phone's full screen menus (player menus, season menu): Netflix's selectionListBackground, #e7000000, read from
      its app; a subtitle under its Episodes menu measures 25 of 255 (note 116) */
   --color-scrim-menu: rgb(0 0 0 / 0.906);
+  /* the round buttons on Clips: a grey at half strength over the trailer (solved from two of Netflix's buttons over two pictures,
+     note 116) */
+  --color-clip-disc: rgb(104 104 104 / 0.5);
 
   /* Light paper used by the help center (Netflix's help site is a light page under a dark bar) */
   --color-paper: #ffffff;
