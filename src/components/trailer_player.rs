@@ -18,6 +18,27 @@ const REVEAL_AFTER_SECONDS: f64 = 0.35;
 /// When YouTube sends no time, how long after "playing" the frame is shown (measured on a Pixel 8: the first picture about 1.4 s
 /// after "playing").
 const REVEAL_FALLBACK_MS: u64 = 1_500;
+/// A video longer than this many seconds ends this many seconds early, before YouTube puts its end tiles over the picture.
+const OUTRO_CUT_FROM: f64 = 25.0;
+const OUTRO_CUT_SECONDS: f64 = 7.0;
+
+/// Where a video starts: where it was left (`resume_at`, a hand-off), its first second, or past a trailer's studio cards (8 s, a teaser 4 s).
+pub fn start_second(resume_at: f64, from_start: bool, is_teaser: bool) -> u32 {
+    if resume_at > 0.5 {
+        resume_at.floor() as u32
+    } else if from_start {
+        0
+    } else if is_teaser {
+        4
+    } else {
+        8
+    }
+}
+
+/// Where a video of this length ends here (see OUTRO_CUT_FROM).
+pub fn played_end(duration: f64) -> f64 {
+    if duration > OUTRO_CUT_FROM { duration - OUTRO_CUT_SECONDS } else { duration }
+}
 
 fn send_yt_cmd(iframe_id: &str, func: &str) {
     if let Some(win) = web_sys::window() {
@@ -128,6 +149,10 @@ pub fn TrailerPlayer(
     /// Keep the picture while paused (Clips: a tap pauses on the frame, as Netflix's), once the video has shown; otherwise a paused
     /// trailer fades out
     #[prop(optional)] show_paused: bool,
+    /// Play from the first second (Clips' scenes); otherwise a trailer starts past its studio cards (8 s, a teaser 4 s)
+    #[prop(default = Signal::derive(|| false), into)] from_start: Signal<bool>,
+    /// At its end the video goes back to where it started and plays on (Clips, as Netflix's, recorded 2026-10-24); `on_ended` still runs
+    #[prop(optional)] looped: bool,
     #[prop(optional, into)] class: Option<String>,
 ) -> impl IntoView {
     let (is_frame_ready, set_is_frame_ready) = signal(false);
@@ -316,7 +341,7 @@ pub fn TrailerPlayer(
         let tid = iframe_id_stored.get_value();
         Effect::new(move |_| {
             if let Some(t) = seek_sig.get() {
-                if t > 0.0 {
+                if t >= 0.0 {
                     playback_anchor_sec.set_value(t);
                     playback_anchor_epoch.set_value(js_sys::Date::now());
                     send_yt_seek(&tid, t);
@@ -446,6 +471,14 @@ pub fn TrailerPlayer(
     let on_ready_cb = on_ready;
     let on_ended_cb = on_ended;
     let on_time_update_cb = on_time_update;
+    // a looped video goes back to where it started and plays on
+    let restart = move |target_id: &str| {
+        let at = start_second(initial_seek_time.get_untracked(), from_start.get_untracked(), is_teaser.get_untracked()) as f64;
+        playback_anchor_sec.set_value(at);
+        playback_anchor_epoch.set_value(js_sys::Date::now());
+        send_yt_seek(target_id, at);
+        send_yt_cmd(target_id, "playVideo");
+    };
 
     crate::utils::listen::listen_window(leptos::ev::message, move |e: web_sys::MessageEvent| {
         let s: String = if let Ok(txt) = e.data().dyn_into::<js_sys::JsString>() {
@@ -569,6 +602,9 @@ pub fn TrailerPlayer(
             || s.contains(r#""data": 0"#);
 
         if is_ended_event {
+            if looped {
+                restart(&target_id);
+            }
             if let Some(cb) = on_ended_cb {
                 cb.run(());
             }
@@ -609,7 +645,10 @@ pub fn TrailerPlayer(
         // Smart Outro Cutoff: If remaining < 7.0s, end before YouTube shows recommendation tiles
         if s.contains(r#""currentTime""#) && s.contains(r#""duration""#) {
             if let (Some(cur), Some(dur)) = (parse_yt_number(&s, "currentTime"), parse_yt_number(&s, "duration")) {
-                if dur > 25.0 && (dur - cur) < 7.0 && (dur - cur) > 0.0 {
+                if cur >= played_end(dur) && cur < dur {
+                    if looped {
+                        restart(&target_id);
+                    }
                     if let Some(cb) = on_ended_cb {
                         cb.run(());
                     }
@@ -634,14 +673,7 @@ pub fn TrailerPlayer(
                             .unwrap_or_default();
 
                         // Smart Intro Skip or Seamless Timestamp Continuation
-                        let init_t = initial_seek_time.get_untracked();
-                        let start_sec = if init_t > 0.5 {
-                            init_t.floor() as u32
-                        } else if is_teaser.get() {
-                            4
-                        } else {
-                            8
-                        };
+                        let start_sec = start_second(initial_seek_time.get_untracked(), from_start.get(), is_teaser.get());
 
                         // ALWAYS load with mute=1 so browser autoplay policies unconditionally permit it!
                         // Sound is restored via unMute postMessage once playback is running.

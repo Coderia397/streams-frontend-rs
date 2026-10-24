@@ -94,6 +94,38 @@ pub fn select_best_tmdb_trailer(videos: &[VideoResult]) -> Option<(String, bool)
     scored.first().map(|(v, _, is_teaser)| (v.key.clone(), *is_teaser))
 }
 
+/// Names of videos filed as clips that are no scene: the film's opening, a whole film preview, ticket and countdown promos.
+const NOT_A_SCENE: [&str; 10] = ["minutes", "full movie", "tickets", "in theaters", "in theatres", "in cinemas", "now playing", "tv spot", " days", "countdown"];
+
+/// The video for a title's place in Clips: a scene from it, as Netflix's Clips are, when TMDB lists one ("Clip"; 14 of the 20 titles in
+/// the feed on 2026-10-24, note 116), else its trailer. Scenes named as clips or previews come first; openings ("First 10 Minutes") and
+/// promos ("IN 10 DAYS!") are passed over. Returns (video_key, is_scene).
+pub fn select_clip(videos: &[VideoResult]) -> Option<(String, bool)> {
+    let scene = videos
+        .iter()
+        .filter(|v| v.site.eq_ignore_ascii_case("youtube") && !v.key.trim().is_empty() && v.r#type.eq_ignore_ascii_case("clip"))
+        .filter(|v| !crate::services::unplayable::is_unplayable(&v.key))
+        .filter(|v| {
+            let name = v.name.as_deref().unwrap_or("").to_lowercase();
+            !NOT_A_SCENE.iter().any(|w| name.contains(w))
+        })
+        .max_by_key(|v| {
+            let name = v.name.as_deref().unwrap_or("").to_lowercase();
+            let mut score = 0i32;
+            if v.official == Some(true) {
+                score += 50;
+            }
+            if name.contains("clip") || name.contains("scene") || name.contains("preview") {
+                score += 30;
+            }
+            score
+        });
+    match scene {
+        Some(v) => Some((v.key.clone(), true)),
+        None => select_best_tmdb_trailer(videos).map(|(k, _)| (k, false)),
+    }
+}
+
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct TmdbVideos {
     pub results: Vec<VideoResult>,

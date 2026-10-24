@@ -2,18 +2,28 @@
 //! note 116): a vertical pager of full screen clips, one a page; the clip in view plays with sound, a swipe snaps to the next one, a tap
 //! pauses it under a large play mark. On the right: sound, My List, Share and the title's round poster with its logo, which opens the
 //! title; at the bottom left: the title, its tags and its synopsis (in full for a moment on the first clip only, then one line with
-//! "more"), and a line with the time left. Netflix cuts vertical clips; here a clip is the title's trailer, cropped to fill the screen.
+//! "more"), and a line with its length; at its end a clip plays again. Netflix cuts vertical clips; here a clip is a scene from the title
+//! that TMDB lists (its trailer when it lists none), from its first second, cropped to fill the screen.
 //! The website has no Clips (lib.rs sends a computer Home).
 use leptos::prelude::*;
 use leptos::html::Div;
 use wasm_bindgen::prelude::*;
-use crate::services::tmdb::{fetch_videos, select_best_tmdb_trailer, MediaItem};
+use crate::services::tmdb::{fetch_videos, select_clip, MediaItem};
 use crate::store::{use_library_store, use_ui_store, LibraryEntry};
 use crate::components::trailer_player::TrailerPlayer;
 use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// How long the synopsis shows in full when a clip comes into view, before it shortens to one line.
 const SYNOPSIS_MS: u64 = 5_000;
+/// A video shorter than this is no clip (TMDB files 3 second promos as clips); Netflix's shortest seen was 11 s (2026-10-24).
+const MIN_CLIP_SECONDS: f64 = 10.0;
+/// Nor one longer than this (a film's first 10 minutes); Netflix's longest seen was 58 s.
+const MAX_CLIP_SECONDS: f64 = 300.0;
+
+thread_local! {
+    /// Videos passed over for their length, kept while the site is open so a clip that comes round again goes straight to the next video
+    static PASSED_OVER: std::cell::RefCell<Vec<String>> = const { std::cell::RefCell::new(Vec::new()) };
+}
 
 #[component]
 pub fn ClipsPage() -> impl IntoView {
@@ -103,19 +113,49 @@ fn Clip(item: MediaItem, index: usize, current: RwSignal<usize>, muted: RwSignal
             });
         }
     });
-    let video_key = Memo::new(move |_| {
+    // a scene from the title when TMDB lists one, else its trailer; one shorter than MIN_CLIP_SECONDS or longer than MAX_CLIP_SECONDS
+    // is passed over once the player has told its length
+    let passed_over = RwSignal::new(PASSED_OVER.with(|p| p.borrow().clone()));
+    let pick = Memo::new(move |_| {
         crate::services::unplayable::track();
-        select_best_tmdb_trailer(&videos.get()).map(|(k, _)| k)
+        let skip = passed_over.get();
+        select_clip(&videos.get().into_iter().filter(|v| !skip.contains(&v.key)).collect::<Vec<_>>())
     });
+    let video_key = Memo::new(move |_| pick.get().map(|(k, _)| k));
+    let is_scene = Signal::derive(move || pick.get().is_some_and(|(_, scene)| scene));
 
     let (ready, set_ready) = signal(false);
     let (time, set_time) = signal(0.0f64);
     let (duration, set_duration) = signal(0.0f64);
-    let left = move || {
-        let s = (duration.get() - time.get()).max(0.0).round() as u64;
+    // another video: the picture shows until it plays, and its time and length are its own
+    Effect::new(move |was: Option<Option<String>>| {
+        let key = video_key.get();
+        if was.is_some_and(|w| w != key) {
+            set_ready.set(false);
+            set_time.set(0.0);
+            set_duration.set(0.0);
+        }
+        key
+    });
+    let on_length = move |d: f64| {
+        if !(MIN_CLIP_SECONDS..=MAX_CLIP_SECONDS).contains(&d) {
+            if let Some(key) = video_key.get_untracked() {
+                PASSED_OVER.with(|p| p.borrow_mut().push(key.clone()));
+                passed_over.update(|s| s.push(key));
+            }
+        } else {
+            set_duration.set(d);
+        }
+    };
+    // the part that plays, from its start to where it loops (components/trailer_player.rs)
+    let from = move || crate::components::trailer_player::start_second(0.0, is_scene.get(), false) as f64;
+    let length = move || (crate::components::trailer_player::played_end(duration.get()) - from()).max(0.0);
+    // the clip's length, which stays as it plays (Netflix's, recorded 2026-10-24)
+    let shown_length = move || {
+        let s = length().round() as u64;
         format!("{}:{:02}", s / 60, s % 60)
     };
-    let fraction = move || if duration.get() > 0.0 { (time.get() / duration.get()).clamp(0.0, 1.0) } else { 0.0 };
+    let fraction = move || if length() > 0.0 { ((time.get() - from()) / length()).clamp(0.0, 1.0) } else { 0.0 };
 
     // the synopsis in full for a moment on the first clip when the page opens, then one line with "more"; the clips after it come in
     // shortened (Netflix's, recorded 2026-10-24); "more" shows it all
@@ -166,13 +206,14 @@ fn Clip(item: MediaItem, index: usize, current: RwSignal<usize>, muted: RwSignal
                         is_playing=Signal::derive(move || active.get() && !paused.get())
                         is_muted=muted
                         show_paused=true
+                        from_start=is_scene
+                        looped=true
                         variant="hero".to_string()
                         iframe_id=iframe_id.clone()
                         on_ready=Callback::new(move |_| set_ready.set(true))
-                        on_ended=Callback::new(move |_| set_time.set(0.0))
                         on_unplayable=Callback::new(|_| {})
                         on_time_update=Callback::new(move |t| set_time.set(t))
-                        on_duration=Callback::new(move |d| set_duration.set(d))
+                        on_duration=Callback::new(on_length)
                     />
                 </div>
             })}
@@ -204,7 +245,7 @@ fn Clip(item: MediaItem, index: usize, current: RwSignal<usize>, muted: RwSignal
                 </button>
             </div>
 
-            // the title, its tags, the synopsis and the time left, at the bottom left: 16 px in, to 116 px from the right, the time line
+            // the title, its tags, the synopsis and the length, at the bottom left: 16 px in, to 116 px from the right, the time line
             // 31 px above the bar
             <div data-clip-words="" class="absolute start-4 end-[116px] bottom-[calc(103px+env(safe-area-inset-bottom))]">
                 <button type="button" on:click=open_title class="text-start text-title-md font-bold leading-tight text-ink cursor-pointer">{title.clone()}</button>
@@ -221,12 +262,12 @@ fn Clip(item: MediaItem, index: usize, current: RwSignal<usize>, muted: RwSignal
                     }.into_any()
                 }}
                 <div class="mt-2 flex items-center gap-3">
-                    // a thin line with a small knob where the clip is, and the time left in grey
+                    // a thin line with a small knob where the clip is, and its length in grey
                     <div class="relative h-[2px] flex-1 rounded-full bg-ink/30">
                         <div class="absolute inset-y-0 left-0 rounded-full bg-ink" style=move || format!("width:{:.2}%", fraction() * 100.0)></div>
                         <div class="absolute top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-ink" style=move || format!("left:{:.2}%", fraction() * 100.0)></div>
                     </div>
-                    <span class="text-label tabular-nums text-mute">{left}</span>
+                    <span class="text-label tabular-nums text-mute">{shown_length}</span>
                 </div>
             </div>
         </div>
