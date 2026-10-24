@@ -1,5 +1,1 @@
-{
-  "version": 1,
-  "include": ["/", "/help", "/help/*", "/sitemap.xml", "/robots.txt", "/browse", "/browse/*", "/login", "/signup", "/forgot", "/settings", "/settings/*", "/watch/*", "/search", "/latest", "/clips", "/games", "/profiles/*", "/auth/*", "/title/*", "/terms", "/privacy", "/cookies", "/dmca", "/disclaimer", "/credits"],
-  "exclude": []
-}
+{"version": 1, "include": ["/", "/help", "/help/*", "/sitemap.xml", "/robots.txt", "/browse", "/browse/*", "/login", "/signup", "/forgot", "/settings", "/settings/*", "/watch/*", "/search", "/latest", "/clips", "/games", "/profiles/*", "/auth/*", "/title/*", "/terms", "/privacy", "/cookies", "/dmca", "/disclaimer", "/credits", "/streams-frontend-rs-*"], "exclude": []}

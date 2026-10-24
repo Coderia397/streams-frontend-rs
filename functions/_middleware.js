@@ -33,8 +33,28 @@ const PAGES = {
   "/search": ["Search", "Find films and series on Streams."],
 };
 
+const APP_WASM = /^\/streams-frontend-rs-[0-9a-f]+_bg\.wasm$/;
+
 export async function onRequest({ request, next, env }) {
   const url = new URL(request.url);
+  // The app's wasm, the largest file of every first visit: the copy compressed once at brotli's highest level by the build
+  // (scripts/precompress.mjs), about a quarter smaller than Cloudflare's on-the-fly compression (note 119). Without that copy, or for
+  // a browser without brotli, the file is served as before.
+  if (APP_WASM.test(url.pathname) && request.method === "GET" && /\bbr\b/.test(request.headers.get("accept-encoding") || "") && env && env.ASSETS) {
+    const br = await env.ASSETS.fetch(new Request(new URL(`${url.pathname}.br`, url.origin))).catch(() => null);
+    if (br && br.ok) {
+      return new Response(br.body, {
+        headers: {
+          "content-type": "application/wasm",
+          "content-encoding": "br",
+          "cache-control": "public, max-age=31536000, immutable",
+          vary: "accept-encoding",
+        },
+        encodeBody: "manual",
+      });
+    }
+    return next();
+  }
   const host = url.hostname.toLowerCase();
   const ours = host === MAIN || host === `www.${MAIN}` || host === HELP;
   const p = url.pathname;
@@ -65,7 +85,13 @@ export async function onRequest({ request, next, env }) {
   const title = TITLE_PATH.exec(p);
   if (title) {
     const head = await titleHead(title[1], title[2], `${origin}${p}`, env).catch(() => null);
-    if (head) return withHead(res, head);
+    // a title TMDB does not have goes to the root, as every address the site does not have (src/lib.rs): no page of its own
+    if (head && head.missing) return Response.redirect(`${url.origin}/`, 302);
+    if (head) return withHead(res, head, head.firstView);
+  }
+  if (p === "/" && !(ours && host === HELP) && env && env.ASSETS) {
+    const first = await landingFirstView(env, url.origin).catch(() => null);
+    return withHead(res, { url: `${origin}/` }, first);
   }
   const page = PAGES[p] || (p.startsWith("/help/") ? PAGES["/help"] : null);
   return withHead(res, {
@@ -75,10 +101,11 @@ export async function onRequest({ request, next, env }) {
   });
 }
 
-/** The head of a title's page, from TMDB (kept a day at the edge). */
+/** The head of a title's page and its first view, from TMDB (kept a day at the edge). */
 async function titleHead(kind, id, pageUrl, env) {
   const key = (env && env.STREAMS_TMDB_KEY) || PUBLIC_TMDB_KEY;
-  const res = await fetch(`https://api.themoviedb.org/3/${kind}/${id}?api_key=${key}&language=en-US`, { cf: { cacheTtl: 86400, cacheEverything: true } });
+  const res = await fetch(`https://api.themoviedb.org/3/${kind}/${id}?api_key=${key}&language=en-US&append_to_response=credits,recommendations`, { cf: { cacheTtl: 86400, cacheEverything: true } });
+  if (res.status === 404) return { missing: true };
   if (!res.ok) return null;
   const d = await res.json();
   const name = d.title || d.name;
@@ -108,7 +135,123 @@ async function titleHead(kind, id, pageUrl, env) {
     imageSize: d.backdrop_path ? [1280, 720] : null,
     type: kind === "tv" ? "video.tv_show" : "video.movie",
     data,
+    firstView: titleFirstView(kind, id, d, name, year),
   };
+}
+
+/** The title's page as plain HTML, shown while the app downloads (a slow phone waits seconds for it) and read by search engines without
+ *  running any script: the backdrop, name, year, genres, synopsis, cast, the sign-in link the app's page offers, and links to titles like
+ *  it. The app removes it once it has started (src/main.rs). Colours are the site's own tokens (style/output.css is already loaded). */
+function titleFirstView(kind, id, d, name, year) {
+  const genres = (d.genres || []).map((g) => g.name).slice(0, 3);
+  const length = kind === "tv"
+    ? (d.number_of_seasons ? `${d.number_of_seasons} season${d.number_of_seasons > 1 ? "s" : ""}` : "")
+    : (d.runtime ? `${Math.floor(d.runtime / 60) ? `${Math.floor(d.runtime / 60)}h ` : ""}${d.runtime % 60}m` : "");
+  const meta = [year, genres.join(", "), length].filter(Boolean).join(" · ");
+  const cast = ((d.credits && d.credits.cast) || []).slice(0, 5).map((c) => c.name);
+  const makers = kind === "tv"
+    ? (d.created_by || []).map((c) => c.name)
+    : ((d.credits && d.credits.crew) || []).filter((c) => c.job === "Director").map((c) => c.name);
+  const slug = `${kind}-${id}`;
+  const signIn = `/login?next=${encodeURIComponent(`/browse?title=${slug}`)}`;
+  const picture = d.backdrop_path
+    ? `<img src="${TMDB_IMAGES}/w1280${d.backdrop_path}" srcset="${TMDB_IMAGES}/w780${d.backdrop_path} 780w, ${TMDB_IMAGES}/w1280${d.backdrop_path} 1280w" sizes="100vw" alt="" fetchpriority="high" decoding="async">`
+    : "";
+  const like = ((d.recommendations && d.recommendations.results) || [])
+    .filter((r) => r.poster_path && (r.title || r.name) && (r.media_type === "movie" || r.media_type === "tv"))
+    .slice(0, 12)
+    .map((r) => `<li><a href="/title/${r.media_type}-${r.id}"><img src="${TMDB_IMAGES}/w185${r.poster_path}" alt="" loading="lazy" decoding="async" width="185" height="278">${html(r.title || r.name)}</a></li>`)
+    .join("");
+  return `<div id="first-view">
+<style>
+#boot{display:none!important}
+#first-view{font-family:var(--font-sans,system-ui,sans-serif);color:var(--color-ink,#fff);background:var(--color-title-page,#0f0f0f);min-height:100vh}
+#first-view .fv-hero{position:relative;width:100%;aspect-ratio:16/9;max-height:78vh;overflow:hidden;background:var(--color-card,#1e1e1e)}
+#first-view .fv-hero img{width:100%;height:100%;object-fit:cover;display:block}
+#first-view .fv-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--color-title-page,#0f0f0f) 2%,transparent 55%)}
+#first-view .fv-body{position:relative;margin-top:-10vw;padding:0 16px 48px;max-width:980px}
+#first-view h1{font-size:clamp(28px,6vw,56px);line-height:1.05;margin:0 0 10px;font-weight:800}
+#first-view .fv-meta,#first-view .fv-people{color:var(--color-ink-silver,#bcbcbc);font-size:15px;margin:0 0 14px}
+#first-view .fv-play{display:inline-block;background:var(--color-brand,#2f6bff);color:#fff;font-weight:700;padding:10px 22px;border-radius:6px;text-decoration:none;margin:0 0 18px}
+#first-view .fv-about{line-height:1.5;font-size:16px;max-width:70ch;margin:0 0 12px}
+#first-view h2{font-size:20px;margin:30px 0 12px}
+#first-view ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:12px}
+#first-view li a{color:var(--color-ink-soft,#e5e5e5);text-decoration:none;font-size:13px;line-height:1.3}
+#first-view li img{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;border-radius:4px;display:block;background:var(--color-card,#1e1e1e);margin-bottom:6px}
+</style>
+<div class="fv-hero">${picture}</div>
+<div class="fv-body">
+<h1>${html(name)}</h1>
+${meta ? `<p class="fv-meta">${html(meta)}</p>` : ""}
+<a class="fv-play" href="${attr(signIn)}">Sign in to watch</a>
+${d.overview ? `<p class="fv-about">${html(d.overview)}</p>` : ""}
+${cast.length ? `<p class="fv-people">Starring: ${html(cast.join(", "))}</p>` : ""}
+${makers.length ? `<p class="fv-people">${kind === "tv" ? "Created by" : "Directed by"}: ${html(makers.slice(0, 3).join(", "))}</p>` : ""}
+${like ? `<h2>More like this</h2><ul>${like}</ul>` : ""}
+</div>
+</div>`;
+}
+
+/** The landing page as plain HTML while the app downloads, in the site's own English words (i18n/en.ftl, read from the deployment, so
+ *  nothing is written twice): the header, the hero, the reasons to join and the questions with their answers. A returning visitor (a
+ *  stored session or chosen profile, as `is_returning` in src/services/account/sign_in.rs) never sees it: the app sends them to Home. */
+async function landingFirstView(env, origin) {
+  const res = await env.ASSETS.fetch(new Request(`${origin}/i18n/en.ftl`));
+  if (!res.ok) return null;
+  const words = ftl(await res.text());
+  const t = (k) => html((words[k] || "").replace(/\{\s*\$brand\s*\}/g, BRAND));
+  if (!words["login-unlimited-films-series-and-more"]) return null;
+  // the same reasons and questions as src/pages/landing/website.rs
+  const reasons = ["screens", "hd", "subs", "place"]
+    .map((r) => `<li><h3>${t(`login-reason-${r}-title`)}</h3><p>${t(`login-reason-${r}-body`)}</p></li>`).join("");
+  const faq = ["what-is", "free-to-use", "need-account", "watch-on-tv", "sources", "kids-profile"]
+    .filter((s) => words[`help-art-${s}-title`])
+    .map((s) => `<li><h3><a href="/help/article/${s}">${t(`help-art-${s}-title`)}</a></h3><p>${t(`help-art-${s}-summary`)}</p></li>`).join("");
+  return `<div id="first-view">
+<script>try{if(localStorage.getItem("streams_session")||sessionStorage.getItem("streams_session")||localStorage.getItem("streams_active_profile"))document.getElementById("first-view").remove()}catch(e){}</script>
+<style>
+#boot{display:none!important}
+#first-view{font-family:var(--font-sans,system-ui,sans-serif);color:var(--color-ink,#fff);background:var(--color-void,#000);min-height:100vh}
+#first-view .fv-nav{display:flex;justify-content:space-between;align-items:center;height:88px;padding:0 24px}
+#first-view .fv-nav img{height:28px;width:auto}
+#first-view .fv-in,#first-view .fv-cta{background:var(--color-brand,#2f6bff);color:#fff;font-weight:700;text-decoration:none;border-radius:999px}
+#first-view .fv-in{padding:8px 18px;font-size:14px}
+#first-view .fv-hero{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px 24px 64px}
+#first-view h1{font-size:clamp(32px,6vw,56px);line-height:1.1;margin:0;font-weight:800;max-width:18ch}
+#first-view .fv-free{font-size:20px;font-weight:500;margin:16px 0 0}
+#first-view .fv-ready{font-size:16px;margin:28px 0 16px;max-width:60ch}
+#first-view .fv-cta{display:inline-block;padding:14px 28px;font-size:18px}
+#first-view section{padding:24px;max-width:1100px;margin:0 auto}
+#first-view h2{font-size:24px;margin:0 0 16px}
+#first-view ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+#first-view li{background:var(--color-card,#1e1e1e);border-radius:12px;padding:20px}
+#first-view h3{font-size:18px;margin:0 0 8px}
+#first-view h3 a{color:inherit}
+#first-view li p{margin:0;color:var(--color-ink-body,#b3b3b3);line-height:1.5}
+</style>
+<header class="fv-nav"><a href="/"><img src="/assets/logos/streams-wordmark-white.svg" alt="${BRAND}" width="120" height="28"></a><a class="fv-in" href="/login">${t("login-sign-in")}</a></header>
+<div class="fv-hero">
+<h1>${t("login-unlimited-films-series-and-more")}</h1>
+<p class="fv-free">${t("auth-tick-free")}</p>
+<p class="fv-ready">${t("login-ready-to-watch-enter-your")}</p>
+<a class="fv-cta" href="/signup">${t("login-get-started")}</a>
+</div>
+<section><h2>${t("login-more-reasons")}</h2><ul>${reasons}</ul></section>
+${faq ? `<section><h2>${t("landing-faq")}</h2><ul>${faq}</ul></section>` : ""}
+</div>`;
+}
+
+/** The single and continued line messages of a Fluent file, by key (comments, terms and attributes left out). */
+function ftl(text) {
+  const out = {};
+  let key = null;
+  for (const line of text.split("\n")) {
+    const m = /^([a-z][a-z0-9-]*)\s*=\s?(.*)$/.exec(line);
+    if (m) { key = m[1]; out[key] = m[2].trim(); }
+    else if (key && /^\s+\S/.test(line) && !/^\s+\./.test(line)) out[key] = `${out[key]} ${line.trim()}`.trim();
+    else key = null;
+  }
+  return out;
 }
 
 /** `text` cut at a word before `max` characters, with an ellipsis when it was cut. */
@@ -119,8 +262,9 @@ function shorten(text, max) {
   return `${cut.slice(0, Math.max(cut.lastIndexOf(" "), max / 2)).replace(/[\s,;:.]+$/, "")}…`;
 }
 
-/** The response with its head's title, description, canonical address, preview tags and schema.org data replaced where given. */
-function withHead(res, h) {
+/** The response with its head's title, description, canonical address, preview tags and schema.org data replaced where given, and the
+ *  first view (if any) at the top of the body. */
+function withHead(res, h, firstView) {
   const set = (attr, value) => ({ element(e) { if (value != null) e.setAttribute(attr, value); } });
   let rw = new HTMLRewriter()
     .on("title", { element(e) { if (h.title) e.setInnerContent(h.title); } })
@@ -139,6 +283,7 @@ function withHead(res, h) {
   // `<` written as \u003c, so a synopsis cannot close the script
   if (h.data) extra.push(`<script type="application/ld+json">${JSON.stringify(h.data).replace(/</g, "\\u003c")}</script>`);
   if (extra.length) rw = rw.on("head", { element(e) { e.append(extra.join(""), { html: true }); } });
+  if (firstView) rw = rw.on("body", { element(e) { e.prepend(firstView, { html: true }); } });
   const out = rw.transform(res);
   // the body's length changed with the head
   const headers = new Headers(out.headers);
@@ -148,4 +293,8 @@ function withHead(res, h) {
 
 function attr(s) {
   return String(s).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
+}
+
+function html(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }

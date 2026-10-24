@@ -9,6 +9,10 @@ fn main() {
         mark("streams:text");
         leptos::mount::mount_to_body(App);
         mark("streams:mounted");
+        // the plain first view the Cloudflare function puts on public pages while the app downloads (functions/_middleware.js) goes now
+        if let Some(first) = web_sys::window().and_then(|w| w.document()).and_then(|d| d.get_element_by_id("first-view")) {
+            first.remove();
+        }
         // The splash only appears if starting takes longer than 1.2 s and the last visit is long ago (see index.html). It fades out.
         if let Some(storage) = web_sys::window().and_then(|w| w.local_storage().ok().flatten()) {
             let _ = storage.set_item(streams_frontend_rs::keys::BOOT_SEEN, &(js_sys::Date::now() as u64).to_string());

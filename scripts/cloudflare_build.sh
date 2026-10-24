@@ -45,4 +45,6 @@ npm ci
 rustc --version
 ./.tools/trunk --version
 ./.tools/trunk build --release
+# the wasm compressed once at brotli's highest level, served by functions/_middleware.js (Cloudflare's own compression is lighter)
+node scripts/precompress.mjs dist
 ls -la dist | head -20
