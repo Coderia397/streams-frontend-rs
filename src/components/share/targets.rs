@@ -1,7 +1,8 @@
-//! The addresses each share target opens, as each service documents or uses them (checked 2026-10-24, note 116): WhatsApp's wa.me
-//! text link, the sms: body link, X's post composer (docs.x.com, web intent), and Snapchat's scan page with the link attached, which
-//! Snap's own share button opens (its sdk.snapkit.com create.js: the page itself on a phone, which hands it to the app, a window with a
-//! Snapcode on a computer). Instagram has no such address; it is reached through the system share sheet (sheet.rs).
+//! The addresses each share target opens, as each service documents them (checked 2026-10-24, note 116): WhatsApp's wa.me text link,
+//! the sms: body link, X's post composer (docs.x.com, web intent) and Snapchat's share link (developers.snap.com, Share Link to
+//! Snapchat): on a phone the app opens its camera with the link attached as a card, on a computer Snapchat's web chat sends it to
+//! friends. The card shows the page's name and site, read from the page, so a link the app cannot reach (localhost) opens a bare scan
+//! pop-up instead. Instagram has no such address; it is reached through the system share sheet (sheet.rs).
 
 /// `s` encoded as JavaScript's encodeURIComponent does (letters, digits and `-_.!~*'()` kept).
 pub fn encode(s: &str) -> String {
@@ -30,7 +31,7 @@ pub fn x(title: &str, url: &str) -> String {
 }
 
 pub fn snapchat(url: &str) -> String {
-    format!("https://snapchat.com/scan?attachmentUrl={}", encode(url))
+    format!("https://www.snapchat.com/share?link={}", encode(url))
 }
 
 #[cfg(test)]
@@ -48,7 +49,7 @@ mod tests {
     fn target_addresses() {
         let url = "https://streams.watch/title/movie-194";
         assert_eq!(x("Amélie", url), "https://x.com/intent/tweet?text=Am%C3%A9lie&url=https%3A%2F%2Fstreams.watch%2Ftitle%2Fmovie-194");
-        assert_eq!(snapchat(url), "https://snapchat.com/scan?attachmentUrl=https%3A%2F%2Fstreams.watch%2Ftitle%2Fmovie-194");
+        assert_eq!(snapchat(url), "https://www.snapchat.com/share?link=https%3A%2F%2Fstreams.watch%2Ftitle%2Fmovie-194");
         assert_eq!(whatsapp("Up", url), "https://wa.me/?text=Up%20https%3A%2F%2Fstreams.watch%2Ftitle%2Fmovie-194");
         assert_eq!(messages("Up", url), "sms:?&body=Up%20https%3A%2F%2Fstreams.watch%2Ftitle%2Fmovie-194");
     }
