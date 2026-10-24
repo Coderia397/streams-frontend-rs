@@ -23,7 +23,7 @@ pub fn ReportMenu(open: RwSignal<bool>) -> impl IntoView {
     };
     view! {
         <Show when=move || open.get()>
-            <div class="absolute inset-0 z-50 bg-void text-ink" on:click=|e: leptos::ev::MouseEvent| e.stop_propagation()>
+            <div class="absolute inset-0 z-50 bg-scrim-menu text-ink" on:click=|e: leptos::ev::MouseEvent| e.stop_propagation()>
                 <h2 class="absolute left-[67px] top-4 text-title-lg font-bold">{crate::i18n::t("player-issue-title")}</h2>
                 <div class="absolute left-1/2 top-[94px] flex w-[509px] max-w-[70%] -translate-x-1/2 flex-col gap-2.5">
                     {ISSUES.into_iter().map(|(id, icon, key)| view! {
@@ -39,7 +39,7 @@ pub fn ReportMenu(open: RwSignal<bool>) -> impl IntoView {
                     }).collect_view()}
                 </div>
                 <div class="absolute bottom-5 right-[25px] flex gap-2">
-                    <button type="button" on:click=move |_| { chosen.set(None); open.set(false); } class="btn-pill h-[43px] bg-lift px-5 text-body-lg font-bold text-ink">{crate::i18n::t("set-cancel")}</button>
+                    <button type="button" on:click=move |_| { chosen.set(None); open.set(false); } class="btn-pill h-[43px] bg-menu-button px-5 text-body-lg font-bold text-ink">{crate::i18n::t("set-cancel")}</button>
                     <button
                         type="button"
                         on:click=send

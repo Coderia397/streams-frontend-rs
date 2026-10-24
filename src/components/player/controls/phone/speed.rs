@@ -41,18 +41,19 @@ pub fn SpeedSlider(open: RwSignal<bool>, speed: ReadSignal<f64>, on_set_speed: C
                     }
                     on:pointermove=move |e: web_sys::PointerEvent| { if e.buttons() > 0 { pick_at(&e) } }
                 >
-                    <div class="absolute inset-0 overflow-hidden rounded-full bg-ink/40">
-                        <div class="h-full bg-ink" style=move || format!("width:{:.2}%", place() * 100.0)></div>
-                    </div>
-                    // the knob: a white upright bar with a dark gap either side
-                    <div class="absolute top-1/2 h-[26px] w-[4px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-ink outline outline-[3px] outline-void" style=move || format!("left:{:.2}%", place() * 100.0)></div>
+                    // two pieces either side of the knob (white before it, grey after), round at the ends of the track and nearly square
+                    // at the knob, 6 px from it; the knob a white upright bar 3.5 x 43 px; a dot at the last stop (Netflix's, zoomed frames)
+                    <div class="absolute inset-y-0 left-0 rounded-s-full rounded-e-[2px] bg-ink" style=move || format!("width:max(0px, calc({:.3} * (100% - 16px) + 8px - 8px))", place())></div>
+                    <div class="absolute inset-y-0 right-0 rounded-e-full rounded-s-[2px] bg-speed-track" style=move || format!("width:max(0px, calc({:.3} * (100% - 16px) + 8px - 8px))", 1.0 - place())></div>
+                    <div class="absolute right-[6px] top-1/2 h-1 w-1 -translate-y-1/2 rounded-full bg-ink" class=("hidden", move || place() >= 0.999)></div>
+                    <div class="absolute top-1/2 h-[43px] w-[3.5px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-ink" style=move || format!("left:calc({:.3} * (100% - 16px) + 8px)", place())></div>
                 </div>
                 <div class="absolute bottom-[16px] left-[176px] right-[125px] h-[52px]" on:click=|e: leptos::ev::MouseEvent| e.stop_propagation()>
                     {SPEEDS.into_iter().enumerate().map(|(i, v)| {
-                        let at = i as f64 / (SPEEDS.len() - 1) as f64 * 100.0;
+                        let at = i as f64 / (SPEEDS.len() - 1) as f64;
                         let chosen = move || (speed.get() - v).abs() < 0.01;
                         view! {
-                            <button type="button" on:click=move |_| on_set_speed.run(v) class="absolute top-0 flex -translate-x-1/2 flex-col items-center px-2 text-body-md text-ink cursor-pointer" style=format!("left:{at:.2}%")>
+                            <button type="button" on:click=move |_| on_set_speed.run(v) class="absolute top-0 flex -translate-x-1/2 flex-col items-center px-2 text-body-md text-ink cursor-pointer" style=format!("left:calc({at:.3} * (100% - 16px) + 8px)")>
                                 <span class=move || if chosen() { "font-bold" } else { "" }>{speed_label(v)}</span>
                                 {((v - 1.0).abs() < 0.01).then(|| view! { <span class="font-bold">{crate::i18n::t("player-speed-normal")}</span> })}
                             </button>

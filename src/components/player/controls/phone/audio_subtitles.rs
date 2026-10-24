@@ -1,7 +1,9 @@
 //! Audio & Subtitles on the phone's player, as Netflix's Android app (view tree and frames on a Pixel 8, 2026-10-24, note 116): the
-//! whole screen, two columns, Audio from 36 px in and Subtitles from 508 px, a bold heading 44 px down, rows 58.5 px apart from 112 px
-//! down with a check before the choice, the lower rows fading out; the choice is applied with Apply (bottom right, white) or dropped with
-//! Cancel (grey). Audio shows when the stream has two or more tracks; subtitles always (Off first).
+//! whole screen with the video paused under it, two columns, Audio from 36 px in and Subtitles from 508 px, a bold heading 44 px down,
+//! rows 58.5 px apart from 97 px down with a check before the choice; the rows fade out from 54 % of the screen's height to its bottom
+//! (Netflix's rows measure 255, 255, 236, 162 and 87 of 255 down the list, a straight fade), showing there is more to scroll. The choice
+//! is applied with Apply (bottom right, white) or dropped with Cancel (grey). Audio shows when the stream has two or more tracks;
+//! subtitles always (Off first).
 use leptos::prelude::*;
 use crate::services::resolver::SubtitleTrack;
 
@@ -34,24 +36,24 @@ pub fn AudioSubtitlesMenu(
         open.set(false);
     };
     let has_audio = move || audio_tracks.get().len() > 1;
-    // the lower rows fade out, as the app's list
-    let fade = "mask-image: linear-gradient(to bottom, #000 0, #000 55%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 55%, transparent 100%);";
+    // the fade, over the whole height of each column so it sits where the app's does whatever the heading's size
+    let fade = "mask-image: linear-gradient(to bottom, #000 54%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, #000 54%, transparent 100%);";
 
     view! {
         <Show when=move || open.get()>
-            <div class="absolute inset-0 z-50 bg-void text-ink" on:click=|e: leptos::ev::MouseEvent| e.stop_propagation()>
+            <div class="absolute inset-0 z-50 bg-scrim-menu text-ink" on:click=|e: leptos::ev::MouseEvent| e.stop_propagation()>
                 // the columns from the screen's edge, as the app's (Audio at 36 px, Subtitles at 508 px; Subtitles alone at 36 px)
                 <Show when=has_audio>
-                    <div class="absolute inset-y-0 left-[36px] w-[436px]">
-                        <Column title=crate::i18n::t("player-audio") style=fade>
+                    <div class="absolute inset-y-0 left-[36px] w-[436px]" style=fade>
+                        <Column title=crate::i18n::t("player-audio")>
                             {move || audio_tracks.get().into_iter().map(|(i, label)| view! {
                                 <Row chosen=Signal::derive(move || audio.get() == i) on_pick=Callback::new(move |_| audio.set(i)) label=label />
                             }).collect_view()}
                         </Column>
                     </div>
                 </Show>
-                <div class=move || if has_audio() { "absolute inset-y-0 left-[508px] right-[230px]" } else { "absolute inset-y-0 left-[36px] right-[230px]" }>
-                    <Column title=crate::i18n::t("subtitle-drawer-subtitles") style=fade>
+                <div class=move || if has_audio() { "absolute inset-y-0 left-[508px] right-[230px]" } else { "absolute inset-y-0 left-[36px] right-[230px]" } style=fade>
+                    <Column title=crate::i18n::t("subtitle-drawer-subtitles")>
                         <Row chosen=Signal::derive(move || sub.get().is_none()) on_pick=Callback::new(move |_| sub.set(None)) label=crate::i18n::t("player-subs-off") />
                         {move || subtitles.get().into_iter().map(|s| {
                             let url = s.url.clone();
@@ -62,7 +64,7 @@ pub fn AudioSubtitlesMenu(
                 </div>
                 // Cancel and Apply, 20 px above the bottom and 25 px from the right
                 <div class="absolute bottom-5 right-[25px] flex gap-2">
-                    <button type="button" on:click=move |_| open.set(false) class="btn-pill h-[43px] bg-lift px-5 text-body-lg font-bold text-ink">{crate::i18n::t("common-cancel")}</button>
+                    <button type="button" on:click=move |_| open.set(false) class="btn-pill h-[43px] bg-menu-button px-5 text-body-lg font-bold text-ink">{crate::i18n::t("common-cancel")}</button>
                     <button type="button" on:click=apply class="btn-pill h-[43px] bg-ink px-5 text-body-lg font-bold text-void">{crate::i18n::t("player-apply")}</button>
                 </div>
             </div>
@@ -72,11 +74,11 @@ pub fn AudioSubtitlesMenu(
 
 /// A column: its heading and the rows under it, scrolling.
 #[component]
-fn Column(title: String, style: &'static str, children: Children) -> impl IntoView {
+fn Column(title: String, children: Children) -> impl IntoView {
     view! {
         <div class="flex h-full w-full min-w-0 flex-col">
-            <h2 class="pt-[44px] text-title-lg font-bold leading-[33px]">{title}</h2>
-            <div class="mt-[24px] min-h-0 flex-1 overflow-y-auto scrollbar-hide pb-24" style=style>{children()}</div>
+            <h2 class="pt-[44px] text-title-md font-bold leading-[33px]">{title}</h2>
+            <div class="mt-[20px] min-h-0 flex-1 overflow-y-auto overscroll-contain scrollbar-hide pb-24">{children()}</div>
         </div>
     }
 }

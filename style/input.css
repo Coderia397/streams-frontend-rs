@@ -668,9 +668,13 @@ button,
 .mobile-subnav { position: sticky; top: 0; z-index: 40; background: rgba(0, 0, 0, var(--hdr-solid, 0)); transform: translateY(calc(-100% * (1 - var(--nav-shown, 1)))); transition: transform 0.25s ease; }
 .mobile-pills-sticky { position: sticky; top: calc(var(--nav-h-mobile) + env(safe-area-inset-top)); z-index: 40; background: #000; transform: translateY(calc(-100% * (1 - var(--nav-shown, 1)))); transition: transform 0.25s ease; }
 
-/* The phone's player held upright (out of full screen): the buttons along the bottom show their icons only, so they fit the width. */
+/* The phone's player held upright (out of full screen): back, the title, the middle row, the seek bar and one Full screen button; the
+   rest of the controls show in landscape only (player/controls/phone/mod.rs). */
 @media (orientation: portrait) {
-  .phone-player-label { display: none; }
+  .phone-player-landscape { display: none; }
+}
+@media (orientation: landscape) {
+  .phone-player-portrait { display: none; }
 }
 
 /* Edge buttons of a row (row_scroll.rs): the button is a tall clickable area over the margin (it has no look of its own, as the old rectangular button used to fill that space); everything visible

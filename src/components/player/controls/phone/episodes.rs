@@ -1,9 +1,19 @@
-//! Episodes on the phone's player, as Netflix's Android app (view tree and frames on a Pixel 8, 2026-10-24, note 116): the whole
-//! screen, a back arrow at the top left and the season at the top right (it opens the season menu); the season's episodes in a row
-//! that scrolls sideways, cards 234 px wide and 20 px apart from 70 px in: the still (16:9, a play mark on the others, the progress under
-//! the one playing), the number and name in bold, a line, the length and the synopsis in grey. A card plays its episode.
+//! Episodes on the phone's player, as Netflix's Android app (its card layout and view tree, read on a Pixel 8, 2026-10-24, note 116):
+//! the whole screen with the video paused under it, a back arrow at the top left and the season at the top right (it opens the season
+//! menu); the season's episodes in a row that scrolls freely sideways (no snapping), clipped 8 px in from either side and from the
+//! cutout, cards 254 px wide with 10 px round the content, so the stills are 234 px wide, 20 px apart, from 70 px in. A card: the still (16:9,
+//! the play mark on the others, a 2 px bar of the part watched along the bottom of the one playing), the number and name on two lines at
+//! most (bold for the one playing), a faint line, the length at half white and the synopsis in grey, which runs down to 10 px above the
+//! bottom and ends there with an ellipsis. A card plays its episode.
 use leptos::prelude::*;
+use wasm_bindgen::JsCast;
+use crate::components::media::icons::play_mark::PlayMark;
 use crate::services::tmdb::{fetch_details, fetch_season_details};
+
+/// The synopsis's line, in px (45 device px on Netflix's).
+const SYNOPSIS_LINE: f64 = 17.6;
+/// The space under each card, in px.
+const CARD_BOTTOM: f64 = 10.0;
 
 #[component]
 pub fn EpisodesMenu(
@@ -22,19 +32,57 @@ pub fn EpisodesMenu(
         let n = season.get();
         async move { fetch_season_details(series_id, n).await.map(|s| s.episodes).unwrap_or_default() }
     });
+    let list = NodeRef::<leptos::html::Div>::new();
+    // how many synopsis lines fit above the card's bottom on this screen
+    let lines = RwSignal::new(6.0_f64);
+    let fit = move || {
+        let Some(el) = list.get_untracked() else { return };
+        let Ok(Some(first)) = el.query_selector("[data-synopsis]") else { return };
+        let room = el.get_bounding_client_rect().bottom() - CARD_BOTTOM - first.get_bounding_client_rect().top();
+        lines.set((room / SYNOPSIS_LINE).floor().max(1.0));
+    };
+    // the list opens on the episode playing, or on the first of another season (assumed from the app, note 116)
+    let show_playing = move || {
+        let Some(el) = list.get_untracked() else { return };
+        let card = |sel: &str| el.query_selector(sel).ok().flatten().and_then(|c| c.dyn_into::<web_sys::HtmlElement>().ok());
+        let left = match (card("[data-playing]"), card("[data-episode]")) {
+            (Some(playing), Some(first)) => playing.offset_left() - first.offset_left(),
+            _ => 0,
+        };
+        el.set_scroll_left(left);
+    };
+    // each time it opens, on the season playing
+    Effect::new(move |was: Option<bool>| {
+        let now = open.get();
+        if now && was != Some(true) { season.set(current_season); }
+        now
+    });
+    Effect::new(move |_| {
+        if open.get() && episodes.get().is_some() {
+            request_animation_frame(move || { fit(); show_playing(); });
+        }
+    });
+    crate::utils::listen::listen_window(leptos::ev::resize, move |_| fit());
+
     view! {
         <Show when=move || open.get()>
-            <div class="absolute inset-0 z-50 bg-void text-ink" on:click=|e: leptos::ev::MouseEvent| e.stop_propagation()>
-                <button type="button" on:click=move |_| open.set(false) class="absolute left-[calc(env(safe-area-inset-left)+8px)] top-0 flex h-14 w-14 items-center justify-center" aria-label=crate::i18n::t("player-back")>
+            <div class="absolute inset-0 z-50 bg-scrim-menu text-ink" on:click=|e: leptos::ev::MouseEvent| e.stop_propagation()>
+                // the arrow 16 px in from the edge the page may draw in, its button 52 by 56 px
+                <button type="button" on:click=move |_| open.set(false) class="absolute left-[calc(env(safe-area-inset-left)+8px)] top-0 flex h-14 w-[52px] items-center ps-2" aria-label=crate::i18n::t("player-back")>
                     <i class="ph ph-arrow-left text-heading"></i>
                 </button>
                 {move || (seasons.get().unwrap_or(1) > 1).then(|| view! {
-                    <button type="button" on:click=move |_| picker_open.set(true) class="btn-pill absolute right-[calc(env(safe-area-inset-right)+8px)] top-2 h-[51px] min-w-[148px] justify-between gap-4 bg-sheet px-5 text-title-sm font-bold">
+                    <button type="button" on:click=move |_| picker_open.set(true) class="btn-pill absolute right-[calc(env(safe-area-inset-right)+16px)] top-2 h-[51px] min-w-[148px] justify-between gap-4 bg-menu-button ps-4 pe-[21px] text-title-sm font-bold text-ink-soft">
                         {move || crate::i18n::t_args("media-season-n", &[("n", fluent_bundle::FluentValue::from(season.get() as i64))])}
                         <i class="ph-fill ph-caret-down text-body"></i>
                     </button>
                 })}
-                <div class="absolute inset-x-0 bottom-0 top-[78px] flex snap-x gap-5 overflow-x-auto scrollbar-hide ps-[calc(env(safe-area-inset-left)+18px)] pe-6">
+                // the row: its edges 8 px in, where the cards are cut off as they scroll
+                <div
+                    node_ref=list
+                    class="absolute bottom-0 left-[calc(env(safe-area-inset-left)+8px)] right-[calc(env(safe-area-inset-right)+8px)] top-[68px] flex items-start overflow-x-auto overscroll-x-contain scrollbar-hide"
+                    style=move || format!("--synopsis-lines: {}", lines.get())
+                >
                     <Suspense fallback=|| view! { <span></span> }>
                         {move || episodes.get().map(|list| list.into_iter().map(|ep| {
                             let n = ep.episode_number;
@@ -47,21 +95,23 @@ pub fn EpisodesMenu(
                                 open.set(false);
                             };
                             view! {
-                                <button type="button" on:click=pick class="w-[234px] shrink-0 snap-start text-start cursor-pointer">
+                                <button type="button" on:click=pick data-episode="" data-playing=move || playing().then_some("") class="flex w-[254px] shrink-0 flex-col p-2.5 text-start cursor-pointer">
                                     <span class="relative block aspect-video w-full overflow-hidden rounded-tile bg-raised">
-                                        {still.map(|s| view! { <img src=s alt="" loading="lazy" class="h-full w-full object-cover" /> })}
+                                        {still.map(|s| view! { <img src=s alt="" loading="lazy" decoding="async" class="h-full w-full object-cover" /> })}
                                         <Show when=move || !playing()>
-                                            <span class="absolute inset-0 flex items-center justify-center">
-                                                <span class="flex h-[60px] w-[60px] items-center justify-center rounded-full border-2 border-ink bg-void/40"><i class="ph-fill ph-play text-heading"></i></span>
-                                            </span>
+                                            <span class="absolute inset-0 flex items-center justify-center"><PlayMark size=36.0 /></span>
                                         </Show>
                                         <Show when=playing>
-                                            <span class="absolute inset-x-0 bottom-0 h-1 bg-ink/30"><span class="block h-full bg-brand" style=move || format!("width:{:.1}%", progress.get().clamp(0.0, 1.0) * 100.0)></span></span>
+                                            <span class="absolute inset-x-0 bottom-0 h-[2px] bg-episode-track"><span class="block h-full bg-brand" style=move || format!("width:{:.1}%", progress.get().clamp(0.0, 1.0) * 100.0)></span></span>
                                         </Show>
                                     </span>
-                                    <span class="flex h-[54px] items-center border-b border-ink/20 text-title-sm font-bold"><span class="truncate">{format!("{n}. {}", ep.name)}</span></span>
-                                    {ep.runtime.filter(|r| *r > 0).map(|r| view! { <span class="mt-2.5 block text-body-sm text-ink-body">{format!("{r}m")}</span> })}
-                                    <span class="mt-1 line-clamp-5 block text-body-md leading-[19.4px] text-ink-body">{ep.overview.clone()}</span>
+                                    // the name: held to the height of two lines, 8 px under the still, and centred in them
+                                    <span class="flex h-[53.8px] items-center pt-2 text-body-lg leading-[22.9px] text-ink-soft" class=("font-bold", playing)>
+                                        <span class="line-clamp-2">{format!("{n}. {}", ep.name)}</span>
+                                    </span>
+                                    <span class="mt-2 block h-px bg-ink/15"></span>
+                                    <span class="mt-2 block h-[14.4px] text-caption leading-[16px] text-ink/50">{ep.runtime.filter(|r| *r > 0).map(|r| format!("{r}m"))}</span>
+                                    <span data-synopsis="" class="mt-2 line-clamp-(--synopsis-lines) text-body-sm leading-[17.6px] text-ink-body">{ep.overview.clone()}</span>
                                 </button>
                             }
                         }).collect_view())}

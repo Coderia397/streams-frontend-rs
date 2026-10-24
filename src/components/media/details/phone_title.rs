@@ -412,7 +412,7 @@ fn Episodes(series_id: u32, seasons: u32, season: RwSignal<u32>) -> impl IntoVie
                                         </span>
                                     </div>
                                     <div class="min-w-0 flex-1">
-                                        <p class="text-title-sm font-bold leading-tight text-ink">{format!("{}. {}", ep.episode_number, ep.name)}</p>
+                                        <p class="line-clamp-5 text-title-sm font-bold leading-tight text-ink">{format!("{}. {}", ep.episode_number, ep.name)}</p>
                                         {ep.runtime.filter(|r| *r > 0).map(|r| view! { <p class="mt-0.5 text-body-md text-ink-body">{format!("{r}m")}</p> })}
                                     </div>
                                 </div>

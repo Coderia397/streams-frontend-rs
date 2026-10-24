@@ -114,6 +114,9 @@
   --color-ink-hover: rgb(255 255 255 / 0.7);
   --color-scrim-field: rgb(22 22 22 / 0.7);
   --color-scrim-edge: rgb(128 128 128 / 0.7);
+  /* the black under the phone's full screen menus (player menus, season menu): Netflix's selectionListBackground, #e7000000, read from
+     its app; a subtitle under its Episodes menu measures 25 of 255 (note 116) */
+  --color-scrim-menu: rgb(0 0 0 / 0.906);
 
   /* Light paper used by the help center (Netflix's help site is a light page under a dark bar) */
   --color-paper: #ffffff;
@@ -167,6 +170,12 @@
   --color-ink-warm: #d4d4d1;
   /* the phone billboard's tag line (Series · Irreverent · Sitcom), measured on Netflix's Android app (note 116) */
   --color-ink-tag: #c8c6c6;
+  /* the grey of the phone player's speed track after the knob, opaque as Netflix's (#616161 measured) */
+  --color-speed-track: #616161;
+  /* the phone player's menus, from Netflix's frames (note 116): the track under the bar of the episode playing, and the grey of the
+     Season and Cancel buttons */
+  --color-episode-track: #2a2a2a;
+  --color-menu-button: #333333;
   --color-ink-ash: #777777;
   --color-mute: #808080;
   --color-button-secondary: #6d6d6e;

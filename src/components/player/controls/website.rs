@@ -109,7 +109,7 @@ pub fn WebsiteControls(state: super::ControlsState) -> impl IntoView {
                                             </span>
                                             <span class="min-w-0 flex-1 text-ink">
                                                 <span class="block truncate text-row font-medium">{format!("{}   {}", n, name)}</span>
-                                                <span class="mt-1 block line-clamp-4 max-h-[100px] overflow-hidden text-title leading-[25px]">{overview}</span>
+                                                <span class="mt-1 line-clamp-4 max-h-[100px] overflow-hidden text-title leading-[25px]">{overview}</span>
                                             </span>
                                         </span>
                                     </div>

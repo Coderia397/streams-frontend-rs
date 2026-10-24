@@ -4,7 +4,10 @@
 //! Lock. Middle: back 10 s, play or pause and forward 10 s, 84 px each, 186 px apart from the middle. Bottom: the seek bar with the time
 //! left, then Speed, Episodes, Audio & Subtitles and Next Ep. spread across the width. Lock leaves one button that unlocks.
 //! Netflix's brightness slider is left out (a page cannot set the screen's brightness); in place of its Clip button, Full screen, which
-//! brings full screen and landscape back after the browser left them (owner, 2026-10-24).
+//! brings full screen and landscape back after the browser left them (owner, 2026-10-24). Held upright (Netflix has no upright player)
+//! only back, the title, the middle row and the seek bar stay, with one Full screen button, wide for a thumb, in the bottom row's place;
+//! the ratings, Report, Lock and the menus wait for landscape, so the page does not look finished upright (owner, 2026-10-24). Episodes,
+//! Audio & Subtitles and Report pause the video while they cover it; closing one plays it and shows the controls again.
 use leptos::prelude::*;
 use super::{time_left, ControlsState};
 use crate::components::media::movie_card_rating::{MovieRating, RatingIcon};
@@ -24,8 +27,8 @@ const LOCK_HINT_MS: u64 = 3_000;
 #[component]
 pub fn PhoneControls(state: ControlsState) -> impl IntoView {
     let ControlsState {
-        title, episode, episode_name, media_id, is_tv, is_playing, is_buffering, current_time, duration, speed, on_set_speed,
-        on_toggle_play, on_seek, on_skip_by, on_next_episode, on_back, subtitles, selected_sub, audio_tracks, audio_selected,
+        title, episode, episode_name, media_id, is_tv, is_playing, is_buffering, is_muted, current_time, duration, speed, on_set_speed,
+        on_toggle_play, on_toggle_mute, on_seek, on_skip_by, on_next_episode, on_back, subtitles, selected_sub, audio_tracks, audio_selected,
         on_select_audio, on_select_sub, on_refresh_audio, on_select_episode, ..
     } = state;
     let shown = RwSignal::new(true);
@@ -98,10 +101,39 @@ pub fn PhoneControls(state: ControlsState) -> impl IntoView {
     };
     // every button: the control's own action, then the controls stay a while longer
     let act = move |f: Callback<()>| move |e: leptos::ev::MouseEvent| { e.stop_propagation(); f.run(()); touch(); };
+    let toggle_full = move |e: leptos::ev::MouseEvent| {
+        e.stop_propagation();
+        if full_screen.get_untracked() { crate::components::player::frame::leave_landscape() } else { crate::components::player::frame::enter_landscape() };
+        touch();
+    };
+    // the menus that cover the video hide the controls and pause it; when one closes the video plays, even when it was paused before,
+    // and the controls fade back in (Netflix's app, note 116). An episode picked there starts by itself.
+    let picked_episode = StoredValue::new(false);
+    let menu_open = Memo::new(move |_| subs_open.get() || episodes_open.get() || report_open.get());
+    Effect::new(move |was: Option<bool>| {
+        let now = menu_open.get();
+        if now && was == Some(false) {
+            shown.set(false);
+            if is_playing.get_untracked() { on_toggle_play.run(()); }
+        } else if !now && was == Some(true) {
+            if !picked_episode.get_value() && !is_playing.get_untracked() { on_toggle_play.run(()); }
+            picked_episode.set_value(false);
+            touch();
+        }
+        now
+    });
+    let on_select_episode = on_select_episode.map(|pick| Callback::new(move |ep| { picked_episode.set_value(true); pick.run(ep); }));
 
     view! {
-        // the tap catcher over the video: a tap shows the controls, a tap while they show hides them
-        <div class="absolute inset-0 z-20 select-none" on:click=move |_| if locked.get_untracked() { hint_lock() } else if !shown.get_untracked() { touch() } else { shown.set(false) }></div>
+        // the tap catcher over the video: a tap shows the controls, a tap while they show hides them. The phone has no mute button (as
+        // Netflix's app): when the browser started the video muted until a tap, this tap turns the sound on
+        <div
+            class="absolute inset-0 z-20 select-none"
+            on:click=move |_| {
+                if is_muted.get_untracked() { on_toggle_mute.run(()); }
+                if locked.get_untracked() { hint_lock() } else if !shown.get_untracked() { touch() } else { shown.set(false) }
+            }
+        ></div>
 
         // the buffering ring, whether the controls show or not
         <Show when=move || is_buffering.get()>
@@ -133,9 +165,10 @@ pub fn PhoneControls(state: ControlsState) -> impl IntoView {
             </div>
         </Show>
 
-        // the controls: one layer that fades; a tap on its empty space hides it
+        // the controls: one layer that fades; a tap on its empty space hides it. The shade is black at 25 %: a white subtitle under
+        // Netflix's controls measures 196 of 255 (note 116)
         <div
-            class="absolute inset-0 z-30 bg-void/40 text-ink transition-opacity duration-(--motion-base)"
+            class="absolute inset-0 z-30 bg-void/25 text-ink transition-opacity duration-(--motion-base)"
             class=("opacity-0", move || !shown.get() || locked.get())
             class=("pointer-events-none", move || !shown.get() || locked.get())
             on:click=move |_| shown.set(false)
@@ -147,7 +180,7 @@ pub fn PhoneControls(state: ControlsState) -> impl IntoView {
                         <i class="ph ph-arrow-left text-heading"></i>
                     </button>
                     <span class="ms-2 min-w-0 truncate text-title-sm font-bold">{heading}</span>
-                    <div class="ms-[29px] flex shrink-0 items-center gap-4">
+                    <div class="phone-player-landscape ms-[29px] flex shrink-0 items-center gap-4">
                         {[(MovieRating::Dislike, "rating-not-for-me"), (MovieRating::Like, "rating-like"), (MovieRating::Love, "rating-love")].into_iter().map(|(r, key)| view! {
                             <button
                                 type="button"
@@ -160,10 +193,10 @@ pub fn PhoneControls(state: ControlsState) -> impl IntoView {
                         }).collect_view()}
                     </div>
                     <span class="flex-1"></span>
-                    <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); report_open.set(true); } class="flex h-14 w-14 shrink-0 items-center justify-center" aria-label=crate::i18n::t("controls-overlay-report-problem")>
+                    <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); report_open.set(true); } class="phone-player-landscape flex h-14 w-14 shrink-0 items-center justify-center" aria-label=crate::i18n::t("controls-overlay-report-problem")>
                         <i class="ph ph-flag text-heading"></i>
                     </button>
-                    <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); locked.set(true); shown.set(false); hint_lock(); } class="flex h-14 w-14 shrink-0 items-center justify-center" aria-label=crate::i18n::t("player-lock")>
+                    <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); locked.set(true); shown.set(false); hint_lock(); } class="phone-player-landscape flex h-14 w-14 shrink-0 items-center justify-center" aria-label=crate::i18n::t("player-lock")>
                         <i class="ph ph-lock-simple-open text-heading"></i>
                     </button>
                 </div>
@@ -195,30 +228,36 @@ pub fn PhoneControls(state: ControlsState) -> impl IntoView {
                 </div>
                 <span class="absolute bottom-[72px] right-[calc(env(safe-area-inset-right)+25px)] text-body-lg leading-[20px] tabular-nums">{move || time_left(current_time.get(), duration.get())}</span>
 
+                // held upright: Full screen alone in the bottom row's place, its middle 35 px above the bottom, as wide as the row
+                <button type="button" on:click=toggle_full class="phone-player-portrait absolute inset-x-6 bottom-[7px] flex h-14 items-center justify-center gap-3 text-body-lg font-semibold">
+                    <i class=move || if full_screen.get() { "ph ph-corners-in text-heading" } else { "ph ph-corners-out text-heading" }></i>
+                    {move || if full_screen.get() { crate::i18n::t("player-exit-full-screen") } else { crate::i18n::t("player-full-screen") }}
+                </button>
+
                 // the buttons along the bottom, their middle 35 px above it
-                <div class="absolute inset-x-0 bottom-[11px] flex h-12 items-center justify-evenly ps-[env(safe-area-inset-left)] pe-[env(safe-area-inset-right)]">
-                    <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); if full_screen.get_untracked() { crate::components::player::frame::leave_landscape() } else { crate::components::player::frame::enter_landscape() }; touch(); } class="flex h-12 items-center gap-3 text-body-lg font-semibold">
+                <div class="phone-player-landscape absolute inset-x-0 bottom-[11px] flex h-12 items-center justify-evenly ps-[env(safe-area-inset-left)] pe-[env(safe-area-inset-right)]">
+                    <button type="button" on:click=toggle_full class="flex h-12 items-center gap-3 text-body-lg font-semibold">
                         <i class=move || if full_screen.get() { "ph ph-corners-in text-heading" } else { "ph ph-corners-out text-heading" }></i>
-                        <span class="phone-player-label">{move || if full_screen.get() { crate::i18n::t("player-exit-full-screen") } else { crate::i18n::t("player-full-screen") }}</span>
+                        {move || if full_screen.get() { crate::i18n::t("player-exit-full-screen") } else { crate::i18n::t("player-full-screen") }}
                     </button>
                     <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); speed_open.set(true); shown.set(false); } class="flex h-12 items-center gap-3 text-body-lg font-semibold">
                         <i class="ph ph-gauge text-heading"></i>
-                        <span class="phone-player-label">{move || crate::i18n::t_args("player-speed", &[("speed", fluent_bundle::FluentValue::from(speed_label(speed.get())))])}</span>
+                        <span>{move || crate::i18n::t_args("player-speed", &[("speed", fluent_bundle::FluentValue::from(speed_label(speed.get())))])}</span>
                     </button>
                     {is_tv.then(|| view! {
                         <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); episodes_open.set(true); } class="flex h-12 items-center gap-3 text-body-lg font-semibold">
                             <i class="ph ph-cards text-heading"></i>
-                            <span class="phone-player-label">{crate::i18n::t("media-episodes")}</span>
+                            <span>{crate::i18n::t("media-episodes")}</span>
                         </button>
                     })}
                     <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); on_refresh_audio.run(()); subs_open.set(true); } class="flex h-12 items-center gap-3 text-body-lg font-semibold">
                         <i class="ph ph-subtitles text-heading"></i>
-                        <span class="phone-player-label">{crate::i18n::t("controls-overlay-audio-subtitles")}</span>
+                        <span>{crate::i18n::t("controls-overlay-audio-subtitles")}</span>
                     </button>
                     {on_next_episode.filter(|_| is_tv).map(|next| view! {
                         <button type="button" on:click=act(next) class="flex h-12 items-center gap-3 text-body-lg font-semibold">
                             <i class="ph ph-skip-forward text-heading"></i>
-                            <span class="phone-player-label">{crate::i18n::t("player-next-ep")}</span>
+                            <span>{crate::i18n::t("player-next-ep")}</span>
                         </button>
                     })}
                 </div>

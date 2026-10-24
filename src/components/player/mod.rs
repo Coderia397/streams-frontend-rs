@@ -79,6 +79,8 @@ pub fn StreamsPlayer(
     let (buffered_fraction, set_buffered_fraction) = signal(0.0);
     let (is_idle, set_is_idle) = signal(false);
     let (pending_resume_time, set_pending_resume_time) = signal(0.0);
+    // when and where the video was first seen playing sound without a picture (wall clock ms, video seconds)
+    let audio_only_since = StoredValue::new(None::<(f64, f64)>);
 
     // Drawers
     let (is_episodes_open, set_is_episodes_open) = signal(false);
@@ -170,21 +172,7 @@ pub fn StreamsPlayer(
                             set_pending_resume_time.set(resume_t);
                         }
 
-                        // Autoplay attempt with resilient muted fallback if browser blocks unmuted audio
-                        if let Ok(play_promise) = video.play() {
-                            let v_clone = video.clone();
-                            let is_muted_sig = set_is_muted;
-                            // a one shot closure handed to JS, freed after it runs (it leaked once per start before)
-                            let on_reject = Closure::once(move |_err: JsValue| {
-                                leptos::logging::warn!("Unmuted autoplay blocked by browser policy, falling back to muted autoplay...");
-                                v_clone.set_muted(true);
-                                is_muted_sig.set(true);
-                                let _ = v_clone.play();
-                            });
-                            let _ = play_promise.catch(&on_reject);
-                            on_reject.forget();
-                        }
-
+                        start_playing(video.clone(), set_is_muted, 2);
                         set_is_playing.set(true);
                     }
                 }
@@ -321,10 +309,14 @@ pub fn StreamsPlayer(
                 set_buffered_fraction.set(frac);
             }
 
-            // Video Freeze / Audio-Only Failover Protection:
-            // If audio has been playing for > 2.0s but videoWidth remains 0, the video codec
-            // is unsupported by this browser or corrupted in this source. Failover to next source!
-            if cur > 2.0 && !video.paused() && video.video_width() == 0 {
+            // Sound without a picture for 3 s of playing means the codec is not supported here or the source is broken: the next source
+            // plays. One time update without a picture is not enough, as it was: the width reads 0 for a moment while hls.js recovers
+            // after a long seek, and that switched sources, so the video reloaded (and, before start_playing, went mute).
+            let no_picture = cur > 2.0 && !video.paused() && video.video_width() == 0;
+            let since = if no_picture { audio_only_since.get_value().or(Some((js_sys::Date::now(), cur))) } else { None };
+            audio_only_since.set_value(since);
+            if since.is_some_and(|(at, from)| js_sys::Date::now() - at > 3_000.0 && cur - from > 2.5) {
+                audio_only_since.set_value(None);
                 leptos::logging::warn!("Stream playing audio only with 0 video dimensions. Failing over to next source...");
                 if let PlayerState::Playing { ref result, active_source_idx } = player_state.get_untracked() {
                     if active_source_idx + 1 < result.sources.len() {
@@ -339,6 +331,8 @@ pub fn StreamsPlayer(
     };
 
     let on_waiting = move |_| set_is_buffering.set(true);
+    // a seek starts the picture check again
+    let on_seeking = move |_| audio_only_since.set_value(None);
     let on_canplay = move |_| {
         set_is_buffering.set(false);
         let pending_t = pending_resume_time.get_untracked();
@@ -553,6 +547,7 @@ pub fn StreamsPlayer(
                                             id=crate::keys::VIDEO_ELEMENT_ID
                                             on:timeupdate=on_time_update
                                             on:waiting=on_waiting
+                                            on:seeking=on_seeking
                                             on:canplay=on_canplay
                                             on:playing=on_playing
                                             on:pause=on_pause
@@ -677,4 +672,36 @@ pub fn StreamsPlayer(
             }}
         </div>
     }
+}
+
+/// Plays `video` as a stream starts. A refusal means one of two things. The browser wants a tap before sound (NotAllowedError): the
+/// video plays muted, and on the phone, which has no mute button, the next tap on the video turns the sound on. Or a newer load replaced
+/// this one (AbortError: hls.js sets the source after the call when the element already held a stream, at the next episode or a switch
+/// to another source): the video plays once the new source can, up to `retries` times. Muting on every refusal, as before, muted the
+/// next episode and every source switch.
+fn start_playing(video: web_sys::HtmlVideoElement, set_is_muted: WriteSignal<bool>, retries: u8) {
+    let Ok(promise) = video.play() else { return };
+    let v = video.clone();
+    // a one shot closure handed to JS, freed after it runs
+    let on_reject = Closure::once(move |err: JsValue| {
+        let name = js_sys::Reflect::get(&err, &"name".into()).ok().and_then(|n| n.as_string()).unwrap_or_default();
+        if name == "NotAllowedError" {
+            leptos::logging::warn!("Sound needs a tap first: playing muted");
+            v.set_muted(true);
+            set_is_muted.set(true);
+            let _ = v.play();
+        } else if retries > 0 {
+            if v.ready_state() >= web_sys::HtmlMediaElement::HAVE_FUTURE_DATA {
+                start_playing(v, set_is_muted, retries - 1);
+            } else {
+                let again = v.clone();
+                let on_ready = Closure::once_into_js(move || start_playing(again, set_is_muted, retries - 1));
+                let once = web_sys::AddEventListenerOptions::new();
+                once.set_once(true);
+                let _ = v.add_event_listener_with_callback_and_add_event_listener_options("canplay", on_ready.unchecked_ref(), &once);
+            }
+        }
+    });
+    let _ = promise.catch(&on_reject);
+    on_reject.forget();
 }

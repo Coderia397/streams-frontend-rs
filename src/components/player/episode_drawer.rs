@@ -96,7 +96,7 @@ pub fn EpisodeDrawer(
                                                         }}
                                                     </span>
                                                 </span>
-                                                <span class="line-clamp-4 block max-h-[100px] min-w-0 flex-1 overflow-hidden text-title leading-[25px] text-ink">{overview}</span>
+                                                <span class="line-clamp-4 max-h-[100px] min-w-0 flex-1 overflow-hidden text-title leading-[25px] text-ink">{overview}</span>
                                             </span>
                                         </button>
                                     }
