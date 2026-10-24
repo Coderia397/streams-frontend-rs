@@ -1,7 +1,7 @@
 //! The share sheet, mounted once at the app's root and opened by `Share::open` (mod.rs). What each target does:
 //! WhatsApp, X: their composer with the title and link, in a new tab (the app takes it when installed). Messages: the messages app with
-//! the title and link. Snapchat: Snap's scan page with the link attached, as Snap's own button opens it: in place on a phone, where
-//! the app takes it, and in a window with a Snapcode on a computer. Instagram: the system share sheet with the poster (Instagram is
+//! the title and link. Snapchat: Snap's scan page with the link attached, the address Snap's own button opens: in a new tab on a
+//! phone, which the app takes, and in a window with a Snapcode on a computer. Instagram: the system share sheet with the poster (Instagram is
 //! one of its targets there, Stories among them); where a browser has no share sheet, the link is copied with a note to paste it into
 //! Instagram. Copy link: the link copied, and a note saying whether it was.
 use leptos::prelude::*;
@@ -86,7 +86,9 @@ pub fn ShareHost() -> impl IntoView {
                 let address = targets::snapchat(&u);
                 let Some(w) = web_sys::window() else { return };
                 if crate::form::current().is_phone() {
-                    let _ = w.location().set_href(&address);
+                    // a new tab, which the app takes: Snap's button sends the page itself, and coming back from the app then left
+                    // the person on another page of ours (verified on the phone, 2026-10-24)
+                    open_tab(address);
                 } else {
                     let _ = w.open_with_url_and_target_and_features(&address, "_blank", "left=500,top=200,width=769,height=700");
                 }
