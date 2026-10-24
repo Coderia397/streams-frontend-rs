@@ -1,6 +1,7 @@
 use leptos::prelude::*;
 use crate::components::media::movie_card_rating::{RatingIcon, MovieRating};
 use crate::components::media::tooltip_wrapper::TooltipWrapper;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// The pill size classes (the .btn-pill presets in style/components.css): sm 32 px, md 40 px, lg 48 px, as Netflix's redesigned pages.
 fn pill_size(size: &str) -> &'static str {
@@ -36,7 +37,7 @@ pub fn PlayPillButton(
                     class=base_classes
                     title=move || if is_resume.get() { crate::i18n::t("media-resume") } else { crate::i18n::t("media-play") }
                 >
-                    <i class="ph-fill ph-play"></i>
+                    <AppIcon glyph=Glyph::Play />
                     <span>{move || if is_resume.get() { crate::i18n::t("media-resume") } else { crate::i18n::t("media-play") }}</span>
                 </a>
             }.into_any()
@@ -49,7 +50,7 @@ pub fn PlayPillButton(
                     class=base_classes
                     title=move || if is_resume.get() { crate::i18n::t("media-resume") } else { crate::i18n::t("media-play") }
                 >
-                    <i class="ph-fill ph-play"></i>
+                    <AppIcon glyph=Glyph::Play />
                     <span>{move || if is_resume.get() { crate::i18n::t("media-resume") } else { crate::i18n::t("media-play") }}</span>
                 </button>
             }.into_any()
@@ -111,7 +112,7 @@ pub fn PlayCircleButton(
             )
             title=move || if is_resume.get() { crate::i18n::t("media-resume") } else { crate::i18n::t("media-play") }
         >
-            <i class=format!("ph-fill ph-play translate-x-0.5 {}", icon_classes)></i>
+            <AppIcon glyph=Glyph::Play class=icon_classes.clone() />
         </button>
     }
 }
@@ -178,9 +179,9 @@ pub fn MyListButton(
             title=title_text
         >
             {move || if is_in_list.get() {
-                view! { <i class=format!("ph-bold ph-check text-success {}", icon_classes)></i> }.into_any()
+                view! { <AppIcon glyph=Glyph::Check class=format!("text-success {}", icon_classes) /> }.into_any()
             } else {
-                view! { <i class=format!("ph-bold ph-plus {}", icon_classes)></i> }.into_any()
+                view! { <AppIcon glyph=Glyph::Plus class=icon_classes.clone() /> }.into_any()
             }}
         </button>
     };
@@ -261,9 +262,9 @@ pub fn RatingPill(
             <button type="button" aria-label=crate::i18n::t("action-buttons-rate") class=circular_button_classes(dim_classes, "")>
                 {move || match rating.get() {
                     Some(MovieRating::Love) => view! { <crate::components::media::movie_card_rating::DoubleThumbsUpIcon size=icon_px filled=true /> }.into_any(),
-                    Some(MovieRating::Dislike) => view! { <i class="ph-fill ph-thumbs-down" style=format!("font-size: {icon_px}px;")></i> }.into_any(),
-                    Some(MovieRating::Like) => view! { <i class="ph-fill ph-thumbs-up" style=format!("font-size: {icon_px}px;")></i> }.into_any(),
-                    None => view! { <i class="ph-bold ph-thumbs-up" style=format!("font-size: {icon_px}px;")></i> }.into_any(),
+                    Some(MovieRating::Dislike) => view! { <AppIcon glyph=Glyph::ThumbDownFilled style=format!("font-size: {icon_px}px;") /> }.into_any(),
+                    Some(MovieRating::Like) => view! { <AppIcon glyph=Glyph::ThumbUpFilled style=format!("font-size: {icon_px}px;") /> }.into_any(),
+                    None => view! { <AppIcon glyph=Glyph::ThumbUp style=format!("font-size: {icon_px}px;") /> }.into_any(),
                 }}
             </button>
             // the opened pill, centred on the button
@@ -282,8 +283,8 @@ pub fn RatingPill(
                                     let on = is_set();
                                     match option {
                                         MovieRating::Love => view! { <crate::components::media::movie_card_rating::DoubleThumbsUpIcon size=icon_px filled=on /> }.into_any(),
-                                        MovieRating::Dislike => view! { <i class=if on { "ph-fill ph-thumbs-down" } else { "ph-bold ph-thumbs-down" } style=format!("font-size: {icon_px}px;")></i> }.into_any(),
-                                        MovieRating::Like => view! { <i class=if on { "ph-fill ph-thumbs-up" } else { "ph-bold ph-thumbs-up" } style=format!("font-size: {icon_px}px;")></i> }.into_any(),
+                                        MovieRating::Dislike => view! { <AppIcon glyph=if on { Glyph::ThumbDownFilled } else { Glyph::ThumbDown } style=format!("font-size: {icon_px}px;") /> }.into_any(),
+                                        MovieRating::Like => view! { <AppIcon glyph=if on { Glyph::ThumbUpFilled } else { Glyph::ThumbUp } style=format!("font-size: {icon_px}px;") /> }.into_any(),
                                     }
                                 }}
                             </button>
@@ -347,9 +348,9 @@ pub fn MuteReplayButton(
                 if is_ended.get() {
                     view! { <i class=format!("ph ph-arrow-counter-clockwise text-ink {}", icon_classes)></i> }.into_any()
                 } else if is_muted.get() {
-                    view! { <i class=format!("ph ph-speaker-slash text-ink {}", icon_classes)></i> }.into_any()
+                    view! { <AppIcon glyph=Glyph::Muted class=format!("text-ink {}", icon_classes) /> }.into_any()
                 } else {
-                    view! { <i class=format!("ph ph-speaker-high text-ink {}", icon_classes)></i> }.into_any()
+                    view! { <AppIcon glyph=Glyph::Speaker class=format!("text-ink {}", icon_classes) /> }.into_any()
                 }
             }}
         </button>

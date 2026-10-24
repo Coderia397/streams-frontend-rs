@@ -18,6 +18,7 @@ pub mod report;
 pub mod speed;
 
 use speed::speed_label;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// How long the controls stay after the last touch while the video plays, in milliseconds.
 const SHOW_MS: u64 = 4_000;
@@ -149,14 +150,14 @@ pub fn PhoneControls(state: ControlsState) -> impl IntoView {
                 {move || if lock_confirm.get() {
                     view! {
                         <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); locked.set(false); lock_hint.set(false); lock_confirm.set(false); touch(); } class="btn-pill h-[51px] gap-2 bg-ink px-6 text-body-lg font-bold text-void">
-                            <i class="ph ph-lock-simple-open text-title"></i>
+                            <AppIcon glyph=Glyph::LockOpen class="text-title" />
                             {crate::i18n::t("player-unlock-confirm")}
                         </button>
                     }.into_any()
                 } else {
                     view! {
                         <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); lock_confirm.set(true); hint_lock(); } class="btn-circle btn-circle-lg bg-ink text-void" aria-label=crate::i18n::t("player-unlock")>
-                            <i class="ph ph-lock-simple text-heading"></i>
+                            <AppIcon glyph=Glyph::Locked class="text-heading" />
                         </button>
                     }.into_any()
                 }}
@@ -177,7 +178,7 @@ pub fn PhoneControls(state: ControlsState) -> impl IntoView {
                 // the top: back, the title, the three ratings after it, Report a problem and Lock at the right
                 <div class="absolute inset-x-0 top-0 flex h-14 items-center pe-[env(safe-area-inset-right)] ps-[env(safe-area-inset-left)]">
                     <button type="button" on:click=act(on_back) class="flex h-14 w-14 shrink-0 items-center justify-center" aria-label=crate::i18n::t("player-back")>
-                        <i class="ph ph-arrow-left text-heading"></i>
+                        <AppIcon glyph=Glyph::Back class="text-heading" />
                     </button>
                     <span class="ms-2 min-w-0 truncate text-title-sm font-bold">{heading}</span>
                     <div class="phone-player-landscape ms-[29px] flex shrink-0 items-center gap-4">
@@ -194,30 +195,28 @@ pub fn PhoneControls(state: ControlsState) -> impl IntoView {
                     </div>
                     <span class="flex-1"></span>
                     <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); report_open.set(true); } class="phone-player-landscape flex h-14 w-14 shrink-0 items-center justify-center" aria-label=crate::i18n::t("controls-overlay-report-problem")>
-                        <i class="ph ph-flag text-heading"></i>
+                        <AppIcon glyph=Glyph::Report class="text-heading" />
                     </button>
                     <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); locked.set(true); shown.set(false); hint_lock(); } class="phone-player-landscape flex h-14 w-14 shrink-0 items-center justify-center" aria-label=crate::i18n::t("player-lock")>
-                        <i class="ph ph-lock-simple-open text-heading"></i>
+                        <AppIcon glyph=Glyph::LockOpen class="text-heading" />
                     </button>
                 </div>
 
                 // the middle: back 10, play or pause, forward 10 (closer together upright: input.css)
                 <div class="phone-player-middle absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-[102px]">
                     <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); on_skip_by.run(-10.0); touch(); } class="relative flex h-[84px] w-[84px] items-center justify-center" aria-label=crate::i18n::t("controls-overlay-rewind-10-seconds-left-arrow")>
-                        <i class="ph ph-arrow-counter-clockwise text-icon-lg"></i>
-                        <span class="pointer-events-none absolute pt-[3px] text-label font-bold">"10"</span>
+                        <AppIcon glyph=Glyph::Back10 class="text-icon-lg" />
                     </button>
                     <button type="button" on:click=act(on_toggle_play) class="flex h-[84px] w-[84px] items-center justify-center" aria-label=move || if is_playing.get() { crate::i18n::t("player-pause") } else { crate::i18n::t("player-play") }>
                         {move || if is_playing.get() {
                             // Netflix's mark: two square bars
                             view! { <span class="flex h-[42px] items-stretch gap-[8.2px]" aria-hidden="true"><span class="w-[13.7px] bg-ink"></span><span class="w-[13.7px] bg-ink"></span></span> }.into_any()
                         } else {
-                            view! { <i class="ph-fill ph-play text-icon-lg"></i> }.into_any()
+                            view! { <AppIcon glyph=Glyph::Play class="text-icon-lg" /> }.into_any()
                         }}
                     </button>
                     <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); on_skip_by.run(10.0); touch(); } class="relative flex h-[84px] w-[84px] items-center justify-center" aria-label=crate::i18n::t("controls-overlay-forward-10-seconds-right-arrow")>
-                        <i class="ph ph-arrow-clockwise text-icon-lg"></i>
-                        <span class="pointer-events-none absolute pt-[3px] text-label font-bold">"10"</span>
+                        <AppIcon glyph=Glyph::Forward10 class="text-icon-lg" />
                     </button>
                 </div>
 
@@ -230,33 +229,33 @@ pub fn PhoneControls(state: ControlsState) -> impl IntoView {
 
                 // held upright: Full screen alone in the bottom row's place, its middle 35 px above the bottom, as wide as the row
                 <button type="button" on:click=toggle_full class="phone-player-portrait absolute inset-x-6 bottom-[7px] flex h-14 items-center justify-center gap-3 text-body-lg font-semibold">
-                    <i class=move || if full_screen.get() { "ph ph-corners-in text-heading" } else { "ph ph-corners-out text-heading" }></i>
+                    {move || view! { <AppIcon glyph=if full_screen.get() { Glyph::ExitFullScreen } else { Glyph::FullScreen } class="text-heading" /> }}
                     {move || if full_screen.get() { crate::i18n::t("player-exit-full-screen") } else { crate::i18n::t("player-full-screen") }}
                 </button>
 
                 // the buttons along the bottom, their middle 35 px above it
                 <div class="phone-player-landscape absolute inset-x-0 bottom-[11px] flex h-12 items-center justify-evenly ps-[env(safe-area-inset-left)] pe-[env(safe-area-inset-right)]">
                     <button type="button" on:click=toggle_full class="flex h-12 items-center gap-3 text-body-lg font-semibold">
-                        <i class=move || if full_screen.get() { "ph ph-corners-in text-heading" } else { "ph ph-corners-out text-heading" }></i>
+                        {move || view! { <AppIcon glyph=if full_screen.get() { Glyph::ExitFullScreen } else { Glyph::FullScreen } class="text-heading" /> }}
                         {move || if full_screen.get() { crate::i18n::t("player-exit-full-screen") } else { crate::i18n::t("player-full-screen") }}
                     </button>
                     <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); speed_open.set(true); shown.set(false); } class="flex h-12 items-center gap-3 text-body-lg font-semibold">
-                        <i class="ph ph-gauge text-heading"></i>
+                        <AppIcon glyph=Glyph::Speed class="text-heading" />
                         <span>{move || crate::i18n::t_args("player-speed", &[("speed", fluent_bundle::FluentValue::from(speed_label(speed.get())))])}</span>
                     </button>
                     {is_tv.then(|| view! {
                         <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); episodes_open.set(true); } class="flex h-12 items-center gap-3 text-body-lg font-semibold">
-                            <i class="ph ph-cards text-heading"></i>
+                            <AppIcon glyph=Glyph::Episodes class="text-heading" />
                             <span>{crate::i18n::t("media-episodes")}</span>
                         </button>
                     })}
                     <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); on_refresh_audio.run(()); subs_open.set(true); } class="flex h-12 items-center gap-3 text-body-lg font-semibold">
-                        <i class="ph ph-subtitles text-heading"></i>
+                        <AppIcon glyph=Glyph::Subtitles class="text-heading" />
                         <span>{crate::i18n::t("controls-overlay-audio-subtitles")}</span>
                     </button>
                     {on_next_episode.filter(|_| is_tv).map(|next| view! {
                         <button type="button" on:click=act(next) class="flex h-12 items-center gap-3 text-body-lg font-semibold">
-                            <i class="ph ph-skip-forward text-heading"></i>
+                            <AppIcon glyph=Glyph::Next class="text-heading" />
                             <span>{crate::i18n::t("player-next-ep")}</span>
                         </button>
                     })}

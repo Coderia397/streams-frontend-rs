@@ -6,6 +6,7 @@ use super::{sidebar, Screen};
 use crate::config::routes;
 use crate::i18n::t;
 use leptos::prelude::*;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// The black bar of a phone with the logo and a back arrow.
 #[component]
@@ -13,7 +14,7 @@ pub fn PhoneBar(screen: Memo<Screen>) -> impl IntoView {
     view! {
         <div class="relative flex h-settings-header items-center bg-chrome px-2 lg:hidden">
             <a href=move || screen.get().parent() aria-label=move || t("set-back") class="flex h-10 w-10 items-center justify-center text-chrome-ink">
-                <i class="ph-bold ph-arrow-left text-2xl rtl:-scale-x-100" aria-hidden="true"></i>
+                <AppIcon glyph=Glyph::Back class="text-2xl rtl:-scale-x-100" />
             </a>
             <img src=crate::brand::LOGO_WORDMARK alt=crate::brand::NAME class="absolute inset-x-0 mx-auto h-6 w-auto" />
         </div>
@@ -38,7 +39,7 @@ pub fn SideMenu(screen: Memo<Screen>, signout_open: RwSignal<bool>) -> impl Into
     view! {
         <aside class="hidden shrink-0 lg:block lg:w-[27.55%]">
             <a href=routes::BROWSE class="mb-[33px] flex h-settings-menu-item items-center gap-2 rounded-button px-4 text-body-sm hover:bg-ink/5">
-                <i class="ph-bold ph-arrow-left text-xl rtl:-scale-x-100" aria-hidden="true"></i>
+                <AppIcon glyph=Glyph::Back class="text-xl rtl:-scale-x-100" />
                 {move || crate::i18n::t_args("set-back-to-app", &[("brand", crate::brand::NAME.into())])}
             </a>
             <nav class="flex flex-col gap-2" aria-label=move || t("set-title")>
@@ -82,7 +83,7 @@ pub fn PageHeading(screen: Memo<Screen>, gate_active: RwSignal<bool>, light_phon
                 class="btn-circle btn-circle-clear btn-circle-md lg:hidden"
                 class=("max-lg:hidden", move || light_phone.get())
             >
-                <i class="ph-bold ph-arrow-left text-2xl rtl:-scale-x-100" aria-hidden="true"></i>
+                <AppIcon glyph=Glyph::Back class="text-2xl rtl:-scale-x-100" />
             </a>
             <a
                 href=move || screen.get().parent_wide()
@@ -93,7 +94,7 @@ pub fn PageHeading(screen: Memo<Screen>, gate_active: RwSignal<bool>, light_phon
                 class=("lg:left-[210px]", move || screen.get().standalone())
                 class=("lg:top-[97px]", move || screen.get().standalone())
             >
-                <i class="ph-bold ph-arrow-left text-2xl rtl:-scale-x-100" aria-hidden="true"></i>
+                <AppIcon glyph=Glyph::Back class="text-2xl rtl:-scale-x-100" />
             </a>
             <h1 class="text-title font-bold lg:w-full lg:flex-1 lg:truncate lg:text-account-title" class=("max-lg:text-account-title-sm", move || light_phone.get()) class=("lg:text-heading-xl!", move || screen.get().standalone()) class=("lg:leading-[40px]!", move || screen.get().standalone()) class=("lg:text-line!", move || screen.get().standalone()) class=("hidden", move || gate_active.get() || screen.get() == Screen::TransferSetting)>
                 <span class=("lg:hidden", move || matches!(screen.get(), Screen::Hub | Screen::Profile(_)))>{move || t(screen.get().title_key())}</span>

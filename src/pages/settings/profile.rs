@@ -12,6 +12,7 @@ use crate::models::profile::Profile;
 use crate::store::use_profile_store;
 use leptos::prelude::*;
 use leptos_router::hooks::use_navigate;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 fn find(id: &str) -> Option<Profile> {
     use_profile_store().profiles.with(|l| l.iter().find(|p| p.id == id).cloned())
@@ -497,7 +498,7 @@ pub fn Lock(id: String) -> impl IntoView {
     view! {
         <div class="max-lg:flex max-lg:min-h-settings-hero-min max-lg:flex-col max-lg:justify-center">
             <div class="mb-6 flex flex-col items-center gap-4 text-center">
-                <span class="flex h-36 w-36 items-center justify-center rounded-full bg-ink/10 lg:h-24 lg:w-24"><i class="ph-bold ph-lock-simple text-7xl lg:text-5xl" aria-hidden="true"></i></span>
+                <span class="flex h-36 w-36 items-center justify-center rounded-full bg-ink/10 lg:h-24 lg:w-24"><AppIcon glyph=Glyph::Locked class="text-7xl lg:text-5xl" /></span>
                 <h2 class="text-heading-lg font-bold lg:text-title">{move || if has_pin.get() { t("set-lock-title-on") } else { t("set-lock-title-off") }}</h2>
                 <p class="max-w-md text-body-md text-ink/60">{move || t_args("set-lock-body", &[("digits", PIN_LENGTH.into())])}</p>
             </div>

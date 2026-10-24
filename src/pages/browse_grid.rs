@@ -3,6 +3,7 @@ use leptos_router::hooks::{use_navigate, use_params_map, use_query_map};
 use crate::components::layout::Layout;
 use crate::components::media::movie_card::MovieCard;
 use crate::models::mapping::map_genre_key_to_tmdb;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 #[component]
 pub fn BrowseGridPage() -> impl IntoView {
@@ -64,7 +65,7 @@ pub fn BrowseGridPage() -> impl IntoView {
                             class="btn-circle btn-circle-clear btn-circle-md"
                             aria-label=crate::i18n::t("browse-grid-go-back")
                         >
-                            <i class="ph-bold ph-arrow-left text-2xl md:text-3xl text-ink"></i>
+                            <AppIcon glyph=Glyph::Back class="text-2xl md:text-3xl text-ink" />
                         </button>
                         <h1 class="text-ink font-bold text-2xl md:text-4xl tracking-tight">
                             {move || display_title()}

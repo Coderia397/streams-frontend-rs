@@ -4,6 +4,7 @@ use crate::services::tmdb::{fetch_recommendations, fetch_movie_logo};
 use crate::components::media::movie_card_badges::RatingBadge;
 use crate::components::media::action_buttons::MyListButton;
 use crate::store::{use_library_store, LibraryEntry};
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 const BATCH_REC: usize = 9;
 
@@ -119,7 +120,7 @@ pub fn RecCard(
 
                 // Play: the round preset, shown under the pointer (always on a touch screen, which has no pointer to rest)
                 <div class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-(--motion-base) group-hover:opacity-100 [@media(hover:none)]:opacity-100">
-                    <span class="btn-circle btn-circle-lg"><i class="ph-fill ph-play"></i></span>
+                    <span class="btn-circle btn-circle-lg"><AppIcon glyph=Glyph::Play /></span>
                 </div>
 
                 // the title's logo, or its name

@@ -22,6 +22,7 @@ use episode_drawer::EpisodeDrawer;
 use subtitle_drawer::SubtitleDrawer;
 use skip_button::SkipButton;
 use rating_card::RatingCard;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 #[derive(Clone, Debug, PartialEq)]
 enum PlayerState {
@@ -533,7 +534,7 @@ pub fn StreamsPlayer(
                                                 on:click=move |_| on_close.run(())
                                                 class="flex items-center gap-2 px-4 py-2 rounded-button bg-void/80 hover:bg-void text-ink text-sm font-semibold backdrop-blur-md shadow-lg"
                                             >
-                                                <i class="ph ph-arrow-left text-lg"></i>
+                                                <AppIcon glyph=Glyph::Back class="text-lg" />
                                                 <span>{crate::i18n::t("player-back")}</span>
                                             </button>
                                         </div>

@@ -1,6 +1,7 @@
 use leptos::prelude::*;
 use leptos_router::hooks::use_navigate;
 use crate::components::layout::nav::Navbar;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct DimensionConfig {
@@ -230,7 +231,7 @@ pub fn NotFoundPage() -> impl IntoView {
                                 }
                                 class="btn-ink flex items-center justify-center px-6 sm:px-8 h-[36px] md:h-[42px] text-body-sm md:text-body-lg gap-2 active:scale-95 shadow-lg duration-(--motion-base)"
                             >
-                                <i class="ph-fill ph-house text-xl text-void" />
+                                <AppIcon glyph=Glyph::HomeFilled class="text-xl text-void" />
                                 <span>{crate::i18n::t("nf-return-home")}</span>
                             </button>
 

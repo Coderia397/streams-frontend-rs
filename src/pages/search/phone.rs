@@ -9,6 +9,7 @@ use leptos::prelude::*;
 use leptos_router::hooks::use_navigate;
 use leptos_router::NavigateOptions;
 use wasm_bindgen::{closure::Closure, JsCast, JsValue};
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// Starts the browser's speech recognition (when it has one) and hands the spoken text to `on_text`. Returns false when the browser cannot listen.
 fn listen(on_text: impl Fn(String) + 'static) -> bool {
@@ -64,7 +65,7 @@ fn SearchListRow(item: MediaItem) -> impl IntoView {
             </div>
             <span class="flex-1 min-w-0 text-body-lg font-bold leading-tight text-ink line-clamp-2">{title.clone()}</span>
             <button on:click=play aria-label=crate::i18n::t("media-play") class="btn-circle btn-circle-sm">
-                <i class="ph-fill ph-play text-ink text-body-sm ms-px"></i>
+                <AppIcon glyph=Glyph::Play class="text-ink text-body-sm ms-px" />
             </button>
         </div>
     }
@@ -137,11 +138,11 @@ pub fn PhoneSearch(#[prop(into)] q: Signal<String>, results: Found, recommended:
                     {move || if focused.get() {
                         view! {
                             <button on:click=on_back.clone() aria-label=crate::i18n::t("navbar-mobile-back") class="w-12 h-12 flex items-center justify-center text-ink flex-none">
-                                <i class="ph ph-arrow-left text-heading-md"></i>
+                                <AppIcon glyph=Glyph::Back class="text-heading-md" />
                             </button>
                         }.into_any()
                     } else {
-                        view! { <span class="w-12 h-12 flex items-center justify-center text-ink/90 flex-none"><i class="ph ph-magnifying-glass text-heading-md"></i></span> }.into_any()
+                        view! { <span class="w-12 h-12 flex items-center justify-center text-ink/90 flex-none"><AppIcon glyph=Glyph::Search class="text-heading-md" /></span> }.into_any()
                     }}
                     <input
                         node_ref=input_ref

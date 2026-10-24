@@ -297,4 +297,8 @@
   }
   .surface-card-hover { transition: background-color var(--motion-fast); }
   :root:is([data-input="mouse"], [data-input="pen"]) .surface-card-hover:hover { background-color: rgb(255 255 255 / 0.14); }
+
+  /* The icons matched to Netflix's (components/media/icons/app_icons.rs): 1em square in the text colour, sitting on the text as the
+     font icons they replace did. */
+  .app-icon { display: inline-block; width: 1em; height: 1em; flex-shrink: 0; vertical-align: -0.125em; overflow: visible; }
 }

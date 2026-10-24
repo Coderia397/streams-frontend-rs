@@ -5,6 +5,7 @@ use crate::consent::use_ui;
 use fluent_bundle::FluentValue;
 use leptos::prelude::*;
 use wasm_bindgen::{closure::Closure, JsCast, JsValue};
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// Every tool id an article may use.
 pub const TOOLS: &[&str] = &["diagnostics", "data", "profiles", "language", "cookies", "refresh"];
@@ -321,7 +322,7 @@ pub fn Profiles() -> impl IntoView {
                             <i class="ph-bold ph-user-circle text-title text-paper-mute" aria-hidden="true"></i>
                             <span class="font-semibold text-paper-ink">{p.name.clone()}</span>
                             {p.is_kids.then(|| view! { <span class="rounded-control bg-brand px-2 py-0.5 text-fine font-bold text-ink">{tr("help-act-profile-kids")}</span> })}
-                            {p.pin.is_some().then(|| view! { <span class="rounded-control border border-paper-edge px-2 py-0.5 text-fine font-bold text-paper-ink"><i class="ph-bold ph-lock-simple me-1"></i>{tr("help-act-profile-pin")}</span> })}
+                            {p.pin.is_some().then(|| view! { <span class="rounded-control border border-paper-edge px-2 py-0.5 text-fine font-bold text-paper-ink"><AppIcon glyph=Glyph::Locked class="me-1" />{tr("help-act-profile-pin")}</span> })}
                         </li>
                     })
                     .collect_view()}

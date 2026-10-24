@@ -4,6 +4,7 @@ use crate::config::routes;
 use crate::i18n::t;
 use crate::store::use_profile_store;
 use leptos::prelude::*;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// The profile button of the website's top bar: the profile picture and a caret that open a small menu (Back, Account, Manage Profiles,
 /// Help Centre, Switch Profile, Sign out), 199 px wide, white, rounded-control 8 px, with a 48 px row for each entry.
@@ -47,7 +48,7 @@ pub fn AccountMenu(avatar: Memo<String>, signout_open: RwSignal<bool>) -> impl I
             </button>
             <Show when=move || open.get()>
                 <div role="menu" class="absolute end-0 top-[42px] z-50 w-[199px] rounded-menu bg-page p-[5px] shadow-menu">
-                    <a role="menuitem" href=routes::BROWSE class=item><i class="ph ph-arrow-left text-heading" aria-hidden="true"></i>{move || crate::i18n::t_args("set-back-to-app", &[("brand", crate::brand::NAME.into())])}</a>
+                    <a role="menuitem" href=routes::BROWSE class=item><AppIcon glyph=Glyph::Back class="text-heading" />{move || crate::i18n::t_args("set-back-to-app", &[("brand", crate::brand::NAME.into())])}</a>
                     <hr class="mx-3 my-[4px] border-set-line" />
                     <a role="menuitem" href=Screen::Account.path() class=item><i class="ph ph-user text-heading" aria-hidden="true"></i>{t("set-nav-account")}</a>
                     <a role="menuitem" href=Screen::AccountProfiles.path() class=item><i class="ph ph-pencil-simple text-heading" aria-hidden="true"></i>{t("profile-manage")}</a>

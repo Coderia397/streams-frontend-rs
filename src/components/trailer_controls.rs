@@ -6,6 +6,7 @@
 //! Laid over a `relative` frame that holds the TrailerPlayer; the frame's owner keeps the time, the length and the pause state.
 use leptos::prelude::*;
 use wasm_bindgen::JsCast;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// How long the controls stay after the last touch, in milliseconds.
 const SHOW_MS: u64 = 3_000;
@@ -76,7 +77,7 @@ pub fn TrailerControls(
                 aria-label=move || if paused.get() { crate::i18n::t("media-play") } else { crate::i18n::t("title-pause") }
             >
                 {move || if paused.get() {
-                    view! { <i class="ph-fill ph-play text-icon-md"></i> }.into_any()
+                    view! { <AppIcon glyph=Glyph::Play class="text-icon-md" /> }.into_any()
                 } else {
                     // Netflix's mark: two square bars, 6.6 x 30 px, 7 px apart
                     view! { <span class="flex h-[30px] items-stretch gap-[7px]" aria-hidden="true"><span class="w-[6.6px] bg-ink"></span><span class="w-[6.6px] bg-ink"></span></span> }.into_any()
@@ -109,7 +110,7 @@ pub fn TrailerControls(
             class="absolute right-[6px] z-30 btn-circle btn-circle-sm transition-[bottom] duration-(--motion-base) ease-out"
             style=move || if shown.get() { "bottom:38.5px" } else { "bottom:12px" }
         >
-            <i class=move || if ui_store.preview_muted.get() { "ph-fill ph-speaker-slash text-body" } else { "ph-fill ph-speaker-high text-body" }></i>
+            {move || view! { <AppIcon glyph=if ui_store.preview_muted.get() { Glyph::Muted } else { Glyph::Speaker } class="text-body" /> }}
         </button>
     }
 }

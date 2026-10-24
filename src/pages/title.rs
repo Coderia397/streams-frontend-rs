@@ -11,6 +11,7 @@ use crate::i18n::t;
 use crate::services::tmdb::{
     fetch_details, fetch_movie_logo, fetch_recommendations, fetch_season_details, fetch_trending, fetch_videos, select_best_tmdb_trailer, MediaItem, VideoResult,
 };
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// `tv-1399` is (true, 1399) and `movie-603` is (false, 603); anything else is not a title.
 pub fn parse_slug(slug: &str) -> Option<(bool, u32)> {
@@ -273,7 +274,7 @@ fn PublicTitle(id: u32, is_tv: bool) -> impl IntoView {
                                         title=move || if paused.get() { t("media-play") } else { t("title-pause") }
                                         aria-label=move || if paused.get() { t("media-play") } else { t("title-pause") }
                                     >
-                                        <i class=move || if paused.get() { "ph-fill ph-play" } else { "ph-fill ph-pause" }></i>
+                                        {move || if paused.get() { view! { <AppIcon glyph=Glyph::Play /> }.into_any() } else { view! { <i class="ph-fill ph-pause"></i> }.into_any() }}
                                     </button>
                                 })}
                                 <crate::components::media::action_buttons::MuteReplayButton
@@ -437,7 +438,7 @@ fn TitleBody(
                                 <button type="button" on:click=move |_| play_video.run(key.clone()) class="group w-[225px] shrink-0 cursor-pointer snap-start text-start md:w-[327px]">
                                     <div class="relative aspect-video overflow-hidden rounded-lg bg-ink/10">
                                         <img src=format!("https://i.ytimg.com/vi/{}/hqdefault.jpg", v.key) alt="" loading="lazy" class="h-full w-full object-cover transition-transform duration-(--motion-base) group-hover:scale-105" />
-                                        <span class="btn-circle btn-circle-md absolute bottom-3 start-3"><i class="ph-fill ph-play"></i></span>
+                                        <span class="btn-circle btn-circle-md absolute bottom-3 start-3"><AppIcon glyph=Glyph::Play /></span>
                                     </div>
                                     <p class="mt-2 text-label font-bold uppercase leading-none tracking-[0.16em] text-ink/70">{label}</p>
                                     <p class="mt-[3px] line-clamp-2 text-body-md font-medium leading-normal">{v.name.clone().unwrap_or_default()}</p>

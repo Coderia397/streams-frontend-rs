@@ -6,6 +6,7 @@ use crate::i18n::t;
 use crate::models::profile::Profile;
 use crate::store::{use_profile_store, ProfileStore};
 use leptos::prelude::*;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// Opens the "Sign out?" dialog that the settings page renders once.
 #[derive(Clone, Copy)]
@@ -183,7 +184,7 @@ pub fn ManageProfiles() -> impl IntoView {
                     <li>
                         <button type="button" on:click=move |_| adding.set(true) class="flex w-full flex-col items-center gap-3">
                             <span class="flex h-28 w-28 items-center justify-center rounded-card bg-ink/10 hover:bg-ink/20">
-                                <i class="ph-bold ph-plus text-4xl text-ink/80" aria-hidden="true"></i>
+                                <AppIcon glyph=Glyph::Plus class="text-4xl text-ink/80" />
                             </span>
                             <span class="text-body-md font-semibold">{t("set-add-profile")}</span>
                         </button>

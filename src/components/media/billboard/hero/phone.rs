@@ -2,6 +2,7 @@ use leptos::prelude::*;
 use crate::models::movie::Movie;
 use crate::store::{use_library_store, use_ui_store, LibraryEntry};
 use crate::services::tmdb::{fetch_movie_logo, MediaItem};
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 #[component]
 pub fn MobileHero(
@@ -174,7 +175,7 @@ pub fn MobileHero(
                             on:click=handle_play
                             class="btn-ink flex-1 flex items-center justify-center h-11 text-lg gap-2 transition-all active:scale-95"
                         >
-                            <i class="ph-fill ph-play text-2xl"></i>
+                            <AppIcon glyph=Glyph::Play class="text-2xl" />
                             <span>{move || {
                                 let watch_store = crate::store::use_watch_store();
                                 if let Some(rec) = watch_store.get_record(movie_id, is_tv) {
@@ -192,7 +193,7 @@ pub fn MobileHero(
                             on:click=toggle_my_list
                             class="btn-glass flex-1 flex items-center justify-center h-11 text-lg gap-2 transition-all active:scale-95"
                         >
-                            <i class=move || if is_added.get() { "ph-bold ph-check text-2xl" } else { "ph-bold ph-plus text-2xl" }></i>
+                            {move || view! { <AppIcon glyph=if is_added.get() { Glyph::Check } else { Glyph::Plus } class="text-2xl" /> }}
                             <span>{crate::i18n::t("my-list")}</span>
                         </button>
                     </div>

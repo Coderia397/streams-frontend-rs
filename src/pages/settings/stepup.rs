@@ -8,6 +8,7 @@ use crate::config::{routes, CODE_LENGTH, CODE_VALID_MINUTES};
 use crate::i18n::{t, t_args};
 use crate::services::account::{self, AuthError};
 use leptos::prelude::*;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// Set while the check is on screen, so the page can hide its own title.
 #[derive(Clone, Copy)]
@@ -132,7 +133,7 @@ pub fn Gate(account: bool, children: ChildrenFn) -> impl IntoView {
                             </button>
                             // radius: an option card
                             <button type="button" on:click=move |_| { note.set(None); step.set(Step::Password) } class="flex h-[69px] w-full items-center gap-[15px] rounded-card bg-ink/5 px-3 text-start hover:bg-ink/10">
-                                <i class="ph ph-lock-simple shrink-0 text-body-md text-ink" aria-hidden="true"></i>
+                                <AppIcon glyph=Glyph::Locked class="shrink-0 text-body-md text-ink" />
                                 <span class="min-w-0 flex-1"><span class="block text-title-sm font-bold leading-6">{t("set-password-confirm")}</span></span>
                                 <i class="ph-bold ph-caret-right shrink-0 text-body-md text-ink rtl:-scale-x-100" aria-hidden="true"></i>
                             </button>

@@ -1753,7 +1753,7 @@ legal-credits-1-b2 = <strong>Inter</strong> من Rasmus Andersson، مستخدم
 legal-credits-1-b3 = <strong>Abril Fatface وCaveat Brush وDM Serif Display وFredoka وGochi Hand وKalam وLondrina Solid وPlayfair Display وSedgwick Ave</strong> من Google Fonts، مستخدمة بموجب SIL Open Font License 1.1.
 legal-credits-1-b4 = <strong>Permanent Marker</strong> و<strong>Rock Salt</strong> من Google Fonts، مستخدمان بموجب Apache License 2.0.
 legal-credits-2-title = 2. الأيقونات
-legal-credits-2-body = أيقونات الواجهة من Phosphor Icons، مستخدمة بموجب ترخيص MIT.
+legal-credits-2-body = أيقونات الواجهة من Phosphor Icons وTabler Icons وHugeicons، مستخدمة بموجب ترخيص MIT، ومن Remix Icon وIBM Carbon، مستخدمة بموجب ترخيص Apache 2.0.
 legal-credits-3-title = 3. معلومات الأفلام والمسلسلات
 legal-credits-3-body = يستخدم هذا المنتج واجهة TMDB البرمجية لكنه غير معتمد أو مصدَّق من TMDB. تأتي العناوين والملخصات والملصقات والتقييمات ومعلومات طاقم التمثيل من <a href="https://www.themoviedb.org" target="_blank" rel="noopener">The Movie Database</a>.
 legal-credits-4-title = 4. البرمجيات

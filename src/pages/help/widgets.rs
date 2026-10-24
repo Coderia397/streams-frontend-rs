@@ -4,6 +4,7 @@ use fluent_bundle::FluentValue;
 use leptos::prelude::*;
 use leptos_router::hooks::use_navigate;
 use wasm_bindgen::JsCast;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// Text with the matching search words in bold.
 pub fn highlighted(text: &str, words: &[String]) -> impl IntoView + use<> {
@@ -143,7 +144,7 @@ pub fn SearchBox(
         <div node_ref=root class="relative w-full" on:focusout=on_focusout>
             <form role="search" on:submit=on_submit class=frame>
                 <div class="flex items-center rounded-field bg-paper">
-                    {(!arrow).then(|| view! { <i class="ph-bold ph-magnifying-glass ps-4 text-title text-paper-ink" aria-hidden="true"></i> })}
+                    {(!arrow).then(|| view! { <AppIcon glyph=Glyph::Search class="ps-4 text-title text-paper-ink" /> })}
                     <input
                         type="search"
                         autocomplete="off"
@@ -199,7 +200,7 @@ pub fn SearchBox(
                                 .collect_view()}
                             <li>
                                 <a href=results_url(&value.get()) class="flex items-center gap-3 border-t border-paper-line px-4 py-3 text-body-sm font-semibold text-paper-ink hover:bg-paper-soft">
-                                    <i class="ph-bold ph-magnifying-glass text-paper-mute"></i>
+                                    <AppIcon glyph=Glyph::Search class="text-paper-mute" />
                                     {tr_with("help-ui-results-count-link", &[("query", FluentValue::from(value.get().trim().to_string()))])}
                                 </a>
                             </li>

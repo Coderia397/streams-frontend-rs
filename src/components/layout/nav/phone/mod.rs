@@ -5,6 +5,7 @@ pub mod bottom_bar;
 
 use bottom_bar::{BottomNavItem, BottomNavMobile};
 use crate::store::use_profile_store;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 #[component]
 pub fn PhoneNav(
@@ -111,7 +112,7 @@ pub fn PhoneNav(
     let bottom_nav_items = vec![
         BottomNavItem {
             id: "home",
-            icon: view! { <i class="ph-bold ph-house text-heading"></i> }.into_any(),
+            icon: view! { <AppIcon glyph=Glyph::Home class="text-heading" /> }.into_any(),
             label: "nav-home",
             on_click: Callback::new(move |_| {
                 set_active_bottom_nav.set("home");
@@ -121,7 +122,7 @@ pub fn PhoneNav(
         },
         BottomNavItem {
             id: "clips",
-            icon: view! { <i class="ph-bold ph-play-circle text-heading"></i> }.into_any(),
+            icon: view! { <AppIcon glyph=Glyph::Clips class="text-heading" /> }.into_any(),
             label: "nav-clips",
             on_click: Callback::new(move |_| {
                 set_active_bottom_nav.set("clips");
@@ -131,7 +132,7 @@ pub fn PhoneNav(
         },
         BottomNavItem {
             id: "search",
-            icon: view! { <i class="ph-bold ph-magnifying-glass text-heading"></i> }.into_any(),
+            icon: view! { <AppIcon glyph=Glyph::Search class="text-heading" /> }.into_any(),
             label: "nav-search",
             on_click: Callback::new(move |_| {
                 set_active_bottom_nav.set("search");
@@ -190,7 +191,7 @@ pub fn PhoneNav(
                                 class="flex h-11 w-11 flex-shrink-0 items-center justify-center ms-2.5 text-ink active:scale-95 transition-transform cursor-pointer"
                                 aria-label=crate::i18n::t("navbar-mobile-back")
                             >
-                                <i class="ph-bold ph-arrow-left text-heading"></i>
+                                <AppIcon glyph=Glyph::Back class="text-heading" />
                             </button>
                         }.into_any()
                     } else {
@@ -230,7 +231,7 @@ pub fn PhoneNav(
                         class="relative flex h-11 w-11 shrink-0 items-center justify-center text-ink cursor-pointer active:scale-95 transition-transform"
                         aria-label=crate::i18n::t("notifications-dropdown-notifications")
                     >
-                        <i class="ph ph-bell text-heading"></i>
+                        <AppIcon glyph=Glyph::Bell class="text-heading" />
                         {move || Some(unread.get().unwrap_or(stored_unread)).filter(|n| *n > 0).map(|n| view! {
                             <span class="absolute top-[2px] right-[3px] flex h-5 min-w-5 items-center justify-center rounded-full bg-brand px-1 text-micro font-bold leading-none text-ink">
                                 {if n > 99 { "99+".to_string() } else { n.to_string() }}

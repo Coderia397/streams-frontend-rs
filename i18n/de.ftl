@@ -1726,7 +1726,7 @@ legal-credits-1-b2 = <strong>Inter</strong> von Rasmus Andersson, verwendet unte
 legal-credits-1-b3 = <strong>Abril Fatface, Caveat Brush, DM Serif Display, Fredoka, Gochi Hand, Kalam, Londrina Solid, Playfair Display und Sedgwick Ave</strong> von Google Fonts, verwendet unter der SIL Open Font License 1.1.
 legal-credits-1-b4 = <strong>Permanent Marker</strong> und <strong>Rock Salt</strong> von Google Fonts, verwendet unter der Apache License 2.0.
 legal-credits-2-title = 2. Symbole
-legal-credits-2-body = Interface-Symbole stammen von Phosphor Icons und werden unter der MIT-Lizenz verwendet.
+legal-credits-2-body = Interface-Symbole stammen von Phosphor Icons, Tabler Icons und Hugeicons und werden unter der MIT-Lizenz verwendet, sowie von Remix Icon und IBM Carbon unter der Apache-Lizenz 2.0.
 legal-credits-3-title = 3. Informationen zu Filmen und Serien
 legal-credits-3-body = Dieses Produkt nutzt die TMDB-API, wird aber nicht von TMDB unterstützt oder zertifiziert. Titel, Zusammenfassungen, Poster, Bewertungen und Besetzungsinformationen stammen von <a href="https://www.themoviedb.org" target="_blank" rel="noopener">The Movie Database</a>.
 legal-credits-4-title = 4. Software

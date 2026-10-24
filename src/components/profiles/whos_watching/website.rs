@@ -2,6 +2,7 @@
 //! pictures, Add Profile and the Manage Profiles pill.
 use crate::models::profile::Profile;
 use leptos::prelude::*;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 #[component]
 pub fn WebsiteGate(
@@ -54,7 +55,7 @@ pub fn WebsiteGate(
                 {move || (profiles.get().len() < 5).then(|| view! {
                     <button type="button" on:click=move |_| on_add.run(()) class="group flex w-[160px] cursor-pointer flex-col items-center gap-[23px] p-[16px] focus:outline-none">
                         <div class="flex h-[128px] w-[128px] items-center justify-center rounded-modal bg-gate-tile outline outline-[3px] outline-transparent transition-[outline-color] group-hover:outline-ink/70">
-                            <i class="ph ph-plus text-icon-lg text-ink"></i>
+                            <AppIcon glyph=Glyph::Plus class="text-icon-lg text-ink" />
                         </div>
                         <span class="text-title-sm font-medium leading-[23px] text-ink/70 transition-colors group-hover:text-ink">{crate::i18n::t("whos-watching-add-profile")}</span>
                     </button>

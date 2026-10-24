@@ -1730,7 +1730,7 @@ legal-credits-1-b2 = Rasmus Andersson의 <strong>Inter</strong>. SIL Open Font L
 legal-credits-1-b3 = Google Fonts의 <strong>Abril Fatface, Caveat Brush, DM Serif Display, Fredoka, Gochi Hand, Kalam, Londrina Solid, Playfair Display, Sedgwick Ave</strong>. SIL Open Font License 1.1에 따라 사용합니다.
 legal-credits-1-b4 = Google Fonts의 <strong>Permanent Marker</strong>와 <strong>Rock Salt</strong>. Apache License 2.0에 따라 사용합니다.
 legal-credits-2-title = 2. 아이콘
-legal-credits-2-body = 인터페이스 아이콘은 Phosphor Icons의 것으로, MIT 라이선스에 따라 사용합니다.
+legal-credits-2-body = 인터페이스 아이콘은 Phosphor Icons, Tabler Icons, Hugeicons의 것은 MIT 라이선스에 따라, Remix Icon과 IBM Carbon의 것은 Apache 라이선스 2.0에 따라 사용합니다.
 legal-credits-3-title = 3. 영화 및 시리즈 정보
 legal-credits-3-body = 이 제품은 TMDB API를 사용하지만 TMDB의 보증이나 인증을 받지 않았습니다. 제목, 줄거리, 포스터, 평점, 출연진 정보는 <a href="https://www.themoviedb.org" target="_blank" rel="noopener">The Movie Database</a>에서 가져옵니다.
 legal-credits-4-title = 4. 소프트웨어

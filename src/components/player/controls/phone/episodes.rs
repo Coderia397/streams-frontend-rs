@@ -9,6 +9,7 @@ use leptos::prelude::*;
 use wasm_bindgen::JsCast;
 use crate::components::media::icons::play_mark::PlayMark;
 use crate::services::tmdb::{fetch_details, fetch_season_details};
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// The synopsis's line, in px (45 device px on Netflix's).
 const SYNOPSIS_LINE: f64 = 17.6;
@@ -69,7 +70,7 @@ pub fn EpisodesMenu(
             <div class="absolute inset-0 z-50 bg-scrim-menu text-ink" on:click=|e: leptos::ev::MouseEvent| e.stop_propagation()>
                 // the arrow 16 px in from the edge the page may draw in, its button 52 by 56 px
                 <button type="button" on:click=move |_| open.set(false) class="absolute left-[calc(env(safe-area-inset-left)+8px)] top-0 flex h-14 w-[52px] items-center ps-2" aria-label=crate::i18n::t("player-back")>
-                    <i class="ph ph-arrow-left text-heading"></i>
+                    <AppIcon glyph=Glyph::Back class="text-heading" />
                 </button>
                 {move || (seasons.get().unwrap_or(1) > 1).then(|| view! {
                     <button type="button" on:click=move |_| picker_open.set(true) class="btn-pill absolute right-[calc(env(safe-area-inset-right)+16px)] top-2 h-[51px] min-w-[148px] justify-between gap-4 bg-menu-button ps-4 pe-[21px] text-title-sm font-bold text-ink-soft">

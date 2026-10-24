@@ -1733,7 +1733,7 @@ legal-credits-1-b2 = <strong>Inter</strong>，作者 Rasmus Andersson，依据 S
 legal-credits-1-b3 = 来自 Google Fonts 的 <strong>Abril Fatface、Caveat Brush、DM Serif Display、Fredoka、Gochi Hand、Kalam、Londrina Solid、Playfair Display 和 Sedgwick Ave</strong>，依据 SIL Open Font License 1.1 使用。
 legal-credits-1-b4 = 来自 Google Fonts 的 <strong>Permanent Marker</strong> 和 <strong>Rock Salt</strong>，依据 Apache License 2.0 使用。
 legal-credits-2-title = 2. 图标
-legal-credits-2-body = 界面图标来自 Phosphor Icons，依据 MIT 许可证使用。
+legal-credits-2-body = 界面图标来自 Phosphor Icons、Tabler Icons 和 Hugeicons，依据 MIT 许可证使用；以及 Remix Icon 和 IBM Carbon，依据 Apache 2.0 许可证使用。
 legal-credits-3-title = 3. 影视信息
 legal-credits-3-body = 本产品使用 TMDB API，但未经 TMDB 认可或认证。标题、简介、海报、评分和演员信息来自 <a href="https://www.themoviedb.org" target="_blank" rel="noopener">The Movie Database</a>。
 legal-credits-4-title = 4. 软件

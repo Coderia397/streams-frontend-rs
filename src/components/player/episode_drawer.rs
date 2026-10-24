@@ -1,6 +1,7 @@
 use leptos::prelude::*;
 use crate::services::tmdb::{fetch_details, fetch_season_details, Episode};
 use crate::store::use_watch_store;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// The episodes panel, laid out from the owner's Netflix screenshots (note 70): a 760 px dark panel above the controls on the right; a header with a back arrow and "Season N" (the arrow
 /// opens the list of seasons); one row per episode with its number, name and a thin progress line; the current episode (and the row that has the keyboard focus) opens into a
@@ -39,7 +40,7 @@ pub fn EpisodeDrawer(
                     on:click=move |_| if many_seasons() { set_show_seasons.update(|s| *s = !*s) }
                     class="flex h-[74px] w-full shrink-0 items-center gap-[18px] px-[24px] text-start text-ink transition-colors duration-(--motion-quick) hover:bg-line"
                 >
-                    <Show when=many_seasons><i class="ph ph-arrow-left text-heading-md"></i></Show>
+                    <Show when=many_seasons><AppIcon glyph=Glyph::Back class="text-heading-md" /></Show>
                     <span class="text-heading-2xl font-medium leading-[36px]">
                         {move || crate::i18n::t_args("media-season-n", &[("n", fluent_bundle::FluentValue::from(selected_season.get() as i64))])}
                     </span>
@@ -92,7 +93,7 @@ pub fn EpisodeDrawer(
                                                         {if is_current {
                                                             view! { <span class="flex items-center gap-2 text-title-md font-medium"><i class="ph-fill ph-waveform text-heading-md"></i>{crate::i18n::t("player-now-playing")}</span> }.into_any()
                                                         } else {
-                                                            view! { <span class="flex h-[64px] w-[64px] items-center justify-center rounded-full bg-void/60"><i class="ph-fill ph-play text-icon-md"></i></span> }.into_any()
+                                                            view! { <span class="flex h-[64px] w-[64px] items-center justify-center rounded-full bg-void/60"><AppIcon glyph=Glyph::Play class="text-icon-md" /></span> }.into_any()
                                                         }}
                                                     </span>
                                                 </span>

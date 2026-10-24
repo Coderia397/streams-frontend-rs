@@ -6,6 +6,7 @@ use fluent_bundle::FluentValue;
 use leptos::prelude::*;
 use leptos_router::hooks::use_params_map;
 use std::collections::HashMap;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 fn read_votes() -> HashMap<String, bool> {
     web_sys::window()
@@ -104,7 +105,7 @@ pub fn ArticlePage() -> impl IntoView {
         <HelpShell>
             <main class="mx-auto w-full max-w-[1100px] px-6 pb-20 pt-6 md:px-12">
                 <a href="/help" class="mb-6 inline-flex items-center gap-2 text-body-sm font-semibold text-paper-ink hover:text-brand-active">
-                    <i class="ph-bold ph-arrow-left rtl:-scale-x-100" aria-hidden="true"></i>
+                    <AppIcon glyph=Glyph::Back class="rtl:-scale-x-100" />
                     {tr("help-ui-back")}
                 </a>
                 {move || match help::article(&slug.get()) {

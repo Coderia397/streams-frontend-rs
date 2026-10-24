@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 use crate::services::ai_engine::SkipMarks;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// The buttons over the picture: Skip Recap, Skip Intro and, at the credits of an episode, "Watch credits" and "Next episode". When they show comes from the skip marks the engine guesses
 /// (ratios of the video's length, so a stream with an extra logo or a different cut still lines up); a video without a mark has no button. Laid out as read from the end of episode screen
@@ -51,7 +52,7 @@ pub fn SkipButton(
                     <span>{crate::i18n::t("player-watch-credits")}</span>
                 </button>
                 <button on:click=move |_| on_next_episode.run(()) class=format!("{base} bg-ink text-void hover:bg-ink/75")>
-                    <i class="ph-fill ph-play text-[1.6vw]"></i>
+                    <AppIcon glyph=Glyph::Play class="text-[1.6vw]" />
                     <span>{crate::i18n::t("player-next-episode")}</span>
                 </button>
             </Show>

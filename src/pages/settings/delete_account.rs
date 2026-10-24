@@ -10,6 +10,7 @@ use crate::i18n::t;
 use crate::services::account;
 use crate::store::use_profile_store;
 use leptos::prelude::*;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 #[component]
 pub fn DeleteAccount() -> impl IntoView {
@@ -36,7 +37,7 @@ pub fn DeleteAccount() -> impl IntoView {
         <div class="lg:fixed lg:inset-x-0 lg:bottom-0 lg:top-settings-header lg:z-(--z-screen) lg:overflow-auto lg:bg-page">
             <div class="relative w-full max-w-[690px] max-lg:max-w-md lg:mx-auto lg:pt-[19px]">
                 <a href=Screen::AccountSecurity.path() aria-label=t("set-back") class="hidden btn-circle btn-circle-clear btn-circle-md lg:absolute lg:-left-[266px] lg:top-[19px] lg:flex">
-                    <i class="ph-bold ph-arrow-left text-2xl rtl:-scale-x-100" aria-hidden="true"></i>
+                    <AppIcon glyph=Glyph::Back class="text-2xl rtl:-scale-x-100" />
                 </a>
                 <h1 class="mb-2 hidden text-heading-xl font-bold leading-[41px] text-ink/80 lg:block">{t("set-title-delete")}</h1>
                 <p class="mb-8 text-title-sm leading-[27px] text-ink/80">{crate::i18n::t_args("set-del-intro", &[("brand", brand.into())])}</p>

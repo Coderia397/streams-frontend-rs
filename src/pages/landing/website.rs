@@ -3,6 +3,7 @@ use leptos::prelude::*;
 use leptos_router::hooks::use_navigate;
 use super::wall;
 use super::art::{FeatureIcon, RankNumber};
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 // ── Size constants ────────────────────────────────────────────────────────────
 
@@ -252,7 +253,7 @@ pub fn WebsiteLanding() -> impl IntoView {
                         <details class="group bg-faq-item">
                             <summary class="flex min-h-[84px] cursor-pointer list-none items-center justify-between gap-4 p-6 text-title-sm hover:bg-faq-item-hover md:text-heading">
                                 <span>{crate::pages::help::art(slug, "title")}</span>
-                                <i class="ph ph-plus text-heading transition-transform duration-(--motion-base) group-open:rotate-45" aria-hidden="true"></i>
+                                <AppIcon glyph=Glyph::Plus class="text-heading transition-transform duration-(--motion-base) group-open:rotate-45" />
                             </summary>
                             <div class="border-t border-void p-6 text-title-sm leading-7 text-ink-soft md:text-heading md:leading-normal">
                                 <p>{crate::pages::help::art(slug, "summary")}</p>

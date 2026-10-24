@@ -1741,7 +1741,7 @@ legal-credits-1-b2 = Rasmus Andersson का <strong>Inter</strong>, SIL Open Fo
 legal-credits-1-b3 = Google Fonts से <strong>Abril Fatface, Caveat Brush, DM Serif Display, Fredoka, Gochi Hand, Kalam, Londrina Solid, Playfair Display और Sedgwick Ave</strong>, SIL Open Font License 1.1 के तहत इस्तेमाल।
 legal-credits-1-b4 = Google Fonts से <strong>Permanent Marker</strong> और <strong>Rock Salt</strong>, Apache License 2.0 के तहत इस्तेमाल।
 legal-credits-2-title = 2. आइकन
-legal-credits-2-body = इंटरफ़ेस के आइकन Phosphor Icons से हैं, MIT License के तहत इस्तेमाल।
+legal-credits-2-body = इंटरफ़ेस के आइकन Phosphor Icons, Tabler Icons और Hugeicons से हैं, MIT License के तहत इस्तेमाल, और Remix Icon और IBM Carbon से, Apache License 2.0 के तहत इस्तेमाल।
 legal-credits-3-title = 3. फ़िल्म और सीरीज़ की जानकारी
 legal-credits-3-body = यह प्रोडक्ट TMDB API का इस्तेमाल करता है, लेकिन TMDB द्वारा समर्थित या प्रमाणित नहीं है। टाइटल, सारांश, पोस्टर, रेटिंग और कलाकारों की जानकारी <a href="https://www.themoviedb.org" target="_blank" rel="noopener">The Movie Database</a> से आती है।
 legal-credits-4-title = 4. सॉफ़्टवेयर

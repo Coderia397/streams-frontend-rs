@@ -2,6 +2,7 @@ use leptos::prelude::*;
 use leptos::html::Div;
 use std::collections::HashSet;
 use crate::store::use_ui_store;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 #[derive(Clone, Debug, PartialEq)]
 pub struct AppNotification {
@@ -135,7 +136,7 @@ pub fn NotificationsDropdown() -> impl IntoView {
                 title=crate::i18n::t("notifications-dropdown-notifications")
                 aria-label=crate::i18n::t("notifications-dropdown-notifications")
             >
-                <i class="ph ph-bell text-heading"></i>
+                <AppIcon glyph=Glyph::Bell class="text-heading" />
                 <Show when=has_unread>
                     <span class="absolute top-[2px] right-[2px] min-w-[16px] h-[16px] px-1 rounded-full bg-brand text-ink text-micro font-medium flex items-center justify-center leading-none">
                         {move || {

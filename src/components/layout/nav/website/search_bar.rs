@@ -1,6 +1,7 @@
 use leptos::prelude::*;
 use leptos::html::{Div, Input};
 use leptos_router::hooks::{use_navigate, use_query_map};
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 #[component]
 pub fn SearchBar(
@@ -140,10 +141,11 @@ pub fn SearchBar(
                     class="focus:outline-none flex items-center justify-center z-10 shrink-0 w-6 h-6"
                     aria-label=crate::i18n::t("search-bar-search")
                 >
-                    <i class="ph ph-magnifying-glass text-heading cursor-pointer select-none transition-colors duration-(--motion-slow)"
+                    <span class="flex cursor-pointer select-none transition-colors duration-(--motion-slow)"
                        class=("text-ink", effective_active)
                        class=("hover:text-ink-light", move || !effective_active())>
-                    </i>
+                        <AppIcon glyph=Glyph::Search class="text-heading" />
+                    </span>
                 </button>
 
                 <input

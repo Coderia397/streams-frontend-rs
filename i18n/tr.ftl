@@ -1737,7 +1737,7 @@ legal-credits-1-b2 = <strong>Inter</strong> Rasmus Andersson tarafından gelişt
 legal-credits-1-b3 = Google Fonts'tan <strong>Abril Fatface, Caveat Brush, DM Serif Display, Fredoka, Gochi Hand, Kalam, Londrina Solid, Playfair Display ve Sedgwick Ave</strong>, SIL Open Font License 1.1 kapsamında kullanılır.
 legal-credits-1-b4 = Google Fonts'tan <strong>Permanent Marker</strong> ve <strong>Rock Salt</strong>, Apache License 2.0 kapsamında kullanılır.
 legal-credits-2-title = 2. Simgeler
-legal-credits-2-body = Arayüz simgeleri Phosphor Icons'tan alınmıştır ve MIT Lisansı altında kullanılmıştır.
+legal-credits-2-body = Arayüz simgeleri Phosphor Icons, Tabler Icons ve Hugeicons'tan MIT Lisansı altında, Remix Icon ve IBM Carbon'dan Apache Lisansı 2.0 altında kullanılmıştır.
 legal-credits-3-title = 3. Film ve diziler bilgisi
 legal-credits-3-body = Bu ürün TMDB API'sini kullanır ancak TMDB tarafından onaylanmamış veya sertifikalandırılmamıştır. Başlıklar, özeti, afişler, puanlar ve oyuncu bilgileri <a href="https://www.themoviedb.org" target="_blank" rel="noopener">The Movie Database</a> adresinden alınmıştır.
 legal-credits-4-title = 4. Yazılım

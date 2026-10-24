@@ -5,6 +5,7 @@ use super::icon_row::{IconChoice, IconRow};
 use crate::data::avatars::AVATAR_CATEGORIES;
 use crate::i18n::t;
 use leptos::prelude::*;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 #[component]
 pub fn IconPicker(
@@ -22,7 +23,7 @@ pub fn IconPicker(
         <div class="text-ink">
             <div class="px-[var(--app-x)] pt-[26px]">
                 <button type="button" on:click=move |_| on_back.run(()) aria-label=t("choose-icon-back") class="-ms-2 btn-circle btn-circle-clear btn-circle-md">
-                    <i class="ph ph-arrow-left text-heading-lg rtl:-scale-x-100" aria-hidden="true"></i>
+                    <AppIcon glyph=Glyph::Back class="text-heading-lg rtl:-scale-x-100" />
                 </button>
                 <h1 class="mt-[30px] text-icon font-bold leading-[46px]">{t("profile-choose-icon")}</h1>
                 <p class="mt-1 flex items-center gap-3 text-title-md text-ink/80">

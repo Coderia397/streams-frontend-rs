@@ -2,6 +2,7 @@ use leptos::prelude::*;
 use crate::store::{use_library_store, use_ui_store, LibraryEntry};
 use crate::services::tmdb::MediaItem;
 use crate::components::media::movie_card_badges::RatingBadge;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 #[component]
 pub fn SpotlightCard(
@@ -171,7 +172,7 @@ pub fn SpotlightCard(
                                         }.into_any()
                                     } else {
                                         view! {
-                                            <i class="ph-bold ph-plus text-xl text-chrome"></i>
+                                            <AppIcon glyph=Glyph::Plus class="text-xl text-chrome" />
                                             <span>{crate::i18n::t("media-add-to-list")}</span>
                                         }.into_any()
                                     }}
@@ -184,7 +185,7 @@ pub fn SpotlightCard(
                                         on:click=on_play_click
                                         class="flex items-center justify-center h-[54px] px-5 rounded-button bg-ink-soft text-chrome text-title-sm font-semibold gap-2 transition-all active:scale-95"
                                     >
-                                        <i class="ph-fill ph-play text-xl text-chrome"></i>
+                                        <AppIcon glyph=Glyph::Play class="text-xl text-chrome" />
                                         <span>{move || {
                                             let watch_store = crate::store::use_watch_store();
                                             if let Some(rec) = watch_store.get_record(movie_id, is_tv) {
@@ -206,7 +207,7 @@ pub fn SpotlightCard(
                                             }.into_any()
                                         } else {
                                             view! {
-                                                <i class="ph-bold ph-plus text-xl text-ink"></i>
+                                                <AppIcon glyph=Glyph::Plus class="text-xl text-ink" />
                                                 <span>{crate::i18n::t("my-list")}</span>
                                             }.into_any()
                                         }}

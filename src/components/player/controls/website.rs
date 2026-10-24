@@ -1,6 +1,7 @@
 //! The website's player controls (Netflix's website player), chosen by controls/mod.rs for tablets and computers.
 use leptos::prelude::*;
 use crate::components::player::timeline_scrubber::TimelineScrubber;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// The website's controls (Netflix's website player): the back and report buttons at the top, the timeline and one row of buttons at
 /// the bottom, hidden while the pointer rests.
@@ -13,9 +14,8 @@ pub fn WebsiteControls(state: super::ControlsState) -> impl IntoView {
     } = state;
     let title = title.get_value();
     // 36 px icons inside 44 px buttons, as in the app
-    let play_icon_class = move || if is_playing.get() { "ph-fill ph-pause text-icon" } else { "ph-fill ph-play text-icon" };
-    let speaker_icon_class = move || {
-        if is_muted.get() || volume.get() <= 0.0 { "ph ph-speaker-x text-icon" } else if volume.get() > 0.5 { "ph ph-speaker-high text-icon" } else { "ph ph-speaker-low text-icon" }
+    let speaker_glyph = move || {
+        if is_muted.get() || volume.get() <= 0.0 { Glyph::Muted } else if volume.get() > 0.5 { Glyph::Speaker } else { Glyph::SpeakerLow }
     };
     let overlay_class = move || {
         format!(
@@ -31,10 +31,10 @@ pub fn WebsiteControls(state: super::ControlsState) -> impl IntoView {
             // the top shade and the back and report buttons (30 px from the corner)
             <div class="pointer-events-none absolute inset-x-0 top-0 h-[85%]" style="background: linear-gradient(rgba(0,0,0,0.3) 0, rgba(0,0,0,0) 20%);" />
             <button on:click=move |_| on_back.run(()) class=format!("{} absolute left-[30px] top-[30px] z-10", btn.replace(" relative", "")) title=crate::i18n::t("controls-overlay-back-to-browse") aria-label=crate::i18n::t("controls-overlay-back-to-browse")>
-                <i class="ph ph-arrow-left text-icon"></i>
+                <AppIcon glyph=Glyph::Back class="text-icon" />
             </button>
             <a href="/help/contact" class=format!("{} absolute right-[30px] top-[30px] z-10", btn.replace(" relative", "")) title=crate::i18n::t("controls-overlay-report-problem") aria-label=crate::i18n::t("controls-overlay-report-problem")>
-                <i class="ph ph-flag text-icon-md"></i>
+                <AppIcon glyph=Glyph::Report class="text-icon-md" />
             </a>
 
             // the buffering ring in the middle
@@ -57,20 +57,18 @@ pub fn WebsiteControls(state: super::ControlsState) -> impl IntoView {
                     // left: play or pause, back 10, forward 10, volume
                     <div class="flex items-center gap-3 md:gap-[38px]">
                         <button on:click=move |_| on_toggle_play.run(()) class=btn title=move || if is_playing.get() { crate::i18n::t("player-pause") } else { crate::i18n::t("player-play") }>
-                            <i class=play_icon_class></i>
+                            {move || if is_playing.get() { view! { <i class="ph-fill ph-pause text-icon"></i> }.into_any() } else { view! { <AppIcon glyph=Glyph::Play class="text-icon" /> }.into_any() }}
                         </button>
                         <button on:click=move |_| on_skip_by.run(-10.0) class=btn title=crate::i18n::t("controls-overlay-rewind-10-seconds-left-arrow")>
-                            <i class="ph ph-arrow-counter-clockwise text-icon"></i>
-                            <span class="pointer-events-none absolute pt-[2px] text-caption font-black">"10"</span>
+                            <AppIcon glyph=Glyph::Back10 class="text-icon" />
                         </button>
                         <button on:click=move |_| on_skip_by.run(10.0) class=btn title=crate::i18n::t("controls-overlay-forward-10-seconds-right-arrow")>
-                            <i class="ph ph-arrow-clockwise text-icon"></i>
-                            <span class="pointer-events-none absolute pt-[2px] text-caption font-black">"10"</span>
+                            <AppIcon glyph=Glyph::Forward10 class="text-icon" />
                         </button>
                         // the volume slider rises above the speaker while the pointer rests on it (a dark 34 x 185 box, accent bar, round knob)
                         <div class="group/vol relative flex items-center">
                             <button on:click=move |_| on_toggle_mute.run(()) class=btn title=move || if is_muted.get() { crate::i18n::t("player-unmute") } else { crate::i18n::t("player-mute") }>
-                                <i class=speaker_icon_class></i>
+                                {move || view! { <AppIcon glyph=speaker_glyph() class="text-icon" /> }}
                             </button>
                             <div class="absolute bottom-[44px] left-1/2 hidden h-[185px] w-[34px] -translate-x-1/2 items-center justify-center rounded-control bg-field group-hover/vol:flex group-focus-within/vol:flex">
                                 <input
@@ -96,7 +94,7 @@ pub fn WebsiteControls(state: super::ControlsState) -> impl IntoView {
                         <Show when=move || is_tv && on_next_episode.is_some()>
                             <div class="group/next relative">
                                 <button on:click=move |_| { if let Some(cb) = on_next_episode { cb.run(()); } } class=btn title=crate::i18n::t("controls-overlay-next-episode")>
-                                    <i class="ph ph-skip-forward text-icon"></i>
+                                    <AppIcon glyph=Glyph::Next class="text-icon" />
                                 </button>
                                 // the card: "Next episode", the still, number and name, four lines of the summary
                                 {move || next_info.get().map(|(n, name, overview, still)| view! {
@@ -105,7 +103,7 @@ pub fn WebsiteControls(state: super::ControlsState) -> impl IntoView {
                                         <span class="flex gap-[26px] px-[35px] py-[24px]">
                                             <span class="relative h-[140px] w-[248px] shrink-0 overflow-hidden bg-player-panel">
                                                 {still.map(|u| view! { <img src=u alt="" class="h-full w-full object-cover" /> })}
-                                                <span class="absolute inset-0 flex items-center justify-center"><i class="ph-fill ph-play text-display text-ink"></i></span>
+                                                <span class="absolute inset-0 flex items-center justify-center"><AppIcon glyph=Glyph::Play class="text-display text-ink" /></span>
                                             </span>
                                             <span class="min-w-0 flex-1 text-ink">
                                                 <span class="block truncate text-row font-medium">{format!("{}   {}", n, name)}</span>
@@ -122,10 +120,10 @@ pub fn WebsiteControls(state: super::ControlsState) -> impl IntoView {
                             </button>
                         </Show>
                         <button on:click=move |_| on_toggle_subtitles.run(()) class=btn title=crate::i18n::t("controls-overlay-audio-subtitles")>
-                            <i class="ph ph-subtitles text-icon"></i>
+                            <AppIcon glyph=Glyph::Subtitles class="text-icon" />
                         </button>
                         <button on:click=move |_| on_toggle_fullscreen.run(()) class=btn title=crate::i18n::t("controls-overlay-fullscreen-f")>
-                            <i class="ph ph-corners-out text-icon"></i>
+                            <AppIcon glyph=Glyph::FullScreen class="text-icon" />
                         </button>
                     </div>
                 </div>

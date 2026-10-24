@@ -1731,7 +1731,7 @@ legal-credits-1-b2 = <strong>Inter</strong>（Rasmus Andersson作）。SIL Open 
 legal-credits-1-b3 = Google Fontsの<strong>Abril Fatface、Caveat Brush、DM Serif Display、Fredoka、Gochi Hand、Kalam、Londrina Solid、Playfair Display、Sedgwick Ave</strong>。SIL Open Font License 1.1 のもとで使っています。
 legal-credits-1-b4 = Google Fontsの<strong>Permanent Marker</strong>と<strong>Rock Salt</strong>。Apache License 2.0 のもとで使っています。
 legal-credits-2-title = 2. アイコン
-legal-credits-2-body = インターフェースのアイコンはPhosphor Iconsのもので、MITライセンスのもとで使っています。
+legal-credits-2-body = インターフェースのアイコンは、Phosphor Icons、Tabler Icons、HugeiconsのものをMITライセンスのもとで、Remix IconとIBM CarbonのものをApacheライセンス2.0のもとで使っています。
 legal-credits-3-title = 3. 映画・シリーズの情報
 legal-credits-3-body = この製品はTMDB APIを使用していますが、TMDBによる推奨や認定を受けたものではありません。作品名、あらすじ、ポスター、評価、キャスト情報は<a href="https://www.themoviedb.org" target="_blank" rel="noopener">The Movie Database</a>から取得しています。
 legal-credits-4-title = 4. ソフトウェア

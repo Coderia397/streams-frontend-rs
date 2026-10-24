@@ -4,6 +4,7 @@ use leptos::prelude::*;
 use crate::models::profile::Profile;
 use crate::services::ai_engine::fetch_hero_feed;
 use crate::services::tmdb::{fetch_movie_logo, MediaItem};
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// How long each title stays, in milliseconds.
 const ROTATE_MS: u64 = 5200;
@@ -103,7 +104,7 @@ pub fn PhoneProfilePicker(
                     }).collect::<Vec<_>>()}
                     {move || (profiles.get().len() < 5).then(|| view! {
                         <button type="button" on:click=move |_| on_add.run(()) class="flex w-[100px] cursor-pointer flex-col items-center gap-[13px] focus:outline-none active:scale-95 transition-transform">
-                            <span class="flex h-[72px] w-[72px] items-center justify-center rounded-[8px] bg-ink/15"><i class="ph ph-plus text-heading text-ink"></i></span>
+                            <span class="flex h-[72px] w-[72px] items-center justify-center rounded-[8px] bg-ink/15"><AppIcon glyph=Glyph::Plus class="text-heading text-ink" /></span>
                             <span class="text-body-lg font-normal leading-tight text-ink">{crate::i18n::t("whos-watching-add-profile")}</span>
                         </button>
                     })}

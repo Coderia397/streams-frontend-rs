@@ -13,6 +13,7 @@ pub use signup::SignupPage;
 use crate::pages::help::tr;
 use leptos::prelude::*;
 use wasm_bindgen::JsCast;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum Look {
@@ -37,7 +38,7 @@ pub fn AuthShell(children: Children, #[prop(default = Look::Dark)] look: Look, #
             <header class=header>
                 <div class="mx-auto flex h-16 max-w-[1280px] sm:h-[90px] items-center justify-between px-6 md:px-12">
                     <div class="flex items-center gap-2">
-                        {back.then(|| view! { <a href="/" aria-label=move || tr("auth-back") class="-ms-2 flex h-10 w-10 items-center justify-center text-title sm:hidden"><i class="ph-bold ph-arrow-left rtl:-scale-x-100"></i></a> })}
+                        {back.then(|| view! { <a href="/" aria-label=move || tr("auth-back") class="-ms-2 flex h-10 w-10 items-center justify-center text-title sm:hidden"><AppIcon glyph=Glyph::Back class="rtl:-scale-x-100" /></a> })}
                         <a href="/" aria-label=crate::brand::NAME><img src=logo alt=crate::brand::NAME class="h-6 w-auto sm:h-8 md:h-10" /></a>
                     </div>
                     {right.map(|(href, key)| view! { <a href=href class=format!("text-body-sm font-bold hover:underline {right_link}")>{tr(key)}</a> })}

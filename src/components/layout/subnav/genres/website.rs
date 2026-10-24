@@ -3,6 +3,7 @@ use leptos::prelude::*;
 use leptos::html::Div;
 use super::SubNavGenre;
 use leptos_router::hooks::use_query_map;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// The website's genre header: the page's title (or the strip and the genre picked), the Genres pill and its menu.
 #[component]
@@ -134,7 +135,7 @@ pub fn CategorySubNavDesktop(
                                                         aria-selected="false"
                                                         class="mb-2 flex w-full items-center gap-2 px-3 py-1.5 rounded-menu-item text-left text-body-sm md:text-body font-medium text-ink/80 hover:bg-ink/15 hover:text-ink whitespace-nowrap cursor-pointer"
                                                     >
-                                                        <i class="ph-bold ph-arrow-left shrink-0 rtl:-scale-x-100" aria-hidden="true"></i>
+                                                        <AppIcon glyph=Glyph::Back class="shrink-0 rtl:-scale-x-100" />
                                                         {all_label.clone()}
                                                     </button>
                                                 })

@@ -11,6 +11,7 @@ use crate::components::media::movie_card_badges::RatingBadge;
 use crate::components::media::movie_card_rating::{MovieRating, RatingIcon};
 use crate::components::trailer_player::TrailerPlayer;
 use crate::components::skeleton::Bone;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 #[derive(Clone, Copy, PartialEq)]
 enum Tab {
@@ -144,7 +145,7 @@ pub fn PhoneTitle() -> impl IntoView {
                             class="ms-2.5 flex h-11 w-11 items-center justify-center text-ink active:scale-95 transition-transform cursor-pointer"
                             aria-label=crate::i18n::t("navbar-mobile-back")
                         >
-                            <i class="ph-bold ph-arrow-left text-heading"></i>
+                            <AppIcon glyph=Glyph::Back class="text-heading" />
                         </button>
                     </div>
                 </div>
@@ -288,7 +289,7 @@ fn TitleBody(details: DetailedMediaItem, season: RwSignal<u32>, tab: RwSignal<Ta
             </div>
 
             <a href=watch_url class="btn-pill btn-ink mt-2.5 h-12 w-full text-body-lg">
-                <i class="ph-fill ph-play text-2xl"></i>
+                <AppIcon glyph=Glyph::Play class="text-2xl" />
                 <span>{if started { crate::i18n::t("media-resume") } else { crate::i18n::t("media-play") }}</span>
             </a>
 
@@ -318,7 +319,7 @@ fn TitleBody(details: DetailedMediaItem, season: RwSignal<u32>, tab: RwSignal<Ta
             // My List, Rate and Share: an icon over its label, 96 px wide and 8 px apart from 14 px in, as in the app
             <div class="mt-4 flex items-start gap-2 ps-1">
                 <button type="button" on:click=toggle_list class="flex w-24 flex-col items-center gap-2.5 py-2 text-ink cursor-pointer active:scale-95 transition-transform">
-                    <i class=move || if in_list.get() { "ph-bold ph-check text-title-md" } else { "ph-bold ph-plus text-title-md" }></i>
+                    {move || view! { <AppIcon glyph=if in_list.get() { Glyph::Check } else { Glyph::Plus } class="text-title-md" /> }}
                     <span class="text-label text-ink-body">{crate::i18n::t("my-list")}</span>
                 </button>
                 <div class="relative">
@@ -343,7 +344,7 @@ fn TitleBody(details: DetailedMediaItem, season: RwSignal<u32>, tab: RwSignal<Ta
                     </Show>
                 </div>
                 <button type="button" on:click=move |_| share.open(share_item.clone()) class="flex w-24 flex-col items-center gap-2.5 py-2 text-ink cursor-pointer active:scale-95 transition-transform">
-                    <i class="ph-bold ph-share-network text-title-md"></i>
+                    <AppIcon glyph=Glyph::Share class="text-title-md" />
                     <span class="text-label text-ink-body">{crate::i18n::t("share-button")}</span>
                 </button>
             </div>
@@ -409,7 +410,7 @@ fn Episodes(series_id: u32, seasons: u32, season: RwSignal<u32>) -> impl IntoVie
                                     <div class="relative aspect-[130/80] w-[130px] shrink-0 overflow-hidden rounded-tile bg-raised">
                                         {still.map(|s| view! { <img src=s alt="" loading="lazy" class="h-full w-full object-cover" /> })}
                                         <span class="absolute inset-0 flex items-center justify-center">
-                                            <span class="flex h-9 w-9 items-center justify-center rounded-full border border-ink/80 bg-void/40"><i class="ph-fill ph-play text-base text-ink"></i></span>
+                                            <span class="flex h-9 w-9 items-center justify-center rounded-full border border-ink/80 bg-void/40"><AppIcon glyph=Glyph::Play class="text-base text-ink" /></span>
                                         </span>
                                     </div>
                                     <div class="min-w-0 flex-1">

@@ -9,6 +9,7 @@ use wasm_bindgen::prelude::*;
 use crate::services::tmdb::{fetch_videos, select_best_tmdb_trailer, MediaItem};
 use crate::store::{use_library_store, use_ui_store, LibraryEntry};
 use crate::components::trailer_player::TrailerPlayer;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// How long the synopsis shows in full when a clip comes into view, before it shortens to one line.
 const SYNOPSIS_MS: u64 = 5_000;
@@ -164,13 +165,13 @@ fn Clip(item: MediaItem, index: usize, current: RwSignal<usize>) -> impl IntoVie
             <div class="absolute end-2 bottom-[calc(132px+env(safe-area-inset-bottom))] flex flex-col items-center gap-4">
                 <button type="button" on:click=move |_| ui_store.set_preview_muted(!ui_store.preview_muted.get_untracked()) class="btn-circle btn-circle-md bg-void/40"
                     aria-label=move || if ui_store.preview_muted.get() { crate::i18n::t("media-unmute") } else { crate::i18n::t("media-mute") }>
-                    <i class=move || if ui_store.preview_muted.get() { "ph-fill ph-speaker-slash text-xl" } else { "ph-fill ph-speaker-high text-xl" }></i>
+                    {move || view! { <AppIcon glyph=if ui_store.preview_muted.get() { Glyph::Muted } else { Glyph::Speaker } class="text-xl" /> }}
                 </button>
                 <button type="button" on:click=toggle_list class="btn-circle btn-circle-md bg-void/40" aria-label=crate::i18n::t("action-buttons-add-to-my-list")>
-                    <i class=move || if in_list.get() { "ph-bold ph-check text-xl" } else { "ph-bold ph-plus text-xl" }></i>
+                    {move || view! { <AppIcon glyph=if in_list.get() { Glyph::Check } else { Glyph::Plus } class="text-xl" /> }}
                 </button>
                 <button type="button" on:click=move |_| share.open(share_item.clone()) class="btn-circle btn-circle-md bg-void/40" aria-label=crate::i18n::t("share-button")>
-                    <i class="ph-bold ph-share-network text-xl"></i>
+                    <AppIcon glyph=Glyph::Share class="text-xl" />
                 </button>
                 <button type="button" on:click=open_title class="h-16 w-16 overflow-hidden rounded-full border-2 border-ink/80 bg-raised cursor-pointer" aria-label=title.clone()>
                     <img src=poster alt="" class="h-full w-full object-cover" />

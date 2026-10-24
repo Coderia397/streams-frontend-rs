@@ -1,5 +1,6 @@
 use leptos::prelude::*;
 use crate::components::hls_adapter::HlsPlayer;
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 #[component]
 pub fn VideoPlayer(
@@ -165,11 +166,11 @@ pub fn VideoPlayer(
             >
                 <div class="flex justify-between items-start pointer-events-auto">
                     <button on:click=close_player class="text-ink text-3xl hover:scale-110 transition-transform drop-shadow-md">
-                        <i class="ph-bold ph-arrow-left"></i>
+                        <AppIcon glyph=Glyph::Back />
                     </button>
                     <div class="text-ink text-xl font-bold drop-shadow-md">{title}</div>
                     <button class="text-ink text-3xl hover:scale-110 transition-transform drop-shadow-md">
-                        <i class="ph-bold ph-flag"></i>
+                        <AppIcon glyph=Glyph::Report />
                     </button>
                 </div>
                 
@@ -192,7 +193,7 @@ pub fn VideoPlayer(
                     <div class="flex justify-between items-center text-ink">
                         <div class="flex items-center gap-8">
                             <button on:click=move |_| do_toggle_play() class="text-display hover:scale-110 transition-transform">
-                                {move || if is_playing.get() { view!{<i class="ph-fill ph-pause"></i>} } else { view!{<i class="ph-fill ph-play"></i>} }}
+                                {move || if is_playing.get() { view!{<i class="ph-fill ph-pause"></i>}.into_any() } else { view!{<AppIcon glyph=Glyph::Play />}.into_any() }}
                             </button>
                             <button on:click=move |_| do_skip_backward() class="text-3xl hover:scale-110 transition-transform" title=crate::i18n::t("video-player-rewind-10s")>
                                 <i class="ph-bold ph-clock-counter-clockwise"></i>
@@ -201,7 +202,7 @@ pub fn VideoPlayer(
                                 <i class="ph-bold ph-clock-clockwise"></i>
                             </button>
                             <button on:click=move |_| do_toggle_mute() class="text-3xl hover:scale-110 transition-transform">
-                                {move || if is_muted.get() { view!{<i class="ph-fill ph-speaker-x"></i>} } else { view!{<i class="ph-fill ph-speaker-high"></i>} }}
+                                {move || if is_muted.get() { view!{<AppIcon glyph=Glyph::Muted />} } else { view!{<AppIcon glyph=Glyph::Speaker />} }}
                             </button>
                         </div>
                         
@@ -215,7 +216,7 @@ pub fn VideoPlayer(
                             </span>
                             <button class="hover:scale-110 transition-transform"><i class="ph-bold ph-closed-captioning"></i></button>
                             <button on:click=move |_| do_toggle_fullscreen() class="hover:scale-110 transition-transform" title=crate::i18n::t("video-player-fullscreen")>
-                                <i class="ph-bold ph-corners-out"></i>
+                                <AppIcon glyph=Glyph::FullScreen />
                             </button>
                         </div>
                     </div>
