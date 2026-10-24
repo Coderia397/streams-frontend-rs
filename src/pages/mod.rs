@@ -14,6 +14,5 @@ pub mod settings;
 pub mod auth;
 pub mod landing;
 pub mod help;
-pub mod not_found;
 pub mod games;
 pub mod title;

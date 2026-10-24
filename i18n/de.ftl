@@ -66,11 +66,6 @@ new-popular-the-films-everyone-is-discussing = Die Filme, über die alle spreche
 new-popular-top-10-films-in-the = Top 10 Filme im UK heute
 new-popular-top-10-series-in-the = Top 10 Serien im UK heute
 new-popular-worth-the-wait = Das Warten lohnt sich
-not-found-alternate-dimensions = Alternative Dimensionen
-not-found-alternate-dimensions-more-like-this = Alternative Dimensionen: Ähnliche Titel
-not-found-cinematic-background = Kino-Hintergrund
-not-found-diagnostic-report = Diagnosebericht
-not-found-the-targeted-router-endpoint-has = Der angeforderte Router-Endpunkt wurde entfernt oder konnte nicht aus unserem CDN-Bereich geladen werden. Bitte kehre zur sicheren Startseite zurück, um die Wiedergabe fortzusetzen.
 notifications-dropdown-notifications = Benachrichtigungen
 notifications-dropdown-youre-all-caught-up-new = Du bist auf dem neuesten Stand – neue Titel erscheinen hier.
 pin-prompt-profile-lock-is-currently-on = Profil-Sperre ist aktiviert.
@@ -600,18 +595,6 @@ help-art-delete-account-body =
     Wenn Sie nur eine Person entfernen möchten, löschen Sie stattdessen ihr Profil. Siehe <a=/help/article/profiles-manage>Profile erstellen, bearbeiten oder löschen</a>.
 
     !! Hinweis: Wenn Sie eine Kopie Ihrer Daten behalten möchten, laden Sie sie vorher herunter. Siehe <a=/help/article/download-data>Eine Kopie Ihrer Daten herunterladen</a>.
-
-help-art-page-not-found-title = Ich sehe eine "404"-Seite
-help-art-page-not-found-summary = Der Link ist falsch oder die Seite wurde verschoben.
-help-art-page-not-found-keywords = 404 nicht gefunden Seite fehlt defekter Link Fehler leer
-help-art-page-not-found-body =
-    Eine 404-Seite bedeutet, dass die Adresse auf { $brand } nirgendwohin führt. Prüfen Sie die Adresse auf Tippfehler oder nutzen Sie das Menü und die Suche, um das Gesuchte zu finden.
-
-    - Verwenden Sie <b>Startseite</b> in der oberen Leiste, um zum Anfang zurückzukehren.
-    - Verwenden Sie die Suche im <a=/help>Hilfe-Center</a>, um einen Artikel zu finden.
-    - Wenn Sie über einen Link auf { $brand } hierher gelangt sind, <a=/help/article/report-bug>Problem melden</a>, wo Sie ihn gefunden haben.
-
-    @@ refresh
 
 help-art-language-title = So ändern Sie die Sprache
 help-art-language-summary = Ändern Sie die Sprache von { $brand } und die Sprachen, in denen Sie schauen.
@@ -1260,33 +1243,6 @@ profile-enter-pin = Geben Sie Ihre PIN ein, um auf das Profil von { $name } zuzu
 profile-edit-title = Profil bearbeiten
 profile-edit-hint = Aktualisieren Sie den Namen, das Symbol und das Schloss dieses Profils.
 profile-add-hint = Fügen Sie ein Profil für eine weitere Person hinzu, die { $brand } nutzt.
-nf-original = EIN 404-FEHLER ORIGINAL
-nf-unknown-agent = Unbekannter Agent
-nf-system-code = Systemcode
-nf-endpoint = Angefragter Endpunkt
-nf-timestamp = Zeitstempel des Vorfalls
-nf-agent = Plattform-Agent
-nf-return-home = Zur Startseite zurückkehren
-nf-more-info = Weitere Informationen
-nf-system-notice = Systemhinweis:
-nf-dim1-title = 404: Das Silizium-Vakuum
-nf-dim2-title = 404: Offline-Signal
-nf-dim3-title = 404: Zersplitterte Hinweise
-nf-dim4-title = 404: Verlorene Filmrollen
-nf-dim5-title = 404: Der Beobachter
-nf-dim6-title = 404: Kosmische Drift
-nf-dim1-synopsis = Tief im Inneren des Mainboards fällt ein leuchtender roter Pixelwürfel in einen dunklen Wirbel, beobachtet von einem silhouettenhaften karmesinroten Auge, das aus den Schatten eines zerrissenen Leinwandschirms späht.
-nf-dim2-synopsis = Reihe um Reihe leerer Samt-Kinositze. Auf der Bühne flackert ein kaputtes Retro-CRT-Fernseher mit Farbtestbildern und Signalrauschen unter einem glitchigen Himmel.
-nf-dim3-synopsis = Ein einsamer Detektiv im Trenchcoat durchsucht einen dunklen Raum und sucht nach einem fehlenden Web-Asset, das in tausend Glasscherben zerbrochen ist. Jede Spur ist ein kaputter Redirect.
-nf-dim4-synopsis = Ein riesiges, atmendes Raster aus vergessenen Filmrollen pulsiert in hochkontrastigem Rot. Während man das Archiv durchsucht, reißt der Zelluloidstreifen, und man bleibt im kinematografischen Dunkel zurück.
-nf-dim5-synopsis = Ein leuchtender digitaler Projektorstrahl durchschneidet ein wirbelndes Schwarzes Loch und scheint durch eine zersplitterte Linse, die wie ein aufragender mechanischer Wächter zurückstarrt.
-nf-dim6-synopsis = Getrieben in einer kosmischen Wolke, schweben uralte Weltraumkabel durch eine Sternennebel und versuchen, Pakete durch einen Riss im Raumzeitgewebe zu routen. Verbindungstimeout.
-nf-zone-1 = Hardware-Glitches
-nf-zone-2 = Signalstörungen
-nf-zone-3 = Verlorene Datendateien
-nf-zone-4 = Analoge Korruption
-nf-zone-5 = Wächter des Leeren
-nf-zone-6 = Kosmische Drift
 legal-privacy-title = Datenschutzerklärung
 legal-privacy-updated = Zuletzt aktualisiert: Oktober 2026
 legal-privacy-1-title = 1. Einleitung

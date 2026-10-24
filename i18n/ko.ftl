@@ -66,11 +66,6 @@ new-popular-the-films-everyone-is-discussing = 모두가 논의하는 영화
 new-popular-top-10-films-in-the = 영국에서 오늘 가장 인기 있는 영화 상위 10개
 new-popular-top-10-series-in-the = 영국에서 오늘 가장 인기 있는 시리즈 상위 10개
 new-popular-worth-the-wait = 기다릴만한 가치가 있는 신작
-not-found-alternate-dimensions = 대체 차원
-not-found-alternate-dimensions-more-like-this = 대체 차원: 비슷한 것들
-not-found-cinematic-background = 영화적 배경
-not-found-diagnostic-report = 진단 보고서
-not-found-the-targeted-router-endpoint-has = 목표한 라우터 엔드포인트가 CDN 공간에서 해제되거나 로드 실패했습니다. 재생을 계속하려면 안전한 홈 스트리밍 환경으로 돌아가 주세요.
 notifications-dropdown-notifications = 알림
 notifications-dropdown-youre-all-caught-up-new = 모두 시청 완료 — 새롭게 도착한 콘텐츠는 여기에 표시됩니다.
 pin-prompt-profile-lock-is-currently-on = 프로필 잠금 기능이 현재 활성화되어 있습니다.
@@ -603,18 +598,6 @@ help-art-delete-account-body =
     한 사람만 지우고 싶다면 대신 그 사람의 프로필을 삭제하세요. <a=/help/article/profiles-manage>프로필을 만들고, 편집하고, 삭제하는 방법</a>에서 확인하세요.
 
     !! 참고: 데이터 사본을 남기려면 먼저 다운로드하세요. <a=/help/article/download-data>내 데이터 사본 다운로드하기</a>에서 확인하세요.
-
-help-art-page-not-found-title = '404' 페이지가 보여요
-help-art-page-not-found-summary = 링크가 잘못되었거나 페이지가 이동했어요.
-help-art-page-not-found-keywords = 404 찾을 수 없음 페이지 없음 깨진 링크 오류
-help-art-page-not-found-body =
-    404 페이지는 그 주소가 { $brand } 어디로도 연결되지 않는다는 뜻이에요. 주소에 오타가 없는지 확인하거나 메뉴와 검색으로 원하는 것을 찾아보세요.
-
-    - 위쪽 바의 <b>홈</b>을 선택하면 처음 화면으로 돌아가요.
-    - <a=/help>도움말 센터</a> 검색으로 도움말을 찾아보세요.
-    - { $brand } 안의 링크를 눌러 여기로 왔다면 그 링크가 어디에 있었는지 <a=/help/article/report-bug>알려 주세요</a>.
-
-    @@ refresh
 
 help-art-language-title = 언어를 바꾸는 방법
 help-art-language-summary = { $brand }의 언어와 시청할 때 쓰는 언어를 바꿔요.
@@ -1261,33 +1244,6 @@ profile-enter-pin = PIN을 입력하여 { $name }의 프로필에 접근하세�
 profile-edit-title = 프로필 편집
 profile-edit-hint = 이 프로필의 이름, 아이콘 및 잠금을 업데이트하세요.
 profile-add-hint = { $brand }를 시청하는 다른 사람을 위한 프로필을 추가하세요.
-nf-original = AN ERROR 404 ORIGINAL
-nf-unknown-agent = 알 수 없는 에이전트
-nf-system-code = 시스템 코드
-nf-endpoint = 요청된 엔드포인트
-nf-timestamp = 사고 시간
-nf-agent = 플랫폼 에이전트
-nf-return-home = 홈으로 돌아가기
-nf-more-info = 더 많은 정보
-nf-system-notice = 시스템 알림:
-nf-dim1-title = 404: 실리콘의 공허
-nf-dim2-title = 404: 오프라인 신호
-nf-dim3-title = 404: 파편화된 단서
-nf-dim4-title = 404: 잃어버린 레일
-nf-dim5-title = 404: 관찰자
-nf-dim6-title = 404: 우주적 이동
-nf-dim1-synopsis = 모바일 보드 내부에서 붉은 빛의 퍼즐이 어두운 폭풍우로 떨어지며, 손상된 캔버스의 그림자에서 붉은 눈의 그림자가 지켜보는 것을 볼 수 있습니다.
-nf-dim2-synopsis = 보라색 영화 좌석이 줄을 이어가며 완전히 비어 있습니다. 무대 위에는 고장난 레트로 CRT 텔레비전이 퍼플 바와 신호 정적을 띠며, 오류가 있는 하늘 아래 떠 있습니다.
-nf-dim3-synopsis =  trench coat를 입은 단독 탐정이 어두운 방을 탐색하며, 파편화된 유리 조각으로 이루어진 손실된 웹 자산을 추적합니다. 모든 단서는 파손된 리디렉션입니다.
-nf-dim4-synopsis = 거대한, 숨 쉬는 영화 레일의 격자가 고대 빨간색으로 빛나며, 아카이브를 탐색할 때 셀룰로이드 스트립이 끊어져 영화적 어둠 속으로 빠집니다.
-nf-dim5-synopsis = 빛나는 디지털 프로젝터 빔이 흐르는 블랙홀을 관통하며, 파편화된 렌즈를 통해 높이 솟은 기계적 관찰자가 바라보는 빛을 발합니다.
-nf-dim6-synopsis = 우주적 구름 속에서 고대 우주 케이블이 별자리 성운을 통해 떠다니며, 시간 공간의 틈을 통해 패킷을 전송하려고 시도하지만, 연결 시간 초과입니다.
-nf-zone-1 = 하드웨어 오류
-nf-zone-2 = 신호 실패
-nf-zone-3 = 실화된 데이터 파일
-nf-zone-4 = 아날로그 부패
-nf-zone-5 = 공허 감시자
-nf-zone-6 = 우주적 이동
 legal-privacy-title = 개인정보 처리방침
 legal-privacy-updated = 최종 업데이트: 2026년 10월
 legal-privacy-1-title = 1. 소개

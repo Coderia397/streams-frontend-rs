@@ -135,7 +135,13 @@ fn choose_spotlight(doc: &web_sys::Document, ui_store: crate::store::UIStore) {
         let Some(el) = cards.item(i).and_then(|n| n.dyn_into::<web_sys::HtmlElement>().ok()) else { continue };
         let own = el.query_selector("[data-spot]").ok().flatten().and_then(|f| f.get_attribute("data-spot"));
         let lit = chosen.is_some() && own == chosen;
-        let _ = el.style().set_property("--dim", if lit { "0" } else { "0.55" });
+        // written only when it changes: a write on every card made the next scroll's position reads recalculate the whole layout, on
+        // every scroll event and every 400 ms (reading an element's own inline style does not)
+        let want = if lit { "0" } else { "0.55" };
+        let style = el.style();
+        if style.get_property_value("--dim").ok().as_deref() != Some(want) {
+            let _ = style.set_property("--dim", want);
+        }
     }
 }
 

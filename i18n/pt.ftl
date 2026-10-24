@@ -66,11 +66,6 @@ new-popular-the-films-everyone-is-discussing = Os filmes que todos estão discut
 new-popular-top-10-films-in-the = Top 10 Filmes no Reino Unido Hoje
 new-popular-top-10-series-in-the = Top 10 Séries no Reino Unido Hoje
 new-popular-worth-the-wait = Vale a pena esperar
-not-found-alternate-dimensions = Dimensões alternativas
-not-found-alternate-dimensions-more-like-this = Dimensões alternativas: Mais como este
-not-found-cinematic-background = Cenário cinematográfico
-not-found-diagnostic-report = Relatório diagnóstico
-not-found-the-targeted-router-endpoint-has = O endpoint do roteador alvo foi desreferenciado ou falhou em carregar do nosso espaço CDN. Por favor, redirecione de volta ao nosso ambiente de streaming seguro para retomar a reprodução.
 notifications-dropdown-notifications = Notificações
 notifications-dropdown-youre-all-caught-up-new = Você está tudo atualizado — novas chegadas aparecerão aqui.
 pin-prompt-profile-lock-is-currently-on = Bloqueio de perfil está atualmente ativado.
@@ -601,17 +596,6 @@ help-art-delete-account-body =
 
     !! Observação: Se quiser guardar uma cópia dos seus dados, baixe-a antes. Veja <a=/help/article/download-data>Baixar uma cópia dos seus dados</a>.
 
-help-art-page-not-found-title = Aparece uma página "404"
-help-art-page-not-found-summary = O link está errado ou a página foi movida.
-help-art-page-not-found-keywords = 404 não encontrado página ausente link quebrado erro vazio
-help-art-page-not-found-body =
-    Uma página 404 significa que o endereço não leva a lugar nenhum em { $brand }. Verifique o endereço para erros de digitação ou use o menu e a pesquisa para encontrar o que você procurava.
-
-    - Use <b>Início</b> na barra superior para voltar ao início.
-    - Use a pesquisa do <a=/help>Centro de Ajuda</a> para encontrar um artigo.
-    - Se um link em { $brand } levou você aqui, <a=/help/article/report-bug>informe-nos</a> onde você o encontrou.
-
-    @@ atualizar
 help-art-language-title = Como mudar o idioma
 help-art-language-summary = Mude o idioma do { $brand } e os idiomas em que você assiste.
 help-art-language-keywords = idioma mudar traduzir interface exibição subtítulo áudio inglês espanhol francês árabe
@@ -1265,33 +1249,6 @@ profile-enter-pin = Digite seu PIN para acessar o perfil de { $name }.
 profile-edit-title = Editar perfil
 profile-edit-hint = Atualize o nome, o ícone e o bloqueio deste perfil.
 profile-add-hint = Adicione um perfil para outra pessoa assistindo { $brand }.
-nf-original = UM ERRO 404 ORIGINAL
-nf-unknown-agent = Agente Desconhecido
-nf-system-code = Código do Sistema
-nf-endpoint = Endpoint Solicitado
-nf-timestamp = Timestamp do Incidente
-nf-agent = Agente da Plataforma
-nf-return-home = Voltar para a Home
-nf-more-info = Mais Informações
-nf-system-notice = Aviso do Sistema:
-nf-dim1-title = 404: O Vazio de Silício
-nf-dim2-title = 404: Sinal Offline
-nf-dim3-title = 404: Pistas Quebradas
-nf-dim4-title = 404: Vídeos Perdidos
-nf-dim5-title = 404: O Observador
-nf-dim6-title = 404: Drift Cósmico
-nf-dim1-synopsis = Profundo dentro da placa-mãe, um cubo de pixel vermelho brilha e cai em um vórtice escuro, observado por um olho vermelho siluetado que espreita das sombras de um canvas rasgado.
-nf-dim2-synopsis = Fileiras após fileiras de assentos de cinema velvet completamente vazios. Na plateia, uma televisão retro quebrada brilha com barras de cor e estática de sinal sob um céu distorcido.
-nf-dim3-synopsis = Um detetive sozinho em um casaco de camurça procura um quarto escuro, rastreando um ativo da web quebrado que se fragmentou em mil pedaços de vidro. Cada pista é um redirecionamento quebrado.
-nf-dim4-synopsis = Uma grade imensa e respirante de fitas de filme esquecidas pulsa em vermelho de alta contraste. À medida que você busca o arquivo, a fita de celulóide quebra, deixando você na escuridão cinematográfica.
-nf-dim5-synopsis = Um feixe de projetor digital brilha através de um buraco negro giratório, iluminando um lente quebrada que olha de volta como um observador mecânico gigante.
-nf-dim6-synopsis = Adrift em uma nuvem cósmica, cabos espaciais antigos flutuam através de uma nebulosa estelar, tentando rotar pacotes através de uma rasgão na teia do espaço-tempo. Conexão expirada.
-nf-zone-1 = Gancho de Hardware
-nf-zone-2 = Falhas de Sinal
-nf-zone-3 = Arquivos de Dados Perdidos
-nf-zone-4 = Corrupção Analógica
-nf-zone-5 = Sentinéis do Vazio
-nf-zone-6 = Drift Cósmico
 legal-privacy-title = Política de Privacidade
 legal-privacy-updated = Última atualização: outubro de 2026
 legal-privacy-1-title = 1. Introdução

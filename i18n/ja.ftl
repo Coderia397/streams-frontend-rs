@@ -66,11 +66,6 @@ new-popular-the-films-everyone-is-discussing = 誰もが話題にしている映
 new-popular-top-10-films-in-the = 英国で今注目されているトップ10の映画
 new-popular-top-10-series-in-the = 英国で今注目されているトップ10のシリーズ
 new-popular-worth-the-wait = 期待の新作
-not-found-alternate-dimensions = 代替次元
-not-found-alternate-dimensions-more-like-this = 代替次元：似たようなもの
-not-found-cinematic-background = 映画的背景
-not-found-diagnostic-report = 診断レポート
-not-found-the-targeted-router-endpoint-has = ターゲットのルーターのエンドポイントが参照されなくなったか、またはCDNスペースから読み込めませんでした。再生を再開するには、安全なホームストリーミング環境に戻ってください。
 notifications-dropdown-notifications = 通知
 notifications-dropdown-youre-all-caught-up-new = すべて見終えました — 新しい到着はここに表示されます。
 pin-prompt-profile-lock-is-currently-on = プロフィールロックは現在有効です。
@@ -604,18 +599,6 @@ help-art-delete-account-body =
     1人分だけ削除したい場合は、代わりにその人のプロフィールを削除してください。<a=/help/article/profiles-manage>プロフィールの作成、編集、削除の方法</a>をご覧ください。
 
     !! 注：データのコピーを残したい場合は、先にダウンロードしてください。<a=/help/article/download-data>データのコピーをダウンロードする</a>をご覧ください。
-
-help-art-page-not-found-title = 「404」ページが表示される
-help-art-page-not-found-summary = リンクが間違っているか、ページが移動しました。
-help-art-page-not-found-keywords = 404 見つかりません ページがない リンク切れ エラー
-help-art-page-not-found-body =
-    404 ページは、そのアドレスが { $brand } のどこにもつながっていないことを意味します。アドレスに入力ミスがないか確認するか、メニューや検索で目的のページを探してください。
-
-    - 上部のバーの<b>ホーム</b>で最初の画面に戻ります。
-    - <a=/help>ヘルプセンター</a>の検索で記事を探します。
-    - { $brand } 内のリンクからここに来た場合は、そのリンクがあった場所を<a=/help/article/report-bug>お知らせください</a>。
-
-    @@ refresh
 
 help-art-language-title = 言語を変更する方法
 help-art-language-summary = { $brand } の表示言語と、視聴するときの言語を変更します。
@@ -1262,33 +1245,6 @@ profile-enter-pin = PINを入力して{ $name }のプロフィールにアクセ
 profile-edit-title = プロフィールを編集
 profile-edit-hint = このプロフィールの名前、アイコン、ロックを更新してください。
 profile-add-hint = { $brand }を別の人が見るためのプロフィールを追加してください。
-nf-original = エラー404オリジナル
-nf-unknown-agent = 不明なエージェント
-nf-system-code = システムコード
-nf-endpoint = リクエストされたエンドポイント
-nf-timestamp = 発生時刻
-nf-agent = プラットフォームエージェント
-nf-return-home = ホームに戻る
-nf-more-info = 詳細情報
-nf-system-notice = システム通知:
-nf-dim1-title = 404: シリコンの虚無
-nf-dim2-title = 404: オフライン信号
-nf-dim3-title = 404: 砕けた手がかり
-nf-dim4-title = 404: 失われたリール
-nf-dim5-title = 404: 監視者
-nf-dim6-title = 404: 宇宙の漂流
-nf-dim1-synopsis = メインボードの奥深く、赤く光るピクセルキューブが暗い渦に落ち込み、破損したキャンバスの影から赤い影が見守る。
-nf-dim2-synopsis = 一枚のヴェローチェのシネマシートが完全に空いている。ステージには、色のバーと信号の静電気を放つ壊れたレトロCRTテレビがあり、不完全な空が広がっている。
-nf-dim3-synopsis = 雨合羽を着た探偵が暗い部屋を捜索し、欠けたウェブ資産を追いかける。すべての手がかりは壊れたリダイレクトだ。
-nf-dim4-synopsis = 巨大で呼吸する、忘れられた映画リールのグリッドが高コントラストの赤で脈動する。アーカイブを検索するにつれて、セルロイドの帯が裂け、映画的暗闇に陥る。
-nf-dim5-synopsis = 輝くデジタルプロジェクターの光が渦巻くブラックホールを切り裂き、砕けたレンズを通して照らす。それは塔のように巨大な機械的な監視者に見える。
-nf-dim6-synopsis = 宇宙の雲に漂い、古代の宇宙ケーブルが星雲を漂い、時空の繊維の裂け目を通じてパケットをルーティングしようとする。接続がタイムアウトしました。
-nf-zone-1 = ハードウェアの不具合
-nf-zone-2 = 信号の失敗
-nf-zone-3 = 失われたデータファイル
-nf-zone-4 = アナログ腐敗
-nf-zone-5 = 虚無哨兵
-nf-zone-6 = 宇宙漂流
 legal-privacy-title = プライバシーポリシー
 legal-privacy-updated = 最終更新日：2026年10月
 legal-privacy-1-title = 1. はじめに

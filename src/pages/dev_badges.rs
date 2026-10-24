@@ -29,7 +29,7 @@ const BACKGROUNDS: &[(&str, &str)] = &[
 #[component]
 pub fn DevBadgesPage() -> impl IntoView {
     if !cfg!(debug_assertions) {
-        return crate::pages::not_found::NotFoundPage().into_any();
+        return view! { <leptos_router::components::Redirect path="/" /> }.into_any();
     }
     view! {
         <div class="p-6 text-ink" style="background:#111">

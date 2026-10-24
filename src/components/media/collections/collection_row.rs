@@ -163,7 +163,8 @@ pub fn CollectionHero(collection: crate::services::ai_engine::Collection) -> imp
     };
     let eyebrow_text = if is_event { crate::i18n::t("collection-eyebrow-event") } else { eyebrow.clone() };
     let heading_label = heading.clone();
-    let artwork = collection.images.first().map(|p| format!("{}/original{}", crate::config::TMDB_IMAGE_URL, p)).unwrap_or_default();
+    // 1280 px, as the row's own artwork: a CSS background cannot pick a size, and TMDB's original (3840 px) cost hundreds of KB under a dark tint
+    let artwork = collection.images.first().map(|p| format!("{}/w1280{}", crate::config::TMDB_IMAGE_URL, p)).unwrap_or_default();
     let h = collection.hue;
     let design = design_of(&collection.id);
     let description = collection.description.clone();

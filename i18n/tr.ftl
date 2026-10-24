@@ -66,11 +66,6 @@ new-popular-the-films-everyone-is-discussing = Herkesin Tartıştığı Filmler
 new-popular-top-10-films-in-the = İngiltere'de En İyi 10 Film
 new-popular-top-10-series-in-the = İngiltere'de En İyi 10 Seri
 new-popular-worth-the-wait = Beklemeye Değer
-not-found-alternate-dimensions = Alternatif Boyutlar
-not-found-alternate-dimensions-more-like-this = Alternatif Boyutlar: Benzeri Bu
-not-found-cinematic-background = Sinematik Arka Plan
-not-found-diagnostic-report = Tanılama Raporu
-not-found-the-targeted-router-endpoint-has = Hedeflenen yönlendirici uç noktası veya CDN uzayımızdan yüklenemedi. Lütfen oynatmayı devam ettirmek için güvenli ev akışı ortamına geri yönlendirin.
 notifications-dropdown-notifications = Bildirimler
 notifications-dropdown-youre-all-caught-up-new = Tümü izlendi — yeni gelenler burada görünecek.
 pin-prompt-profile-lock-is-currently-on = Profil Kilidi şu anda açık.
@@ -604,18 +599,6 @@ help-art-delete-account-body =
     Yalnızca bir kişiyi kaldırmak istiyorsanız onun profilini silin. Bkz. <a=/help/article/profiles-manage>Profil oluşturma, düzenleme veya silme</a>.
 
     !! Not: Verilerinizin bir kopyasını saklamak istiyorsanız önce indirin. Bkz. <a=/help/article/download-data>Verilerinizin bir kopyasını indirme</a>.
-
-help-art-page-not-found-title = "404" sayfası görüyorum
-help-art-page-not-found-summary = Bağlantı yanlış ya da sayfa taşınmış.
-help-art-page-not-found-keywords = 404 bulunamadı sayfa yok bozuk bağlantı hata
-help-art-page-not-found-body =
-    404 sayfası, adresin { $brand } üzerinde hiçbir yere gitmediği anlamına gelir. Adreste yazım hatası olup olmadığını kontrol edin ya da aradığınızı bulmak için menüyü ve aramayı kullanın.
-
-    - Başa dönmek için üst çubuktaki <b>Ana Sayfa</b>'yı kullanın.
-    - Bir makale bulmak için <a=/help>Yardım Merkezi</a> aramasını kullanın.
-    - Sizi buraya { $brand } üzerindeki bir bağlantı getirdiyse bağlantıyı nerede bulduğunuzu <a=/help/article/report-bug>bize bildirin</a>.
-
-    @@ refresh
 
 help-art-language-title = Dili değiştirme
 help-art-language-summary = { $brand } dilini ve izlediğiniz dilleri değiştirin.
@@ -1268,33 +1251,6 @@ profile-enter-pin = Lütfen { $name }'ın profiline erişmek için PIN kodunuzu 
 profile-edit-title = Profili Düzenle
 profile-edit-hint = Bu profili adı, simge ve kilidi güncelleyin.
 profile-add-hint = { $brand }'ı izleyen başka bir kişi için bir profil ekleyin.
-nf-original = BİR HATA 404 ORJİNALİ
-nf-unknown-agent = Bilinmeyen aracı
-nf-system-code = Sistem Kodu
-nf-endpoint = İstenen Bitiş Noktası
-nf-timestamp = Olay Zamanı
-nf-agent = Platform Aracı
-nf-return-home = Ana Sayfaya Dön
-nf-more-info = Daha Fazla Bilgi
-nf-system-notice = Sistem Bildirimi:
-nf-dim1-title = 404: Silikon Boşluk
-nf-dim2-title = 404: Çevrimdışı Sinyal
-nf-dim3-title = 404: Kırılmış İpuçları
-nf-dim4-title = 404: Kaybolmuş Reel
-nf-dim5-title = 404: İzleyici
-nf-dim6-title = 404: Kozmik Yüzme
-nf-dim1-synopsis = Bir ana kartın derinlerinde, kırmızı ışık yayan bir küp, karanlık bir vorteks içine düşer ve karanlıkta bir kırmızı gölge gözden izler.
-nf-dim2-synopsis = Koltukları kumaşın karanlıkta yankılanan bir sinema salonunda, bir sahne üzerinde kırık bir retro CRT televizyonu, renk çubukları ve sinyal gürültüsüyle yanar.
-nf-dim3-synopsis = Bir çamaşır kıyafeti giyen tek bir detektif, karanlık bir odada kaybolmuş bir web varlığı izler. Her ipucu bir kırık yönlendirme olur.
-nf-dim4-synopsis = Unutulmuş bir film reelinin büyük, nefes alan bir gridi, yüksek kontrastlı kırmızıda parlar. Arşivde ararken, celluloid şeridi kırılır ve sizi sinematik karanlıkta bırakır.
-nf-dim5-synopsis = Bir ışık ışını, dönen kara deliğin içinden geçer ve kırılmış bir lensin içinden ışınlar. Lens, bir devasa mekanik izleyici gibi geri baktırır.
-nf-dim6-synopsis = Kozmik bulutlarda, eski uzay kabloları, yıldız bulutları boyunca yüzer. Uzay-zaman dokusundaki bir delik üzerinden paketleri yönlendirmeye çalışırlar. Bağlantı zaman aşımına uğradı.
-nf-zone-1 = Donanım Bozuklukları
-nf-zone-2 = Sinyal Başarısızlıkları
-nf-zone-3 = Kayıp Veri Dosyaları
-nf-zone-4 = Analog Corruption
-nf-zone-5 = Void Sentinels
-nf-zone-6 = Cosmic Drift
 legal-privacy-title = Gizlilik Politikası
 legal-privacy-updated = Son güncelleme: Ekim 2026
 legal-privacy-1-title = 1. Giriş

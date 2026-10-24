@@ -66,11 +66,6 @@ new-popular-the-films-everyone-is-discussing = 全网热议电影
 new-popular-top-10-films-in-the = 英国今日电影Top 10
 new-popular-top-10-series-in-the = 英国今日剧集Top 10
 new-popular-worth-the-wait = 值得期待
-not-found-alternate-dimensions = 平行维度
-not-found-alternate-dimensions-more-like-this = 平行维度：更多类似内容
-not-found-cinematic-background = 电影级背景
-not-found-diagnostic-report = 诊断报告
-not-found-the-targeted-router-endpoint-has = 目标路由端点已失效或无法从我们的CDN空间加载。请返回安全的首页流媒体环境以继续播放。
 notifications-dropdown-notifications = 通知
 notifications-dropdown-youre-all-caught-up-new = 你已看完所有内容——新上线的内容将显示在这里。
 pin-prompt-profile-lock-is-currently-on = 个人资料锁定功能已开启。
@@ -604,18 +599,6 @@ help-art-delete-account-body =
     如果只想移除一个人，删除他的个人资料就行。请参阅<a=/help/article/profiles-manage>如何创建、编辑或删除个人资料</a>。
 
     !! 注意：如果想保留数据副本，请先下载。请参阅<a=/help/article/download-data>下载你的数据副本</a>。
-
-help-art-page-not-found-title = 我看到了“404”页面
-help-art-page-not-found-summary = 链接有误，或页面已经移动。
-help-art-page-not-found-keywords = 404 未找到 页面不存在 链接失效 错误
-help-art-page-not-found-body =
-    404 页面表示这个地址在 { $brand } 上不指向任何内容。检查地址有没有打错，或用菜单和搜索找到你想要的内容。
-
-    - 用顶部栏的<b>首页</b>回到起点。
-    - 用<a=/help>帮助中心</a>的搜索查找文章。
-    - 如果是 { $brand } 上的某个链接把你带到这里，<a=/help/article/report-bug>请告诉我们</a>你是在哪里找到它的。
-
-    @@ refresh
 
 help-art-language-title = 如何更改语言
 help-art-language-summary = 更改 { $brand } 的语言以及你观看时使用的语言。
@@ -1264,33 +1247,6 @@ profile-enter-pin = 输入 PIN 以访问 { $name } 的个人资料。
 profile-edit-title = 编辑个人资料
 profile-edit-hint = 更新此个人资料的名称、图标和锁定设置。
 profile-add-hint = 为观看 { $brand } 的其他人添加个人资料。
-nf-original = 404 错误原创
-nf-unknown-agent = 未知代理
-nf-system-code = 系统代码
-nf-endpoint = 请求端点
-nf-timestamp = 事件时间戳
-nf-agent = 平台代理
-nf-return-home = 返回首页
-nf-more-info = 更多信息
-nf-system-notice = 系统通知：
-nf-dim1-title = 404：硅基虚空
-nf-dim2-title = 404：离线信号
-nf-dim3-title = 404：破碎的线索
-nf-dim4-title = 404：遗失的胶片
-nf-dim5-title = 404：观察者
-nf-dim6-title = 404：宇宙漂移
-nf-dim1-synopsis = 在主板深处，一个发着红光的像素立方体坠入黑暗的漩涡，一只剪影般的猩红眼睛从撕裂画布的阴影中窥视着这一切。
-nf-dim2-synopsis = 一排排天鹅绒影院座椅空无一人。舞台上，一台破损的复古 CRT 电视在故障的天空下闪烁着彩条和信号噪点。
-nf-dim3-synopsis = 一位身穿风衣的孤胆侦探在昏暗的房间中搜寻，追踪一个碎裂成万千玻璃碎片的缺失网页资源。每一条线索都是一个失效的重定向。
-nf-dim4-synopsis = 一张巨大且仿佛在呼吸的遗忘电影胶片网格，在高对比度的红光中脉动。当你搜索档案时，胶片条断裂，将你留在电影般的黑暗中。
-nf-dim5-synopsis = 一道发光的数字投影光束穿过旋转的黑洞，透过破碎的镜头照射出来，那镜头像一只高耸的机械守望者般回望着你。
-nf-dim6-synopsis = 在宇宙云团中漂流，古老的太空电缆漂浮在恒星星云中，试图通过时空结构的裂缝路由数据包。连接超时。
-nf-zone-1 = 硬件故障
-nf-zone-2 = 信号中断
-nf-zone-3 = 丢失的数据文件
-nf-zone-4 = 模拟信号损坏
-nf-zone-5 = 虚空哨兵
-nf-zone-6 = 宇宙漂移
 legal-privacy-title = 隐私政策
 legal-privacy-updated = 最后更新：2026 年 10 月
 legal-privacy-1-title = 1. 简介

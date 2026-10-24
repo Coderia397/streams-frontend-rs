@@ -66,11 +66,6 @@ new-popular-the-films-everyone-is-discussing = The Films Everyone Is Discussing
 new-popular-top-10-films-in-the = Top 10 Films in the UK Today
 new-popular-top-10-series-in-the = Top 10 Series in the UK Today
 new-popular-worth-the-wait = Worth the Wait
-not-found-alternate-dimensions = Alternate Dimensions
-not-found-alternate-dimensions-more-like-this = Alternate Dimensions: More Like This
-not-found-cinematic-background = Cinematic Background
-not-found-diagnostic-report = Diagnostic Report
-not-found-the-targeted-router-endpoint-has = The targeted router endpoint has been de-referenced or has failed to load from our CDN space. Please redirect back to our secure home streaming environment to resume playback.
 notifications-dropdown-notifications = Notifications
 notifications-dropdown-youre-all-caught-up-new = You're all caught up — new arrivals will show up here.
 pin-prompt-profile-lock-is-currently-on = Profile Lock is currently on.
@@ -604,18 +599,6 @@ help-art-delete-account-body =
     If you only want to remove one person, delete their profile instead. See <a=/help/article/profiles-manage>How to create, edit, or delete profiles</a>.
 
     !! Note: To keep a copy of your data, download it first. See <a=/help/article/download-data>Download a copy of your data</a>.
-
-help-art-page-not-found-title = I see a "404" page
-help-art-page-not-found-summary = The link is wrong or the page moved.
-help-art-page-not-found-keywords = 404 not found page missing broken link error void
-help-art-page-not-found-body =
-    A 404 page means the address does not lead anywhere on { $brand }. Check the address for typing mistakes or use the menu and search to find what you wanted.
-
-    - Use <b>Home</b> in the top bar to go back to the start.
-    - Use <a=/help>the Help Centre</a> search to find an article.
-    - If a link on { $brand } led you here, <a=/help/article/report-bug>tell us</a> where you found it.
-
-    @@ refresh
 
 help-art-language-title = How to change the language
 help-art-language-summary = Change the language of { $brand } and the languages you watch in.
@@ -1291,33 +1274,6 @@ profile-enter-pin = Enter your PIN to access { $name }'s profile.
 profile-edit-title = Edit Profile
 profile-edit-hint = Update this profile's name, icon, and lock.
 profile-add-hint = Add a profile for another person watching { $brand }.
-nf-original = AN ERROR 404 ORIGINAL
-nf-unknown-agent = Unknown agent
-nf-system-code = System Code
-nf-endpoint = Requested Endpoint
-nf-timestamp = Incident Timestamp
-nf-agent = Platform Agent
-nf-return-home = Return to Home
-nf-more-info = More Info
-nf-system-notice = System Notice:
-nf-dim1-title = 404: The Silicon Void
-nf-dim2-title = 404: Offline Signal
-nf-dim3-title = 404: Shattered Clues
-nf-dim4-title = 404: Lost Reels
-nf-dim5-title = 404: The Watcher
-nf-dim6-title = 404: Cosmic Drift
-nf-dim1-synopsis = Deep inside the motherboard, a glowing red pixel cube falls into a dark vortex, watched by a silhouetted crimson eye peeking from the shadows of a torn canvas.
-nf-dim2-synopsis = Row after row of velvet cinema seats sit completely empty. On stage, a broken retro CRT television flickers with color-bars and signal static under a glitchy sky.
-nf-dim3-synopsis = A lone detective in a trench coat searches a dark room, tracking a missing web asset that shattered into a thousand shards of glass. Every lead is a broken redirect.
-nf-dim4-synopsis = A massive, breathing grid of forgotten movie reels pulses in high-contrast red. As you search the archive, the celluloid strip snaps, leaving you in the cinematic dark.
-nf-dim5-synopsis = A glowing digital projector beam cuts through a swirling black hole, shining through a shattered lens that stares back like a towering mechanical watcher.
-nf-dim6-synopsis = Adrift in a cosmic cloud, ancient space cables float through a stellar nebula, trying to route packets through a tear in the space-time fabric. Connection timed out.
-nf-zone-1 = Hardware Glitches
-nf-zone-2 = Signal Failures
-nf-zone-3 = Lost Data Files
-nf-zone-4 = Analog Corruption
-nf-zone-5 = Void Sentinels
-nf-zone-6 = Cosmic Drift
 legal-privacy-title = Privacy Policy
 legal-privacy-updated = Last updated: October 2026
 legal-privacy-1-title = 1. Who we are

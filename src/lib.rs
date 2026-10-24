@@ -115,12 +115,13 @@ pub fn App() -> impl IntoView {
         <Router>
             <HostGuard />
             <crate::components::media::info_modal::SharedTitleOpener />
-            <Routes fallback=crate::pages::not_found::NotFoundPage>
+            // an address the site does not have goes to the site's root (the landing page, or Home for a returning visitor), with no page of its own
+            <Routes fallback=|| view! { <leptos_router::components::Redirect path="/" /> }>
                 <Route path=path!("/browse") view=|| view! { <HomeRoute kids=false /> } />
                 <Route path=path!("/kids") view=|| view! { <HomeRoute kids=true /> } />
-                // the developer pages exist only when the site is opened from this machine or its network (note 67 E8); anywhere else they are a page that is not found
-                <Route path=path!("/dev/badges") view=|| if is_local_host() { view! { <crate::pages::dev_badges::DevBadgesPage /> }.into_any() } else { view! { <crate::pages::not_found::NotFoundPage /> }.into_any() } />
-                <Route path=path!("/dev/logos") view=|| if is_local_host() { view! { <crate::components::media::collection_logo::LogoGalleryPage /> }.into_any() } else { view! { <crate::pages::not_found::NotFoundPage /> }.into_any() } />
+                // the developer pages exist only when the site is opened from this machine or its network (note 67 E8); anywhere else they go to the root, as an address the site does not have
+                <Route path=path!("/dev/badges") view=|| if is_local_host() { view! { <crate::pages::dev_badges::DevBadgesPage /> }.into_any() } else { view! { <leptos_router::components::Redirect path="/" /> }.into_any() } />
+                <Route path=path!("/dev/logos") view=|| if is_local_host() { view! { <crate::components::media::collection_logo::LogoGalleryPage /> }.into_any() } else { view! { <leptos_router::components::Redirect path="/" /> }.into_any() } />
                 <Route path=path!("/browse/genre/:id") view=crate::pages::category::GenreRoute />
                 <Route path=path!("/title/:slug") view=crate::pages::title::TitlePage />
                 <Route path=path!("/watch/:id") view=crate::pages::player::PlayerPage />

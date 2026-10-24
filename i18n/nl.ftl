@@ -66,11 +66,6 @@ new-popular-the-films-everyone-is-discussing = De films die iedereen bespreekt
 new-popular-top-10-films-in-the = Top 10 films in het VK vandaag
 new-popular-top-10-series-in-the = Top 10 series in het VK vandaag
 new-popular-worth-the-wait = Het wachten waard
-not-found-alternate-dimensions = Alternatieve dimensies
-not-found-alternate-dimensions-more-like-this = Alternatieve dimensies: Meer van hetzelfde
-not-found-cinematic-background = Cinematografische achtergrond
-not-found-diagnostic-report = Diagnostisch rapport
-not-found-the-targeted-router-endpoint-has = Het doelgerichte router-eindpunt is verwijderd of is mislukt bij het laden van onze CDN-ruimte. Ga terug naar ons beveiligde thuisstreamingomgeving om de afspeling voort te zetten.
 notifications-dropdown-notifications = Notificaties
 notifications-dropdown-youre-all-caught-up-new = Je bent op alles bijgewerkt — nieuwe aankomsten verschijnen hier.
 pin-prompt-profile-lock-is-currently-on = Profielvergrendeling is momenteel ingeschakeld.
@@ -604,18 +599,6 @@ help-art-delete-account-body =
     Wil je maar één persoon weghalen, verwijder dan alleen diens profiel. Zie <a=/help/article/profiles-manage>Profielen maken, bewerken of verwijderen</a>.
 
     !! Let op: Wil je een kopie van je gegevens houden, download die dan eerst. Zie <a=/help/article/download-data>Een kopie van je gegevens downloaden</a>.
-
-help-art-page-not-found-title = Ik zie een "404"-pagina
-help-art-page-not-found-summary = De link klopt niet of de pagina is verplaatst.
-help-art-page-not-found-keywords = 404 niet gevonden pagina bestaat niet kapotte link fout
-help-art-page-not-found-body =
-    Een 404-pagina betekent dat het adres nergens naartoe leidt op { $brand }. Controleer het adres op typfouten, of gebruik het menu en de zoekfunctie om te vinden wat je zocht.
-
-    - Gebruik <b>Home</b> in de balk bovenaan om terug naar het begin te gaan.
-    - Gebruik de zoekfunctie van het <a=/help>Helpcentrum</a> om een artikel te vinden.
-    - Bracht een link op { $brand } je hier, <a=/help/article/report-bug>Een probleem melden</a> waar je die vond.
-
-    @@ refresh
 
 help-art-language-title = De taal veranderen
 help-art-language-summary = Verander de taal van { $brand } en de talen waarin je kijkt.
@@ -1268,33 +1251,6 @@ profile-enter-pin = Voer je PIN in om toegang te krijgen tot { $name }'s profiel
 profile-edit-title = Profiel bewerken
 profile-edit-hint = Vernieuw de naam, icoon en slot van dit profiel.
 profile-add-hint = Voeg een profiel toe voor een ander persoon die { $brand } bekijkt.
-nf-original = EEN FOUT 404 OORSPRONKELIJK
-nf-unknown-agent = Onbekende agent
-nf-system-code = Systeemcode
-nf-endpoint = Aangevraagde eindpunt
-nf-timestamp = Incident-timestamp
-nf-agent = Platform-agent
-nf-return-home = Terug naar Start
-nf-more-info = Meer informatie
-nf-system-notice = Systeemmelding:
-nf-dim1-title = 404: De siliciumleegte
-nf-dim2-title = 404: Offline signaal
-nf-dim3-title = 404: Gescheurde sporen
-nf-dim4-title = 404: Verloren reels
-nf-dim5-title = 404: De waarnemer
-nf-dim6-title = 404: Cosmische drift
-nf-dim1-synopsis = Diep in de moederbord, valt een glinsterend rode pixelkubus in een donkere vortex, terwijl een schaduw van een karmozijnrode oog uit de schaduw van een gescheurde canvas kijkt.
-nf-dim2-synopsis = Rij na rij van zachte cinema-zitjes zit volledig leeg. Op het toneel, een gebroken retro CRT televisie knippert met kleurbanden en signaalstatische onder een glitchende hemel.
-nf-dim3-synopsis = Een alleenstaande detective in een trench coat zoekt een donker vertrek, terwijl hij een ontbrekende web-asset volgt dat in duizend stukken glas is gescheurd. Elke spoor is een gebroken redirect.
-nf-dim4-synopsis = Een gigantisch, ademend netwerk van vergeten filmreels pulseren in hoge contrast rode kleur. Terwijl je de archieven doorzoekt, breekt het celluloidstrip, waardoor je in het cinematografische donker terechtkomt.
-nf-dim5-synopsis = Een gloedvol digitale projectorstraal snijdt door een draaiende zwarte gat, schijnt door een gescheurde lens die terugkijkt als een reusachtige mechanische waarnemer.
-nf-dim6-synopsis = Adrift in een kosmische wolk, oude ruimtekabels drijven door een sterrennebula, probeerend pakketten te routeren door een scheur in het ruimtetijdweefsel. Verbinding is verlopen.
-nf-zone-1 = Hardwarefouten
-nf-zone-2 = Signaal fouten
-nf-zone-3 = Verloren databestanden
-nf-zone-4 = Analog Corruptie
-nf-zone-5 = Lege Wachters
-nf-zone-6 = Cosmische Drift
 legal-privacy-title = Privacybeleid
 legal-privacy-updated = Laatst bijgewerkt: oktober 2026
 legal-privacy-1-title = 1. Inleiding

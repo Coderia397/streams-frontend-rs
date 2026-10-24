@@ -66,11 +66,6 @@ new-popular-the-films-everyone-is-discussing = Les films dont tout le monde parl
 new-popular-top-10-films-in-the = Top 10 des films au Royaume-Uni aujourd'hui
 new-popular-top-10-series-in-the = Top 10 des séries au Royaume-Uni aujourd'hui
 new-popular-worth-the-wait = À ne pas manquer
-not-found-alternate-dimensions = Dimensions alternatives
-not-found-alternate-dimensions-more-like-this = Dimensions alternatives : des titres similaires
-not-found-cinematic-background = Arrière-plan cinématique
-not-found-diagnostic-report = Rapport de diagnostic
-not-found-the-targeted-router-endpoint-has = Le point de terminaison du routeur ciblé a été désactivé ou n'a pas pu être chargé depuis notre espace CDN. Veuillez revenir à notre environnement de streaming sécurisé pour reprendre la lecture.
 notifications-dropdown-notifications = Notifications
 notifications-dropdown-youre-all-caught-up-new = Vous êtes à jour — les nouveautés apparaîtront ici.
 pin-prompt-profile-lock-is-currently-on = Le verrouillage du profil est activé.
@@ -598,17 +593,6 @@ help-art-delete-account-body =
 
     !! Remarque : Pour garder une copie de vos données, téléchargez-la d'abord. Consultez <a=/help/article/download-data>Télécharger une copie de vos données</a>.
 
-help-art-page-not-found-title = Je vois une page « 404 »
-help-art-page-not-found-summary = Le lien est incorrect ou la page a été déplacée.
-help-art-page-not-found-keywords = 404 introuvable page manquante lien cassé erreur vide
-help-art-page-not-found-body =
-    Une page 404 signifie que l'adresse ne mène nulle part sur { $brand }. Vérifiez l'adresse pour détecter les erreurs de frappe ou utilisez le menu et la recherche pour trouver ce que vous cherchiez.
-
-    - Utilisez <b>Accueil</b> dans la barre supérieure pour revenir au début.
-    - Utilisez la recherche du <a=/help>Centre d'aide</a> pour trouver un article.
-    - Si un lien sur { $brand } vous a mené ici, <a=/help/article/report-bug>signalez-le-nous</a> en indiquant où vous l'avez trouvé.
-
-    @@ refresh
 help-art-language-title = Comment changer la langue
 help-art-language-summary = Changez la langue de { $brand } et les langues dans lesquelles vous regardez.
 help-art-language-keywords = langue changer traduire interface affichage sous-titres audio anglais espagnol français arabe
@@ -1252,33 +1236,6 @@ profile-enter-pin = Saisissez votre code PIN pour accéder au profil de { $name 
 profile-edit-title = Modifier le profil
 profile-edit-hint = Mettez à jour le nom, l'icône et le verrouillage de ce profil.
 profile-add-hint = Ajoutez un profil pour une autre personne qui regarde { $brand }.
-nf-original = UNE ORIGINAL 404 EN ERREUR
-nf-unknown-agent = Agent inconnu
-nf-system-code = Code système
-nf-endpoint = Point de terminaison demandé
-nf-timestamp = Horodatage de l'incident
-nf-agent = Agent de la plateforme
-nf-return-home = Retour à l'accueil
-nf-more-info = Plus d'infos
-nf-system-notice = Avis système :
-nf-dim1-title = 404 : Le Vide de Silicium
-nf-dim2-title = 404 : Signal Hors Ligne
-nf-dim3-title = 404 : Indices Brisés
-nf-dim4-title = 404 : Bobines Perdues
-nf-dim5-title = 404 : L'Observateur
-nf-dim6-title = 404 : Dérive Cosmique
-nf-dim1-synopsis = Au cœur de la carte mère, un cube pixel rougeoyant tombe dans un vortex sombre, observé par un œil écarlate en silhouette qui apparaît depuis les ombres d'une toile déchirée.
-nf-dim2-synopsis = Rangée après rangée, les sièges en velours de la salle de cinéma sont complètement vides. Sur scène, un vieux téléviseur CRT cassé clignote avec des barres de couleur et du bruit de signal sous un ciel glitché.
-nf-dim3-synopsis = Un détective solitaire en trench-coat fouille une pièce sombre, traçant un actif web manquant qui s'est brisé en mille éclats de verre. Chaque piste est une redirection cassée.
-nf-dim4-synopsis = Une immense grille de bobines de films oubliées respire en rouge à fort contraste. Pendant que vous fouillez les archives, la pellicule cède, vous laissant dans l'obscurité cinématographique.
-nf-dim5-synopsis = Un faisceau de projecteur numérique lumineux traverse un trou noir tourbillonnant, brillant à travers un objectif brisé qui vous fixe comme un observateur mécanique géant.
-nf-dim6-synopsis = En dérive dans un nuage cosmique, d'anciens câbles spatiaux flottent à travers une nébuleuse stellaire, essayant de router des paquets à travers une déchirure dans la trame de l'espace-temps. Délai de connexion expiré.
-nf-zone-1 = Pannes Matérielles
-nf-zone-2 = Pannes de Signal
-nf-zone-3 = Fichiers de Données Perdus
-nf-zone-4 = Corruption analogique
-nf-zone-5 = Sentinelles du vide
-nf-zone-6 = Dérive cosmique
 legal-privacy-title = Politique de confidentialité
 legal-privacy-updated = Dernière mise à jour : octobre 2026
 legal-privacy-1-title = 1. Introduction

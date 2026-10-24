@@ -66,11 +66,6 @@ new-popular-the-films-everyone-is-discussing = الأفلام التي يتحد�
 new-popular-top-10-films-in-the = أفضل 10 أفلام في المملكة المتحدة اليوم
 new-popular-top-10-series-in-the = أفضل 10 مسلسلات في المملكة المتحدة اليوم
 new-popular-worth-the-wait = يستحق الانتظار
-not-found-alternate-dimensions = أبعاد بديلة
-not-found-alternate-dimensions-more-like-this = أبعاد بديلة: المزيد من هذا النوع
-not-found-cinematic-background = خلفية سينمائية
-not-found-diagnostic-report = تقرير تشخيصي
-not-found-the-targeted-router-endpoint-has = تم إلغاء الإشارة إلى نقطة النهاية المستهدفة أو فشل تحميلها من مساحة CDN الخاصة بنا. يرجى التحويل مرة أخرى إلى بيئة البث الآمنة الرئيسية لاستئناف التشغيل.
 notifications-dropdown-notifications = الإشعارات
 notifications-dropdown-youre-all-caught-up-new = لقد اطّلعت على كل شيء — ستظهر الإضافات الجديدة هنا.
 pin-prompt-profile-lock-is-currently-on = قفل الملف الشخصي مفعّل حاليًا.
@@ -608,18 +603,6 @@ help-art-delete-account-body =
     إذا كنت تريد إزالة شخص واحد فقط، فاحذف ملفه الشخصي بدلاً من ذلك. راجع <a=/help/article/profiles-manage>كيفية إنشاء الملفات الشخصية أو تعديلها أو حذفها</a>.
 
     !! ملاحظة: للاحتفاظ بنسخة من بياناتك، نزّلها أولاً. راجع <a=/help/article/download-data>تنزيل نسخة من بياناتك</a>.
-
-help-art-page-not-found-title = تظهر لي صفحة «404»
-help-art-page-not-found-summary = الرابط خاطئ أو نُقلت الصفحة.
-help-art-page-not-found-keywords = 404 غير موجود صفحة مفقودة رابط معطل خطأ
-help-art-page-not-found-body =
-    تعني صفحة 404 أن العنوان لا يؤدي إلى أي مكان على { $brand }. تحقق من عدم وجود أخطاء كتابية في العنوان، أو استخدم القائمة والبحث للعثور على ما تريد.
-
-    - استخدم <b>الرئيسية</b> في الشريط العلوي للعودة إلى البداية.
-    - استخدم البحث في <a=/help>مركز المساعدة</a> للعثور على مقالة.
-    - إذا أوصلك إلى هنا رابط على { $brand }، <a=/help/article/report-bug>فأخبرنا</a> أين وجدته.
-
-    @@ refresh
 
 help-art-language-title = كيفية تغيير اللغة
 help-art-language-summary = غيّر لغة { $brand } واللغات التي تشاهد بها.
@@ -1284,33 +1267,6 @@ profile-enter-pin = أدخل رمز PIN للوصول إلى الملف الشخ�
 profile-edit-title = تعديل الملف الشخصي
 profile-edit-hint = حدّث اسم الملف الشخصي وأيقونته وقفله.
 profile-add-hint = أضف ملفًا شخصيًا لشخص آخر يشاهد { $brand }.
-nf-original = أصل خطأ 404
-nf-unknown-agent = وكيل غير معروف
-nf-system-code = رمز النظام
-nf-endpoint = نقطة النهاية المطلوبة
-nf-timestamp = طابع زمني للحادث
-nf-agent = وكيل المنصة
-nf-return-home = العودة إلى الرئيسية
-nf-more-info = معلومات إضافية
-nf-system-notice = إشعار النظام:
-nf-dim1-title = 404: الفراغ السيليكوني
-nf-dim2-title = 404: إشارة غير متصلة
-nf-dim3-title = 404: أدلة متناثرة
-nf-dim4-title = 404: أشرطة مفقودة
-nf-dim5-title = 404: المراقب
-nf-dim6-title = 404: انجراف كوني
-nf-dim1-synopsis = في أعماق اللوحة الأم، يسقط مكعب بكسل أحمر متوهج في دوامة مظلمة، تحت مراقبة عين قرمزية مظللة تتسلل من ظلال قماش ممزق.
-nf-dim2-synopsis = صف بعد صف من مقاعد السينما المخملية فارغة تمامًا. على المسرح، تتذبذب شاشة تلفزيون قديمة CRT مكسورة بألوان أعمدة وضجيج الإشارة تحت سماء متقطعة.
-nf-dim3-synopsis = محقق وحيد يرتدي معطفًا طويلًا يبحث في غرفة مظلمة، يتتبع أصلًا ويب مفقودًا تحطم إلى ألف شظية زجاجية. كل خيط من الخيوط هو إعادة توجيه مكسورة.
-nf-dim4-synopsis = شبكة ضخمة تتنفس من أشرطة أفلام منسية تنبض بالأحمر عالي التباين. بينما تبحث في الأرشيف، تنقطع شريط السيلويد، لتتركك في ظلام سينمائي.
-nf-dim5-synopsis = حزمة ضوء مشعة من جهاز عرض رقمي تخترق ثقبًا أسود دوّارًا، وتسطع عبر عدسة محطمة تنظر إليك كحارس ميكانيكي ضخم.
-nf-dim6-synopsis = في سحابة كونية، تطفو كابلات فضائية قديمة عبر سديم نجمي، تحاول توجيه الحزم عبر تمزق في نسيج الزمكان. انتهت مهلة الاتصال.
-nf-zone-1 = أعطال الأجهزة
-nf-zone-2 = فشل الإشارة
-nf-zone-3 = ملفات البيانات المفقودة
-nf-zone-4 = تلف التناظري
-nf-zone-5 = حراس الفراغ
-nf-zone-6 = الانجراف الكوني
 legal-privacy-title = سياسة الخصوصية
 legal-privacy-updated = آخر تحديث: أكتوبر 2026
 legal-privacy-1-title = 1. مقدمة

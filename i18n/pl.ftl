@@ -66,11 +66,6 @@ new-popular-the-films-everyone-is-discussing = Filmy, o których wszyscy dyskutu
 new-popular-top-10-films-in-the = Top 10 filmów w UK dzisiaj
 new-popular-top-10-series-in-the = Top 10 serii w UK dzisiaj
 new-popular-worth-the-wait = Warto poczekać
-not-found-alternate-dimensions = Alternatywne wymiary
-not-found-alternate-dimensions-more-like-this = Alternatywne wymiary: podobne do tego
-not-found-cinematic-background = Kino tło
-not-found-diagnostic-report = Raport diagnostyczny
-not-found-the-targeted-router-endpoint-has = Zmierzony punkt końcowy routera został odnaleziony lub nie mógł zostać załadowany z naszego przestrzeni CDN. Proszę skierować się z powrotem do bezpiecznego środowiska domowego strumieniowania, aby wznowić odtwarzanie.
 notifications-dropdown-notifications = Powiadomienia
 notifications-dropdown-youre-all-caught-up-new = Wszystko przewijane — nowe wpisy pojawią się tutaj.
 pin-prompt-profile-lock-is-currently-on = Zablokowanie profilu jest obecnie włączone.
@@ -606,18 +601,6 @@ help-art-delete-account-body =
     Jeśli chcesz usunąć tylko jedną osobę, usuń jej profil. Zobacz <a=/help/article/profiles-manage>Jak tworzyć, edytować i usuwać profile</a>.
 
     !! Uwaga: Jeśli chcesz zachować kopię danych, najpierw ją pobierz. Zobacz <a=/help/article/download-data>Pobieranie kopii danych</a>.
-
-help-art-page-not-found-title = Widzę stronę „404”
-help-art-page-not-found-summary = Link jest błędny albo strona została przeniesiona.
-help-art-page-not-found-keywords = 404 nie znaleziono strona nie istnieje uszkodzony link błąd
-help-art-page-not-found-body =
-    Strona 404 oznacza, że adres nigdzie nie prowadzi w { $brand }. Sprawdź, czy w adresie nie ma literówek, albo skorzystaj z menu i wyszukiwania, aby znaleźć to, czego szukasz.
-
-    - Użyj przycisku <b>Strona główna</b> na górnym pasku, aby wrócić na początek.
-    - Skorzystaj z wyszukiwania w <a=/help>Centrum pomocy</a>, aby znaleźć artykuł.
-    - Jeśli trafiasz tu z linku w { $brand }, <a=/help/article/report-bug>daj nam znać</a>, gdzie go znaleziono.
-
-    @@ refresh
 
 help-art-language-title = Jak zmienić język
 help-art-language-summary = Zmień język { $brand } i języki, w których oglądasz.
@@ -1284,33 +1267,6 @@ profile-enter-pin = Wprowadź swój PIN, aby uzyskać dostęp do profilu { $name
 profile-edit-title = Edytuj profil
 profile-edit-hint = Zaktualizuj nazwę, ikonę i zamek tego profilu.
 profile-add-hint = Dodaj profil dla innej osoby oglądającej { $brand }.
-nf-original = BŁĄD 404 ORYGINALNY
-nf-unknown-agent = Nieznany agent
-nf-system-code = Kod Systemu
-nf-endpoint = Wymagany Punkt końcowy
-nf-timestamp = Czas Zdarzenia
-nf-agent = Agent Platformy
-nf-return-home = Powrót do Strony Głównej
-nf-more-info = Więcej Informacji
-nf-system-notice = Ogłoszenie Systemowe:
-nf-dim1-title = 404: Ciemna Pustka
-nf-dim2-title = 404: Offline Signal
-nf-dim3-title = 404: Zniszczone Wskazówki
-nf-dim4-title = 404: Straciliśmy Reels
-nf-dim5-title = 404: Obserwator
-nf-dim6-title = 404: Kosmiczne Drżenie
-nf-dim1-synopsis = Głęboko w płytkach głównego układu, czerwony sześcian pikseli spada w ciemny wir, obserwowany przez czerwony cień odbijający się z cieni rozrwanego płótna.
-nf-dim2-synopsis = W rzędach siedzących w tkaninie kinetycznej siedzą zupełnie puste miejsca. Na scenie, zepsuty retro CRT telewizor mruczy barwami i statycznym sygnałem pod niebem z błędami.
-nf-dim3-synopsis = Jedyny detektyw w płaszczu wodnym przeszukuje ciemną pokój, śledząc zaginiony zasób sieci, który rozpadł się na tysiące kawałków szkła. Każdy ślad to zniszczony przekierowanie.
-nf-dim4-synopsis = Wielki, oddychający grid zapomnianych filmowych reelek pulsuje w wysokiej kontrastowej czerwieni. Gdy szukasz archiwum, ta taśma celluloidowa pęknie, zostawiając cię w ciemności kina.
-nf-dim5-synopsis = Świetlista wiązka projektora cyfrowego przebija się przez wirzący czarny dziurę, oświetlając zniszczony soczewkę, która patrzy z powrotem jak ogromny mechaniczny obserwator.
-nf-dim6-synopsis = Wypływając w kosmicznym chmurze, stare przewody przestrzenne unoszą się przez galaktyczne nebulę, próbując przekierować pakiety przez rys w tkaninie czasoprzestrzennym. Połączenie wygasło.
-nf-zone-1 = Błędy sprzętu
-nf-zone-2 = Poruszenia sygnału
-nf-zone-3 = Zniszczone pliki danych
-nf-zone-4 = Zakłócenia analogowe
-nf-zone-5 = Strażnicy pustki
-nf-zone-6 = Drift kosmiczny
 legal-privacy-title = Polityka prywatności
 legal-privacy-updated = Ostatnia aktualizacja: październik 2026
 legal-privacy-1-title = 1. Wstęp

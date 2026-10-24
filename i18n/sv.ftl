@@ -66,11 +66,6 @@ new-popular-the-films-everyone-is-discussing = Filmer som alla diskuterar
 new-popular-top-10-films-in-the = Top 10 filmer i UK idag
 new-popular-top-10-series-in-the = Top 10 serier i UK idag
 new-popular-worth-the-wait = Värt att vänta på
-not-found-alternate-dimensions = Alternativa dimensioner
-not-found-alternate-dimensions-more-like-this = Alternativa dimensioner: Mer av samma typ
-not-found-cinematic-background = Cinematisk bakgrund
-not-found-diagnostic-report = Diagnostisk rapport
-not-found-the-targeted-router-endpoint-has = Det målade router slutpunkten har de-refererats eller har misslyckats att laddas från vår CDN-utrymme. Vänligen rikta tillbaka till vår säkra hemma streaming miljö för att återuppta spelning.
 notifications-dropdown-notifications = Meddelanden
 notifications-dropdown-youre-all-caught-up-new = Du är allt uppdaterat – nya ankomster visas här.
 pin-prompt-profile-lock-is-currently-on = Profil lås är för närvarande på.
@@ -604,18 +599,6 @@ help-art-delete-account-body =
     Vill du bara ta bort en person raderar du hellre den personens profil. Se <a=/help/article/profiles-manage>Skapa, redigera eller radera profiler</a>.
 
     !! Obs! Vill du behålla en kopia av dina uppgifter laddar du ner den först. Se <a=/help/article/download-data>Ladda ner en kopia av dina uppgifter</a>.
-
-help-art-page-not-found-title = Jag ser en "404"-sida
-help-art-page-not-found-summary = Länken är fel eller sidan har flyttats.
-help-art-page-not-found-keywords = 404 hittades inte sidan finns inte trasig länk fel
-help-art-page-not-found-body =
-    En 404-sida betyder att adressen inte leder någonstans på { $brand }. Kontrollera adressen efter stavfel, eller använd menyn och sökningen för att hitta det du letade efter.
-
-    - Använd <b>Hem</b> i fältet högst upp för att gå tillbaka till början.
-    - Använd sökningen i <a=/help>hjälpcentret</a> för att hitta en artikel.
-    - Om en länk på { $brand } ledde hit, <a=/help/article/report-bug>berätta för oss</a> var du hittade den.
-
-    @@ refresh
 
 help-art-language-title = Byta språk
 help-art-language-summary = Byt språk i { $brand } och de språk du tittar på.
@@ -1268,33 +1251,6 @@ profile-enter-pin = Skriv in ditt PIN för att komma åt { $name }'s profil.
 profile-edit-title = Redigera profil
 profile-edit-hint = Uppdatera denna profilens namn, ikon och lås.
 profile-add-hint = Lägg till en profil för en annan person som tittar på { $brand }.
-nf-original = EN FEL 404 ORIGINALET
-nf-unknown-agent = Okänd agent
-nf-system-code = Systemkod
-nf-endpoint = Begärd slutpunkt
-nf-timestamp = Incidenttidsstämpel
-nf-agent = Plattformsservice
-nf-return-home = Gå till startsidan
-nf-more-info = Mer information
-nf-system-notice = Systemmeddelande:
-nf-dim1-title = 404: Den silikondöda
-nf-dim2-title = 404: Offline-signal
-nf-dim3-title = 404: Brutna spår
-nf-dim4-title = 404: Förlorade filmer
-nf-dim5-title = 404: Den som tittar
-nf-dim6-title = 404: Kosmisk drift
-nf-dim1-synopsis = Djupt inuti mainboardet faller en glödande röd pixelkub in i en mörk vorteks, tittad på av en skuggande röd ö i en tornadoframkallning.
-nf-dim2-synopsis = Rad efter rad av velvettsinema-salar sitter helt tomma. På scenen, en bruten retro CRT-television flimrar med färgstolpar och signalstörningar under en glitchig himmel.
-nf-dim3-synopsis = En ensam detektiv i en kavaj söker en mörk rum, följer en förlorad webbasset som spruckit i tusen glasfragment. Varje spår är en bruten omdirigering.
-nf-dim4-synopsis = En massiv, andande nät av glödande filmer pulserar i högkontrast röd. När du söker i arkivet, spricker celluloidet och lämnar dig i kinoskummet.
-nf-dim5-synopsis = En glödande digital projektionsstråle skär genom en svirrande svarta hål, skenar genom en sprucken lins som tittar tillbaka som en stor mekanisk tittare.
-nf-dim6-synopsis = Driftande i en kosmisk moln, gamla rymdkablar flyter genom en stjärnnebulosa, försöker rikta paket genom en räck i rumtiden. Anslutning tidsut. 
-nf-zone-1 = Hårdvaru-störningar
-nf-zone-2 = Signalproblem
-nf-zone-3 = Förlorade datafiler
-nf-zone-4 = Analog Corruption
-nf-zone-5 = Void Sentinels
-nf-zone-6 = Cosmic Drift
 legal-privacy-title = Integritetspolicy
 legal-privacy-updated = Senast uppdaterad: oktober 2026
 legal-privacy-1-title = 1. Introduktion

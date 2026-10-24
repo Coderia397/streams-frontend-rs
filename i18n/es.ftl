@@ -66,11 +66,6 @@ new-popular-the-films-everyone-is-discussing = Las películas de las que todos h
 new-popular-top-10-films-in-the = Top 10 de películas en el Reino Unido hoy
 new-popular-top-10-series-in-the = Top 10 de series en el Reino Unido hoy
 new-popular-worth-the-wait = Vale la pena esperar
-not-found-alternate-dimensions = Dimensiones alternativas
-not-found-alternate-dimensions-more-like-this = Dimensiones alternativas: contenido similar
-not-found-cinematic-background = Fondo cinematográfico
-not-found-diagnostic-report = Informe de diagnóstico
-not-found-the-targeted-router-endpoint-has = El punto final de enrutador solicitado ha sido desreferenciado o no se pudo cargar desde nuestro espacio CDN. Redirígete a nuestro entorno de streaming seguro para reanudar la reproducción.
 notifications-dropdown-notifications = Notificaciones
 notifications-dropdown-youre-all-caught-up-new = Estás al día; las novedades aparecerán aquí.
 pin-prompt-profile-lock-is-currently-on = El bloqueo de perfil está activado.
@@ -601,17 +596,6 @@ help-art-delete-account-body =
 
     !! Nota: Si quieres conservar una copia de tus datos, descárgala antes. Consulta <a=/help/article/download-data>Descargar una copia de tus datos</a>.
 
-help-art-page-not-found-title = Veo una página "404"
-help-art-page-not-found-summary = El enlace es incorrecto o la página se movió.
-help-art-page-not-found-keywords = 404 no encontrado página faltante enlace roto error vacío
-help-art-page-not-found-body =
-    Una página 404 significa que la dirección no lleva a ningún lugar en { $brand }. Revisa la dirección por errores de escritura o usa el menú y la búsqueda para encontrar lo que querías.
-
-    - Usa <b>Inicio</b> en la barra superior para volver al inicio.
-    - Usa la búsqueda del <a=/help>Centro de ayuda</a> para encontrar un artículo.
-    - Si un enlace en { $brand } te llevó aquí, <a=/help/article/report-bug>avísanos</a> dónde lo encontraste.
-
-    @@ refresh
 help-art-language-title = Cómo cambiar el idioma
 help-art-language-summary = Cambia el idioma de { $brand } y los idiomas en los que ves los títulos.
 help-art-language-keywords = idioma cambiar traducir interfaz mostrar subtítulos audio inglés español francés árabe
@@ -1257,33 +1241,6 @@ profile-enter-pin = Introduce tu PIN para acceder al perfil de { $name }.
 profile-edit-title = Editar perfil
 profile-edit-hint = Actualiza el nombre, el icono y el bloqueo de este perfil.
 profile-add-hint = Agrega un perfil para otra persona que ve { $brand }.
-nf-original = UNA ORIGINAL DE ERROR 404
-nf-unknown-agent = Agente desconocido
-nf-system-code = Código del sistema
-nf-endpoint = Punto final solicitado
-nf-timestamp = Fecha y hora del incidente
-nf-agent = Agente de la plataforma
-nf-return-home = Volver al inicio
-nf-more-info = Más información
-nf-system-notice = Aviso del sistema:
-nf-dim1-title = 404: El vacío de silicio
-nf-dim2-title = 404: Señal sin conexión
-nf-dim3-title = 404: Pistas fragmentadas
-nf-dim4-title = 404: Bobinas perdidas
-nf-dim5-title = 404: El observador
-nf-dim6-title = 404: Deriva cósmica
-nf-dim1-synopsis = En el interior de la placa base, un cubo de píxeles rojos brillantes cae en un vórtice oscuro, observado por un ojo carmesí en silueta que asoma desde las sombras de un lienzo rasgado.
-nf-dim2-synopsis = Fila tras fila de butacas de terciopelo del cine están completamente vacías. En el escenario, una televisión CRT retro rota parpadea con barras de color y estática de señal bajo un cielo con fallos.
-nf-dim3-synopsis = Un detective solitario con abrigo busca en una habitación oscura, rastreando un recurso web perdido que se ha hecho añicos en mil fragmentos de vidrio. Cada pista es una redirección rota.
-nf-dim4-synopsis = Una enorme cuadrícula de bobinas de películas olvidadas late en rojo de alto contraste. Mientras buscas en el archivo, la tira de celuloide se rompe, dejándote en la oscuridad cinematográfica.
-nf-dim5-synopsis = Un haz de proyector digital brillante atraviesa un agujero negro giratorio, brillando a través de una lente rota que mira de vuelta como un observador mecánico imponente.
-nf-dim6-synopsis = A la deriva en una nube cósmica, antiguos cables espaciales flotan a través de una nebulosa estelar, intentando enrutar paquetes a través de una grieta en el tejido del espacio-tiempo. Tiempo de conexión agotado.
-nf-zone-1 = Fallos de hardware
-nf-zone-2 = Fallos de señal
-nf-zone-3 = Archivos de datos perdidos
-nf-zone-4 = Corrupción analógica
-nf-zone-5 = Centinelas del vacío
-nf-zone-6 = Deriva cósmica
 legal-privacy-title = Política de privacidad
 legal-privacy-updated = Última actualización: octubre de 2026
 legal-privacy-1-title = 1. Introducción
