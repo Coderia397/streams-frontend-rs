@@ -672,6 +672,8 @@ button,
    rest of the controls show in landscape only (player/controls/phone/mod.rs). */
 @media (orientation: portrait) {
   .phone-player-landscape { display: none; }
+  /* three 84 px buttons 40 px apart fit a 360 px wide phone; landscape's 102 px put the 10 second buttons off a 421 px screen */
+  .phone-player-middle { gap: 40px; }
 }
 @media (orientation: landscape) {
   .phone-player-portrait { display: none; }

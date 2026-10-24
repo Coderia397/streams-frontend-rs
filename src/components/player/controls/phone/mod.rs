@@ -201,8 +201,8 @@ pub fn PhoneControls(state: ControlsState) -> impl IntoView {
                     </button>
                 </div>
 
-                // the middle: back 10, play or pause, forward 10
-                <div class="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-[102px]">
+                // the middle: back 10, play or pause, forward 10 (closer together upright: input.css)
+                <div class="phone-player-middle absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-[102px]">
                     <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); on_skip_by.run(-10.0); touch(); } class="relative flex h-[84px] w-[84px] items-center justify-center" aria-label=crate::i18n::t("controls-overlay-rewind-10-seconds-left-arrow")>
                         <i class="ph ph-arrow-counter-clockwise text-icon-lg"></i>
                         <span class="pointer-events-none absolute pt-[3px] text-label font-bold">"10"</span>
