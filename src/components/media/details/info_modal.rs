@@ -144,12 +144,17 @@ pub fn close_title_in_place() {
 fn keep_title_in_address() {
     let ui_store = use_ui_store();
     let location = leptos_router::hooks::use_location();
-    Effect::new(move |_| {
+    // `was_open`: a title in the address that nothing has opened yet (a shared link while Who's watching is up, a reload before the
+    // profile is known) stays there for the opener; only closing an open title takes it out
+    Effect::new(move |was_open: Option<bool>| {
         let open = ui_store.info_modal_open.get();
         let wanted = ui_store.info_modal_movie_id.get().filter(|_| open).map(|id| crate::pages::title::slug_for(ui_store.info_modal_is_tv.get(), id));
-        let Some(w) = web_sys::window() else { return };
-        let (Ok(path), Ok(search), Ok(history)) = (w.location().pathname(), w.location().search(), w.history()) else { return };
+        let Some(w) = web_sys::window() else { return open };
+        let (Ok(path), Ok(search), Ok(history)) = (w.location().pathname(), w.location().search(), w.history()) else { return open };
         let current = title_param(&search);
+        if current.is_some() && wanted.is_none() && was_open != Some(true) {
+            return open;
+        }
         match (current, wanted) {
             (None, Some(slug)) => {
                 let _ = history.push_state_with_url(&JsValue::NULL, "", Some(&with_title(&path, &search, Some(&slug))));
@@ -167,6 +172,7 @@ fn keep_title_in_address() {
             }
             _ => {}
         }
+        open
     });
     // Back took the title out of the address: the title closes; Forward brought one back: it opens. Read from the window's own event:
     // the router does not report a move between entries it did not make

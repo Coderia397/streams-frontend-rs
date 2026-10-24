@@ -237,7 +237,13 @@ pub fn activate_profile(id: &str) {
         if let Some(storage) = window.local_storage().ok().flatten() {
             let _ = storage.set_item(crate::keys::ACTIVE_PROFILE, id);
         }
-        let _ = window.location().set_href(home_of(id));
+        // a title waiting in the address (a shared link, a reload while Who's watching was up) opens on the profile's home
+        let pending = window.location().search().ok().and_then(|q| q.trim_start_matches('?').split('&').find(|kv| kv.starts_with("title=")).map(str::to_string));
+        let home = home_of(id);
+        let _ = window.location().set_href(&match pending {
+            Some(title) => format!("{home}?{title}"),
+            None => home.to_string(),
+        });
     }
 }
 

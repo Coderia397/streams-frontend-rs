@@ -13,8 +13,11 @@ fn parse_yt_number(s: &str, key: &str) -> Option<f64> {
     val_str[..end_idx].trim().parse::<f64>().ok()
 }
 
-/// How long after YouTube reports playing the frame is shown (see the playing event).
-const REVEAL_AFTER_PLAYING_MS: u64 = 400;
+/// How far the video's time must have moved before its frame is shown, in seconds (see the time messages).
+const REVEAL_AFTER_SECONDS: f64 = 0.35;
+/// When YouTube sends no time, how long after "playing" the frame is shown (measured on a Pixel 8: the first picture about 1.4 s
+/// after "playing").
+const REVEAL_FALLBACK_MS: u64 = 1_500;
 
 fn send_yt_cmd(iframe_id: &str, func: &str) {
     if let Some(win) = web_sys::window() {
@@ -145,6 +148,8 @@ pub fn TrailerPlayer(
     let on_duration_stored = StoredValue::new(on_duration);
 
     let iframe_id_stored = StoredValue::new(iframe_id);
+    // the first time the frame reported for this video (its start), to tell when pictures are moving
+    let first_time = StoredValue::new(None::<f64>);
 
     // ── Artificial Scaling Calculation ───────────────────────────────────────
     let is_webkit = is_webkit_browser();
@@ -177,6 +182,7 @@ pub fn TrailerPlayer(
         if k != prev {
             last_key.set_value(k.clone());
             set_is_frame_ready.set(false);
+            first_time.set_value(None);
             set_failed.set(false);
             heard.set_value(false);
             last_tracked_time.set_value(0.0);
@@ -515,20 +521,20 @@ pub fn TrailerPlayer(
             || s.contains(r#""data": 1"#);
 
         if is_playing_event {
-            // YouTube says "playing" a moment before its first picture is drawn (on a phone about a quarter of a second of black): the
-            // frame is shown a little later, so the still picture stays until the video is on screen, as Netflix's cards do
-            // (and the owner hears "ready", which takes its picture away, at the same moment)
+            // the frame is shown once its time has moved (below), not at "playing": YouTube says "playing" up to a second and a half
+            // before its first picture is drawn on a phone, which showed as black between the still and the video. YouTube does not
+            // always send its time, so the frame is shown REVEAL_FALLBACK_MS after "playing" in any case.
             if !is_frame_ready.get_untracked() {
                 leptos::leptos_dom::helpers::set_timeout(
                     move || {
-                        if is_playing.try_get_untracked() == Some(true) {
+                        if is_playing.try_get_untracked() == Some(true) && is_frame_ready.try_get_untracked() == Some(false) {
                             set_is_frame_ready.try_set(true);
                             if let Some(cb) = on_ready_cb {
                                 cb.run(());
                             }
                         }
                     },
-                    std::time::Duration::from_millis(REVEAL_AFTER_PLAYING_MS),
+                    std::time::Duration::from_millis(REVEAL_FALLBACK_MS),
                 );
             }
 
@@ -567,9 +573,19 @@ pub fn TrailerPlayer(
         // Live Time Update Reporting (for seamless handoff to modal and back)
         if s.contains(r#""currentTime""#) {
             if let Some(cur) = parse_yt_number(&s, "currentTime") {
-                // time that moves is playback (a video that cannot play reports 0)
-                if cur > 0.0 {
-                    set_is_frame_ready.set(true);
+                // the frame is shown when its time has moved a little past where it started (pictures are being drawn); the still
+                // picture stays until then, as Netflix's cards (a video that cannot play reports 0 and never moves)
+                if cur > 0.0 && !is_frame_ready.get_untracked() {
+                    match first_time.get_value() {
+                        None => first_time.set_value(Some(cur)),
+                        Some(start) if cur - start >= REVEAL_AFTER_SECONDS && is_playing.get_untracked() => {
+                            set_is_frame_ready.set(true);
+                            if let Some(cb) = on_ready_cb {
+                                cb.run(());
+                            }
+                        }
+                        _ => {}
+                    }
                 }
                 last_tracked_time.set_value(cur);
                 if cur > 0.0 {
