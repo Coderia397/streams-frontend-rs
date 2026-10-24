@@ -84,9 +84,8 @@ pub fn RecCard(
         move |_| {
             if let Some(cb) = on_play {
                 cb.run(rec_c.clone());
-            } else if let Some(w) = web_sys::window() {
-                let kind = if is_tv { "tv" } else { "movie" };
-                let _ = w.location().set_href(&format!("/watch/{}/{}", kind, rec_id));
+            } else {
+                crate::components::player::open::open_player(&crate::components::player::open::watch_url(rec_id, is_tv));
             }
         }
     };

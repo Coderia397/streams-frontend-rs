@@ -887,6 +887,8 @@ fn WebsiteDetails() -> impl IntoView {
 #[component]
 pub fn SharedTitleOpener() -> impl IntoView {
     keep_title_in_address();
+    // the player opens from anywhere, with full screen on the phone (components/player/open.rs); this component sits inside the router
+    crate::components::player::open::keep_navigate();
     let location = leptos_router::hooks::use_location();
     let ui_store = use_ui_store();
     let profile_store = crate::store::use_profile_store();

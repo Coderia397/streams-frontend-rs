@@ -7,6 +7,20 @@
    used, on any device (an iPad with a mouse included), and never sticks after a finger's tap (a touch laptop included). Tailwind's own
    rule asked the device instead (hover: hover), which is false on an iPad with a mouse and true on a touch laptop used with a finger. */
 @custom-variant hover (&:where(:root[data-input="mouse"] *, :root[data-input="pen"] *):hover);
+/* The width variants follow the form (src/form: data-form on the root), not the width alone: a phone held sideways is wider than 600 px
+   but keeps the phone designs (note 116). sm, md and lg still need their width on a tablet or computer. */
+@custom-variant sm {
+  @media (width >= 600px) { &:where(:root:not([data-form="phone"]) *) { @slot; } }
+}
+@custom-variant md {
+  @media (width >= 48rem) { &:where(:root:not([data-form="phone"]) *) { @slot; } }
+}
+@custom-variant lg {
+  @media (width >= 1024px) { &:where(:root:not([data-form="phone"]) *) { @slot; } }
+}
+@custom-variant max-sm {
+  &:where(:root[data-form="phone"] *) { @slot; }
+}
 /* Controls that only make sense for a pointer that rests (row arrows, page dots): gone while a finger is used, so an invisible arrow
    never catches a tap at a row's edge. */
 :root[data-input="touch"] .hover-only { display: none !important; }
@@ -24,19 +38,19 @@
   --search-open-w: 220px;
 }
 @media (min-width: 960px) {
-  :root { --search-open-w: 400px; }
+  :root:not([data-form="phone"]) { --search-open-w: 400px; }
 }
 @media (min-width: 600px) {
-  :root { --app-x: 36px; --tile-gap: 8px; --tile-radius: 8px; }
+  :root:not([data-form="phone"]) { --app-x: 36px; --tile-gap: 8px; --tile-radius: 8px; }
 }
 @media (min-width: 1280px) {
-  :root { --app-x: 48px; --tile-radius: 12px; }
+  :root:not([data-form="phone"]) { --app-x: 48px; --tile-radius: 12px; }
 }
 @media (min-width: 1600px) {
-  :root { --app-x: 60px; }
+  :root:not([data-form="phone"]) { --app-x: 60px; }
 }
 @media (min-width: 2560px) {
-  :root { --app-x: 72px; }
+  :root:not([data-form="phone"]) { --app-x: 72px; }
 }
 
 /* Tile width: whole tiles per row, 2 / 3 / 4 / 5 / 6 / 7 / 8 on the web (slot formula from Netflix:
@@ -45,22 +59,22 @@
   width: 28.23cqw;
 }
 @media (min-width: 600px) {
-  .tile-width { width: calc((100cqw - 2 * var(--app-x) - 2 * var(--tile-gap)) / 3); }
+  :root:not([data-form="phone"]) .tile-width { width: calc((100cqw - 2 * var(--app-x) - 2 * var(--tile-gap)) / 3); }
 }
 @media (min-width: 960px) {
-  .tile-width { width: calc((100cqw - 2 * var(--app-x) - 3 * var(--tile-gap)) / 4); }
+  :root:not([data-form="phone"]) .tile-width { width: calc((100cqw - 2 * var(--app-x) - 3 * var(--tile-gap)) / 4); }
 }
 @media (min-width: 1280px) {
-  .tile-width { width: calc((100cqw - 2 * var(--app-x) - 4 * var(--tile-gap)) / 5); }
+  :root:not([data-form="phone"]) .tile-width { width: calc((100cqw - 2 * var(--app-x) - 4 * var(--tile-gap)) / 5); }
 }
 @media (min-width: 1600px) {
-  .tile-width { width: calc((100cqw - 2 * var(--app-x) - 5 * var(--tile-gap)) / 6); }
+  :root:not([data-form="phone"]) .tile-width { width: calc((100cqw - 2 * var(--app-x) - 5 * var(--tile-gap)) / 6); }
 }
 @media (min-width: 1920px) {
-  .tile-width { width: calc((100cqw - 2 * var(--app-x) - 6 * var(--tile-gap)) / 7); }
+  :root:not([data-form="phone"]) .tile-width { width: calc((100cqw - 2 * var(--app-x) - 6 * var(--tile-gap)) / 7); }
 }
 @media (min-width: 2560px) {
-  .tile-width { width: calc((100cqw - 2 * var(--app-x) - 7 * var(--tile-gap)) / 8); }
+  :root:not([data-form="phone"]) .tile-width { width: calc((100cqw - 2 * var(--app-x) - 7 * var(--tile-gap)) / 8); }
 }
 
 /* Ranked (Top 10) card: one slot wide, numeral left half, poster right half. Phones use 47% of the row (about 2 cards). */
@@ -72,23 +86,19 @@
 .topten-num { fill: var(--color-page); stroke: var(--tt-stroke); }
 .topten-card .topten-svgwrap { display: block; height: 100%; margin-right: -9cqw; }
 .topten-card .topten-svgwrap > svg { display: block; height: 100%; width: auto; max-width: none; overflow: visible; }
-@media (max-width: 599.98px) {
-  .tile-width.topten-card { width: 43.67cqw; }
-  .topten-card .topten-poster { margin-left: 22.4%; width: 64.6%; }
-  .topten-card .topten-rank { left: 4.5%; width: auto; align-items: flex-end; justify-content: flex-start; }
-  .topten-card .topten-svgwrap { height: 40.7cqw; margin-right: 0; }
-  .topten-card .topten-num { stroke: var(--color-ink-mist); }
-}
+:root[data-form="phone"] .tile-width.topten-card { width: 43.67cqw; }
+:root[data-form="phone"] .topten-card .topten-poster { margin-left: 22.4%; width: 64.6%; }
+:root[data-form="phone"] .topten-card .topten-rank { left: 4.5%; width: auto; align-items: flex-end; justify-content: flex-start; }
+:root[data-form="phone"] .topten-card .topten-svgwrap { height: 40.7cqw; margin-right: 0; }
+:root[data-form="phone"] .topten-card .topten-num { stroke: var(--color-ink-mist); }
 
 /* Landscape rows on phones (continue watching) keep 2.15 tiles of 16:9. */
-@media (max-width: 599.98px) {
-  .tile-width.tile-landscape { width: calc((100cqw - var(--app-x) - 2 * var(--tile-gap)) / 2.15); }
-}
+:root[data-form="phone"] .tile-width.tile-landscape { width: calc((100cqw - var(--app-x) - 2 * var(--tile-gap)) / 2.15); }
 
 /* Tile shape: 5:7 posters on phones, 1.78125:1 backdrops from 600 up. */
 .movie-card-container { aspect-ratio: 5 / 7; }
 @media (min-width: 600px) {
-  .movie-card-container { aspect-ratio: 1.78125 / 1; }
+  :root:not([data-form="phone"]) .movie-card-container { aspect-ratio: 1.78125 / 1; }
 }
 
 /* Billboard (inset card): margin top / bottom per breakpoint, synopsis size and width. The nav is 80 high, the
@@ -98,19 +108,19 @@
   padding: calc(var(--nav-h) + var(--billboard-top-extra, 0px) + 4px) var(--app-x) 16px;
 }
 @media (min-width: 960px) {
-  .billboard-margin { padding-top: calc(var(--nav-h) + var(--billboard-top-extra, 0px) + 6px); padding-bottom: 26px; }
+  :root:not([data-form="phone"]) .billboard-margin { padding-top: calc(var(--nav-h) + var(--billboard-top-extra, 0px) + 6px); padding-bottom: 26px; }
 }
 @media (min-width: 1280px) {
-  .billboard-margin { padding-top: calc(var(--nav-h) + var(--billboard-top-extra, 0px) + 8px); padding-bottom: 36px; }
+  :root:not([data-form="phone"]) .billboard-margin { padding-top: calc(var(--nav-h) + var(--billboard-top-extra, 0px) + 8px); padding-bottom: 36px; }
 }
 @media (min-width: 1600px) {
-  .billboard-margin { padding-bottom: 32px; }
+  :root:not([data-form="phone"]) .billboard-margin { padding-bottom: 32px; }
 }
 @media (min-width: 1920px) {
-  .billboard-margin { padding-top: calc(var(--nav-h) + var(--billboard-top-extra, 0px) + 12px); }
+  :root:not([data-form="phone"]) .billboard-margin { padding-top: calc(var(--nav-h) + var(--billboard-top-extra, 0px) + 12px); }
 }
 @media (min-width: 2560px) {
-  .billboard-margin { padding-bottom: 36px; }
+  :root:not([data-form="phone"]) .billboard-margin { padding-bottom: 36px; }
 }
 .billboard-synopsis {
   font-size: 18px;
@@ -118,23 +128,23 @@
   max-width: 100%;
 }
 @media (min-width: 960px) {
-  .billboard-synopsis { line-height: 27px; max-width: 629px; }
+  :root:not([data-form="phone"]) .billboard-synopsis { line-height: 27px; max-width: 629px; }
 }
 @media (min-width: 1280px) {
-  .billboard-synopsis { font-size: 20px; line-height: 28px; max-width: 568px; }
+  :root:not([data-form="phone"]) .billboard-synopsis { font-size: 20px; line-height: 28px; max-width: 568px; }
 }
 @media (min-width: 1600px) {
-  .billboard-synopsis { max-width: 625px; }
+  :root:not([data-form="phone"]) .billboard-synopsis { max-width: 625px; }
 }
 @media (min-width: 1920px) {
-  .billboard-synopsis { font-size: 24px; }
+  :root:not([data-form="phone"]) .billboard-synopsis { font-size: 24px; }
 }
 
 /* Row block and row title (Netflix: title to tiles gap 10, 32 between rows; 16 / 18 / 24 weight 500). */
 /* the space between rows: only real rows count (an empty placeholder first in the list gave the first row a second gap under the billboard, 64 px where Netflix has 32) */
 .rows-stack > :not(:empty) ~ :not(:empty) { margin-top: 12px; }
 @media (min-width: 600px) {
-  .rows-stack > :not(:empty) ~ :not(:empty) { margin-top: 32px; }
+  :root:not([data-form="phone"]) .rows-stack > :not(:empty) ~ :not(:empty) { margin-top: 32px; }
 }
 /* The margin before a row's first card and after its last: the page margin less one gap, because the row's gap follows it, so the first card
    starts exactly at the page margin as on Netflix (it started one gap further in) and where an endless row pages to. */
@@ -148,11 +158,11 @@
   padding-bottom: 2px;
 }
 @media (min-width: 600px) {
-  .row-block { gap: 10px; }
+  :root:not([data-form="phone"]) .row-block { gap: 10px; }
 }
 /* from 1280 wide the cards start 14 px under the row title's line, as Netflix's (measured 2026-10-23 at 1736 on Films: title 920.4, cards 964.9); the strip adds 2 */
 @media (min-width: 1280px) {
-  .row-block { gap: 12px; }
+  :root:not([data-form="phone"]) .row-block { gap: 12px; }
 }
 /* phone: Netflix's Android app sets row titles at 18 sp, 21 px at the owner's 1.15 font scale (cap height 38 px on a Pixel 8), on a 30 px line (note 116) */
 .row-title {
@@ -162,10 +172,10 @@
   color: #fff;
 }
 @media (min-width: 600px) {
-  .row-title { font-size: 18px; line-height: 1.27; font-weight: 500; }
+  :root:not([data-form="phone"]) .row-title { font-size: 18px; line-height: 1.27; font-weight: 500; }
 }
 @media (min-width: 1280px) {
-  /* Netflix's 24 px row title takes a 30.5 px line (measured 2026-10-23 at 1736 wide on Films; a row is 194.6 tall with its cards, 32 px apart) */
+  :root:not([data-form="phone"]) /* Netflix's 24 px row title takes a 30.5 px line (measured 2026-10-23 at 1736 wide on Films; a row is 194.6 tall with its cards, :root:not([data-form="phone"]) 32 px apart) */
   .row-title { font-size: 24px; line-height: 30.5px; }
 }
 
@@ -205,7 +215,7 @@ body {
 }
 
 @media (min-width: 768px) {
-  body {
+  :root:not([data-form="phone"]) body {
     background-color: var(--color-page);
   }
 }
@@ -657,6 +667,11 @@ button,
    (--nav-shown, --hdr-solid) is set by layout/nav/phone/mod.rs. */
 .mobile-subnav { position: sticky; top: 0; z-index: 40; background: rgba(0, 0, 0, var(--hdr-solid, 0)); transform: translateY(calc(-100% * (1 - var(--nav-shown, 1)))); transition: transform 0.25s ease; }
 .mobile-pills-sticky { position: sticky; top: calc(var(--nav-h-mobile) + env(safe-area-inset-top)); z-index: 40; background: #000; transform: translateY(calc(-100% * (1 - var(--nav-shown, 1)))); transition: transform 0.25s ease; }
+
+/* The phone's player held upright (out of full screen): the buttons along the bottom show their icons only, so they fit the width. */
+@media (orientation: portrait) {
+  .phone-player-label { display: none; }
+}
 
 /* Edge buttons of a row (row_scroll.rs): the button is a tall clickable area over the margin (it has no look of its own, as the old rectangular button used to fill that space); everything visible
    belongs to the round pill in its middle: nearly solid at rest, blurred and more transparent while hovered, and easing back to solid slowly when the pointer leaves. */

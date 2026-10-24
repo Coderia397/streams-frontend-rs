@@ -1,7 +1,6 @@
 use leptos::prelude::*;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
-use leptos_router::hooks::use_navigate;
 use crate::store::use_watch_store;
 use crate::store::use_ui_store;
 
@@ -20,7 +19,6 @@ pub fn ContinueWatchingRow(
     let title = StoredValue::new(title);
     let watch_store = use_watch_store();
     let ui_store = use_ui_store();
-    let navigate = use_navigate();
     let scroll_ref = NodeRef::<leptos::html::Div>::new();
     let (can_scroll_left, set_can_scroll_left) = signal(false);
     let (can_scroll_right, set_can_scroll_right) = signal(true);
@@ -122,7 +120,6 @@ pub fn ContinueWatchingRow(
                                 <div class="row-edge" />
 
                                 {items.into_iter().map(|rec| {
-                                    let nav_play = navigate.clone();
                                     let id = rec.media_id;
                                     let is_tv = rec.is_tv;
                                     let season = rec.season;
@@ -145,7 +142,7 @@ pub fn ContinueWatchingRow(
                                     let target_url_for_play = target_url.clone();
                                     let handle_play = move |e: leptos::ev::MouseEvent| {
                                         e.stop_propagation();
-                                        nav_play(&target_url_for_play, Default::default());
+                                        crate::components::player::open::open_player(&target_url_for_play);
                                     };
 
                                     let handle_open_info = move |e: leptos::ev::MouseEvent| {

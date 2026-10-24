@@ -8,6 +8,7 @@ The icons in use are every `ph-<name>` in the source plus every string that is e
 icon="devices", which a component turns into `ph-{icon}`), in this app and in the engine (../streams-engine/src: the billboard's lines
 name their icons there). The full fonts stay in assets/phosphor/<weight>/ as the source.
 """
+import hashlib
 import pathlib, re, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -66,12 +67,21 @@ def main():
         s.populate(unicodes=codes)
         s.subset(f)
         subset.save_font(f, str(target), opts)
-        parts.append(f'@font-face {{ font-family: "{family}"; src: url("./icons-{weight}.woff2") format("woff2"); font-weight: normal; font-style: normal; font-display: block; }}')
+        # the address carries the font's content: a browser that kept the old font (same file name) takes the new one at once
+        stamp = hashlib.sha256(target.read_bytes()).hexdigest()[:10]
+        parts.append(f'@font-face {{ font-family: "{family}"; src: url("./icons-{weight}.woff2?v={stamp}") format("woff2"); font-weight: normal; font-style: normal; font-display: block; }}')
         parts.append(base_rule(weight))
         parts.extend(f'.{cls}.ph-{n}:before {{ content: "\\{table[n]}"; }}' for n in want if n in table)
         print(f"{weight}: {len(codes)} glyphs, {target.stat().st_size} bytes")
     out_css.write_text("\n".join(parts) + "\n", encoding="utf-8")
     print(f"icons.css: {out_css.stat().st_size} bytes, {len(want)} icons")
+    # the page links the stylesheet with its content too (index.html)
+    stamp = hashlib.sha256(out_css.read_bytes()).hexdigest()[:10]
+    page = ROOT / "index.html"
+    html = page.read_text(encoding="utf-8")
+    html = re.sub(r'href="/assets/phosphor/icons\.css(\?v=[0-9a-f]+)?"', f'href="/assets/phosphor/icons.css?v={stamp}"', html)
+    page.write_text(html, encoding="utf-8")
+    print(f"index.html: icons.css?v={stamp}")
 
 
 main()

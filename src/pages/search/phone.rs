@@ -41,7 +41,6 @@ fn can_listen() -> bool {
 #[component]
 fn SearchListRow(item: MediaItem) -> impl IntoView {
     let ui_store = use_ui_store();
-    let navigate = use_navigate();
     let (id, is_tv) = (item.id, item.is_tv());
     let title = item.display_title().to_string();
     let picture = item.backdrop_url("w300").or_else(|| item.poster_url("w300")).unwrap_or_default();
@@ -55,7 +54,7 @@ fn SearchListRow(item: MediaItem) -> impl IntoView {
     };
     let play = move |e: leptos::ev::MouseEvent| {
         e.stop_propagation();
-        navigate(&format!("/watch/{}/{}", if is_tv { "tv" } else { "movie" }, id), Default::default());
+        crate::components::player::open::open_player(&crate::components::player::open::watch_url(id, is_tv));
     };
     view! {
         // Netflix's app (note 116): a 140.5 x 79 px picture, the title 10 px after it at 15 sp (17 px at the owner's font scale)

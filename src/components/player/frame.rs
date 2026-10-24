@@ -1,0 +1,83 @@
+//! The box the player page draws in, one per form (note 114). The website: the whole window. The phone: Netflix's app plays in
+//! landscape, full screen (note 116), so the phone's frame asks the browser for full screen and a landscape lock when the player opens
+//! (a browser allows it only right after a tap: the Play that opened the page). When the browser leaves full screen (the phone locked,
+//! another app), the player stays as it is and its Full screen button brings it back (owner's choice, 2026-10-24: no turning by itself).
+//! Leaving the player gives both back.
+use leptos::prelude::*;
+use wasm_bindgen::{JsCast, JsValue};
+
+/// Full screen and a landscape lock; either may be refused (no tap just before, or a browser without them).
+pub fn enter_landscape() {
+    let Some(win) = web_sys::window() else { return };
+    let Some(doc) = win.document() else { return };
+    if doc.fullscreen_element().is_none() {
+        if let Some(root) = doc.document_element() {
+            let _ = root.request_fullscreen();
+        }
+    }
+    // screen.orientation.lock("landscape"), read by name (its web-sys type needs features the app does not use elsewhere)
+    let Ok(orientation) = js_sys::Reflect::get(&win.screen().map(JsValue::from).unwrap_or(JsValue::NULL), &"orientation".into()) else { return };
+    let Ok(lock) = js_sys::Reflect::get(&orientation, &"lock".into()).and_then(|f| f.dyn_into::<js_sys::Function>()) else { return };
+    if let Ok(promise) = lock.call1(&orientation, &"landscape".into()).and_then(|p| p.dyn_into::<js_sys::Promise>()) {
+        // a refusal is expected outside full screen; it is not an error of the page
+        let ignore = wasm_bindgen::closure::Closure::<dyn FnMut(JsValue)>::new(|_: JsValue| {});
+        let _ = promise.catch(&ignore);
+        ignore.forget();
+    }
+}
+
+pub fn leave_landscape() {
+    let Some(win) = web_sys::window() else { return };
+    if let Ok(orientation) = js_sys::Reflect::get(&win.screen().map(JsValue::from).unwrap_or(JsValue::NULL), &"orientation".into()) {
+        if let Ok(unlock) = js_sys::Reflect::get(&orientation, &"unlock".into()).and_then(|f| f.dyn_into::<js_sys::Function>()) {
+            let _ = unlock.call0(&orientation);
+        }
+    }
+    if let Some(doc) = win.document() {
+        if doc.fullscreen_element().is_some() {
+            doc.exit_fullscreen();
+        }
+    }
+}
+
+/// The player page's box for the form in use.
+#[component]
+pub fn PlayerFrame(children: ChildrenFn) -> impl IntoView {
+    let children = StoredValue::new(children);
+    view! {
+        <crate::form::ByForm
+            phone=move || view! { <PhoneFrame>{children.with_value(|c| c())}</PhoneFrame> }
+            desktop=move || view! { <div class="fixed inset-0 bg-void">{children.with_value(|c| c())}</div> }
+        />
+    }
+}
+
+#[component]
+fn PhoneFrame(children: Children) -> impl IntoView {
+    enter_landscape();
+    on_cleanup(leave_landscape);
+    // the phone locked or another app opened: the video pauses, as Netflix's app (the browser has left full screen; the Full screen
+    // button brings it back)
+    let on_hidden = wasm_bindgen::closure::Closure::<dyn Fn()>::new(|| {
+        let Some(doc) = web_sys::window().and_then(|w| w.document()) else { return };
+        if doc.hidden() {
+            if let Some(video) = doc.get_element_by_id(crate::keys::VIDEO_ELEMENT_ID).and_then(|e| e.dyn_into::<web_sys::HtmlMediaElement>().ok()) {
+                let _ = video.pause();
+            }
+        }
+    });
+    if let Some(doc) = web_sys::window().and_then(|w| w.document()) {
+        let _ = doc.add_event_listener_with_callback("visibilitychange", on_hidden.as_ref().unchecked_ref());
+    }
+    let kept = StoredValue::new_local(Some(on_hidden));
+    on_cleanup(move || {
+        kept.try_update_value(|k| {
+            if let (Some(cb), Some(doc)) = (k.take(), web_sys::window().and_then(|w| w.document())) {
+                let _ = doc.remove_event_listener_with_callback("visibilitychange", cb.as_ref().unchecked_ref());
+            }
+        });
+    });
+    view! {
+        <div class="fixed inset-0 bg-void">{children()}</div>
+    }
+}

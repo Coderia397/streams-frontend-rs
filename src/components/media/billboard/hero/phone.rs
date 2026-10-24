@@ -86,22 +86,8 @@ pub fn MobileHero(
         e.stop_propagation();
         if let Some(cb) = on_play {
             cb.run(movie_c3.clone());
-        } else if let Some(w) = web_sys::window() {
-            let watch_store = crate::store::use_watch_store();
-            let target = if let Some(rec) = watch_store.get_record(movie_id, is_tv) {
-                if is_tv && rec.season.is_some() && rec.episode.is_some() {
-                    format!("/watch/tv/{}?season={}&episode={}", movie_id, rec.season.unwrap(), rec.episode.unwrap())
-                } else if is_tv {
-                    format!("/watch/tv/{}", movie_id)
-                } else {
-                    format!("/watch/movie/{}", movie_id)
-                }
-            } else if is_tv {
-                format!("/watch/tv/{}", movie_id)
-            } else {
-                format!("/watch/movie/{}", movie_id)
-            };
-            let _ = w.location().set_href(&target);
+        } else {
+            crate::components::player::open::open_player(&crate::components::player::open::watch_url(movie_id, is_tv));
         }
     };
 

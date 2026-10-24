@@ -119,8 +119,8 @@ pub fn InfoModalEpisodes(
                                             move |_| {
                                                 if let Some(cb) = on_play_cb {
                                                     cb.run((series_id, season_val, ep_num));
-                                                } else if let Some(w) = web_sys::window() {
-                                                    let _ = w.location().set_href(&format!("/watch/tv/{}?season={}&episode={}", series_id, season_val, ep_num));
+                                                } else {
+                                                    crate::components::player::open::open_player(&format!("/watch/tv/{}?season={}&episode={}", series_id, season_val, ep_num));
                                                 }
                                             }
                                         };

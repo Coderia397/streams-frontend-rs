@@ -95,7 +95,9 @@ pub fn PlayerPage() -> impl IntoView {
     });
 
     view! {
-        <div class="w-full h-screen bg-void overflow-hidden select-none">
+        // the box of the form in use: the window on a computer; on a phone full screen in landscape (components/player/frame.rs)
+        <crate::components::player::frame::PlayerFrame>
+        <div class="w-full h-full bg-void overflow-hidden select-none">
             <Suspense fallback=move || view! {
                 <div class="w-full h-full flex items-center justify-center bg-void" role="status" aria-label=crate::i18n::t("player-loading")>
                     // as on Netflix: black, one thin arc turning in the middle, 4vw wide, no text
@@ -150,6 +152,7 @@ pub fn PlayerPage() -> impl IntoView {
                 }}
             </Suspense>
         </div>
+        </crate::components::player::frame::PlayerFrame>
     }
 }
 

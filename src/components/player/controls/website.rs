@@ -1,47 +1,17 @@
+//! The website's player controls (Netflix's website player), chosen by controls/mod.rs for tablets and computers.
 use leptos::prelude::*;
 use crate::components::player::timeline_scrubber::TimelineScrubber;
 
-fn format_time_remaining(curr: f64, dur: f64) -> String {
-    if dur <= 0.0 || curr.is_nan() || dur.is_nan() {
-        return "00:00".to_string();
-    }
-    let rem = (dur - curr).max(0.0).floor() as u64;
-    let hours = rem / 3600;
-    let mins = (rem % 3600) / 60;
-    let secs = rem % 60;
-    if hours > 0 {
-        format!("{}:{:02}:{:02}", hours, mins, secs)
-    } else {
-        format!("{:02}:{:02}", mins, secs)
-    }
-}
-
+/// The website's controls (Netflix's website player): the back and report buttons at the top, the timeline and one row of buttons at
+/// the bottom, hidden while the pointer rests.
 #[component]
-pub fn ControlsOverlay(
-    title: String,
-    subtitle: Signal<String>,
-    /// the next episode: number, name, summary and still, for the card that opens over the next episode button
-    next_info: Signal<Option<(u32, String, String, Option<String>)>>,
-    is_tv: bool,
-    is_playing: ReadSignal<bool>,
-    is_buffering: ReadSignal<bool>,
-    is_muted: ReadSignal<bool>,
-    volume: ReadSignal<f64>,
-    current_time: ReadSignal<f64>,
-    duration: ReadSignal<f64>,
-    buffered_fraction: ReadSignal<f64>,
-    is_idle: ReadSignal<bool>,
-    on_toggle_play: Callback<()>,
-    on_seek: Callback<f64>,
-    on_skip_by: Callback<f64>,
-    on_toggle_mute: Callback<()>,
-    on_set_volume: Callback<f64>,
-    on_toggle_episodes: Callback<()>,
-    on_toggle_subtitles: Callback<()>,
-    on_next_episode: Option<Callback<()>>,
-    on_toggle_fullscreen: Callback<()>,
-    on_back: Callback<()>,
-) -> impl IntoView {
+pub fn WebsiteControls(state: super::ControlsState) -> impl IntoView {
+    let super::ControlsState {
+        title, subtitle, next_info, is_tv, is_playing, is_buffering, is_muted, volume, current_time, duration, buffered_fraction, is_idle,
+        on_toggle_play, on_seek, on_skip_by, on_toggle_mute, on_set_volume, on_toggle_episodes, on_toggle_subtitles, on_next_episode,
+        on_toggle_fullscreen, on_back, ..
+    } = state;
+    let title = title.get_value();
     // 36 px icons inside 44 px buttons, as in the app
     let play_icon_class = move || if is_playing.get() { "ph-fill ph-pause text-icon" } else { "ph-fill ph-play text-icon" };
     let speaker_icon_class = move || {
@@ -80,7 +50,7 @@ pub fn ControlsOverlay(
                     <TimelineScrubber current_time=current_time duration=duration buffered_fraction=buffered_fraction on_seek=on_seek />
                 </div>
                 <span class="absolute right-[28px] top-[1px] w-11 text-right text-body-md leading-5 text-ink">
-                    {move || format_time_remaining(current_time.get(), duration.get())}
+                    {move || super::time_left(current_time.get(), duration.get())}
                 </span>
 
                 <div class="absolute left-[20px] right-[28px] top-[52px] flex h-11 items-center">

@@ -1,5 +1,4 @@
 use leptos::prelude::*;
-use leptos_router::hooks::use_navigate;
 use crate::store::{use_library_store, use_ui_store, LibraryEntry};
 use crate::services::tmdb::MediaItem;
 use crate::components::media::movie_card_badges::RatingBadge;
@@ -16,7 +15,6 @@ pub fn SpotlightCard(
     #[prop(default = false)] is_coming_soon: bool,
     #[prop(default = false)] hide_play: bool,
 ) -> impl IntoView {
-    let navigate = use_navigate();
     let library = use_library_store();
     let ui_store = use_ui_store();
 
@@ -56,21 +54,7 @@ pub fn SpotlightCard(
 
     let on_play_click = move |e: leptos::ev::MouseEvent| {
         e.stop_propagation();
-        let watch_store = crate::store::use_watch_store();
-        let target = if let Some(rec) = watch_store.get_record(movie_id, is_tv) {
-            if is_tv && rec.season.is_some() && rec.episode.is_some() {
-                format!("/watch/tv/{}?season={}&episode={}", movie_id, rec.season.unwrap(), rec.episode.unwrap())
-            } else if is_tv {
-                format!("/watch/tv/{}", movie_id)
-            } else {
-                format!("/watch/movie/{}", movie_id)
-            }
-        } else if is_tv {
-            format!("/watch/tv/{}", movie_id)
-        } else {
-            format!("/watch/movie/{}", movie_id)
-        };
-        navigate(&target, Default::default());
+        crate::components::player::open::open_player(&crate::components::player::open::watch_url(movie_id, is_tv));
     };
 
     let on_card_click = move |_: ()| {

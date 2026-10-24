@@ -30,6 +30,17 @@
     <link rel="apple-touch-startup-image" media="(device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/assets/logos/splash/splash-ipad-10.9.png" />
     <link rel="apple-touch-startup-image" media="(device-width: 744px) and (device-height: 1133px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/assets/logos/splash/splash-ipad-mini.png" />
     <script>
+      /* The form of the site before the first paint, by the same rule as src/form (phone: under 600 px wide, or a phone itself: a screen
+         under 600 px on its short side used by touch, held either way; desktop from 1024 px; tablet between); the app keeps it current. */
+      try {
+        var mq = function (q) { return window.matchMedia(q).matches; };
+        var mobile = navigator.userAgentData && typeof navigator.userAgentData.mobile === "boolean" ? navigator.userAgentData.mobile : /Mobi/.test(navigator.userAgent);
+        var phoneDevice = Math.min(screen.width, screen.height) < 600 && (mq("(pointer: coarse)") || mobile);
+        document.documentElement.setAttribute("data-form",
+          mq("(max-width: 599.98px)") || phoneDevice ? "phone" : mq("(min-width: 1024px)") ? "desktop" : "tablet");
+      } catch (e) {}
+    </script>
+    <script>
       /* The start animation is for the first visit and for a return after a long time. A visit within the last
          data-boot-quiet-minutes (set on <body>) never shows it. It also waits 1.2 s, so a quick start never shows it. */
       try {
@@ -102,7 +113,7 @@
       })();
     </script>
     <!-- Phosphor icons, cut down to the icons the site uses (scripts/subset_icons.py): one small stylesheet and three small fonts -->
-    <link rel="stylesheet" href="/assets/phosphor/icons.css" />
+    <link rel="stylesheet" href="/assets/phosphor/icons.css?v=9cbb908c80" />
     <!-- Trunk Rust binary target specification -->
     <link data-trunk rel="rust" data-bin="streams-frontend-rs" />
     <!-- Trunk will automatically hash and include this CSS file -->

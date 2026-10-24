@@ -1,6 +1,8 @@
 // Autoplay and resilient streaming subsystem
 pub mod timeline_scrubber;
-pub mod controls_overlay;
+pub mod controls;
+pub mod frame;
+pub mod open;
 pub mod episode_drawer;
 pub mod subtitle_drawer;
 pub mod skip_button;
@@ -15,7 +17,7 @@ use crate::components::hls_adapter::HlsPlayer;
 use crate::services::resolver::{resolve_stream, PlayableKind, StreamResolveResult};
 use crate::store::use_watch_store;
 
-use controls_overlay::ControlsOverlay;
+use controls::{ControlsState, PlayerControls};
 use episode_drawer::EpisodeDrawer;
 use subtitle_drawer::SubtitleDrawer;
 use skip_button::SkipButton;
@@ -73,6 +75,7 @@ pub fn StreamsPlayer(
     let (volume, set_volume) = signal(1.0);
     let (current_time, set_current_time) = signal(0.0);
     let (duration, set_duration) = signal(0.0);
+    let (speed, set_speed) = signal(1.0f64);
     let (buffered_fraction, set_buffered_fraction) = signal(0.0);
     let (is_idle, set_is_idle) = signal(false);
     let (pending_resume_time, set_pending_resume_time) = signal(0.0);
@@ -284,6 +287,14 @@ pub fn StreamsPlayer(
         }
     };
 
+    // Playback speed (the phone's speed menu)
+    let do_set_speed = move |v: f64| {
+        if let Some(video) = video_ref.get() {
+            video.set_playback_rate(v);
+        }
+        set_speed.set(v);
+    };
+
     // Fullscreen Toggle
     let do_toggle_fullscreen = move || {
         reset_idle_timer();
@@ -436,6 +447,7 @@ pub fn StreamsPlayer(
                 .and_then(|d| d.episodes.into_iter().find(|e| e.episode_number == episode.unwrap_or(1)).map(|e| e.name))
         } else { None }
     });
+    let episode_title_stored = StoredValue::new(episode_title.clone());
     let subtitle_header_text = move || {
         if is_tv {
             match episode_title.clone().or_else(|| ep_name.get().flatten()) {
@@ -466,12 +478,13 @@ pub fn StreamsPlayer(
     });
     let marks_sig = Signal::derive(move || marks_res.get().unwrap_or_default());
     let subtitle_sig = Signal::derive(subtitle_header_text);
+    let episode_name_sig = Signal::derive(move || episode_title_stored.get_value().or_else(|| ep_name.get().flatten()).filter(|n| !n.is_empty()));
 
     view! {
         <div
             node_ref=player_container_ref
             on:mousemove=on_mouse_move
-            class="relative w-full h-screen bg-void overflow-hidden select-none"
+            class="relative w-full h-full bg-void overflow-hidden select-none"
         >
             {move || match player_state.get() {
                 PlayerState::Resolving => view! {
@@ -549,35 +562,40 @@ pub fn StreamsPlayer(
                                             playsinline=true
                                         />
 
-                                        // Controls Overlay
-                                        <ControlsOverlay
-                                            title=title_stored.get_value()
-                                            subtitle=subtitle_sig
-                                            next_info=next_sig
-                                            is_tv=is_tv
-                                            is_playing=is_playing
-                                            is_buffering=is_buffering
-                                            is_muted=is_muted
-                                            volume=volume
-                                            current_time=current_time
-                                            duration=duration
-                                            buffered_fraction=buffered_fraction
-                                            is_idle=is_idle
-                                            on_toggle_play=Callback::new(move |_| do_toggle_play())
-                                            on_seek=Callback::new(move |t| do_seek(t))
-                                            on_skip_by=Callback::new(move |d| do_skip_by(d))
-                                            on_toggle_mute=Callback::new(move |_| do_toggle_mute())
-                                            on_set_volume=Callback::new(move |v| do_set_volume(v))
-                                            on_toggle_episodes=Callback::new(move |_| set_is_episodes_open.update(|o| *o = !*o))
-                                            on_toggle_subtitles=Callback::new(move |_| set_is_subtitles_open.update(|o| *o = !*o))
-                                            on_next_episode=on_episode_change.map(|cb| Callback::new(move |_| {
+                                        // the controls of the form in use (controls/: website.rs, phone.rs)
+                                        <PlayerControls state=ControlsState {
+                                            title: title_stored,
+                                            subtitle: subtitle_sig,
+                                            next_info: next_sig,
+                                            episode: if is_tv { Some((season.unwrap_or(1), episode.unwrap_or(1))) } else { None },
+                                            episode_name: episode_name_sig,
+                                            media_id,
+                                            is_tv,
+                                            is_playing,
+                                            is_buffering,
+                                            is_muted,
+                                            volume,
+                                            current_time,
+                                            duration,
+                                            buffered_fraction,
+                                            is_idle,
+                                            speed,
+                                            on_set_speed: Callback::new(move |v| do_set_speed(v)),
+                                            on_toggle_play: Callback::new(move |_| do_toggle_play()),
+                                            on_seek: Callback::new(move |t| do_seek(t)),
+                                            on_skip_by: Callback::new(move |d| do_skip_by(d)),
+                                            on_toggle_mute: Callback::new(move |_| do_toggle_mute()),
+                                            on_set_volume: Callback::new(move |v| do_set_volume(v)),
+                                            on_toggle_episodes: Callback::new(move |_| set_is_episodes_open.update(|o| *o = !*o)),
+                                            on_toggle_subtitles: Callback::new(move |_| set_is_subtitles_open.update(|o| *o = !*o)),
+                                            on_next_episode: on_episode_change.map(|cb| Callback::new(move |_| {
                                                 let next_ep = episode.unwrap_or(1) + 1;
                                                 let curr_s = season.unwrap_or(1);
                                                 cb.run((curr_s, next_ep));
-                                            }))
-                                            on_toggle_fullscreen=Callback::new(move |_| do_toggle_fullscreen())
-                                            on_back=on_close
-                                        />
+                                            })),
+                                            on_toggle_fullscreen: Callback::new(move |_| do_toggle_fullscreen()),
+                                            on_back: on_close,
+                                        } />
 
                                         // the age rating card, once at the start of a play
                                         <RatingCard media_id=media_id is_tv=is_tv season=season episode=episode current_time=current_time />
