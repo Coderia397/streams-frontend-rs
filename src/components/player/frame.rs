@@ -12,7 +12,16 @@ pub fn enter_landscape() {
     let Some(doc) = win.document() else { return };
     if doc.fullscreen_element().is_none() {
         if let Some(root) = doc.document_element() {
-            let _ = root.request_fullscreen();
+            // the standard call, or Safari's older prefixed one (iPad, Mac before 16.4); an iPhone's Safari has neither for a page
+            let standard = js_sys::Reflect::get(&root, &"requestFullscreen".into()).ok().filter(|f| f.is_function());
+            let prefixed = js_sys::Reflect::get(&root, &"webkitRequestFullscreen".into()).ok().filter(|f| f.is_function());
+            if let Some(f) = standard.or(prefixed).and_then(|f| f.dyn_into::<js_sys::Function>().ok()) {
+                if let Ok(p) = f.call0(&root).and_then(|p| p.dyn_into::<js_sys::Promise>()) {
+                    let ignore = wasm_bindgen::closure::Closure::<dyn FnMut(JsValue)>::new(|_: JsValue| {});
+                    let _ = p.catch(&ignore);
+                    ignore.forget();
+                }
+            }
         }
     }
     // screen.orientation.lock("landscape"), read by name (its web-sys type needs features the app does not use elsewhere)
