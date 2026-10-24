@@ -52,10 +52,28 @@ pub fn PlayerFrame(children: ChildrenFn) -> impl IntoView {
     }
 }
 
+/// The page may draw under the camera's cutout while the player is open (`viewport-fit=cover`), as Netflix's player does: its menus
+/// start 36 px from the screen's edge, its controls keep clear of the cutout (env(safe-area-inset-*)). Other pages keep the default,
+/// so nothing of theirs goes under a notch.
+fn cover_cutout(on: bool) {
+    let Some(meta) = web_sys::window().and_then(|w| w.document()).and_then(|d| d.query_selector("meta[name=viewport]").ok().flatten()) else { return };
+    let content = meta.get_attribute("content").unwrap_or_default();
+    let base: Vec<&str> = content.split(',').map(str::trim).filter(|p| !p.is_empty() && !p.starts_with("viewport-fit")).collect();
+    let mut parts = base.join(", ");
+    if on {
+        parts.push_str(", viewport-fit=cover");
+    }
+    let _ = meta.set_attribute("content", &parts);
+}
+
 #[component]
 fn PhoneFrame(children: Children) -> impl IntoView {
     enter_landscape();
-    on_cleanup(leave_landscape);
+    cover_cutout(true);
+    on_cleanup(|| {
+        leave_landscape();
+        cover_cutout(false);
+    });
     // the phone locked or another app opened: the video pauses, as Netflix's app (the browser has left full screen; the Full screen
     // button brings it back)
     let on_hidden = wasm_bindgen::closure::Closure::<dyn Fn()>::new(|| {

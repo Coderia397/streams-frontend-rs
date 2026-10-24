@@ -423,25 +423,7 @@ fn Episodes(series_id: u32, seasons: u32, season: RwSignal<u32>) -> impl IntoVie
                 </div>
             </Suspense>
         </div>
-        // the app's season menu: the seasons in a list over the page, the one shown in bold, a round close button under them
-        <Show when=move || menu_open.get()>
-            <div class="fixed inset-0 z-(--z-sheet) flex flex-col items-center justify-center bg-void/90 animate-in fade-in" on:click=move |_| menu_open.set(false)>
-                <div class="flex max-h-[70vh] flex-col items-center gap-1 overflow-y-auto scrollbar-hide py-4">
-                    {(1..=seasons).map(|n| view! {
-                        <button
-                            type="button"
-                            on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); season.set(n); menu_open.set(false); }
-                            class=move || format!("px-6 py-3 cursor-pointer {}", if season.get() == n { "text-title-md font-bold text-ink" } else { "text-title-sm text-ink-body" })
-                        >
-                            {crate::i18n::t_args("media-season-n", &[("n", fluent_bundle::FluentValue::from(n as i64))])}
-                        </button>
-                    }).collect_view()}
-                </div>
-                <button type="button" on:click=move |_| menu_open.set(false) aria-label=crate::i18n::t("action-buttons-close") class="mt-4 flex h-14 w-14 items-center justify-center rounded-full bg-ink text-void cursor-pointer">
-                    <i class="ph-bold ph-x text-2xl"></i>
-                </button>
-            </div>
-        </Show>
+        <super::season_picker::SeasonPicker open=menu_open seasons=seasons season=season />
     }
 }
 

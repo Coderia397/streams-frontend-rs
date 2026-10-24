@@ -595,6 +595,22 @@ pub fn StreamsPlayer(
                                             })),
                                             on_toggle_fullscreen: Callback::new(move |_| do_toggle_fullscreen()),
                                             on_back: on_close,
+                                            subtitles: Signal::derive(current_subtitle_tracks),
+                                            selected_sub: selected_sub_url,
+                                            audio_tracks: audio_tracks.into(),
+                                            audio_selected: audio_selected.into(),
+                                            on_select_audio: Callback::new(move |i| {
+                                                if let Some(p) = hls_player.get_untracked() { p.set_audio_track(i); }
+                                                set_audio_selected.set(i);
+                                            }),
+                                            on_select_sub: Callback::new(move |u| set_selected_sub_url.set(u)),
+                                            on_refresh_audio: Callback::new(move |_| {
+                                                if let Some(p) = hls_player.get_untracked() {
+                                                    audio_tracks.set(p.audio_tracks());
+                                                    set_audio_selected.set(p.audio_track());
+                                                }
+                                            }),
+                                            on_select_episode: on_episode_change,
                                         } />
 
                                         // the age rating card, once at the start of a play
@@ -616,6 +632,10 @@ pub fn StreamsPlayer(
                                             })
                                         />
 
+                                        // the website's drawers; the phone's menus are inside its controls (controls/phone)
+                                        <crate::form::ByForm
+                                            phone=|| ()
+                                            desktop=move || view! {
                                         // Episode Drawer
                                         <EpisodeDrawer
                                             series_id=media_id
@@ -645,6 +665,8 @@ pub fn StreamsPlayer(
                                             on_select_sub=Callback::new(move |u| set_selected_sub_url.set(u))
                                             on_change_delay=Callback::new(move |d| set_sub_delay.set(d))
                                             on_close=Callback::new(move |_| set_is_subtitles_open.set(false))
+                                        />
+                                            }
                                         />
                                     </div>
                                 }.into_any()

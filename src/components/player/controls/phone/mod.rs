@@ -9,25 +9,41 @@ use leptos::prelude::*;
 use super::{time_left, ControlsState};
 use crate::components::media::movie_card_rating::{MovieRating, RatingIcon};
 
+pub mod audio_subtitles;
+pub mod episodes;
+pub mod report;
+pub mod speed;
+
+use speed::speed_label;
+
 /// How long the controls stay after the last touch while the video plays, in milliseconds.
 const SHOW_MS: u64 = 4_000;
-/// The speeds of the speed menu, as Netflix's.
-const SPEEDS: [f64; 5] = [0.5, 0.75, 1.0, 1.25, 1.5];
-
-fn speed_label(v: f64) -> String {
-    let s = format!("{v}");
-    format!("{s}x")
-}
+/// How long the locked screen's button stays after a tap, in milliseconds.
+const LOCK_HINT_MS: u64 = 3_000;
 
 #[component]
 pub fn PhoneControls(state: ControlsState) -> impl IntoView {
     let ControlsState {
         title, episode, episode_name, media_id, is_tv, is_playing, is_buffering, current_time, duration, speed, on_set_speed,
-        on_toggle_play, on_seek, on_skip_by, on_toggle_episodes, on_toggle_subtitles, on_next_episode, on_back, ..
+        on_toggle_play, on_seek, on_skip_by, on_next_episode, on_back, subtitles, selected_sub, audio_tracks, audio_selected,
+        on_select_audio, on_select_sub, on_refresh_audio, on_select_episode, ..
     } = state;
     let shown = RwSignal::new(true);
     let locked = RwSignal::new(false);
+    // the phone's menus, each over the whole screen as the app's
     let speed_open = RwSignal::new(false);
+    let subs_open = RwSignal::new(false);
+    let episodes_open = RwSignal::new(false);
+    let report_open = RwSignal::new(false);
+    // locked: a tap shows the lock button for a moment; the button asks to confirm; the confirmation unlocks
+    let lock_hint = RwSignal::new(false);
+    let lock_confirm = RwSignal::new(false);
+    let lock_timer = StoredValue::new(None::<leptos::leptos_dom::helpers::TimeoutHandle>);
+    let hint_lock = move || {
+        lock_hint.set(true);
+        if let Some(h) = lock_timer.get_value() { h.clear(); }
+        lock_timer.set_value(leptos::leptos_dom::helpers::set_timeout_with_handle(move || { lock_hint.try_set(false); lock_confirm.try_set(false); }, std::time::Duration::from_millis(LOCK_HINT_MS)).ok());
+    };
     // whether the browser is in full screen (it leaves it by itself when the phone locks or another app opens)
     let is_full = || web_sys::window().and_then(|w| w.document()).is_some_and(|d| d.fullscreen_element().is_some());
     let full_screen = RwSignal::new(is_full());
@@ -85,7 +101,7 @@ pub fn PhoneControls(state: ControlsState) -> impl IntoView {
 
     view! {
         // the tap catcher over the video: a tap shows the controls, a tap while they show hides them
-        <div class="absolute inset-0 z-20 select-none" on:click=move |_| if locked.get_untracked() || !shown.get_untracked() { touch() } else { shown.set(false) }></div>
+        <div class="absolute inset-0 z-20 select-none" on:click=move |_| if locked.get_untracked() { hint_lock() } else if !shown.get_untracked() { touch() } else { shown.set(false) }></div>
 
         // the buffering ring, whether the controls show or not
         <Show when=move || is_buffering.get()>
@@ -94,13 +110,26 @@ pub fn PhoneControls(state: ControlsState) -> impl IntoView {
             </div>
         </Show>
 
-        // locked: one button at the bottom, which unlocks
-        <Show when=move || locked.get() && shown.get()>
-            <div class="absolute inset-x-0 bottom-[24px] z-30 flex flex-col items-center gap-2">
-                <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); locked.set(false); touch(); } class="btn-circle btn-circle-lg bg-ink/15" aria-label=crate::i18n::t("player-unlock")>
-                    <i class="ph-fill ph-lock-simple text-heading"></i>
-                </button>
-                <span class="text-body-sm text-ink">{crate::i18n::t("player-screen-locked")}</span>
+        // locked (Netflix's): a tap shows a white lock button with "Screen Locked" and "Tap to Unlock"; the button turns into a pill,
+        // "Unlock controls?", and that unlocks
+        <Show when=move || locked.get() && lock_hint.get()>
+            <div class="absolute inset-x-0 bottom-[46px] z-30 flex flex-col items-center text-ink animate-in fade-in">
+                {move || if lock_confirm.get() {
+                    view! {
+                        <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); locked.set(false); lock_hint.set(false); lock_confirm.set(false); touch(); } class="btn-pill h-[51px] gap-2 bg-ink px-6 text-body-lg font-bold text-void">
+                            <i class="ph ph-lock-simple-open text-title"></i>
+                            {crate::i18n::t("player-unlock-confirm")}
+                        </button>
+                    }.into_any()
+                } else {
+                    view! {
+                        <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); lock_confirm.set(true); hint_lock(); } class="btn-circle btn-circle-lg bg-ink text-void" aria-label=crate::i18n::t("player-unlock")>
+                            <i class="ph ph-lock-simple text-heading"></i>
+                        </button>
+                    }.into_any()
+                }}
+                <span class="mt-2 text-body-lg">{crate::i18n::t("player-screen-locked")}</span>
+                <span class="text-body-sm text-ink-body">{crate::i18n::t("player-tap-to-unlock")}</span>
             </div>
         </Show>
 
@@ -131,10 +160,10 @@ pub fn PhoneControls(state: ControlsState) -> impl IntoView {
                         }).collect_view()}
                     </div>
                     <span class="flex-1"></span>
-                    <a href="/help/contact" on:click=|e: leptos::ev::MouseEvent| e.stop_propagation() class="flex h-14 w-14 shrink-0 items-center justify-center" aria-label=crate::i18n::t("controls-overlay-report-problem")>
+                    <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); report_open.set(true); } class="flex h-14 w-14 shrink-0 items-center justify-center" aria-label=crate::i18n::t("controls-overlay-report-problem")>
                         <i class="ph ph-flag text-heading"></i>
-                    </a>
-                    <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); locked.set(true); touch(); } class="flex h-14 w-14 shrink-0 items-center justify-center" aria-label=crate::i18n::t("player-lock")>
+                    </button>
+                    <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); locked.set(true); shown.set(false); hint_lock(); } class="flex h-14 w-14 shrink-0 items-center justify-center" aria-label=crate::i18n::t("player-lock")>
                         <i class="ph ph-lock-simple-open text-heading"></i>
                     </button>
                 </div>
@@ -172,17 +201,17 @@ pub fn PhoneControls(state: ControlsState) -> impl IntoView {
                         <i class=move || if full_screen.get() { "ph ph-corners-in text-heading" } else { "ph ph-corners-out text-heading" }></i>
                         <span class="phone-player-label">{move || if full_screen.get() { crate::i18n::t("player-exit-full-screen") } else { crate::i18n::t("player-full-screen") }}</span>
                     </button>
-                    <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); speed_open.set(true); touch(); } class="flex h-12 items-center gap-3 text-body-lg font-semibold">
+                    <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); speed_open.set(true); shown.set(false); } class="flex h-12 items-center gap-3 text-body-lg font-semibold">
                         <i class="ph ph-gauge text-heading"></i>
                         <span class="phone-player-label">{move || crate::i18n::t_args("player-speed", &[("speed", fluent_bundle::FluentValue::from(speed_label(speed.get())))])}</span>
                     </button>
                     {is_tv.then(|| view! {
-                        <button type="button" on:click=act(on_toggle_episodes) class="flex h-12 items-center gap-3 text-body-lg font-semibold">
+                        <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); episodes_open.set(true); } class="flex h-12 items-center gap-3 text-body-lg font-semibold">
                             <i class="ph ph-cards text-heading"></i>
                             <span class="phone-player-label">{crate::i18n::t("media-episodes")}</span>
                         </button>
                     })}
-                    <button type="button" on:click=act(on_toggle_subtitles) class="flex h-12 items-center gap-3 text-body-lg font-semibold">
+                    <button type="button" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); on_refresh_audio.run(()); subs_open.set(true); } class="flex h-12 items-center gap-3 text-body-lg font-semibold">
                         <i class="ph ph-subtitles text-heading"></i>
                         <span class="phone-player-label">{crate::i18n::t("controls-overlay-audio-subtitles")}</span>
                     </button>
@@ -196,30 +225,26 @@ pub fn PhoneControls(state: ControlsState) -> impl IntoView {
             </div>
         </div>
 
-        // the speed menu: the five speeds on a line over the darkened video, the one in use marked, a close button at the top right
-        <Show when=move || speed_open.get()>
-            <div class="absolute inset-0 z-40 flex flex-col items-center justify-center bg-void/85 text-ink" on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); speed_open.set(false); touch(); }>
-                <button type="button" class="absolute right-[calc(env(safe-area-inset-right)+16px)] top-4 btn-circle btn-circle-md" aria-label=crate::i18n::t("action-buttons-close")>
-                    <i class="ph-bold ph-x text-title"></i>
-                </button>
-                <p class="mb-10 text-title-md font-bold">{crate::i18n::t("player-speed-title")}</p>
-                <div class="relative flex w-[min(640px,80%)] items-start justify-between">
-                    <span class="absolute left-[12px] right-[12px] top-[11px] h-[2px] bg-ink/40" aria-hidden="true"></span>
-                    {SPEEDS.into_iter().map(|v| view! {
-                        <button
-                            type="button"
-                            on:click=move |e: leptos::ev::MouseEvent| { e.stop_propagation(); on_set_speed.run(v); speed_open.set(false); touch(); }
-                            class="relative flex w-6 flex-col items-center gap-4"
-                        >
-                            <span class=move || format!("block rounded-full bg-ink {}", if (speed.get() - v).abs() < 0.01 { "h-6 w-6" } else { "mt-[6px] h-3 w-3" })></span>
-                            <span class=move || format!("whitespace-nowrap text-body-md {}", if (speed.get() - v).abs() < 0.01 { "font-bold" } else { "text-ink-body" })>
-                                {if (v - 1.0).abs() < 0.01 { crate::i18n::t("player-speed-normal") } else { speed_label(v) }}
-                            </span>
-                        </button>
-                    }).collect_view()}
-                </div>
-            </div>
-        </Show>
+        <speed::SpeedSlider open=speed_open speed=speed on_set_speed=on_set_speed />
+        <audio_subtitles::AudioSubtitlesMenu
+            open=subs_open
+            subtitles=subtitles
+            selected_sub=selected_sub
+            audio_tracks=audio_tracks
+            audio_selected=audio_selected
+            on_select_audio=on_select_audio
+            on_select_sub=on_select_sub
+        />
+        {episode.map(|current| view! {
+            <episodes::EpisodesMenu
+                open=episodes_open
+                series_id=media_id
+                current=current
+                progress=Signal::derive(move || if duration.get() > 0.0 { current_time.get() / duration.get() } else { 0.0 })
+                on_select_episode=on_select_episode
+            />
+        })}
+        <report::ReportMenu open=report_open />
     }
 }
 

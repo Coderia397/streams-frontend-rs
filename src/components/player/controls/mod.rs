@@ -42,6 +42,17 @@ pub struct ControlsState {
     pub on_next_episode: Option<Callback<()>>,
     pub on_toggle_fullscreen: Callback<()>,
     pub on_back: Callback<()>,
+    /// The phone's own menus (the website keeps its drawers in player/mod.rs): the subtitles and audio of the stream, the choice made,
+    /// and moving to another episode
+    pub subtitles: Signal<Vec<crate::services::resolver::SubtitleTrack>>,
+    pub selected_sub: ReadSignal<Option<String>>,
+    pub audio_tracks: Signal<Vec<(i32, String)>>,
+    pub audio_selected: Signal<i32>,
+    pub on_select_audio: Callback<i32>,
+    pub on_select_sub: Callback<Option<String>>,
+    /// Reads the stream's audio tracks again (they come a moment after it starts)
+    pub on_refresh_audio: Callback<()>,
+    pub on_select_episode: Option<Callback<(u32, u32)>>,
 }
 
 /// The time left, as the players show it (`06:55`, `1:02:10`).
