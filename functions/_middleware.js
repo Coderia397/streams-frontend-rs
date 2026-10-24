@@ -34,6 +34,9 @@ const PAGES = {
 };
 
 const APP_WASM = /^\/streams-frontend-rs-[0-9a-f]+_bg\.wasm$/;
+// the home page's title and summary in search results and link previews (owner, 2026-10-24): the brand alone matched nothing people type
+const HOME_TITLE = `${BRAND}: Free Films and Series, Picked for You`;
+const HOME_DESCRIPTION = `Find your next film or series on ${BRAND}. Rows picked for your taste, trailers, a Kids profile, and no subscription or card.`;
 
 export async function onRequest({ request, next, env }) {
   const url = new URL(request.url);
@@ -98,7 +101,7 @@ export async function onRequest({ request, next, env }) {
   }
   if (p === "/" && !(ours && host === HELP) && env && env.ASSETS) {
     const first = await landingFirstView(env, url.origin).catch(() => null);
-    return withHead(res, { url: `${origin}/` }, first);
+    return withHead(res, { title: HOME_TITLE, description: HOME_DESCRIPTION, url: `${origin}/` }, first);
   }
   const page = PAGES[p] || (p.startsWith("/help/") ? PAGES["/help"] : null);
   return withHead(res, {
