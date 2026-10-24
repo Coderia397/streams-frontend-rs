@@ -3,7 +3,8 @@
 //! pauses it under a large play mark. On the right: sound, My List, Share and the title's round poster with its logo, which opens the
 //! title; at the bottom left: the title, its tags and its synopsis (in full for a moment on the first clip only, then one line with
 //! "more"), and a line with its length; at its end a clip plays again. Netflix cuts vertical clips; here a clip is a scene from the title
-//! that TMDB lists (its trailer when it lists none), from its first second, cropped to fill the screen.
+//! that TMDB lists (its trailer when it lists none), from its first second, cropped to fill the screen. The feed runs on through the
+//! titles of the profile's Home rows (about 400) in the order of order.rs, ten at a time; what the person does with a clip goes to the engine.
 //! The website has no Clips (lib.rs sends a computer Home).
 use leptos::prelude::*;
 use leptos::html::Div;
@@ -12,6 +13,8 @@ use crate::services::tmdb::{fetch_videos, select_clip, MediaItem};
 use crate::store::{use_library_store, use_ui_store, LibraryEntry};
 use crate::components::trailer_player::TrailerPlayer;
 use crate::components::media::icons::app_icons::{AppIcon, Glyph};
+
+mod order;
 
 /// How long the synopsis shows in full when a clip comes into view, before it shortens to one line.
 const SYNOPSIS_MS: u64 = 5_000;
@@ -25,19 +28,60 @@ thread_local! {
     static PASSED_OVER: std::cell::RefCell<Vec<String>> = const { std::cell::RefCell::new(Vec::new()) };
 }
 
+/// Clips added at a time; the next ones are added when the clip in view is BATCH_AHEAD from the end.
+const BATCH: usize = 10;
+const BATCH_AHEAD: usize = 4;
+/// A clip left this soon after it began playing tells the engine "not for me" (the owner's feed suggestion 3).
+const SKIP_MS: f64 = 3_000.0;
+
 #[component]
 pub fn ClipsPage() -> impl IntoView {
-    let feed = LocalResource::new(move || async move {
-        // what is being watched today, from the engine (age limit applied there); TMDB only when the engine cannot be reached
-        if let Some(rows) = crate::services::ai_engine::fetch_new_popular_n(Some("watching"), Some(20)).await {
-            if let Some(row) = rows.first() {
-                return row.to_media_items();
-            }
+    // the profile's titles for the personal rows (read here: they come from the page's stores)
+    let signals = StoredValue::new(crate::services::ai_engine::personal_signals());
+    // the clips on the page with their places; titles come once
+    let shown = RwSignal::new(Vec::<(usize, MediaItem)>::new());
+    let shown_keys = StoredValue::new(std::collections::HashSet::<(bool, u32)>::new());
+    let adding = StoredValue::new(false);
+    let no_more = StoredValue::new(false);
+    // the next BATCH, in the order of order.rs; the engine's rows are read again each time, so they follow what the person has swiped
+    // since (the session's taste, services/ai_engine::send_feedback)
+    let add_more = move || {
+        if adding.get_value() || no_more.get_value() {
+            return;
         }
-        crate::services::tmdb::fetch_trending("all").await.unwrap_or_default()
-    });
+        adding.set_value(true);
+        leptos::task::spawn_local(async move {
+            use crate::services::ai_engine::{fetch_feed_page, fetch_new_popular_n};
+            let trending = fetch_new_popular_n(Some("watching"), Some(40)).await.and_then(|rows| rows.into_iter().next()).map(|r| r.items).unwrap_or_default();
+            let rows = fetch_feed_page("home", None, Some(24), &signals.get_value()).await.map(|p| p.rows).unwrap_or_default();
+            let next = order::order(&trending, &rows, &shown_keys.get_value());
+            let mut batch: Vec<MediaItem> = next.iter().take(BATCH).map(|v| v.to_media_item()).collect();
+            if batch.is_empty() && shown_keys.with_value(|k| k.is_empty()) {
+                // the engine cannot be reached: TMDB's trending titles
+                batch = crate::services::tmdb::fetch_trending("all").await.unwrap_or_default();
+                no_more.set_value(true);
+            }
+            if batch.is_empty() {
+                no_more.set_value(true);
+            }
+            shown_keys.update_value(|k| k.extend(batch.iter().map(|m| (m.is_tv(), m.id))));
+            shown.try_update(|s| {
+                let n = s.len();
+                s.extend(batch.into_iter().enumerate().map(|(i, m)| (n + i, m)));
+            });
+            adding.set_value(false);
+        });
+    };
+    add_more();
     // the clip in view (its place in the list)
     let current = RwSignal::new(0usize);
+    Effect::new(move |_| {
+        let c = current.get();
+        let n = shown.with(|s| s.len());
+        if n > 0 && c + BATCH_AHEAD >= n {
+            add_more();
+        }
+    });
     // Clips play with sound, as Netflix's; a browser allows sound only once the person has touched the page, so before that they start
     // muted. Its own setting: the trailers elsewhere keep theirs
     let touched = web_sys::window()
@@ -51,9 +95,9 @@ pub fn ClipsPage() -> impl IntoView {
     view! {
         <crate::components::layout::Layout>
             <div class="fixed inset-0 z-(--z-dialog) overflow-y-scroll snap-y snap-mandatory overscroll-contain scrollbar-hide bg-void">
-                <Suspense fallback=|| view! { <div class="h-dvh w-full skeleton"></div> }>
-                    {move || feed.get().map(|items| items.into_iter().enumerate().map(|(i, item)| view! { <Clip item=item index=i current=current muted=muted /> }).collect_view())}
-                </Suspense>
+                <Show when=move || shown.with(|s| !s.is_empty()) fallback=|| view! { <div class="h-dvh w-full skeleton"></div> }>
+                    <For each=move || shown.get() key=|(i, m)| (*i, m.id) children=move |(i, item)| view! { <Clip item=item index=i current=current muted=muted /> } />
+                </Show>
             </div>
         </crate::components::layout::Layout>
     }
@@ -99,16 +143,20 @@ fn Clip(item: MediaItem, index: usize, current: RwSignal<usize>, muted: RwSignal
         }
     });
     let active = Memo::new(move |_| current.get() == index);
-    // the trailer is looked up when the clip is in view or next, so the next swipe finds it ready
+    // the player is set up when the clip is in view or next, so the next swipe finds it ready
     let near = Memo::new(move |_| { let c = current.get(); index == c || index == c + 1 });
+    // its videos are looked up two clips ahead, so a title with none is gone before a swipe reaches it (the owner's feed suggestion 5)
+    let ahead = Memo::new(move |_| { let c = current.get(); index >= c && index <= c + 2 });
     let (videos, set_videos) = signal(Vec::new());
+    let (found, set_found) = signal(false);
     let looked_up = StoredValue::new(false);
     Effect::new(move |_| {
-        if near.get() && !looked_up.get_value() {
+        if ahead.get() && !looked_up.get_value() {
             looked_up.set_value(true);
             leptos::task::spawn_local(async move {
                 if let Ok(v) = fetch_videos(id, is_tv).await {
                     set_videos.set(v);
+                    set_found.set(true);
                 }
             });
         }
@@ -123,6 +171,8 @@ fn Clip(item: MediaItem, index: usize, current: RwSignal<usize>, muted: RwSignal
     });
     let video_key = Memo::new(move |_| pick.get().map(|(k, _)| k));
     let is_scene = Signal::derive(move || pick.get().is_some_and(|(_, scene)| scene));
+    // no video that plays here: the clip is left out of the feed
+    let no_video = Memo::new(move |_| found.get() && pick.get().is_none());
 
     let (ready, set_ready) = signal(false);
     let (time, set_time) = signal(0.0f64);
@@ -172,18 +222,51 @@ fn Clip(item: MediaItem, index: usize, current: RwSignal<usize>, muted: RwSignal
         if !on_control { paused.update(|p| *p = !*p); }
     };
 
+    // what the person does with the clip goes to the engine's session, which the next clips are ordered by (the owner's feed suggestion
+    // 3): a clip watched to its end or its title opened counts a little for the title (click), My List much (like), leaving a playing clip
+    // within SKIP_MS against it (skip). None marks the title as seen, so Home still offers it
+    let tell = move |event: &'static str| {
+        leptos::task::spawn_local(async move {
+            crate::services::ai_engine::send_feedback(id, Some(if is_tv { "tv" } else { "movie" }), event).await;
+        });
+    };
+    let playing_since = StoredValue::new(None::<f64>);
+    Effect::new(move |_| {
+        if active.get() && ready.get() {
+            if playing_since.get_value().is_none() {
+                playing_since.set_value(Some(js_sys::Date::now()));
+            }
+        } else if !active.get() {
+            if let Some(at) = playing_since.get_value() {
+                if js_sys::Date::now() - at < SKIP_MS {
+                    tell("skip");
+                }
+                playing_since.set_value(None);
+            }
+        }
+    });
+    let watched_through = StoredValue::new(false);
+    let on_looped = move |_| {
+        if !watched_through.get_value() {
+            watched_through.set_value(true);
+            tell("click");
+        }
+    };
+
     let in_list = Signal::derive(move || library.my_list.get().contains_key(&id));
     let entry = item.clone();
     let toggle_list = move |_| {
         let mut list = library.my_list.get();
         if list.remove(&id).is_none() {
             list.insert(id, LibraryEntry { media: entry.clone(), added_at: js_sys::Date::now() as u64 });
+            tell("like");
         }
         library.my_list.set(list);
     };
     let share = crate::components::share::use_share();
     let share_item = crate::components::share::ShareItem::title(is_tv, id, title.clone(), item.poster_path.as_deref());
     let open_title = move |_| {
+        tell("click");
         ui_store.modal_initial_time.set(0.0);
         ui_store.modal_current_time.set(0.0);
         ui_store.info_modal_is_tv.set(is_tv);
@@ -195,7 +278,7 @@ fn Clip(item: MediaItem, index: usize, current: RwSignal<usize>, muted: RwSignal
     let logo = LocalResource::new(move || async move { if near.get() { crate::services::tmdb::fetch_movie_logo(id, is_tv).await.ok().flatten() } else { None } });
 
     view! {
-        <div node_ref=root on:click=tap class="relative h-dvh w-full snap-start snap-always overflow-hidden bg-void">
+        <div node_ref=root on:click=tap class="relative h-dvh w-full snap-start snap-always overflow-hidden bg-void" class=("hidden", move || no_video.get())>
             // the picture until the trailer plays, cut to the screen
             <img src=picture alt="" class="absolute inset-0 h-full w-full object-cover transition-opacity duration-(--motion-slow)" class=("opacity-0", move || ready.get() && (active.get() || paused.get())) />
             // the trailer: a 16:9 frame as tall as the screen, centred, so it fills the screen
@@ -208,6 +291,7 @@ fn Clip(item: MediaItem, index: usize, current: RwSignal<usize>, muted: RwSignal
                         show_paused=true
                         from_start=is_scene
                         looped=true
+                        on_ended=Callback::new(on_looped)
                         variant="hero".to_string()
                         iframe_id=iframe_id.clone()
                         on_ready=Callback::new(move |_| set_ready.set(true))
