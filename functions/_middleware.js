@@ -111,7 +111,7 @@ export async function onRequest({ request, next, env }) {
 /** The head of a title's page and its first view, from TMDB (kept a day at the edge). */
 async function titleHead(kind, id, pageUrl, env) {
   const key = (env && env.STREAMS_TMDB_KEY) || PUBLIC_TMDB_KEY;
-  const res = await fetch(`https://api.themoviedb.org/3/${kind}/${id}?api_key=${key}&language=en-US&append_to_response=credits,recommendations`, { cf: { cacheTtl: 86400, cacheEverything: true } });
+  const res = await fetch(`https://api.themoviedb.org/3/${kind}/${id}?api_key=${key}&language=en-US&append_to_response=credits,recommendations,external_ids`, { cf: { cacheTtl: 86400, cacheEverything: true } });
   if (res.status === 404) return { missing: true };
   if (!res.ok) return null;
   const d = await res.json();
@@ -132,6 +132,14 @@ async function titleHead(kind, id, pageUrl, env) {
     datePublished: date || undefined,
     numberOfSeasons: kind === "tv" ? d.number_of_seasons : undefined,
     duration: kind === "movie" && d.runtime ? `PT${d.runtime}M` : undefined,
+    // the people and the same work elsewhere, so search engines tie the page to the right film or series (not to another of the name)
+    actor: person(((d.credits && d.credits.cast) || []).slice(0, 5).map((c) => c.name)),
+    director: kind === "movie" ? person(((d.credits && d.credits.crew) || []).filter((c) => c.job === "Director").map((c) => c.name)) : undefined,
+    creator: kind === "tv" ? person((d.created_by || []).map((c) => c.name)) : undefined,
+    sameAs: [
+      d.external_ids && d.external_ids.imdb_id ? `https://www.imdb.com/title/${d.external_ids.imdb_id}/` : null,
+      `https://www.themoviedb.org/${kind}/${id}`,
+    ].filter(Boolean),
   };
   return {
     title: `Watch ${name}${year ? ` (${year})` : ""} | ${BRAND}`,
@@ -181,12 +189,13 @@ function titleFirstView(kind, id, d, name, year) {
 #first-view .fv-meta,#first-view .fv-people{color:var(--color-ink-silver,#bcbcbc);font-size:15px;margin:0 0 14px}
 #first-view .fv-play{display:inline-block;background:var(--color-brand,#2f6bff);color:#fff;font-weight:700;padding:10px 22px;border-radius:6px;text-decoration:none;margin:0 0 18px}
 #first-view .fv-about{line-height:1.5;font-size:16px;max-width:70ch;margin:0 0 12px}
+#first-view .fv-more{padding:0 16px 48px;max-width:980px}
 #first-view h2{font-size:20px;margin:30px 0 12px}
 #first-view ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:12px}
 #first-view li a{color:var(--color-ink-soft,#e5e5e5);text-decoration:none;font-size:13px;line-height:1.3}
 #first-view li img{width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;border-radius:4px;display:block;background:var(--color-card,#1e1e1e);margin-bottom:6px}
 </style>
-<div class="fv-hero">${picture}</div>
+<main><article><div class="fv-hero">${picture}</div>
 <div class="fv-body">
 <h1>${html(name)}</h1>
 ${meta ? `<p class="fv-meta">${html(meta)}</p>` : ""}
@@ -194,8 +203,9 @@ ${meta ? `<p class="fv-meta">${html(meta)}</p>` : ""}
 ${d.overview ? `<p class="fv-about">${html(d.overview)}</p>` : ""}
 ${cast.length ? `<p class="fv-people">Starring: ${html(cast.join(", "))}</p>` : ""}
 ${makers.length ? `<p class="fv-people">${kind === "tv" ? "Created by" : "Directed by"}: ${html(makers.slice(0, 3).join(", "))}</p>` : ""}
-${like ? `<h2>More like this</h2><ul>${like}</ul>` : ""}
-</div>
+</div></article>
+${like ? `<nav class="fv-more" aria-label="More like this"><h2>More like this</h2><ul>${like}</ul></nav>` : ""}
+</main>
 </div>`;
 }
 
@@ -237,7 +247,7 @@ async function landingFirstView(env, origin) {
 #first-view li p{margin:0;color:var(--color-ink-body,#b3b3b3);line-height:1.5}
 </style>
 <header class="fv-nav"><a href="/"><img src="/assets/logos/streams-wordmark-white.svg" alt="${BRAND}" width="120" height="28"></a><a class="fv-in" href="/login">${t("login-sign-in")}</a></header>
-<div class="fv-hero">
+<main><div class="fv-hero">
 <h1>${t("login-unlimited-films-series-and-more")}</h1>
 <p class="fv-free">${t("auth-tick-free")}</p>
 <p class="fv-ready">${t("login-ready-to-watch-enter-your")}</p>
@@ -245,6 +255,7 @@ async function landingFirstView(env, origin) {
 </div>
 <section><h2>${t("login-more-reasons")}</h2><ul>${reasons}</ul></section>
 ${faq ? `<section><h2>${t("landing-faq")}</h2><ul>${faq}</ul></section>` : ""}
+</main>
 </div>`;
 }
 
@@ -278,7 +289,7 @@ async function helpFirstView(env, origin, slug) {
     return {
       title, description: summary,
       html: `<div id="first-view">${style}<main><nav><a href="/help">${html(`${BRAND} Help Centre`)}</a></nav>
-<h1>${html(title)}</h1>${summary ? `<p class="fv-lead">${html(summary)}</p>` : ""}${body}</main></div>`,
+<article><h1>${html(title)}</h1>${summary ? `<p class="fv-lead">${html(summary)}</p>` : ""}${body}</article></main></div>`,
     };
   }
   // the home: every article the help host's sitemap lists, with its summary
@@ -339,6 +350,11 @@ function ftl(text) {
     else key = null;
   }
   return out;
+}
+
+/** schema.org people from names (undefined when there are none, so the field is left out). */
+function person(names) {
+  return names.length ? names.map((name) => ({ "@type": "Person", name })) : undefined;
 }
 
 /** `text` cut at a word before `max` characters, with an ellipsis when it was cut. */
