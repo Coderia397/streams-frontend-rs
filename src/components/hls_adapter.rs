@@ -30,6 +30,10 @@ extern "C" {
 
     #[wasm_bindgen(js_name = hlsDuration)]
     pub fn hls_duration(handle: &str) -> f64;
+
+    /// Fetches hls.js ahead (not on Apple's browsers, which play streams themselves), while the stream's address is being found.
+    #[wasm_bindgen(js_name = hlsWarm)]
+    pub fn hls_warm();
 }
 
 pub struct HlsPlayer {

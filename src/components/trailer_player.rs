@@ -40,6 +40,13 @@ pub fn played_end(duration: f64) -> f64 {
     if duration > OUTRO_CUT_FROM { duration - OUTRO_CUT_SECONDS } else { duration }
 }
 
+#[wasm_bindgen(module = "/interop/dist/streams-interop.js")]
+extern "C" {
+    /// Calls back once the pictures on screen have arrived and the browser is idle (interop/settle.ts): a player starts after the page has drawn.
+    #[wasm_bindgen(js_name = whenPageSettled)]
+    fn js_when_page_settled(callback: &js_sys::Function);
+}
+
 fn send_yt_cmd(iframe_id: &str, func: &str) {
     if let Some(win) = web_sys::window() {
         if let Some(doc) = win.document() {
@@ -162,7 +169,9 @@ pub fn TrailerPlayer(
     // a message has come from this player's frame since the video was set: its messages decide when it shows
     let heard = StoredValue::new(false);
     let reveal_timer = StoredValue::new_local(None::<leptos::leptos_dom::helpers::TimeoutHandle>);
-    let (has_ever_started, set_has_ever_started) = signal(is_playing.get_untracked());
+    // the frame is made once the page has settled (see the effect below), not at the first render
+    let (has_ever_started, set_has_ever_started) = signal(false);
+    let settling = StoredValue::new(false);
     let (is_tab_hidden, set_is_tab_hidden) = signal(false);
     let (was_playing_before_tab_hidden, set_was_playing_before_tab_hidden) = signal(false);
     let (is_unmounted_by_inactivity, set_is_unmounted_by_inactivity) = signal(false);
@@ -197,9 +206,18 @@ pub fn TrailerPlayer(
     );
 
     // ── Track mount & play lifecycle without tearing down the iframe ─────────
+    // the player (about 1 MB of YouTube script, then the video) waits until the page's pictures on screen have arrived and the browser is
+    // idle, so the page draws first on a slow connection or phone; once the page has settled this is a moment
     Effect::new(move |_| {
-        if is_playing.get() {
-            set_has_ever_started.set(true);
+        if is_playing.get() && !has_ever_started.get_untracked() && !settling.get_value() {
+            settling.set_value(true);
+            let go = Closure::once_into_js(move || {
+                let _ = settling.try_set_value(false);
+                if is_playing.try_get_untracked() == Some(true) {
+                    let _ = set_has_ever_started.try_set(true);
+                }
+            });
+            js_when_page_settled(go.unchecked_ref());
         }
     });
 
@@ -677,8 +695,9 @@ pub fn TrailerPlayer(
 
                         // ALWAYS load with mute=1 so browser autoplay policies unconditionally permit it!
                         // Sound is restored via unMute postMessage once playback is running.
+                        // YouTube's privacy domain: the same player without its advertising requests (doubleclick, ad beacons)
                         let embed_url = format!(
-                            "https://www.youtube.com/embed/{}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&enablejsapi=1&disablekb=1&origin={}&widget_referrer={}&start={}",
+                            "https://www.youtube-nocookie.com/embed/{}?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&enablejsapi=1&disablekb=1&origin={}&widget_referrer={}&start={}",
                             key,
                             origin,
                             origin,

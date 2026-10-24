@@ -24,6 +24,27 @@ function loadPlayer(): Promise<Player> {
   return (player ??= import(/* @vite-ignore */ src) as Promise<Player>);
 }
 
+/** Apple's browsers (Safari on a Mac, every browser on an iPhone or iPad) have HLS built in: the stream is read and decoded by the
+ *  system, with no hls.js work on the main processor, and Picture in Picture, AirPlay and the lock screen's controls come with it.
+ *  They play streams themselves; other browsers use hls.js. */
+function appleHls(video: HTMLVideoElement): boolean {
+  return navigator.vendor === 'Apple Computer, Inc.' && video.canPlayType('application/vnd.apple.mpegurl') !== '';
+}
+
+/** hls.js fetched ahead, while the player looks for the stream's address (both take seconds on a slow connection; one after the
+ *  other they added up). Not on Apple's browsers, which do not use it. */
+export function hlsWarm(): void {
+  const probe = document.createElement('video');
+  if (!appleHls(probe)) loadPlayer().catch(() => {});
+}
+
+/** The audio tracks of a stream the browser plays itself (Safari lists an HLS stream's audio renditions on the element). */
+type NativeTrack = { label: string; language: string; enabled: boolean };
+function nativeTracks(video?: HTMLVideoElement): NativeTrack[] {
+  const list = (video as unknown as { audioTracks?: ArrayLike<NativeTrack> } | undefined)?.audioTracks;
+  return list ? Array.from(list) : [];
+}
+
 /** The browser plays `url` in `video` by itself (a plain file, or HLS where the browser has it built in, as Safari). */
 function native(video: HTMLVideoElement, url: string): HlsInstance {
   video.src = url;
@@ -43,7 +64,7 @@ export function hlsAttach(videoId: string, streamUrl: string): string {
   if (!video) return "";
   const handle = "hls_" + (++counter);
 
-  if (/\.(mp4|m4v|webm|mkv|mov)(\?.*)?$/i.test(streamUrl)) {
+  if (/\.(mp4|m4v|webm|mkv|mov)(\?.*)?$/i.test(streamUrl) || appleHls(video)) {
     instances.set(handle, native(video, streamUrl));
     return handle;
   }
@@ -80,22 +101,28 @@ export function hlsDestroy(handle: string): void {
 
 export function hlsSetAudioTrack(handle: string, trackIndex: number): void {
   const inst = instances.get(handle);
-  if (inst && !inst._native) {
-    inst.audioTrack = trackIndex;
-  }
+  if (!inst) return;
+  if (inst._native) nativeTracks(inst._video).forEach((t, i) => { t.enabled = i === trackIndex; });
+  else inst.audioTrack = trackIndex;
 }
 
 /** The audio tracks of the stream as JSON, `[{"i":0,"name":"English","lang":"en"}]`; empty when the stream has fewer than two. */
 export function hlsAudioTracks(handle: string): string {
-  const inst = instances.get(handle) as unknown as { _native?: boolean; audioTracks?: { name?: string; lang?: string }[] } | undefined;
-  if (!inst || inst._native || !inst.audioTracks || inst.audioTracks.length < 2) return "[]";
-  return JSON.stringify(inst.audioTracks.map((t, i) => ({ i, name: t.name || "", lang: t.lang || "" })));
+  const inst = instances.get(handle) as unknown as (HlsInstance & { audioTracks?: { name?: string; lang?: string }[] }) | undefined;
+  if (!inst) return "[]";
+  const tracks = inst._native
+    ? nativeTracks(inst._video).map((t) => ({ name: t.label, lang: t.language }))
+    : inst.audioTracks || [];
+  if (tracks.length < 2) return "[]";
+  return JSON.stringify(tracks.map((t, i) => ({ i, name: t.name || "", lang: t.lang || "" })));
 }
 
 /** The audio track playing now (the index into the list above). */
 export function hlsGetAudioTrack(handle: string): number {
   const inst = instances.get(handle);
-  return inst && !inst._native ? inst.audioTrack : 0;
+  if (!inst) return 0;
+  if (inst._native) return Math.max(0, nativeTracks(inst._video).findIndex((t) => t.enabled));
+  return inst.audioTrack;
 }
 
 export function hlsSetQuality(handle: string, level: number): void {

@@ -135,8 +135,9 @@ pub fn StreamsPlayer(
         }
     });
 
-    // Initial resolve
+    // Initial resolve, with the stream library fetched at the same time (it was fetched only once the address was known)
     Effect::new(move |_| {
+        crate::components::hls_adapter::hls_warm();
         do_resolve.run(false);
     });
 

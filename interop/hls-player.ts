@@ -9,6 +9,11 @@ export function attach(video: HTMLVideoElement, streamUrl: string): HlsInstance 
     const hls = new Hls({
       enableWorker: true,
       capLevelToPlayerSize: true,
+      // a quality the device drops frames at (a slow phone or TV decoding a high bitrate) is not chosen again: measured by the
+      // player while it plays, so each device finds its own ceiling
+      capLevelOnFPSDrop: true,
+      // the first piece of video is fetched while the stream's index is still being read: playback starts sooner
+      startFragPrefetch: true,
       maxBufferLength: 30,
       maxMaxBufferLength: 60,
       backBufferLength: 30,
