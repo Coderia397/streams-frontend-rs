@@ -1,0 +1,5 @@
+# Leptos type erasure for every build of the app (note 119, 2026-10-24): views are kept as one erased type at component boundaries
+# instead of a new generated type for every view, which cut the release wasm from 5,185,069 to 3,875,327 bytes (976,560 as brotli 11)
+# and its build time, with the same pages drawn (checked on the local runner, seven pages). Only the browser target: tests run natively.
+[target.wasm32-unknown-unknown]
+rustflags = ["--cfg", "erase_components"]

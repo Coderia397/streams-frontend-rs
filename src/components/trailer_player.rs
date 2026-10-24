@@ -212,9 +212,14 @@ pub fn TrailerPlayer(
         if is_playing.get() && !has_ever_started.get_untracked() && !settling.get_value() {
             settling.set_value(true);
             let go = Closure::once_into_js(move || {
-                let _ = settling.try_set_value(false);
-                if is_playing.try_get_untracked() == Some(true) {
-                    let _ = set_has_ever_started.try_set(true);
+                // the player can be gone by the time the page settles (a page left at once, as /browse sending a visitor on): its own
+                // value is gone with it, and then nothing of it is read (reading `is_playing` runs its page's signals, which panics)
+                if settling.try_get_value().is_none() {
+                    return;
+                }
+                settling.set_value(false);
+                if is_playing.get_untracked() {
+                    set_has_ever_started.set(true);
                 }
             });
             js_when_page_settled(go.unchecked_ref());

@@ -23,8 +23,10 @@ curl -sSfL -o tailwindcss "https://github.com/tailwindlabs/tailwindcss/releases/
 chmod +x tailwindcss
 
 # The release profile in Cargo.toml (full LTO, one codegen unit) needs about 20 minutes here, which is the builder's limit.
-# Thin LTO with more codegen units keeps the build well inside it at the cost of a slightly larger wasm file.
-export CARGO_PROFILE_RELEASE_LTO="${CARGO_PROFILE_RELEASE_LTO:-thin}"
+# Full LTO with 16 codegen units: with Leptos type erasure (.cargo/config.toml) it built in 4 min 24 s on the owner's Mac against
+# 4 min 40 s for thin LTO without it, and the wasm is 34% smaller than the thin LTO build (note 119, 2026-10-24). Set
+# CARGO_PROFILE_RELEASE_LTO=thin in the Pages settings to go back if a build ever runs long.
+export CARGO_PROFILE_RELEASE_LTO="${CARGO_PROFILE_RELEASE_LTO:-fat}"
 export CARGO_PROFILE_RELEASE_CODEGEN_UNITS="${CARGO_PROFILE_RELEASE_CODEGEN_UNITS:-16}"
 
 # The interop bundle needs Node 22 or newer and the pinned npm packages. The Pages image may ship an older Node, so fetch a
