@@ -33,3 +33,4 @@ Disallow: /dev/
 Disallow: /brand/
 
 Sitemap: https://streams.watch/sitemap.xml
+Sitemap: https://streams.watch/sitemap-titles.xml
