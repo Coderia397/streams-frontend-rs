@@ -3,6 +3,7 @@ pub mod layout;
 pub mod media;
 pub mod player;
 pub mod profiles;
+pub mod share;
 pub mod skeleton;
 pub mod video_player;
 pub mod trailer_player;

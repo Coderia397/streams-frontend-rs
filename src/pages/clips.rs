@@ -125,8 +125,8 @@ fn Clip(item: MediaItem, index: usize, current: RwSignal<usize>) -> impl IntoVie
         }
         library.my_list.set(list);
     };
-    let share_open = RwSignal::new(false);
-    let share_url = crate::pages::title::share_url(is_tv, id);
+    let share = crate::components::share::use_share();
+    let share_item = crate::components::share::ShareItem::title(is_tv, id, title.clone(), item.poster_path.as_deref());
     let open_title = move |_| {
         ui_store.modal_initial_time.set(0.0);
         ui_store.modal_current_time.set(0.0);
@@ -169,7 +169,7 @@ fn Clip(item: MediaItem, index: usize, current: RwSignal<usize>) -> impl IntoVie
                 <button type="button" on:click=toggle_list class="btn-circle btn-circle-md bg-void/40" aria-label=crate::i18n::t("action-buttons-add-to-my-list")>
                     <i class=move || if in_list.get() { "ph-bold ph-check text-xl" } else { "ph-bold ph-plus text-xl" }></i>
                 </button>
-                <button type="button" on:click=move |_| share_open.set(true) class="btn-circle btn-circle-md bg-void/40" aria-label=crate::i18n::t("share-button")>
+                <button type="button" on:click=move |_| share.open(share_item.clone()) class="btn-circle btn-circle-md bg-void/40" aria-label=crate::i18n::t("share-button")>
                     <i class="ph-bold ph-share-network text-xl"></i>
                 </button>
                 <button type="button" on:click=open_title class="h-16 w-16 overflow-hidden rounded-full border-2 border-ink/80 bg-raised cursor-pointer" aria-label=title.clone()>
@@ -194,7 +194,6 @@ fn Clip(item: MediaItem, index: usize, current: RwSignal<usize>) -> impl IntoVie
                     <span class="text-label tabular-nums text-ink-body">{left}</span>
                 </div>
             </div>
-            <crate::components::media::share_sheet::ShareSheet open=share_open title=title.clone() url=share_url />
         </div>
     }
 }

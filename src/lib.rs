@@ -40,6 +40,7 @@ pub fn App() -> impl IntoView {
     crate::components::profiles::switch_overlay::provide_switch();
     crate::components::profiles::switch_overlay::resume_compact_switch();
     crate::pages::settings::provide_prefs();
+    crate::components::share::provide_share();
     // a browser that starts already signed in tells the account it is still here
     crate::services::account::keep_session_fresh();
     crate::services::device::register_in_background();
@@ -106,6 +107,7 @@ pub fn App() -> impl IntoView {
 
     view! {
         <crate::components::media::info_modal::InfoModal />
+        <crate::components::share::ShareHost />
         <crate::components::profiles::switch_overlay::GlobalSwitchOverlay />
         <Show when=has_no_profile>
             <crate::components::profiles::whos_watching::WhosWatchingGate />

@@ -127,9 +127,11 @@ pub fn PhoneTitle() -> impl IntoView {
 
     view! {
         <Show when=move || is_open.get()>
+            // the fade is opacity only: the enter animation kept a transform on this page for good, and a transform makes the page the frame
+            // of everything fixed inside it, so the season menu opened scrolled with the page (owner, 2026-10-24)
             <div
                 node_ref=scroller
-                class="fixed inset-0 z-(--z-info-modal) overflow-y-auto overscroll-contain scrollbar-hide bg-void text-ink animate-in fade-in"
+                class="fixed inset-0 z-(--z-info-modal) overflow-y-auto overscroll-contain scrollbar-hide bg-void text-ink animate-fadeIn"
                 role="dialog"
                 aria-modal="true"
             >
@@ -267,8 +269,8 @@ fn TitleBody(details: DetailedMediaItem, season: RwSignal<u32>, tab: RwSignal<Ta
         crate::store::ratings::set(id, is_tv, next);
         rate_open.set(false);
     };
-    let share_open = RwSignal::new(false);
-    let share_url = crate::pages::title::share_url(is_tv, id);
+    let share = crate::components::share::use_share();
+    let share_item = crate::components::share::ShareItem::title(is_tv, id, title.clone(), details.poster_path.as_deref());
     // a film has no episodes: More Like This is its tab
     if !is_tv {
         tab.set(Tab::MoreLikeThis);
@@ -340,12 +342,11 @@ fn TitleBody(details: DetailedMediaItem, season: RwSignal<u32>, tab: RwSignal<Ta
                         </div>
                     </Show>
                 </div>
-                <button type="button" on:click=move |_| share_open.set(true) class="flex w-24 flex-col items-center gap-2.5 py-2 text-ink cursor-pointer active:scale-95 transition-transform">
+                <button type="button" on:click=move |_| share.open(share_item.clone()) class="flex w-24 flex-col items-center gap-2.5 py-2 text-ink cursor-pointer active:scale-95 transition-transform">
                     <i class="ph-bold ph-share-network text-title-md"></i>
                     <span class="text-label text-ink-body">{crate::i18n::t("share-button")}</span>
                 </button>
             </div>
-            <crate::components::media::share_sheet::ShareSheet open=share_open title=title.clone() url=share_url />
         </div>
 
         // the tabs: a line across the page, the chosen tab marked by a bar over it

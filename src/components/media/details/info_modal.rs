@@ -546,10 +546,9 @@ fn WebsiteDetails() -> impl IntoView {
 
                             let (modal_rating, set_modal_rating) = signal(crate::store::ratings::get(current_movie_id, is_tv_val));
 
-                            // Share opens the device's share sheet with a link that opens this title (see SharedTitleOpener)
-                            let share_open = RwSignal::new(false);
-                            let share_url = crate::pages::title::share_url(is_tv_val, current_movie_id);
-                            let share_title = title.clone();
+                            // Share opens the share sheet with a link that opens this title (see SharedTitleOpener)
+                            let share = crate::components::share::use_share();
+                            let share_item = StoredValue::new(crate::components::share::ShareItem::title(is_tv_val, current_movie_id, title.clone(), details.poster_path.as_deref()));
 
                             let watch_store = crate::store::use_watch_store();
                             let watch_record = watch_store.get_record(current_movie_id, is_tv_val);
@@ -723,12 +722,11 @@ fn WebsiteDetails() -> impl IntoView {
                                                 <Show when=move || form.get().is_phone()>
                                                     <crate::components::media::action_buttons::CircleIconButton
                                                         icon="ph-share-network"
-                                                        on_click=Callback::new(move |_| share_open.set(true))
+                                                        on_click=Callback::new(move |_| share.open(share_item.get_value()))
                                                         title=crate::i18n::t("share-button")
                                                     />
                                                 </Show>
                                             </div>
-                                            <crate::components::media::share_sheet::ShareSheet open=share_open title=share_title url=share_url />
                                         </div>
 
                                         // Mute / Replay Button

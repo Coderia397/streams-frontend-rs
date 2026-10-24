@@ -1146,6 +1146,7 @@ share-copied-instagram = Link copied — paste it into Instagram
 share-copied-snapchat = Link copied — paste it into Snapchat
 share-messages = Messages
 share-copy-link = Copy link
+share-copy-failed = Could not copy the link
 share-button = Share
 title-page-doc = Watch { $title } | { $brand }
 title-jump-label = Sections of this page

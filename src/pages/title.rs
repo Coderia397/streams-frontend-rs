@@ -27,11 +27,6 @@ pub fn slug_for(is_tv: bool, id: u32) -> String {
     format!("{}-{id}", if is_tv { "tv" } else { "movie" })
 }
 
-/// The address of a title's page on this site, for sharing.
-pub fn share_url(is_tv: bool, id: u32) -> String {
-    let origin = web_sys::window().and_then(|w| w.location().origin().ok()).unwrap_or_default();
-    format!("{origin}/title/{}", slug_for(is_tv, id))
-}
 
 #[component]
 pub fn TitlePage() -> impl IntoView {
