@@ -89,6 +89,13 @@ export async function onRequest({ request, next, env }) {
     if (head && head.missing) return Response.redirect(`${url.origin}/`, 302);
     if (head) return withHead(res, head, head.firstView);
   }
+  // the Help Centre's home and articles: every one was the same empty page before the app ran, so Google kept one of them and
+  // called the rest duplicates ("Google chose different canonical than user", Search Console, 2026-10-24)
+  const article = /^\/help\/article\/([a-z0-9-]+)$/.exec(p);
+  if ((p === "/help" || article) && env && env.ASSETS) {
+    const help = await helpFirstView(env, url.origin, article ? article[1] : null).catch(() => null);
+    if (help) return withHead(res, { title: article ? `${help.title} | ${BRAND} Help Centre` : `${help.title} | ${BRAND}`, description: help.description, url: `${origin}${p}` }, help.html);
+  }
   if (p === "/" && !(ours && host === HELP) && env && env.ASSETS) {
     const first = await landingFirstView(env, url.origin).catch(() => null);
     return withHead(res, { url: `${origin}/` }, first);
@@ -239,6 +246,86 @@ async function landingFirstView(env, origin) {
 <section><h2>${t("login-more-reasons")}</h2><ul>${reasons}</ul></section>
 ${faq ? `<section><h2>${t("landing-faq")}</h2><ul>${faq}</ul></section>` : ""}
 </div>`;
+}
+
+/** A Help Centre page as plain HTML while the app downloads, in the site's English words (i18n/en.ftl): an article's title, summary and
+ *  text (paragraphs, numbered and plain lists, bold, links), or the home page's list of every article with its summary (the articles
+ *  of the help host's sitemap). Null for an article that does not exist (the app then decides). */
+async function helpFirstView(env, origin, slug) {
+  const res = await env.ASSETS.fetch(new Request(`${origin}/i18n/en.ftl`));
+  if (!res.ok) return null;
+  const words = ftlBlocks(await res.text());
+  const fill = (s) => (s || "").replace(/\{\s*\$(\w+)\s*\}/g, (_, v) => HELP_VARS[v] ?? "");
+  const style = `<style>
+#boot{display:none!important}
+#first-view{font-family:var(--font-sans,system-ui,sans-serif);color:var(--color-ink,#fff);background:var(--color-page,#141414);min-height:100vh;padding:24px 16px 64px}
+#first-view main{max-width:760px;margin:0 auto}
+#first-view nav a{color:var(--color-ink-body,#b3b3b3);text-decoration:none;font-size:14px}
+#first-view h1{font-size:clamp(26px,5vw,40px);line-height:1.15;margin:16px 0 12px;font-weight:800}
+#first-view .fv-lead{font-size:18px;color:var(--color-ink-soft,#e5e5e5);margin:0 0 20px}
+#first-view p,#first-view li{line-height:1.6;font-size:16px;color:var(--color-ink-soft,#e5e5e5)}
+#first-view a{color:var(--color-brand-glow,#7aa6ff)}
+#first-view ul.fv-list{list-style:none;padding:0}
+#first-view ul.fv-list li{padding:12px 0;border-bottom:1px solid var(--color-line,#333)}
+#first-view ul.fv-list a{font-weight:700;text-decoration:none}
+#first-view ul.fv-list span{display:block;color:var(--color-ink-body,#b3b3b3);font-size:14px}
+</style>`;
+  if (slug) {
+    const title = fill(words[`help-art-${slug}-title`]);
+    if (!title) return null;
+    const summary = fill(words[`help-art-${slug}-summary`]);
+    const body = helpBody(fill(words[`help-art-${slug}-body`]));
+    return {
+      title, description: summary,
+      html: `<div id="first-view">${style}<main><nav><a href="/help">${html(`${BRAND} Help Centre`)}</a></nav>
+<h1>${html(title)}</h1>${summary ? `<p class="fv-lead">${html(summary)}</p>` : ""}${body}</main></div>`,
+    };
+  }
+  // the home: every article the help host's sitemap lists, with its summary
+  const map = await env.ASSETS.fetch(new Request(`${origin}/sitemap.xml`)).then((r) => (r.ok ? r.text() : "")).catch(() => "");
+  const slugs = [...new Set([...map.matchAll(/\/help\/article\/([a-z0-9-]+)</g)].map((m) => m[1]))];
+  const items = slugs.filter((s) => words[`help-art-${s}-title`])
+    .map((s) => `<li><a href="/help/article/${s}">${html(fill(words[`help-art-${s}-title`]))}</a><span>${html(fill(words[`help-art-${s}-summary`]))}</span></li>`)
+    .join("");
+  if (!items) return null;
+  const page = PAGES["/help"];
+  return {
+    title: page[0], description: page[1],
+    html: `<div id="first-view">${style}<main><h1>${html(`${BRAND} ${page[0]}`)}</h1><p class="fv-lead">${html(page[1])}</p><ul class="fv-list">${items}</ul></main></div>`,
+  };
+}
+
+// the values src/pages/help/mod.rs fills into help texts (src/brand.rs)
+const HELP_VARS = { brand: BRAND, help_email: "help@streams.watch", contribute_email: "contribute@streams.watch", support_email: "help@streams.watch" };
+
+/** A help article's text as HTML: blocks split at blank lines; a block of "1." lines is a numbered list, of "- " lines a plain list,
+ *  anything else a paragraph; <b> and the app's link form <a=address> are kept, everything else is escaped. */
+function helpBody(text) {
+  const inline = (s) => html(s)
+    .replace(/&lt;b&gt;/g, "<b>").replace(/&lt;\/b&gt;/g, "</b>")
+    .replace(/&lt;a=([^\s&]+)&gt;/g, (_, u) => `<a href="${attr(u)}">`).replace(/&lt;\/a&gt;/g, "</a>");
+  return text.split(/\n\s*\n/).map((block) => {
+    const lines = block.split("\n").map((l) => l.trim()).filter(Boolean);
+    if (!lines.length) return "";
+    if (lines.every((l) => /^\d+\.\s/.test(l))) return `<ol>${lines.map((l) => `<li>${inline(l.replace(/^\d+\.\s*/, ""))}</li>`).join("")}</ol>`;
+    if (lines.every((l) => /^[-*]\s/.test(l))) return `<ul>${lines.map((l) => `<li>${inline(l.replace(/^[-*]\s*/, ""))}</li>`).join("")}</ul>`;
+    return `<p>${inline(lines.join(" "))}</p>`;
+  }).join("");
+}
+
+/** Every message of a Fluent file with its lines kept (a multi-line body keeps its blank lines and line starts), by key. */
+function ftlBlocks(text) {
+  const out = {};
+  let key = null, lines = [];
+  const close = () => { if (key) out[key] = lines.join("\n").replace(/\n+$/, "").trim(); };
+  for (const line of text.split("\n")) {
+    const m = /^([a-z][a-z0-9-]*)\s*=\s?(.*)$/.exec(line);
+    if (m) { close(); key = m[1]; lines = [m[2]]; continue; }
+    if (key && (line.trim() === "" || /^\s+\S/.test(line)) && !/^\s+\./.test(line)) { lines.push(line.replace(/^ {4}/, "")); continue; }
+    close(); key = null; lines = [];
+  }
+  close();
+  return out;
 }
 
 /** The single and continued line messages of a Fluent file, by key (comments, terms and attributes left out). */

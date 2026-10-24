@@ -7,19 +7,25 @@ import json, re, sys, urllib.request
 HOST = "streams.watch"
 KEY = "26ed9fc21105876fd210922caba18a27"
 SITEMAPS = [f"https://{HOST}/sitemap.xml", f"https://{HOST}/sitemap-titles.xml"]
+# Cloudflare's bot protection refuses Python's default agent (403)
+UA = {"User-Agent": "streams-indexnow/1.0 (+https://streams.watch)"}
+
+
+def get(url):
+    return urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=30).read().decode("utf-8", "ignore")
 
 
 def addresses():
     out = []
     for sm in SITEMAPS:
-        text = urllib.request.urlopen(sm, timeout=30).read().decode("utf-8", "ignore")
+        text = get(sm)
         out += [u for u in re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", text) if u.startswith(f"https://{HOST}/")]
     return list(dict.fromkeys(out))
 
 
 def main():
     # the key file must be live first, or every submission is refused
-    live = urllib.request.urlopen(f"https://{HOST}/{KEY}.txt", timeout=15).read().decode().strip()
+    live = get(f"https://{HOST}/{KEY}.txt").strip()
     if live != KEY:
         sys.exit(f"the key file at https://{HOST}/{KEY}.txt does not hold the key yet: deploy first")
     urls = addresses()
@@ -30,7 +36,7 @@ def main():
             print("would send", len(body["urlList"]), "addresses, first", body["urlList"][0])
             continue
         req = urllib.request.Request("https://api.indexnow.org/indexnow", data=json.dumps(body).encode(),
-                                     headers={"Content-Type": "application/json; charset=utf-8"})
+                                     headers={"Content-Type": "application/json; charset=utf-8", **UA})
         with urllib.request.urlopen(req, timeout=60) as r:
             print("sent", len(body["urlList"]), "->", r.status)
 
