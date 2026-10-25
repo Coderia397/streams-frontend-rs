@@ -167,11 +167,20 @@ pub async fn resolve_stream(
         url.push_str("&force=1");
     }
 
-    let resp = Request::get(&url)
+    // the resolver answers members only (streams-resolver-rs, members.rs): the account's token goes with every request
+    let token = crate::services::account::ensure_fresh().await.map(|s| s.access_token);
+    let mut request = Request::get(&url);
+    if let Some(t) = token.as_deref().filter(|t| !t.is_empty()) {
+        request = request.header("Authorization", &format!("Bearer {t}"));
+    }
+    let resp = request
         .send()
         .await
         .map_err(|e| format!("Failed to reach stream resolver: {}", e))?;
 
+    if resp.status() == 401 {
+        return Err("Your session has ended. Sign in again to watch.".to_string());
+    }
     if !resp.ok() {
         return Err(format!("Stream resolver returned HTTP status {}", resp.status()));
     }
