@@ -19,7 +19,7 @@ export { applyAmbientColor, setThemeColor } from './theme';
 export { resumeSeal, resumeOpen, resumeForget, resumeFingerprint } from './resume';
 export { sharePrepare, shareSystem, copyText } from './share';
 export { whenPageSettled } from './settle';
-export { subtitleLoad } from './subtitles';
+export { subtitleLoad, subtitleNativeTrack } from './subtitles';
 
 export function getCachedAmbientColor(imageUrl: string): string {
   const res = ambient.getCachedAmbientColor(imageUrl);

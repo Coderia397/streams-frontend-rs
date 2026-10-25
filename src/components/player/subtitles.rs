@@ -19,6 +19,8 @@ use wasm_bindgen::prelude::*;
 extern "C" {
     #[wasm_bindgen(js_name = subtitleLoad)]
     async fn subtitle_load(candidates: &str, duration: f64) -> JsValue;
+    #[wasm_bindgen(js_name = subtitleNativeTrack)]
+    fn subtitle_native_track(video_id: &str, cues: &str, delay: f64);
 }
 
 /// The start of a language's key in the track list: `sub:en`.
@@ -34,7 +36,7 @@ pub struct SubFile {
     pub lang: Lang,
 }
 
-#[derive(Clone, Debug, PartialEq, serde::Deserialize)]
+#[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
 pub struct Cue {
     pub s: f64,
     pub e: f64,
@@ -240,6 +242,14 @@ pub fn SubtitleOverlay(
                 cues.set(Some(std::sync::Arc::new(l.cues)));
             }
         });
+    });
+
+    // the same lines as the video's own text track, for Picture in Picture and a system's own full screen player (interop/subtitles.ts),
+    // given again when the offset changes and taken away when subtitles are off
+    Effect::new(move |_| {
+        let d = delay.get();
+        let json = cues.with(|c| c.as_ref().map(|list| serde_json::to_string(list.as_ref()).unwrap_or_default()).unwrap_or_default());
+        subtitle_native_track(crate::keys::VIDEO_ELEMENT_ID, &json, d);
     });
 
     // ten times a second the video's own clock picks the line (the player's time signal moves four times a second)

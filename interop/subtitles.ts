@@ -180,3 +180,39 @@ export async function subtitleLoad(candidates: string, duration: number): Promis
   }
   return '';
 }
+
+// ── the same cues as a text track of the video ──────────────────────────────────────────────────────────────────────────────
+// The page draws its own line (src/components/player/subtitles.rs); Picture in Picture and a system's own full screen player show
+// only the video, so the cues are also given to the video as a text track: hidden while the page's line shows, shown there.
+const tracks = new WeakMap<HTMLVideoElement, TextTrack>();
+
+function trackOf(video: HTMLVideoElement): TextTrack {
+  let track = tracks.get(video);
+  if (track) return track;
+  track = video.addTextTrack('subtitles', 'Streams');
+  tracks.set(video, track);
+  const show = () => { const t = tracks.get(video); if (t) t.mode = 'showing'; };
+  const hide = () => { const t = tracks.get(video); if (t) t.mode = 'hidden'; };
+  video.addEventListener('enterpictureinpicture', show);
+  video.addEventListener('leavepictureinpicture', hide);
+  video.addEventListener('webkitbeginfullscreen', show);
+  video.addEventListener('webkitendfullscreen', hide);
+  return track;
+}
+
+// `cues` is the JSON array the page shows ("" removes them); `delay` moves every cue as the page's offset does
+export function subtitleNativeTrack(videoId: string, cues: string, delay: number): void {
+  const video = document.getElementById(videoId) as HTMLVideoElement | null;
+  if (!video || typeof VTTCue === 'undefined') return;
+  const track = trackOf(video);
+  const old = track.cues ? Array.from(track.cues) : [];
+  for (const c of old) track.removeCue(c);
+  if (!cues) { track.mode = 'disabled'; return; }
+  let list: Cue[] = [];
+  try { list = JSON.parse(cues); } catch { return; }
+  for (const c of list) {
+    try { track.addCue(new VTTCue(Math.max(0, c.s + delay), Math.max(0, c.e + delay), c.t)); } catch { /* a cue the browser refuses */ }
+  }
+  const away = document.pictureInPictureElement === video || (video as unknown as { webkitDisplayingFullscreen?: boolean }).webkitDisplayingFullscreen === true;
+  track.mode = away ? 'showing' : 'hidden';
+}
