@@ -124,8 +124,9 @@ pub fn App() -> impl IntoView {
                 <Route path=path!("/dev/logos") view=|| if is_local_host() { view! { <crate::components::media::collection_logo::LogoGalleryPage /> }.into_any() } else { view! { <leptos_router::components::Redirect path="/" /> }.into_any() } />
                 <Route path=path!("/browse/genre/:id") view=crate::pages::category::GenreRoute />
                 <Route path=path!("/title/:slug") view=crate::pages::title::TitlePage />
-                <Route path=path!("/watch/:id") view=crate::pages::player::PlayerPage />
-                <Route path=path!("/watch/:kind/:id") view=crate::pages::player::PlayerPage />
+                // the player waits for Who's watching: no film plays behind the profile picker (owner, 2026-10-25)
+                <Route path=path!("/watch/:id") view=|| view! { <ProfileHold><crate::pages::player::PlayerPage /></ProfileHold> } />
+                <Route path=path!("/watch/:kind/:id") view=|| view! { <ProfileHold><crate::pages::player::PlayerPage /></ProfileHold> } />
                 <Route
                     path=path!("")
                     view=move || {
@@ -280,15 +281,18 @@ fn HomeRoute(kids: bool) -> impl IntoView {
     if !kids && kids_active {
         return view! { <leptos_router::components::Redirect path=format!("/kids{search}") /> }.into_any();
     }
-    // while Who's watching or the switch screen covers the page, the home page is not there at all: its banner video would go on playing (with sound) behind them
+    view! { <ProfileHold><BrowseHome /></ProfileHold> }.into_any()
+}
+
+/// A page that plays video is not there at all while Who's watching or the profile switch screen covers it: its film, trailer or
+/// banner would go on playing (with sound) behind them. It appears once a profile is in use.
+#[component]
+fn ProfileHold(children: ChildrenFn) -> impl IntoView {
     let profile_store = crate::store::use_profile_store();
     let switching = use_context::<crate::components::profiles::switch_overlay::SwitchState>();
-    view! {
-        {move || if profile_store.active_profile_id.get().is_none() || switching.is_some_and(|s| s.0.get().is_some()) {
-            view! { <span /> }.into_any()
-        } else {
-            view! { <BrowseHome /> }.into_any()
-        }}
+    move || if profile_store.active_profile_id.get().is_none() || switching.is_some_and(|s| s.0.get().is_some()) {
+        view! { <span /> }.into_any()
+    } else {
+        children().into_any()
     }
-    .into_any()
 }
