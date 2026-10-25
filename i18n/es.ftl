@@ -319,7 +319,7 @@ help-art-privacy-data-title = ¿Qué datos recopila { $brand }?
 help-art-privacy-data-summary = Un resumen breve de lo que se almacena, lo que se envía y dónde leer la política completa.
 help-art-privacy-data-keywords = privacidad datos recopilar información personal rastrear vender compartir cookies analítica
 help-art-privacy-data-body =
-    No vendemos datos personales ni mostramos anuncios. Aquí tienes la versión corta. La <a=/privacy>Política de privacidad</a> tiene el texto completo.
+    No vendemos datos personales ni mostramos anuncios. Aquí tienes la versión corta. La <a=/help/legal/privacy>Política de privacidad</a> tiene el texto completo.
 
     ## Lo que guarda tu cuenta
     Tu nombre, tu correo electrónico, un número de teléfono opcional, tus perfiles, Mi lista, tus valoraciones, tu actividad de visualización y tus ajustes, además de una lista de inicios de sesión recientes y los dispositivos desde los que se hicieron.
@@ -333,7 +333,7 @@ help-art-privacy-data-body =
     - Descarga una copia de tus datos. Consulta <a=/help/article/download-data>Descargar una copia de tus datos</a>.
     - Elimina tu cuenta cuando quieras. Consulta <a=/help/article/delete-account>Eliminar tu cuenta</a>.
 
-    Sobre las cookies y el almacenamiento del navegador, consulta la <a=/cookies>Política de cookies</a>.
+    Sobre las cookies y el almacenamiento del navegador, consulta la <a=/help/legal/cookies>Política de cookies</a>.
 
     @@ cookies
 
@@ -802,7 +802,7 @@ help-art-sources-body =
     - Una fuente puede dejar de estar en línea sin previo aviso.
     - La calidad, las pistas de audio y los subtítulos provienen de la fuente.
 
-    No controlamos ni verificamos esas fuentes. Consulta el <a=/disclaimer>Aviso legal</a>. Si eres titular de derechos, consulta <a=/help/article/copyright>Cómo reportar un problema de derechos de autor</a>.
+    No controlamos ni verificamos esas fuentes. Consulta el <a=/help/legal/disclaimer>Aviso legal</a>. Si eres titular de derechos, consulta <a=/help/article/copyright>Cómo reportar un problema de derechos de autor</a>.
 help-art-contribute-title = ¿Cómo puedo contribuir?
 help-art-contribute-summary = Se aceptan ideas, correcciones, traducciones e informes de errores.
 help-art-contribute-keywords = contribuir contribuyendo voluntario traducir traducción código github ayudar mejorar sugerencias
@@ -869,7 +869,7 @@ help-art-copyright-body =
     3. La dirección de la página en { $brand } que enlaza a ella.
     4. Una declaración de que eres el titular de los derechos o que tienes permiso para actuar en su nombre.
 
-    Envíala a <a=mailto:{ $help_email }>{ $help_email }</a> con el asunto <b>Notificación DMCA</b>. El proceso completo está en la <a=/dmca>página DMCA</a>.
+    Envíala a <a=mailto:{ $help_email }>{ $help_email }</a> con el asunto <b>Notificación DMCA</b>. El proceso completo está en la <a=/help/legal/dmca>página DMCA</a>.
 help-art-title-feedback-title = Comentarios sobre un título en { $brand }
 help-art-title-feedback-summary = Reporta una descripción incorrecta, un título faltante o un título que nunca se reproduce.
 help-art-title-feedback-keywords = comentarios título descripción incorrecta faltante solicitud película serie agregar reportar póster incorrecto
@@ -918,7 +918,7 @@ cookie-general =
 
     Tus elecciones aquí se guardan en tu navegador, así que borrar los datos del sitio las restablece.
 
-    Para más información, consulta la <a=/cookies>Política de cookies</a> y la <a=/privacy>Política de privacidad</a>.
+    Para más información, consulta la <a=/help/legal/cookies>Política de cookies</a> y la <a=/help/legal/privacy>Política de privacidad</a>.
 
 cookie-essential =
     Estos elementos son necesarios para darte el servicio que pediste. Mantienen tu sesión iniciada, guardan una copia de tus perfiles, ajustes, Mi lista, valoraciones y progreso para que las páginas se abran al instante, y recuerdan tu idioma y lo que elijas aquí. Las copias se mantienen al día con tu cuenta. No puedes desactivarlos.
@@ -1352,6 +1352,7 @@ help-ui-did-you-mean = ¿Quiso decir “{ $query }”?
 help-ui-viewed = Vistos recientemente
 help-ui-on-this-page = En esta página
 help-ui-other-policies = Otras políticas
+help-ui-print = Imprimir
 help-ui-section-link = Enlace a esta sección
 help-ui-policy-questions = ¿Preguntas sobre esta política?
 help-topic-legal = Legal y políticas
@@ -1661,7 +1662,7 @@ auth-last-name = Apellido
 auth-password-rule = Al menos { $min } caracteres.
 auth-create = Crear cuenta
 auth-creating = Creando tu cuenta…
-auth-terms = Al crear una cuenta, aceptas los <a=/terms>Términos de servicio</a> y la <a=/privacy>Política de privacidad</a>.
+auth-terms = Al crear una cuenta, aceptas los <a=/help/legal/terms>Términos de servicio</a> y la <a=/help/legal/privacy>Política de privacidad</a>.
 auth-check-title = Revisa tu correo
 auth-check-body = Enviamos un enlace a { $email }. Ábrelo para confirmar tu dirección y luego inicia sesión.
 auth-check-spam = ¿No lo encuentras? Busca en tu carpeta de spam.

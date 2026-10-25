@@ -319,7 +319,7 @@ help-art-privacy-data-title = Quelles données { $brand } collecte-t-il ?
 help-art-privacy-data-summary = Un résumé court de ce qui est stocké, de ce qui est envoyé et de l'endroit où lire la politique complète.
 help-art-privacy-data-keywords = confidentialité données collecter informations personnelles suivi vendre partager cookies analyse
 help-art-privacy-data-body =
-    Nous ne vendons pas de données personnelles et nous n'affichons pas de publicité. Voici la version courte. La <a=/privacy>Politique de confidentialité</a> contient le texte complet.
+    Nous ne vendons pas de données personnelles et nous n'affichons pas de publicité. Voici la version courte. La <a=/help/legal/privacy>Politique de confidentialité</a> contient le texte complet.
 
     ## Ce que garde votre compte
     Votre nom, votre adresse e-mail, un numéro de téléphone facultatif, vos profils, Ma liste, vos notes, votre activité de visionnage et vos réglages, ainsi qu'une liste des connexions récentes et des appareils d'où elles venaient.
@@ -333,7 +333,7 @@ help-art-privacy-data-body =
     - Téléchargez une copie de vos données. Consultez <a=/help/article/download-data>Télécharger une copie de vos données</a>.
     - Supprimez votre compte quand vous voulez. Consultez <a=/help/article/delete-account>Supprimer votre compte</a>.
 
-    Pour les cookies et le stockage du navigateur, consultez la <a=/cookies>Politique relative aux cookies</a>.
+    Pour les cookies et le stockage du navigateur, consultez la <a=/help/legal/cookies>Politique relative aux cookies</a>.
 
     @@ cookies
 
@@ -798,7 +798,7 @@ help-art-sources-body =
     - Une source peut devenir indisponible sans préavis.
     - La qualité, les pistes audio et les sous-titres proviennent de la source.
 
-    Nous ne contrôlons pas et ne vérifions pas ces sources. Consultez le <a=/disclaimer>Avertissement</a>. Si vous êtes titulaire de droits, consultez <a=/help/article/copyright>Comment signaler un problème de droits d'auteur</a>.
+    Nous ne contrôlons pas et ne vérifions pas ces sources. Consultez le <a=/help/legal/disclaimer>Avertissement</a>. Si vous êtes titulaire de droits, consultez <a=/help/article/copyright>Comment signaler un problème de droits d'auteur</a>.
 help-art-contribute-title = Comment puis-je contribuer ?
 help-art-contribute-summary = Les idées, corrections, traductions et rapports de bogues sont les bienvenus.
 help-art-contribute-keywords = contribuer contribution bénévole traduire traduction code github aide améliorer suggestions
@@ -864,7 +864,7 @@ help-art-copyright-body =
     3. L’adresse de la page sur { $brand } qui y fait référence.
     4. Une déclaration indiquant que vous êtes le titulaire des droits ou autorisé à agir en son nom.
 
-    Envoyez-le à <a=mailto:{ $help_email }>{ $help_email }</a> avec l’objet <b>Avis DMCA</b>. Le processus complet est sur la <a=/dmca>page DMCA</a>.
+    Envoyez-le à <a=mailto:{ $help_email }>{ $help_email }</a> avec l’objet <b>Avis DMCA</b>. Le processus complet est sur la <a=/help/legal/dmca>page DMCA</a>.
 help-art-title-feedback-title = Commentaires sur un titre sur { $brand }
 help-art-title-feedback-summary = Signaler une description erronée, un titre manquant ou un titre qui ne se lit jamais.
 help-art-title-feedback-keywords = commentaires titre description erronée manquant demande film série ajouter signaler affiche incorrecte
@@ -913,7 +913,7 @@ cookie-general =
 
     Vos choix ici sont enregistrés dans votre navigateur ; supprimer les données du site les réinitialise donc.
 
-    Pour en savoir plus, consultez la <a=/cookies>Politique de cookies</a> et la <a=/privacy>Politique de confidentialité</a>.
+    Pour en savoir plus, consultez la <a=/help/legal/cookies>Politique de cookies</a> et la <a=/help/legal/privacy>Politique de confidentialité</a>.
 
 cookie-essential =
     Ces éléments sont nécessaires pour vous fournir le service demandé. Ils vous gardent connecté, conservent une copie de vos profils, réglages, Ma liste, notes et progression pour que les pages s'ouvrent immédiatement, et mémorisent votre langue et les choix faits ici. Les copies restent synchronisées avec votre compte. Vous ne pouvez pas les refuser.
@@ -1347,6 +1347,7 @@ help-ui-did-you-mean = Vouliez-vous dire « { $query } » ?
 help-ui-viewed = Vus récemment
 help-ui-on-this-page = Sur cette page
 help-ui-other-policies = Autres politiques
+help-ui-print = Imprimer
 help-ui-section-link = Lien vers cette section
 help-ui-policy-questions = Des questions sur cette politique ?
 help-topic-legal = Légal et politiques
@@ -1653,7 +1654,7 @@ auth-last-name = Nom
 auth-password-rule = Au moins { $min } caractères.
 auth-create = Créer un compte
 auth-creating = Création de votre compte…
-auth-terms = En créant un compte, vous acceptez les <a=/terms>Conditions d'utilisation</a> et la <a=/privacy>Politique de confidentialité</a>.
+auth-terms = En créant un compte, vous acceptez les <a=/help/legal/terms>Conditions d'utilisation</a> et la <a=/help/legal/privacy>Politique de confidentialité</a>.
 auth-check-title = Vérifiez votre e-mail
 auth-check-body = Nous avons envoyé un lien à { $email }. Ouvrez-le pour confirmer votre adresse, puis connectez-vous.
 auth-check-spam = Pas reçu ? Regardez dans votre dossier de spam.

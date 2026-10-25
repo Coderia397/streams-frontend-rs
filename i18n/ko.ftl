@@ -318,7 +318,7 @@ help-art-privacy-data-title = { $brand }는 어떤 데이터를 수집하나요?
 help-art-privacy-data-summary = 저장되는 정보와 전송되는 정보, 전체 정책을 볼 수 있는 곳을 간단히 정리했어요.
 help-art-privacy-data-keywords = 개인정보 데이터 수집 추적 판매 공유 쿠키 분석
 help-art-privacy-data-body =
-    개인 데이터를 판매하지 않으며 광고도 보여 주지 않아요. 핵심만 정리했어요. 전체 내용은 <a=/privacy>개인정보 처리방침</a>에 있어요.
+    개인 데이터를 판매하지 않으며 광고도 보여 주지 않아요. 핵심만 정리했어요. 전체 내용은 <a=/help/legal/privacy>개인정보 처리방침</a>에 있어요.
 
     ## 계정에 저장되는 정보
     이름, 이메일 주소, 선택 입력한 전화번호, 프로필, 내 목록, 평가, 시청 기록, 설정, 그리고 최근 로그인과 로그인한 기기 목록.
@@ -332,7 +332,7 @@ help-art-privacy-data-body =
     - 데이터 사본을 다운로드할 수 있어요. <a=/help/article/download-data>내 데이터 사본 다운로드하기</a>에서 확인하세요.
     - 언제든 계정을 삭제할 수 있어요. <a=/help/article/delete-account>계정 삭제하기</a>에서 확인하세요.
 
-    쿠키와 브라우저 저장소에 대해서는 <a=/cookies>쿠키 정책</a>에서 확인하세요.
+    쿠키와 브라우저 저장소에 대해서는 <a=/help/legal/cookies>쿠키 정책</a>에서 확인하세요.
 
     @@ cookies
 
@@ -806,7 +806,7 @@ help-art-sources-body =
     - 소스는 예고 없이 멈출 수 있어요.
     - 화질, 오디오 트랙, 자막은 소스에 따라 정해져요.
 
-    저희는 이 소스들을 관리하거나 확인하지 않아요. <a=/disclaimer>면책 조항</a>에서 확인하세요. 권리자라면 <a=/help/article/copyright>저작권 문제를 신고하는 방법</a>에서 확인하세요.
+    저희는 이 소스들을 관리하거나 확인하지 않아요. <a=/help/legal/disclaimer>면책 조항</a>에서 확인하세요. 권리자라면 <a=/help/article/copyright>저작권 문제를 신고하는 방법</a>에서 확인하세요.
 
 help-art-contribute-title = 어떻게 기여할 수 있나요?
 help-art-contribute-summary = 아이디어, 수정, 번역, 버그 신고 모두 환영해요.
@@ -875,7 +875,7 @@ help-art-copyright-body =
     3. 그 저작물로 연결되는 { $brand } 페이지의 주소.
     4. 권리자 본인이거나 권리자를 대신할 권한이 있다는 진술.
 
-    제목을 <b>DMCA 통지</b>로 해서 <a=mailto:{ $help_email }>{ $help_email }</a>로 보내 주세요. 전체 절차는 <a=/dmca>DMCA 페이지</a>에 있어요.
+    제목을 <b>DMCA 통지</b>로 해서 <a=mailto:{ $help_email }>{ $help_email }</a>로 보내 주세요. 전체 절차는 <a=/help/legal/dmca>DMCA 페이지</a>에 있어요.
 
 help-art-title-feedback-title = { $brand }의 콘텐츠에 대한 의견
 help-art-title-feedback-summary = 잘못된 설명, 없는 콘텐츠, 재생되지 않는 콘텐츠를 알려 주세요.
@@ -927,7 +927,7 @@ cookie-general =
 
     여기서 고른 선택은 브라우저에 저장되므로, 사이트 데이터를 지우면 초기화돼요.
 
-    자세한 내용은 <a=/cookies>쿠키 정책</a>과 <a=/privacy>개인정보 처리방침</a>에서 확인하세요.
+    자세한 내용은 <a=/help/legal/cookies>쿠키 정책</a>과 <a=/help/legal/privacy>개인정보 처리방침</a>에서 확인하세요.
 
 cookie-essential =
     요청한 서비스를 제공하는 데 꼭 필요한 항목이에요. 로그인 상태를 유지하고, 페이지가 바로 열리도록 프로필, 설정, 내 목록, 평가, 진행 상황 사본을 저장하며, 언어와 여기서 고른 선택을 기억해요. 사본은 계정과 동기화돼요. 끌 수 없어요.
@@ -1355,6 +1355,7 @@ help-ui-did-you-mean = 혹시 '{ $query }' 검색하셨나요?
 help-ui-viewed = 최근 본 도움말
 help-ui-on-this-page = 이 페이지의 내용
 help-ui-other-policies = 다른 정책
+help-ui-print = 인쇄
 help-ui-section-link = 이 섹션 링크
 help-ui-policy-questions = 이 정책에 대한 질문이 있나요?
 help-topic-legal = 법적 사항 및 정책
@@ -1668,7 +1669,7 @@ auth-last-name = 성
 auth-password-rule = 최소 { $min }자 이상입니다.
 auth-create = 계정 생성
 auth-creating = 계정 생성 중…
-auth-terms = 계정을 생성함으로써 <a=/terms>서비스 약관</a> 및 <a=/privacy>개인정보 정책</a>에 동의하게 됩니다.
+auth-terms = 계정을 생성함으로써 <a=/help/legal/terms>서비스 약관</a> 및 <a=/help/legal/privacy>개인정보 정책</a>에 동의하게 됩니다.
 auth-check-title = 이메일 확인
 auth-check-body = { $email }으로 링크를 보냈습니다. 링크를 열어 주소를 확인하고 로그인해 주세요.
 auth-check-spam = 없나요? 스팸 폴더를 확인해 주세요.

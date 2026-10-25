@@ -25,12 +25,12 @@ pub struct LegalDoc {
 }
 
 pub const LEGAL: &[LegalDoc] = &[
-    LegalDoc { id: "privacy", path: "/privacy", sections: 14 },
-    LegalDoc { id: "terms", path: "/terms", sections: 18 },
-    LegalDoc { id: "cookie-policy", path: "/cookies", sections: 4 },
-    LegalDoc { id: "dmca", path: "/dmca", sections: 6 },
-    LegalDoc { id: "disclaimer", path: "/disclaimer", sections: 5 },
-    LegalDoc { id: "credits", path: "/credits", sections: 6 },
+    LegalDoc { id: "privacy", path: "/help/legal/privacy", sections: 14 },
+    LegalDoc { id: "terms", path: "/help/legal/terms", sections: 18 },
+    LegalDoc { id: "cookie-policy", path: "/help/legal/cookies", sections: 4 },
+    LegalDoc { id: "dmca", path: "/help/legal/dmca", sections: 6 },
+    LegalDoc { id: "disclaimer", path: "/help/legal/disclaimer", sections: 5 },
+    LegalDoc { id: "credits", path: "/help/legal/credits", sections: 6 },
 ];
 
 pub fn legal_doc(id: &str) -> Option<&'static LegalDoc> {

@@ -110,14 +110,57 @@ pub mod routes {
     pub const KIDS: &str = "/kids";
     pub const LOGIN: &str = "/login";
     pub const HELP: &str = "/help";
-    pub const PRIVACY: &str = "/privacy";
-    pub const TERMS: &str = "/terms";
-    pub const DMCA: &str = "/dmca";
-    pub const DISCLAIMER: &str = "/disclaimer";
+    /// The policies live in the Help Centre, as help.netflix.com/legal/privacy does (owner, 2026-10-25); src/data/help.rs lists them for the sitemap.
+    pub const PRIVACY: &str = "/help/legal/privacy";
+    pub const TERMS: &str = "/help/legal/terms";
+    pub const COOKIES: &str = "/help/legal/cookies";
+    pub const DMCA: &str = "/help/legal/dmca";
+    pub const DISCLAIMER: &str = "/help/legal/disclaimer";
+    pub const CREDITS: &str = "/help/legal/credits";
     pub const HELP_CONTACT: &str = "/help/contact";
     pub const WATCH: &str = "/watch";
     /// Where the links in our emails land (the branded templates point here, not at supabase.co).
     pub const AUTH_CONFIRM: &str = "/auth/confirm";
+
+    /// The policies' earlier addresses and the ones people type (functions/_middleware.js answers the same list with a 301 before the app loads).
+    pub const MOVED: &[(&str, &str)] = &[
+        ("/privacy", PRIVACY),
+        ("/privacy-policy", PRIVACY),
+        ("/privacy-statement", PRIVACY),
+        ("/terms", TERMS),
+        ("/terms-of-service", TERMS),
+        ("/terms-of-use", TERMS),
+        ("/tos", TERMS),
+        ("/cookies", COOKIES),
+        ("/cookie-policy", COOKIES),
+        ("/dmca", DMCA),
+        ("/disclaimer", DISCLAIMER),
+        ("/credits", CREDITS),
+        ("/licenses", CREDITS),
+        ("/legal", PRIVACY),
+        ("/help/legal", PRIVACY),
+    ];
+
+    /// Where an address of `MOVED` lives now (a trailing slash and capitals do not matter).
+    pub fn moved(path: &str) -> Option<&'static str> {
+        let path = path.trim_end_matches('/').to_ascii_lowercase();
+        MOVED.iter().find(|(from, _)| *from == path).map(|(_, to)| *to)
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn policy_addresses_agree_and_old_ones_move() {
+            let listed: Vec<&str> = crate::data::help::LEGAL.iter().map(|d| d.path).collect();
+            assert_eq!(listed, [PRIVACY, TERMS, COOKIES, DMCA, DISCLAIMER, CREDITS]);
+            assert_eq!(moved("/privacy-policy"), Some(PRIVACY));
+            assert_eq!(moved("/Terms-Of-Service/"), Some(TERMS));
+            assert_eq!(moved("/privacy/x"), None);
+            assert!(MOVED.iter().all(|(_, to)| listed.contains(to)));
+        }
+    }
 }
 
 /// Where the cookie pop-up sits from the `sm` width up (a foldable or a tablet). Set STREAMS_COOKIE_BANNER to top, bottom,

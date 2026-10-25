@@ -319,7 +319,7 @@ help-art-privacy-data-title = Vilka uppgifter samlar { $brand } in?
 help-art-privacy-data-summary = En kort sammanfattning av vad som sparas, vad som skickas och var du läser hela policyn.
 help-art-privacy-data-keywords = integritet uppgifter samla in personuppgifter policy vad sparar ni
 help-art-privacy-data-body =
-    Vi säljer inga personuppgifter och visar ingen reklam. Här är den korta versionen. <a=/privacy>Integritetspolicyn</a> har hela texten.
+    Vi säljer inga personuppgifter och visar ingen reklam. Här är den korta versionen. <a=/help/legal/privacy>Integritetspolicyn</a> har hela texten.
 
     ## Vad ditt konto sparar
     Ditt namn, din e-postadress, ett telefonnummer om du lägger till ett, dina profiler, Min lista, dina betyg, din tittaraktivitet och dina inställningar, plus en lista över de senaste inloggningarna och enheterna de kom från.
@@ -333,7 +333,7 @@ help-art-privacy-data-body =
     - Ladda ner en kopia av dina uppgifter. Se <a=/help/article/download-data>Ladda ner en kopia av dina uppgifter</a>.
     - Radera ditt konto när du vill. Se <a=/help/article/delete-account>Radera ditt konto</a>.
 
-    Om cookies och webbläsarens lagring, se <a=/cookies>Cookiepolicyn</a>.
+    Om cookies och webbläsarens lagring, se <a=/help/legal/cookies>Cookiepolicyn</a>.
 
     @@ cookies
 
@@ -807,7 +807,7 @@ help-art-sources-body =
     - En källa kan gå offline utan förvarning.
     - Kvalitet, ljudspår och undertexter kommer från källan.
 
-    Vi styr inte över och kontrollerar inte de källorna. Se <a=/disclaimer>Ansvarsfriskrivningen</a>. Om du är rättighetsinnehavare, se <a=/help/article/copyright>Rapportera ett upphovsrättsproblem</a>.
+    Vi styr inte över och kontrollerar inte de källorna. Se <a=/help/legal/disclaimer>Ansvarsfriskrivningen</a>. Om du är rättighetsinnehavare, se <a=/help/article/copyright>Rapportera ett upphovsrättsproblem</a>.
 
 help-art-contribute-title = Hur kan jag bidra?
 help-art-contribute-summary = Idéer, rättningar, översättningar och felrapporter är välkomna.
@@ -876,7 +876,7 @@ help-art-copyright-body =
     3. Adressen till sidan på { $brand } som länkar till det.
     4. Ett intygande om att du är rättighetsinnehavare eller får agera för den.
 
-    Skicka den till <a=mailto:{ $help_email }>{ $help_email }</a> med ämnet <b>DMCA-anmälan</b>. Hela processen finns på <a=/dmca>DMCA-sidan</a>.
+    Skicka den till <a=mailto:{ $help_email }>{ $help_email }</a> med ämnet <b>DMCA-anmälan</b>. Hela processen finns på <a=/help/legal/dmca>DMCA-sidan</a>.
 
 help-art-title-feedback-title = Synpunkter på en titel på { $brand }
 help-art-title-feedback-summary = Rapportera en felaktig beskrivning, en titel som saknas eller en titel som aldrig spelas upp.
@@ -928,7 +928,7 @@ cookie-general =
 
     Dina val här sparas i webbläsaren, så om du rensar webbplatsdata återställs de.
 
-    Läs mer i <a=/cookies>Cookiepolicy</a> och <a=/privacy>Integritetspolicy</a>.
+    Läs mer i <a=/help/legal/cookies>Cookiepolicy</a> och <a=/help/legal/privacy>Integritetspolicy</a>.
 
 cookie-essential =
     De här uppgifterna behövs för att ge dig tjänsten du bad om. De håller dig inloggad, sparar en kopia av dina profiler, inställningar, Min lista, betyg och var du är så att sidor öppnas direkt, och kommer ihåg ditt språk och dina val här. Kopiorna hålls i takt med ditt konto. Du kan inte välja bort dem.
@@ -1362,6 +1362,7 @@ help-ui-did-you-mean = Meant du men "{ $query }"?
 help-ui-viewed = Nyligen visade
 help-ui-on-this-page = På denna sida
 help-ui-other-policies = Andra filer
+help-ui-print = Skriv ut
 help-ui-section-link = Länk till denna avsnitt
 help-ui-policy-questions = Frågor om denna fil?
 help-topic-legal = Lagliga och filer
@@ -1675,7 +1676,7 @@ auth-last-name = Efternamn
 auth-password-rule = Minst { $min } tecken.
 auth-create = Skapa konto
 auth-creating = Skapar ditt konto…
-auth-terms = Genom att skapa ett konto godkänner du <a=/terms>Servicevillkor</a> och <a=/privacy>Integritetspolicy</a>.
+auth-terms = Genom att skapa ett konto godkänner du <a=/help/legal/terms>Servicevillkor</a> och <a=/help/legal/privacy>Integritetspolicy</a>.
 auth-check-title = Kolla din e-post
 auth-check-body = Vi skickade en länk till { $email }. Öppna den för att bekräfta din adress, sedan logga in.
 auth-check-spam = Inte där? Kolla i din spammapp.

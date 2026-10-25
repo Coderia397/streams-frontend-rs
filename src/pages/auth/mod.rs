@@ -68,12 +68,12 @@ pub fn AuthFooter(#[prop(default = Look::Dark)] look: Look) -> impl IntoView {
     let links: [(&str, &str); 8] = [
         ("/help", "footer-help"),
         ("/help/contact", "footer-contact"),
-        ("/terms", "help-ui-legal-terms"),
-        ("/privacy", "help-ui-legal-privacy"),
-        ("/cookies", "help-ui-legal-cookies"),
-        ("/dmca", "help-ui-legal-dmca"),
-        ("/disclaimer", "help-ui-legal-disclaimer"),
-        ("/credits", "help-ui-legal-credits"),
+        (crate::config::routes::TERMS, "help-ui-legal-terms"),
+        (crate::config::routes::PRIVACY, "help-ui-legal-privacy"),
+        (crate::config::routes::COOKIES, "help-ui-legal-cookies"),
+        (crate::config::routes::DMCA, "help-ui-legal-dmca"),
+        (crate::config::routes::DISCLAIMER, "help-ui-legal-disclaimer"),
+        (crate::config::routes::CREDITS, "help-ui-legal-credits"),
     ];
     view! {
             <footer class=footer>

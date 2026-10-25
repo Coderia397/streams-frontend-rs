@@ -14,14 +14,14 @@ pub fn Footer() -> impl IntoView {
                     <a href="/latest" class="hover:underline hover:text-ink transition-colors">{crate::i18n::t("nav-new-popular")}</a>
                     <a href="/browse/my-list" class="hover:underline hover:text-ink transition-colors">{crate::i18n::t("nav-my-list")}</a>
                     <a href="/settings" class="hover:underline hover:text-ink transition-colors">{crate::i18n::t("footer-settings")}</a>
-                    <a href="/privacy" class="hover:underline hover:text-ink transition-colors">{crate::i18n::t("footer-privacy")}</a>
-                    <a href="/terms" class="hover:underline hover:text-ink transition-colors">{crate::i18n::t("footer-terms")}</a>
-                    <a href="/dmca" class="hover:underline hover:text-ink transition-colors">{crate::i18n::t("footer-dmca")}</a>
-                    <a href="/disclaimer" class="hover:underline hover:text-ink transition-colors">{crate::i18n::t("footer-disclaimer")}</a>
-                    <a href="/cookies" class="hover:underline hover:text-ink transition-colors">{crate::i18n::t("footer-cookie-policy")}</a>
+                    <a href=crate::config::routes::PRIVACY class="hover:underline hover:text-ink transition-colors">{crate::i18n::t("footer-privacy")}</a>
+                    <a href=crate::config::routes::TERMS class="hover:underline hover:text-ink transition-colors">{crate::i18n::t("footer-terms")}</a>
+                    <a href=crate::config::routes::DMCA class="hover:underline hover:text-ink transition-colors">{crate::i18n::t("footer-dmca")}</a>
+                    <a href=crate::config::routes::DISCLAIMER class="hover:underline hover:text-ink transition-colors">{crate::i18n::t("footer-disclaimer")}</a>
+                    <a href=crate::config::routes::COOKIES class="hover:underline hover:text-ink transition-colors">{crate::i18n::t("footer-cookie-policy")}</a>
                     <a href="/contact" class="hover:underline hover:text-ink transition-colors">{crate::i18n::t("footer-contact")}</a>
                     <a href="/help" class="hover:underline hover:text-ink transition-colors">{crate::i18n::t("footer-help")}</a>
-                    <a href="/credits" class="hover:underline hover:text-ink transition-colors">{crate::i18n::t("help-ui-legal-credits")}</a>
+                    <a href=crate::config::routes::CREDITS class="hover:underline hover:text-ink transition-colors">{crate::i18n::t("help-ui-legal-credits")}</a>
                     <button on:click=move |_| consent.open_center() class="text-start hover:underline hover:text-ink transition-colors">{crate::i18n::t("footer-cookie-preferences")}</button>
                 </nav>
 

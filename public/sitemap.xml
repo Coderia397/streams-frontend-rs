@@ -5,12 +5,12 @@
   <url><loc>https://streams.watch/signup</loc><priority>0.7</priority></url>
   <url><loc>https://streams.watch/help</loc><priority>0.7</priority></url>
   <url><loc>https://streams.watch/help/contact</loc><priority>0.5</priority></url>
-  <url><loc>https://streams.watch/privacy</loc><priority>0.5</priority></url>
-  <url><loc>https://streams.watch/terms</loc><priority>0.5</priority></url>
-  <url><loc>https://streams.watch/cookies</loc><priority>0.5</priority></url>
-  <url><loc>https://streams.watch/dmca</loc><priority>0.5</priority></url>
-  <url><loc>https://streams.watch/disclaimer</loc><priority>0.5</priority></url>
-  <url><loc>https://streams.watch/credits</loc><priority>0.5</priority></url>
+  <url><loc>https://streams.watch/help/legal/privacy</loc><priority>0.5</priority></url>
+  <url><loc>https://streams.watch/help/legal/terms</loc><priority>0.5</priority></url>
+  <url><loc>https://streams.watch/help/legal/cookies</loc><priority>0.5</priority></url>
+  <url><loc>https://streams.watch/help/legal/dmca</loc><priority>0.5</priority></url>
+  <url><loc>https://streams.watch/help/legal/disclaimer</loc><priority>0.5</priority></url>
+  <url><loc>https://streams.watch/help/legal/credits</loc><priority>0.5</priority></url>
   <url><loc>https://streams.watch/help/article/profiles-manage</loc><priority>0.5</priority></url>
   <url><loc>https://streams.watch/help/article/switch-profile</loc><priority>0.5</priority></url>
   <url><loc>https://streams.watch/help/article/profile-pin</loc><priority>0.5</priority></url>

@@ -19,6 +19,8 @@ pub fn LegalPage(doc: &'static str) -> impl IntoView {
         });
     }
     let toc: Vec<(String, String)> = (1..=d.sections).map(|n| (format!("s-{n}"), legal_text(&format!("legal-{doc}-{n}-title")))).collect();
+    let toc_menu = toc.clone();
+    let (menu, set_menu) = signal(false);
     let sections = (1..=d.sections)
         .map(|n| {
             let mut bullets = Vec::new();
@@ -51,19 +53,50 @@ pub fn LegalPage(doc: &'static str) -> impl IntoView {
     view! {
         <HelpShell>
             <main class="mx-auto w-full max-w-[1100px] px-6 pb-20 pt-6 md:px-12">
-                <a href="/help" class="mb-6 inline-flex items-center gap-2 text-body-sm font-semibold text-paper-ink hover:text-brand-active">
-                    <AppIcon glyph=Glyph::Back class="rtl:-scale-x-100" />
-                    {tr("help-ui-back")}
-                </a>
+                // Back to Help Home on the left; Print and, below the desktop layout, the contents menu on the right (help.netflix.com/legal/privacy)
+                <div class="relative mb-6 flex items-center justify-between gap-4 print:hidden" on:keydown=move |ev| if ev.key() == "Escape" { set_menu.set(false) }>
+                    <a href="/help" class="inline-flex items-center gap-2 text-body-sm font-semibold text-paper-ink hover:text-brand-active">
+                        <AppIcon glyph=Glyph::Back class="rtl:-scale-x-100" />
+                        {tr("help-ui-back")}
+                    </a>
+                    <div class="flex items-center gap-2">
+                        <button
+                            type="button"
+                            on:click=|_| { let _ = web_sys::window().map(|w| w.print()); }
+                            aria-label=tr("help-ui-print")
+                            class="inline-flex size-10 items-center justify-center gap-2 rounded-button border border-paper-edge bg-paper text-body-sm font-bold text-paper-ink hover:bg-paper-soft sm:size-auto sm:px-4 sm:py-2"
+                        >
+                            <i class="ph-bold ph-printer text-body-lg" aria-hidden="true"></i>
+                            <span class="hidden sm:inline">{tr("help-ui-print")}</span>
+                        </button>
+                        <button
+                            type="button"
+                            on:click=move |_| set_menu.update(|o| *o = !*o)
+                            aria-label=tr("help-ui-on-this-page")
+                            aria-expanded=move || menu.get().to_string()
+                            class="inline-flex size-10 items-center justify-center rounded-button border border-paper-edge bg-paper text-paper-ink hover:bg-paper-soft lg:hidden"
+                        >
+                            <i class=move || if menu.get() { "ph-bold ph-x text-body-lg" } else { "ph-bold ph-list text-body-lg" } aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <Show when=move || menu.get()>
+                        // a tap outside the list closes it; a tap on an entry scrolls there and closes it
+                        <button type="button" tabindex="-1" aria-hidden="true" class="fixed inset-0 z-20 cursor-default lg:hidden" on:click=move |_| set_menu.set(false)></button>
+                        <div class="absolute end-0 top-full z-30 mt-2 max-h-[70vh] w-72 max-w-[calc(100vw-3rem)] overflow-y-auto rounded-card border border-paper-line bg-paper p-4 shadow-xl lg:hidden" on:click=move |_| set_menu.set(false)>
+                            <Toc items=toc_menu.clone() title=tr("help-ui-on-this-page") />
+                        </div>
+                    </Show>
+                </div>
                 <div class="grid gap-10 lg:grid-cols-[230px_minmax(0,1fr)]">
-                    <aside class="lg:sticky lg:top-6 lg:self-start">
+                    // the contents sit beside the text on a wide screen; a narrower one reaches them through the menu above, so the title comes first
+                    <aside class="hidden lg:sticky lg:top-6 lg:block lg:self-start print:hidden">
                         <Toc items=toc title=tr("help-ui-on-this-page") />
                     </aside>
                     <article class="min-w-0 max-w-[720px]">
                         <h1 class="break-words hyphens-auto text-heading-xl font-extrabold leading-tight text-paper-ink md:text-display-sm">{title}</h1>
                         <p class="mb-10 mt-3 text-body-md font-semibold text-paper-mute">{legal_text(&format!("legal-{doc}-updated"))}</p>
                         <div class="space-y-10">{sections}</div>
-                        <div class="mt-14 border-t border-paper-line pt-6">
+                        <div class="mt-14 border-t border-paper-line pt-6 print:hidden">
                             <h2 class="mb-3 text-body-md font-bold text-paper-ink">{tr("help-ui-other-policies")}</h2>
                             <ul class="space-y-2">{others}</ul>
                             <p class="mt-6 text-body-sm text-paper-mute">

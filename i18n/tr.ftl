@@ -319,7 +319,7 @@ help-art-privacy-data-title = { $brand } hangi verileri topluyor?
 help-art-privacy-data-summary = Neyin saklandığının, neyin gönderildiğinin ve tam politikanın nerede okunacağının kısa özeti.
 help-art-privacy-data-keywords = gizlilik veri toplama kişisel veriler politika neleri saklıyorsunuz
 help-art-privacy-data-body =
-    Kişisel verileri satmayız ve reklam göstermeyiz. İşte kısa hali. Tam metin <a=/privacy>Gizlilik Politikası</a>'ndadır.
+    Kişisel verileri satmayız ve reklam göstermeyiz. İşte kısa hali. Tam metin <a=/help/legal/privacy>Gizlilik Politikası</a>'ndadır.
 
     ## Hesabınızın sakladıkları
     Adınız, e-posta adresiniz, eklerseniz telefon numaranız, profilleriniz, Listem, puanlarınız, izleme etkinliğiniz ve ayarlarınız; ayrıca son oturum açmaların ve geldikleri cihazların listesi.
@@ -333,7 +333,7 @@ help-art-privacy-data-body =
     - Verilerinizin bir kopyasını indirin. Bkz. <a=/help/article/download-data>Verilerinizin bir kopyasını indirme</a>.
     - Hesabınızı istediğiniz zaman silin. Bkz. <a=/help/article/delete-account>Hesabınızı silme</a>.
 
-    Çerezler ve tarayıcı depolaması için <a=/cookies>Çerez Politikası</a>'na bakın.
+    Çerezler ve tarayıcı depolaması için <a=/help/legal/cookies>Çerez Politikası</a>'na bakın.
 
     @@ cookies
 
@@ -807,7 +807,7 @@ help-art-sources-body =
     - Bir kaynak haber vermeden çevrim dışı olabilir.
     - Kalite, ses parçaları ve altyazılar kaynaktan gelir.
 
-    Bu kaynakları kontrol etmeyiz ve denetlemeyiz. Bkz. <a=/disclaimer>Sorumluluk Reddi</a>. Hak sahibiyseniz bkz. <a=/help/article/copyright>Telif hakkı sorunu bildirme</a>.
+    Bu kaynakları kontrol etmeyiz ve denetlemeyiz. Bkz. <a=/help/legal/disclaimer>Sorumluluk Reddi</a>. Hak sahibiyseniz bkz. <a=/help/article/copyright>Telif hakkı sorunu bildirme</a>.
 
 help-art-contribute-title = Nasıl katkıda bulunabilirim?
 help-art-contribute-summary = Fikirler, düzeltmeler, çeviriler ve hata bildirimleri memnuniyetle karşılanır.
@@ -876,7 +876,7 @@ help-art-copyright-body =
     3. { $brand } üzerinde ona bağlantı veren sayfanın adresi.
     4. Hak sahibi olduğunuza veya onun adına hareket etmeye yetkili olduğunuza dair bir beyan.
 
-    Bildirimi <b>DMCA bildirimi</b> konusuyla <a=mailto:{ $help_email }>{ $help_email }</a> adresine gönderin. Sürecin tamamı <a=/dmca>DMCA sayfasında</a>.
+    Bildirimi <b>DMCA bildirimi</b> konusuyla <a=mailto:{ $help_email }>{ $help_email }</a> adresine gönderin. Sürecin tamamı <a=/help/legal/dmca>DMCA sayfasında</a>.
 
 help-art-title-feedback-title = { $brand } üzerindeki bir başlık hakkında geri bildirim
 help-art-title-feedback-summary = Yanlış bir açıklamayı, eksik bir başlığı veya hiç oynatılmayan bir başlığı bildirin.
@@ -928,7 +928,7 @@ cookie-general =
 
     Buradaki seçimleriniz tarayıcınızda saklanır; site verilerini silmek onları sıfırlar.
 
-    Daha fazlası için <a=/cookies>Çerez Politikası</a> ve <a=/privacy>Gizlilik Politikası</a> sayfalarına bakın.
+    Daha fazlası için <a=/help/legal/cookies>Çerez Politikası</a> ve <a=/help/legal/privacy>Gizlilik Politikası</a> sayfalarına bakın.
 
 cookie-essential =
     Bu öğeler, istediğiniz hizmeti sunmak için gereklidir. Oturumunuzu açık tutar, sayfalar hemen açılsın diye profillerinizin, ayarlarınızın, Listem'in, puanlarınızın ve ilerlemenizin bir kopyasını saklar, dilinizi ve burada yaptığınız seçimleri hatırlar. Kopyalar hesabınızla eşit tutulur. Bunları kapatamazsınız.
@@ -1362,6 +1362,7 @@ help-ui-did-you-mean = ‘{ $query }’ demek mi istediniz?
 help-ui-viewed = Son görüntülenenler
 help-ui-on-this-page = Bu sayfada
 help-ui-other-policies = Diğer politikalar
+help-ui-print = Yazdır
 help-ui-section-link = Bu bölüme bağlantı
 help-ui-policy-questions = Bu politika hakkında sorularınız var mı?
 help-topic-legal = Yasal ve Politikalar
@@ -1675,7 +1676,7 @@ auth-last-name = Soyisim
 auth-password-rule = En az { $min } karakter.
 auth-create = Hesap oluştur
 auth-creating = Hesabınızı oluşturuyoruz…
-auth-terms = Hesap oluşturarak <a=/terms>Hizmet Şartları</a> ve <a=/privacy> Gizlilik Politikası</a> ile kabul edersiniz.
+auth-terms = Hesap oluşturarak <a=/help/legal/terms>Hizmet Şartları</a> ve <a=/help/legal/privacy> Gizlilik Politikası</a> ile kabul edersiniz.
 auth-check-title = E-postanızı kontrol edin
 auth-check-body = { $email } adresine bir bağlantı gönderdik. Açarak adresinizi doğrulayın, ardından oturum açın.
 auth-check-spam = Orada değil mi? Spam klasörünüzü kontrol edin.

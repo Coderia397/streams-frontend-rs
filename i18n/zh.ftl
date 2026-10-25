@@ -319,7 +319,7 @@ help-art-privacy-data-title = { $brand } 会收集哪些数据？
 help-art-privacy-data-summary = 简单说明保存了什么、发送了什么，以及在哪里阅读完整政策。
 help-art-privacy-data-keywords = 隐私 数据 收集 个人信息 追踪 出售 分享 cookie 分析
 help-art-privacy-data-body =
-    我们不出售个人数据，也不展示广告。下面是简要版本，完整内容请看<a=/privacy>隐私政策</a>。
+    我们不出售个人数据，也不展示广告。下面是简要版本，完整内容请看<a=/help/legal/privacy>隐私政策</a>。
 
     ## 保存在你的账户中
     你的姓名、电子邮件地址、可选的手机号码、个人资料、我的片单、评分、观看记录和设置，以及最近的登录和它们所用设备的列表。
@@ -333,7 +333,7 @@ help-art-privacy-data-body =
     - 下载你的数据副本。请参阅<a=/help/article/download-data>下载你的数据副本</a>。
     - 随时删除你的账户。请参阅<a=/help/article/delete-account>删除你的账户</a>。
 
-    关于 Cookie 和浏览器存储，请参阅 <a=/cookies>Cookie 政策</a>。
+    关于 Cookie 和浏览器存储，请参阅 <a=/help/legal/cookies>Cookie 政策</a>。
 
     @@ cookies
 
@@ -807,7 +807,7 @@ help-art-sources-body =
     - 来源可能会毫无预兆地下线。
     - 画质、音轨和字幕都取决于来源。
 
-    我们不控制也不检查这些来源。请参阅<a=/disclaimer>免责声明</a>。如果你是权利人，请参阅<a=/help/article/copyright>如何举报版权问题</a>。
+    我们不控制也不检查这些来源。请参阅<a=/help/legal/disclaimer>免责声明</a>。如果你是权利人，请参阅<a=/help/article/copyright>如何举报版权问题</a>。
 
 help-art-contribute-title = 我可以怎样参与？
 help-art-contribute-summary = 欢迎提供想法、修复、翻译和问题报告。
@@ -876,7 +876,7 @@ help-art-copyright-body =
     3. { $brand } 上链接到该作品的页面地址。
     4. 一份声明，说明你是权利人或有权代表权利人行事。
 
-    请发送到 <a=mailto:{ $help_email }>{ $help_email }</a>，邮件主题写<b>DMCA 通知</b>。完整流程见 <a=/dmca>DMCA 页面</a>。
+    请发送到 <a=mailto:{ $help_email }>{ $help_email }</a>，邮件主题写<b>DMCA 通知</b>。完整流程见 <a=/help/legal/dmca>DMCA 页面</a>。
 
 help-art-title-feedback-title = 关于 { $brand } 上作品的反馈
 help-art-title-feedback-summary = 报告错误的简介、缺少的作品，或一直无法播放的作品。
@@ -928,7 +928,7 @@ cookie-general =
 
     你在这里的选择保存在浏览器中，所以清除网站数据会把它们重置。
 
-    更多信息请参阅<a=/cookies>Cookie 政策</a>和<a=/privacy>隐私政策</a>。
+    更多信息请参阅<a=/help/legal/cookies>Cookie 政策</a>和<a=/help/legal/privacy>隐私政策</a>。
 
 cookie-essential =
     这些项目是为你提供所请求服务所必需的。它们让你保持登录，保存个人资料、设置、我的片单、评分和进度的副本以便页面立刻打开，并记住你的语言和你在这里做出的选择。这些副本会与你的账户保持同步。你无法关闭它们。
@@ -1358,6 +1358,7 @@ help-ui-did-you-mean = 你是不是要找“{ $query }”？
 help-ui-viewed = 最近看过
 help-ui-on-this-page = 本页内容
 help-ui-other-policies = 其他政策
+help-ui-print = 打印
 help-ui-section-link = 链接到此部分
 help-ui-policy-questions = 对这项政策有疑问？
 help-topic-legal = 法律与政策
@@ -1671,7 +1672,7 @@ auth-last-name = 姓氏
 auth-password-rule = 至少 { $min } 个字符。
 auth-create = 创建账户
 auth-creating = 正在创建你的账户…
-auth-terms = 创建账户即表示你同意<a=/terms>服务条款</a>和<a=/privacy>隐私政策</a>。
+auth-terms = 创建账户即表示你同意<a=/help/legal/terms>服务条款</a>和<a=/help/legal/privacy>隐私政策</a>。
 auth-check-title = 检查你的电子邮件
 auth-check-body = 我们已向 { $email } 发送了一个链接。打开它以确认你的地址，然后登录。
 auth-check-spam = 没收到？请查看垃圾邮件文件夹。

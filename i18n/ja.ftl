@@ -319,7 +319,7 @@ help-art-privacy-data-title = { $brand } はどんなデータを収集します
 help-art-privacy-data-summary = 保存される情報と送信される情報の概要、およびポリシー全文の場所。
 help-art-privacy-data-keywords = プライバシー データ 収集 個人情報 追跡 販売 共有 クッキー 分析
 help-art-privacy-data-body =
-    個人データを販売することはなく、広告も表示しません。ここでは要点を説明します。全文は<a=/privacy>プライバシーポリシー</a>をご覧ください。
+    個人データを販売することはなく、広告も表示しません。ここでは要点を説明します。全文は<a=/help/legal/privacy>プライバシーポリシー</a>をご覧ください。
 
     ## アカウントに保存される情報
     氏名、メールアドレス、任意の電話番号、プロフィール、マイリスト、評価、視聴履歴、設定、および最近のサインインとそのデバイスの一覧。
@@ -333,7 +333,7 @@ help-art-privacy-data-body =
     - データのコピーをダウンロードできます。<a=/help/article/download-data>データのコピーをダウンロードする</a>をご覧ください。
     - アカウントはいつでも削除できます。<a=/help/article/delete-account>アカウントを削除する</a>をご覧ください。
 
-    クッキーとブラウザのストレージについては、<a=/cookies>クッキーポリシー</a>をご覧ください。
+    クッキーとブラウザのストレージについては、<a=/help/legal/cookies>クッキーポリシー</a>をご覧ください。
 
     @@ cookies
 
@@ -807,7 +807,7 @@ help-art-sources-body =
     - 配信元は予告なく停止することがあります。
     - 画質、音声トラック、字幕は配信元によって決まります。
 
-    私たちはこれらの配信元を管理しておらず、内容も確認していません。<a=/disclaimer>免責事項</a>をご覧ください。権利者の方は、<a=/help/article/copyright>著作権侵害を報告する方法</a>をご覧ください。
+    私たちはこれらの配信元を管理しておらず、内容も確認していません。<a=/help/legal/disclaimer>免責事項</a>をご覧ください。権利者の方は、<a=/help/article/copyright>著作権侵害を報告する方法</a>をご覧ください。
 
 help-art-contribute-title = どうすれば協力できますか？
 help-art-contribute-summary = アイデア、修正、翻訳、バグ報告を歓迎します。
@@ -876,7 +876,7 @@ help-art-copyright-body =
     3. その作品にリンクしている { $brand } のページのアドレス。
     4. 権利者本人であるか、権利者の代理として行動する権限があることの表明。
 
-    件名を<b>DMCA通知</b>として、<a=mailto:{ $help_email }>{ $help_email }</a> までお送りください。手続きの詳細は<a=/dmca>DMCAページ</a>にあります。
+    件名を<b>DMCA通知</b>として、<a=mailto:{ $help_email }>{ $help_email }</a> までお送りください。手続きの詳細は<a=/help/legal/dmca>DMCAページ</a>にあります。
 
 help-art-title-feedback-title = { $brand } の作品についてのフィードバック
 help-art-title-feedback-summary = 説明の誤り、見つからない作品、再生されない作品を報告します。
@@ -928,7 +928,7 @@ cookie-general =
 
     ここでの選択はブラウザに保存されるため、サイトデータを消去するとリセットされます。
 
-    詳しくは<a=/cookies>クッキーポリシー</a>と<a=/privacy>プライバシーポリシー</a>をご覧ください。
+    詳しくは<a=/help/legal/cookies>クッキーポリシー</a>と<a=/help/legal/privacy>プライバシーポリシー</a>をご覧ください。
 
 cookie-essential =
     これらはご希望のサービスを提供するために必要です。サインインした状態を保ち、ページがすぐに開くようにプロフィール、設定、マイリスト、評価、進捗のコピーを保存し、言語とここでの選択を記憶します。コピーはアカウントと同期されます。オフにすることはできません。
@@ -1356,6 +1356,7 @@ help-ui-did-you-mean = もしかして「{ $query }」？
 help-ui-viewed = 最近見た記事
 help-ui-on-this-page = このページの内容
 help-ui-other-policies = その他のポリシー
+help-ui-print = 印刷
 help-ui-section-link = このセクションへのリンク
 help-ui-policy-questions = このポリシーについてご質問がありますか？
 help-topic-legal = 法的情報とポリシー
@@ -1669,7 +1670,7 @@ auth-last-name = 姓
 auth-password-rule = 少なくとも{ $min }文字以上です。
 auth-create = アカウントを作成
 auth-creating = アカウントを作成中…
-auth-terms = アカウントを作成することで、<a=/terms>利用規約</a>と<a=/privacy>プライバシーポリシー</a>に同意したことになります。
+auth-terms = アカウントを作成することで、<a=/help/legal/terms>利用規約</a>と<a=/help/legal/privacy>プライバシーポリシー</a>に同意したことになります。
 auth-check-title = メールを確認してください
 auth-check-body = { $email }にリンクを送信しました。開いてアドレスを確認し、サインインしてください。
 auth-check-spam = 見つからない場合は、スパムフォルダをご確認ください。

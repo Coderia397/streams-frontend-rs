@@ -22,15 +22,24 @@ const PAGES = {
   "/signup": ["Sign Up", "Make a free Streams account: profiles, a Kids profile and rows made for your taste."],
   "/forgot": ["Reset Your Password", "Get a link to set a new password for your Streams account."],
   "/help": ["Help Centre", "Answers about your account, watching on your devices, profiles and more."],
-  "/terms": ["Terms of Service", "The terms for using Streams."],
-  "/privacy": ["Privacy Policy", "What Streams collects, why, and the choices you have."],
-  "/cookies": ["Cookie Policy", "The cookies and storage Streams uses, and how to choose."],
-  "/dmca": ["DMCA Safe Harbor Notice", "How to send a copyright notice to Streams."],
-  "/disclaimer": ["Disclaimer", "What Streams is and what it is not."],
-  "/credits": ["Licenses and credits", "The data, software and art Streams is made with."],
+  "/help/legal/terms": ["Terms of Service", "The terms for using Streams."],
+  "/help/legal/privacy": ["Privacy Policy", "What Streams collects, why, and the choices you have."],
+  "/help/legal/cookies": ["Cookie Policy", "The cookies and storage Streams uses, and how to choose."],
+  "/help/legal/dmca": ["DMCA Safe Harbor Notice", "How to send a copyright notice to Streams."],
+  "/help/legal/disclaimer": ["Disclaimer", "What Streams is and what it is not."],
+  "/help/legal/credits": ["Licenses and credits", "The data, software and art Streams is made with."],
   "/clips": ["Clips", "Trailers to watch one after another."],
   "/latest": ["New & Popular", "What is new and what everyone is watching."],
   "/search": ["Search", "Find films and series on Streams."],
+};
+
+// the policies' earlier addresses and the ones people type, answered with a 301 to the policy in the Help Centre (src/config.rs, routes::MOVED;
+// public/_routes.json must list each one, or this function never sees it)
+const MOVED = {
+  "/privacy": "/help/legal/privacy", "/privacy-policy": "/help/legal/privacy", "/privacy-statement": "/help/legal/privacy",
+  "/terms": "/help/legal/terms", "/terms-of-service": "/help/legal/terms", "/terms-of-use": "/help/legal/terms", "/tos": "/help/legal/terms",
+  "/cookies": "/help/legal/cookies", "/cookie-policy": "/help/legal/cookies", "/dmca": "/help/legal/dmca", "/disclaimer": "/help/legal/disclaimer",
+  "/credits": "/help/legal/credits", "/licenses": "/help/legal/credits", "/legal": "/help/legal/privacy", "/help/legal": "/help/legal/privacy",
 };
 
 const APP_WASM = /^\/streams-frontend-rs-[0-9a-f]+_bg\.wasm$/;
@@ -63,6 +72,8 @@ export async function onRequest({ request, next, env }) {
   const p = url.pathname;
   if (ours) {
     const onHelp = host === HELP;
+    const moved = MOVED[p.replace(/\/+$/, "").toLowerCase()];
+    if (moved) return Response.redirect(`https://${HELP}${moved}${url.search}`, 301);
     const helpPath = p === "/help" || p.startsWith("/help/");
     if (!onHelp && helpPath) return Response.redirect(`https://${HELP}${p}${url.search}`, 301);
     if (onHelp && !helpPath && p !== "/" && !FILE.test(p)) return Response.redirect(`https://${MAIN}${p}${url.search}`, 301);
@@ -102,7 +113,7 @@ export async function onRequest({ request, next, env }) {
   // the policies: before this, a reader without the app found only their titles, so who runs the site and its terms were unreadable
   if (LEGAL[p] && env && env.ASSETS) {
     const legal = await legalFirstView(env, url.origin, p).catch(() => null);
-    if (legal) return withHead(res, { title: `${PAGES[p][0]} | ${BRAND}`, description: PAGES[p][1], url: `${origin}${p}` }, legal);
+    if (legal) return withHead(res, { title: `${PAGES[p][0]} | ${BRAND} Help Centre`, description: PAGES[p][1], url: `${origin}${p}` }, legal);
   }
   if (p === "/" && !(ours && host === HELP) && env && env.ASSETS) {
     const first = await landingFirstView(env, url.origin).catch(() => null);
@@ -316,8 +327,8 @@ async function helpFirstView(env, origin, slug) {
 
 // the policies by address: their id in i18n/en.ftl and number of sections (src/data/help.rs, LEGAL)
 const LEGAL = {
-  "/privacy": ["privacy", 14], "/terms": ["terms", 18], "/cookies": ["cookie-policy", 4],
-  "/dmca": ["dmca", 6], "/disclaimer": ["disclaimer", 5], "/credits": ["credits", 6],
+  "/help/legal/privacy": ["privacy", 14], "/help/legal/terms": ["terms", 18], "/help/legal/cookies": ["cookie-policy", 4],
+  "/help/legal/dmca": ["dmca", 6], "/help/legal/disclaimer": ["disclaimer", 5], "/help/legal/credits": ["credits", 6],
 };
 
 /** A policy as plain HTML while the app downloads, in the order src/pages/help/legal.rs shows it: title, date, each numbered section
@@ -351,7 +362,7 @@ async function legalFirstView(env, origin, path) {
 #first-view .fv-date{color:var(--color-ink-body,#b3b3b3);font-weight:600;margin:0 0 16px}
 #first-view p,#first-view li{line-height:1.6;font-size:16px;color:var(--color-ink-soft,#e5e5e5)}
 #first-view a{color:var(--color-brand-glow,#7aa6ff)}
-</style><main><nav><a href="https://${HELP}/help">${html(`${BRAND} Help Centre`)}</a></nav>
+</style><main><nav><a href="/help">${html(`${BRAND} Help Centre`)}</a></nav>
 <article><h1>${html(title)}</h1><p class="fv-date">${html(fill(words[`legal-${id}-updated`]))}</p>${body}</article>
 <nav aria-label="Other policies"><h2>${html(fill(words["help-ui-other-policies"]) || "Other policies")}</h2><ul>${others}</ul></nav></main></div>`;
 }

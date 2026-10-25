@@ -319,7 +319,7 @@ help-art-privacy-data-title = What data does { $brand } collect?
 help-art-privacy-data-summary = A short summary of what is stored, what is sent, and where to read the full policy.
 help-art-privacy-data-keywords = privacy data collect personal information tracking sell share cookies analytics
 help-art-privacy-data-body =
-    We do not sell personal data and we do not show ads. Here is the short version. The <a=/privacy>Privacy Policy</a> has the full text.
+    We do not sell personal data and we do not show ads. Here is the short version. The <a=/help/legal/privacy>Privacy Policy</a> has the full text.
 
     ## Kept in your account
     Your name, email address, an optional phone number, your profiles, My List, ratings, viewing activity and settings, and a list of recent sign ins and the devices they came from.
@@ -333,7 +333,7 @@ help-art-privacy-data-body =
     - Download a copy of your data. See <a=/help/article/download-data>Download a copy of your data</a>.
     - Delete your account at any time. See <a=/help/article/delete-account>Delete your account</a>.
 
-    For cookies and browser storage, see the <a=/cookies>Cookie Policy</a>.
+    For cookies and browser storage, see the <a=/help/legal/cookies>Cookie Policy</a>.
 
     @@ cookies
 
@@ -807,7 +807,7 @@ help-art-sources-body =
     - A source can go offline without warning.
     - Quality, audio tracks and subtitles come from the source.
 
-    We do not control or check those sources. See the <a=/disclaimer>Disclaimer</a>. If you are a rights holder, see <a=/help/article/copyright>How to report a copyright problem</a>.
+    We do not control or check those sources. See the <a=/help/legal/disclaimer>Disclaimer</a>. If you are a rights holder, see <a=/help/article/copyright>How to report a copyright problem</a>.
 
 help-art-contribute-title = How can I contribute?
 help-art-contribute-summary = Ideas, fixes, translations and bug reports are welcome.
@@ -876,7 +876,7 @@ help-art-copyright-body =
     3. The address of the page on { $brand } that links to it.
     4. A statement that you are the rights holder or are allowed to act for them.
 
-    Send it to <a=mailto:{ $help_email }>{ $help_email }</a> with the subject <b>DMCA notice</b>. The full process is on the <a=/dmca>DMCA page</a>.
+    Send it to <a=mailto:{ $help_email }>{ $help_email }</a> with the subject <b>DMCA notice</b>. The full process is on the <a=/help/legal/dmca>DMCA page</a>.
 
 help-art-title-feedback-title = Feedback about a title on { $brand }
 help-art-title-feedback-summary = Report a wrong description, a missing title or a title that never plays.
@@ -928,7 +928,7 @@ cookie-general =
 
     Your choices here are saved in your browser, so clearing site data resets them.
 
-    For more, see the <a=/cookies>Cookie Policy</a> and the <a=/privacy>Privacy Policy</a>.
+    For more, see the <a=/help/legal/cookies>Cookie Policy</a> and the <a=/help/legal/privacy>Privacy Policy</a>.
 
 cookie-essential =
     These items are needed to give you the service you asked for. They keep you signed in, hold a copy of your profiles, settings, My List, ratings and progress so pages open at once, and remember your language and the choices you make here. The copies are kept in step with your account. You cannot opt out of them.
@@ -1442,6 +1442,7 @@ help-ui-did-you-mean = Did you mean “{ $query }”?
 help-ui-viewed = Recently viewed
 help-ui-on-this-page = On this page
 help-ui-other-policies = Other policies
+help-ui-print = Print
 help-ui-section-link = Link to this section
 help-ui-policy-questions = Questions about this policy?
 help-topic-legal = Legal and Policies
@@ -1758,7 +1759,7 @@ auth-last-name = Last name
 auth-password-rule = At least { $min } characters.
 auth-create = Create account
 auth-creating = Creating your account…
-auth-terms = By creating an account you confirm you are 18 or older and agree to the <a=/terms>Terms of Service</a> and the <a=/privacy>Privacy Policy</a>.
+auth-terms = By creating an account you confirm you are 18 or older and agree to the <a=/help/legal/terms>Terms of Service</a> and the <a=/help/legal/privacy>Privacy Policy</a>.
 auth-check-title = Check your email
 auth-check-body = We sent a link to { $email }. Open it to confirm your address, then sign in.
 auth-check-spam = Not there? Look in your spam folder.

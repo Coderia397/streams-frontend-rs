@@ -321,7 +321,7 @@ help-art-privacy-data-title = Jakie dane zbiera { $brand }?
 help-art-privacy-data-summary = Krótkie podsumowanie tego, co przechowujemy, co jest wysyłane i gdzie przeczytać pełną politykę.
 help-art-privacy-data-keywords = prywatność dane zbieranie dane osobowe polityka co przechowujecie
 help-art-privacy-data-body =
-    Nie sprzedajemy danych osobowych i nie wyświetlamy reklam. Oto krótka wersja. Pełny tekst jest w <a=/privacy>Polityce prywatności</a>.
+    Nie sprzedajemy danych osobowych i nie wyświetlamy reklam. Oto krótka wersja. Pełny tekst jest w <a=/help/legal/privacy>Polityce prywatności</a>.
 
     ## Co przechowuje Twoje konto
     Imię i nazwisko, adres e-mail, numer telefonu, jeśli go dodasz, profile, Moją listę, oceny, aktywność oglądania i ustawienia, a do tego listę ostatnich logowań i urządzeń, z których pochodziły.
@@ -335,7 +335,7 @@ help-art-privacy-data-body =
     - Pobierz kopię swoich danych. Zobacz <a=/help/article/download-data>Pobieranie kopii danych</a>.
     - Usuń konto w dowolnej chwili. Zobacz <a=/help/article/delete-account>Usuwanie konta</a>.
 
-    O plikach cookie i pamięci przeglądarki przeczytasz w <a=/cookies>Polityce plików cookie</a>.
+    O plikach cookie i pamięci przeglądarki przeczytasz w <a=/help/legal/cookies>Polityce plików cookie</a>.
 
     @@ cookies
 
@@ -809,7 +809,7 @@ help-art-sources-body =
     - Źródło może bez ostrzeżenia przestać działać.
     - Jakość, ścieżki dźwiękowe i napisy pochodzą ze źródła.
 
-    Nie kontrolujemy ani nie sprawdzamy tych źródeł. Zobacz <a=/disclaimer>Zastrzeżenia</a>. Jeśli jesteś właścicielem praw, zobacz <a=/help/article/copyright>Jak zgłosić problem z prawami autorskimi</a>.
+    Nie kontrolujemy ani nie sprawdzamy tych źródeł. Zobacz <a=/help/legal/disclaimer>Zastrzeżenia</a>. Jeśli jesteś właścicielem praw, zobacz <a=/help/article/copyright>Jak zgłosić problem z prawami autorskimi</a>.
 
 help-art-contribute-title = Jak mogę pomóc?
 help-art-contribute-summary = Pomysły, poprawki, tłumaczenia i zgłoszenia błędów są mile widziane.
@@ -878,7 +878,7 @@ help-art-copyright-body =
     3. Adres strony w { $brand }, która do niego linkuje.
     4. Oświadczenie, że jesteś właścicielem praw albo możesz działać w jego imieniu.
 
-    Wyślij je na <a=mailto:{ $help_email }>{ $help_email }</a> z tematem <b>Zgłoszenie DMCA</b>. Pełną procedurę opisuje <a=/dmca>strona DMCA</a>.
+    Wyślij je na <a=mailto:{ $help_email }>{ $help_email }</a> z tematem <b>Zgłoszenie DMCA</b>. Pełną procedurę opisuje <a=/help/legal/dmca>strona DMCA</a>.
 
 help-art-title-feedback-title = Uwagi do tytułu w { $brand }
 help-art-title-feedback-summary = Zgłoś błędny opis, brakujący tytuł albo tytuł, który nigdy się nie odtwarza.
@@ -930,7 +930,7 @@ cookie-general =
 
     Twoje wybory zapisują się w przeglądarce, więc wyczyszczenie danych witryny je resetuje.
 
-    Więcej informacji: <a=/cookies>Polityka Cookies</a> i <a=/privacy>Polityka prywatności</a>.
+    Więcej informacji: <a=/help/legal/cookies>Polityka Cookies</a> i <a=/help/legal/privacy>Polityka prywatności</a>.
 
 cookie-essential =
     Te dane są potrzebne do świadczenia usługi, o którą prosisz. Utrzymują zalogowanie, przechowują kopię profili, ustawień, Mojej listy, ocen i postępów, żeby strony otwierały się od razu, oraz zapamiętują język i wybory dokonane tutaj. Kopie są zgodne z Twoim kontem. Nie można ich wyłączyć.
@@ -1378,6 +1378,7 @@ help-ui-did-you-mean = Czy miało na myśli „{ $query }”?
 help-ui-viewed = Ostatnio przeglądane
 help-ui-on-this-page = Na tej stronie
 help-ui-other-policies = Inne polityki
+help-ui-print = Drukuj
 help-ui-section-link = Link do tej sekcji
 help-ui-policy-questions = Pytania dotyczące tej polityki?
 help-topic-legal = Prawne i polityki
@@ -1691,7 +1692,7 @@ auth-last-name = Nazwisko
 auth-password-rule = Co najmniej { $min } znaków.
 auth-create = Utwórz konto
 auth-creating = Tworzenie konta…
-auth-terms = Tworząc konto zgadzasz się na <a=/terms>Warunki korzystania</a> oraz <a=/privacy>Politykę prywatności</a>.
+auth-terms = Tworząc konto zgadzasz się na <a=/help/legal/terms>Warunki korzystania</a> oraz <a=/help/legal/privacy>Politykę prywatności</a>.
 auth-check-title = Sprawdź swoją skrzynkę e-mail
 auth-check-body = Wyśleliśmy link do { $email }. Otwórz go, aby potwierdzić adres, a następnie zaloguj się.
 auth-check-spam = Nie ma tam? Sprawdź swoją skrzynkę spamową.

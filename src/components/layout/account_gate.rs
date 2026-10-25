@@ -24,9 +24,10 @@ pub enum Access {
 pub fn access(path: &str) -> Access {
     const VISITORS: [&str; 3] = ["/login", "/signup", "/forgot"];
     // `/auth` holds the links in account emails (confirm an address, set a new password): they work whether or not the browser is signed in
-    const EVERYONE: [&str; 12] = ["/title", "/auth", "/help", "/privacy", "/terms", "/cookies", "/dmca", "/credits", "/disclaimer", "/contact", "/welcome", "/reads"];
+    const EVERYONE: [&str; 6] = ["/title", "/auth", "/help", "/contact", "/welcome", "/reads"];
     let under = |p: &str| path == p || path.starts_with(&format!("{p}/"));
-    if path == "/" || path.is_empty() || EVERYONE.iter().any(|p| under(p)) {
+    // the policies live under /help; their earlier addresses only move there (config::routes::MOVED)
+    if path == "/" || path.is_empty() || EVERYONE.iter().any(|p| under(p)) || crate::config::routes::moved(path).is_some() {
         Access::Everyone
     } else if VISITORS.iter().any(|p| under(p)) {
         Access::Visitors
@@ -94,7 +95,7 @@ mod tests {
         for p in ["/login", "/signup", "/forgot"] {
             assert_eq!(access(p), Access::Visitors, "{p}");
         }
-        for p in ["/", "/auth/confirm", "/title/tv-1399", "/help", "/help/article/share", "/privacy", "/terms", "/cookies", "/dmca", "/contact"] {
+        for p in ["/", "/auth/confirm", "/title/tv-1399", "/help", "/help/article/share", "/help/legal/privacy", "/help/legal/terms", "/privacy", "/privacy-policy", "/terms", "/cookies", "/dmca", "/contact"] {
             assert_eq!(access(p), Access::Everyone, "{p}");
         }
         for p in ["/browse", "/browse/genre/83", "/settings/account", "/search", "/watch/tv/1399", "/loginx", "/helpdesk"] {

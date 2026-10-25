@@ -116,7 +116,7 @@ pub fn App() -> impl IntoView {
             <HostGuard />
             <crate::components::media::info_modal::SharedTitleOpener />
             // an address the site does not have goes to the site's root (the landing page, or Home for a returning visitor), with no page of its own
-            <Routes fallback=|| view! { <leptos_router::components::Redirect path="/" /> }>
+            <Routes fallback=|| view! { <UnknownAddress /> }>
                 <Route path=path!("/browse") view=|| view! { <HomeRoute kids=false /> } />
                 <Route path=path!("/kids") view=|| view! { <HomeRoute kids=true /> } />
                 // the developer pages exist only when the site is opened from this machine or its network (note 67 E8); anywhere else they go to the root, as an address the site does not have
@@ -182,12 +182,13 @@ pub fn App() -> impl IntoView {
                 <Route path=path!("/forgot") view=crate::pages::auth::ForgotPage />
                 <Route path=path!("/auth/confirm") view=crate::pages::auth::ConfirmPage />
                 <Route path=path!("/welcome") view=|| view! { <leptos_router::components::Redirect path="/" /> } />
-                <Route path=path!("/privacy") view=|| view! { <crate::pages::help::LegalPage doc="privacy" /> } />
-                <Route path=path!("/terms") view=|| view! { <crate::pages::help::LegalPage doc="terms" /> } />
-                <Route path=path!("/cookies") view=|| view! { <crate::pages::help::LegalPage doc="cookie-policy" /> } />
-                <Route path=path!("/dmca") view=|| view! { <crate::pages::help::LegalPage doc="dmca" /> } />
-                <Route path=path!("/credits") view=|| view! { <crate::pages::help::LegalPage doc="credits" /> } />
-                <Route path=path!("/disclaimer") view=|| view! { <crate::pages::help::LegalPage doc="disclaimer" /> } />
+                // the policies, at config::routes (their earlier addresses are in config::routes::MOVED, answered by UnknownAddress)
+                <Route path=path!("/help/legal/privacy") view=|| view! { <crate::pages::help::LegalPage doc="privacy" /> } />
+                <Route path=path!("/help/legal/terms") view=|| view! { <crate::pages::help::LegalPage doc="terms" /> } />
+                <Route path=path!("/help/legal/cookies") view=|| view! { <crate::pages::help::LegalPage doc="cookie-policy" /> } />
+                <Route path=path!("/help/legal/dmca") view=|| view! { <crate::pages::help::LegalPage doc="dmca" /> } />
+                <Route path=path!("/help/legal/credits") view=|| view! { <crate::pages::help::LegalPage doc="credits" /> } />
+                <Route path=path!("/help/legal/disclaimer") view=|| view! { <crate::pages::help::LegalPage doc="disclaimer" /> } />
                 <Route path=path!("/contact") view=|| view! { <leptos_router::components::Redirect path="/help/contact" /> } />
             </Routes>
             <crate::components::layout::account_gate::AccountGate />
@@ -227,8 +228,18 @@ fn is_local_host() -> bool {
     host == "localhost" || host == "127.0.0.1" || host == "[::1]" || host.starts_with("10.") || host.starts_with("192.168.") || private_172 || host.ends_with(".local")
 }
 
-/// Keeps each host to its own pages: `/help` on the main address moves to the Help Centre's host, and anything else on that host (the app, sign in, the policies) moves back to the main one.
-/// The server does the same for crawlers (`functions/_middleware.js`); this covers a person moving between pages without a new page load.
+/// An address the app does not have: a policy's earlier or common address goes to the policy, anything else to the root.
+#[component]
+fn UnknownAddress() -> impl IntoView {
+    let to = crate::config::routes::moved(&leptos_router::hooks::use_location().pathname.get_untracked()).unwrap_or(crate::config::routes::HOME);
+    let navigate = leptos_router::hooks::use_navigate();
+    // after the fallback is drawn: navigating while the router draws it writes the address the router is reading, which aborted the app on
+    // every unknown address (RwLock<Url>::write inside NestedRoutesView::build, 2026-10-25)
+    Effect::new(move |_| navigate(to, leptos_router::NavigateOptions { replace: true, ..Default::default() }));
+}
+
+/// Keeps each host to its own pages: `/help` (with the policies under `/help/legal`) on the main address moves to the Help Centre's host, and anything else on that host
+/// (the app, sign in) moves back to the main one. The server does the same for crawlers (`functions/_middleware.js`); this covers a person moving between pages without a new page load.
 #[component]
 fn HostGuard() -> impl IntoView {
     let location = leptos_router::hooks::use_location();

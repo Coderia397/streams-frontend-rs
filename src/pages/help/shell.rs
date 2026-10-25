@@ -25,7 +25,7 @@ pub fn set_title(page: &str) {
         if let Some(doc) = window.document() {
             doc.set_title(&full);
             let path = window.location().pathname().unwrap_or_default();
-            // the Help Centre lives on its own host; the policies (/terms and so on) stay on the main one
+            // the Help Centre, with the policies under /help/legal, lives on its own host
             let origin = if path == "/help" || path.starts_with("/help/") { crate::config::HELP_URL } else { crate::config::SITE_URL };
             set_attr(&doc, "link[rel=canonical]", "href", &format!("{origin}{path}"));
             set_attr(&doc, "meta[property='og:url']", "content", &format!("{origin}{path}"));
@@ -124,7 +124,7 @@ pub fn HelpShell(children: Children, #[prop(default = Look::Dark)] look: Look, #
             crate::i18n::set_language(&select.value());
         }
     };
-    let legal = [("/terms", "help-ui-legal-terms"), ("/privacy", "help-ui-legal-privacy"), ("/cookies", "help-ui-legal-cookies"), ("/dmca", "help-ui-legal-dmca"), ("/disclaimer", "help-ui-legal-disclaimer"), ("/credits", "help-ui-legal-credits")];
+    let legal = [(crate::config::routes::TERMS, "help-ui-legal-terms"), (crate::config::routes::PRIVACY, "help-ui-legal-privacy"), (crate::config::routes::COOKIES, "help-ui-legal-cookies"), (crate::config::routes::DMCA, "help-ui-legal-dmca"), (crate::config::routes::DISCLAIMER, "help-ui-legal-disclaimer"), (crate::config::routes::CREDITS, "help-ui-legal-credits")];
 
     let header_bg = if dark { "bg-void text-ink" } else { "bg-paper text-paper-ink" };
     let logo = if dark { crate::brand::LOGO_WORDMARK } else { crate::brand::LOGO_WORDMARK_PRIMARY };
@@ -137,7 +137,7 @@ pub fn HelpShell(children: Children, #[prop(default = Look::Dark)] look: Look, #
 
     view! {
         <div class="flex min-h-screen flex-col bg-paper font-sans text-paper-ink selection:bg-brand selection:text-ink">
-            <header class=header_bg>
+            <header class=format!("{header_bg} print:hidden")>
                 <div class="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-4 px-6 md:px-12">
                     <div class="flex min-w-0 items-center gap-4">
                         <a href=crate::config::app_link("/browse") class="flex shrink-0 items-center" aria-label=crate::brand::NAME>
@@ -169,7 +169,7 @@ pub fn HelpShell(children: Children, #[prop(default = Look::Dark)] look: Look, #
                 </section>
             })}
 
-            <footer class=footer_bg>
+            <footer class=format!("{footer_bg} print:hidden")>
                 <div class="mx-auto max-w-[1280px] px-6 py-12 md:px-12">
                     {(contact_band && dark).then(|| view! {
                         <div class="mb-8 flex flex-wrap items-center gap-6 border-b border-ink/20 pb-8">

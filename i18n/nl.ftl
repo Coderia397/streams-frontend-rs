@@ -319,7 +319,7 @@ help-art-privacy-data-title = Welke gegevens verzamelt { $brand }?
 help-art-privacy-data-summary = Een korte samenvatting van wat we bewaren, wat er wordt verstuurd en waar je het volledige beleid leest.
 help-art-privacy-data-keywords = privacy gegevens verzamelen persoonsgegevens beleid wat bewaren jullie
 help-art-privacy-data-body =
-    We verkopen geen persoonsgegevens en tonen geen advertenties. Hier is de korte versie. Het <a=/privacy>privacybeleid</a> heeft de volledige tekst.
+    We verkopen geen persoonsgegevens en tonen geen advertenties. Hier is de korte versie. Het <a=/help/legal/privacy>privacybeleid</a> heeft de volledige tekst.
 
     ## Wat je account bewaart
     Je naam, je e-mailadres, een telefoonnummer als je dat toevoegt, je profielen, Mijn lijst, je beoordelingen, je kijkactiviteit en je instellingen, plus een lijst van recente inlogs en de apparaten waar die vandaan kwamen.
@@ -333,7 +333,7 @@ help-art-privacy-data-body =
     - Download een kopie van je gegevens. Zie <a=/help/article/download-data>Een kopie van je gegevens downloaden</a>.
     - Verwijder je account wanneer je wilt. Zie <a=/help/article/delete-account>Je account verwijderen</a>.
 
-    Over cookies en browseropslag lees je meer in het <a=/cookies>cookiebeleid</a>.
+    Over cookies en browseropslag lees je meer in het <a=/help/legal/cookies>cookiebeleid</a>.
 
     @@ cookies
 
@@ -807,7 +807,7 @@ help-art-sources-body =
     - Een bron kan zonder waarschuwing offline gaan.
     - Kwaliteit, audiosporen en ondertitels komen van de bron.
 
-    We hebben geen controle over die bronnen en controleren ze niet. Zie de <a=/disclaimer>Disclaimer</a>. Ben je rechthebbende, zie dan <a=/help/article/copyright>Een auteursrechtprobleem melden</a>.
+    We hebben geen controle over die bronnen en controleren ze niet. Zie de <a=/help/legal/disclaimer>Disclaimer</a>. Ben je rechthebbende, zie dan <a=/help/article/copyright>Een auteursrechtprobleem melden</a>.
 
 help-art-contribute-title = Hoe kan ik bijdragen?
 help-art-contribute-summary = Ideeën, verbeteringen, vertalingen en foutmeldingen zijn welkom.
@@ -876,7 +876,7 @@ help-art-copyright-body =
     3. Het adres van de pagina op { $brand } die ernaar linkt.
     4. Een verklaring dat jij de rechthebbende bent of namens die mag optreden.
 
-    Stuur hem naar <a=mailto:{ $help_email }>{ $help_email }</a> met als onderwerp <b>DMCA-melding</b>. De volledige procedure staat op de <a=/dmca>DMCA-pagina</a>.
+    Stuur hem naar <a=mailto:{ $help_email }>{ $help_email }</a> met als onderwerp <b>DMCA-melding</b>. De volledige procedure staat op de <a=/help/legal/dmca>DMCA-pagina</a>.
 
 help-art-title-feedback-title = Feedback over een titel op { $brand }
 help-art-title-feedback-summary = Meld een verkeerde beschrijving, een ontbrekende titel of een titel die nooit afspeelt.
@@ -928,7 +928,7 @@ cookie-general =
 
     Je keuzes hier worden in je browser bewaard, dus als je de sitegegevens wist, worden ze teruggezet.
 
-    Lees meer in het <a=/cookies>Cookiebeleid</a> en het <a=/privacy>Privacybeleid</a>.
+    Lees meer in het <a=/help/legal/cookies>Cookiebeleid</a> en het <a=/help/legal/privacy>Privacybeleid</a>.
 
 cookie-essential =
     Deze gegevens zijn nodig om je de dienst te geven waar je om vroeg. Ze houden je ingelogd, bewaren een kopie van je profielen, instellingen, Mijn lijst, beoordelingen en voortgang zodat pagina's meteen openen, en onthouden je taal en de keuzes die je hier maakt. De kopieën blijven gelijk met je account. Je kunt ze niet uitzetten.
@@ -1362,6 +1362,7 @@ help-ui-did-you-mean = Bedoelde je “{ $query }”?
 help-ui-viewed = Onlangs bekeken
 help-ui-on-this-page = Op deze pagina
 help-ui-other-policies = Andere beleid
+help-ui-print = Afdrukken
 help-ui-section-link = Link naar deze sectie
 help-ui-policy-questions = Vragen over dit beleid?
 help-topic-legal = Juridisch en beleid
@@ -1675,7 +1676,7 @@ auth-last-name = Achternaam
 auth-password-rule = Minstens { $min } tekens.
 auth-create = Account aanmaken
 auth-creating = Je account aanmaken…
-auth-terms = Door een account aan te maken, ga je akkoord met de <a=/terms>Algemene voorwaarden</a> en de <a=/privacy>Privacybeleid</a>.
+auth-terms = Door een account aan te maken, ga je akkoord met de <a=/help/legal/terms>Algemene voorwaarden</a> en de <a=/help/legal/privacy>Privacybeleid</a>.
 auth-check-title = Controleer je e-mail
 auth-check-body = We hebben een link gestuurd naar { $email }. Open deze om je adres te bevestigen, dan kun je aanmelden.
 auth-check-spam = Niet daar? Kijk in je spammap.

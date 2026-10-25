@@ -37,7 +37,7 @@ pub fn MobileWelcome() -> impl IntoView {
             <header class="relative z-10 flex items-center justify-between px-4 py-3">
                 <a href="/" aria-label=crate::brand::NAME><img src=crate::brand::LOGO_WORDMARK alt=crate::brand::NAME class="h-7 w-auto" /></a>
                 <div class="flex items-center gap-1 text-fine font-bold uppercase tracking-wide">
-                    <a href="/privacy" class="px-3 py-3">{crate::i18n::t("help-ui-legal-privacy")}</a>
+                    <a href=crate::config::routes::PRIVACY class="px-3 py-3">{crate::i18n::t("help-ui-legal-privacy")}</a>
                     <button on:click=move |_| nav_login("/login", Default::default()) class="px-3 py-3">{crate::i18n::t("login-sign-in")}</button>
                 </div>
             </header>
