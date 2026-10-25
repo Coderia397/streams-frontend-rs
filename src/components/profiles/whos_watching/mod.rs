@@ -31,6 +31,8 @@ pub fn WhosWatchingGate(
 
     let (edit_mode, set_edit_mode) = signal(manage);
     let (pin_prompt_profile, set_pin_prompt_profile) = signal(None::<Profile>);
+    // what the PIN opens: the profile (false) or, in Manage Profiles, its edit window (true)
+    let (pin_then_edit, set_pin_then_edit) = signal(false);
     let (modal_state, set_modal_state) = signal(None::<(String, Option<Profile>)>); // (mode, initial)
     let (switching_target, set_switching_target) = signal(None::<Profile>);
     let (unlocked_ids, set_unlocked_ids) = signal(Vec::<String>::new());
@@ -45,8 +47,13 @@ pub fn WhosWatchingGate(
 
     let on_select_tile = move |p: Profile| {
         if edit_mode.get() {
-            // In edit mode, clicking a tile opens edit modal (Task 099)
-            set_modal_state.set(Some(("edit".to_string(), Some(p))));
+            // a locked profile is edited only after its PIN, as it is opened only after it: Manage Profiles was a way round the lock
+            if p.pin.is_some() && !unlocked_ids.get().contains(&p.id) {
+                set_pin_then_edit.set(true);
+                set_pin_prompt_profile.set(Some(p));
+            } else {
+                set_modal_state.set(Some(("edit".to_string(), Some(p))));
+            }
         } else {
             // Check if profile has PIN lock (Task 098)
             let is_unlocked = unlocked_ids.get().contains(&p.id);
@@ -62,7 +69,12 @@ pub fn WhosWatchingGate(
         if let Some(p) = pin_prompt_profile.get() {
             set_unlocked_ids.update(|ids| ids.push(p.id.clone()));
             set_pin_prompt_profile.set(None);
-            perform_switch(p);
+            if pin_then_edit.get_untracked() {
+                set_pin_then_edit.set(false);
+                set_modal_state.set(Some(("edit".to_string(), Some(p))));
+            } else {
+                perform_switch(p);
+            }
         }
     };
 
@@ -76,7 +88,7 @@ pub fn WhosWatchingGate(
                     avatar_url: form.avatar_url,
                     is_kids: form.is_kids,
                     is_default: Some(false),
-                    pin: form.pin,
+                    pin: None,
                     sort_order: profiles_signal.get().len() as i32,
                 };
                 profiles_signal.update(|list| list.push(new_profile));
@@ -87,7 +99,6 @@ pub fn WhosWatchingGate(
                             target.name = form.name;
                             target.avatar_url = form.avatar_url;
                             target.is_kids = form.is_kids;
-                            target.pin = form.pin;
                         }
                     });
                 }
@@ -156,7 +167,7 @@ pub fn WhosWatchingGate(
                     <ProfilePinPrompt
                         profile=p
                         on_unlock=Callback::new(move |_| on_unlock_pin())
-                        on_cancel=Callback::new(move |_| set_pin_prompt_profile.set(None))
+                        on_cancel=Callback::new(move |_| { set_pin_prompt_profile.set(None); set_pin_then_edit.set(false); })
                     />
                 })}
             </Show>

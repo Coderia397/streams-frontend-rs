@@ -7,7 +7,6 @@ pub struct ProfileFormData {
     pub name: String,
     pub avatar_url: Option<String>,
     pub is_kids: bool,
-    pub pin: Option<String>,
 }
 
 #[component]
@@ -24,32 +23,21 @@ pub fn AddEditProfileModal(
     // a new profile starts with one of the six plain faces, picked at random
     let initial_avatar = initial.as_ref().and_then(|p| p.avatar_url.clone()).unwrap_or_else(crate::data::avatars::random_smile);
     let initial_kids = initial.as_ref().map(|p| p.is_kids).unwrap_or(false);
-    let initial_pin = initial.as_ref().and_then(|p| p.pin.clone());
-    let has_pin = initial_pin.is_some();
+    // the lock is shown here, never changed here: a PIN is set, changed or removed in Settings, where the account checks the current PIN
+    // or a recent sign in (Manage Profiles let anyone untick it, 2026-10-25)
+    let has_pin = initial.as_ref().is_some_and(|p| p.pin.is_some());
+    let lock_href = initial.as_ref().map(|p| format!("/settings/profile/{}/lock", p.id)).unwrap_or_default();
 
     let (name, set_name) = signal(initial_name);
     let (avatar_url, set_avatar_url) = signal(initial_avatar);
     let (is_kids, set_kids) = signal(initial_kids);
-    let (pin_enabled, set_pin_enabled) = signal(has_pin);
-    let (pin_val, set_pin_val) = signal(initial_pin.unwrap_or_default());
 
     let (picking_avatar, set_picking_avatar) = signal(false);
     let (confirm_delete, set_confirm_delete) = signal(false);
 
-    let is_pin_valid = move || {
-        if !pin_enabled.get() {
-            true
-        } else {
-            let p = pin_val.get();
-            p.len() == 4 && p.chars().all(|c| c.is_ascii_digit())
-        }
-    };
-
     // Save is always pressable; an empty name shows "Please enter a name" under the field, as Netflix does
     let (name_missing, set_name_missing) = signal(false);
-    let can_save = move || {
-        !name.get().trim().is_empty() && is_pin_valid()
-    };
+    let can_save = move || !name.get().trim().is_empty();
 
     let is_edit = mode == "edit";
     let modal_title = if is_edit { crate::i18n::t("profile-edit-title") } else { crate::i18n::t("set-add-a-profile") };
@@ -60,12 +48,10 @@ pub fn AddEditProfileModal(
             return;
         }
         if !can_save() { return; }
-        let pin = if pin_enabled.get() { Some(pin_val.get()) } else { None };
         on_save.run(ProfileFormData {
             name: name.get().trim().to_string(),
             avatar_url: Some(avatar_url.get()),
             is_kids: is_kids.get(),
-            pin,
         });
     };
 
@@ -150,49 +136,19 @@ pub fn AddEditProfileModal(
                     </label>
                 </div>
 
-                // Profile Lock PIN Toggle (not part of Add a profile)
-                <div class=move || if is_edit { "border-t border-ink/10 py-5 space-y-3" } else { "hidden" }>
-                    <label class="flex items-center justify-between gap-4 cursor-pointer">
+                // Profile Lock: shown, and changed in Settings (not part of Add a profile)
+                <Show when=move || is_edit>
+                    <a href=lock_href.clone() class="flex items-center justify-between gap-4 border-t border-ink/10 py-5">
                         <div>
                             <span class="text-ink font-semibold text-body">{crate::i18n::t("profile-lock")}</span>
-                            <p class="text-ink/40 text-label mt-0.5">
-                                {crate::i18n::t("add-edit-modal-require-a-4digit-pin-to")}
-                            </p>
+                            <p class="text-ink/40 text-label mt-0.5">{crate::i18n::t("add-edit-modal-require-a-4digit-pin-to")}</p>
                         </div>
-                        <input
-                            type="checkbox"
-                            prop:checked=move || pin_enabled.get()
-                            on:change=move |e| set_pin_enabled.set(event_target_checked(&e))
-                            class="w-5 h-5 accent-brand rounded-control cursor-pointer"
-                        />
-                    </label>
-
-                    {move || {
-                        if pin_enabled.get() {
-                            view! {
-                                <div class="pt-2">
-                                    <input
-                                        type="password"
-                                        maxlength="4"
-                                        placeholder=crate::i18n::t("add-edit-modal-enter-4digit-pin")
-                                        prop:value=move || pin_val.get()
-                                        on:input=move |e| {
-                                            let v = event_target_value(&e);
-                                            let clean: String = v.chars().filter(|c| c.is_ascii_digit()).take(4).collect();
-                                            set_pin_val.set(clean);
-                                        }
-                                        class="w-48 bg-transparent border border-ink/20 px-4 py-2 text-ink text-base tracking-widest placeholder:tracking-normal placeholder:text-ink/30 outline-none focus:border-ink transition-colors"
-                                    />
-                                    <Show when=move || !is_pin_valid()>
-                                        <p class="text-danger-soft text-xs mt-1">{crate::i18n::t("profile-pin-invalid")}</p>
-                                    </Show>
-                                </div>
-                            }.into_any()
-                        } else {
-                            view! { <div /> }.into_any()
-                        }
-                    }}
-                </div>
+                        <span class="flex items-center gap-2 text-ink/60 text-body">
+                            {if has_pin { crate::i18n::t("set-lock-on") } else { crate::i18n::t("set-lock-off") }}
+                            <i class="ph-bold ph-caret-right rtl:-scale-x-100" aria-hidden="true"></i>
+                        </span>
+                    </a>
+                </Show>
 
                 // Delete profile section (Task 099)
                 {move || {
