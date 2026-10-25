@@ -234,8 +234,18 @@ pub fn start_account(store: ProfileStore, session: &crate::services::account::Se
 /// for it, as Netflix does when you pick a profile.
 pub fn activate_profile(id: &str) {
     if let Some(window) = web_sys::window() {
-        if let Some(storage) = window.local_storage().ok().flatten() {
+        let storage = window.local_storage().ok().flatten();
+        let had_profile = storage.as_ref().and_then(|s| s.get_item(crate::keys::ACTIVE_PROFILE).ok().flatten()).is_some();
+        if let Some(storage) = &storage {
             let _ = storage.set_item(crate::keys::ACTIVE_PROFILE, id);
+        }
+        // Who's watching came up over a watch address (a link to a film, a reload in the player): the pick goes on to that film, which the
+        // player then checks against the profile's age rating. A switch from one profile to another starts on the new profile's home.
+        let path = window.location().pathname().unwrap_or_default();
+        if !had_profile && path.starts_with("/watch/") {
+            let search = window.location().search().unwrap_or_default();
+            let _ = window.location().set_href(&format!("{path}{search}"));
+            return;
         }
         // a title waiting in the address (a shared link, a reload while Who's watching was up) opens on the profile's home
         let pending = window.location().search().ok().and_then(|q| q.trim_start_matches('?').split('&').find(|kv| kv.starts_with("title=")).map(str::to_string));

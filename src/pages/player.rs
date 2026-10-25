@@ -20,23 +20,22 @@ pub fn PlayerPage() -> impl IntoView {
 
     let kind_param = move || params.read().get("kind");
 
-    // Fetch movie or TV details
+    // Fetch movie or TV details, and whether the profile in use may watch the title: a watch address opened by hand, from a shared link or
+    // from history on a Kids or age limited profile is checked with the same rule as every list (services::rating::filter_allowed)
     let media_resource = LocalResource::new(move || {
         let id = id_val();
         let k = kind_param();
         async move {
-            if id > 0 {
-                if k.as_deref() == Some("tv") {
-                    if let Ok(d) = fetch_details(id, true).await {
-                        return Some((d, true));
-                    }
-                } else if k.as_deref() == Some("movie") {
-                    if let Ok(d) = fetch_details(id, false).await {
-                        return Some((d, false));
-                    }
-                }
-                // Fallback auto-detection
-                if let Ok(d) = fetch_details(id, false).await {
+            let found = if id > 0 {
+                let wanted = match k.as_deref() {
+                    Some("tv") => fetch_details(id, true).await.ok().map(|d| (d, true)),
+                    Some("movie") => fetch_details(id, false).await.ok().map(|d| (d, false)),
+                    _ => None,
+                };
+                if wanted.is_some() {
+                    wanted
+                } else if let Ok(d) = fetch_details(id, false).await {
+                    // no kind in the address: a film first, then a series
                     Some((d, false))
                 } else if let Ok(d) = fetch_details(id, true).await {
                     Some((d, true))
@@ -45,7 +44,16 @@ pub fn PlayerPage() -> impl IntoView {
                 }
             } else {
                 None
-            }
+            };
+            let (d, is_tv) = found?;
+            let item = crate::services::tmdb::MediaItem {
+                id: d.id,
+                media_type: Some(if is_tv { "tv" } else { "movie" }.to_string()),
+                genre_ids: d.genres.as_ref().map(|g| g.iter().map(|x| x.id).collect()).unwrap_or_default(),
+                ..Default::default()
+            };
+            let allowed = !crate::services::rating::filter_allowed(vec![item]).await.is_empty();
+            Some((d, is_tv, allowed))
         }
     });
 
@@ -110,7 +118,17 @@ pub fn PlayerPage() -> impl IntoView {
                     let e_num = active_episode.get();
 
                     media_resource.get().map(|res| match res {
-                        Some((item, is_tv)) => {
+                        Some((_, _, false)) => view! {
+                            // above the profile's age rating (or not a children's title on a Kids profile): nothing is resolved or played
+                            <div class="w-full h-full flex flex-col items-center justify-center bg-void text-center px-4">
+                                <h2 class="text-xl font-bold text-ink mb-2">{crate::i18n::t("player-not-allowed")}</h2>
+                                <p class="text-ink/60 text-sm mb-6">{crate::i18n::t("player-not-allowed-hint")}</p>
+                                <button on:click=move |_| on_close.run(()) class="btn-brand px-6 py-2.5 text-sm">
+                                    {crate::i18n::t("controls-overlay-back-to-browse")}
+                                </button>
+                            </div>
+                        }.into_any(),
+                        Some((item, is_tv, true)) => {
                             let title = item.display_title().to_string();
                             let year = item.release_date.as_ref().or(item.first_air_date.as_ref()).map(|d| {
                                 d.chars().take(4).collect::<String>()
