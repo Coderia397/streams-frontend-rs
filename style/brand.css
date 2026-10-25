@@ -58,6 +58,9 @@
   /* the player: drawers and pictures, the loaded part of the timeline */
   --color-player-panel: #1a1a1a;
   --color-ink-mist: #b8b8b8;
+  /* the player's pause screen dims the picture to half; the skip and play discs are black at 40% (Netflix's, note 126) */
+  --color-player-dim: rgb(0 0 0 / 0.5);
+  --color-player-disc: rgb(0 0 0 / 0.4);
   /* warnings and links (settings) */
   --color-warning: #da7516;
   --color-link: #0080ff;
@@ -281,6 +284,8 @@
   --bottom-nav-h: 76px;
   /* Row with the page title and Genres button above the billboard on Films and Series (Netflix web, measured 2026-10-09). */
   --subnav-h: 74px;
+  /* The website player's bottom band (timeline and buttons); what sits over the picture keeps above it while the controls show. */
+  --player-bar-h: 135px;
 }
 
 /* Stacking order, lowest to highest. Used as z-(--z-nav). */
@@ -316,4 +321,7 @@
   --motion-slower: 500ms;
   --motion-slowest: 700ms;
   --motion-glacial: 1000ms;
+  /* the player's skip discs and its play or pause disc fade out over these (measured on Netflix, note 126) */
+  --motion-player-skip: 560ms;
+  --motion-player-toggle: 600ms;
 }

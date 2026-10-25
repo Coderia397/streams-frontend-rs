@@ -1,5 +1,6 @@
 // The only entry point Rust binds to (#[wasm_bindgen(module = "/interop/dist/streams-interop.js")]). Every export here has a matching
-// extern declaration in src/components/hls_adapter.rs, src/components/share/mod.rs, src/components/trailer_player.rs, src/components/player/subtitles.rs or src/utils/ambient.rs; tsc checks the
+// extern declaration in src/components/hls_adapter.rs, src/components/share/mod.rs, src/components/trailer_player.rs, src/components/player/subtitles.rs,
+// src/components/player/timeline_scrubber.rs or src/utils/ambient.rs; tsc checks the
 // TypeScript side of the signatures.
 import * as ambient from './ambient';
 
@@ -20,6 +21,7 @@ export { resumeSeal, resumeOpen, resumeForget, resumeFingerprint } from './resum
 export { sharePrepare, shareSystem, copyText } from './share';
 export { whenPageSettled } from './settle';
 export { subtitleLoad, subtitleNativeTrack } from './subtitles';
+export { previewOpen, previewShow, previewClose } from './preview';
 
 export function getCachedAmbientColor(imageUrl: string): string {
   const res = ambient.getCachedAmbientColor(imageUrl);

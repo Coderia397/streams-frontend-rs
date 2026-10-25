@@ -19,7 +19,7 @@ type Player = typeof import('./hls-player');
 let player: Promise<Player> | null = null;
 
 /** hls.js, fetched once. The address is made at run time so the bundler leaves the library out of this file. */
-function loadPlayer(): Promise<Player> {
+export function loadPlayer(): Promise<Player> {
   const src = new URL('/hls-player.js', location.origin).href;
   return (player ??= import(/* @vite-ignore */ src) as Promise<Player>);
 }

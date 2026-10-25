@@ -8,6 +8,7 @@ pub mod subtitle_drawer;
 pub mod skip_button;
 pub mod rating_card;
 pub mod subtitles;
+pub mod website_overlays;
 
 use leptos::prelude::*;
 use wasm_bindgen::prelude::*;
@@ -23,7 +24,11 @@ use episode_drawer::EpisodeDrawer;
 use subtitle_drawer::SubtitleDrawer;
 use skip_button::SkipButton;
 use rating_card::RatingCard;
+use website_overlays::{Disc, PauseScreen, PlayerDiscs};
 use crate::components::media::icons::app_icons::{AppIcon, Glyph};
+
+/// The website's pause screen comes this long after the pointer last moved while paused (Netflix's: 10.1 s, note 126).
+const PAUSE_SCREEN_MS: i32 = 10_000;
 
 #[derive(Clone, Debug, PartialEq)]
 enum PlayerState {
@@ -107,6 +112,12 @@ pub fn StreamsPlayer(
     let (speed, set_speed) = signal(1.0f64);
     let (buffered_fraction, set_buffered_fraction) = signal(0.0);
     let (is_idle, set_is_idle) = signal(false);
+    // the disc the last skip or play and pause leaves on the website's picture, numbered so a repeat brings a new one (website_overlays.rs)
+    let (disc, set_disc) = signal(None::<(Disc, u32)>);
+    let show_disc = move |d: Disc| set_disc.update(|v| *v = Some((d, v.map_or(0, |(_, n)| n.wrapping_add(1)))));
+    // the website's pause screen, a while after the pointer stopped while paused
+    let (pause_screen, set_pause_screen) = signal(false);
+    let pause_timer = StoredValue::new(None::<i32>);
     let (pending_resume_time, set_pending_resume_time) = signal(0.0);
     // when and where the video was first seen playing sound without a picture (wall clock ms, video seconds)
     let audio_only_since = StoredValue::new(None::<(f64, f64)>);
@@ -210,8 +221,31 @@ pub fn StreamsPlayer(
         do_resolve.run(false);
     });
 
+    // the pause screen goes, and comes back PAUSE_SCREEN_MS after this if the video is still paused
+    let arm_pause_screen = move || {
+        if pause_screen.get_untracked() {
+            set_pause_screen.set(false);
+        }
+        clear_timeout_handle(pause_timer.get_value());
+        let t = if is_playing.get_untracked() {
+            None
+        } else {
+            set_timeout_handle(move || {
+                if !is_playing.get_untracked() {
+                    set_pause_screen.set(true);
+                }
+            }, PAUSE_SCREEN_MS)
+        };
+        pause_timer.set_value(t);
+    };
+    Effect::new(move |_| {
+        is_playing.track();
+        arm_pause_screen();
+    });
+
     // Idle timer reset
     let reset_idle_timer = move || {
+        arm_pause_screen();
         set_is_idle.set(false);
         clear_timeout_handle(idle_timer.get_value());
         let t = set_timeout_handle(move || {
@@ -297,9 +331,11 @@ pub fn StreamsPlayer(
             if video.paused() {
                 let _ = video.play();
                 set_is_playing.set(true);
+                show_disc(Disc::Play);
             } else {
                 let _ = video.pause();
                 set_is_playing.set(false);
+                show_disc(Disc::Pause);
             }
         }
     };
@@ -318,6 +354,7 @@ pub fn StreamsPlayer(
     let do_skip_by = move |delta_secs: f64| {
         let current = current_time.get();
         do_seek(current + delta_secs);
+        show_disc(if delta_secs < 0.0 { Disc::Back } else { Disc::Forward });
     };
 
     // Mute Toggle
@@ -506,6 +543,7 @@ pub fn StreamsPlayer(
     on_cleanup(move || {
         clear_timeout_handle(idle_timer.get_value());
         clear_timeout_handle(progress_timer.get_value());
+        clear_timeout_handle(pause_timer.get_value());
     });
 
     // Subtitle Display Logic
@@ -610,6 +648,24 @@ pub fn StreamsPlayer(
             crate::services::tmdb::fetch_season_details(media_id, season.unwrap_or(1)).await.ok()
                 .and_then(|d| d.episodes.into_iter().find(|e| e.episode_number == episode.unwrap_or(1)).map(|e| e.name))
         } else { None }
+    });
+    // the summary on the website's pause screen: the episode's, or the film's
+    let synopsis_res = LocalResource::new(move || async move {
+        if media_id == 0 {
+            return None;
+        }
+        if is_tv {
+            crate::services::tmdb::fetch_season_details(media_id, season.unwrap_or(1)).await.ok()
+                .and_then(|d| d.episodes.into_iter().find(|e| e.episode_number == episode.unwrap_or(1)).map(|e| e.overview))
+        } else {
+            crate::services::tmdb::fetch_details(media_id, false).await.ok().map(|d| d.overview)
+        }
+    });
+    let synopsis_sig = Signal::derive(move || synopsis_res.get().flatten());
+    // the stream playing here (not an embedded player), for the timeline's pictures
+    let stream_url = Signal::derive(move || match player_state.get() {
+        PlayerState::Playing { ref result, active_source_idx } => result.sources.get(active_source_idx).filter(|s| s.kind != PlayableKind::Embed).map(|s| s.url.clone()),
+        _ => None,
     });
     let episode_title_stored = StoredValue::new(episode_title.clone());
     let subtitle_header_text = move || {
@@ -722,7 +778,9 @@ pub fn StreamsPlayer(
                                             on:playing=on_playing
                                             on:pause=on_pause
                                             on:error=on_error
-                                            on:click=move |_| do_toggle_play()
+                                            // a click reaches the video only while the website's controls are hidden (they cover it when shown, and play or
+                                            // pause on a click; the phone's controls catch every tap): it brings the controls back, as on Netflix
+                                            on:click=move |_| reset_idle_timer()
                                             class="w-full h-full object-contain cursor-pointer"
                                             playsinline=true
                                         />
@@ -782,6 +840,7 @@ pub fn StreamsPlayer(
                                                 }
                                             }),
                                             on_select_episode: on_episode_change,
+                                            stream_url,
                                         } />
 
                                         // the age rating card, once at the start of a play
@@ -793,6 +852,7 @@ pub fn StreamsPlayer(
                                             duration=duration
                                             is_tv=is_tv
                                             marks=marks_sig
+                                            lifted=Signal::derive(move || !is_idle.get())
                                             on_skip_to=Callback::new(move |t| do_seek(t))
                                             on_next_episode=Callback::new(move |_| {
                                                 if let Some(cb) = on_episode_change {
@@ -807,6 +867,19 @@ pub fn StreamsPlayer(
                                         <crate::form::ByForm
                                             phone=|| ()
                                             desktop=move || view! {
+                                        // the discs a skip or a play and pause leaves on the picture, and the pause screen (website_overlays.rs)
+                                        <PlayerDiscs disc=disc />
+                                        <PauseScreen
+                                            shown=Signal::derive(move || {
+                                                pause_screen.get() && !is_episodes_open.get() && !is_subtitles_open.get()
+                                                    && duration.get() > 0.0 && current_time.get() < duration.get() - 2.0
+                                            })
+                                            title=title_stored
+                                            season=season
+                                            episode=episode
+                                            episode_name=episode_name_sig
+                                            synopsis=synopsis_sig
+                                        />
                                         // Episode Drawer
                                         <EpisodeDrawer
                                             series_id=media_id

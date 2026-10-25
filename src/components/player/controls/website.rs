@@ -10,24 +10,36 @@ pub fn WebsiteControls(state: super::ControlsState) -> impl IntoView {
     let super::ControlsState {
         title, subtitle, next_info, is_tv, is_playing, is_buffering, is_muted, volume, current_time, duration, buffered_fraction, is_idle,
         on_toggle_play, on_seek, on_skip_by, on_toggle_mute, on_set_volume, on_toggle_episodes, on_toggle_subtitles, on_next_episode,
-        on_toggle_fullscreen, on_back, ..
+        on_toggle_fullscreen, on_back, stream_url, ..
     } = state;
     let title = title.get_value();
     // 36 px icons inside 44 px buttons, as in the app
     let speaker_glyph = move || {
         if is_muted.get() || volume.get() <= 0.0 { Glyph::Muted } else if volume.get() > 0.5 { Glyph::Speaker } else { Glyph::SpeakerLow }
     };
+    // hidden while the pointer rests, playing or paused (Netflix's: 2.56 s, note 126); a click then reaches the video and brings them back
     let overlay_class = move || {
         format!(
             "absolute inset-0 z-20 transition-opacity duration-(--motion-slow) select-none {}",
-            if is_idle.get() && is_playing.get() { "opacity-0 pointer-events-none cursor-none" } else { "opacity-100 pointer-events-auto cursor-default" }
+            if is_idle.get() { "opacity-0 pointer-events-none cursor-none" } else { "opacity-100 pointer-events-auto cursor-default" }
         )
+    };
+    // while they show, a click on the picture plays or pauses; buttons, links, fields and the timeline keep their own clicks
+    let on_picture_click = move |e: leptos::ev::MouseEvent| {
+        use wasm_bindgen::JsCast;
+        let on_control = e.target()
+            .and_then(|t| t.dyn_into::<web_sys::Element>().ok())
+            .and_then(|el| el.closest("button, a, input, [data-player-control]").ok().flatten())
+            .is_some();
+        if !on_control {
+            on_toggle_play.run(());
+        }
     };
     // every button: 44 x 44, no plate
     let btn = "flex h-11 relative w-11 shrink-0 items-center justify-center rounded-hairline text-ink transition-transform duration-(--motion-quick) hover:scale-125 active:scale-95";
 
     view! {
-        <div class=overlay_class>
+        <div class=overlay_class on:click=on_picture_click>
             // the top shade and the back and report buttons (30 px from the corner)
             <div class="pointer-events-none absolute inset-x-0 top-0 h-[85%]" style="background: linear-gradient(rgba(0,0,0,0.3) 0, rgba(0,0,0,0) 20%);" />
             <button on:click=move |_| on_back.run(()) class=format!("{} absolute left-[30px] top-[30px] z-10", btn.replace(" relative", "")) title=crate::i18n::t("controls-overlay-back-to-browse") aria-label=crate::i18n::t("controls-overlay-back-to-browse")>
@@ -44,10 +56,10 @@ pub fn WebsiteControls(state: super::ControlsState) -> impl IntoView {
                 </Show>
             </div>
 
-            // the bottom: a 135 px band with a soft shade, the timeline on top, the buttons 52 px below its top
-            <div class="absolute inset-x-0 bottom-0 h-[135px]" style="background: linear-gradient(0deg, rgba(0,0,0,0.3) 0, rgba(0,0,0,0));">
+            // the bottom: a band (--player-bar-h) with a soft shade, the timeline on top, the buttons 52 px below its top
+            <div class="absolute inset-x-0 bottom-0 h-(--player-bar-h)" style="background: linear-gradient(0deg, rgba(0,0,0,0.3) 0, rgba(0,0,0,0));">
                 <div class="absolute left-[20px] right-[90px] top-0">
-                    <TimelineScrubber current_time=current_time duration=duration buffered_fraction=buffered_fraction on_seek=on_seek />
+                    <TimelineScrubber current_time=current_time duration=duration buffered_fraction=buffered_fraction on_seek=on_seek stream_url=stream_url />
                 </div>
                 <span class="absolute right-[28px] top-[1px] w-11 text-right text-body-md leading-5 text-ink">
                     {move || super::time_left(current_time.get(), duration.get())}
@@ -70,7 +82,7 @@ pub fn WebsiteControls(state: super::ControlsState) -> impl IntoView {
                             <button on:click=move |_| on_toggle_mute.run(()) class=btn title=move || if is_muted.get() { crate::i18n::t("player-unmute") } else { crate::i18n::t("player-mute") }>
                                 {move || view! { <AppIcon glyph=speaker_glyph() class="text-icon" /> }}
                             </button>
-                            <div class="absolute bottom-[44px] left-1/2 hidden h-[185px] w-[34px] -translate-x-1/2 items-center justify-center rounded-control bg-field group-hover/vol:flex group-focus-within/vol:flex">
+                            <div data-player-control="" class="absolute bottom-[44px] left-1/2 hidden h-[185px] w-[34px] -translate-x-1/2 items-center justify-center rounded-control bg-field group-hover/vol:flex group-focus-within/vol:flex">
                                 <input
                                     type="range" min="0" max="1" step="0.02"
                                     prop:value=move || if is_muted.get() { 0.0 } else { volume.get() }

@@ -80,3 +80,23 @@ export function attach(video: HTMLVideoElement, streamUrl: string): HlsInstance 
     hls.attachMedia(video);
   return hls as unknown as HlsInstance;
 }
+
+/** hls.js for the timeline's pictures (interop/preview.ts): the stream's lowest quality only, a buffer of a few seconds around the
+ *  moment asked for, and nothing loaded until the first `startLoad`. Null when this browser cannot run hls.js. */
+export function attachPreview(video: HTMLVideoElement, streamUrl: string): HlsInstance & { startLoad(at?: number): void } | null {
+  if (!Hls.isSupported()) return null;
+  const hls = new Hls({
+    enableWorker: true,
+    autoStartLoad: false,
+    startLevel: 0,
+    capLevelToPlayerSize: false,
+    maxBufferLength: 2,
+    maxMaxBufferLength: 4,
+    backBufferLength: 0,
+  });
+  // levels are listed from the lowest bitrate up: keep the choice there
+  hls.on(Hls.Events.MANIFEST_PARSED, () => { hls.autoLevelCapping = 0; });
+  hls.loadSource(streamUrl);
+  hls.attachMedia(video);
+  return hls as unknown as HlsInstance & { startLoad(at?: number): void };
+}
