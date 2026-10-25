@@ -689,7 +689,11 @@ pub fn StreamsPlayer(
     });
     let next_sig = Signal::derive(move || next_ep.get().flatten());
     // the guessed skip marks of this video (ratios of its length); an episode is the last of its season when no episode follows it in the season's list
+    // films have no skip buttons (no intro or recap to skip, no next episode): the engine is not asked
     let marks_res = LocalResource::new(move || async move {
+        if !is_tv {
+            return crate::services::ai_engine::SkipMarks::default();
+        }
         let last = if is_tv && media_id > 0 {
             crate::services::tmdb::fetch_season_details(media_id, season.unwrap_or(1)).await.ok()
                 .map(|d| d.episodes.iter().all(|e| e.episode_number <= episode.unwrap_or(1))).unwrap_or(false)
