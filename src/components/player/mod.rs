@@ -7,6 +7,7 @@ pub mod episode_drawer;
 pub mod subtitle_drawer;
 pub mod skip_button;
 pub mod rating_card;
+pub mod subtitles;
 
 use leptos::prelude::*;
 use wasm_bindgen::prelude::*;
@@ -88,6 +89,22 @@ pub fn StreamsPlayer(
     let (is_subtitles_open, set_is_subtitles_open) = signal(false);
     let (selected_sub_url, set_selected_sub_url) = signal(None::<String>);
     let (sub_delay, set_sub_delay) = signal(0.0);
+    // SubDL's languages for this title (subtitles.rs), added to the stream's own tracks, and the files behind each
+    let (subdl_tracks, set_subdl_tracks) = signal(Vec::<crate::services::resolver::SubtitleTrack>::new());
+    let subtitle_files = StoredValue::new(subtitles::Candidates::new());
+    let prefs = crate::pages::settings::use_prefs();
+    let profiles = crate::store::use_profile_store();
+    // a choice in the player is kept as the profile's subtitle language (off included), as Netflix keeps it for the next title
+    let choose_sub = Callback::new(move |key: Option<String>| {
+        set_selected_sub_url.set(key.clone());
+        let lang = match key.as_deref() {
+            None => Some("off".to_string()),
+            Some(k) => k.strip_prefix(subtitles::SUBDL).map(|c| c.to_ascii_lowercase()),
+        };
+        if let (Some(lang), Some(id)) = (lang, profiles.active_profile_id.get_untracked()) {
+            prefs.update_profile(&id, |p| p.subtitle_language = Some(lang));
+        }
+    });
 
     // Internal HLS & timers
     let hls_player = RwSignal::new_local(None::<std::rc::Rc<HlsPlayer>>);
@@ -429,12 +446,35 @@ pub fn StreamsPlayer(
 
     // Subtitle Display Logic
     let current_subtitle_tracks = move || {
-        if let PlayerState::Playing { ref result, .. } = player_state.get() {
-            result.subtitles.clone()
-        } else {
-            vec![]
-        }
+        let mut tracks = if let PlayerState::Playing { ref result, .. } = player_state.get() { result.subtitles.clone() } else { vec![] };
+        tracks.extend(subdl_tracks.get());
+        tracks
     };
+
+    // SubDL's list, asked once the stream is found; the profile's subtitle language is switched on when it is there
+    Effect::new(move |done: Option<bool>| {
+        if done == Some(true) {
+            return true;
+        }
+        if !matches!(player_state.get(), PlayerState::Playing { .. }) {
+            return false;
+        }
+        let preferred = profiles.active_profile_id.get_untracked().and_then(|id| prefs.profile(&id).subtitle_language);
+        leptos::task::spawn_local(async move {
+            let (tracks, files) = subtitles::subdl_tracks(media_id, is_tv, season, episode, preferred.clone()).await;
+            subtitle_files.set_value(files);
+            set_subdl_tracks.set(tracks);
+            if selected_sub_url.get_untracked().is_none() {
+                if let Some(code) = preferred.filter(|p| !p.is_empty() && p != "off") {
+                    let key = format!("{}{}", subtitles::SUBDL, code.to_ascii_uppercase());
+                    if subtitle_files.with_value(|f| f.contains_key(&key)) {
+                        set_selected_sub_url.set(Some(key));
+                    }
+                }
+            }
+        });
+        true
+    });
 
     // the title block as on Netflix: the show in bold, then "E3" and the episode's name; a film shows its title only
     let ep_name = LocalResource::new(move || async move {
@@ -559,6 +599,14 @@ pub fn StreamsPlayer(
                                             playsinline=true
                                         />
 
+                                        // the subtitle line, above the picture and under the controls
+                                        <subtitles::SubtitleOverlay
+                                            selected=selected_sub_url
+                                            candidates=subtitle_files
+                                            delay=sub_delay
+                                            lifted=Signal::derive(move || !is_idle.get())
+                                        />
+
                                         // the controls of the form in use (controls/: website.rs, phone.rs)
                                         <PlayerControls state=ControlsState {
                                             title: title_stored,
@@ -600,7 +648,7 @@ pub fn StreamsPlayer(
                                                 if let Some(p) = hls_player.get_untracked() { p.set_audio_track(i); }
                                                 set_audio_selected.set(i);
                                             }),
-                                            on_select_sub: Callback::new(move |u| set_selected_sub_url.set(u)),
+                                            on_select_sub: choose_sub,
                                             on_refresh_audio: Callback::new(move |_| {
                                                 if let Some(p) = hls_player.get_untracked() {
                                                     audio_tracks.set(p.audio_tracks());
@@ -659,7 +707,7 @@ pub fn StreamsPlayer(
                                                 if let Some(p) = hls_player.get_untracked() { p.set_audio_track(i); }
                                                 set_audio_selected.set(i);
                                             })
-                                            on_select_sub=Callback::new(move |u| set_selected_sub_url.set(u))
+                                            on_select_sub=choose_sub
                                             on_change_delay=Callback::new(move |d| set_sub_delay.set(d))
                                             on_close=Callback::new(move |_| set_is_subtitles_open.set(false))
                                         />

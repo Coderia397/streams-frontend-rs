@@ -5,15 +5,15 @@ use super::widgets::{Section, SwatchPicker, SwitchRow};
 use crate::i18n::t;
 use leptos::prelude::*;
 
-fn hex(name: &str) -> &'static str {
+pub(crate) fn hex(name: &str) -> &'static str {
     SUBTITLE_COLORS.iter().find(|(n, _)| *n == name).map(|(_, h)| *h).unwrap_or(SUBTITLE_COLORS[0].1)
 }
 
-fn size_px(size: u8) -> u32 {
+pub(crate) fn size_px(size: u8) -> u32 {
     SUBTITLE_SIZES.iter().find(|(v, _, _)| *v == size).map(|(_, _, px)| *px).unwrap_or(SUBTITLE_SIZES[1].2)
 }
 
-fn edge_css(edge: &str, color: &str) -> String {
+pub(crate) fn edge_css(edge: &str, color: &str) -> String {
     let c = hex(color);
     match edge {
         "raised" => format!("1px 1px 0 {c}, 2px 2px 0 {c}"),
@@ -24,13 +24,24 @@ fn edge_css(edge: &str, color: &str) -> String {
     }
 }
 
-fn paint(name: &str, clear: bool) -> String {
+pub(crate) fn paint(name: &str, clear: bool) -> String {
     if name == "none" {
         return "transparent".to_string();
     }
     let h = hex(name);
     let (r, g, b) = (u8::from_str_radix(&h[1..3], 16).unwrap_or(0), u8::from_str_radix(&h[3..5], 16).unwrap_or(0), u8::from_str_radix(&h[5..7], 16).unwrap_or(0));
     format!("rgba({r},{g},{b},{})", if clear { 0.5 } else { 1.0 })
+}
+
+/// The style of a subtitle line in the player, the same as the preview above with the size taken from the player's height (`cqh`, the
+/// overlay is a size container) so a line is as tall on a phone as on a computer, as on Netflix: small 3.6%, medium 4.6%, large 6%.
+pub(crate) fn player_cue_css(s: &SubtitleStyle) -> String {
+    let height = match s.size { 0 => 3.6, 2 => 6.0, _ => 4.6 };
+    let window = paint(&s.window, s.window_clear);
+    format!(
+        "font-size:{height}cqh;line-height:1.25;color:{};text-shadow:{};background:{};box-shadow:0 0 0 0.35em {window};border-radius:0.15em;padding:0.05em 0.3em",
+        hex(&s.color), edge_css(&s.edge, &s.edge_color), paint(&s.background, s.background_clear)
+    )
 }
 
 #[component]

@@ -21,7 +21,7 @@ pub(crate) mod prefs;
 mod profile;
 mod restrictions;
 mod shell;
-mod subtitles;
+pub(crate) mod subtitles;
 mod widgets;
 
 pub use prefs::{provide_prefs, use_prefs};
