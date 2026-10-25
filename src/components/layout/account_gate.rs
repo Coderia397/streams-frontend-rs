@@ -80,10 +80,15 @@ pub fn AccountGate() -> impl IntoView {
 pub fn after_sign_in() -> String {
     let search = web_sys::window().and_then(|w| w.location().search().ok()).unwrap_or_default();
     let next = search.trim_start_matches('?').split('&').find_map(|kv| kv.strip_prefix("next=")).map(|v| js_sys::decode_uri_component(v).ok().and_then(|s| s.as_string()).unwrap_or_default());
-    match next {
-        Some(n) if n.starts_with('/') && !n.starts_with("//") && !is_open_to_visitors(n.split('?').next().unwrap_or("")) => n,
-        _ => crate::config::routes::BROWSE.to_string(),
-    }
+    next.and_then(|n| safe_next(&n)).unwrap_or_else(|| crate::config::routes::BROWSE.to_string())
+}
+
+/// `next` when it is an address of this site that needs an account. Browsers read a backslash as a slash and drop tabs and line breaks,
+/// so `/\example.com` or `/<tab>/example.com` would leave the site (a signed in member was sent to example.com, 2026-10-25): any of
+/// those, or two leading slashes, is refused.
+pub fn safe_next(n: &str) -> Option<String> {
+    let local = n.starts_with('/') && !n.starts_with("//") && !n.contains('\\') && !n.chars().any(|c| c.is_control() || c.is_whitespace());
+    (local && !is_open_to_visitors(n.split(['?', '#']).next().unwrap_or(""))).then(|| n.to_string())
 }
 
 #[cfg(test)]
@@ -100,6 +105,15 @@ mod tests {
         }
         for p in ["/browse", "/browse/genre/83", "/settings/account", "/search", "/watch/tv/1399", "/loginx", "/helpdesk"] {
             assert_eq!(access(p), Access::Members, "{p}");
+        }
+    }
+
+    #[test]
+    fn next_stays_on_the_site() {
+        assert_eq!(safe_next("/browse?title=tv-1399").as_deref(), Some("/browse?title=tv-1399"));
+        assert_eq!(safe_next("/settings/account").as_deref(), Some("/settings/account"));
+        for bad in ["//example.com", "/\\example.com", "/\\/example.com", "/\t/example.com", "/\n/example.com", "https://example.com", "example.com", "/login", "/"] {
+            assert_eq!(safe_next(bad), None, "{bad:?}");
         }
     }
 }

@@ -260,7 +260,12 @@ fn HostGuard() -> impl IntoView {
 /// profile that is not a Kids profile switches to the account's Kids profile (with the loading screen), as netflix.com/Kids does.
 #[component]
 fn HomeRoute(kids: bool) -> impl IntoView {
+    // the tab's name: a page that sent the member here (a shared title's page) leaves its own
+    crate::pages::help::set_site_title("");
     let kids_active = crate::pages::settings::prefs::active_is_kids();
+    // a move between the two homes keeps the query: a shared link's `?title=` opens the title's details on either home
+    let search = leptos_router::hooks::use_location().search.get_untracked();
+    let search = if search.is_empty() || search.starts_with('?') { search } else { format!("?{search}") };
     let has_active = web_sys::window().and_then(|w| w.local_storage().ok().flatten()).and_then(|s| s.get_item(crate::keys::ACTIVE_PROFILE).ok().flatten()).is_some();
     if kids && !kids_active {
         let store = crate::store::use_profile_store();
@@ -269,11 +274,11 @@ fn HomeRoute(kids: bool) -> impl IntoView {
                 crate::components::profiles::switch_overlay::begin_switch(k);
                 view! { <span /> }.into_any()
             }
-            _ => view! { <leptos_router::components::Redirect path="/browse" /> }.into_any(),
+            _ => view! { <leptos_router::components::Redirect path=format!("/browse{search}") /> }.into_any(),
         };
     }
     if !kids && kids_active {
-        return view! { <leptos_router::components::Redirect path="/kids" /> }.into_any();
+        return view! { <leptos_router::components::Redirect path=format!("/kids{search}") /> }.into_any();
     }
     // while Who's watching or the switch screen covers the page, the home page is not there at all: its banner video would go on playing (with sound) behind them
     let profile_store = crate::store::use_profile_store();
