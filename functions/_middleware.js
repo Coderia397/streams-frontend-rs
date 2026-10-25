@@ -99,6 +99,11 @@ export async function onRequest({ request, next, env }) {
     const help = await helpFirstView(env, url.origin, article ? article[1] : null).catch(() => null);
     if (help) return withHead(res, { title: article ? `${help.title} | ${BRAND} Help Centre` : `${help.title} | ${BRAND}`, description: help.description, url: `${origin}${p}` }, help.html);
   }
+  // the policies: before this, a reader without the app found only their titles, so who runs the site and its terms were unreadable
+  if (LEGAL[p] && env && env.ASSETS) {
+    const legal = await legalFirstView(env, url.origin, p).catch(() => null);
+    if (legal) return withHead(res, { title: `${PAGES[p][0]} | ${BRAND}`, description: PAGES[p][1], url: `${origin}${p}` }, legal);
+  }
   if (p === "/" && !(ours && host === HELP) && env && env.ASSETS) {
     const first = await landingFirstView(env, url.origin).catch(() => null);
     return withHead(res, { title: HOME_TITLE, description: HOME_DESCRIPTION, url: `${origin}/` }, first);
@@ -309,6 +314,48 @@ async function helpFirstView(env, origin, slug) {
   };
 }
 
+// the policies by address: their id in i18n/en.ftl and number of sections (src/data/help.rs, LEGAL)
+const LEGAL = {
+  "/privacy": ["privacy", 14], "/terms": ["terms", 18], "/cookies": ["cookie-policy", 4],
+  "/dmca": ["dmca", 6], "/disclaimer": ["disclaimer", 5], "/credits": ["credits", 6],
+};
+
+/** A policy as plain HTML while the app downloads, in the order src/pages/help/legal.rs shows it: title, date, each numbered section
+ *  with its text and points, then the other policies. The texts keep their <strong> and their links to outside sites. */
+async function legalFirstView(env, origin, path) {
+  const res = await env.ASSETS.fetch(new Request(`${origin}/i18n/en.ftl`));
+  if (!res.ok) return null;
+  const words = ftl(await res.text());
+  const [id, sections] = LEGAL[path];
+  const fill = (s) => (s || "").replace(/\{\s*\$(\w+)\s*\}/g, (_, v) => HELP_VARS[v] ?? "");
+  const inline = (s) => html(fill(s))
+    .replace(/&lt;(\/?)strong&gt;/g, "<$1strong>")
+    .replace(/&lt;a href="(https:\/\/[^"\s]+)"[^&]*&gt;/g, (_, u) => `<a href="${attr(u)}" rel="noopener">`).replace(/&lt;\/a&gt;/g, "</a>");
+  const title = fill(words[`legal-${id}-title`]);
+  if (!title) return null;
+  let body = "";
+  for (let n = 1; n <= sections; n++) {
+    const points = [];
+    for (let k = 1; words[`legal-${id}-${n}-b${k}`]; k++) points.push(`<li>${inline(words[`legal-${id}-${n}-b${k}`])}</li>`);
+    body += `<section><h2>${inline(words[`legal-${id}-${n}-title`])}</h2><p>${inline(words[`legal-${id}-${n}-body`])}</p>${points.length ? `<ul>${points.join("")}</ul>` : ""}</section>`;
+  }
+  const others = Object.entries(LEGAL).filter(([p]) => p !== path)
+    .map(([p, [o]]) => `<li><a href="${p}">${html(fill(words[`legal-${o}-title`]))}</a></li>`).join("");
+  return `<div id="first-view"><style>
+#boot{display:none!important}
+#first-view{font-family:var(--font-sans,system-ui,sans-serif);color:var(--color-ink,#fff);background:var(--color-page,#141414);min-height:100vh;padding:24px 16px 64px}
+#first-view main{max-width:760px;margin:0 auto}
+#first-view nav a{color:var(--color-ink-body,#b3b3b3);text-decoration:none;font-size:14px}
+#first-view h1{font-size:clamp(26px,5vw,40px);line-height:1.15;margin:16px 0 8px;font-weight:800}
+#first-view h2{font-size:20px;margin:32px 0 8px}
+#first-view .fv-date{color:var(--color-ink-body,#b3b3b3);font-weight:600;margin:0 0 16px}
+#first-view p,#first-view li{line-height:1.6;font-size:16px;color:var(--color-ink-soft,#e5e5e5)}
+#first-view a{color:var(--color-brand-glow,#7aa6ff)}
+</style><main><nav><a href="https://${HELP}/help">${html(`${BRAND} Help Centre`)}</a></nav>
+<article><h1>${html(title)}</h1><p class="fv-date">${html(fill(words[`legal-${id}-updated`]))}</p>${body}</article>
+<nav aria-label="Other policies"><h2>${html(fill(words["help-ui-other-policies"]) || "Other policies")}</h2><ul>${others}</ul></nav></main></div>`;
+}
+
 // the values src/pages/help/mod.rs fills into help texts (src/brand.rs)
 const HELP_VARS = { brand: BRAND, help_email: "help@streams.watch", contribute_email: "contribute@streams.watch", support_email: "help@streams.watch" };
 
@@ -321,6 +368,8 @@ function helpBody(text) {
   return text.split(/\n\s*\n/).map((block) => {
     const lines = block.split("\n").map((l) => l.trim()).filter(Boolean);
     if (!lines.length) return "";
+    // a "## " line heads the rest of its block
+    if (/^##\s/.test(lines[0])) return `<h2>${inline(lines[0].replace(/^##\s*/, ""))}</h2>${lines.length > 1 ? helpBody(lines.slice(1).join("\n")) : ""}`;
     if (lines.every((l) => /^\d+\.\s/.test(l))) return `<ol>${lines.map((l) => `<li>${inline(l.replace(/^\d+\.\s*/, ""))}</li>`).join("")}</ol>`;
     if (lines.every((l) => /^[-*]\s/.test(l))) return `<ul>${lines.map((l) => `<li>${inline(l.replace(/^[-*]\s*/, ""))}</li>`).join("")}</ul>`;
     return `<p>${inline(lines.join(" "))}</p>`;
