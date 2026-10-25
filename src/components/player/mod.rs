@@ -43,6 +43,33 @@ fn set_timeout_handle<F: FnOnce() + 'static>(cb: F, ms: i32) -> Option<i32> {
         .ok()
 }
 
+/// The source to try after `failed`: the next one in order that is not on the same host, and not another stream of the same provider
+/// (a provider whose video host refuses this site, Cineby or Vidflix on 2026-10-25, lists five links that all fail the same way).
+/// Ids of audio entries that are another source's language start here (below it: the tracks of the stream playing).
+const AUDIO_ELSEWHERE: i32 = 1000;
+
+/// The languages a source says its audio is in, as tags.
+fn audio_tags(s: &crate::services::resolver::PlayableSource) -> Vec<String> {
+    let listed: Vec<&str> = if s.audio_languages.is_empty() { s.audio.as_deref().filter(|a| *a != "multi").into_iter().collect() } else { s.audio_languages.iter().map(String::as_str).collect() };
+    let mut tags: Vec<String> = Vec::new();
+    for t in listed.into_iter().filter_map(crate::utils::lang_tag::parse).map(|l| l.tag) {
+        if !tags.contains(&t) {
+            tags.push(t);
+        }
+    }
+    tags
+}
+
+pub(crate) fn next_source(sources: &[crate::services::resolver::PlayableSource], failed: usize) -> Option<usize> {
+    let host = |u: &str| u.split("://").nth(1).and_then(|r| r.split('/').next()).unwrap_or("").to_ascii_lowercase();
+    let bad = sources.get(failed)?;
+    let (bad_host, bad_streamed) = (host(&bad.url), bad.kind != PlayableKind::Embed);
+    (failed + 1..sources.len()).find(|&j| {
+        let s = &sources[j];
+        host(&s.url) != bad_host && !(bad_streamed && s.kind != PlayableKind::Embed && s.provider == bad.provider)
+    })
+}
+
 fn clear_timeout_handle(id: Option<i32>) {
     if let Some(id) = id {
         if let Some(window) = web_sys::window() {
@@ -129,6 +156,11 @@ pub fn StreamsPlayer(
     // the audio tracks of the stream (read each time the panel opens, since the stream lists them a moment after it starts)
     let audio_tracks = RwSignal::new(Vec::<(i32, String)>::new());
     let (audio_selected, set_audio_selected) = signal(0i32);
+    // a language another source has (ids from AUDIO_ELSEWHERE): which source and which language; picking it moves to that source
+    let audio_elsewhere = StoredValue::new(std::collections::HashMap::<i32, (usize, String)>::new());
+    // after such a move: the moment to go on from, and the language to pick in the new stream once it lists its tracks
+    let switch_resume = StoredValue::new(None::<f64>);
+    let switch_audio = StoredValue::new(None::<String>);
     Effect::new(move |_| {
         if is_subtitles_open.get() {
             if let Some(p) = hls_player.get_untracked() {
@@ -203,8 +235,9 @@ pub fn StreamsPlayer(
                         let player = HlsPlayer::attach(video.clone(), stream_url);
                         hls_player.set(Some(std::rc::Rc::new(player)));
 
-                        // Store resume time for when metadata/canplay is ready
-                        let resume_t = untrack(|| watch_store.get_resume_time(media_id, is_tv, season, episode));
+                        // Store resume time for when metadata/canplay is ready: the moment of a source switch, else the saved progress
+                        let resume_t = switch_resume.get_value().take().unwrap_or_else(|| untrack(|| watch_store.get_resume_time(media_id, is_tv, season, episode)));
+                        switch_resume.set_value(None);
                         if resume_t > 0.0 {
                             set_pending_resume_time.set(resume_t);
                         }
@@ -356,11 +389,8 @@ pub fn StreamsPlayer(
                 audio_only_since.set_value(None);
                 leptos::logging::warn!("Stream playing audio only with 0 video dimensions. Failing over to next source...");
                 if let PlayerState::Playing { ref result, active_source_idx } = player_state.get_untracked() {
-                    if active_source_idx + 1 < result.sources.len() {
-                        set_player_state.set(PlayerState::Playing {
-                            result: result.clone(),
-                            active_source_idx: active_source_idx + 1,
-                        });
+                    if let Some(next) = next_source(&result.sources, active_source_idx) {
+                        set_player_state.set(PlayerState::Playing { result: result.clone(), active_source_idx: next });
                     }
                 }
             }
@@ -372,6 +402,23 @@ pub fn StreamsPlayer(
     let on_seeking = move |_| audio_only_since.set_value(None);
     let on_canplay = move |_| {
         set_is_buffering.set(false);
+        // after a move to another source for its language: pick that language once the stream lists its tracks
+        if let Some(tag) = switch_audio.get_value() {
+            for wait in [300, 1500] {
+                let tag = tag.clone();
+                set_timeout_handle(move || {
+                    let Some(p) = hls_player.get_untracked() else { return };
+                    let tracks = p.audio_tracks();
+                    let found = tracks.iter().find(|(_, label)| crate::utils::lang_tag::parse(label).is_some_and(|l| crate::utils::lang_tag::base(&l.tag) == crate::utils::lang_tag::base(&tag)));
+                    if let Some((i, _)) = found {
+                        p.set_audio_track(*i);
+                        set_audio_selected.set(*i);
+                        audio_tracks.set(tracks.clone());
+                        switch_audio.set_value(None);
+                    }
+                }, wait);
+            }
+        }
         let pending_t = pending_resume_time.get_untracked();
         if pending_t > 0.0 {
             if let Some(video) = video_ref.get() {
@@ -395,11 +442,8 @@ pub fn StreamsPlayer(
     let on_error = move |_| {
         leptos::logging::warn!("Video playback error encountered on current stream source, attempting failover...");
         if let PlayerState::Playing { ref result, active_source_idx } = player_state.get_untracked() {
-            if active_source_idx + 1 < result.sources.len() {
-                set_player_state.set(PlayerState::Playing {
-                    result: result.clone(),
-                    active_source_idx: active_source_idx + 1,
-                });
+            if let Some(next) = next_source(&result.sources, active_source_idx) {
+                set_player_state.set(PlayerState::Playing { result: result.clone(), active_source_idx: next });
             } else {
                 set_player_state.set(PlayerState::Error(
                     crate::i18n::t("player-error-no-source"),
@@ -500,6 +544,62 @@ pub fn StreamsPlayer(
             }
         });
         true
+    });
+
+    // the Audio list: the tracks of the stream playing, named in the viewer's language, then each language another source has (once);
+    // picking one of those moves to that source at the same moment
+    let audio_options = Signal::derive(move || {
+        let mut out: Vec<(i32, String)> = Vec::new();
+        let mut have: Vec<String> = Vec::new();
+        for (i, label) in audio_tracks.get() {
+            match crate::utils::lang_tag::parse(&label) {
+                Some(l) => {
+                    out.push((i, crate::i18n::language_name(&l.tag)));
+                    have.push(l.tag);
+                }
+                None => out.push((i, label)),
+            }
+        }
+        let mut elsewhere = std::collections::HashMap::new();
+        if let PlayerState::Playing { ref result, active_source_idx } = player_state.get() {
+            if let Some(cur) = result.sources.get(active_source_idx) {
+                for t in audio_tags(cur) {
+                    if !have.iter().any(|h| crate::utils::lang_tag::base(h) == crate::utils::lang_tag::base(&t)) {
+                        have.push(t);
+                    }
+                }
+            }
+            let mut id = AUDIO_ELSEWHERE;
+            for (j, src) in result.sources.iter().enumerate().filter(|(j, _)| *j != active_source_idx) {
+                for t in audio_tags(src) {
+                    if have.iter().any(|h| crate::utils::lang_tag::base(h) == crate::utils::lang_tag::base(&t)) {
+                        continue;
+                    }
+                    out.push((id, crate::i18n::language_name(&t)));
+                    elsewhere.insert(id, (j, t.clone()));
+                    have.push(t);
+                    id += 1;
+                }
+            }
+        }
+        audio_elsewhere.set_value(elsewhere);
+        out
+    });
+    let choose_audio = Callback::new(move |i: i32| {
+        if i >= AUDIO_ELSEWHERE {
+            let Some((j, tag)) = audio_elsewhere.with_value(|m| m.get(&i).cloned()) else { return };
+            if let PlayerState::Playing { ref result, .. } = player_state.get_untracked() {
+                // an embedded player keeps its own moment and tracks: only a stream played here goes on from the same moment
+                if result.sources.get(j).is_some_and(|s| s.kind != PlayableKind::Embed) {
+                    switch_resume.set_value(Some(current_time.get_untracked()));
+                    switch_audio.set_value(Some(tag));
+                }
+                set_player_state.set(PlayerState::Playing { result: result.clone(), active_source_idx: j });
+            }
+            return;
+        }
+        if let Some(p) = hls_player.get_untracked() { p.set_audio_track(i); }
+        set_audio_selected.set(i);
     });
 
     // the title block as on Netflix: the show in bold, then "E3" and the episode's name; a film shows its title only
@@ -668,12 +768,9 @@ pub fn StreamsPlayer(
                                             on_back: on_close,
                                             subtitles: Signal::derive(current_subtitle_tracks),
                                             selected_sub: selected_sub_url,
-                                            audio_tracks: audio_tracks.into(),
+                                            audio_tracks: audio_options,
                                             audio_selected: audio_selected.into(),
-                                            on_select_audio: Callback::new(move |i| {
-                                                if let Some(p) = hls_player.get_untracked() { p.set_audio_track(i); }
-                                                set_audio_selected.set(i);
-                                            }),
+                                            on_select_audio: choose_audio,
                                             on_select_sub: choose_sub,
                                             on_refresh_audio: Callback::new(move |_| {
                                                 if let Some(p) = hls_player.get_untracked() {
@@ -727,12 +824,9 @@ pub fn StreamsPlayer(
                                             subtitles=Signal::derive(current_subtitle_tracks)
                                             selected_sub_url=selected_sub_url
                                             sub_delay=sub_delay
-                                            audio_tracks=audio_tracks.into()
+                                            audio_tracks=audio_options
                                             audio_selected=audio_selected.into()
-                                            on_select_audio=Callback::new(move |i| {
-                                                if let Some(p) = hls_player.get_untracked() { p.set_audio_track(i); }
-                                                set_audio_selected.set(i);
-                                            })
+                                            on_select_audio=choose_audio
                                             on_select_sub=choose_sub
                                             on_change_delay=Callback::new(move |d| set_sub_delay.set(d))
                                             on_close=Callback::new(move |_| set_is_subtitles_open.set(false))
@@ -780,4 +874,41 @@ fn start_playing(video: web_sys::HtmlVideoElement, set_is_muted: WriteSignal<boo
     });
     let _ = promise.catch(&on_reject);
     on_reject.forget();
+}
+
+#[cfg(test)]
+mod failover_tests {
+    use super::*;
+    use crate::services::resolver::PlayableSource;
+
+    fn src(url: &str, provider: &str, kind: PlayableKind) -> PlayableSource {
+        PlayableSource { url: url.into(), quality: "auto".into(), provider: provider.into(), kind, referer: None, audio: None, audio_languages: vec![], is_original: None, is_multi_audio: None }
+    }
+
+    #[test]
+    fn a_failed_host_and_its_providers_streams_are_skipped() {
+        let list = vec![
+            src("https://v.lumenbox.top/a/2160", "Cineby", PlayableKind::Hls),
+            src("https://v.lumenbox.top/a/1080", "Cineby", PlayableKind::Hls),
+            src("https://cno.to/api/s/21/movie/1", "Cineby", PlayableKind::Hls),
+            src("https://player.vidzee.wtf/embed/1", "HydraHD", PlayableKind::Embed),
+            src("https://vidlink.pro/movie/1", "HydraHD", PlayableKind::Embed),
+        ];
+        assert_eq!(next_source(&list, 0), Some(3));
+        // an embed that fails moves to the next embed of the same provider on another host
+        assert_eq!(next_source(&list, 3), Some(4));
+        assert_eq!(next_source(&list, 4), None);
+    }
+
+    #[test]
+    fn audio_languages_of_a_source() {
+        let mut s = src("https://x/1", "VixSrc", PlayableKind::Hls);
+        s.audio_languages = vec!["en".into(), "ita".into()];
+        assert_eq!(audio_tags(&s), ["en", "it"]);
+        let mut s = src("https://x/2", "HydraHD", PlayableKind::Embed);
+        s.audio = Some("ru".into());
+        assert_eq!(audio_tags(&s), ["ru"]);
+        s.audio = Some("multi".into());
+        assert!(audio_tags(&s).is_empty());
+    }
 }
