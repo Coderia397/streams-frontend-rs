@@ -75,6 +75,7 @@ search-bar-search-input = Zoekopdracht
 search-bar-titles-people-genres = Titels, personen, genres
 subtitle-drawer-no-subtitles-detected-for-this = Geen onderliggende teksten gedetecteerd voor deze stream.
 subtitle-drawer-subtitle-timing-offset = Onderliggende tekst tijdsverschuiving
+subtitle-drawer-another-version = Niet synchroon? Probeer een andere versie
 subtitle-drawer-subtitles = Ondertitels
 player-audio = Audio
 vibe-row-scroll-left = Scroll naar links

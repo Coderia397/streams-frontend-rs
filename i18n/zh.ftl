@@ -75,6 +75,7 @@ search-bar-search-input = 搜索输入框
 search-bar-titles-people-genres = 片名、人物、类型
 subtitle-drawer-no-subtitles-detected-for-this = 未检测到该流的字幕。
 subtitle-drawer-subtitle-timing-offset = 字幕时间偏移
+subtitle-drawer-another-version = 不同步？换一个版本
 subtitle-drawer-subtitles = 字幕
 player-audio = 音频
 vibe-row-scroll-left = 向左滚动

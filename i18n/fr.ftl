@@ -75,6 +75,7 @@ search-bar-search-input = Champ de recherche
 search-bar-titles-people-genres = Titres, personnes, genres
 subtitle-drawer-no-subtitles-detected-for-this = Aucun sous-titre détecté pour ce flux.
 subtitle-drawer-subtitle-timing-offset = Décalage de synchronisation des sous-titres
+subtitle-drawer-another-version = Pas synchronisés ? Essayer une autre version
 subtitle-drawer-subtitles = Sous-titres
 player-audio = Audio
 vibe-row-scroll-left = Faire défiler vers la gauche

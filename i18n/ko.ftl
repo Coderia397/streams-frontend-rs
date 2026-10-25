@@ -75,6 +75,7 @@ search-bar-search-input = 검색 입력
 search-bar-titles-people-genres = 제목, 인물, 장르
 subtitle-drawer-no-subtitles-detected-for-this = 이 스트리밍에 자막이 검출되지 않았습니다.
 subtitle-drawer-subtitle-timing-offset = 자막 타이밍 오프셋
+subtitle-drawer-another-version = 싱크가 맞지 않나요? 다른 버전 사용
 subtitle-drawer-subtitles = 자막
 player-audio = 오디오
 vibe-row-scroll-left = 왼쪽으로 스크롤

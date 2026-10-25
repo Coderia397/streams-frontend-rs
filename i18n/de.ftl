@@ -75,6 +75,7 @@ search-bar-search-input = Suchfeld
 search-bar-titles-people-genres = Titel, Personen, Genres
 subtitle-drawer-no-subtitles-detected-for-this = Keine Untertitel für diesen Stream erkannt.
 subtitle-drawer-subtitle-timing-offset = Untertitel-Zeitversatz
+subtitle-drawer-another-version = Nicht synchron? Andere Version probieren
 subtitle-drawer-subtitles = Untertitel
 player-audio = Ton
 vibe-row-scroll-left = Nach links scrollen

@@ -75,6 +75,7 @@ search-bar-search-input = Ввод поиска
 search-bar-titles-people-genres = Названия, люди, жанры
 subtitle-drawer-no-subtitles-detected-for-this = Нет субтитров для этого потока.
 subtitle-drawer-subtitle-timing-offset = Сдвиг времени субтитров
+subtitle-drawer-another-version = Не совпадают? Попробовать другую версию
 subtitle-drawer-subtitles = Субтитры
 player-audio = Аудио
 vibe-row-scroll-left = Прокрутить влево

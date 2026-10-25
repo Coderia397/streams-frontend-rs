@@ -116,6 +116,7 @@ pub fn StreamsPlayer(
     let (is_subtitles_open, set_is_subtitles_open) = signal(false);
     let (selected_sub_url, set_selected_sub_url) = signal(None::<String>);
     let (sub_delay, set_sub_delay) = signal(0.0);
+    let (sub_retry, set_sub_retry) = signal(0u32);
     // SubDL's files for this title (subtitles.rs); with the stream's own tracks they make one list, one entry per language
     let subdl_found = RwSignal::new(Vec::<subtitles::SubFile>::new());
     let prefs = crate::pages::settings::use_prefs();
@@ -141,6 +142,7 @@ pub fn StreamsPlayer(
     let first_stored = StoredValue::new(first_langs.clone());
     // a choice in the player is kept as the profile's subtitle language (off included), as Netflix keeps it for the next title
     let choose_sub = Callback::new(move |key: Option<String>| {
+        set_sub_retry.set(0);
         set_selected_sub_url.set(key.clone());
         let lang = match key.as_deref() {
             None => Some("off".to_string()),
@@ -731,6 +733,7 @@ pub fn StreamsPlayer(
                                             candidates=subtitle_files
                                             delay=sub_delay
                                             lifted=Signal::derive(move || !is_idle.get())
+                                            retry=sub_retry
                                         />
 
                                         // the controls of the form in use (controls/: website.rs, phone.rs)
@@ -829,6 +832,8 @@ pub fn StreamsPlayer(
                                             on_select_audio=choose_audio
                                             on_select_sub=choose_sub
                                             on_change_delay=Callback::new(move |d| set_sub_delay.set(d))
+                                            has_other_version=Signal::derive(move || selected_sub_url.get().is_some_and(|k| subtitle_files.with(|c| c.get(&k).is_some_and(|l| l.len() > 1))))
+                                            on_other_version=Callback::new(move |_| set_sub_retry.update(|n| *n += 1))
                                             on_close=Callback::new(move |_| set_is_subtitles_open.set(false))
                                         />
                                             }

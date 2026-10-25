@@ -75,6 +75,7 @@ search-bar-search-input = Campo de búsqueda
 search-bar-titles-people-genres = Títulos, personas, géneros
 subtitle-drawer-no-subtitles-detected-for-this = No se detectaron subtítulos para este stream.
 subtitle-drawer-subtitle-timing-offset = Ajuste de sincronización de subtítulos
+subtitle-drawer-another-version = ¿Desincronizados? Prueba otra versión
 subtitle-drawer-subtitles = Subtítulos
 player-audio = Audio
 vibe-row-scroll-left = Desplazar a la izquierda

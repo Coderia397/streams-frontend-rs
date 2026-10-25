@@ -75,6 +75,7 @@ search-bar-search-input = Sök inmatning
 search-bar-titles-people-genres = Titlar, personer, genrer
 subtitle-drawer-no-subtitles-detected-for-this = Inga undertexter upptäcktes för denna ström.
 subtitle-drawer-subtitle-timing-offset = Undertext tid offset
+subtitle-drawer-another-version = Inte i synk? Prova en annan version
 subtitle-drawer-subtitles = Undertexter
 player-audio = Ljud
 vibe-row-scroll-left = Rulla till vänster

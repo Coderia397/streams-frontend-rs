@@ -75,6 +75,7 @@ search-bar-search-input = खोज इनपुट
 search-bar-titles-people-genres = शीर्षक, लोग, जनरल
 subtitle-drawer-no-subtitles-detected-for-this = इस स्ट्रीम के लिए कोई सबटाइटल नहीं डिटेक्ट किए गए हैं।
 subtitle-drawer-subtitle-timing-offset = सबटाइटल समय ऑफ़सेट
+subtitle-drawer-another-version = सिंक नहीं है? दूसरा संस्करण आज़माएँ
 subtitle-drawer-subtitles = सबटाइटल
 player-audio = ऑडियो
 vibe-row-scroll-left = बाएँ बढ़ाएं

@@ -17,6 +17,9 @@ pub fn SubtitleDrawer(
     on_select_audio: Callback<i32>,
     on_select_sub: Callback<Option<String>>,
     on_change_delay: Callback<f64>,
+    /// True when the chosen language has another file to try; `on_other_version` moves to it (subtitles out of step with the video)
+    #[prop(optional, into)] has_other_version: Signal<bool>,
+    #[prop(optional)] on_other_version: Option<Callback<()>>,
     on_close: Callback<()>,
 ) -> impl IntoView {
     let row = "flex h-[59px] w-full items-center px-[10px] text-start text-title-lg transition-colors duration-(--motion-quick) hover:bg-lift hover:text-ink focus-visible:outline-2 focus-visible:outline-ink";
@@ -77,6 +80,15 @@ pub fn SubtitleDrawer(
                                 <button on:click=move |_| on_change_delay.run(sub_delay.get() + 0.5) class="h-9 w-12 rounded-button hover:bg-lift">"+0.5s"</button>
                             </span>
                         </div>
+                    </Show>
+                    <Show when=move || selected_sub_url.get().is_some() && has_other_version.get() && on_other_version.is_some()>
+                        <button
+                            on:click=move |_| { if let Some(cb) = on_other_version { cb.run(()) } }
+                            class="mt-[6px] flex w-full items-center gap-3 rounded-button px-[10px] py-3 text-start text-title-sm text-ink-body hover:bg-lift hover:text-ink"
+                        >
+                            <i class="ph-bold ph-arrows-clockwise text-title" aria-hidden="true"></i>
+                            {crate::i18n::t("subtitle-drawer-another-version")}
+                        </button>
                     </Show>
                 </div>
               </div>

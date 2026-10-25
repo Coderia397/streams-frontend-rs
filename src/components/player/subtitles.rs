@@ -43,6 +43,8 @@ pub struct Cue {
 
 #[derive(serde::Deserialize)]
 struct Loaded {
+    #[serde(default)]
+    index: usize,
     cues: Vec<Cue>,
 }
 
@@ -187,7 +189,14 @@ pub fn cue_html(text: &str) -> String {
 /// The line on screen. `selected` is a track key (a provider address or `subdl:<CODE>`), `delay` moves every cue (seconds, positive
 /// shows them later), `lifted` moves the line above the controls while they show.
 #[component]
-pub fn SubtitleOverlay(selected: ReadSignal<Option<String>>, candidates: Signal<Candidates>, delay: ReadSignal<f64>, lifted: Signal<bool>) -> impl IntoView {
+pub fn SubtitleOverlay(
+    selected: ReadSignal<Option<String>>,
+    candidates: Signal<Candidates>,
+    delay: ReadSignal<f64>,
+    lifted: Signal<bool>,
+    /// bumped to move to the chosen language's next file (Out of sync? Try another version)
+    retry: ReadSignal<u32>,
+) -> impl IntoView {
     let prefs = crate::pages::settings::use_prefs();
     let profiles = crate::store::use_profile_store();
     let style = Memo::new(move |_| {
@@ -195,21 +204,31 @@ pub fn SubtitleOverlay(selected: ReadSignal<Option<String>>, candidates: Signal<
         crate::pages::settings::subtitles::player_cue_css(&prefs.profile(&id).subtitle_style)
     });
     let cues = RwSignal::new(None::<std::sync::Arc<Vec<Cue>>>);
+    // the file showing: the language's key and its place in that language's list
+    let showing = StoredValue::new(None::<(String, usize)>);
     let (line, set_line) = signal(None::<usize>);
 
     // the file of the selected track: loaded when the choice changes, the previous one dropped at once
     Effect::new(move |_| {
         let key = selected.get();
+        let again = retry.get();
         cues.set(None);
         set_line.set(None);
         let Some(key) = key else { return };
-        let list: Vec<(String, String)> = candidates.with_untracked(|c| c.get(&key).cloned().unwrap_or_default());
-        if list.is_empty() {
+        let all: Vec<(String, String)> = candidates.with_untracked(|c| c.get(&key).cloned().unwrap_or_default());
+        if all.is_empty() {
             return;
         }
+        // a retry starts after the file showing; a new choice starts at the language's first file
+        let start = match showing.get_value() {
+            Some((k, i)) if k == key && again > 0 => (i + 1) % all.len(),
+            _ => 0,
+        };
+        let list: Vec<(String, String)> = all[start..].iter().chain(all[..start].iter()).cloned().collect();
         let json = serde_json::to_string(&list.iter().map(|(url, lang)| serde_json::json!({ "url": url, "lang": lang })).collect::<Vec<_>>()).unwrap_or_default();
         // the film's length rules out a file made for another cut (0 while the video does not know it yet)
         let duration = video_element().map(|v| v.duration()).filter(|d| d.is_finite()).unwrap_or(0.0);
+        let total = all.len();
         leptos::task::spawn_local(async move {
             let loaded = subtitle_load(&json, duration).await.as_string().unwrap_or_default();
             // the choice may have changed while the file loaded
@@ -217,6 +236,7 @@ pub fn SubtitleOverlay(selected: ReadSignal<Option<String>>, candidates: Signal<
                 return;
             }
             if let Ok(l) = serde_json::from_str::<Loaded>(&loaded) {
+                showing.set_value(Some((key.clone(), (start + l.index) % total)));
                 cues.set(Some(std::sync::Arc::new(l.cues)));
             }
         });

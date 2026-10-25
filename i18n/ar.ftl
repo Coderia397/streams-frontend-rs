@@ -75,6 +75,7 @@ search-bar-search-input = حقل البحث
 search-bar-titles-people-genres = عناوين، أشخاص، أنواع
 subtitle-drawer-no-subtitles-detected-for-this = لم يتم اكتشاف ترجمة نص لهذا البث.
 subtitle-drawer-subtitle-timing-offset = إزاحة توقيت الترجمة
+subtitle-drawer-another-version = غير متزامنة؟ جرّب نسخة أخرى
 subtitle-drawer-subtitles = الترجمة
 player-audio = الصوت
 vibe-row-scroll-left = تمرير لليسار

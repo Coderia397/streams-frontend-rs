@@ -75,6 +75,7 @@ search-bar-search-input = Arama Girişi
 search-bar-titles-people-genres = Başlıklar, kişiler, türler
 subtitle-drawer-no-subtitles-detected-for-this = Bu akış için alt yazı tespit edilmedi.
 subtitle-drawer-subtitle-timing-offset = Alt Yazı Zaman Kayması
+subtitle-drawer-another-version = Senkron değil mi? Başka bir sürüm dene
 subtitle-drawer-subtitles = Altyazı
 player-audio = Ses
 vibe-row-scroll-left = Sola Kaydır

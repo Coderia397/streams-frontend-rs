@@ -75,6 +75,7 @@ search-bar-search-input = Search Input
 search-bar-titles-people-genres = Titles, people, genres
 subtitle-drawer-no-subtitles-detected-for-this = No subtitles detected for this stream.
 subtitle-drawer-subtitle-timing-offset = Subtitle Timing Offset
+subtitle-drawer-another-version = Out of sync? Try another version
 subtitle-drawer-subtitles = Subtitles
 player-audio = Audio
 vibe-row-scroll-left = Scroll left

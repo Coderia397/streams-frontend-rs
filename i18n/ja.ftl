@@ -75,6 +75,7 @@ search-bar-search-input = 検索入力
 search-bar-titles-people-genres = タイトル、人物、ジャンル
 subtitle-drawer-no-subtitles-detected-for-this = このストリームにはサブタイトルが検出されませんでした。
 subtitle-drawer-subtitle-timing-offset = サブタイトルのタイミングオフセット
+subtitle-drawer-another-version = ずれていますか？別のバージョンを試す
 subtitle-drawer-subtitles = 字幕
 player-audio = 音声
 vibe-row-scroll-left = 左にスクロール

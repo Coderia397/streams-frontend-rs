@@ -75,6 +75,7 @@ search-bar-search-input = Inserisci la Ricerca
 search-bar-titles-people-genres = Titoli, persone, generi
 subtitle-drawer-no-subtitles-detected-for-this = Non sono stati rilevati sottotitoli per questa trasmissione.
 subtitle-drawer-subtitle-timing-offset = Offset del Sottotitolo
+subtitle-drawer-another-version = Non sincronizzati? Prova un'altra versione
 subtitle-drawer-subtitles = Sottotitoli
 player-audio = Audio
 vibe-row-scroll-left = Scorri a Sinistra

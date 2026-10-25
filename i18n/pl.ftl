@@ -75,6 +75,7 @@ search-bar-search-input = Wprowadź wyszukiwanie
 search-bar-titles-people-genres = Tytuły, osoby, gatunki
 subtitle-drawer-no-subtitles-detected-for-this = Nie wykryto napisów dla tego strumienia.
 subtitle-drawer-subtitle-timing-offset = Przesunięcie czasu napisów
+subtitle-drawer-another-version = Nie zsynchronizowane? Wypróbuj inną wersję
 subtitle-drawer-subtitles = Napisy
 player-audio = Audio
 vibe-row-scroll-left = Przewiń w lewo

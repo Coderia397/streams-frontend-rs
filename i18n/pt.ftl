@@ -75,6 +75,7 @@ search-bar-search-input = Entrada de busca
 search-bar-titles-people-genres = Títulos, pessoas, gêneros
 subtitle-drawer-no-subtitles-detected-for-this = Nenhuma legenda detectada para este streaming.
 subtitle-drawer-subtitle-timing-offset = Offset de sincronização das legendas
+subtitle-drawer-another-version = Fora de sincronia? Tente outra versão
 subtitle-drawer-subtitles = Legendas
 player-audio = Áudio
 vibe-row-scroll-left = Rolagem para a esquerda
