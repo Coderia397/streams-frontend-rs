@@ -667,6 +667,12 @@ pub fn StreamsPlayer(
         PlayerState::Playing { ref result, active_source_idx } => result.sources.get(active_source_idx).filter(|s| s.kind != PlayableKind::Embed).map(|s| s.url.clone()),
         _ => None,
     });
+    let is_hls = Signal::derive(move || match player_state.get() {
+        PlayerState::Playing { ref result, active_source_idx } => {
+            result.sources.get(active_source_idx).map_or(false, |s| s.kind == PlayableKind::Hls)
+        }
+        _ => false,
+    });
     let episode_title_stored = StoredValue::new(episode_title.clone());
     let subtitle_header_text = move || {
         if is_tv {
@@ -845,6 +851,7 @@ pub fn StreamsPlayer(
                                             }),
                                             on_select_episode: on_episode_change,
                                             stream_url,
+                                            is_hls,
                                         } />
 
                                         // the age rating card, once at the start of a play

@@ -10,7 +10,7 @@ pub fn WebsiteControls(state: super::ControlsState) -> impl IntoView {
     let super::ControlsState {
         title, subtitle, next_info, is_tv, is_playing, is_buffering, is_muted, volume, current_time, duration, buffered_fraction, is_idle,
         on_toggle_play, on_seek, on_skip_by, on_toggle_mute, on_set_volume, on_toggle_episodes, on_toggle_subtitles, on_next_episode,
-        on_toggle_fullscreen, on_back, stream_url, ..
+        on_toggle_fullscreen, on_back, stream_url, is_hls, ..
     } = state;
     let title = title.get_value();
     // 36 px icons inside 44 px buttons, as in the app
@@ -59,7 +59,7 @@ pub fn WebsiteControls(state: super::ControlsState) -> impl IntoView {
             // the bottom: a band (--player-bar-h) with a soft shade, the timeline on top, the buttons 52 px below its top
             <div class="absolute inset-x-0 bottom-0 h-(--player-bar-h)" style="background: linear-gradient(0deg, rgba(0,0,0,0.3) 0, rgba(0,0,0,0));">
                 <div class="absolute left-[20px] right-[90px] top-0">
-                    <TimelineScrubber current_time=current_time duration=duration buffered_fraction=buffered_fraction on_seek=on_seek stream_url=stream_url />
+                    <TimelineScrubber current_time=current_time duration=duration buffered_fraction=buffered_fraction on_seek=on_seek stream_url=stream_url is_hls=is_hls />
                 </div>
                 <span class="absolute right-[28px] top-[1px] w-11 text-right text-body-md leading-5 text-ink">
                     {move || super::time_left(current_time.get(), duration.get())}

@@ -5,7 +5,7 @@ use wasm_bindgen::prelude::*;
 extern "C" {
     /// A picture source for the timeline (interop/preview.ts): a hidden copy of the stream at its lowest quality
     #[wasm_bindgen(js_name = previewOpen)]
-    fn preview_open(url: &str) -> String;
+    fn preview_open(url: &str, is_hls: bool) -> String;
     /// Draws the picture of a moment into the canvas with this id (hidden until it is there)
     #[wasm_bindgen(js_name = previewShow)]
     fn preview_show(handle: &str, seconds: f64, canvas_id: &str);
@@ -44,6 +44,8 @@ pub fn TimelineScrubber(
     on_seek: Callback<f64>,
     /// the stream playing (none for an embedded player): where the pictures come from
     stream_url: Signal<Option<String>>,
+    #[prop(default = Signal::derive(|| false))]
+    is_hls: Signal<bool>,
 ) -> impl IntoView {
     use wasm_bindgen::JsCast;
     let scrubber_ref = NodeRef::<leptos::html::Div>::new();
@@ -92,22 +94,27 @@ pub fn TimelineScrubber(
     };
 
     let on_pointer_move = move |e: web_sys::PointerEvent| {
+        let is_fine_pointer = e.pointer_type() == "mouse" || e.pointer_type() == "pen";
         if let Some(fraction) = fraction_at(&e) {
             let at = fraction * duration.get();
             set_hover_pct.set(fraction * 100.0);
             set_hover_time_str.set(format_time(at));
-            set_is_hovering.set(true);
+            if is_fine_pointer {
+                set_is_hovering.set(true);
+            }
             if held.get_untracked().is_some() {
                 set_held.set(Some(fraction));
             }
-            if let Some(url) = stream_url.get_untracked().filter(|_| at.is_finite() && at > 0.0) {
-                if preview.with_value(|p| p.as_ref().map(|(_, u)| u != &url).unwrap_or(true)) {
-                    close_preview();
-                    let handle = preview_open(&url);
-                    preview.set_value((!handle.is_empty()).then(|| (handle, url)));
-                }
-                if let Some((handle, _)) = preview.get_value() {
-                    preview_show(&handle, at, PREVIEW_CANVAS);
+            if is_fine_pointer {
+                if let Some(url) = stream_url.get_untracked().filter(|_| at.is_finite() && at > 0.0) {
+                    if preview.with_value(|p| p.as_ref().map(|(_, u)| u != &url).unwrap_or(true)) {
+                        close_preview();
+                        let handle = preview_open(&url, is_hls.get_untracked());
+                        preview.set_value((!handle.is_empty()).then(|| (handle, url)));
+                    }
+                    if let Some((handle, _)) = preview.get_value() {
+                        preview_show(&handle, at, PREVIEW_CANVAS);
+                    }
                 }
             }
         }

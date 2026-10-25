@@ -55,6 +55,8 @@ pub struct ControlsState {
     pub on_select_episode: Option<Callback<(u32, u32)>>,
     /// The stream playing here (none for an embedded player): the website's timeline draws its pictures from it
     pub stream_url: Signal<Option<String>>,
+    /// Whether the active stream is an HLS stream
+    pub is_hls: Signal<bool>,
 }
 
 /// The time left, as the players show it (`06:55`, `1:02:10`).

@@ -1,16 +1,17 @@
-// Pictures for the website timeline (src/components/player/timeline_scrubber.rs), as Netflix shows over its bar (note 126). There is no
-// picture sheet for our streams, so a second copy of the stream, muted and never shown, jumps to the moment under the pointer at the
-// stream's lowest quality (hls.js; a plain file or Apple's own HLS as is), and that frame is drawn into the timeline's canvas. Frames are
-// kept per STEP seconds, so going back over the bar costs nothing; only the newest moment asked for is fetched while another loads. The
-// canvas shows only while it holds the picture of the moment under the pointer: otherwise the time pill shows alone, as on Netflix.
+// Timeline scrubber preview engine (src/components/player/timeline_scrubber.rs).
+// Uses high-efficiency byte-range keyframe slicing via WebCodecs on HLS streams,
+// with graceful fallback to video element seeking on plain media files or unsupported streams.
+
+import { PreviewStrip } from './preview/strip';
+import { isWebCodecsSupported } from './preview/decoder';
 import { loadPlayer } from './hls';
 
 const STEP = 10;
-// frames kept (at 256 x 144 each is about 150 KB; 120 is 20 minutes of the bar in 10 s steps)
 const KEEP = 120;
 
 type Hlsish = { destroy(): void; startLoad?(at?: number): void };
-type Preview = {
+
+type FallbackPreview = {
   video: HTMLVideoElement;
   hls: Hlsish | null;
   loaded: boolean;
@@ -21,129 +22,272 @@ type Preview = {
   dead: boolean;
 };
 
-const previews = new Map<string, Preview>();
-let counter = 0;
+interface PreviewSession {
+  url: string;
+  strip: PreviewStrip | null;
+  fallback: FallbackPreview | null;
+  activeCanvas: string;
+  debounceTimer: any;
+  lastSeconds: number;
+  dead: boolean;
+}
+
+const sessions = new Map<string, PreviewSession>();
+let sessionCounter = 0;
 
 function appleHls(video: HTMLVideoElement): boolean {
   return navigator.vendor === 'Apple Computer, Inc.' && video.canPlayType('application/vnd.apple.mpegurl') !== '';
 }
 
-/** Opens a picture source for `url`; returns its handle ("" when there is none). */
-export function previewOpen(url: string): string {
+function createFallbackPreview(url: string): FallbackPreview {
   const video = document.createElement('video');
   video.muted = true;
   video.playsInline = true;
   video.preload = 'auto';
-  const handle = 'pv_' + (++counter);
-  const p: Preview = { video, hls: null, loaded: false, frames: new Map(), wanted: null, busy: null, canvas: '', dead: false };
-  previews.set(handle, p);
+
+  const fb: FallbackPreview = {
+    video,
+    hls: null,
+    loaded: false,
+    frames: new Map(),
+    wanted: null,
+    busy: null,
+    canvas: '',
+    dead: false,
+  };
+
   if (/\.(mp4|m4v|webm|mkv|mov)(\?.*)?$/i.test(url) || appleHls(video)) {
     video.src = url;
-    p.loaded = true;
-    return handle;
+    fb.loaded = true;
+  } else {
+    loadPlayer()
+      .then((m) => {
+        if (fb.dead) return;
+        const hls = m.attachPreview(video, url);
+        if (hls) {
+          fb.hls = hls;
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          video.src = url;
+          fb.loaded = true;
+        } else {
+          fb.dead = true;
+        }
+        if (fb.wanted !== null) fetchNextFallback(fb);
+      })
+      .catch(() => {
+        fb.dead = true;
+      });
   }
-  loadPlayer()
-    .then((m) => {
-      if (p.dead) return;
-      const hls = m.attachPreview(video, url);
-      if (hls) p.hls = hls;
-      else if (video.canPlayType('application/vnd.apple.mpegurl')) { video.src = url; p.loaded = true; }
-      else p.dead = true;
-      if (p.wanted !== null) fetchNext(p);
-    })
-    .catch(() => { p.dead = true; });
+
+  return fb;
+}
+
+/** Opens a high-efficiency preview source for `url`. `isHls` is supplied directly from Rust. */
+export function previewOpen(url: string, isHls: boolean): string {
+  const handle = 'pv_' + (++sessionCounter);
+  const session: PreviewSession = {
+    url,
+    strip: null,
+    fallback: null,
+    activeCanvas: '',
+    debounceTimer: null,
+    lastSeconds: -1,
+    dead: false,
+  };
+
+  if (isHls && isWebCodecsSupported()) {
+    const strip = new PreviewStrip(url);
+    session.strip = strip;
+    strip
+      .init()
+      .then((ok) => {
+        if (!ok && !session.dead) {
+          // Fall back gracefully to hidden video if WebCodecs, fMP4, or DRM cannot be handled
+          session.strip?.destroy();
+          session.strip = null;
+          session.fallback = createFallbackPreview(url);
+          if (session.lastSeconds >= 0 && session.activeCanvas) {
+            previewShow(handle, session.lastSeconds, session.activeCanvas);
+          }
+        }
+      })
+      .catch(() => {
+        if (!session.dead) {
+          session.strip?.destroy();
+          session.strip = null;
+          session.fallback = createFallbackPreview(url);
+        }
+      });
+  } else {
+    session.fallback = createFallbackPreview(url);
+  }
+
+  sessions.set(handle, session);
   return handle;
 }
 
-/** Shows the picture of `seconds` in the canvas `canvasId`: at once when it is kept, else when it has loaded (if the pointer is still
- *  there). The canvas is hidden meanwhile. */
+/** Shows the picture corresponding to `seconds` on canvas `canvasId`. */
 export function previewShow(handle: string, seconds: number, canvasId: string): void {
-  const p = previews.get(handle);
-  if (!p || p.dead) return;
-  const bucket = Math.max(0, Math.floor(seconds / STEP));
-  p.canvas = canvasId;
-  p.wanted = bucket;
-  const kept = p.frames.get(bucket);
-  if (kept) { draw(p, kept); return; }
-  hide(p);
-  fetchNext(p);
+  const session = sessions.get(handle);
+  if (!session || session.dead) return;
+
+  session.activeCanvas = canvasId;
+  session.lastSeconds = seconds;
+
+  if (session.strip) {
+    // 1. Immediately draw the nearest cached baseline frame within 75s (or hide canvas if none nearby)
+    const nearest = session.strip.getNearestCachedFrame(seconds, 75);
+    if (nearest) {
+      drawCanvas(canvasId, nearest, 0.75); // Dimmed slightly to indicate seeking
+    } else {
+      hideCanvas(canvasId);
+    }
+
+    // 2. Debounce exact keyframe fetch by 75ms to avoid spamming network on rapid pointer sweeps
+    if (session.debounceTimer) clearTimeout(session.debounceTimer);
+    session.debounceTimer = setTimeout(() => {
+      if (session.dead || session.lastSeconds !== seconds) return;
+
+      session.strip?.getExactFrame(seconds).then((exactFrame) => {
+        if (!exactFrame || session.dead || !session.strip) return;
+        // Verify user is still hovering within the same segment (evaluated after playlist is loaded)
+        if (session.strip.getSegmentIndex(session.lastSeconds) === session.strip.getSegmentIndex(seconds)) {
+          drawCanvas(canvasId, exactFrame, 1.0); // Full crisp opacity
+        }
+      });
+    }, 75);
+    return;
+  }
+
+  if (session.fallback) {
+    const fb = session.fallback;
+    if (fb.dead) return;
+    const bucket = Math.max(0, Math.floor(seconds / STEP));
+    fb.canvas = canvasId;
+    fb.wanted = bucket;
+    const kept = fb.frames.get(bucket);
+    if (kept) {
+      drawCanvas(canvasId, kept, 1.0);
+      return;
+    }
+    // Hide canvas while seeking to new bucket to prevent showing previous moment's frame
+    hideCanvas(canvasId);
+    fetchNextFallback(fb);
+  }
 }
 
-/** Closes the picture source and frees its frames. */
+/** Closes the preview source and frees allocated bitmap resources. */
 export function previewClose(handle: string): void {
-  const p = previews.get(handle);
-  if (!p) return;
-  p.dead = true;
-  p.hls?.destroy();
-  p.video.removeAttribute('src');
-  p.video.load();
-  p.frames.forEach((f) => f.close());
-  p.frames.clear();
-  previews.delete(handle);
+  const session = sessions.get(handle);
+  if (!session) return;
+
+  session.dead = true;
+
+  if (session.debounceTimer) {
+    clearTimeout(session.debounceTimer);
+    session.debounceTimer = null;
+  }
+
+  if (session.strip) {
+    session.strip.destroy();
+    session.strip = null;
+  }
+
+  if (session.fallback) {
+    const fb = session.fallback;
+    fb.dead = true;
+    try {
+      fb.hls?.destroy();
+    } catch {}
+    fb.video.removeAttribute('src');
+    fb.video.load();
+    fb.frames.forEach((f) => {
+      try {
+        f.close();
+      } catch {}
+    });
+    fb.frames.clear();
+    session.fallback = null;
+  }
+
+  sessions.delete(handle);
 }
 
-function canvasOf(p: Preview): HTMLCanvasElement | null {
-  return p.canvas ? (document.getElementById(p.canvas) as HTMLCanvasElement | null) : null;
-}
-
-function hide(p: Preview): void {
-  const c = canvasOf(p);
-  if (c) c.style.visibility = 'hidden';
-}
-
-function draw(p: Preview, frame: ImageBitmap): void {
-  const c = canvasOf(p);
+function drawCanvas(canvasId: string, frame: ImageBitmap, opacity = 1.0): void {
+  const c = document.getElementById(canvasId) as HTMLCanvasElement | null;
   const ctx = c?.getContext('2d');
   if (!c || !ctx) return;
+
+  ctx.clearRect(0, 0, c.width, c.height);
   ctx.drawImage(frame, 0, 0, c.width, c.height);
+  c.style.opacity = opacity < 1.0 ? String(opacity) : '1.0';
   c.style.visibility = 'visible';
 }
 
-/** Loads the newest moment asked for, one at a time. */
-function fetchNext(p: Preview): void {
-  if (p.dead || p.busy !== null || p.wanted === null || p.frames.has(p.wanted)) return;
-  if (!p.loaded && !p.hls) return; // hls.js still arriving: fetched once it is attached
-  const bucket = p.wanted;
-  p.busy = bucket;
+function hideCanvas(canvasId: string): void {
+  const c = document.getElementById(canvasId) as HTMLCanvasElement | null;
+  if (c) {
+    c.style.visibility = 'hidden';
+  }
+}
+
+function fetchNextFallback(fb: FallbackPreview): void {
+  if (fb.dead || fb.busy !== null || fb.wanted === null || fb.frames.has(fb.wanted)) return;
+  if (!fb.loaded && !fb.hls) return;
+
+  const bucket = fb.wanted;
+  fb.busy = bucket;
   const at = bucket * STEP;
-  const video = p.video;
+  const video = fb.video;
   let done = false;
+
   const finish = (): void => {
     if (done) return;
     done = true;
     video.removeEventListener('seeked', onSeeked);
     video.removeEventListener('loadeddata', onSeeked);
     clearTimeout(timer);
-    p.busy = null;
-    fetchNext(p);
+    fb.busy = null;
+    fetchNextFallback(fb);
   };
+
   const onSeeked = (): void => {
-    if (p.dead) return finish();
-    // hls.js's first jump reports done while the element holds no picture yet (Safari, 2026-10-25: readyState 1, "Cannot create
-    // ImageBitmap before the HTMLVideoElement has data"): wait for the data
+    if (fb.dead) return finish();
     if (video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
       video.addEventListener('loadeddata', onSeeked, { once: true });
       return;
     }
     createImageBitmap(video, { resizeWidth: 256, resizeHeight: 144, resizeQuality: 'medium' })
       .then((frame) => {
-        if (p.dead) { frame.close(); return; }
-        p.frames.set(bucket, frame);
-        if (p.frames.size > KEEP) {
-          const oldest = p.frames.keys().next().value;
-          if (oldest !== undefined) { p.frames.get(oldest)?.close(); p.frames.delete(oldest); }
+        if (fb.dead) {
+          try {
+            frame.close();
+          } catch {}
+          return;
         }
-        if (p.wanted === bucket) draw(p, frame);
+        fb.frames.set(bucket, frame);
+        if (fb.frames.size > KEEP) {
+          const oldest = fb.frames.keys().next().value;
+          if (oldest !== undefined) {
+            try {
+              fb.frames.get(oldest)?.close();
+            } catch {}
+            fb.frames.delete(oldest);
+          }
+        }
+        if (fb.wanted === bucket && fb.canvas) {
+          drawCanvas(fb.canvas, frame, 1.0);
+        }
       })
       .catch(() => {})
       .finally(finish);
   };
-  // a moment that never loads (a refused piece, a slow host) does not hold the others back
-  const timer = setTimeout(finish, 6000);
+
+  const timer = setTimeout(finish, 4000);
   video.addEventListener('seeked', onSeeked);
-  if (p.hls && !p.loaded) {
-    p.loaded = true;
-    p.hls.startLoad?.(at);
+  if (fb.hls && !fb.loaded) {
+    fb.loaded = true;
+    fb.hls.startLoad?.(at);
   }
   video.currentTime = at;
 }
