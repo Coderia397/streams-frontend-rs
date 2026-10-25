@@ -13,27 +13,32 @@ pub enum Disc {
     Pause,
 }
 
-/// The disc of the last skip or play and pause. Each action brings a new element (the number counts them), so a repeat starts the fade
-/// again. Back sits 10.3% in from the left, forward 9.05% in from the right (centres, measured on a 1552 px wide player), play and pause
-/// in the middle; all centred top to bottom.
+/// The disc of the last skip or play and pause. Each action brings a new element, keyed by its number, so a repeat starts the fade
+/// again: a plain reactive view kept the first element and only changed its attributes, and its finished fade left every later disc at
+/// opacity 0. Back sits 10.3% in from the left, forward 9.05% in from the right (centres, measured on a 1552 px wide player), play and
+/// pause in the middle; all centred top to bottom.
 #[component]
 pub fn PlayerDiscs(disc: ReadSignal<Option<(Disc, u32)>>) -> impl IntoView {
-    move || disc.get().map(|(kind, _)| {
-        let (place, extra) = match kind {
-            Disc::Back => ("left:calc(10.3% - 50px);top:50%;transform:translateY(-50%)", "player-disc-skip"),
-            Disc::Forward => ("right:calc(9.05% - 50px);top:50%;transform:translateY(-50%)", "player-disc-skip"),
-            Disc::Play | Disc::Pause => ("left:50%;top:50%;transform:translate(-50%,-50%)", ""),
-        };
-        let icon = match kind {
-            Disc::Back => view! { <AppIcon glyph=Glyph::Back10 class="text-display-sm" /> }.into_any(),
-            Disc::Forward => view! { <AppIcon glyph=Glyph::Forward10 class="text-display-sm" /> }.into_any(),
-            Disc::Play => view! { <AppIcon glyph=Glyph::Play class="text-heading-xl" /> }.into_any(),
-            Disc::Pause => view! { <i class="ph-fill ph-pause text-heading-xl"></i> }.into_any(),
-        };
-        view! {
-            <div class=format!("player-disc {extra} absolute z-20 bg-player-disc") style=place aria-hidden="true">{icon}</div>
-        }
-    })
+    view! {
+        <For each=move || disc.get() key=|(_, n)| *n children=|(kind, _)| disc_view(kind) />
+    }
+}
+
+fn disc_view(kind: Disc) -> impl IntoView {
+    let (place, extra) = match kind {
+        Disc::Back => ("left:calc(10.3% - 50px);top:50%;transform:translateY(-50%)", "player-disc-skip"),
+        Disc::Forward => ("right:calc(9.05% - 50px);top:50%;transform:translateY(-50%)", "player-disc-skip"),
+        Disc::Play | Disc::Pause => ("left:50%;top:50%;transform:translate(-50%,-50%)", ""),
+    };
+    let icon = match kind {
+        Disc::Back => view! { <AppIcon glyph=Glyph::Back10 class="text-display-sm" /> }.into_any(),
+        Disc::Forward => view! { <AppIcon glyph=Glyph::Forward10 class="text-display-sm" /> }.into_any(),
+        Disc::Play => view! { <AppIcon glyph=Glyph::Play class="text-heading-xl" /> }.into_any(),
+        Disc::Pause => view! { <i class="ph-fill ph-pause text-heading-xl"></i> }.into_any(),
+    };
+    view! {
+        <div class=format!("player-disc {extra} absolute z-20 bg-player-disc") style=place aria-hidden="true">{icon}</div>
+    }
 }
 
 /// Netflix's pause screen: the picture dimmed to half, and on the left "You're watching", the title, the season, the episode and its

@@ -112,12 +112,19 @@ function fetchNext(p: Preview): void {
     if (done) return;
     done = true;
     video.removeEventListener('seeked', onSeeked);
+    video.removeEventListener('loadeddata', onSeeked);
     clearTimeout(timer);
     p.busy = null;
     fetchNext(p);
   };
   const onSeeked = (): void => {
     if (p.dead) return finish();
+    // hls.js's first jump reports done while the element holds no picture yet (Safari, 2026-10-25: readyState 1, "Cannot create
+    // ImageBitmap before the HTMLVideoElement has data"): wait for the data
+    if (video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA) {
+      video.addEventListener('loadeddata', onSeeked, { once: true });
+      return;
+    }
     createImageBitmap(video, { resizeWidth: 256, resizeHeight: 144, resizeQuality: 'medium' })
       .then((frame) => {
         if (p.dead) { frame.close(); return; }
