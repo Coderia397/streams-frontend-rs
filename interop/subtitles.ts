@@ -158,13 +158,13 @@ const ADS = /(opensubtitles|subscene|subdl\.|yts\.|yify|addic7ed|podnapisi|subti
 // or "" when none does. `candidates` is a JSON array of {url, lang}; `duration` (seconds, 0 when not known yet) rules out a file made
 // for another cut: one that runs well past the end, or stops long before it.
 export async function subtitleLoad(candidates: string, duration: number): Promise<string> {
-  let list: { url: string; lang: string }[] = [];
+  let list: { url: string; lang: string; auth?: string }[] = [];
   try { list = JSON.parse(candidates); } catch { return ''; }
   for (let i = 0; i < list.length; i++) {
     const c = list[i];
     if (!c) continue;
     try {
-      const res = await fetch(c.url, { credentials: 'omit' });
+      const res = await fetch(c.url, { credentials: 'omit', headers: c.auth ? { Authorization: `Bearer ${c.auth}` } : undefined });
       if (!res.ok) continue;
       const buf = await res.arrayBuffer();
       if (buf.byteLength > MAX_BYTES) continue;

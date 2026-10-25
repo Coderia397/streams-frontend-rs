@@ -105,7 +105,12 @@ pub async fn subdl_files(media_id: u32, is_tv: bool, season: Option<u32>, episod
         .subtitles
         .into_iter()
         // single files only: a zip would need unpacking in the browser
-        .filter(|f| !f.zip && f.url.starts_with("https://dl.subdl.com/"))
+        .filter(|f| {
+            !f.zip
+                && (f.url.starts_with("https://dl.subdl.com/")
+                    || f.url.contains("/api/subtitles/download")
+                    || f.url.starts_with(crate::config::RESOLVER_URL))
+        })
         .filter_map(|f| {
             let lang = lang_tag::parse(&f.language).or_else(|| lang_tag::parse(&f.label))?;
             Some(SubFile { url: f.url, lang })
@@ -227,11 +232,15 @@ pub fn SubtitleOverlay(
             _ => 0,
         };
         let list: Vec<(String, String)> = all[start..].iter().chain(all[..start].iter()).cloned().collect();
-        let json = serde_json::to_string(&list.iter().map(|(url, lang)| serde_json::json!({ "url": url, "lang": lang })).collect::<Vec<_>>()).unwrap_or_default();
         // the film's length rules out a file made for another cut (0 while the video does not know it yet)
         let duration = video_element().map(|v| v.duration()).filter(|d| d.is_finite()).unwrap_or(0.0);
         let total = all.len();
         leptos::task::spawn_local(async move {
+            let token = crate::services::account::ensure_fresh().await.map(|s| s.access_token).unwrap_or_default();
+            let json = serde_json::to_string(&list.iter().map(|(url, lang)| {
+                let auth = if url.starts_with(crate::config::RESOLVER_URL) { token.as_str() } else { "" };
+                serde_json::json!({ "url": url, "lang": lang, "auth": auth })
+            }).collect::<Vec<_>>()).unwrap_or_default();
             let loaded = subtitle_load(&json, duration).await.as_string().unwrap_or_default();
             // the choice may have changed while the file loaded
             if selected.get_untracked().as_deref() != Some(key.as_str()) {

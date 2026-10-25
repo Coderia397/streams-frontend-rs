@@ -887,7 +887,7 @@ mod failover_tests {
     use crate::services::resolver::PlayableSource;
 
     fn src(url: &str, provider: &str, kind: PlayableKind) -> PlayableSource {
-        PlayableSource { url: url.into(), quality: "auto".into(), provider: provider.into(), kind, referer: None, audio: None, audio_languages: vec![], is_original: None, is_multi_audio: None }
+        PlayableSource { url: url.into(), quality: "auto".into(), provider: provider.into(), kind, referer: None, audio: None, audio_languages: vec![], is_original: None, is_multi_audio: None, browser_ok: None }
     }
 
     #[test]

@@ -39,6 +39,8 @@ pub struct RawSource {
     pub is_original: Option<bool>,
     #[serde(default, rename = "isMultiAudio")]
     pub is_multi_audio: Option<bool>,
+    #[serde(default, rename = "browserOk", alias = "browser_ok")]
+    pub browser_ok: Option<bool>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -66,6 +68,7 @@ pub struct PlayableSource {
     pub audio_languages: Vec<String>,
     pub is_original: Option<bool>,
     pub is_multi_audio: Option<bool>,
+    pub browser_ok: Option<bool>,
 }
 
 impl PlayableSource {
@@ -98,7 +101,14 @@ impl PlayableSource {
             PlayableKind::Embed => 10,
         };
 
-        kind_score + quality_score + audio_bonus
+        // Penalize streams confirmed by resolver probe to be unplayable in the browser (CORS / 403)
+        let browser_penalty = if self.browser_ok == Some(false) {
+            -150
+        } else {
+            0
+        };
+
+        kind_score + quality_score + audio_bonus + browser_penalty
     }
 }
 
@@ -233,6 +243,7 @@ pub async fn resolve_stream(
                     audio_languages: s.audio_languages,
                     is_original: s.is_original,
                     is_multi_audio: s.is_multi_audio,
+                    browser_ok: s.browser_ok,
                 });
             }
         }
