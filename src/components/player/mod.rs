@@ -89,17 +89,35 @@ pub fn StreamsPlayer(
     let (is_subtitles_open, set_is_subtitles_open) = signal(false);
     let (selected_sub_url, set_selected_sub_url) = signal(None::<String>);
     let (sub_delay, set_sub_delay) = signal(0.0);
-    // SubDL's languages for this title (subtitles.rs), added to the stream's own tracks, and the files behind each
-    let (subdl_tracks, set_subdl_tracks) = signal(Vec::<crate::services::resolver::SubtitleTrack>::new());
-    let subtitle_files = StoredValue::new(subtitles::Candidates::new());
+    // SubDL's files for this title (subtitles.rs); with the stream's own tracks they make one list, one entry per language
+    let subdl_found = RwSignal::new(Vec::<subtitles::SubFile>::new());
     let prefs = crate::pages::settings::use_prefs();
     let profiles = crate::store::use_profile_store();
+    // the profile's subtitle language: Some(tag), Some("off"), or None (follow: subtitles come on when the audio is not the viewer's language)
+    let sub_pref = move || {
+        profiles.active_profile_id.get_untracked().and_then(|id| prefs.profile(&id).subtitle_language).map(|p| {
+            if p == "off" { p } else { crate::utils::lang_tag::parse(&p).map(|l| l.tag).unwrap_or(p) }
+        })
+    };
+    let ui_tag = crate::utils::lang_tag::parse(&crate::i18n::language()).map(|l| l.tag).unwrap_or_else(|| "en".into());
+    let orig_tag = orig_lang.as_deref().and_then(crate::utils::lang_tag::parse).map(|l| l.tag);
+    // the languages that lead the list and are asked of SubDL first: the profile's, the interface's, the film's own
+    let first_langs: Vec<String> = {
+        let mut v: Vec<String> = Vec::new();
+        for t in [sub_pref().filter(|p| p != "off"), Some(ui_tag.clone()), orig_tag.clone()].into_iter().flatten() {
+            if !v.contains(&t) {
+                v.push(t);
+            }
+        }
+        v
+    };
+    let first_stored = StoredValue::new(first_langs.clone());
     // a choice in the player is kept as the profile's subtitle language (off included), as Netflix keeps it for the next title
     let choose_sub = Callback::new(move |key: Option<String>| {
         set_selected_sub_url.set(key.clone());
         let lang = match key.as_deref() {
             None => Some("off".to_string()),
-            Some(k) => k.strip_prefix(subtitles::SUBDL).map(|c| c.to_ascii_lowercase()),
+            Some(k) => k.strip_prefix(subtitles::KEY).map(str::to_string),
         };
         if let (Some(lang), Some(id)) = (lang, profiles.active_profile_id.get_untracked()) {
             prefs.update_profile(&id, |p| p.subtitle_language = Some(lang));
@@ -445,11 +463,14 @@ pub fn StreamsPlayer(
     });
 
     // Subtitle Display Logic
-    let current_subtitle_tracks = move || {
-        let mut tracks = if let PlayerState::Playing { ref result, .. } = player_state.get() { result.subtitles.clone() } else { vec![] };
-        tracks.extend(subdl_tracks.get());
-        tracks
-    };
+    // one list: the stream's own tracks first, then SubDL's files, one entry per language (subtitles::build)
+    let subtitle_list = Memo::new(move |_| {
+        let mut files = if let PlayerState::Playing { ref result, .. } = player_state.get() { subtitles::stream_files(&result.subtitles) } else { vec![] };
+        files.extend(subdl_found.get());
+        first_stored.with_value(|first| subtitles::build(&files, first, crate::i18n::language_name))
+    });
+    let current_subtitle_tracks = move || subtitle_list.with(|l| l.0.clone());
+    let subtitle_files = Signal::derive(move || subtitle_list.with(|l| l.1.clone()));
 
     // SubDL's list, asked once the stream is found; the profile's subtitle language is switched on when it is there
     Effect::new(move |done: Option<bool>| {
@@ -459,18 +480,23 @@ pub fn StreamsPlayer(
         if !matches!(player_state.get(), PlayerState::Playing { .. }) {
             return false;
         }
-        let preferred = profiles.active_profile_id.get_untracked().and_then(|id| prefs.profile(&id).subtitle_language);
+        let preferred = sub_pref();
+        let first = first_stored.get_value();
+        let (ui, orig) = (ui_tag.clone(), orig_tag.clone());
         leptos::task::spawn_local(async move {
-            let (tracks, files) = subtitles::subdl_tracks(media_id, is_tv, season, episode, preferred.clone()).await;
-            subtitle_files.set_value(files);
-            set_subdl_tracks.set(tracks);
-            if selected_sub_url.get_untracked().is_none() {
-                if let Some(code) = preferred.filter(|p| !p.is_empty() && p != "off") {
-                    let key = format!("{}{}", subtitles::SUBDL, code.to_ascii_uppercase());
-                    if subtitle_files.with_value(|f| f.contains_key(&key)) {
-                        set_selected_sub_url.set(Some(key));
-                    }
-                }
+            let found = subtitles::subdl_files(media_id, is_tv, season, episode, &first).await;
+            subdl_found.set(found);
+            if selected_sub_url.get_untracked().is_some() {
+                return;
+            }
+            // the profile's language when it is there; with no choice saved (follow), the viewer's language when the film is in another
+            let wanted = match preferred.as_deref() {
+                Some("off") => None,
+                Some(tag) => Some(tag.to_string()),
+                None => orig.filter(|o| crate::utils::lang_tag::base(o) != crate::utils::lang_tag::base(&ui)).map(|_| ui),
+            };
+            if let Some(key) = wanted.and_then(|w| subtitle_files.with_untracked(|c| subtitles::key_for(c, &w))) {
+                set_selected_sub_url.set(Some(key));
             }
         });
         true

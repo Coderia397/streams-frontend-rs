@@ -1,11 +1,16 @@
-//! Subtitles in the player: the list (the stream's own tracks, then SubDL through the resolver, one entry per language), the file
-//! (interop/subtitles.ts downloads it, decodes it and checks it holds real cues, trying a language's next file when one does not),
-//! and the line on screen, drawn in the profile's Subtitle appearance and moved up while the controls show.
+//! Subtitles in the player: one list with one entry per language, the file, and the line on screen.
 //!
-//! The player's own `subtitles` list of `SubtitleTrack`s stays the one the drawers show: a SubDL language is a track whose url is
-//! `subdl:<CODE>`, and its files are kept in `Candidates`.
+//! The list joins the stream's own tracks and SubDL's files (through the resolver, which keeps the key). Every language label goes
+//! through `utils::lang_tag`, so "BR_PT", "pob" and "Portuguese (Brazil)" are one entry, named in the viewer's language. The file:
+//! interop/subtitles.ts downloads it, decodes it, and keeps it only when it holds real cues, in the language it is listed as (a file
+//! listed as English held Persian on 2026-10-25), that fit the film; otherwise the language's next file is tried. The line is drawn
+//! in the profile's Subtitle appearance and moves up while the controls show.
+//!
+//! A language is a `SubtitleTrack` whose url is `sub:<tag>` (`sub:en`, `sub:pt-BR`); its files, in the order they are tried, are in
+//! `Candidates`.
 
 use crate::services::resolver::SubtitleTrack;
+use crate::utils::lang_tag::{self, Lang};
 use leptos::prelude::*;
 use std::collections::HashMap;
 use wasm_bindgen::prelude::*;
@@ -13,14 +18,21 @@ use wasm_bindgen::prelude::*;
 #[wasm_bindgen(module = "/interop/dist/streams-interop.js")]
 extern "C" {
     #[wasm_bindgen(js_name = subtitleLoad)]
-    async fn subtitle_load(candidates: &str) -> JsValue;
+    async fn subtitle_load(candidates: &str, duration: f64) -> JsValue;
 }
 
-/// The key of a SubDL language in the track list: `subdl:EN`.
-pub const SUBDL: &str = "subdl:";
+/// The start of a language's key in the track list: `sub:en`.
+pub const KEY: &str = "sub:";
 
-/// The files of each track key, in the order they are tried: (address, language code).
+/// The files of each track key, in the order they are tried: (address, language tag).
 pub type Candidates = HashMap<String, Vec<(String, String)>>;
+
+/// One subtitle file and the language it is listed as.
+#[derive(Clone, Debug, PartialEq)]
+pub struct SubFile {
+    pub url: String,
+    pub lang: Lang,
+}
 
 #[derive(Clone, Debug, PartialEq, serde::Deserialize)]
 pub struct Cue {
@@ -37,6 +49,8 @@ struct Loaded {
 #[derive(serde::Deserialize)]
 struct SubdlFile {
     language: String,
+    #[serde(default)]
+    label: String,
     url: String,
     #[serde(default)]
     zip: bool,
@@ -48,25 +62,27 @@ struct SubdlAnswer {
     subtitles: Vec<SubdlFile>,
 }
 
-/// The languages asked of SubDL: the profile's subtitle language first, then the languages the site is written in (SubDL answers at
-/// most 30 files, three per language).
-fn wanted_languages(preferred: Option<&str>) -> String {
-    let mut codes: Vec<String> = preferred.filter(|p| !p.is_empty() && *p != "off").map(|p| p.to_ascii_uppercase()).into_iter().collect();
-    for c in ["EN", "AR", "DE", "ES", "FR", "HI", "IT", "JA", "KO", "NL", "PL", "PT", "RU", "SV", "TR", "ZH"] {
-        if !codes.iter().any(|x| x == c) {
-            codes.push(c.to_string());
+/// The languages asked of SubDL (its codes): the ones the viewer most likely wants first, then the languages the site is written in.
+/// SubDL answers at most 30 files, three per language.
+fn wanted_languages(first: &[String]) -> String {
+    let mut codes: Vec<String> = Vec::new();
+    let site = ["en", "ar", "de", "es", "fr", "hi", "it", "ja", "ko", "nl", "pl", "pt", "ru", "sv", "tr", "zh"];
+    for tag in first.iter().map(String::as_str).chain(site) {
+        let code = lang_tag::subdl_code(tag);
+        if !codes.contains(&code) {
+            codes.push(code);
         }
     }
     codes.join(",")
 }
 
-/// SubDL's files for this title or episode, as tracks (one per language) and their candidates. Empty when the resolver has nothing.
-pub async fn subdl_tracks(media_id: u32, is_tv: bool, season: Option<u32>, episode: Option<u32>, preferred: Option<String>) -> (Vec<SubtitleTrack>, Candidates) {
+/// SubDL's files for this title or episode. Empty when the resolver has nothing or cannot be reached.
+pub async fn subdl_files(media_id: u32, is_tv: bool, season: Option<u32>, episode: Option<u32>, first: &[String]) -> Vec<SubFile> {
     let mut url = format!(
         "{}/api/subtitles/subdl?tmdbId={media_id}&type={}&langs={}",
         crate::config::RESOLVER_URL,
         if is_tv { "tv" } else { "movie" },
-        wanted_languages(preferred.as_deref())
+        wanted_languages(first)
     );
     if is_tv {
         url.push_str(&format!("&season={}&episode={}", season.unwrap_or(1), episode.unwrap_or(1)));
@@ -76,26 +92,81 @@ pub async fn subdl_tracks(media_id: u32, is_tv: bool, season: Option<u32>, episo
     if let Some(t) = token.as_deref().filter(|t| !t.is_empty()) {
         request = request.header("Authorization", &format!("Bearer {t}"));
     }
-    let Ok(resp) = request.send().await else { return (Vec::new(), HashMap::new()) };
+    let Ok(resp) = request.send().await else { return Vec::new() };
     if !resp.ok() {
-        return (Vec::new(), HashMap::new());
+        return Vec::new();
     }
-    let Ok(answer) = resp.json::<SubdlAnswer>().await else { return (Vec::new(), HashMap::new()) };
-    let mut order: Vec<String> = Vec::new();
-    let mut candidates: Candidates = HashMap::new();
-    for f in answer.subtitles.into_iter().filter(|f| !f.zip && f.url.starts_with("https://dl.subdl.com/")) {
-        let code = f.language.to_ascii_uppercase();
-        let key = format!("{SUBDL}{code}");
-        if !candidates.contains_key(&key) {
-            order.push(code.clone());
-        }
-        candidates.entry(key).or_default().push((f.url, code));
-    }
-    let tracks = order
+    let Ok(answer) = resp.json::<SubdlAnswer>().await else { return Vec::new() };
+    answer
+        .subtitles
         .into_iter()
-        .map(|code| SubtitleTrack { url: format!("{SUBDL}{code}"), label: crate::i18n::language_name(&code.to_ascii_lowercase()), lang: code.to_ascii_lowercase() })
+        // single files only: a zip would need unpacking in the browser
+        .filter(|f| !f.zip && f.url.starts_with("https://dl.subdl.com/"))
+        .filter_map(|f| {
+            let lang = lang_tag::parse(&f.language).or_else(|| lang_tag::parse(&f.label))?;
+            Some(SubFile { url: f.url, lang })
+        })
+        .collect()
+}
+
+/// The stream's own subtitle tracks as files (their language read from the code or, failing that, the label).
+pub fn stream_files(tracks: &[SubtitleTrack]) -> Vec<SubFile> {
+    tracks
+        .iter()
+        .filter(|t| t.url.starts_with("http"))
+        .filter_map(|t| Some(SubFile { url: t.url.clone(), lang: lang_tag::parse(&t.lang).or_else(|| lang_tag::parse(&t.label))? }))
+        .collect()
+}
+
+/// The list the drawers show (one entry per language) and the files behind each. Forced files are left out (they hold only the lines
+/// spoken in another language than the audio); files come in the order given (the stream's own first), those for hearing impaired
+/// viewers after the others. The languages of `first` lead in that order; the rest follow by name.
+pub fn build(files: &[SubFile], first: &[String], name: impl Fn(&str) -> String) -> (Vec<SubtitleTrack>, Candidates) {
+    let mut by_tag: Vec<(String, Vec<&SubFile>)> = Vec::new();
+    for f in files.iter().filter(|f| !f.lang.forced) {
+        match by_tag.iter_mut().find(|(t, _)| *t == f.lang.tag) {
+            Some((_, list)) => {
+                if !list.iter().any(|x| x.url == f.url) {
+                    list.push(f);
+                }
+            }
+            None => by_tag.push((f.lang.tag.clone(), vec![f])),
+        }
+    }
+    let rank = |tag: &str| {
+        first.iter().position(|w| w == tag).map(|i| (0, i)).or_else(|| first.iter().position(|w| lang_tag::base(w) == lang_tag::base(tag)).map(|i| (1, i))).unwrap_or((2, 0))
+    };
+    let mut entries: Vec<(String, String, Vec<&SubFile>)> = by_tag.into_iter().map(|(tag, mut list)| {
+        list.sort_by_key(|f| f.lang.hi);
+        (name(&tag), tag, list)
+    }).collect();
+    entries.sort_by(|a, b| rank(&a.1).cmp(&rank(&b.1)).then_with(|| a.0.to_lowercase().cmp(&b.0.to_lowercase())));
+    let mut candidates = Candidates::new();
+    let tracks = entries
+        .into_iter()
+        .map(|(label, tag, list)| {
+            let key = format!("{KEY}{tag}");
+            candidates.insert(key.clone(), list.iter().map(|f| (f.url.clone(), tag.clone())).collect());
+            SubtitleTrack { url: key, label, lang: tag }
+        })
         .collect();
     (tracks, candidates)
+}
+
+/// The key of the language to show for `wanted` (a tag, or a language whose version is not there: `pt` finds `pt-BR`).
+pub fn key_for(candidates: &Candidates, wanted: &str) -> Option<String> {
+    let exact = format!("{KEY}{wanted}");
+    if candidates.contains_key(&exact) {
+        return Some(exact);
+    }
+    let base = lang_tag::base(wanted);
+    let mut keys: Vec<&String> = candidates.keys().filter(|k| k.strip_prefix(KEY).is_some_and(|t| lang_tag::base(t) == base)).collect();
+    keys.sort();
+    keys.first().map(|k| k.to_string())
+}
+
+fn video_element() -> Option<web_sys::HtmlVideoElement> {
+    web_sys::window()?.document()?.get_element_by_id(crate::keys::VIDEO_ELEMENT_ID)?.dyn_into::<web_sys::HtmlVideoElement>().ok()
 }
 
 /// The cue showing at `t` seconds, if any (cues are sorted by start; a few overlap, the latest started wins).
@@ -116,7 +187,7 @@ pub fn cue_html(text: &str) -> String {
 /// The line on screen. `selected` is a track key (a provider address or `subdl:<CODE>`), `delay` moves every cue (seconds, positive
 /// shows them later), `lifted` moves the line above the controls while they show.
 #[component]
-pub fn SubtitleOverlay(selected: ReadSignal<Option<String>>, candidates: StoredValue<Candidates>, delay: ReadSignal<f64>, lifted: Signal<bool>) -> impl IntoView {
+pub fn SubtitleOverlay(selected: ReadSignal<Option<String>>, candidates: Signal<Candidates>, delay: ReadSignal<f64>, lifted: Signal<bool>) -> impl IntoView {
     let prefs = crate::pages::settings::use_prefs();
     let profiles = crate::store::use_profile_store();
     let style = Memo::new(move |_| {
@@ -132,14 +203,15 @@ pub fn SubtitleOverlay(selected: ReadSignal<Option<String>>, candidates: StoredV
         cues.set(None);
         set_line.set(None);
         let Some(key) = key else { return };
-        let list: Vec<(String, String)> = if key.starts_with(SUBDL) {
-            candidates.with_value(|c| c.get(&key).cloned().unwrap_or_default())
-        } else {
-            vec![(key.clone(), String::new())]
-        };
+        let list: Vec<(String, String)> = candidates.with_untracked(|c| c.get(&key).cloned().unwrap_or_default());
+        if list.is_empty() {
+            return;
+        }
         let json = serde_json::to_string(&list.iter().map(|(url, lang)| serde_json::json!({ "url": url, "lang": lang })).collect::<Vec<_>>()).unwrap_or_default();
+        // the film's length rules out a file made for another cut (0 while the video does not know it yet)
+        let duration = video_element().map(|v| v.duration()).filter(|d| d.is_finite()).unwrap_or(0.0);
         leptos::task::spawn_local(async move {
-            let loaded = subtitle_load(&json).await.as_string().unwrap_or_default();
+            let loaded = subtitle_load(&json, duration).await.as_string().unwrap_or_default();
             // the choice may have changed while the file loaded
             if selected.get_untracked().as_deref() != Some(key.as_str()) {
                 return;
@@ -154,13 +226,7 @@ pub fn SubtitleOverlay(selected: ReadSignal<Option<String>>, candidates: StoredV
     let tick = leptos::prelude::set_interval_with_handle(
         move || {
             let Some(list) = cues.get_untracked() else { return };
-            let Some(video) = web_sys::window()
-                .and_then(|w| w.document())
-                .and_then(|d| d.get_element_by_id(crate::keys::VIDEO_ELEMENT_ID))
-                .and_then(|e| e.dyn_into::<web_sys::HtmlVideoElement>().ok())
-            else {
-                return;
-            };
+            let Some(video) = video_element() else { return };
             let now = cue_at(&list, video.current_time() - delay.get_untracked());
             if now != line.get_untracked() {
                 set_line.set(now);
@@ -213,8 +279,28 @@ mod tests {
     }
 
     #[test]
-    fn asks_the_profiles_language_first() {
-        assert!(wanted_languages(Some("fr")).starts_with("FR,EN,AR"));
-        assert!(wanted_languages(Some("off")).starts_with("EN,"));
+    fn asks_the_viewers_languages_first() {
+        assert!(wanted_languages(&["fr".into(), "pt-BR".into()]).starts_with("FR,BR_PT,EN,AR"));
+        assert!(wanted_languages(&[]).starts_with("EN,AR"));
+    }
+
+    fn file(url: &str, label: &str) -> SubFile {
+        SubFile { url: url.into(), lang: lang_tag::parse(label).unwrap() }
+    }
+
+    #[test]
+    fn one_entry_per_language_viewers_first() {
+        let files = vec![
+            file("s1", "eng"), file("a", "EN"), file("b", "English SDH"), file("c", "BR_PT"), file("d", "pob"),
+            file("e", "DE"), file("f", "AR"), file("g", "English - forced"), file("a", "EN"),
+        ];
+        let (tracks, cand) = build(&files, &["pt-BR".to_string(), "en".to_string()], |t| t.to_string());
+        let keys: Vec<&str> = tracks.iter().map(|t| t.url.as_str()).collect();
+        assert_eq!(keys, ["sub:pt-BR", "sub:en", "sub:ar", "sub:de"]);
+        // the stream's own file first, the hearing impaired one last, the forced one left out, no file twice
+        assert_eq!(cand["sub:en"].iter().map(|(u, _)| u.as_str()).collect::<Vec<_>>(), ["s1", "a", "b"]);
+        assert_eq!(cand["sub:pt-BR"].len(), 2);
+        assert_eq!(key_for(&cand, "pt").as_deref(), Some("sub:pt-BR"));
+        assert_eq!(key_for(&cand, "fr"), None);
     }
 }

@@ -1,4 +1,5 @@
 pub mod ebml;
+pub mod lang_tag;
 pub mod mkv_audio_extractor;
 pub mod ambient;
 
