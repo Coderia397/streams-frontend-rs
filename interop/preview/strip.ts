@@ -300,6 +300,12 @@ export class PreviewStrip {
     }
   }
 
+  /** The kept picture of the piece covering `seconds`, or null when that piece has none yet. */
+  public getExactCachedFrame(seconds: number): ImageBitmap | null {
+    if (!this.playlist) return null;
+    return this.frames.get(findSegmentIndex(this.playlist.segments, seconds)) ?? null;
+  }
+
   /** Returns the nearest cached frame within maxDistanceSeconds (default 75s). */
   public getNearestCachedFrame(seconds: number, maxDistanceSeconds = 75): ImageBitmap | null {
     if (!this.playlist || this.frames.size === 0) return null;

@@ -177,7 +177,7 @@ pub fn TimelineScrubber(
                 style=place
             >
                 <Show when=has_pictures>
-                    <canvas id=PREVIEW_CANVAS width="256" height="144" class="invisible w-[245px] aspect-video bg-void shadow-lg" />
+                    <canvas id=PREVIEW_CANVAS width="256" height="144" class="invisible w-[245px] aspect-video rounded-card bg-void shadow-lg" />
                 </Show>
                 <span class="flex h-7 items-center rounded-button bg-field px-3.5 text-body-sm font-medium text-ink tabular-nums">
                     {move || hover_time_str.get()}

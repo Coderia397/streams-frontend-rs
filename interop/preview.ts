@@ -135,6 +135,14 @@ export function previewShow(handle: string, seconds: number, canvasId: string): 
   session.lastSeconds = seconds;
 
   if (session.strip) {
+    // 0. The hovered piece's own picture is already kept: show it at full strength, nothing to fetch (dimming it on every move flickered)
+    const exact = session.strip.getExactCachedFrame(seconds);
+    if (exact) {
+      if (session.debounceTimer) clearTimeout(session.debounceTimer);
+      drawCanvas(canvasId, exact, 1.0);
+      return;
+    }
+
     // 1. Immediately draw the nearest cached baseline frame within 75s (or hide canvas if none nearby)
     const nearest = session.strip.getNearestCachedFrame(seconds, 75);
     if (nearest) {
