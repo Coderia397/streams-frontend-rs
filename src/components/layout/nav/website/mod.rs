@@ -170,15 +170,11 @@ pub fn WebsiteNav(
                     let active_id = p_store.active_profile_id.get();
                     let is_kids = p_store.profiles.get().iter().any(|p| Some(&p.id) == active_id.as_ref() && p.is_kids);
                     if is_kids {
-                        // Exit Kids: back to the main profile (the first profile that is not a Kids profile)
+                        // Exit Kids: Who's watching in its Kids form, as Netflix's Switch profile on a Kids profile (it went straight to the main
+                        // profile, which was not always who was watching; owner's recording, 2026-10-26, note 132)
                         view! {
                             <button
-                                on:click=move |_| {
-                                    let list = p_store.profiles.get();
-                                    if let Some(main) = list.iter().find(|p| p.is_default == Some(true) && !p.is_kids).or_else(|| list.iter().find(|p| !p.is_kids)).cloned() {
-                                        crate::components::profiles::switch_overlay::begin_switch(main);
-                                    }
-                                }
+                                on:click=move |_| crate::store::ask_who_is_watching(p_store)
                                 class="flex h-9 items-center rounded-button bg-ink px-4 text-label font-bold text-void select-none cursor-pointer hover:bg-ink/85 transition-colors"
                             >{crate::i18n::t("nav-exit-kids")}</button>
                         }.into_any()
@@ -187,10 +183,14 @@ pub fn WebsiteNav(
                         view! { <span /> }.into_any()
                     } else {
                         view! {
+                            // Kids: the account's Kids profile; with two or more there is a choice to make, so Who's watching (Netflix)
                             <button
                                 on:click=move |_| {
-                                    if let Some(kids) = p_store.profiles.get().into_iter().find(|p| p.is_kids) {
-                                        crate::components::profiles::switch_overlay::begin_switch(kids);
+                                    let kids: Vec<_> = p_store.profiles.get_untracked().into_iter().filter(|p| p.is_kids).collect();
+                                    match kids.as_slice() {
+                                        [one] => crate::components::profiles::switch_overlay::begin_switch(one.clone()),
+                                        [] => {}
+                                        _ => crate::store::ask_who_is_watching(p_store),
                                     }
                                 }
                                 class="flex items-center gap-2 text-ink hover:text-ink transition-all select-none cursor-pointer group h-9 pl-0.5 pr-2 ml-1.5 rounded-button hover:bg-mute/40"

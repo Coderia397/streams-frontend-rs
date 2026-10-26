@@ -43,10 +43,7 @@ fn ask(profiles: &ProfileStore) {
     if profiles.profiles.with_untracked(|l| l.len() < 2) || profiles.active_profile_id.get_untracked().is_none() {
         return;
     }
-    if let Some(s) = storage() {
-        let _ = s.remove_item(crate::keys::ACTIVE_PROFILE);
-    }
-    profiles.active_profile_id.set(None);
+    crate::store::ask_who_is_watching(*profiles);
 }
 
 /// Checks the time away at start and whenever the browser is used again, and keeps the time of the last activity.

@@ -244,6 +244,9 @@ pub fn activate_profile(id: &str) {
         if let Some(storage) = window.local_storage().ok().flatten() {
             let _ = storage.set_item(crate::keys::ACTIVE_PROFILE, id);
         }
+        if let Some(storage) = window.session_storage().ok().flatten() {
+            let _ = storage.remove_item(crate::keys::KIDS_GATE);
+        }
         // Who's watching came up over a page (an address opened or linked, a reload, the page left open when the browser asked again after
         // time away, the page Switch profiles was chosen on): the pick goes on to that page. A switch from one profile to another (the menu,
         // the Kids and Exit Kids buttons) starts on the new profile's home. The screen is up while no profile is in use; storage cannot tell,
@@ -263,6 +266,26 @@ pub fn activate_profile(id: &str) {
             None => home.to_string(),
         });
     }
+}
+
+/// Brings up Who's watching over the page in use: the profile in use is put down, and the screen's pick comes back to this page
+/// (`activate_profile`). Asked by a Kids profile (its Switch Profile, Exit Kids, time away on it), the screen is Netflix's Kids form: the
+/// kids mark in the corner, no Add Profile and no Manage Profiles, and the same mark on the loading screen after the pick (owner's
+/// recording, 2026-10-26, note 132). The form is kept for the tab, so a reload shows the same screen; a pick ends it.
+pub fn ask_who_is_watching(store: ProfileStore) {
+    let from_kids = store.active_profile_id.get_untracked().is_some_and(|id| store.profiles.with_untracked(|l| l.iter().any(|p| p.id == id && p.is_kids)));
+    if let Some(s) = web_sys::window().and_then(|w| w.session_storage().ok().flatten()) {
+        let _ = if from_kids { s.set_item(crate::keys::KIDS_GATE, "1") } else { s.remove_item(crate::keys::KIDS_GATE) };
+    }
+    if let Some(s) = web_sys::window().and_then(|w| w.local_storage().ok().flatten()) {
+        let _ = s.remove_item(crate::keys::ACTIVE_PROFILE);
+    }
+    store.active_profile_id.set(None);
+}
+
+/// Whether Who's watching was asked by a Kids profile (`ask_who_is_watching`).
+pub fn kids_gate() -> bool {
+    web_sys::window().and_then(|w| w.session_storage().ok().flatten()).and_then(|s| s.get_item(crate::keys::KIDS_GATE).ok().flatten()).is_some()
 }
 
 /// Whether a pick on Who's watching goes on to the page under it, as Netflix keeps its address. The two homes lead to the picked profile's

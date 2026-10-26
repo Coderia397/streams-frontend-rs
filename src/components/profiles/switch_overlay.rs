@@ -1,11 +1,13 @@
-//! The moment between choosing a profile and its home page, drawn as Netflix does it (measured on frames of netflix.com taken 0.3 s apart): the logo at the
-//! top left on the page colour, a square frame in the accent colour that turns once round the grey place of the picture, then the picture itself
-//! with a ring in the accent colour turning round it. There is no name.
+//! The moment between choosing a profile and its home page, drawn as Netflix does it (the owner's recording of netflix.com, 2026-10-26, note 132): the
+//! logo at the top left on the page colour, and the profile's picture (67 px) with an arc in the accent colour turning round it, thin at its tail and
+//! full at its head. There is no name. On the website every profile has the same screen, a Kids profile too: the square frame that turned first and the coloured
+//! Kids screen were ours, not Netflix's website (owner: "the square thingy is crap", "no static image of rainbow"); the Kids screen is the phone's. When the switch began on a Kids
+//! profile, the kids mark stays in the corner, as on Netflix.
 use leptos::prelude::*;
 use wasm_bindgen::JsCast;
 use crate::models::profile::Profile;
 
-/// How long the overlay stays before the profile is opened, in milliseconds (the square and the first turns of the ring).
+/// How long the overlay stays before the profile is opened, in milliseconds (the first turns of the arc).
 const SHOWN_MS: i32 = 1500;
 
 #[component]
@@ -15,35 +17,38 @@ pub fn ProfileSwitchOverlay(
 ) -> impl IntoView {
     let name = profile.name.clone();
     let avatar = profile.avatar_url.clone().unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string());
-    let is_kids = profile.is_kids;
+    let kids_mark = crate::store::kids_gate();
 
-    // the framework's timer: cleared if the screen goes first, and its closure is freed (the old one leaked once per switch)
-    if let Ok(handle) = leptos::leptos_dom::helpers::set_timeout_with_handle(move || on_finish.run(()), std::time::Duration::from_millis(SHOWN_MS as u64)) {
-        on_cleanup(move || handle.clear());
-    }
-
-    // a Kids profile opens behind the Kids screen (bands of colour and the word); the others show the logo, the square and the ring
-    if is_kids {
+    // the phone opens a Kids profile behind the Kids screen, as Netflix's app (its animation, bands sliding down, is not captured yet: owner's
+    // recording to come, note 132); the website has the loading screen below for every profile
+    if profile.is_kids && is_app_switch() {
         return view! {
             <div class="fixed inset-0 z-(--z-takeover) overflow-hidden bg-page animate-in fade-in duration-(--motion-base)" role="status" aria-label=name>
                 <crate::components::profiles::kids_splash::KidsSplash class="h-full w-full" />
             </div>
         }.into_any();
     }
+
+    // the framework's timer: cleared if the screen goes first, and its closure is freed (the old one leaked once per switch)
+    if let Ok(handle) = leptos::leptos_dom::helpers::set_timeout_with_handle(move || on_finish.run(()), std::time::Duration::from_millis(SHOWN_MS as u64)) {
+        on_cleanup(move || handle.clear());
+    }
+
     view! {
         <div class="fixed inset-0 z-(--z-takeover) overflow-hidden bg-page animate-in fade-in duration-(--motion-base)" role="status" aria-label=name.clone()>
             <img src=crate::brand::LOGO_WORDMARK_PRIMARY alt=crate::brand::NAME class="absolute left-[var(--app-x,56px)] top-[22px] h-[25px] w-auto" />
             <div class="absolute left-1/2 top-1/2 h-[188px] w-[188px] -translate-x-1/2 -translate-y-1/2">
-                <span class="sw-square absolute left-1/2 top-1/2" aria-hidden="true"></span>
                 <svg class="sw-arc absolute inset-0" width="188" height="188" viewBox="0 0 188 188" aria-hidden="true">
-                    <circle cx="94" cy="94" r="90" fill="none" style="stroke: var(--color-brand)" stroke-width="7" stroke-linecap="round" stroke-dasharray="230 336" />
+                    <defs><linearGradient id="sw-arc-g" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--color-brand)" stop-opacity="0" /><stop offset="1" style="stop-color:var(--color-brand)" /></linearGradient></defs>
+                    <circle cx="94" cy="94" r="90" fill="none" stroke="url(#sw-arc-g)" stroke-width="7" stroke-linecap="round" stroke-dasharray="230 336" />
                 </svg>
-                <div class="absolute left-1/2 top-1/2 h-[67px] w-[67px] -translate-x-1/2 -translate-y-1/2 overflow-hidden bg-line">
-                    <div class="sw-picture h-full w-full">
-                        <img src=avatar alt="" class="h-full w-full object-cover" />
-                    </div>
+                <div class="absolute left-1/2 top-1/2 h-[67px] w-[67px] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
+                    <img src=avatar alt="" class="h-full w-full object-cover" />
                 </div>
             </div>
+            {kids_mark.then(|| view! {
+                <div class="pointer-events-none fixed bottom-4 right-[var(--app-x)]"><crate::components::profiles::kids_splash::KidsWordmark class="h-8 w-auto" /></div>
+            })}
         </div>
     }.into_any()
 }

@@ -270,9 +270,15 @@ fn HomeRoute(kids: bool) -> impl IntoView {
     let has_active = web_sys::window().and_then(|w| w.local_storage().ok().flatten()).and_then(|s| s.get_item(crate::keys::ACTIVE_PROFILE).ok().flatten()).is_some();
     if kids && !kids_active {
         let store = crate::store::use_profile_store();
-        return match store.profiles.get_untracked().into_iter().find(|p| p.is_kids) {
-            Some(k) if has_active => {
-                crate::components::profiles::switch_overlay::begin_switch(k);
+        let kids_profiles: Vec<_> = store.profiles.get_untracked().into_iter().filter(|p| p.is_kids).collect();
+        return match kids_profiles.as_slice() {
+            [one] if has_active => {
+                crate::components::profiles::switch_overlay::begin_switch(one.clone());
+                view! { <span /> }.into_any()
+            }
+            // two or more Kids profiles: Who's watching, as the Kids button (nav/website)
+            [_, _, ..] if has_active => {
+                crate::store::ask_who_is_watching(store);
                 view! { <span /> }.into_any()
             }
             _ => view! { <leptos_router::components::Redirect path=format!("/browse{search}") /> }.into_any(),

@@ -5,6 +5,8 @@
 pub const ACTIVE_PROFILE: &str = "streams_active_profile";
 /// When this browser was last used (milliseconds): a long time away brings back Who's watching (services/profile_gate.rs).
 pub const LAST_SEEN: &str = "streams_last_seen";
+/// Who's watching was asked by a Kids profile (this tab only): the Kids form of the screen (store::ask_who_is_watching)
+pub const KIDS_GATE: &str = "streams_kids_gate";
 pub const PROFILES: &str = "streams_profiles";
 pub const PREVIEW_MUTED: &str = "streams_preview_muted";
 pub const SESSION_ID: &str = "streams_session_id";

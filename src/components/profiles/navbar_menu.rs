@@ -23,10 +23,7 @@ pub fn NavbarProfileMenu() -> impl IntoView {
     // Switch profile brings up the page that asks who is watching over the page in use, and the pick comes back to it (store::activate_profile)
     let switch_gate = Callback::new(move |_: ()| {
         set_is_open.set(false);
-        active_profile_id.set(None);
-        if let Some(storage) = web_sys::window().and_then(|w| w.local_storage().ok().flatten()) {
-            let _ = storage.remove_item(crate::keys::ACTIVE_PROFILE);
-        }
+        crate::store::ask_who_is_watching(profile_store);
     });
 
     let other_profiles = move || {

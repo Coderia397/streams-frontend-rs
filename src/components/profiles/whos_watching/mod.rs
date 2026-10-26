@@ -158,6 +158,7 @@ pub fn WhosWatchingGate(
                         on_select=Callback::new(move |p| on_select_tile(p))
                         on_add=Callback::new(move |_| set_modal_state.set(Some(("add".to_string(), None))))
                         on_manage=on_manage
+                        kids=!manage && crate::store::kids_gate()
                     />
                 }
             />

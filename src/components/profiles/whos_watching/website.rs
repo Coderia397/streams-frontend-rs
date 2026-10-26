@@ -1,5 +1,7 @@
 //! Who's watching on tablets and computers (note 114), as Netflix's website: the question, the profiles 160 px apart with their
-//! pictures, Add Profile and the Manage Profiles pill.
+//! pictures, Add Profile and the Manage Profiles pill. Under the pointer a tile gets a panel, white at 8.5 % over the page and as large as
+//! the tile (160 x 205), and its name turns white (measured on the owner's recording of netflix.com, 2026-10-26, note 132). Asked by a
+//! Kids profile, the screen is Netflix's Kids form: no Add Profile, no Manage Profiles, and the kids mark in the corner.
 use crate::models::profile::Profile;
 use leptos::prelude::*;
 use crate::components::media::icons::app_icons::{AppIcon, Glyph};
@@ -11,6 +13,9 @@ pub fn WebsiteGate(
     on_select: Callback<Profile>,
     on_add: Callback<()>,
     on_manage: Callback<()>,
+    /// the Kids form (store::kids_gate)
+    #[prop(optional)]
+    kids: bool,
 ) -> impl IntoView {
     let profile_store = crate::store::use_profile_store();
     view! {
@@ -31,8 +36,8 @@ pub fn WebsiteGate(
                     let has_pin = profile.pin.is_some();
                     let avatar = profile.avatar_url.clone().unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string());
                     view! {
-                        <button type="button" on:click=move |_| on_select.run(p_clone.clone()) class="group flex w-[160px] cursor-pointer flex-col items-center gap-[23px] p-[16px] focus:outline-none">
-                            <div class="relative h-[128px] w-[128px] overflow-hidden rounded-modal outline outline-[3px] outline-transparent transition-[outline-color] group-hover:outline-ink/70 group-focus-visible:outline-ink/70">
+                        <button type="button" on:click=move |_| on_select.run(p_clone.clone()) class=TILE>
+                            <div class="relative h-[128px] w-[128px] overflow-hidden rounded-modal">
                                 {if is_kids && p_clone.avatar_url.is_none() {
                                     view! { <crate::components::profiles::kids_avatar::KidsAvatar size=128.0 /> }.into_any()
                                 } else {
@@ -51,10 +56,10 @@ pub fn WebsiteGate(
                     }
                 }).collect::<Vec<_>>()}
 
-                // Add Profile tile
-                {move || (profiles.get().len() < 5).then(|| view! {
-                    <button type="button" on:click=move |_| on_add.run(()) class="group flex w-[160px] cursor-pointer flex-col items-center gap-[23px] p-[16px] focus:outline-none">
-                        <div class="flex h-[128px] w-[128px] items-center justify-center rounded-modal bg-gate-tile outline outline-[3px] outline-transparent transition-[outline-color] group-hover:outline-ink/70">
+                // Add Profile tile (not in the Kids form)
+                {move || (!kids && profiles.get().len() < 5).then(|| view! {
+                    <button type="button" on:click=move |_| on_add.run(()) class=TILE>
+                        <div class="flex h-[128px] w-[128px] items-center justify-center rounded-modal bg-gate-tile">
                             <AppIcon glyph=Glyph::Plus class="text-icon-lg text-ink" />
                         </div>
                         <span class="text-title-sm font-medium leading-[23px] text-ink/70 transition-colors group-hover:text-ink">{crate::i18n::t("whos-watching-add-profile")}</span>
@@ -62,8 +67,8 @@ pub fn WebsiteGate(
                 })}
             </div>
 
-            // Manage Profiles opens the editing mode; Done goes back
-            <div class="mb-10 mt-[36px]">
+            // Manage Profiles opens the editing mode; Done goes back (not in the Kids form)
+            <div class="mb-10 mt-[36px]" class:hidden=kids>
                 <button
                     type="button"
                     on:click=move |_| on_manage.run(())
@@ -73,6 +78,13 @@ pub fn WebsiteGate(
                 </button>
             </div>
             </div>
+            // the Kids form: the mark that stays in the corner of a Kids profile's pages (layout/nav/website)
+            {kids.then(|| view! {
+                <div class="pointer-events-none fixed bottom-4 right-[var(--app-x)]"><crate::components::profiles::kids_splash::KidsWordmark class="h-8 w-auto" /></div>
+            })}
             </div>
     }
 }
+
+/// A profile's tile, and Add Profile's: the panel under the pointer or the keyboard's focus.
+const TILE: &str = "group flex w-[160px] cursor-pointer flex-col items-center gap-[23px] rounded-modal p-[16px] transition-colors duration-(--motion-quick) hover:bg-ink/[0.085] focus:outline-none focus-visible:bg-ink/[0.085]";

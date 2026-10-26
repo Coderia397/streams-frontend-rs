@@ -32,10 +32,7 @@ pub fn AccountMenu(avatar: Memo<String>, signout_open: RwSignal<bool>) -> impl I
     let switch = Callback::new(move |_: ()| {
         // Switch Profile brings up the page that asks who is watching over this page, and the pick comes back here (store::activate_profile)
         open.set(false);
-        profiles.active_profile_id.set(None);
-        if let Some(storage) = web_sys::window().and_then(|w| w.local_storage().ok().flatten()) {
-            let _ = storage.remove_item(crate::keys::ACTIVE_PROFILE);
-        }
+        crate::store::ask_who_is_watching(profiles);
     });
     view! {
         <div node_ref=root class="relative">

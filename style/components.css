@@ -230,18 +230,9 @@
   @media (min-width: 1280px) { .set-gutter { padding-inline: calc(8.3333vw + 48px); } }
 }
 
-/* The profile switch (see components/profiles/switch_overlay.rs): a square frame turns in, gives way to a ring that turns round the picture. */
+/* The profile switch (see components/profiles/switch_overlay.rs): an arc turns round the picture. */
 @layer components {
-  .sw-square {
-    width: 134px; height: 134px; margin: -67px 0 0 -67px;
-    border: 20px solid var(--color-brand);
-    animation: sw-square 0.45s ease-out both, sw-out 0.12s 0.42s forwards;
-  }
-  .sw-arc { opacity: 0; animation: sw-in 0.15s 0.42s forwards, sw-spin 1.05s linear 0.42s infinite; }
-  .sw-picture { opacity: 0; animation: sw-in 0.15s 0.42s forwards; }
-  @keyframes sw-square { from { opacity: 0; transform: rotate(-50deg) scale(0.5); } 30% { opacity: 1; } to { opacity: 1; transform: rotate(9deg) scale(1); } }
-  @keyframes sw-out { to { opacity: 0; } }
-  @keyframes sw-in { to { opacity: 1; } }
+  .sw-arc { animation: sw-spin 1.05s linear infinite; }
   @keyframes sw-spin { to { transform: rotate(360deg); } }
 
   /* The website player's discs (Netflix's, note 126): ±10 at the sides and play or pause in the middle. A 100 px round disc, black at
