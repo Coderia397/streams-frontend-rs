@@ -47,6 +47,23 @@ pub fn LinkRow(
     }
 }
 
+/// A profile's row (Netflix's "Manage profile and preferences": the picture, the name, "Edit personal and contact info"): a link row with
+/// the picture in the icon's place, at the icon's size, so the text lines up with the rows under it (owner, 2026-10-26: it looked cramped
+/// in a layout of its own).
+#[component]
+pub fn ProfileRow(#[prop(into)] avatar: String, #[prop(into)] name: String, #[prop(into)] hint: String, #[prop(into)] href: String) -> impl IntoView {
+    view! {
+        <a href=href class=ROW>
+            <img src=avatar alt="" class="me-3 h-6 w-6 shrink-0 rounded-hairline object-cover lg:me-4" />
+            <span class="min-w-0 flex-1">
+                <span class="block truncate text-body-md font-semibold leading-row text-ink lg:text-title-sm lg:font-medium lg:leading-[27px]">{name}</span>
+                <span class="block pt-0.5 text-label leading-normal text-ink/70 lg:pt-0 lg:text-body-sm lg:leading-[25px]">{hint}</span>
+            </span>
+            <i class="ph ph-caret-right ms-3 text-2xl text-ink/70 lg:text-body-md rtl:-scale-x-100" aria-hidden="true"></i>
+        </a>
+    }
+}
+
 /// A row that does something here (opens a dialog, runs a test).
 #[component]
 pub fn ActionRow(

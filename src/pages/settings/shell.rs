@@ -83,7 +83,8 @@ pub fn PageHeading(screen: Memo<Screen>, gate_active: RwSignal<bool>, light_phon
         other => other.parent_wide(),
     };
     view! {
-        <header class="flex items-center gap-3 max-lg:mb-1 lg:mb-0" class=("max-lg:mb-4", move || light_phone.get())>
+        // Manage profile and preferences has no line under its title: the card keeps Netflix's 20 px from it (owner, 2026-10-26)
+        <header class="flex items-center gap-3 max-lg:mb-1" class=("max-lg:mb-4", move || light_phone.get()) class=("lg:mb-0", move || !matches!(screen.get(), Screen::Profile(_))) class=("lg:mb-5", move || matches!(screen.get(), Screen::Profile(_)))>
             <a
                 href=move || screen.get().parent()
                 aria-label=move || t("set-back")

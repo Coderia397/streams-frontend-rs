@@ -3,7 +3,7 @@
 //! take over later (public.profiles: name, avatar, kind, has_pin, is_main; the rating limit is in profile_settings.age_rating).
 use super::hub::persist_profiles;
 use super::prefs::use_prefs;
-use super::widgets::{toast, ConfirmDialog, DigitBoxes, Field, FormButtons, LinkRow, Message, OutlineButton, Section, SwitchRow, Tone};
+use super::widgets::{toast, ConfirmDialog, DigitBoxes, Field, FormButtons, LinkRow, Message, OutlineButton, ProfileRow, Section, SwitchRow, Tone};
 use super::Screen;
 use crate::config::{GAME_HANDLE_MAX, GAME_HANDLE_MIN, PIN_LENGTH, PROFILE_NAME_MAX};
 use crate::data::settings::{rating, HANDLE_ADJECTIVES, HANDLE_NOUNS, PROFILE_DATA_USAGE};
@@ -188,14 +188,7 @@ pub fn ProfileOverview(id: String) -> impl IntoView {
         view! {
             <div>
                 <Section>
-                    <a href=edit.clone() class="flex items-center gap-4 px-5 py-3 hover:bg-ink/10">
-                        <img src=p.avatar_url.clone().unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string()) alt="" class="h-10 w-10 rounded-control object-cover" />
-                        <span class="min-w-0 flex-1">
-                            <span class="block truncate text-body-md font-bold">{p.name.clone()}</span>
-                            <span class="block text-label text-ink/60">{t("set-po-edit-hint")}</span>
-                        </span>
-                        <i class="ph-bold ph-caret-right text-xl text-ink/40 rtl:-scale-x-100" aria-hidden="true"></i>
-                    </a>
+                    <ProfileRow avatar=p.avatar_url.clone().unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string()) name=p.name.clone() hint=t("set-po-edit-hint") href=edit.clone() />
                     <LinkRow icon="lock-simple" title=t("set-title-lock") hint=t("set-po-lock-hint") href=lock />
                 </Section>
                 <Section title=t("set-po-preferences")>
