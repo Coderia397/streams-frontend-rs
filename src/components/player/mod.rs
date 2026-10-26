@@ -6,6 +6,7 @@ pub mod open;
 pub mod episode_drawer;
 pub mod subtitle_drawer;
 pub mod skip_button;
+pub mod skip_detector;
 pub mod rating_card;
 pub mod subtitles;
 pub mod website_overlays;
@@ -700,6 +701,40 @@ pub fn StreamsPlayer(
     let next_sig = Signal::derive(move || next_ep.get().flatten());
     // the guessed skip marks of this video (ratios of its length); an episode is the last of its season when no episode follows it in the season's list
     // films have no skip buttons (no intro or recap to skip, no next episode): the engine is not asked
+    let active_cues = RwSignal::new(None::<std::sync::Arc<Vec<subtitles::Cue>>>);
+    let on_cues_change = Callback::new(move |cues: Option<std::sync::Arc<Vec<subtitles::Cue>>>| {
+        active_cues.set(cues);
+    });
+
+    // background English subtitle cues loaded for skip detection even when viewer subtitles are off
+    let bg_english_cues = RwSignal::new(None::<std::sync::Arc<Vec<subtitles::Cue>>>);
+    Effect::new(move |loaded: Option<bool>| {
+        if loaded == Some(true) || !is_tv {
+            return true;
+        }
+        let d = duration.get();
+        if d <= 0.0 || d.is_nan() {
+            return false;
+        }
+        let candidates = subtitle_files.get();
+        let Some(en_key) = subtitles::key_for(&candidates, "en") else { return false };
+        // If viewer already has the English subtitle track selected, active_cues handles detection;
+        // return false so turning subtitles off later will re-trigger this effect and load in the background
+        if selected_sub_url.get().as_ref() == Some(&en_key) {
+            return false;
+        }
+        let Some(list) = candidates.get(&en_key).cloned() else { return false };
+        if list.is_empty() {
+            return false;
+        }
+        leptos::task::spawn_local(async move {
+            if let Some(cues) = subtitles::load_cues(&list, d).await {
+                bg_english_cues.set(Some(std::sync::Arc::new(cues)));
+            }
+        });
+        true
+    });
+
     let marks_res = LocalResource::new(move || async move {
         if !is_tv {
             return crate::services::ai_engine::SkipMarks::default();
@@ -710,7 +745,51 @@ pub fn StreamsPlayer(
         } else { false };
         crate::services::ai_engine::fetch_skip_marks(is_tv, media_id, episode, last).await
     });
-    let marks_sig = Signal::derive(move || marks_res.get().unwrap_or_default());
+
+    let marks_with_origin = Memo::new(move |_| {
+        let d = duration.get();
+        let prior = marks_res.get();
+        let candidates = subtitle_files.get();
+        let en_key = subtitles::key_for(&candidates, "en");
+        let is_active_english = selected_sub_url.get().is_some() && selected_sub_url.get() == en_key;
+        let (cues, delay) = if is_active_english {
+            (active_cues.get(), sub_delay.get())
+        } else if let Some(bg_cues) = bg_english_cues.get() {
+            (Some(bg_cues), 0.0)
+        } else {
+            (active_cues.get(), sub_delay.get())
+        };
+        match cues {
+            Some(c) => skip_detector::detect_marks_from_cues(&c, d, delay, is_tv, prior.as_ref()),
+            None => {
+                let marks = prior.unwrap_or_default();
+                skip_detector::SkipMarksWithOrigin {
+                    intro_origin: marks.intro.map(|_| skip_detector::MarkOrigin::Engine),
+                    recap_origin: marks.recap.map(|_| skip_detector::MarkOrigin::Engine),
+                    credits_origin: marks.credits.map(|_| skip_detector::MarkOrigin::Engine),
+                    intro_strength: marks.intro.map(|_| skip_detector::SignalStrength::Medium),
+                    recap_strength: marks.recap.map(|_| skip_detector::SignalStrength::Medium),
+                    credits_strength: marks.credits.map(|_| skip_detector::SignalStrength::Medium),
+                    marks,
+                }
+            }
+        }
+    });
+
+    Effect::new(move |_| {
+        let m = marks_with_origin.get();
+        if m.marks.intro.is_some() || m.marks.recap.is_some() || m.marks.credits.is_some() {
+            #[cfg(target_arch = "wasm32")]
+            web_sys::console::log_1(&wasm_bindgen::JsValue::from_str(&format!(
+                "[SkipMarks] intro={:?} ({:?}, {:?}), recap={:?} ({:?}, {:?}), credits={:?} ({:?}, {:?})",
+                m.marks.intro, m.intro_origin, m.intro_strength,
+                m.marks.recap, m.recap_origin, m.recap_strength,
+                m.marks.credits, m.credits_origin, m.credits_strength,
+            )));
+        }
+    });
+
+    let marks_sig = Signal::derive(move || marks_with_origin.with(|m| m.marks.clone()));
     let subtitle_sig = Signal::derive(subtitle_header_text);
     let episode_name_sig = Signal::derive(move || episode_title_stored.get_value().or_else(|| ep_name.get().flatten()).filter(|n| !n.is_empty()));
 
@@ -806,6 +885,7 @@ pub fn StreamsPlayer(
                                             delay=sub_delay
                                             lifted=Signal::derive(move || !is_idle.get())
                                             retry=sub_retry
+                                            on_cues_change=on_cues_change
                                         />
 
                                         // the controls of the form in use (controls/: website.rs, phone.rs)

@@ -184,6 +184,21 @@ pub fn cue_at(cues: &[Cue], t: f64) -> Option<usize> {
     (0..after).rev().take(4).find(|&i| cues[i].e > t)
 }
 
+/// Loads subtitle cues from candidate URLs for a given duration.
+pub async fn load_cues(list: &[(String, String)], duration: f64) -> Option<Vec<Cue>> {
+    if list.is_empty() {
+        return None;
+    }
+    let token = crate::services::account::ensure_fresh().await.map(|s| s.access_token).unwrap_or_default();
+    let json = serde_json::to_string(&list.iter().map(|(url, lang)| {
+        let auth = if url.starts_with(crate::config::RESOLVER_URL) { token.as_str() } else { "" };
+        serde_json::json!({ "url": url, "lang": lang, "auth": auth })
+    }).collect::<Vec<_>>()).ok()?;
+    let loaded = subtitle_load(&json, duration).await.as_string()?;
+    let parsed: Loaded = serde_json::from_str(&loaded).ok()?;
+    Some(parsed.cues)
+}
+
 /// A cue's text as HTML: everything escaped, then italic, bold and underline put back, lines broken.
 pub fn cue_html(text: &str) -> String {
     let mut out = text.replace('&', "&amp;").replace('<', "&lt;").replace('>', "&gt;");
@@ -203,6 +218,8 @@ pub fn SubtitleOverlay(
     lifted: Signal<bool>,
     /// bumped to move to the chosen language's next file (Out of sync? Try another version)
     retry: ReadSignal<u32>,
+    #[prop(optional)]
+    on_cues_change: Option<Callback<Option<std::sync::Arc<Vec<Cue>>>>>,
 ) -> impl IntoView {
     let prefs = crate::pages::settings::use_prefs();
     let profiles = crate::store::use_profile_store();
@@ -221,6 +238,9 @@ pub fn SubtitleOverlay(
         let again = retry.get();
         cues.set(None);
         set_line.set(None);
+        if let Some(cb) = on_cues_change {
+            cb.run(None);
+        }
         let Some(key) = key else { return };
         let all: Vec<(String, String)> = candidates.with_untracked(|c| c.get(&key).cloned().unwrap_or_default());
         if all.is_empty() {
@@ -248,7 +268,11 @@ pub fn SubtitleOverlay(
             }
             if let Ok(l) = serde_json::from_str::<Loaded>(&loaded) {
                 showing.set_value(Some((key.clone(), (start + l.index) % total)));
-                cues.set(Some(std::sync::Arc::new(l.cues)));
+                let arc_cues = std::sync::Arc::new(l.cues);
+                cues.set(Some(arc_cues.clone()));
+                if let Some(cb) = on_cues_change {
+                    cb.run(Some(arc_cues));
+                }
             }
         });
     });
