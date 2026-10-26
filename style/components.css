@@ -105,6 +105,46 @@
   :root:is([data-input="mouse"], [data-input="pen"]) .btn-circle-solid:hover { background-color: var(--color-ink-hover); }
   .btn-circle-clear { background-color: transparent; }
   :root:is([data-input="mouse"], [data-input="pen"]) .btn-circle-clear:hover { background-color: var(--color-glass); }
+
+  /* Search fields: one pill for every search bar (the website's nav search, the phone's search page, the Help Centre, the licences list),
+     so their shape and colours change here once (owner, 2026-10-26). The field carries the shape, edge and fill; the input inside is bare,
+     with its icons beside it. The default draws Netflix's search field on the app's black pages (a fill of 8 % ink and an edge of 35 % ink:
+     #141414 and #5a5a5a on black, as the 400 x 56 field measured in note 111) and follows the light settings pages, being made of ink;
+     -paper is the Help Centre's white field; -ring adds the brand's gradient edge (the Help Centre's front page). Heights sm 44, md 48, lg 56. */
+  .search-field {
+    --search-fill: color-mix(in srgb, var(--color-ink) 8%, transparent);
+    --search-edge: color-mix(in srgb, var(--color-ink) 35%, transparent);
+    --search-focus: var(--color-ink);
+    --search-text: var(--color-ink);
+    --search-hint: color-mix(in srgb, var(--color-ink) 55%, transparent);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-inline: 16px;
+    border: 1px solid var(--search-edge);
+    border-radius: var(--radius-input);
+    background-color: var(--search-fill);
+    color: var(--search-text);
+    transition: border-color var(--motion-fast), background-color var(--motion-fast);
+  }
+  .search-field:focus-within { border-color: var(--search-focus); }
+  .search-field input { flex: 1; min-width: 0; height: 100%; border: 0; border-radius: 0; background: transparent; color: inherit; outline: none; }
+  .search-field input::placeholder { color: var(--search-hint); }
+  .search-field-paper {
+    --search-fill: var(--color-paper);
+    --search-edge: var(--color-paper-edge);
+    --search-focus: var(--color-paper-ink);
+    --search-text: var(--color-paper-ink);
+    --search-hint: var(--color-paper-mute);
+  }
+  .search-field-ring {
+    border: 2px solid transparent;
+    background: linear-gradient(var(--search-fill), var(--search-fill)) padding-box, linear-gradient(to right, var(--color-accent), var(--color-brand-glow), var(--color-brand)) border-box;
+    box-shadow: var(--shadow-raise);
+  }
+  .search-field-sm { height: 44px; }
+  .search-field-md { height: 48px; }
+  .search-field-lg { height: 56px; }
 }
 
 /* Light page for the settings screens that Netflix draws white: the account pages on a phone (page grey, cards white) and every

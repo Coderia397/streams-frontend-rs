@@ -132,17 +132,18 @@ pub fn PhoneSearch(#[prop(into)] q: Signal<String>, results: Found, recommended:
 
     view! {
             // ── The bar of the phone layout ─────────────────────────────────────
-            <div class="fixed top-0 inset-x-0 z-(--z-nav) bg-field pt-[env(safe-area-inset-top)]">
-                <div class="flex items-center h-[52px] ps-1 pe-1">
+            // the shared search field (style/components.css), 44 px high with 8 px around it
+            <div class="fixed top-0 inset-x-0 z-(--z-nav) bg-void px-3 pb-2 pt-[calc(env(safe-area-inset-top)+8px)]">
+                <div class="search-field search-field-sm px-0">
                     // the app: a back arrow while typing, a magnifier once the keyboard is down
                     {move || if focused.get() {
                         view! {
-                            <button on:click=on_back.clone() aria-label=crate::i18n::t("navbar-mobile-back") class="w-12 h-12 flex items-center justify-center text-ink flex-none">
+                            <button on:click=on_back.clone() aria-label=crate::i18n::t("navbar-mobile-back") class="w-11 h-full flex items-center justify-center text-ink flex-none">
                                 <AppIcon glyph=Glyph::Back class="text-heading-md" />
                             </button>
                         }.into_any()
                     } else {
-                        view! { <span class="w-12 h-12 flex items-center justify-center text-ink/90 flex-none"><AppIcon glyph=Glyph::Search class="text-heading-md" /></span> }.into_any()
+                        view! { <span class="w-11 h-full flex items-center justify-center text-ink/90 flex-none"><AppIcon glyph=Glyph::Search class="text-heading-md" /></span> }.into_any()
                     }}
                     <input
                         node_ref=input_ref
@@ -158,17 +159,17 @@ pub fn PhoneSearch(#[prop(into)] q: Signal<String>, results: Found, recommended:
                         on:input=on_input.clone()
                         on:focus=move |_| set_focused.set(true)
                         on:blur=move |_| set_focused.set(false)
-                        class="flex-1 min-w-0 bg-transparent text-title-md text-ink placeholder:text-ink/55 outline-none border-0 ps-3"
+                        class="text-title-md ps-1"
                     />
                     {move || if draft.get().is_empty() {
                         can_listen().then(|| view! {
-                            <button on:click=on_voice.clone() aria-label=crate::i18n::t("search-voice") class="w-12 h-12 flex items-center justify-center text-ink/90 flex-none">
+                            <button on:click=on_voice.clone() aria-label=crate::i18n::t("search-voice") class="w-11 h-full flex items-center justify-center text-ink/90 flex-none">
                                 <i class="ph ph-microphone text-heading-md"></i>
                             </button>
                         }).into_any()
                     } else {
                         view! {
-                            <button on:click=on_clear.clone() aria-label=crate::i18n::t("search-bar-clear-search") class="w-12 h-12 flex items-center justify-center text-ink/90 flex-none">
+                            <button on:click=on_clear.clone() aria-label=crate::i18n::t("search-bar-clear-search") class="w-11 h-full flex items-center justify-center text-ink/90 flex-none">
                                 <i class="ph ph-x text-heading-md"></i>
                             </button>
                         }.into_any().into()
@@ -176,7 +177,7 @@ pub fn PhoneSearch(#[prop(into)] q: Signal<String>, results: Found, recommended:
                 </div>
             </div>
 
-            <div class="pt-[calc(60px+env(safe-area-inset-top))] px-3 pb-28 min-h-screen bg-void">
+            <div class="pt-[calc(68px+env(safe-area-inset-top))] px-3 pb-28 min-h-screen bg-void">
                 // Nothing typed: the recommendations, as a list
                 <Show when=move || q.get().trim().is_empty()>
                     <h1 class="text-title leading-[30px] font-bold text-ink mt-1.5 mb-[5px]">{crate::i18n::t("search-recommended")}</h1>

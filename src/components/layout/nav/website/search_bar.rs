@@ -122,16 +122,11 @@ pub fn SearchBar(
     view! {
         <div node_ref=container_ref class="relative flex items-center">
             <div 
-                // Netflix: closed = 40x40 icon button, open = 400x56 field, radius 28, #161616, 1px grey 70% border
+                // Netflix: closed = 40x40 icon button, open = the 400x56 search field every search bar shares (style/components.css)
                 class="relative flex items-center transition-all duration-(--motion-slow) ease-out overflow-hidden rounded-input"
-                class=("bg-raised", effective_active)
-                class=("border", effective_active)
-                class=("border-mute/70", effective_active)
+                class=("search-field", effective_active)
+                class=("search-field-lg", effective_active)
                 class=("w-(--search-open-w)", effective_active)
-                class=("h-14", effective_active)
-                class=("px-4", effective_active)
-                class=("bg-transparent", move || !effective_active())
-                class=("border-transparent", move || !effective_active())
                 class=("w-10", move || !effective_active())
                 class=("h-10", move || !effective_active())
                 class=("justify-center", move || !effective_active())
@@ -152,7 +147,7 @@ pub fn SearchBar(
                     node_ref=input_ref
                     type="text"
                     placeholder=crate::i18n::t("search-bar-titles-people-genres")
-                    class="bg-transparent border-none outline-none text-ink text-body-md ml-3 transition-all duration-(--motion-slow) font-sans"
+                    class="text-body-md ms-1 transition-all duration-(--motion-slow) font-sans"
                     class=("w-full", effective_active)
                     class=("opacity-100", effective_active)
                     class=("w-0", move || !effective_active())

@@ -7,6 +7,7 @@ use super::notifications::{push_permission, request_push_permission};
 use super::widgets::{Message, Tone};
 use super::Screen;
 use crate::data::settings::{licences, DATA_USAGE, LEGAL_LINKS};
+use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 use crate::i18n::t;
 use leptos::prelude::*;
 
@@ -111,14 +112,17 @@ pub fn Licences() -> impl IntoView {
     view! {
         <div>
             <p class="mb-4 text-body-md text-ink/60">{crate::i18n::t_args("set-licences-hint", &[("count", count.into())])}</p>
-            <input
-                type="search"
-                placeholder=move || t("set-licences-search")
-                aria-label=move || t("set-licences-search")
-                prop:value=move || query.get()
-                on:input=move |ev| { query.set(event_target_value(&ev)); shown.set(crate::config::LICENCES_PAGE); }
-                class="mb-5 w-full border border-ink/20 bg-ink/10 px-4 py-3 text-body-md text-ink focus:border-ink focus:outline-none"
-            />
+            <label class="search-field search-field-md mb-5">
+                <AppIcon glyph=Glyph::Search class="text-title" />
+                <input
+                    type="search"
+                    placeholder=move || t("set-licences-search")
+                    aria-label=move || t("set-licences-search")
+                    prop:value=move || query.get()
+                    on:input=move |ev| { query.set(event_target_value(&ev)); shown.set(crate::config::LICENCES_PAGE); }
+                    class="text-body-md"
+                />
+            </label>
             <Section>
                 {move || filtered.get().into_iter().take(shown.get()).map(|p| view! {
                     <div class="set-row flex min-h-settings-row w-full items-center justify-between gap-4 border-b border-set-line px-1 py-3 last:border-b-0">

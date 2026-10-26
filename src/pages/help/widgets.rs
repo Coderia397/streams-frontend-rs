@@ -134,43 +134,42 @@ pub fn SearchBox(
         }
     };
 
-    let frame = match variant {
-        Variant::Hero => "rounded-input p-0.5 bg-linear-to-r from-accent via-brand-glow to-brand shadow-raise",
-        Variant::Plain => "rounded-input border border-paper-edge focus-within:border-paper-ink",
-        Variant::Arrow => "rounded-input border border-paper-line focus-within:border-paper-ink",
+    // the shared search field (style/components.css): the front page's has the brand's gradient edge, the contact page's ends in an arrow
+    let field = match variant {
+        Variant::Hero => "search-field search-field-paper search-field-ring search-field-md",
+        Variant::Plain => "search-field search-field-paper search-field-md",
+        Variant::Arrow => "search-field search-field-paper search-field-md pe-0",
     };
     let arrow = variant == Variant::Arrow;
     view! {
         <div node_ref=root class="relative w-full" on:focusout=on_focusout>
-            <form role="search" on:submit=on_submit class=frame>
-                <div class="flex items-center rounded-field bg-paper">
-                    {(!arrow).then(|| view! { <AppIcon glyph=Glyph::Search class="ps-4 text-title text-paper-ink" /> })}
-                    <input
-                        type="search"
-                        autocomplete="off"
-                        enterkeyhint="search"
-                        aria-label=move || tr("help-ui-search-label")
-                        placeholder=move || tr(placeholder)
-                        prop:value=value
-                        on:input=move |ev| {
-                            let q = event_target_value(&ev);
-                            set_value.set(q.clone());
-                            set_active.set(None);
-                            set_open.set(true);
-                            if let Some(cb) = on_query {
-                                cb.run(q);
-                            }
+            <form role="search" on:submit=on_submit class=field>
+                {(!arrow).then(|| view! { <AppIcon glyph=Glyph::Search class="text-title" /> })}
+                <input
+                    type="search"
+                    autocomplete="off"
+                    enterkeyhint="search"
+                    aria-label=move || tr("help-ui-search-label")
+                    placeholder=move || tr(placeholder)
+                    prop:value=value
+                    on:input=move |ev| {
+                        let q = event_target_value(&ev);
+                        set_value.set(q.clone());
+                        set_active.set(None);
+                        set_open.set(true);
+                        if let Some(cb) = on_query {
+                            cb.run(q);
                         }
-                        on:focus=move |_| set_open.set(true)
-                        on:keydown=on_key
-                        class="h-12 w-full min-w-0 bg-transparent px-3 text-body-md text-paper-ink placeholder:text-paper-mute focus:outline-none"
-                    />
-                    {arrow.then(|| view! {
-                        <button type="submit" aria-label=move || tr("help-ui-search-label") class="flex h-12 w-12 shrink-0 items-center justify-center text-title text-paper-mute hover:text-paper-ink">
-                            <i class="ph-bold ph-arrow-right rtl:-scale-x-100" aria-hidden="true"></i>
-                        </button>
-                    })}
-                </div>
+                    }
+                    on:focus=move |_| set_open.set(true)
+                    on:keydown=on_key
+                    class="text-body-md"
+                />
+                {arrow.then(|| view! {
+                    <button type="submit" aria-label=move || tr("help-ui-search-label") class="flex h-full w-12 shrink-0 items-center justify-center rounded-full text-title text-paper-mute hover:text-paper-ink">
+                        <i class="ph-bold ph-arrow-right rtl:-scale-x-100" aria-hidden="true"></i>
+                    </button>
+                })}
             </form>
             {move || {
                 let current = panel.get();
