@@ -46,12 +46,14 @@
   /* Colours of particular places (scripts/check_colours.py keeps the components on tokens; 2026-10-23) */
   /* Kids: the red of the Kids pills and buttons */
   --color-kids-red: #e30b15;
-  /* Who's watching (Netflix's): the Add Profile tile, the phone picker's page, the glow from above the screen */
-  --color-gate-tile: #3b2527;
+  /* Who's watching (Netflix's): the Add Profile tile, the phone picker's page, the glow from above the screen. The glow and the tile are made
+     from the brand colour, in Netflix's proportions to its red (its glow is the red at 48 % on black, 80 % opaque, then 24 %, 40 % opaque;
+     its tile the field grey with 14 % of the red), so the screen follows --color-brand (owner, 2026-10-26: blue, from the brand) */
+  --color-gate-tile: color-mix(in srgb, var(--color-brand) 14%, var(--color-field));
   --color-gate-phone: #0b0a0b;
   --color-gate-phone-sheet: #0f0e10;
-  --color-gate-glow: rgb(111 24 29 / 0.8);
-  --color-gate-glow-far: rgb(56 12 15 / 0.4);
+  --color-gate-glow: color-mix(in srgb, color-mix(in srgb, var(--color-brand) 48%, black) 80%, transparent);
+  --color-gate-glow-far: color-mix(in srgb, color-mix(in srgb, var(--color-brand) 24%, black) 40%, transparent);
   /* the signed out title page (Netflix's #0f0f0f) and its deepest fields */
   --color-title-page: #0f0f0f;
   --color-field-deep: #161616;
