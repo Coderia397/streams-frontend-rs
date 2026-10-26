@@ -24,7 +24,8 @@ pub enum Access {
 pub fn access(path: &str) -> Access {
     const VISITORS: [&str; 3] = ["/login", "/signup", "/forgot"];
     // `/auth` holds the links in account emails (confirm an address, set a new password): they work whether or not the browser is signed in
-    const EVERYONE: [&str; 6] = ["/title", "/auth", "/help", "/contact", "/welcome", "/reads"];
+    // `/signout` ends a session if there is one and goes to the start page either way, so a visitor is never sent to sign in first (and back to it)
+    const EVERYONE: [&str; 7] = ["/title", "/auth", "/help", "/contact", "/welcome", "/reads", "/signout"];
     let under = |p: &str| path == p || path.starts_with(&format!("{p}/"));
     // the policies live under /help; their earlier addresses only move there (config::routes::MOVED)
     if path == "/" || path.is_empty() || EVERYONE.iter().any(|p| under(p)) || crate::config::routes::moved(path).is_some() {

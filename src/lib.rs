@@ -65,6 +65,17 @@ pub fn App() -> impl IntoView {
         library_store.reload();
         crate::services::sync::sync_in_background();
     });
+    // the Help Centre's host cannot read this storage: it shows the person as signed in from a cookie the app keeps (services/help_cookie.rs),
+    // the name of the profile in use (or the first) while an account is signed in or a profile was chosen here
+    if !on_help_host {
+        let member = crate::services::account::signed_in();
+        Effect::new(move |_| {
+            let id = profile_store.active_profile_id.get();
+            let chosen = web_sys::window().and_then(|w| w.local_storage().ok().flatten()).and_then(|s| s.get_item(crate::keys::ACTIVE_PROFILE).ok().flatten()).is_some();
+            let name = profile_store.profiles.with(|list| list.iter().find(|p| Some(&p.id) == id.as_ref()).or(list.first()).map(|p| p.name.clone()));
+            crate::services::help_cookie::write(name.as_deref().filter(|_| member.get() || chosen));
+        });
+    }
     // when the session ends while the page is open (signed out here or in another tab, signed out everywhere, refused by the account), the
     // account's data leaves this browser and the tab loads afresh (nothing stays in memory): the start page, or sign in (and back) when the
     // account ended it
@@ -176,6 +187,7 @@ pub fn App() -> impl IntoView {
                 <Route path=path!("/settings") view=crate::pages::settings::SettingsPage />
                 <Route path=path!("/settings/*any") view=crate::pages::settings::SettingsPage />
                 <Route path=path!("/login") view=crate::pages::auth::LoginPage />
+                <Route path=path!("/signout") view=crate::pages::auth::SignOutPage />
                 <Route path=path!("/signup") view=crate::pages::auth::SignupPage />
                 <Route path=path!("/forgot") view=crate::pages::auth::ForgotPage />
                 <Route path=path!("/auth/confirm") view=crate::pages::auth::ConfirmPage />

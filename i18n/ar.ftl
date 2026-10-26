@@ -942,6 +942,7 @@ cookie-essential =
 
 cookie-essential-list =
     - <b>streams_session</b>، <b>streams_device_key</b> و<b>streams_resume</b>: تسجيل دخولك، ومعرّف عشوائي يتيح لحسابك التعرف على هذا المتصفح، وملاحظة مختومة تتيح لك العودة خلال يوم من تسجيل الخروج.
+    - <b>streams_hello</b>: ملف تعريف ارتباط يحمل اسم الملف الشخصي المستخدم، كي يُظهرك مركز المساعدة، الذي له عنوان خاص به، مسجلاً للدخول. يُحذف عند تسجيل الخروج.
     - <b>streams_profiles</b>، <b>streams_active_profile</b>، <b>streams_profile_prefs</b>، <b>streams_app_prefs</b> و<b>streams_account_prefs</b>: نسخ من ملفاتك الشخصية والملف المستخدم وإعداداتك.
     - <b>streams_my_list_v1</b>، <b>streams_title_ratings_v1</b>، <b>streams_watch_progress_v1</b> و<b>streams_episode_progress_v1</b>: نسخ من قائمتي والتقييمات وموضع توقفك عن المشاهدة، لكل ملف شخصي.
     - <b>streams_sync_snapshot</b> و<b>streams_sync_cursor</b>: آخر ما تم تبادله مع حسابك، حتى لا تُرسل إلا التغييرات.
@@ -1332,7 +1333,7 @@ legal-cookie-policy-title = سياسة ملفات تعريف الارتباط
 legal-cookie-policy-updated = آخر تحديث: أكتوبر 2026
 legal-cookie-policy-1-title = كيف نستخدم ملفات تعريف الارتباط والتخزين
 legal-cookie-policy-1-body = لا يستخدم { $brand } ملفات تعريف الارتباط الإعلانية أو التحليلية. نستخدم التخزين المحلي في متصفحك، وهو مكان على جهازك لا يقرؤه إلا هذا الموقع، من أجل:
-legal-cookie-policy-1-b1 = <strong>تسجيل الدخول:</strong> ما يبقيك مسجلاً للدخول على هذا المتصفح.
+legal-cookie-policy-1-b1 = <strong>تسجيل الدخول:</strong> ما يبقيك مسجلاً للدخول على هذا المتصفح، وملف تعريف ارتباط يحمل اسم ملفك الشخصي كي يُظهرك مركز المساعدة مسجلاً للدخول.
 legal-cookie-policy-1-b2 = <strong>السرعة:</strong> نسخة من ملفاتك الشخصية وإعداداتك وتقدم مشاهدتك، لتفتح الصفحات فوراً.
 legal-cookie-policy-1-b3 = <strong>اختياراتك:</strong> اختياراتك بشأن ملفات تعريف الارتباط والتخصيص، ولغة العرض.
 legal-cookie-policy-1-b4 = <strong>المواقع الأخرى:</strong> تُشغَّل المقاطع الدعائية من YouTube، الذي قد يضع ملفات تعريف الارتباط الخاصة به عند تشغيل مقطع دعائي. يمكنك تغيير اختياراتك في أي وقت من إعدادات الخصوصية والبيانات. حذف بيانات هذا الموقع في متصفحك يسجّل خروجك من ذلك المتصفح، ويحتفظ حسابك بكل شيء.

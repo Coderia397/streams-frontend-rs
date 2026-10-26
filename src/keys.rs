@@ -19,6 +19,8 @@ pub const TITLE_RATINGS: &str = "streams_title_ratings_v1";
 pub const LANGUAGE: &str = "streams_language";
 pub const NOTIFICATIONS_READ: &str = "streams-notifications-read:default";
 pub const SESSION: &str = "streams_session";
+/// A cookie (the only one), on the site's domain: the name of the profile in use, for the Help Centre's host (services/help_cookie.rs)
+pub const HELLO: &str = "streams_hello";
 pub const CONSENT: &str = "streams_consent";
 pub const CONSENT_DISMISSED: &str = "streams_consent_dismissed";
 pub const HELP_RECENT: &str = "streams_help_recent";

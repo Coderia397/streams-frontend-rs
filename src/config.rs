@@ -109,6 +109,8 @@ pub mod routes {
     /// The home of a Kids profile (netflix.com/Kids); Series, Films and genres use the normal /browse/genre addresses.
     pub const KIDS: &str = "/kids";
     pub const LOGIN: &str = "/login";
+    /// Signs out and goes to the start page (netflix.com/SignOut): the Help Centre's Sign out, whose host cannot end the app's session.
+    pub const SIGN_OUT: &str = "/signout";
     pub const HELP: &str = "/help";
     /// The policies live in the Help Centre, as help.netflix.com/legal/privacy does (owner, 2026-10-25); src/data/help.rs lists them for the sitemap.
     pub const PRIVACY: &str = "/help/legal/privacy";

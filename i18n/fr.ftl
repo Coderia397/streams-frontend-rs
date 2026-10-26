@@ -923,6 +923,7 @@ cookie-essential =
 
 cookie-essential-list =
     - <b>streams_session</b>, <b>streams_device_key</b> et <b>streams_resume</b> : votre connexion, un identifiant aléatoire qui permet à votre compte de reconnaître ce navigateur, et une note scellée qui vous permet de revenir dans la journée qui suit une déconnexion.
+    - <b>streams_hello</b> : un cookie avec le nom du profil utilisé, pour que le Centre d'aide, qui a sa propre adresse, vous affiche comme connecté. Il est supprimé à la déconnexion.
     - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b> et <b>streams_account_prefs</b> : des copies de vos profils, de celui en cours d'utilisation et de vos réglages.
     - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b> et <b>streams_episode_progress_v1</b> : des copies de Ma liste, des notes et de votre avancement, pour chaque profil.
     - <b>streams_sync_snapshot</b> et <b>streams_sync_cursor</b> : ce qui a été échangé en dernier avec votre compte, pour n'envoyer que les changements.
@@ -1301,7 +1302,7 @@ legal-cookie-policy-title = Politique de cookies
 legal-cookie-policy-updated = Dernière mise à jour : octobre 2026
 legal-cookie-policy-1-title = Comment nous utilisons les cookies et le stockage
 legal-cookie-policy-1-body = { $brand } n'utilise pas de cookies publicitaires ni d'analyse. Nous utilisons le stockage local de votre navigateur, un espace de votre appareil que seul ce site peut lire, pour :
-legal-cookie-policy-1-b1 = <strong>La connexion :</strong> ce qui vous garde connecté sur ce navigateur.
+legal-cookie-policy-1-b1 = <strong>La connexion :</strong> ce qui vous garde connecté sur ce navigateur, et un cookie avec le nom de votre profil pour que le Centre d'aide vous affiche comme connecté.
 legal-cookie-policy-1-b2 = <strong>La rapidité :</strong> une copie de vos profils, réglages et progression, pour que les pages s'ouvrent tout de suite.
 legal-cookie-policy-1-b3 = <strong>Vos choix :</strong> vos choix concernant les cookies et la personnalisation, et votre langue d'affichage.
 legal-cookie-policy-1-b4 = <strong>Autres sites :</strong> les bandes-annonces sont lues depuis YouTube, qui peut déposer ses propres cookies pendant la lecture. Vous pouvez changer vos choix à tout moment dans Confidentialité et paramètres des données. Effacer les données de ce site dans votre navigateur vous déconnecte de ce navigateur ; votre compte garde tout.

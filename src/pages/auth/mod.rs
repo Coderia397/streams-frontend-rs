@@ -15,6 +15,17 @@ use leptos::prelude::*;
 use wasm_bindgen::JsCast;
 use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
+/// `/signout`, the Help Centre's Sign out: ends the session (the rule in lib.rs then clears this person's data and loads the start page),
+/// as the settings' Sign out does. A browser without a session goes straight to the start page.
+#[component]
+pub fn SignOutPage() -> impl IntoView {
+    if crate::services::account::has_account() {
+        crate::pages::settings::hub::sign_out_now();
+    } else if let Some(w) = web_sys::window() {
+        let _ = w.location().replace(crate::config::routes::HOME);
+    }
+}
+
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub enum Look {
     /// Black page, used for sign in and password reset.

@@ -938,6 +938,7 @@ cookie-essential =
 
 cookie-essential-list =
     - <b>streams_session</b>, <b>streams_device_key</b> ve <b>streams_resume</b>: oturumunuz, hesabınızın bu tarayıcıyı tanımasını sağlayan rastgele bir kimlik ve oturumu kapattıktan sonraki bir gün içinde geri dönmenizi sağlayan mühürlü bir not.
+    - <b>streams_hello</b>: kullanılan profilin adını taşıyan bir çerez; kendi adresi olan Yardım Merkezi'nin sizi oturum açmış olarak göstermesi için. Oturumu kapattığınızda silinir.
     - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b> ve <b>streams_account_prefs</b>: profillerinizin, kullanılan profilin ve ayarlarınızın kopyaları.
     - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b> ve <b>streams_episode_progress_v1</b>: her profil için Listem'in, puanların ve nereye kadar izlediğinizin kopyaları.
     - <b>streams_sync_snapshot</b> ve <b>streams_sync_cursor</b>: yalnızca değişiklikler gönderilsin diye hesabınızla en son paylaşılanlar.
@@ -1316,7 +1317,7 @@ legal-cookie-policy-title = Çerez Politikası
 legal-cookie-policy-updated = Son güncelleme: Ekim 2026
 legal-cookie-policy-1-title = Çerezleri ve depolamayı nasıl kullanıyoruz
 legal-cookie-policy-1-body = { $brand } reklam veya analiz çerezleri kullanmaz. Tarayıcınızın yerel depolamasını, yani cihazınızda yalnızca bu sitenin okuyabildiği alanı şunlar için kullanırız:
-legal-cookie-policy-1-b1 = <strong>Oturum açma:</strong> bu tarayıcıda oturumunuzu açık tutan bilgi.
+legal-cookie-policy-1-b1 = <strong>Oturum açma:</strong> bu tarayıcıda oturumunuzu açık tutan bilgi ve Yardım Merkezi'nin sizi oturum açmış olarak göstermesi için profil adınızı taşıyan bir çerez.
 legal-cookie-policy-1-b2 = <strong>Hız:</strong> sayfaların hemen açılması için profillerinizin, ayarlarınızın ve ilerlemenizin bir kopyası.
 legal-cookie-policy-1-b3 = <strong>Seçimleriniz:</strong> çerezler ve kişiselleştirme hakkındaki seçimleriniz ve görüntüleme diliniz.
 legal-cookie-policy-1-b4 = <strong>Diğer siteler:</strong> fragmanlar, oynatma sırasında kendi çerezlerini koyabilen YouTube üzerinden oynatılır. Seçimlerinizi istediğiniz zaman Gizlilik ve veri ayarları'ndan değiştirebilirsiniz. Bu sitenin verilerini tarayıcınızdan temizlemek o tarayıcıda oturumunuzu kapatır; hesabınız her şeyi saklar.

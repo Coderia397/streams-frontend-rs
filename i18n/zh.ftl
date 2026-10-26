@@ -938,6 +938,7 @@ cookie-essential =
 
 cookie-essential-list =
     - <b>streams_session</b>、<b>streams_device_key</b>、<b>streams_resume</b>：你的登录信息、一个让账户识别此浏览器的随机 ID，以及一条让你在退出后一天内可以直接回来的加密记录。
+    - <b>streams_hello</b>：一个保存当前使用的个人资料名称的 Cookie，让有独立网址的帮助中心显示你已登录。退出登录时会被删除。
     - <b>streams_profiles</b>、<b>streams_active_profile</b>、<b>streams_profile_prefs</b>、<b>streams_app_prefs</b>、<b>streams_account_prefs</b>：你的个人资料、正在使用的个人资料和设置的副本。
     - <b>streams_my_list_v1</b>、<b>streams_title_ratings_v1</b>、<b>streams_watch_progress_v1</b>、<b>streams_episode_progress_v1</b>：每个个人资料的我的片单、评分和观看位置的副本。
     - <b>streams_sync_snapshot</b>、<b>streams_sync_cursor</b>：上次与账户交换的内容，这样只需发送更改。
@@ -1312,7 +1313,7 @@ legal-cookie-policy-title = Cookie 政策
 legal-cookie-policy-updated = 最后更新：2026 年 10 月
 legal-cookie-policy-1-title = 我们如何使用 Cookie 和存储
 legal-cookie-policy-1-body = { $brand } 不使用广告或分析 Cookie。我们使用浏览器的本地存储（设备上只有本网站能读取的空间）来保存：
-legal-cookie-policy-1-b1 = <strong>登录：</strong>让你在这个浏览器上保持登录的信息。
+legal-cookie-policy-1-b1 = <strong>登录：</strong>让你在这个浏览器上保持登录的信息，以及一个保存你的个人资料名称的 Cookie，让帮助中心显示你已登录。
 legal-cookie-policy-1-b2 = <strong>速度：</strong>你的个人资料、设置和观看进度的副本，让页面立刻打开。
 legal-cookie-policy-1-b3 = <strong>你的选择：</strong>你的 Cookie 和个性化选择，以及显示语言。
 legal-cookie-policy-1-b4 = <strong>其他网站：</strong>预告片从 YouTube 播放，播放时 YouTube 可能会设置自己的 Cookie。你可以随时在“隐私与数据设置”中更改选择。在浏览器中删除本网站的数据会让你在该浏览器上退出登录；你的账户会保留所有内容。

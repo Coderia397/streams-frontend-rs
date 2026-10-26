@@ -930,6 +930,7 @@ cookie-essential =
 
 cookie-essential-list =
     - <b>streams_session</b>, <b>streams_device_key</b> und <b>streams_resume</b>: Ihre Anmeldung, eine zufällige Kennung, an der Ihr Konto diesen Browser wiedererkennt, und eine versiegelte Notiz, mit der Sie innerhalb eines Tages nach dem Abmelden zurückkehren können.
+    - <b>streams_hello</b>: ein Cookie mit dem Namen des aktiven Profils, damit das Hilfe-Center, das eine eigene Adresse hat, Sie als angemeldet zeigt. Beim Abmelden wird es gelöscht.
     - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b> und <b>streams_account_prefs</b>: Kopien Ihrer Profile, des aktiven Profils und Ihrer Einstellungen.
     - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b> und <b>streams_episode_progress_v1</b>: Kopien von Meine Liste, Bewertungen und Ihrem Fortschritt, für jedes Profil.
     - <b>streams_sync_snapshot</b> und <b>streams_sync_cursor</b>: was zuletzt mit Ihrem Konto abgeglichen wurde, damit nur Änderungen gesendet werden.
@@ -1308,7 +1309,7 @@ legal-cookie-policy-title = Cookie-Richtlinie
 legal-cookie-policy-updated = Zuletzt aktualisiert: Oktober 2026
 legal-cookie-policy-1-title = Wie wir Cookies und Speicher verwenden
 legal-cookie-policy-1-body = { $brand } verwendet keine Werbe- oder Analyse-Cookies. Wir nutzen den lokalen Speicher Ihres Browsers, einen Bereich auf Ihrem Gerät, den nur diese Website lesen kann, für:
-legal-cookie-policy-1-b1 = <strong>Anmeldung:</strong> was Sie in diesem Browser angemeldet hält.
+legal-cookie-policy-1-b1 = <strong>Anmeldung:</strong> was Sie in diesem Browser angemeldet hält, und ein Cookie mit dem Namen Ihres Profils, damit das Hilfe-Center Sie als angemeldet zeigt.
 legal-cookie-policy-1-b2 = <strong>Geschwindigkeit:</strong> eine Kopie Ihrer Profile, Einstellungen und Ihres Fortschritts, damit Seiten sofort öffnen.
 legal-cookie-policy-1-b3 = <strong>Ihre Entscheidungen:</strong> Ihre Entscheidungen zu Cookies und Personalisierung sowie Ihre Anzeigesprache.
 legal-cookie-policy-1-b4 = <strong>Andere Websites:</strong> Trailer werden von YouTube abgespielt, das beim Abspielen eigene Cookies setzen kann. Sie können Ihre Entscheidungen jederzeit unter Datenschutz- und Dateneinstellungen ändern. Wenn Sie die Daten dieser Website in Ihrem Browser löschen, werden Sie in diesem Browser abgemeldet; Ihr Konto behält alles.

@@ -929,6 +929,7 @@ cookie-essential =
 
 cookie-essential-list =
     - <b>streams_session</b>, <b>streams_device_key</b> e <b>streams_resume</b>: seu login, um identificador aleatório que permite à sua conta reconhecer este navegador e uma nota lacrada que deixa você voltar em até um dia depois de sair.
+    - <b>streams_hello</b>: um cookie com o nome do perfil em uso, para que o Centro de Ajuda, que tem endereço próprio, mostre você como conectado. Ele é apagado quando você sai.
     - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b> e <b>streams_account_prefs</b>: cópias dos seus perfis, do perfil em uso e das suas configurações.
     - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b> e <b>streams_episode_progress_v1</b>: cópias da Minha Lista, das avaliações e de até onde você assistiu, para cada perfil.
     - <b>streams_sync_snapshot</b> e <b>streams_sync_cursor</b>: o que foi trocado por último com a sua conta, para enviar só as mudanças.
@@ -1314,7 +1315,7 @@ legal-cookie-policy-title = Política de Cookies
 legal-cookie-policy-updated = Última atualização: outubro de 2026
 legal-cookie-policy-1-title = Como usamos cookies e armazenamento
 legal-cookie-policy-1-body = O { $brand } não usa cookies de publicidade ou de análise. Usamos o armazenamento local do navegador, um espaço no seu dispositivo que só este site consegue ler, para:
-legal-cookie-policy-1-b1 = <strong>Login:</strong> o que mantém você conectado neste navegador.
+legal-cookie-policy-1-b1 = <strong>Login:</strong> o que mantém você conectado neste navegador, e um cookie com o nome do seu perfil para que o Centro de Ajuda mostre você como conectado.
 legal-cookie-policy-1-b2 = <strong>Rapidez:</strong> uma cópia dos seus perfis, configurações e progresso, para as páginas abrirem na hora.
 legal-cookie-policy-1-b3 = <strong>Suas escolhas:</strong> suas escolhas sobre cookies e personalização e o idioma de exibição.
 legal-cookie-policy-1-b4 = <strong>Outros sites:</strong> os trailers são reproduzidos pelo YouTube, que pode colocar os próprios cookies ao reproduzir um trailer. Você pode mudar suas escolhas quando quiser em Privacidade e configurações de dados. Limpar os dados deste site no navegador desconecta você desse navegador; sua conta guarda tudo.

@@ -938,6 +938,7 @@ cookie-essential =
 
 cookie-essential-list =
     - <b>streams_session</b>、<b>streams_device_key</b>、<b>streams_resume</b>：サインイン情報、アカウントがこのブラウザを識別するためのランダムな ID、サインアウト後 1 日以内に戻れるようにする封印されたメモ。
+    - <b>streams_hello</b>：使用中のプロフィール名を入れたクッキー。独自のアドレスを持つヘルプセンターで、サインインした状態として表示するためのものです。サインアウトすると削除されます。
     - <b>streams_profiles</b>、<b>streams_active_profile</b>、<b>streams_profile_prefs</b>、<b>streams_app_prefs</b>、<b>streams_account_prefs</b>：プロフィール、使用中のプロフィール、設定のコピー。
     - <b>streams_my_list_v1</b>、<b>streams_title_ratings_v1</b>、<b>streams_watch_progress_v1</b>、<b>streams_episode_progress_v1</b>：プロフィールごとのマイリスト、評価、視聴位置のコピー。
     - <b>streams_sync_snapshot</b>、<b>streams_sync_cursor</b>：変更分だけを送るための、アカウントと最後にやり取りした内容。
@@ -1310,7 +1311,7 @@ legal-cookie-policy-title = クッキーポリシー
 legal-cookie-policy-updated = 最終更新日：2026年10月
 legal-cookie-policy-1-title = クッキーとストレージの使い方
 legal-cookie-policy-1-body = { $brand } は広告や分析のためのクッキーを使いません。代わりに、このサイトだけが読み取れるデバイス内の保存場所であるブラウザのローカルストレージを、次の目的で使います：
-legal-cookie-policy-1-b1 = <strong>サインイン：</strong>このブラウザでサインインした状態を保つための情報。
+legal-cookie-policy-1-b1 = <strong>サインイン：</strong>このブラウザでサインインした状態を保つための情報と、ヘルプセンターでサインイン中と表示するための、プロフィール名を入れたクッキー。
 legal-cookie-policy-1-b2 = <strong>表示速度：</strong>ページがすぐに開くように、プロフィール、設定、視聴の進捗のコピー。
 legal-cookie-policy-1-b3 = <strong>お客様の選択：</strong>クッキーとパーソナライズに関する選択、および表示言語。
 legal-cookie-policy-1-b4 = <strong>ほかのサイト：</strong>予告編はYouTubeから再生され、再生時にYouTubeが独自のクッキーを設定することがあります。選択は「プライバシーとデータ設定」でいつでも変更できます。ブラウザでこのサイトのデータを削除すると、そのブラウザではサインアウトされますが、アカウントのデータはすべて残ります。

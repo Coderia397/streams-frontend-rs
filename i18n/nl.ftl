@@ -938,6 +938,7 @@ cookie-essential =
 
 cookie-essential-list =
     - <b>streams_session</b>, <b>streams_device_key</b> en <b>streams_resume</b>: je inlog, een willekeurige code waarmee je account deze browser herkent, en een verzegelde notitie waarmee je binnen een dag na het uitloggen terug kunt komen.
+    - <b>streams_hello</b>: een cookie met de naam van het profiel in gebruik, zodat het Helpcentrum, dat een eigen adres heeft, je als ingelogd toont. Uitloggen verwijdert hem.
     - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b> en <b>streams_account_prefs</b>: kopieën van je profielen, het profiel dat in gebruik is en je instellingen.
     - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b> en <b>streams_episode_progress_v1</b>: kopieën van Mijn lijst, beoordelingen en hoe ver je keek, per profiel.
     - <b>streams_sync_snapshot</b> en <b>streams_sync_cursor</b>: wat het laatst met je account is uitgewisseld, zodat alleen wijzigingen worden verstuurd.
@@ -1316,7 +1317,7 @@ legal-cookie-policy-title = Cookiebeleid
 legal-cookie-policy-updated = Laatst bijgewerkt: oktober 2026
 legal-cookie-policy-1-title = Hoe we cookies en opslag gebruiken
 legal-cookie-policy-1-body = { $brand } gebruikt geen advertentie- of analysecookies. We gebruiken de lokale opslag van je browser, een plek op je apparaat die alleen deze site kan lezen, voor:
-legal-cookie-policy-1-b1 = <strong>Inloggen:</strong> wat je in deze browser ingelogd houdt.
+legal-cookie-policy-1-b1 = <strong>Inloggen:</strong> wat je in deze browser ingelogd houdt, en een cookie met de naam van je profiel zodat het Helpcentrum je als ingelogd toont.
 legal-cookie-policy-1-b2 = <strong>Snelheid:</strong> een kopie van je profielen, instellingen en voortgang, zodat pagina's meteen openen.
 legal-cookie-policy-1-b3 = <strong>Je keuzes:</strong> je keuzes over cookies en personalisatie, en je weergavetaal.
 legal-cookie-policy-1-b4 = <strong>Andere sites:</strong> trailers worden afgespeeld via YouTube, dat tijdens het afspelen eigen cookies kan plaatsen. Je kunt je keuzes altijd veranderen in Privacy- en gegevensinstellingen. Wis je de gegevens van deze site in je browser, dan ben je in die browser uitgelogd; je account bewaart alles.

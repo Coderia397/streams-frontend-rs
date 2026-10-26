@@ -938,6 +938,7 @@ cookie-essential =
 
 cookie-essential-list =
     - <b>streams_session</b>, <b>streams_device_key</b> and <b>streams_resume</b>: your sign in, a random id that lets your account recognise this browser, and a sealed note that lets you come back within a day of signing out.
+    - <b>streams_hello</b>: a cookie with the name of the profile in use, so the Help Centre, which has its own address, shows you as signed in. Signing out removes it.
     - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b> and <b>streams_account_prefs</b>: copies of your profiles, the one in use and your settings.
     - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b> and <b>streams_episode_progress_v1</b>: copies of My List, ratings and how far you watched, for each profile.
     - <b>streams_sync_snapshot</b> and <b>streams_sync_cursor</b>: what was last exchanged with your account, so only changes are sent.
@@ -1391,7 +1392,7 @@ legal-cookie-policy-title = Cookie Policy
 legal-cookie-policy-updated = Last updated: October 2026
 legal-cookie-policy-1-title = 1. What we keep in your browser
 legal-cookie-policy-1-body = { $brand } does not use advertising or analytics cookies. We use your browser's local storage, a place on your device that only this site can read, for:
-legal-cookie-policy-1-b1 = <strong>Signing in:</strong> what keeps you signed in on this browser.
+legal-cookie-policy-1-b1 = <strong>Signing in:</strong> what keeps you signed in on this browser, and a cookie with your profile's name so the Help Centre shows you as signed in.
 legal-cookie-policy-1-b2 = <strong>Speed:</strong> a copy of your profiles, settings and viewing progress, so pages open at once.
 legal-cookie-policy-1-b3 = <strong>Your choices:</strong> your cookie and personalisation choices and your display language.
 legal-cookie-policy-2-title = 2. Other sites

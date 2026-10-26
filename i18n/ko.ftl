@@ -937,6 +937,7 @@ cookie-essential =
 
 cookie-essential-list =
     - <b>streams_session</b>, <b>streams_device_key</b>, <b>streams_resume</b>: 로그인 정보, 계정이 이 브라우저를 알아보게 하는 무작위 ID, 로그아웃 후 하루 안에 다시 들어올 수 있게 하는 봉인된 메모.
+    - <b>streams_hello</b>: 사용 중인 프로필 이름이 담긴 쿠키로, 별도 주소를 쓰는 도움말 센터에서 로그인 상태로 표시하기 위한 것입니다. 로그아웃하면 삭제됩니다.
     - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b>, <b>streams_account_prefs</b>: 프로필, 사용 중인 프로필, 설정의 사본.
     - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b>, <b>streams_episode_progress_v1</b>: 프로필별 내 목록, 평가, 시청 위치의 사본.
     - <b>streams_sync_snapshot</b>, <b>streams_sync_cursor</b>: 변경된 것만 보내기 위해 계정과 마지막으로 주고받은 내용.
@@ -1309,7 +1310,7 @@ legal-cookie-policy-title = 쿠키 정책
 legal-cookie-policy-updated = 최종 업데이트: 2026년 10월
 legal-cookie-policy-1-title = 쿠키와 저장소 사용 방식
 legal-cookie-policy-1-body = { $brand }는 광고나 분석 쿠키를 사용하지 않습니다. 대신 이 사이트만 읽을 수 있는 기기 내 공간인 브라우저의 로컬 저장소를 다음 목적으로 사용합니다:
-legal-cookie-policy-1-b1 = <strong>로그인:</strong> 이 브라우저에서 로그인 상태를 유지하는 정보.
+legal-cookie-policy-1-b1 = <strong>로그인:</strong> 이 브라우저에서 로그인 상태를 유지하는 정보, 그리고 도움말 센터에서 로그인 상태로 표시하기 위해 프로필 이름을 담은 쿠키.
 legal-cookie-policy-1-b2 = <strong>속도:</strong> 페이지가 바로 열리도록 저장한 프로필, 설정, 시청 진행 상황 사본.
 legal-cookie-policy-1-b3 = <strong>이용자의 선택:</strong> 쿠키와 맞춤 설정 선택, 표시 언어.
 legal-cookie-policy-1-b4 = <strong>다른 사이트:</strong> 예고편은 YouTube에서 재생되며, 예고편이 재생될 때 YouTube가 자체 쿠키를 설정할 수 있습니다. 선택은 개인정보 및 데이터 설정에서 언제든 바꿀 수 있습니다. 브라우저에서 이 사이트의 데이터를 삭제하면 해당 브라우저에서 로그아웃되며, 계정에는 모든 데이터가 그대로 남습니다.

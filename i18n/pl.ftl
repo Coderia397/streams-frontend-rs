@@ -940,6 +940,7 @@ cookie-essential =
 
 cookie-essential-list =
     - <b>streams_session</b>, <b>streams_device_key</b> i <b>streams_resume</b>: zalogowanie, losowy identyfikator, po którym konto rozpoznaje tę przeglądarkę, oraz zapieczętowana notatka, która pozwala wrócić w ciągu doby od wylogowania.
+    - <b>streams_hello</b>: plik cookie z nazwą używanego profilu, dzięki któremu Centrum pomocy, które ma własny adres, pokazuje, że jesteś zalogowany. Wylogowanie go usuwa.
     - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b> i <b>streams_account_prefs</b>: kopie profili, aktywnego profilu i ustawień.
     - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b> i <b>streams_episode_progress_v1</b>: kopie Mojej listy, ocen i miejsca, w którym skończyło się oglądanie, dla każdego profilu.
     - <b>streams_sync_snapshot</b> i <b>streams_sync_cursor</b>: to, co ostatnio wymieniono z kontem, żeby wysyłać tylko zmiany.
@@ -1332,7 +1333,7 @@ legal-cookie-policy-title = Polityka Cookies
 legal-cookie-policy-updated = Ostatnia aktualizacja: październik 2026
 legal-cookie-policy-1-title = Jak używamy plików cookie i pamięci
 legal-cookie-policy-1-body = { $brand } nie używa reklamowych ani analitycznych plików cookie. Korzystamy z pamięci lokalnej przeglądarki, czyli miejsca na Twoim urządzeniu, które może odczytać tylko ta strona, do:
-legal-cookie-policy-1-b1 = <strong>Logowania:</strong> tego, co utrzymuje Cię zalogowanym w tej przeglądarce.
+legal-cookie-policy-1-b1 = <strong>Logowania:</strong> tego, co utrzymuje Cię zalogowanym w tej przeglądarce, oraz pliku cookie z nazwą Twojego profilu, dzięki któremu Centrum pomocy pokazuje, że jesteś zalogowany.
 legal-cookie-policy-1-b2 = <strong>Szybkości:</strong> kopii profili, ustawień i postępów, żeby strony otwierały się od razu.
 legal-cookie-policy-1-b3 = <strong>Twoich wyborów:</strong> wyborów dotyczących plików cookie i personalizacji oraz języka interfejsu.
 legal-cookie-policy-1-b4 = <strong>Innych stron:</strong> zwiastuny są odtwarzane z YouTube, który może zapisywać własne pliki cookie podczas odtwarzania. Swoje wybory możesz zmienić w dowolnej chwili w Ustawieniach prywatności i danych. Wyczyszczenie danych tej strony w przeglądarce wylogowuje Cię w tej przeglądarce; konto zachowuje wszystko.

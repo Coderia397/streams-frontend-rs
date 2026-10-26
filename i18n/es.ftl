@@ -928,6 +928,7 @@ cookie-essential =
 
 cookie-essential-list =
     - <b>streams_session</b>, <b>streams_device_key</b> y <b>streams_resume</b>: tu sesión, un identificador aleatorio que permite a tu cuenta reconocer este navegador y una nota sellada que te deja volver durante el día siguiente a cerrar sesión.
+    - <b>streams_hello</b>: una cookie con el nombre del perfil en uso, para que el Centro de ayuda, que tiene su propia dirección, te muestre con la sesión iniciada. Se borra al cerrar sesión.
     - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b> y <b>streams_account_prefs</b>: copias de tus perfiles, del que está en uso y de tus ajustes.
     - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b> y <b>streams_episode_progress_v1</b>: copias de Mi lista, de las valoraciones y de hasta dónde viste, para cada perfil.
     - <b>streams_sync_snapshot</b> y <b>streams_sync_cursor</b>: lo último que se intercambió con tu cuenta, para enviar solo los cambios.
@@ -1306,7 +1307,7 @@ legal-cookie-policy-title = Política de cookies
 legal-cookie-policy-updated = Última actualización: octubre de 2026
 legal-cookie-policy-1-title = Cómo usamos las cookies y el almacenamiento
 legal-cookie-policy-1-body = { $brand } no usa cookies de publicidad ni de analítica. Usamos el almacenamiento local de tu navegador, un lugar de tu dispositivo que solo puede leer este sitio, para:
-legal-cookie-policy-1-b1 = <strong>Iniciar sesión:</strong> lo que mantiene tu sesión iniciada en este navegador.
+legal-cookie-policy-1-b1 = <strong>Iniciar sesión:</strong> lo que mantiene tu sesión iniciada en este navegador, y una cookie con el nombre de tu perfil para que el Centro de ayuda te muestre con la sesión iniciada.
 legal-cookie-policy-1-b2 = <strong>Rapidez:</strong> una copia de tus perfiles, ajustes y progreso, para que las páginas abran al instante.
 legal-cookie-policy-1-b3 = <strong>Tus elecciones:</strong> tus elecciones sobre cookies y personalización, y el idioma de la interfaz.
 legal-cookie-policy-1-b4 = <strong>Otros sitios:</strong> los avances se reproducen desde YouTube, que puede poner sus propias cookies al reproducir un avance. Puedes cambiar tus elecciones cuando quieras en Configuración de privacidad y datos. Si borras los datos de este sitio en tu navegador, se cierra la sesión en ese navegador; tu cuenta lo conserva todo.

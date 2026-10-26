@@ -938,6 +938,7 @@ cookie-essential =
 
 cookie-essential-list =
     - <b>streams_session</b>, <b>streams_device_key</b> och <b>streams_resume</b>: din inloggning, ett slumpmässigt id som låter ditt konto känna igen den här webbläsaren och en förseglad anteckning som låter dig komma tillbaka inom ett dygn efter att du loggat ut.
+    - <b>streams_hello</b>: en cookie med namnet på profilen som används, så att Hjälpcenter, som har en egen adress, visar dig som inloggad. Den tas bort när du loggar ut.
     - <b>streams_profiles</b>, <b>streams_active_profile</b>, <b>streams_profile_prefs</b>, <b>streams_app_prefs</b> och <b>streams_account_prefs</b>: kopior av dina profiler, den som används och dina inställningar.
     - <b>streams_my_list_v1</b>, <b>streams_title_ratings_v1</b>, <b>streams_watch_progress_v1</b> och <b>streams_episode_progress_v1</b>: kopior av Min lista, betyg och hur långt du har tittat, för varje profil.
     - <b>streams_sync_snapshot</b> och <b>streams_sync_cursor</b>: det som senast utbyttes med ditt konto, så att bara ändringar skickas.
@@ -1316,7 +1317,7 @@ legal-cookie-policy-title = Cookiepolicy
 legal-cookie-policy-updated = Senast uppdaterad: oktober 2026
 legal-cookie-policy-1-title = Hur vi använder cookies och lagring
 legal-cookie-policy-1-body = { $brand } använder inga reklam- eller analyscookies. Vi använder webbläsarens lokala lagring, en plats på din enhet som bara den här webbplatsen kan läsa, till:
-legal-cookie-policy-1-b1 = <strong>Inloggning:</strong> det som håller dig inloggad i den här webbläsaren.
+legal-cookie-policy-1-b1 = <strong>Inloggning:</strong> det som håller dig inloggad i den här webbläsaren, och en cookie med din profils namn så att Hjälpcenter visar dig som inloggad.
 legal-cookie-policy-1-b2 = <strong>Snabbhet:</strong> en kopia av dina profiler, inställningar och ditt framsteg, så att sidorna öppnas direkt.
 legal-cookie-policy-1-b3 = <strong>Dina val:</strong> dina val om cookies och personalisering, och ditt visningsspråk.
 legal-cookie-policy-1-b4 = <strong>Andra webbplatser:</strong> trailers spelas upp från YouTube, som kan sätta egna cookies när en trailer spelas. Du kan ändra dina val när som helst under Integritet och datainställningar. Om du rensar webbplatsens data i webbläsaren loggas du ut där; ditt konto sparar allt.

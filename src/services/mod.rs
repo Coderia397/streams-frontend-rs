@@ -9,3 +9,4 @@ pub mod trailer_resolver;
 pub mod unplayable;
 pub mod profile_gate;
 pub mod sync;
+pub mod help_cookie;

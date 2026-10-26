@@ -96,7 +96,7 @@ fn AccountMenu(name: Signal<String>, dark: bool) -> impl IntoView {
                         {tr("help-ui-account")}
                         <i class="ph-bold ph-caret-right text-fine text-brand" aria-hidden="true"></i>
                     </a>
-                    <a role="menuitem" href=crate::config::app_link("/login") class="flex items-center gap-2 px-4 py-2 text-body-md text-paper-ink hover:bg-paper-soft">
+                    <a role="menuitem" href=crate::config::app_link(crate::config::routes::SIGN_OUT) class="flex items-center gap-2 px-4 py-2 text-body-md text-paper-ink hover:bg-paper-soft">
                         {tr("help-ui-signout")}
                         <i class="ph-bold ph-caret-right text-fine text-brand" aria-hidden="true"></i>
                     </a>
@@ -113,8 +113,16 @@ pub fn HelpShell(children: Children, #[prop(default = Look::Dark)] look: Look, #
     let dark = look == Look::Dark;
     let current = crate::i18n::language();
     let profiles = crate::store::use_profile_store();
-    let signed_in = has_profile();
+    // on its own host the Help Centre cannot read the app's storage: the app leaves the profile's name in a cookie (services/help_cookie.rs)
+    let hello = if crate::config::on_help_host() { Some(crate::services::help_cookie::read()) } else { None };
+    let signed_in = match &hello {
+        Some(name) => name.is_some(),
+        None => has_profile(),
+    };
     let active_name = Signal::derive(move || {
+        if let Some(name) = &hello {
+            return name.clone().unwrap_or_default();
+        }
         let id = profiles.active_profile_id.get();
         profiles.profiles.with(|list| list.iter().find(|p| Some(&p.id) == id.as_ref()).or(list.first()).map(|p| p.name.clone()).unwrap_or_default())
     });
