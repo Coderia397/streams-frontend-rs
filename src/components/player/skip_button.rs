@@ -5,15 +5,20 @@ use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 /// The buttons over the picture: Skip Recap, Skip Intro and, at the credits of an episode, "Watch credits" and "Next episode". When they show comes from the skip marks the engine guesses
 /// (ratios of the video's length, so a stream with an extra logo or a different cut still lines up); a video without a mark has no button. They are the app's pills (btn-pill-md:
 /// fully round, 40 px, grey glass; Next episode white). On the website they sit at the controls' right edge, above the controls band while it shows (--player-bar-h) and lower when
-/// it hides, moving with it; on the phone they keep their corner.
+/// it hides, moving with it. On the phone held sideways they line up with the time left (25 px in from the cutout side): with the controls hidden at the bottom row's height
+/// (its middle 35 px up), with them showing above the seek bar (its top 93 px up), so they never cover Next Ep. or the time; held upright, inside the lower right corner of the
+/// picture (a 16:9 picture is 56.25vw high, centred), clear of the middle row and the Full screen button. The locked screen hides them.
 #[component]
 pub fn SkipButton(
     current_time: ReadSignal<f64>,
     duration: ReadSignal<f64>,
     is_tv: bool,
     marks: Signal<SkipMarks>,
-    /// whether the website's controls show (the buttons keep above them)
+    /// whether the controls show, the website's or the phone's (the buttons keep above them)
     lifted: Signal<bool>,
+    /// the phone's locked screen: no buttons
+    #[prop(default = Signal::derive(|| false))]
+    hidden: Signal<bool>,
     /// seek to this time (seconds)
     on_skip_to: Callback<f64>,
     on_next_episode: Callback<()>,
@@ -38,7 +43,11 @@ pub fn SkipButton(
     let form = crate::form::use_form();
     let place = move || {
         if form.get().is_phone() {
-            "bottom-[3.54vw] right-[3vw]"
+            if lifted.get() {
+                "right-[calc(env(safe-area-inset-right)+25px)] landscape:bottom-[105px] portrait:bottom-[calc(50%_-_28.125vw_+_12px)]"
+            } else {
+                "right-[calc(env(safe-area-inset-right)+25px)] landscape:bottom-[15px] portrait:bottom-[calc(50%_-_28.125vw_+_12px)]"
+            }
         } else if lifted.get() {
             "bottom-[calc(var(--player-bar-h)+1rem)] right-[28px]"
         } else {
@@ -47,7 +56,7 @@ pub fn SkipButton(
     };
 
     view! {
-        <div class=move || format!("absolute {} z-30 flex items-center gap-3 pointer-events-auto transition-[bottom] duration-(--motion-slow)", place())>
+        <div class=move || format!("absolute {} z-30 flex items-center gap-3 pointer-events-auto transition-[bottom] duration-(--motion-slow) {}", place(), if hidden.get() { "hidden" } else { "" })>
             <Show when=show_recap>
                 <button on:click=move |_| { if let Some(r) = marks.get().recap { on_skip_to.run(r[1] * duration.get()); } } class=format!("{base} {grey}")>
                     <i class="ph-fill ph-fast-forward"></i>

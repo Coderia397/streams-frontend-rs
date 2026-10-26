@@ -29,6 +29,9 @@ pub struct ControlsState {
     pub buffered_fraction: ReadSignal<f64>,
     /// The website hides its controls after a while without the pointer moving
     pub is_idle: ReadSignal<bool>,
+    /// The phone's controls: whether they show, and whether the screen is locked (kept here so the skip buttons over the picture follow them)
+    pub phone_shown: RwSignal<bool>,
+    pub phone_locked: RwSignal<bool>,
     /// The playback speed (1.0 normal)
     pub speed: ReadSignal<f64>,
     pub on_set_speed: Callback<f64>,

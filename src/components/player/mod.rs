@@ -112,6 +112,10 @@ pub fn StreamsPlayer(
     let (speed, set_speed) = signal(1.0f64);
     let (buffered_fraction, set_buffered_fraction) = signal(0.0);
     let (is_idle, set_is_idle) = signal(false);
+    // the phone's controls showing and its locked screen (controls/phone sets them; the skip buttons follow them)
+    let phone_shown = RwSignal::new(true);
+    let phone_locked = RwSignal::new(false);
+    let form = crate::form::use_form();
     // the disc the last skip or play and pause leaves on the website's picture, numbered so a repeat brings a new one (website_overlays.rs)
     let (disc, set_disc) = signal(None::<(Disc, u32)>);
     let show_disc = move |d: Disc| set_disc.update(|v| *v = Some((d, v.map_or(0, |(_, n)| n.wrapping_add(1)))));
@@ -821,6 +825,8 @@ pub fn StreamsPlayer(
                                             duration,
                                             buffered_fraction,
                                             is_idle,
+                                            phone_shown,
+                                            phone_locked,
                                             speed,
                                             on_set_speed: Callback::new(move |v| do_set_speed(v)),
                                             on_toggle_play: Callback::new(move |_| do_toggle_play()),
@@ -863,7 +869,8 @@ pub fn StreamsPlayer(
                                             duration=duration
                                             is_tv=is_tv
                                             marks=marks_sig
-                                            lifted=Signal::derive(move || !is_idle.get())
+                                            lifted=Signal::derive(move || if form.get().is_phone() { phone_shown.get() && !phone_locked.get() } else { !is_idle.get() })
+                                            hidden=phone_locked.into()
                                             on_skip_to=Callback::new(move |t| do_seek(t))
                                             on_next_episode=Callback::new(move |_| {
                                                 if let Some(cb) = on_episode_change {

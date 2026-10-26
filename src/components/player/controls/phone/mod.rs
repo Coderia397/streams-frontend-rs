@@ -30,10 +30,11 @@ pub fn PhoneControls(state: ControlsState) -> impl IntoView {
     let ControlsState {
         title, episode, episode_name, media_id, is_tv, is_playing, is_buffering, is_muted, current_time, duration, speed, on_set_speed,
         on_toggle_play, on_toggle_mute, on_seek, on_skip_by, on_next_episode, on_back, subtitles, selected_sub, audio_tracks, audio_selected,
-        on_select_audio, on_select_sub, on_refresh_audio, on_select_episode, ..
+        on_select_audio, on_select_sub, on_refresh_audio, on_select_episode, phone_shown, phone_locked, ..
     } = state;
-    let shown = RwSignal::new(true);
-    let locked = RwSignal::new(false);
+    let shown = phone_shown;
+    let locked = phone_locked;
+    locked.set(false);
     // the phone's menus, each over the whole screen as the app's
     let speed_open = RwSignal::new(false);
     let subs_open = RwSignal::new(false);
