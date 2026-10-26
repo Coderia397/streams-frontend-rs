@@ -147,11 +147,18 @@ pub fn default_profiles_with(main_avatar: String) -> Vec<crate::models::profile:
 
 pub fn provide_profile_store() {
     let storage = web_sys::window().and_then(|w| w.local_storage().ok().flatten());
-    let mut initial_profiles = storage
+    let stored = storage
         .as_ref()
         .and_then(|s| s.get_item(crate::keys::PROFILES).ok().flatten())
-        .and_then(|raw| serde_json::from_str::<Vec<crate::models::profile::Profile>>(&raw).ok())
-        .unwrap_or_else(default_profiles);
+        .and_then(|raw| serde_json::from_str::<Vec<crate::models::profile::Profile>>(&raw).ok());
+    // a browser used for the first time (no profiles kept, no activity noted yet): its first profiles are new, for the guide (layout/tour.rs)
+    let first_use = stored.is_none() && storage.as_ref().is_some_and(|s| s.get_item(crate::keys::LAST_SEEN).ok().flatten().is_none());
+    let mut initial_profiles = stored.unwrap_or_else(default_profiles);
+    if first_use {
+        for p in &initial_profiles {
+            crate::components::layout::tour::mark_new(&p.id);
+        }
+    }
     crate::models::profile_rules::normalize(&mut initial_profiles);
     // the profile in use: the one this browser chose, if it still exists. Without one, a browser that holds an account shows Who's watching
     // (as Netflix does after signing in or reloading before a choice); a browser without an account uses its first profile.
@@ -230,19 +237,20 @@ pub fn start_account(store: ProfileStore, session: &crate::services::account::Se
     crate::services::sync::refresh_profiles(store);
 }
 
-/// Makes a profile the one in use and loads the home page afresh, so everything that belongs to a profile (feed, list, ratings, the Kids frame) is read again
-/// for it, as Netflix does when you pick a profile.
+/// Makes a profile the one in use and loads the page afresh (the page Who's watching covered, or the profile's home after a switch), so everything that
+/// belongs to a profile (feed, list, ratings, the Kids frame) is read again for it, as Netflix does when you pick a profile.
 pub fn activate_profile(id: &str) {
     if let Some(window) = web_sys::window() {
-        let storage = window.local_storage().ok().flatten();
-        let had_profile = storage.as_ref().and_then(|s| s.get_item(crate::keys::ACTIVE_PROFILE).ok().flatten()).is_some();
-        if let Some(storage) = &storage {
+        if let Some(storage) = window.local_storage().ok().flatten() {
             let _ = storage.set_item(crate::keys::ACTIVE_PROFILE, id);
         }
-        // Who's watching came up over a watch address (a link to a film, a reload in the player): the pick goes on to that film, which the
-        // player then checks against the profile's age rating. A switch from one profile to another starts on the new profile's home.
+        // Who's watching came up over a page (an address opened or linked, a reload, the page left open when the browser asked again after
+        // time away, the page Switch profiles was chosen on): the pick goes on to that page. A switch from one profile to another (the menu,
+        // the Kids and Exit Kids buttons) starts on the new profile's home. The screen is up while no profile is in use; storage cannot tell,
+        // as the screen saves its pick there before this runs.
+        let from_gate = use_profile_store().active_profile_id.get_untracked().is_none();
         let path = window.location().pathname().unwrap_or_default();
-        if !had_profile && path.starts_with("/watch/") {
+        if from_gate && stays_after_pick(&path, home_of(id) == crate::config::routes::KIDS) {
             let search = window.location().search().unwrap_or_default();
             let _ = window.location().set_href(&format!("{path}{search}"));
             return;
@@ -255,6 +263,18 @@ pub fn activate_profile(id: &str) {
             None => home.to_string(),
         });
     }
+}
+
+/// Whether a pick on Who's watching goes on to the page under it, as Netflix keeps its address. The two homes lead to the picked profile's
+/// own home, and the sign in, email link and profile pages to Home. A Kids profile goes on only where the page checks it (the player checks
+/// the age rating, a genre page shows a Kids profile's titles); anywhere else it starts on `/kids`.
+fn stays_after_pick(path: &str, kids: bool) -> bool {
+    use crate::config::routes;
+    let path = path.trim_end_matches('/');
+    if matches!(path, "" | routes::BROWSE | routes::KIDS) || [routes::LOGIN, "/signup", "/auth", "/profiles"].iter().any(|p| path.starts_with(p)) {
+        return false;
+    }
+    !kids || path.starts_with("/watch/") || path.starts_with("/browse/genre/")
 }
 
 /// Where a profile starts: a Kids profile at `/kids`, every other one at `/browse`.
@@ -336,3 +356,22 @@ pub mod scoped;
 pub mod trailers;
 pub mod watch_store;
 pub use watch_store::{provide_watch_store, use_watch_store, WatchRecord, WatchStore};
+
+#[cfg(test)]
+mod tests {
+    use super::stays_after_pick;
+
+    #[test]
+    fn a_pick_goes_on_to_the_page_under_who_is_watching() {
+        for p in ["/browse/genre/83", "/title/tv-1399", "/search", "/browse/my-list", "/latest", "/settings/account", "/help/contact", "/watch/tv/1399"] {
+            assert!(stays_after_pick(p, false), "{p}");
+        }
+        for p in ["/", "", "/browse", "/browse/", "/kids", "/login", "/signup", "/auth/confirm", "/profiles/manage"] {
+            assert!(!stays_after_pick(p, false), "{p}");
+        }
+        // a Kids profile goes on only where the page checks it
+        for (p, stays) in [("/watch/movie/12", true), ("/browse/genre/83", true), ("/title/tv-1399", false), ("/search", false), ("/browse/my-list", false)] {
+            assert_eq!(stays_after_pick(p, true), stays, "{p}");
+        }
+    }
+}

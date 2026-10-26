@@ -78,6 +78,7 @@ pub fn import_profile(text: &str, store: ProfileStore, prefs: Prefs) -> Result<S
     let taken: Vec<String> = store.profiles.with_untracked(|l| l.iter().map(|p| p.name.clone()).collect());
     let name = free_name(&taken, &file.name);
     let id = format!("p{}", js_sys::Date::now() as u64);
+    crate::components::layout::tour::mark_new(&id);
     store.profiles.update(|l| {
         let order = l.iter().map(|p| p.sort_order).max().unwrap_or(0) + 1;
         l.push(Profile { id: id.clone(), name: name.clone(), avatar_url: file.avatar_url, is_kids: file.is_kids, is_default: Some(false), pin: None, sort_order: order });

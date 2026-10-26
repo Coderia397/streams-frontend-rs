@@ -20,15 +20,13 @@ pub fn NavbarProfileMenu() -> impl IntoView {
     };
 
     let is_kids = Memo::new(move |_| active_profile().is_some_and(|p| p.is_kids));
-    // Switch profile goes back to the page that asks who is watching
-    let nav_to_gate = navigate.clone();
+    // Switch profile brings up the page that asks who is watching over the page in use, and the pick comes back to it (store::activate_profile)
     let switch_gate = Callback::new(move |_: ()| {
         set_is_open.set(false);
         active_profile_id.set(None);
         if let Some(storage) = web_sys::window().and_then(|w| w.local_storage().ok().flatten()) {
             let _ = storage.remove_item(crate::keys::ACTIVE_PROFILE);
         }
-        nav_to_gate(crate::config::routes::BROWSE, Default::default());
     });
 
     let other_profiles = move || {

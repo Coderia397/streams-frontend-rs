@@ -122,8 +122,8 @@ pub fn App() -> impl IntoView {
                 // the developer pages exist only when the site is opened from this machine or its network (note 67 E8); anywhere else they go to the root, as an address the site does not have
                 <Route path=path!("/dev/badges") view=|| if is_local_host() { view! { <crate::pages::dev_badges::DevBadgesPage /> }.into_any() } else { view! { <leptos_router::components::Redirect path="/" /> }.into_any() } />
                 <Route path=path!("/dev/logos") view=|| if is_local_host() { view! { <crate::components::media::collection_logo::LogoGalleryPage /> }.into_any() } else { view! { <leptos_router::components::Redirect path="/" /> }.into_any() } />
-                <Route path=path!("/browse/genre/:id") view=crate::pages::category::GenreRoute />
-                <Route path=path!("/title/:slug") view=crate::pages::title::TitlePage />
+                <Route path=path!("/browse/genre/:id") view=|| view! { <ProfileHold><crate::pages::category::GenreRoute /></ProfileHold> } />
+                <Route path=path!("/title/:slug") view=|| view! { <ProfileHold><crate::pages::title::TitlePage /></ProfileHold> } />
                 // the player waits for Who's watching: no film plays behind the profile picker (owner, 2026-10-25)
                 <Route path=path!("/watch/:id") view=|| view! { <ProfileHold><crate::pages::player::PlayerPage /></ProfileHold> } />
                 <Route path=path!("/watch/:kind/:id") view=|| view! { <ProfileHold><crate::pages::player::PlayerPage /></ProfileHold> } />
@@ -171,7 +171,7 @@ pub fn App() -> impl IntoView {
                 // is switched to a big screen while on it (note 116)
                 <Route path=path!("/clips") view=|| view! {
                     <crate::form::ByForm
-                        phone=|| view! { <crate::pages::clips::ClipsPage /> }
+                        phone=|| view! { <ProfileHold><crate::pages::clips::ClipsPage /></ProfileHold> }
                         desktop=|| view! { <leptos_router::components::Redirect path="/browse" /> }
                     />
                 } />
@@ -284,8 +284,9 @@ fn HomeRoute(kids: bool) -> impl IntoView {
     view! { <ProfileHold><BrowseHome /></ProfileHold> }.into_any()
 }
 
-/// A page that plays video is not there at all while Who's watching or the profile switch screen covers it: its film, trailer or
-/// banner would go on playing (with sound) behind them. It appears once a profile is in use.
+/// A page that plays video (home, a genre's page and its billboard, a title's page, Clips, the player) is not there at all while Who's watching
+/// or the profile switch screen covers it: its film, trailer or banner would go on playing (with sound) behind them. It appears once a profile
+/// is in use, on the same address (store::activate_profile).
 #[component]
 fn ProfileHold(children: ChildrenFn) -> impl IntoView {
     let profile_store = crate::store::use_profile_store();

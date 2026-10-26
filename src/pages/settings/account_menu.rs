@@ -10,10 +10,8 @@ use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 /// Help Centre, Switch Profile, Sign out), 199 px wide, white, rounded-control 8 px, with a 48 px row for each entry.
 #[component]
 pub fn AccountMenu(avatar: Memo<String>, signout_open: RwSignal<bool>) -> impl IntoView {
-    use leptos_router::hooks::use_navigate;
     let open = RwSignal::new(false);
     let root = NodeRef::<leptos::html::Div>::new();
-    let navigate = use_navigate();
     let profiles = use_profile_store();
     crate::utils::listen::listen_window(leptos::ev::click, move |ev| {
         if !open.get_untracked() {
@@ -32,13 +30,12 @@ pub fn AccountMenu(avatar: Memo<String>, signout_open: RwSignal<bool>) -> impl I
     });
     let item = "flex h-12 w-full items-center gap-4 rounded-menu-item px-3 text-start text-body-md font-medium text-ink hover:bg-ink/5";
     let switch = Callback::new(move |_: ()| {
-        // Switch Profile goes back to the page that asks who is watching
+        // Switch Profile brings up the page that asks who is watching over this page, and the pick comes back here (store::activate_profile)
         open.set(false);
         profiles.active_profile_id.set(None);
         if let Some(storage) = web_sys::window().and_then(|w| w.local_storage().ok().flatten()) {
             let _ = storage.remove_item(crate::keys::ACTIVE_PROFILE);
         }
-        navigate(routes::BROWSE, Default::default());
     });
     view! {
         <div node_ref=root class="relative">

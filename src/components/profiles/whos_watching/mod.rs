@@ -82,6 +82,7 @@ pub fn WhosWatchingGate(
         if let Some((mode, initial)) = modal_state.get() {
             if mode == "add" {
                 let new_id = format!("p_{}", js_sys::Date::now() as u64);
+                crate::components::layout::tour::mark_new(&new_id);
                 let new_profile = Profile {
                     id: new_id.clone(),
                     name: form.name,

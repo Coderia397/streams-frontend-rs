@@ -1,5 +1,8 @@
-//! The first-visit guide: a short tour of the top bar for a profile that has not seen it. Steps are data (the elements they point at by `data-tour` name, and
-//! translation keys for their text); adding a step or a new tour (another id or version) shows it once to every profile that has not seen that one. Close counts as seen.
+//! The first-visit guide: a short tour of the top bar, shown once to a new profile, the first time it is used on a computer, and never
+//! again (owner, 2026-10-26, note 130). An account's profile asks the account (`claim_profile_guide`: true once for a profile made since
+//! 2026-10-26, false ever after and for every older profile), so a second device or browser never shows it again. A profile of a browser
+//! without an account has it when this browser made it (`mark_new`: Add Profile, a transfer, a new browser's first profiles). Steps are
+//! data (the elements they point at by `data-tour` name, and translation keys for their text). Close counts as seen.
 use leptos::prelude::*;
 use wasm_bindgen::JsCast;
 
@@ -12,7 +15,7 @@ pub struct Step {
 
 pub struct Tour {
     pub id: &'static str,
-    /// Raise it to show the tour again to everyone who saw an older version
+    /// Part of the key this browser keeps per profile (the account keeps one guide per profile, whatever the version)
     pub version: u32,
     pub steps: &'static [Step],
 }
@@ -35,8 +38,23 @@ fn storage() -> Option<web_sys::Storage> {
     web_sys::window()?.local_storage().ok().flatten()
 }
 
+/// What this browser knows of a profile's guide: "1" shown, "due" made here and not yet shown, nothing otherwise.
+fn state(key: &str) -> Option<String> {
+    storage().and_then(|s| s.get_item(key).ok().flatten())
+}
+
 fn is_seen(key: &str) -> bool {
-    storage().and_then(|s| s.get_item(key).ok().flatten()).is_some()
+    state(key).as_deref() == Some("1")
+}
+
+/// Marks a profile this browser has just made, for the guide (a browser without an account; an account's profile asks the account).
+pub fn mark_new(profile: &str) {
+    if let Some(s) = storage() {
+        let key = seen_key(&FIRST_VISIT, profile);
+        if s.get_item(&key).ok().flatten().is_none() {
+            let _ = s.set_item(&key, "due");
+        }
+    }
 }
 
 fn mark_seen(key: &str) {
@@ -78,12 +96,23 @@ pub fn TourHost() -> impl IntoView {
     let (boxed, set_boxed) = signal(None::<(f64, f64, f64, f64)>);
     let card_ref = NodeRef::<leptos::html::Div>::new();
 
-    // after the page has settled: show the tour to a profile that has not seen it
+    // after the page has settled: show the tour to a new profile, once. Shown counts as seen at once, so a reload in the middle does not
+    // bring it back. An account's profile is shown it only when the account says this is the first time; when the account cannot be
+    // reached, nothing is shown and the next page asks again.
     Effect::new(move |_| {
-        let key = seen_key(tour, &profile());
-        if is_seen(&key) { return; }
+        let id = profile();
+        let key = seen_key(tour, &id);
+        let account = crate::services::sync::is_uuid(&id);
+        // a profile of an account that has not been given the account's id yet waits for it
+        if is_seen(&key) || (!account && (crate::services::account::has_account() || state(&key).as_deref() != Some("due"))) { return; }
         let cb = wasm_bindgen::closure::Closure::once_into_js(move || {
-            if can_show() && !is_seen(&key) { set_step.set(0); set_open.set(true); }
+            if !can_show() || is_seen(&key) { return; }
+            let show = { let key = key.clone(); move || { mark_seen(&key); set_step.set(0); set_open.set(true); } };
+            if !account { show(); return; }
+            leptos::task::spawn_local(async move {
+                let Ok(first) = crate::services::account::rpc("claim_profile_guide", &serde_json::json!({ "p_profile": id })).await else { return };
+                if first.as_bool() == Some(true) { show(); } else { mark_seen(&key); }
+            });
         });
         if let Some(w) = web_sys::window() {
             let _ = w.set_timeout_with_callback_and_timeout_and_arguments_0(cb.unchecked_ref(), 1500);

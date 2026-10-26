@@ -121,9 +121,11 @@ pub fn add_profile(store: ProfileStore, data: ProfileFormData) {
     if name.is_empty() {
         return;
     }
+    let id = format!("p{}", js_sys::Date::now() as u64);
+    crate::components::layout::tour::mark_new(&id);
     store.profiles.update(|list| {
         let order = list.iter().map(|p| p.sort_order).max().unwrap_or(0) + 1;
-        list.push(Profile { id: format!("p{}", js_sys::Date::now() as u64), name, avatar_url: data.avatar_url, is_kids: data.is_kids, is_default: Some(false), pin: None, sort_order: order });
+        list.push(Profile { id, name, avatar_url: data.avatar_url, is_kids: data.is_kids, is_default: Some(false), pin: None, sort_order: order });
     });
     persist_profiles(store);
 }
