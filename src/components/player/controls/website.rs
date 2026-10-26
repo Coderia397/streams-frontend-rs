@@ -24,13 +24,15 @@ pub fn WebsiteControls(state: super::ControlsState) -> impl IntoView {
             if is_idle.get() { "opacity-0 pointer-events-none cursor-none" } else { "opacity-100 pointer-events-auto cursor-default" }
         )
     };
-    // while they show, a click on the picture plays or pauses; buttons, links, fields and the timeline keep their own clicks
+    // while they show, a click on the picture plays or pauses; buttons, links, fields and the timeline keep their own clicks. The path the
+    // click took when it happened decides: the play button swaps its icon while it handles the click, so the clicked icon has left the page
+    // by the time the click arrives here, it has no button around it any more, and the click paused and played again (owner's recording,
+    // 2026-10-26, note 131)
     let on_picture_click = move |e: leptos::ev::MouseEvent| {
         use wasm_bindgen::JsCast;
-        let on_control = e.target()
-            .and_then(|t| t.dyn_into::<web_sys::Element>().ok())
-            .and_then(|el| el.closest("button, a, input, [data-player-control]").ok().flatten())
-            .is_some();
+        let on_control = e.composed_path().iter()
+            .filter_map(|n| n.dyn_into::<web_sys::Element>().ok())
+            .any(|el| el.matches("button, a, input, [data-player-control]").unwrap_or(false));
         if !on_control {
             on_toggle_play.run(());
         }

@@ -68,23 +68,25 @@ pub fn PlayerPage() -> impl IntoView {
         }
     });
 
-    // Initialize season / episode from query params or watch_store
+    // The season and episode: from the address, else from the saved progress, read once. Following the saved progress (it is written every
+    // few seconds while playing) set them again and again, and each set built the whole player afresh: on an address without them
+    // (/watch/tv/1421) the video went black and started again every 5 s (owner's recording, 2026-10-26, note 131). A value that is already
+    // in use is not set again, for the same reason.
+    let choose = move |s: u32, e: u32| {
+        if active_season.get_untracked() != s { set_active_season.set(s); }
+        if active_episode.get_untracked() != e { set_active_episode.set(e); }
+    };
     Effect::new(move |_| {
         let q = query.read();
         let q_s = q.get("season").or_else(|| q.get("s")).and_then(|v| v.parse::<u32>().ok());
         let q_e = q.get("episode").or_else(|| q.get("e")).and_then(|v| v.parse::<u32>().ok());
 
         if let (Some(s), Some(e)) = (q_s, q_e) {
-            set_active_season.set(s);
-            set_active_episode.set(e);
+            choose(s, e);
         } else {
-            // Check watch store
             let id = id_val();
-            if let Some(record) = watch_store.get_record(id, true) {
-                if let (Some(s), Some(e)) = (record.season, record.episode) {
-                    set_active_season.set(s);
-                    set_active_episode.set(e);
-                }
+            if let Some((Some(s), Some(e))) = untrack(|| watch_store.get_record(id, true)).map(|r| (r.season, r.episode)) {
+                choose(s, e);
             }
         }
     });
