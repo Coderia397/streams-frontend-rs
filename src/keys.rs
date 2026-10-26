@@ -7,6 +7,10 @@ pub const ACTIVE_PROFILE: &str = "streams_active_profile";
 pub const LAST_SEEN: &str = "streams_last_seen";
 /// Who's watching was asked by a Kids profile (this tab only): the Kids form of the screen (store::ask_who_is_watching)
 pub const KIDS_GATE: &str = "streams_kids_gate";
+/// The profile Manage Profiles opened while no profile is in use (this tab only): its settings pages show without Who's watching over them
+pub const MANAGE_EDIT: &str = "streams_manage_edit";
+/// Where Manage Profiles' Done goes back to when Who's watching sent the person there (this tab only)
+pub const GATE_RETURN: &str = "streams_gate_return";
 pub const PROFILES: &str = "streams_profiles";
 pub const PREVIEW_MUTED: &str = "streams_preview_muted";
 pub const SESSION_ID: &str = "streams_session_id";

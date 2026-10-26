@@ -49,7 +49,6 @@ pub fn App() -> impl IntoView {
     let on_help_host = crate::config::on_help_host();
 
     let profile_store = crate::store::use_profile_store();
-    let has_no_profile = move || profile_store.active_profile_id.get().is_none();
 
     // The data of a profile (viewing progress, My List, ratings) is read for the profile in use whenever it changes, and the account's changes are pulled for it.
     let library_store = crate::store::use_library_store();
@@ -109,11 +108,9 @@ pub fn App() -> impl IntoView {
         <crate::components::media::info_modal::InfoModal />
         <crate::components::share::ShareHost />
         <crate::components::profiles::switch_overlay::GlobalSwitchOverlay />
-        <Show when=has_no_profile>
-            <crate::components::profiles::whos_watching::WhosWatchingGate />
-        </Show>
         <Router>
             <HostGuard />
+            <GlobalGate />
             <crate::components::media::info_modal::SharedTitleOpener />
             // an address the site does not have goes to the site's root (the landing page, or Home for a returning visitor), with no page of its own
             <Routes fallback=|| view! { <UnknownAddress /> }>
@@ -288,6 +285,20 @@ fn HomeRoute(kids: bool) -> impl IntoView {
         return view! { <leptos_router::components::Redirect path=format!("/kids{search}") /> }.into_any();
     }
     view! { <ProfileHold><BrowseHome /></ProfileHold> }.into_any()
+}
+
+/// Who's watching over every page while no profile is in use, except Manage Profiles and the settings of the profile it opened, which are
+/// pages of their own as on Netflix (store::shown_without_profile, note 132).
+#[component]
+fn GlobalGate() -> impl IntoView {
+    let profile_store = crate::store::use_profile_store();
+    let location = leptos_router::hooks::use_location();
+    let shown = move || profile_store.active_profile_id.get().is_none() && !crate::store::shown_without_profile(&location.pathname.get());
+    view! {
+        <Show when=shown>
+            <crate::components::profiles::whos_watching::WhosWatchingGate />
+        </Show>
+    }
 }
 
 /// A page that plays video (home, a genre's page and its billboard, a title's page, Clips, the player) is not there at all while Who's watching

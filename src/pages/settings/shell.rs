@@ -75,6 +75,13 @@ pub fn SideMenu(screen: Memo<Screen>, signout_open: RwSignal<bool>) -> impl Into
 /// and the title. The title steps aside while the check of who is asking is showing, and on the Profile transfer page.
 #[component]
 pub fn PageHeading(screen: Memo<Screen>, gate_active: RwSignal<bool>, light_phone: Signal<bool>) -> impl IntoView {
+    // a profile's page opened from Manage Profiles while no profile is in use goes back there, as Netflix's "Manage profile and
+    // preferences" goes back to its ManageProfiles (note 132)
+    let profiles = crate::store::use_profile_store();
+    let wide_back = move || match screen.get() {
+        Screen::Profile(id) if profiles.active_profile_id.get().is_none() && crate::store::manage_edit().as_deref() == Some(id.as_str()) => "/profiles/manage".to_string(),
+        other => other.parent_wide(),
+    };
     view! {
         <header class="flex items-center gap-3 max-lg:mb-1 lg:mb-0" class=("max-lg:mb-4", move || light_phone.get())>
             <a
@@ -86,7 +93,7 @@ pub fn PageHeading(screen: Memo<Screen>, gate_active: RwSignal<bool>, light_phon
                 <AppIcon glyph=Glyph::Back class="text-2xl rtl:-scale-x-100" />
             </a>
             <a
-                href=move || screen.get().parent_wide()
+                href=wide_back
                 aria-label=move || t("set-back")
                 class="hidden btn-circle btn-circle-clear btn-circle-md lg:flex"
                 class=("lg:hidden", move || matches!(screen.get(), Screen::Account | Screen::Hub | Screen::AccountSecurity | Screen::AccountDevices | Screen::AccountProfiles))

@@ -245,7 +245,9 @@ pub fn activate_profile(id: &str) {
             let _ = storage.set_item(crate::keys::ACTIVE_PROFILE, id);
         }
         if let Some(storage) = window.session_storage().ok().flatten() {
-            let _ = storage.remove_item(crate::keys::KIDS_GATE);
+            for k in [crate::keys::KIDS_GATE, crate::keys::MANAGE_EDIT, crate::keys::GATE_RETURN] {
+                let _ = storage.remove_item(k);
+            }
         }
         // Who's watching came up over a page (an address opened or linked, a reload, the page left open when the browser asked again after
         // time away, the page Switch profiles was chosen on): the pick goes on to that page. A switch from one profile to another (the menu,
@@ -281,6 +283,41 @@ pub fn ask_who_is_watching(store: ProfileStore) {
         let _ = s.remove_item(crate::keys::ACTIVE_PROFILE);
     }
     store.active_profile_id.set(None);
+}
+
+fn session() -> Option<web_sys::Storage> {
+    web_sys::window().and_then(|w| w.session_storage().ok().flatten())
+}
+
+/// Manage Profiles opened this profile's settings (after its PIN, if it has one): while no profile is in use, those pages show without
+/// Who's watching over them, as Netflix's "Manage profile and preferences" opened from its Manage Profiles page (note 132).
+pub fn open_from_manage(id: &str) {
+    if let Some(s) = session() { let _ = s.set_item(crate::keys::MANAGE_EDIT, id); }
+}
+
+/// The profile whose settings Manage Profiles opened (`open_from_manage`).
+pub fn manage_edit() -> Option<String> {
+    session().and_then(|s| s.get_item(crate::keys::MANAGE_EDIT).ok().flatten())
+}
+
+/// Whether `path` is a page of its own while no profile is in use: Manage Profiles, and the settings of the profile it opened.
+pub fn shown_without_profile(path: &str) -> bool {
+    let path = path.trim_end_matches('/');
+    let edited = manage_edit().is_some_and(|id| {
+        let root = format!("/settings/profile/{id}");
+        path == root || path.starts_with(&format!("{root}/"))
+    });
+    path == "/profiles/manage" || edited
+}
+
+/// Remembers the page Who's watching was over when it sent the person to Manage Profiles, for Done to come back to.
+pub fn remember_gate_page(path: &str) {
+    if let Some(s) = session() { let _ = s.set_item(crate::keys::GATE_RETURN, path); }
+}
+
+/// The page Who's watching was over (`remember_gate_page`), else Home.
+pub fn gate_page() -> String {
+    session().and_then(|s| s.get_item(crate::keys::GATE_RETURN).ok().flatten()).filter(|p| p.starts_with('/') && !p.starts_with("//")).unwrap_or_else(|| crate::config::routes::BROWSE.to_string())
 }
 
 /// Whether Who's watching was asked by a Kids profile (`ask_who_is_watching`).

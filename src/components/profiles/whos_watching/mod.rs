@@ -45,6 +45,19 @@ pub fn WhosWatchingGate(
         if is_app_switch() && !p.is_kids { begin_switch(p); } else { set_switching_target.set(Some(p)); }
     };
 
+    // a profile chosen for editing: on the website its settings page, Netflix's "Manage profile and preferences", whose back arrow comes
+    // back to Manage Profiles (note 132); on the phone the editing window
+    let open_editor = Callback::new({
+        let navigate = navigate.clone();
+        move |p: Profile| {
+            if crate::form::current().is_phone() {
+                set_modal_state.set(Some(("edit".to_string(), Some(p))));
+            } else {
+                crate::store::open_from_manage(&p.id);
+                navigate(&format!("/settings/profile/{}", p.id), Default::default());
+            }
+        }
+    });
     let on_select_tile = move |p: Profile| {
         if edit_mode.get() {
             // a locked profile is edited only after its PIN, as it is opened only after it: Manage Profiles was a way round the lock
@@ -52,7 +65,7 @@ pub fn WhosWatchingGate(
                 set_pin_then_edit.set(true);
                 set_pin_prompt_profile.set(Some(p));
             } else {
-                set_modal_state.set(Some(("edit".to_string(), Some(p))));
+                open_editor.run(p);
             }
         } else {
             // Check if profile has PIN lock (Task 098)
@@ -71,7 +84,7 @@ pub fn WhosWatchingGate(
             set_pin_prompt_profile.set(None);
             if pin_then_edit.get_untracked() {
                 set_pin_then_edit.set(false);
-                set_modal_state.set(Some(("edit".to_string(), Some(p))));
+                open_editor.run(p);
             } else {
                 perform_switch(p);
             }
@@ -128,10 +141,23 @@ pub fn WhosWatchingGate(
         set_modal_state.set(None);
     };
 
-    // Manage Profiles opens the editing mode and Done leaves it; on the Manage profiles page Done goes back to the app
+    // Manage Profiles: on the website its own page (/profiles/manage, Netflix's ManageProfiles), whose Done goes back to Who's watching over
+    // the page it was asked on (or Home when a profile is in use); on the phone the editing mode in place (note 132)
     let on_manage = Callback::new({
         let navigate = navigate.clone();
-        move |_| if manage { navigate("/browse", Default::default()) } else { set_edit_mode.update(|e| *e = !*e) }
+        move |_| {
+            if manage {
+                let back = if active_profile_id.get_untracked().is_none() { crate::store::gate_page() } else { crate::config::routes::BROWSE.to_string() };
+                navigate(&back, Default::default());
+            } else if crate::form::current().is_phone() {
+                set_edit_mode.update(|e| *e = !*e);
+            } else {
+                if let Some(loc) = web_sys::window().map(|w| w.location()) {
+                    crate::store::remember_gate_page(&format!("{}{}", loc.pathname().unwrap_or_default(), loc.search().unwrap_or_default()));
+                }
+                navigate("/profiles/manage", Default::default());
+            }
+        }
     });
 
     view! {
