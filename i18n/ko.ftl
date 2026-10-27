@@ -2496,3 +2496,11 @@ set-primary-cannot-delete = 기본 프로필은 삭제할 수 없습니다.
 set-edit-profile-page = 프로필 편집
 set-handle-lead = 핸들은 { $brand } 게임에서 다른 { $brand } 멤버와 함께 플레이할 때 사용되는 고유 이름입니다.
 set-learn-more = 자세히 알아보기
+
+# Lost your way? (pages/not_found.rs): an address the site does not have, as netflix.com/NotFound
+notfound-title = 길을 잃으셨나요?
+notfound-body = 죄송합니다. 해당 페이지를 찾을 수 없습니다. 홈페이지에서 다양한 콘텐츠를 만나 보세요.
+notfound-home = { $brand } 홈
+notfound-code = 오류 코드
+notfound-from = 출처
+notfound-still = LOST IN SPACE

@@ -274,8 +274,7 @@ pub fn manage_edit() -> Option<String> {
 pub fn shown_without_profile(path: &str) -> bool {
     let path = path.trim_end_matches('/');
     let edited = manage_edit().is_some_and(|id| {
-        let root = format!("/settings/profile/{id}");
-        path == root || path.starts_with(&format!("{root}/"))
+        crate::pages::settings::Screen::parse(path, "", |p| p == id).and_then(|s| s.edited_profile().map(String::from)).is_some_and(|p| p == id)
     });
     path == "/profiles/manage" || edited
 }
@@ -393,7 +392,7 @@ mod tests {
 
     #[test]
     fn a_pick_goes_on_to_the_page_under_who_is_watching() {
-        for p in ["/browse/genre/83", "/title/tv-1399", "/search", "/browse/my-list", "/latest", "/settings/account", "/help/contact", "/watch/tv/1399"] {
+        for p in ["/browse/genre/83", "/title/tv-1399", "/search", "/browse/my-list", "/latest", "/account", "/help/contact", "/watch/tv/1399"] {
             assert!(stays_after_pick(p, false), "{p}");
         }
         for p in ["/", "", "/browse", "/browse/", "/kids", "/login", "/signup", "/auth/confirm", "/profiles/manage"] {

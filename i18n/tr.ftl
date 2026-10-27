@@ -2505,3 +2505,11 @@ set-primary-cannot-delete = Birincil profil silinemez.
 set-edit-profile-page = Profili Düzenle
 set-handle-lead = Kullanıcı adınız, tüm { $brand } Oyunlarında diğer { $brand } üyeleriyle oynarken kullanılacak benzersiz bir isimdir.
 set-learn-more = Daha fazla bilgi edin
+
+# Lost your way? (pages/not_found.rs): an address the site does not have, as netflix.com/NotFound
+notfound-title = Yolunu mu kaybettin?
+notfound-body = Üzgünüz, o sayfayı bulamıyoruz. Ana sayfada keşfedecek çok şey var.
+notfound-home = { $brand } Ana Sayfa
+notfound-code = Hata Kodu
+notfound-from = KAYNAK
+notfound-still = LOST IN SPACE

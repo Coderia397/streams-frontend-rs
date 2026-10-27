@@ -16,3 +16,4 @@ pub mod landing;
 pub mod help;
 pub mod games;
 pub mod title;
+pub mod not_found;

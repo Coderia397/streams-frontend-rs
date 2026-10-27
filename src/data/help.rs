@@ -51,7 +51,7 @@ pub const POPULAR: &[&str] = &["what-is", "wont-play", "profiles-manage", "kids-
 
 /// Quick links on the contact page: (message id suffix, icon, link). Article links start with /help/article/.
 pub const QUICK_LINKS: &[(&str, &str, &str)] = &[
-    ("profiles", "ph-user-circle", "/settings/account/profiles"),
+    ("profiles", "ph-user-circle", "/account/profiles"),
     ("language", "ph-translate", "/settings"),
     ("signin", "ph-sign-in", "/login"),
     ("copyright", "ph-copyright", "/help/article/copyright"),

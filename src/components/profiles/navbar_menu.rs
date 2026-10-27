@@ -161,7 +161,7 @@ pub fn NavbarProfileMenu() -> impl IntoView {
                         set_is_open.set(false);
                         // the transfer screen of the profile in use (the same page the profile settings open)
                         let id = active_profile_id.get_untracked().unwrap_or_default();
-                        nav_to_transfer(&format!("/settings/profile/{id}/transfer"), Default::default());
+                        nav_to_transfer(&crate::pages::settings::Screen::TransferProfile(id).path(), Default::default());
                     } class=ROW>
                     <i class=format!("{ICON} ph-user-switch") aria-hidden="true"></i>
                     <span>{crate::i18n::t("profile-transfer")}</span>
@@ -172,7 +172,7 @@ pub fn NavbarProfileMenu() -> impl IntoView {
                     role="menuitem"
                     on:click=move |_| {
                         set_is_open.set(false);
-                        nav_to_account("/settings/account", Default::default());
+                        nav_to_account(&crate::pages::settings::Screen::Account.path(), Default::default());
                     }
                     class=ROW
                 >

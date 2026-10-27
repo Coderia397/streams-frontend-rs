@@ -27,7 +27,7 @@ pub fn Privacy() -> impl IntoView {
             {move || active.get().map(|p| view! { <p class="mb-6 text-body-md text-ink/60">{t_args("set-for-profile", &[("name", p.name.clone().into())])}</p> })}
             <Section title=t("set-privacy-viewing")>
                 {move || active.get().map(|p| view! { <LinkRow icon="lock-simple" title=t("set-title-lock") hint=t("set-privacy-lock-hint") href=Screen::Lock(p.id).path() /> })}
-                <LinkRow icon="clock-counter-clockwise" title=t("set-title-activity") hint=t("set-privacy-activity-hint") href=Screen::Activity.path() />
+                <LinkRow icon="clock-counter-clockwise" title=t("set-title-activity") hint=t("set-privacy-activity-hint") href=Screen::Activity(active.get_untracked().map(|p| p.id).unwrap_or_default()).path() />
             </Section>
             <Section title=t("set-privacy-data")>
                 <SwitchRow

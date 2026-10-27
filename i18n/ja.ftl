@@ -2497,3 +2497,11 @@ set-primary-cannot-delete = プライマリプロファイルは削除できま�
 set-edit-profile-page = プロファイルを編集
 set-handle-lead = ハンドルは、{ $brand } ゲームで他の { $brand } メンバーと遊ぶ際に使用される、固有の名前です。
 set-learn-more = 詳しく見る
+
+# Lost your way? (pages/not_found.rs): an address the site does not have, as netflix.com/NotFound
+notfound-title = 迷子になりましたか？
+notfound-body = 申し訳ありません。そのページは見つかりませんでした。ホームページで見どころをたくさん探せます。
+notfound-home = { $brand } ホーム
+notfound-code = エラーコード
+notfound-from = 出典
+notfound-still = LOST IN SPACE

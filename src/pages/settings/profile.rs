@@ -111,7 +111,7 @@ pub fn EditProfile(id: String, #[prop(optional)] edit_page: bool) -> impl IntoVi
                             <LinkRow icon="game-controller" title=t("set-title-game-handle") href=Screen::GameHandle(id.get_value()).path() value=handle_value />
                         </Section>
                         <Section title=t("set-contact-info")>
-                            <LinkRow icon="identification-card" title=t("set-title-name") href=Screen::Name.path() />
+                            <LinkRow icon="identification-card" title=t("set-title-name") href=Screen::Name(id.get_value()).path() />
                             <LinkRow icon="envelope-simple" title=t("set-title-email") href=Screen::Email.path() />
                             <LinkRow icon="device-mobile" title=t("set-title-phone") href=Screen::Phone.path() />
                         </Section>
@@ -133,8 +133,8 @@ pub fn EditProfile(id: String, #[prop(optional)] edit_page: bool) -> impl IntoVi
                             move || view! {
                             <LinkRow icon="play-circle" title=t("set-title-playback") hint=t("set-playback-hint") href=screen(Screen::Playback) />
                             <LinkRow icon="bell" title=t("set-title-notifications") hint=t("set-notifications-hint") href=screen(Screen::Notifications) />
-                            <LinkRow icon="clock-counter-clockwise" title=t("set-title-activity") hint=t("set-privacy-activity-hint") href=Screen::Activity.path() />
-                            <LinkRow icon="shield-check" title=t("set-title-privacy") hint=t("set-privacy-hint") href=Screen::Privacy.path() />
+                            <LinkRow icon="clock-counter-clockwise" title=t("set-title-activity") hint=t("set-privacy-activity-hint") href=screen(Screen::Activity) />
+                            <LinkRow icon="shield-check" title=t("set-title-privacy") hint=t("set-privacy-hint") href=screen(Screen::Privacy) />
                             <LinkRow icon="arrows-left-right" title=t("set-title-transfer-profile") hint=t("set-transfer-profile-hint") href=screen(Screen::TransferProfile) />
                             }
                         }
@@ -185,6 +185,7 @@ pub fn ProfileOverview(id: String) -> impl IntoView {
         let can_be_main = p.is_default != Some(true) && !p.is_kids;
         let path = |s: fn(String) -> Screen| s(pid.clone()).path();
         let (edit, lock, language, restrictions, subtitles, playback, notifications, transfer, main) = (path(Screen::ProfileEdit), path(Screen::Lock), path(Screen::Language), path(Screen::Restrictions), path(Screen::Subtitles), path(Screen::Playback), path(Screen::Notifications), path(Screen::TransferProfile), path(Screen::MainProfile));
+        let (activity, privacy) = (path(Screen::Activity), path(Screen::Privacy));
         view! {
             <div>
                 <Section>
@@ -197,8 +198,8 @@ pub fn ProfileOverview(id: String) -> impl IntoView {
                     <LinkRow icon="text-aa" title=t("set-title-subtitles") hint=t("set-po-subtitles-hint") href=subtitles />
                     <LinkRow icon="play-circle" title=t("set-title-playback") hint=t("set-po-playback-hint") href=playback />
                     <LinkRow icon="bell" title=t("set-title-notifications") hint=t("set-po-notifications-hint") href=notifications />
-                    <LinkRow icon="clock-counter-clockwise" title=t("set-title-activity") hint=t("set-po-activity-hint") href=Screen::Activity.path() />
-                    <LinkRow icon="shield-check" title=t("set-title-privacy") hint=t("set-po-privacy-hint") href=Screen::Privacy.path() />
+                    <LinkRow icon="clock-counter-clockwise" title=t("set-title-activity") hint=t("set-po-activity-hint") href=activity />
+                    <LinkRow icon="shield-check" title=t("set-title-privacy") hint=t("set-po-privacy-hint") href=privacy />
                     <LinkRow icon="arrows-left-right" title=t("set-title-transfer") hint=t("set-transfer-profile-hint") href=transfer />
                     {can_be_main.then(|| view! { <LinkRow icon="crown-simple" title=t("set-main-profile") hint=t("set-main-profile-hint") href=main /> })}
                 </Section>
@@ -317,20 +318,26 @@ pub fn GameHandle(id: String) -> impl IntoView {
     }
 }
 
-fn valid_handle(handle: &str) -> bool {
+pub(super) fn valid_handle(handle: &str) -> bool {
     (GAME_HANDLE_MIN..=GAME_HANDLE_MAX).contains(&handle.chars().count()) && handle.chars().all(|c| c.is_ascii_alphanumeric())
 }
 
 #[component]
 pub fn AvatarPicker(id: String) -> impl IntoView {
-    use crate::components::profiles::icon_picker::IconPicker;
     let navigate = use_navigate();
+    let back = Screen::ProfileEdit(id.clone()).path();
+    view! { <IconPanel id=id on_done=Callback::new(move |_| navigate(&back, Default::default())) /> }
+}
+
+/// The picture picker over the page: the top bar over the picker, no side menu. A computer opens it in place on Edit Profile with no
+/// address of its own, as Netflix's "Choose a profile icon" (read live on 2026-10-27, note 138); a phone at its own screen (`AvatarPicker`).
+#[component]
+pub(super) fn IconPanel(id: String, on_done: Callback<()>) -> impl IntoView {
+    use crate::components::profiles::icon_picker::IconPicker;
     let id = StoredValue::new(id);
     let name = Signal::derive(move || find(&id.get_value()).map(|p| p.name).unwrap_or_default());
     let current = Signal::derive(move || find(&id.get_value()).and_then(|p| p.avatar_url));
     let kids = find(&id.get_value()).is_some_and(|p| p.is_kids);
-    let (pick_nav, back_nav) = (navigate.clone(), navigate);
-    // a page of its own, as on the website: the top bar over the picker, no side menu
     view! {
         <div class="fixed inset-0 z-(--z-screen) overflow-y-auto bg-page text-ink" style="--app-x: calc(8.3333vw + 72px);">
             <header class="flex h-16 items-center px-[var(--app-x)]">
@@ -342,9 +349,9 @@ pub fn AvatarPicker(id: String) -> impl IntoView {
                 kids=kids
                 on_pick=Callback::new(move |url: String| {
                     change(&id.get_value(), |p| p.avatar_url = Some(url));
-                    pick_nav(&Screen::ProfileEdit(id.get_value()).path(), Default::default());
+                    on_done.run(());
                 })
-                on_back=Callback::new(move |_| back_nav(&Screen::ProfileEdit(id.get_value()).path(), Default::default()))
+                on_back=Callback::new(move |_| on_done.run(()))
             />
         </div>
     }

@@ -48,7 +48,7 @@ fn AccountDetails(#[prop(optional)] wide: bool) -> impl IntoView {
     let or_none = |v: String| Signal::derive(move || if v.is_empty() { t("set-none") } else { v.clone() });
     view! {
         <Section title=t("set-account-details")>
-            {(!wide).then(|| view! { <LinkRow icon="identification-card" title=t("set-title-name") href=Screen::Name.path() value=or_none(full_name.clone()) /> })}
+            {(!wide).then(|| view! { <LinkRow icon="identification-card" title=t("set-title-name") href=Screen::Name(active_profile_id()).path() value=or_none(full_name.clone()) /> })}
             <LinkRow icon="lock-simple" title=t("set-title-password") href=Screen::Password.path() />
             <LinkRow icon="envelope-simple" title=t("set-title-email") href=Screen::Email.path() value=or_none(email) verified=true />
             <LinkRow icon="device-mobile" title=t("set-title-phone") href=Screen::Phone.path() value=or_none(phone) />
@@ -85,7 +85,7 @@ fn ProfilesSection() -> impl IntoView {
     view! {
         <Section title=t("set-account-profiles")>
             <LinkRow icon="users-three" title=t("set-nav-profiles") href=Screen::AccountProfiles.path() />
-            <LinkRow icon="shield-check" title=t("set-title-privacy") href=Screen::Privacy.path() />
+            <LinkRow icon="shield-check" title=t("set-title-privacy") href=Screen::Privacy(active_profile_id()).path() />
         </Section>
     }
 }

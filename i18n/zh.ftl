@@ -2500,3 +2500,11 @@ set-primary-cannot-delete = 无法删除主个人资料。
 set-edit-profile-page = 编辑个人资料
 set-handle-lead = 你的用户名是唯一的，将用于在所有 { $brand } 游戏中与其他 { $brand } 成员互动。
 set-learn-more = 了解更多
+
+# Lost your way? (pages/not_found.rs): an address the site does not have, as netflix.com/NotFound
+notfound-title = 迷路了吗？
+notfound-body = 抱歉，我们找不到该页面。主页上有许多精彩内容等你探索。
+notfound-home = { $brand } 主页
+notfound-code = 错误代码
+notfound-from = 出自
+notfound-still = LOST IN SPACE

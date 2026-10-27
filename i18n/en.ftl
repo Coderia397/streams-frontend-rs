@@ -2663,3 +2663,11 @@ set-primary-cannot-delete = The primary profile cannot be deleted.
 set-edit-profile-page = Edit Profile
 set-handle-lead = Your handle is a unique name that'll be used for playing with other { $brand } members across all { $brand } Games.
 set-learn-more = Learn more
+
+# Lost your way? (pages/not_found.rs): an address the site does not have, as netflix.com/NotFound
+notfound-title = Lost your way?
+notfound-body = Sorry, we can't find that page. You'll find loads to explore on the home page.
+notfound-home = { $brand } Home
+notfound-code = Error Code
+notfound-from = FROM
+notfound-still = LOST IN SPACE

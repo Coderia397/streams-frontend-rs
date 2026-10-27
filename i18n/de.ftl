@@ -2494,3 +2494,11 @@ set-primary-cannot-delete = Das Hauptprofil kann nicht gelöscht werden.
 set-edit-profile-page = Profil bearbeiten
 set-handle-lead = Ihr Benutzername ist ein eindeutiger Name, der für das Spielen mit anderen { $brand }-Mitgliedern in allen { $brand }-Spielen verwendet wird.
 set-learn-more = Mehr erfahren
+
+# Lost your way? (pages/not_found.rs): an address the site does not have, as netflix.com/NotFound
+notfound-title = Hast du dich verirrt?
+notfound-body = Leider können wir diese Seite nicht finden. Auf der Startseite gibt es jede Menge zu entdecken.
+notfound-home = { $brand }-Startseite
+notfound-code = Fehlercode
+notfound-from = AUS
+notfound-still = LOST IN SPACE

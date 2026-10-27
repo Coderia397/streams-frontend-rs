@@ -97,7 +97,7 @@ pub fn PageHeading(screen: Memo<Screen>, gate_active: RwSignal<bool>, light_phon
                 href=wide_back
                 aria-label=move || t("set-back")
                 class="hidden btn-circle btn-circle-clear btn-circle-md lg:flex"
-                class=("lg:hidden", move || matches!(screen.get(), Screen::Account | Screen::Hub | Screen::AccountSecurity | Screen::AccountDevices | Screen::AccountProfiles))
+                class=("lg:hidden", move || matches!(screen.get(), Screen::Account | Screen::AccountSecurity | Screen::AccountDevices | Screen::AccountProfiles))
                 class=("lg:absolute", move || screen.get().standalone())
                 class=("lg:left-[210px]", move || screen.get().standalone())
                 class=("lg:top-[97px]", move || screen.get().standalone())
@@ -105,8 +105,8 @@ pub fn PageHeading(screen: Memo<Screen>, gate_active: RwSignal<bool>, light_phon
                 <AppIcon glyph=Glyph::Back class="text-2xl rtl:-scale-x-100" />
             </a>
             <h1 class="text-title font-bold lg:w-full lg:flex-1 lg:truncate lg:text-account-title" class=("max-lg:text-account-title-sm", move || light_phone.get()) class=("lg:text-heading-xl!", move || screen.get().standalone()) class=("lg:leading-[40px]!", move || screen.get().standalone()) class=("lg:text-line!", move || screen.get().standalone()) class=("hidden", move || gate_active.get() || screen.get() == Screen::TransferSetting)>
-                <span class=("lg:hidden", move || matches!(screen.get(), Screen::Hub | Screen::Profile(_)))>{move || t(screen.get().title_key())}</span>
-                <span class="hidden" class=("lg:inline", move || matches!(screen.get(), Screen::Hub | Screen::Profile(_)))>{move || t(if screen.get() == Screen::Hub { Screen::Account.title_key() } else { "set-title-manage-profile" })}</span>
+                <span class=("lg:hidden", move || matches!(screen.get(), Screen::Profile(_)))>{move || t(screen.get().title_key())}</span>
+                <span class="hidden" class=("lg:inline", move || matches!(screen.get(), Screen::Profile(_)))>{t("set-title-manage-profile")}</span>
             </h1>
         </header>
     }

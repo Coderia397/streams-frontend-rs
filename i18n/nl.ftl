@@ -2505,3 +2505,11 @@ set-primary-cannot-delete = Het primaire profiel kan niet worden verwijderd.
 set-edit-profile-page = Profiel bewerken
 set-handle-lead = Je handle is een unieke naam die wordt gebruikt om te spelen met andere { $brand }-leden in alle { $brand }-spellen.
 set-learn-more = Meer weten
+
+# Lost your way? (pages/not_found.rs): an address the site does not have, as netflix.com/NotFound
+notfound-title = Verdwaald?
+notfound-body = Sorry, we kunnen die pagina niet vinden. Op de startpagina is genoeg te ontdekken.
+notfound-home = { $brand }-startpagina
+notfound-code = Foutcode
+notfound-from = UIT
+notfound-still = LOST IN SPACE

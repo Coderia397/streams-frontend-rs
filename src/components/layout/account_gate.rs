@@ -25,7 +25,7 @@ pub fn access(path: &str) -> Access {
     const VISITORS: [&str; 3] = ["/login", "/signup", "/forgot"];
     // `/auth` holds the links in account emails (confirm an address, set a new password): they work whether or not the browser is signed in
     // `/signout` ends a session if there is one and goes to the start page either way, so a visitor is never sent to sign in first (and back to it)
-    const EVERYONE: [&str; 7] = ["/title", "/auth", "/help", "/contact", "/welcome", "/reads", "/signout"];
+    const EVERYONE: [&str; 8] = ["/title", "/auth", "/help", "/contact", "/welcome", "/reads", "/signout", "/NotFound"];
     let under = |p: &str| path == p || path.starts_with(&format!("{p}/"));
     // the policies live under /help; their earlier addresses only move there (config::routes::MOVED)
     if path == "/" || path.is_empty() || EVERYONE.iter().any(|p| under(p)) || crate::config::routes::moved(path).is_some() {
@@ -101,10 +101,10 @@ mod tests {
         for p in ["/login", "/signup", "/forgot"] {
             assert_eq!(access(p), Access::Visitors, "{p}");
         }
-        for p in ["/", "/auth/confirm", "/title/tv-1399", "/help", "/help/article/share", "/help/legal/privacy", "/help/legal/terms", "/privacy", "/privacy-policy", "/terms", "/cookies", "/dmca", "/contact"] {
+        for p in ["/", "/NotFound", "/auth/confirm", "/title/tv-1399", "/help", "/help/article/share", "/help/legal/privacy", "/help/legal/terms", "/privacy", "/privacy-policy", "/terms", "/cookies", "/dmca", "/contact"] {
             assert_eq!(access(p), Access::Everyone, "{p}");
         }
-        for p in ["/browse", "/browse/genre/83", "/settings/account", "/search", "/watch/tv/1399", "/loginx", "/helpdesk"] {
+        for p in ["/browse", "/browse/genre/83", "/account", "/settings/p1", "/password", "/search", "/watch/tv/1399", "/loginx", "/helpdesk"] {
             assert_eq!(access(p), Access::Members, "{p}");
         }
     }
@@ -112,7 +112,7 @@ mod tests {
     #[test]
     fn next_stays_on_the_site() {
         assert_eq!(safe_next("/browse?title=tv-1399").as_deref(), Some("/browse?title=tv-1399"));
-        assert_eq!(safe_next("/settings/account").as_deref(), Some("/settings/account"));
+        assert_eq!(safe_next("/account").as_deref(), Some("/account"));
         for bad in ["//example.com", "/\\example.com", "/\\/example.com", "/\t/example.com", "/\n/example.com", "https://example.com", "example.com", "/login", "/"] {
             assert_eq!(safe_next(bad), None, "{bad:?}");
         }

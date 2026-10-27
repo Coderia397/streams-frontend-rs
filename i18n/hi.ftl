@@ -2509,3 +2509,11 @@ set-primary-cannot-delete = प्राथमिक प्रोफ़ाइल
 set-edit-profile-page = प्रोफ़ाइल संपादित करें
 set-handle-lead = आपका हैंडल एक अद्वितीय नाम है जो { $brand } गेम में अन्य { $brand } सदस्यों के साथ खेलने के लिए उपयोग किया जाएगा।
 set-learn-more = और जानें
+
+# Lost your way? (pages/not_found.rs): an address the site does not have, as netflix.com/NotFound
+notfound-title = रास्ता भटक गए?
+notfound-body = माफ़ करें, हमें वह पेज नहीं मिला. होम पेज पर देखने के लिए बहुत कुछ है.
+notfound-home = { $brand } होम
+notfound-code = एरर कोड
+notfound-from = स्रोत
+notfound-still = LOST IN SPACE

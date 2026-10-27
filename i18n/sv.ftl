@@ -2505,3 +2505,11 @@ set-primary-cannot-delete = Den primära profilen kan inte raderas.
 set-edit-profile-page = Redigera profil
 set-handle-lead = Ditt användarnamn är ett unikt namn som används när du spelar med andra { $brand }-medlemmar i alla { $brand }-spel.
 set-learn-more = Läs mer
+
+# Lost your way? (pages/not_found.rs): an address the site does not have, as netflix.com/NotFound
+notfound-title = Har du gått vilse?
+notfound-body = Tyvärr hittar vi inte den sidan. På startsidan finns massor att upptäcka.
+notfound-home = { $brand } Hem
+notfound-code = Felkod
+notfound-from = FRÅN
+notfound-still = LOST IN SPACE

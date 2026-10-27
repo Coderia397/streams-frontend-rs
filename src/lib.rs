@@ -125,7 +125,7 @@ pub fn App() -> impl IntoView {
             <HostGuard />
             <GlobalGate />
             <crate::components::media::info_modal::SharedTitleOpener />
-            // an address the site does not have goes to the site's root (the landing page, or Home for a returning visitor), with no page of its own
+            // an address the site does not have: Netflix's "Lost your way?" at /NotFound (pages/not_found.rs)
             <Routes fallback=|| view! { <UnknownAddress /> }>
                 <Route path=path!("/browse") view=|| view! { <HomeRoute kids=false /> } />
                 <Route path=path!("/kids") view=|| view! { <HomeRoute kids=true /> } />
@@ -186,8 +186,19 @@ pub fn App() -> impl IntoView {
                     />
                 } />
                 <Route path=path!("/reads") view=crate::pages::reads::ReadsPage />
+                // settings and the account at netflix.com's own addresses (pages/settings, note 138)
                 <Route path=path!("/settings") view=crate::pages::settings::SettingsPage />
                 <Route path=path!("/settings/*any") view=crate::pages::settings::SettingsPage />
+                <Route path=path!("/account") view=crate::pages::settings::SettingsPage />
+                <Route path=path!("/account/*any") view=crate::pages::settings::SettingsPage />
+                <Route path=path!("/password") view=crate::pages::settings::SettingsPage />
+                <Route path=path!("/email") view=crate::pages::settings::SettingsPage />
+                <Route path=path!("/phonenumber") view=crate::pages::settings::SettingsPage />
+                <Route path=path!("/manageaccountaccess") view=crate::pages::settings::SettingsPage />
+                <Route path=path!("/donottest") view=crate::pages::settings::SettingsPage />
+                <Route path=path!("/notificationSettings") view=crate::pages::settings::SettingsPage />
+                <Route path=path!("/notificationSettings/*any") view=crate::pages::settings::SettingsPage />
+                <Route path=path!("/NotFound") view=crate::pages::not_found::NotFoundPage />
                 <Route path=path!("/login") view=crate::pages::auth::LoginPage />
                 <Route path=path!("/signout") view=crate::pages::auth::SignOutPage />
                 <Route path=path!("/signup") view=crate::pages::auth::SignupPage />
@@ -240,14 +251,15 @@ fn is_local_host() -> bool {
     host == "localhost" || host == "127.0.0.1" || host == "[::1]" || host.starts_with("10.") || host.starts_with("192.168.") || private_172 || host.ends_with(".local")
 }
 
-/// An address the app does not have: a policy's earlier or common address goes to the policy, anything else to the root.
+/// An address the app does not have: a policy's earlier or common address goes to the policy, anything else to Netflix's "Lost your way?"
+/// page with the address it was asked for (`/NotFound?prev=`, read live on netflix.com 2026-10-27, note 138).
 #[component]
 fn UnknownAddress() -> impl IntoView {
-    let to = crate::config::routes::moved(&leptos_router::hooks::use_location().pathname.get_untracked()).unwrap_or(crate::config::routes::HOME);
+    let to = crate::config::routes::moved(&leptos_router::hooks::use_location().pathname.get_untracked()).map(String::from).unwrap_or_else(crate::pages::not_found::address_for_lost);
     let navigate = leptos_router::hooks::use_navigate();
     // after the fallback is drawn: navigating while the router draws it writes the address the router is reading, which aborted the app on
     // every unknown address (RwLock<Url>::write inside NestedRoutesView::build, 2026-10-25)
-    Effect::new(move |_| navigate(to, leptos_router::NavigateOptions { replace: true, ..Default::default() }));
+    Effect::new(move |_| navigate(&to, leptos_router::NavigateOptions { replace: true, ..Default::default() }));
 }
 
 /// Keeps each host to its own pages: `/help` (with the policies under `/help/legal`) on the main address moves to the Help Centre's host, and anything else on that host

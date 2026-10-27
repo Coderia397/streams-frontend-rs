@@ -26,7 +26,7 @@ pub fn AddEditProfileModal(
     // the lock is shown here, never changed here: a PIN is set, changed or removed in Settings, where the account checks the current PIN
     // or a recent sign in (Manage Profiles let anyone untick it, 2026-10-25)
     let has_pin = initial.as_ref().is_some_and(|p| p.pin.is_some());
-    let lock_href = initial.as_ref().map(|p| format!("/settings/profile/{}/lock", p.id)).unwrap_or_default();
+    let lock_href = initial.as_ref().map(|p| crate::pages::settings::Screen::Lock(p.id.clone()).path()).unwrap_or_default();
 
     let (name, set_name) = signal(initial_name);
     let (avatar_url, set_avatar_url) = signal(initial_avatar);

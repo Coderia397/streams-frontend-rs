@@ -2525,3 +2525,11 @@ set-primary-cannot-delete = Основной профиль нельзя уда�
 set-edit-profile-page = Редактировать профиль
 set-handle-lead = Ваш ник — это уникальное имя, которое будет использоваться для игры с другими участниками { $brand } во всех играх { $brand}.
 set-learn-more = Подробнее
+
+# Lost your way? (pages/not_found.rs): an address the site does not have, as netflix.com/NotFound
+notfound-title = Заблудились?
+notfound-body = К сожалению, мы не можем найти эту страницу. На главной странице вас ждёт много интересного.
+notfound-home = Главная { $brand }
+notfound-code = Код ошибки
+notfound-from = ИЗ
+notfound-still = LOST IN SPACE

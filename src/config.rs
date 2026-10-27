@@ -106,6 +106,10 @@ pub const SECURITY_EVENTS_SHOWN: u32 = 10;
 pub mod routes {
     pub const HOME: &str = "/";
     pub const BROWSE: &str = "/browse";
+    /// My List; on a phone the tab whose profile sheet opens App settings, Account and a profile's settings (nav/phone).
+    pub const MY_LIST: &str = "/browse/my-list";
+    /// Netflix's page for an address the site does not have ("Lost your way?", pages/not_found.rs), with `?prev=` the address asked.
+    pub const NOT_FOUND: &str = "/NotFound";
     /// The home of a Kids profile (netflix.com/Kids); Series, Films and genres use the normal /browse/genre addresses.
     pub const KIDS: &str = "/kids";
     pub const LOGIN: &str = "/login";

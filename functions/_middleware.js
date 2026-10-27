@@ -104,8 +104,9 @@ export async function onRequest({ request, next, env }) {
   const title = TITLE_PATH.exec(p);
   if (title) {
     const head = await titleHead(title[1], title[2], `${origin}${p}`, env).catch(() => null);
-    // a title TMDB does not have goes to the root, as every address the site does not have (src/lib.rs): no page of its own
-    if (head && head.missing) return Response.redirect(`${url.origin}/`, 302);
+    // a title TMDB does not have goes to Netflix's "Lost your way?" page with the address asked, as every address the site does not
+    // have (src/lib.rs, src/pages/not_found.rs)
+    if (head && head.missing) return Response.redirect(`${url.origin}/NotFound?prev=${encodeURIComponent(url.href)}`, 302);
     if (head) return withHead(res, head, head.firstView);
   }
   // the Help Centre's home and articles: every one was the same empty page before the app ran, so Google kept one of them and

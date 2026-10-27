@@ -54,7 +54,7 @@ pub fn WhosWatchingGate(
                 set_modal_state.set(Some(("edit".to_string(), Some(p))));
             } else {
                 crate::store::open_from_manage(&p.id);
-                navigate(&format!("/settings/profile/{}", p.id), Default::default());
+                navigate(&crate::pages::settings::Screen::Profile(p.id.clone()).path(), Default::default());
             }
         }
     });

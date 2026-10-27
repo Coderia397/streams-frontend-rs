@@ -1,10 +1,11 @@
 //! The website's Edit Profile page: a page of its own (only the logo above it), the picture with a pencil, the name, the gender, the game handle, the contact info of the
-//! account (name, email, mobile phone), Save, Cancel and Delete Profile. Measured on netflix.com/settings/profile/edit/<id> at 1851 px wide: a 690 px column.
-use super::profile::remove_profile;
+//! account (name, email, mobile phone), Save, Cancel and Delete Profile. Measured on netflix.com/settings/profile/edit/<id> at 1851 px wide: a 690 px column. As there
+//! (read live on 2026-10-27, note 138) the picture's pencil opens "Choose a profile icon" in place, and the game handle is a field of this page, saved with it.
+use super::profile::{remove_profile, valid_handle, IconPanel};
 use super::prefs::use_prefs;
 use super::widgets::{toast, ConfirmDialog, FloatField};
 use super::Screen;
-use crate::config::{routes, PROFILE_NAME_MAX};
+use crate::config::{routes, GAME_HANDLE_MAX, GAME_HANDLE_MIN, PROFILE_NAME_MAX};
 use crate::i18n::t;
 use crate::models::profile_rules::can_delete;
 use crate::services::account;
@@ -24,6 +25,8 @@ pub fn EditProfilePage(id: String) -> impl IntoView {
     let name = RwSignal::new(profile.get_untracked().map(|p| p.name).unwrap_or_default());
     let gender = RwSignal::new(prefs.profile(&id.get_value()).gender.unwrap_or_default());
     let gender_open = RwSignal::new(false);
+    let handle = RwSignal::new(prefs.profile(&id.get_value()).game_handle.unwrap_or_default());
+    let choosing_icon = RwSignal::new(false);
     let confirm = RwSignal::new(false);
     let note = RwSignal::new(None::<String>);
     let session = account::session();
@@ -42,9 +45,18 @@ pub fn EditProfilePage(id: String) -> impl IntoView {
             note.set(Some(t("set-name-taken")));
             return;
         }
+        let h = handle.get_untracked().trim().to_string();
+        let held = prefs.profile(&id.get_value()).game_handle.unwrap_or_default();
+        if h != held && !valid_handle(&h) {
+            note.set(Some(crate::i18n::t_args("set-handle-invalid", &[("min", GAME_HANDLE_MIN.into()), ("max", GAME_HANDLE_MAX.into())])));
+            return;
+        }
         store.profiles.update(|l| { if let Some(p) = l.iter_mut().find(|p| p.id == id.get_value()) { p.name = value; } });
         let g = gender.get_untracked();
-        prefs.update_profile(&id.get_value(), |p| p.gender = (!g.is_empty()).then(|| g.clone()));
+        prefs.update_profile(&id.get_value(), |p| {
+            p.gender = (!g.is_empty()).then(|| g.clone());
+            if h != held { p.game_handle = Some(h.clone()); }
+        });
         super::hub::persist_profiles(store);
         toast(t("set-saved"));
         nav_save(&back(), Default::default());
@@ -82,10 +94,10 @@ pub fn EditProfilePage(id: String) -> impl IntoView {
                 {move || note.get().map(|m| view! { <p role="status" class="mb-4 rounded-control border border-danger/50 bg-danger/10 px-4 py-3 text-body-sm text-danger">{m}</p> })}
                 <div class="mb-[24px] flex items-start gap-[20px]">
                     // radius: the avatar tile
-                    <a href=Screen::Avatar(id.get_value()).path() class="group relative -ms-[4px] block h-[128px] w-[128px] shrink-0 overflow-hidden rounded-control" aria-label=t("set-title-avatar")>
+                    <button type="button" on:click=move |_| choosing_icon.set(true) class="group relative -ms-[4px] block h-[128px] w-[128px] shrink-0 overflow-hidden rounded-control" aria-label=t("set-title-avatar")>
                         {move || profile.get().map(|p| view! { <img src=p.avatar_url.clone().unwrap_or_else(|| crate::brand::DEFAULT_AVATAR.to_string()) alt="" class="h-full w-full object-cover" /> })}
                         <span class="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-chrome/50"><i class="ph ph-pencil-simple text-heading text-chrome-ink" aria-hidden="true"></i></span>
-                    </a>
+                    </button>
                     <div class="flex min-w-0 flex-1 flex-col gap-[8px]">
                         <FloatField label=t("set-profile-name") value=name maxlength=PROFILE_NAME_MAX as u32 />
                         <div class="relative">
@@ -104,17 +116,18 @@ pub fn EditProfilePage(id: String) -> impl IntoView {
 
                 <h2 class="text-heading font-medium leading-[30px] text-ink">{t("set-title-game-handle")}</h2>
                 <p class="mb-4 mt-4 text-body-md leading-6 text-ink/70">{crate::i18n::t_args("set-handle-lead", &[("brand", crate::brand::NAME.into())])}" "<a href=routes::HELP class="underline underline-offset-2">{t("set-learn-more")}</a></p>
-                <a href=Screen::GameHandle(id.get_value()).path() class="block">
-                    <div class="relative flex h-[56px] w-full items-center gap-4 rounded-control border border-scrim-edge bg-page px-4">
-                        <i class="ph ph-game-controller shrink-0 text-heading" aria-hidden="true"></i>
-                        <span class="flex flex-col"><span class="text-fine leading-[14px] text-ink/70">{t("set-title-game-handle")}</span><span class="text-body-md leading-[22px] text-ink">{move || prefs.profile(&id.get_value()).game_handle.unwrap_or_else(|| t("set-handle-create"))}</span></span>
-                    </div>
-                </a>
+                <label class="relative flex h-[56px] w-full items-center gap-4 rounded-control border border-scrim-edge bg-page px-4 focus-within:border-ink">
+                    <i class="ph ph-game-controller shrink-0 text-heading" aria-hidden="true"></i>
+                    <span class="flex min-w-0 flex-1 flex-col">
+                        <span class="text-fine leading-[14px] text-ink/70">{t("set-title-game-handle")}</span>
+                        <input type="text" maxlength=GAME_HANDLE_MAX as u32 autocomplete="off" spellcheck="false" placeholder=t("set-handle-create") prop:value=move || handle.get() on:input=move |e| handle.set(event_target_value(&e)) class="w-full bg-transparent text-body-md leading-[22px] text-ink outline-none placeholder:text-ink/70" />
+                    </span>
+                </label>
 
                 <hr class="my-[32px] border-chrome/20" />
                 <h2 class="mb-[16px] text-title-sm leading-[27px] text-line">{t("set-contact-info")}</h2>
                 <div class="divide-y divide-chrome/10 rounded-card border border-chrome/10 px-[4px]">
-                    {field_row("user", t("set-title-name"), full_name, t("set-add-your-name"), Screen::Name.path())}
+                    {field_row("user", t("set-title-name"), full_name, t("set-add-your-name"), Screen::Name(id.get_value()).path())}
                     {field_row("envelope-simple", t("set-title-email"), email, String::new(), Screen::Email.path())}
                     {field_row("device-mobile", t("set-title-phone"), phone, t("set-add-phone"), Screen::Phone.path())}
                 </div>
@@ -128,6 +141,9 @@ pub fn EditProfilePage(id: String) -> impl IntoView {
                 <Show when=move || !deletable()><p class="mt-[16px] text-body-sm text-chrome/70">{t("set-primary-cannot-delete")}</p></Show>
             </div>
             <ConfirmDialog open=confirm title=t("set-delete-profile") body=t("set-delete-profile-body") confirm_label=t("set-delete") danger=true on_confirm=delete />
+            <Show when=move || choosing_icon.get()>
+                <IconPanel id=id.get_value() on_done=Callback::new(move |_| choosing_icon.set(false)) />
+            </Show>
         </div>
     }
 }
