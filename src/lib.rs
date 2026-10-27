@@ -32,8 +32,10 @@ pub fn App() -> impl IntoView {
     crate::form::start();
     crate::store::provide_ui_store();
     crate::store::provide_profile_store();
-    // Who's watching again after a while away (shorter on a computer than on a phone)
-    crate::services::profile_gate::start(crate::store::use_profile_store());
+    // Who's watching again after a while away (shorter on a computer than on a phone); not on the Help Centre's host (GlobalGate)
+    if !crate::config::on_help_host() {
+        crate::services::profile_gate::start(crate::store::use_profile_store());
+    }
     crate::store::provide_library_store();
     crate::store::provide_watch_store();
     crate::consent::provide_ui();
@@ -300,12 +302,20 @@ fn HomeRoute(kids: bool) -> impl IntoView {
 }
 
 /// Who's watching over every page while no profile is in use, except Manage Profiles and the settings of the profile it opened, which are
-/// pages of their own as on Netflix (store::shown_without_profile, note 132).
+/// pages of their own as on Netflix (store::shown_without_profile, note 132). Never on the Help Centre's host: its storage is its own, so
+/// it held only the two first profiles (Main and Kids) and asked a visitor to pick one after 40 minutes away (owner, 2026-10-27, note 136).
 #[component]
 fn GlobalGate() -> impl IntoView {
     let profile_store = crate::store::use_profile_store();
     let location = leptos_router::hooks::use_location();
-    let shown = move || profile_store.active_profile_id.get().is_none() && !crate::store::shown_without_profile(&location.pathname.get());
+    let on_help_host = crate::config::on_help_host();
+    // a browser with no profiles (no account) has nothing to choose
+    let shown = move || {
+        !on_help_host
+            && profile_store.active_profile_id.get().is_none()
+            && profile_store.profiles.with(|l| !l.is_empty())
+            && !crate::store::shown_without_profile(&location.pathname.get())
+    };
     view! {
         <Show when=shown>
             <crate::components::profiles::whos_watching::WhosWatchingGate />
@@ -315,12 +325,13 @@ fn GlobalGate() -> impl IntoView {
 
 /// A page that plays video (home, a genre's page and its billboard, a title's page, Clips, the player) is not there at all while Who's watching
 /// or the profile switch screen covers it: its film, trailer or banner would go on playing (with sound) behind them. It appears once a profile
-/// is in use, on the same address (store::activate_profile).
+/// is in use, on the same address (store::activate_profile). A browser with no profiles (a visitor on a title's page) waits for nothing.
 #[component]
 fn ProfileHold(children: ChildrenFn) -> impl IntoView {
     let profile_store = crate::store::use_profile_store();
     let switching = use_context::<crate::components::profiles::switch_overlay::SwitchState>();
-    move || if profile_store.active_profile_id.get().is_none() || switching.is_some_and(|s| s.0.get().is_some()) {
+    let choosing = move || profile_store.active_profile_id.get().is_none() && profile_store.profiles.with(|l| !l.is_empty());
+    move || if choosing() || switching.is_some_and(|s| s.0.get().is_some()) {
         view! { <span /> }.into_any()
     } else {
         children().into_any()

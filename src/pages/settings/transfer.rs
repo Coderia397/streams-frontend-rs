@@ -71,8 +71,8 @@ fn free_name(taken: &[String], wanted: &str) -> String {
 /// Adds the profile in `text` to this account. Returns the name it was given.
 pub fn import_profile(text: &str, store: ProfileStore, prefs: Prefs) -> Result<String, ImportError> {
     let file = parse_file(text)?;
-    let regular = store.profiles.with_untracked(|l| l.iter().filter(|p| !p.is_kids).count());
-    if !file.is_kids && regular >= MAX_PROFILES {
+    // five in all, Kids profiles included (settings/hub.rs can_add_profile)
+    if store.profiles.with_untracked(|l| l.len()) >= MAX_PROFILES {
         return Err(ImportError::Full);
     }
     let taken: Vec<String> = store.profiles.with_untracked(|l| l.iter().map(|p| p.name.clone()).collect());

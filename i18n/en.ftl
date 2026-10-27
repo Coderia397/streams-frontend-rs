@@ -1867,7 +1867,6 @@ category-top10-movies = Top 10 Movies Today
 category-top10-series = Top 10 TV Shows Today
 reads-title = Comics & Manga
 reads-empty = No comics in library
-profile-default-main = Main
 profile-default-kids = Kids
 
 # Settings and Account (routes under /settings)
@@ -1891,12 +1890,8 @@ set-sign-out = Sign out
 set-sign-out-body = You will be signed out of this browser. Your profiles and settings stay in your account.
 set-signin-needed = Sign in to your account to change these details.
 set-manage-profiles = Manage profiles
-set-profiles-hint = Choose a profile to edit it, or add a new one.
-set-add-profile = Add profile
-set-kids-profile = Kids profile
 set-profile-missing = This profile could not be found.
 set-profile-name = Profile name
-set-title-profiles = Manage profiles
 set-title-edit-profile = Edit profile
 set-title-avatar = Choose a profile picture
 set-title-restrictions = Viewing restrictions

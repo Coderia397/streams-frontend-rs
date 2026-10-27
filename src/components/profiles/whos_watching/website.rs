@@ -57,7 +57,7 @@ pub fn WebsiteGate(
                 }).collect::<Vec<_>>()}
 
                 // Add Profile tile (not in the Kids form)
-                {move || (!kids && profiles.get().len() < 5).then(|| view! {
+                {move || (!kids && profiles.get().len() < crate::config::MAX_PROFILES).then(|| view! {
                     <button type="button" on:click=move |_| on_add.run(()) class=TILE>
                         <div class="flex h-[128px] w-[128px] items-center justify-center rounded-modal bg-gate-tile">
                             <AppIcon glyph=Glyph::Plus class="text-icon-lg text-ink" />

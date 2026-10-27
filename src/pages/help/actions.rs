@@ -327,7 +327,12 @@ pub fn Profiles() -> impl IntoView {
                     })
                     .collect_view()}
             </ul>
-            <button on:click=move |_| store.active_profile_id.set(None) class=button_class(true)>{tr("help-act-open-profiles")}</button>
+            // the Help Centre's host shows no Who's watching (lib.rs GlobalGate): the profiles are the app's, on its own host
+            {if crate::config::on_help_host() {
+                view! { <a href=crate::config::app_link("/profiles/manage") class=button_class(true)>{tr("profile-manage")}</a> }.into_any()
+            } else {
+                view! { <button on:click=move |_| store.active_profile_id.set(None) class=button_class(true)>{tr("help-act-open-profiles")}</button> }.into_any()
+            }}
         </Tool>
     }
 }

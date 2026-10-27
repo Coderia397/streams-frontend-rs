@@ -36,7 +36,6 @@ use leptos_router::hooks::use_location;
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Screen {
     Hub,
-    Profiles,
     Profile(String),
     ProfileEdit(String),
     Avatar(String),
@@ -94,7 +93,6 @@ impl Screen {
         let parts: Vec<&str> = rest.split('/').filter(|p| !p.is_empty()).collect();
         let id = || parts.get(1).map(|s| s.to_string()).unwrap_or_else(|| active.to_string());
         match parts.as_slice() {
-            ["profiles"] => Screen::Profiles,
             ["profile"] | ["profile", _] => Screen::Profile(id()),
             ["profile", _, "edit"] => Screen::ProfileEdit(id()),
             ["profile", _, "avatar"] => Screen::Avatar(id()),
@@ -140,7 +138,6 @@ impl Screen {
         let profile = |id: &String, tail: &str| if id.is_empty() { format!("{ROOT}/profile") } else { format!("{ROOT}/profile/{id}{tail}") };
         match self {
             Screen::Hub => ROOT.into(),
-            Screen::Profiles => format!("{ROOT}/profiles"),
             Screen::Profile(id) => profile(id, ""),
             Screen::ProfileEdit(id) => profile(id, "/edit"),
             Screen::Avatar(id) => profile(id, "/avatar"),
@@ -184,7 +181,7 @@ impl Screen {
     pub fn parent(&self) -> String {
         match self {
             Screen::Hub => routes::BROWSE.into(),
-            Screen::Profiles | Screen::App | Screen::Account | Screen::Profile(_) | Screen::AccountSecurity | Screen::AccountDevices | Screen::AccountProfiles => Screen::Hub.path(),
+            Screen::App | Screen::Account | Screen::Profile(_) | Screen::AccountSecurity | Screen::AccountDevices | Screen::AccountProfiles => Screen::Hub.path(),
             Screen::ProfileEdit(id) | Screen::Avatar(id) | Screen::Restrictions(id) | Screen::Lock(id) | Screen::MainProfile(id) | Screen::Language(id) | Screen::AudioSubtitles(id) | Screen::Subtitles(id) | Screen::Playback(id) | Screen::Notifications(id) | Screen::GameHandle(id) | Screen::TransferProfile(id) => Screen::Profile(id.clone()).path(),
             Screen::NotificationChannel(id, _) => Screen::Notifications(id.clone()).path(),
             Screen::Ratings(id) | Screen::Blocked(id) => Screen::Restrictions(id.clone()).path(),
@@ -200,7 +197,7 @@ impl Screen {
         match self {
             Screen::Name | Screen::Password | Screen::Email | Screen::Phone | Screen::Privacy | Screen::PersonalInfo | Screen::Testing | Screen::TransferSetting | Screen::Delete => Screen::AccountSecurity.path(),
             Screen::Access => Screen::AccountDevices.path(),
-            Screen::Profiles | Screen::Profile(_) => Screen::AccountProfiles.path(),
+            Screen::Profile(_) => Screen::AccountProfiles.path(),
             Screen::AccountSecurity | Screen::AccountDevices | Screen::AccountProfiles | Screen::App => Screen::Account.path(),
             Screen::Account => routes::BROWSE.into(),
             other => other.parent(),
@@ -210,7 +207,6 @@ impl Screen {
     pub fn title_key(&self) -> &'static str {
         match self {
             Screen::Hub => "set-title",
-            Screen::Profiles => "set-title-profiles",
             Screen::Profile(_) | Screen::ProfileEdit(_) => "set-title-edit-profile",
             Screen::Avatar(_) => "set-title-avatar",
             Screen::Restrictions(_) => "set-title-restrictions",
@@ -362,7 +358,6 @@ fn screen_body(screen: Screen) -> AnyView {
     match screen {
         // phones and tablets: the hub list; computers: the hub address shows the account overview
         Screen::Hub => view! { <DesktopOr compact=|| view! { <hub::Hub /> } desktop=|| view! { <account::Account /> } /> }.into_any(),
-        Screen::Profiles => view! { <hub::ManageProfiles /> }.into_any(),
         // phones and tablets: the Edit profile list of the app; computers: "Manage profile and preferences" like the website, and Edit profile is its own page
         Screen::Profile(id) => {
             let (a, b) = (id.clone(), id);
@@ -417,7 +412,6 @@ mod tests {
     fn every_screen() -> Vec<Screen> {
         let id = || "p1".to_string();
         vec![
-            Screen::Profiles,
             Screen::Profile(id()),
             Screen::Avatar(id()),
             Screen::Restrictions(id()),
@@ -503,7 +497,7 @@ mod tests {
     #[test]
     fn addresses_written_in_data_files_match_the_tree() {
         assert!(crate::data::settings::LEGAL_LINKS.iter().any(|(_, _, href)| *href == Screen::Licences.path()));
-        assert!(crate::data::help::QUICK_LINKS.iter().any(|(id, _, href)| *id == "profiles" && *href == Screen::Profiles.path()));
+        assert!(crate::data::help::QUICK_LINKS.iter().any(|(id, _, href)| *id == "profiles" && *href == Screen::AccountProfiles.path()));
     }
 
     #[test]

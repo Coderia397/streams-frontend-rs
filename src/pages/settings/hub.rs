@@ -6,14 +6,10 @@ use crate::i18n::t;
 use crate::models::profile::Profile;
 use crate::store::{use_profile_store, ProfileStore};
 use leptos::prelude::*;
-use crate::components::media::icons::app_icons::{AppIcon, Glyph};
 
 /// Opens the "Sign out?" dialog that the settings page renders once.
 #[derive(Clone, Copy)]
 pub struct SignOutOpen(pub RwSignal<bool>);
-
-/// Non kids profiles an account can hold. The Kids profile does not count toward it.
-pub const MAX_PROFILES: usize = 5;
 
 /// Keeps the profiles in this browser and sends the change to the account.
 pub fn persist_profiles(store: ProfileStore) {
@@ -98,7 +94,7 @@ pub fn Hub() -> impl IntoView {
                 }).collect_view()}
             </ul>
             <div class="mb-10 flex justify-center">
-                <a href=Screen::Profiles.path() class="rounded-button bg-set-sheet-tile px-6 py-3 text-body-md font-bold hover:bg-ink/20 lg:bg-ink/10">{t("set-manage-profiles")}</a>
+                <a href=Screen::AccountProfiles.path() class="rounded-button bg-set-sheet-tile px-6 py-3 text-body-md font-bold hover:bg-ink/20 lg:bg-ink/10">{t("set-manage-profiles")}</a>
             </div>
             <Section>
                 <LinkRow icon="gear-six" title=t("set-nav-app") href=Screen::App.path() />
@@ -110,9 +106,10 @@ pub fn Hub() -> impl IntoView {
     }
 }
 
-/// True while the account can take another profile (the Kids profile does not count toward the limit).
+/// True while the account can take another profile: five in all, Kids profiles included (owner, 2026-10-27; the account's own rule,
+/// Supabase migration 20261027140133).
 pub fn can_add_profile(store: ProfileStore) -> bool {
-    store.profiles.with(|l| l.iter().filter(|p| !p.is_kids).count() < MAX_PROFILES) || store.profiles.with(|l| !l.iter().any(|p| p.is_kids))
+    store.profiles.with(|l| l.len() < crate::config::MAX_PROFILES)
 }
 
 /// Adds the profile the modal describes, keeps it and sends it to the account.
@@ -145,7 +142,7 @@ pub fn AddProfile() -> impl IntoView {
         <div class="px-5 pb-5 pt-2">
             <Show when=move || can_add_profile(store)>
                 <button type="button" on:click=move |_| adding.set(true) class="h-12 w-full rounded-button bg-glass-hover text-title-sm font-medium hover:bg-glass">{t("set-add-profile-button")}</button>
-                <p class="mt-4 text-center text-body-sm text-chrome/70">{crate::i18n::t_args("set-add-profile-limit", &[("max", (MAX_PROFILES as i64).into())])}</p>
+                <p class="mt-4 text-center text-body-sm text-chrome/70">{crate::i18n::t_args("set-add-profile-limit", &[("max", (crate::config::MAX_PROFILES as i64).into())])}</p>
             </Show>
             <Show when=move || adding.get()>
                 <AddEditProfileModal mode="add" initial=None on_save=on_save on_delete=None on_cancel=Callback::new(move |_| adding.set(false)) />
@@ -154,56 +151,10 @@ pub fn AddProfile() -> impl IntoView {
     }
 }
 
+/// "Import a profile": picks a file saved by Transfer a profile and adds it to this account. On the Profiles page
+/// (`/settings/account/profiles`), the one page of the account's profiles: the grid at `/settings/profiles` was a second one (owner, 2026-10-27).
 #[component]
-pub fn ManageProfiles() -> impl IntoView {
-    let store = use_profile_store();
-    let adding = RwSignal::new(false);
-    let can_add = move || can_add_profile(store);
-    let on_save = Callback::new(move |data: ProfileFormData| {
-        add_profile(store, data);
-        adding.set(false);
-    });
-
-    view! {
-        <div>
-            <p class="mb-6 text-body-md text-ink/60">{t("set-profiles-hint")}</p>
-            <ul class="grid grid-cols-2 gap-6 sm:grid-cols-3">
-                {move || store.profiles.get().into_iter().map(|p| view! {
-                    <li>
-                        <a href=Screen::Profile(p.id.clone()).path() class="group flex flex-col items-center gap-3 text-center">
-                            <span class="relative block h-28 w-28 overflow-hidden rounded-card">
-                                {picture(&p, 112.0, "block h-full w-full object-cover opacity-70")}
-                                <span class="absolute inset-0 flex items-center justify-center bg-void/40">
-                                    <i class="ph-bold ph-pencil-simple text-3xl text-ink" aria-hidden="true"></i>
-                                </span>
-                            </span>
-                            <span class="w-full truncate text-body-md font-semibold">{p.name.clone()}</span>
-                            {p.is_kids.then(|| view! { <span class="text-label text-ink/50">{t("set-kids-profile")}</span> })}
-                        </a>
-                    </li>
-                }).collect_view()}
-                <Show when=can_add>
-                    <li>
-                        <button type="button" on:click=move |_| adding.set(true) class="flex w-full flex-col items-center gap-3">
-                            <span class="flex h-28 w-28 items-center justify-center rounded-card bg-ink/10 hover:bg-ink/20">
-                                <AppIcon glyph=Glyph::Plus class="text-4xl text-ink/80" />
-                            </span>
-                            <span class="text-body-md font-semibold">{t("set-add-profile")}</span>
-                        </button>
-                    </li>
-                </Show>
-            </ul>
-            <ImportProfile />
-            <Show when=move || adding.get()>
-                <AddEditProfileModal mode="add" initial=None on_save=on_save on_delete=None on_cancel=Callback::new(move |_| adding.set(false)) />
-            </Show>
-        </div>
-    }
-}
-
-/// "Import a profile": picks a file saved by Transfer a profile and adds it to this account.
-#[component]
-fn ImportProfile() -> impl IntoView {
+pub fn ImportProfile() -> impl IntoView {
     use super::prefs::use_prefs;
     use super::widgets::{toast, ActionRow, Message, Section, Tone};
     let store = use_profile_store();

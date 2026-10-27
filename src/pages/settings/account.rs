@@ -84,7 +84,7 @@ fn DevicesSection(#[prop(optional)] wide: bool) -> impl IntoView {
 fn ProfilesSection() -> impl IntoView {
     view! {
         <Section title=t("set-account-profiles")>
-            <LinkRow icon="users-three" title=t("set-nav-profiles") href=Screen::Profiles.path() />
+            <LinkRow icon="users-three" title=t("set-nav-profiles") href=Screen::AccountProfiles.path() />
             <LinkRow icon="shield-check" title=t("set-title-privacy") href=Screen::Privacy.path() />
         </Section>
     }
@@ -129,7 +129,7 @@ pub fn Account() -> impl IntoView {
                 </Section>
                 <Section>
                     <LinkRow icon="sliders-horizontal" title=t("set-overview-edit") hint=t("set-overview-edit-hint") href=Screen::Profile(active_profile_id()).path() />
-                    <LinkRow icon="users-three" title=t("set-nav-profiles") hint=crate::i18n::t_args("set-overview-profiles", &[("count", profile_count.get_untracked().into())]) href=Screen::Profiles.path() />
+                    <LinkRow icon="users-three" title=t("set-nav-profiles") hint=crate::i18n::t_args("set-overview-profiles", &[("count", profile_count.get_untracked().into())]) href=Screen::AccountProfiles.path() />
                 </Section>
                 }
             />
@@ -183,6 +183,7 @@ pub fn ProfilesPage() -> impl IntoView {
                 }}
                 <super::hub::AddProfile />
             </Section>
+            <super::hub::ImportProfile />
         </div>
     }
 }

@@ -71,7 +71,7 @@ pub fn EditProfile(id: String, #[prop(optional)] edit_page: bool) -> impl IntoVi
     };
     let delete = Callback::new(move |_| {
         remove_profile(&id.get_value());
-        navigate(&Screen::Profiles.path(), Default::default());
+        navigate(&Screen::AccountProfiles.path(), Default::default());
     });
     move || {
         let Some(p) = profile.get() else { return not_found() };
@@ -176,7 +176,7 @@ pub fn ProfileOverview(id: String) -> impl IntoView {
     let profile = Memo::new(move |_| store.profiles.with(|l| l.iter().find(|p| p.id == id.get_value()).cloned()));
     let delete = Callback::new(move |_| {
         remove_profile(&id.get_value());
-        navigate(&Screen::Profiles.path(), Default::default());
+        navigate(&Screen::AccountProfiles.path(), Default::default());
     });
     move || {
         let Some(p) = profile.get() else { return not_found() };

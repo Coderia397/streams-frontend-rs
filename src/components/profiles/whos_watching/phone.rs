@@ -102,7 +102,7 @@ pub fn PhoneProfilePicker(
                             </button>
                         }
                     }).collect::<Vec<_>>()}
-                    {move || (profiles.get().len() < 5).then(|| view! {
+                    {move || (profiles.get().len() < crate::config::MAX_PROFILES).then(|| view! {
                         <button type="button" on:click=move |_| on_add.run(()) class="flex w-[100px] cursor-pointer flex-col items-center gap-[13px] focus:outline-none active:scale-95 transition-transform">
                             <span class="flex h-[72px] w-[72px] items-center justify-center rounded-[8px] bg-ink/15"><AppIcon glyph=Glyph::Plus class="text-heading text-ink" /></span>
                             <span class="text-body-lg font-normal leading-tight text-ink">{crate::i18n::t("whos-watching-add-profile")}</span>

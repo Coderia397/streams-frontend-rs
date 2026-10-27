@@ -12,6 +12,10 @@ const HELP = "help.streams.watch";
 const FILE = /\.[a-z0-9]{2,5}$/i;
 const BRAND = "Streams";
 const TITLE_PATH = /^\/title\/(tv|movie)-([1-9]\d{0,9})$/;
+// search engines and link previews: the Help Centre's and the policies' plain first views are theirs alone. A person saw the plain page
+// for a moment on every load before the app drew the Help Centre over it (owner, 2026-10-27, note 136); the same words reach the
+// engines, so nothing differs but the frame. The heads stay for everyone.
+const CRAWLER = /bot\b|crawl|spider|slurp|facebookexternalhit|embedly|preview|inspectiontool|whatsapp|telegram|discord|slack/i;
 // the site's TMDB key, the same one every visitor's browser already uses (src/config.rs); STREAMS_TMDB_KEY in the Pages settings replaces it
 const PUBLIC_TMDB_KEY = "fc5fec3b73d8605daaeb1eb3b91157eb";
 const TMDB_IMAGES = "https://image.tmdb.org/t/p";
@@ -94,6 +98,7 @@ export async function onRequest({ request, next, env }) {
   }
   const res = await next();
   if (request.method !== "GET" || FILE.test(p) || !(res.headers.get("content-type") || "").includes("text/html")) return res;
+  const crawler = CRAWLER.test(request.headers.get("user-agent") || "");
   // the canonical host: the help pages on help.streams.watch, everything else on streams.watch (previews keep their own host)
   const origin = ours ? `https://${p === "/help" || p.startsWith("/help/") ? HELP : MAIN}` : url.origin;
   const title = TITLE_PATH.exec(p);
@@ -108,12 +113,12 @@ export async function onRequest({ request, next, env }) {
   const article = /^\/help\/article\/([a-z0-9-]+)$/.exec(p);
   if ((p === "/help" || article) && env && env.ASSETS) {
     const help = await helpFirstView(env, url.origin, article ? article[1] : null).catch(() => null);
-    if (help) return withHead(res, { title: article ? `${help.title} | ${BRAND} Help Centre` : `${help.title} | ${BRAND}`, description: help.description, url: `${origin}${p}` }, help.html);
+    if (help) return varyByAgent(withHead(res, { title: article ? `${help.title} | ${BRAND} Help Centre` : `${help.title} | ${BRAND}`, description: help.description, url: `${origin}${p}` }, crawler ? help.html : null));
   }
   // the policies: before this, a reader without the app found only their titles, so who runs the site and its terms were unreadable
   if (LEGAL[p] && env && env.ASSETS) {
-    const legal = await legalFirstView(env, url.origin, p).catch(() => null);
-    if (legal) return withHead(res, { title: `${PAGES[p][0]} | ${BRAND} Help Centre`, description: PAGES[p][1], url: `${origin}${p}` }, legal);
+    const legal = crawler ? await legalFirstView(env, url.origin, p).catch(() => null) : null;
+    return varyByAgent(withHead(res, { title: `${PAGES[p][0]} | ${BRAND} Help Centre`, description: PAGES[p][1], url: `${origin}${p}` }, legal));
   }
   if (p === "/" && !(ours && host === HELP) && env && env.ASSETS) {
     const first = await landingFirstView(env, url.origin).catch(() => null);
@@ -455,6 +460,12 @@ function withHead(res, h, firstView) {
   const headers = new Headers(out.headers);
   headers.delete("content-length");
   return new Response(out.body, { status: out.status, headers });
+}
+
+/** The response marked as one that depends on who asks (a crawler gets the first view), so no cache hands one's copy to the other. */
+function varyByAgent(res) {
+  res.headers.append("vary", "user-agent");
+  return res;
 }
 
 function attr(s) {

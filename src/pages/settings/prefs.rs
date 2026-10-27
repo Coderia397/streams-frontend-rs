@@ -222,13 +222,6 @@ mod tests {
     }
 
     #[test]
-    fn the_default_kids_profile_is_a_kids_profile() {
-        let kids: Vec<_> = crate::store::default_profiles_with("x".into()).into_iter().filter(|p| p.is_kids).collect();
-        assert_eq!(kids.len(), 1);
-        assert_eq!(kids[0].id, "p2");
-    }
-
-    #[test]
     fn a_kids_profile_never_gets_an_adult_limit() {
         let mut p = ProfilePrefs::default();
         assert_eq!(p.rating_for(false), "18");
@@ -244,7 +237,7 @@ mod tests {
 pub fn active_is_kids() -> bool {
     let Some(storage) = web_sys::window().and_then(|w| w.local_storage().ok().flatten()) else { return false };
     let active = storage.get_item(crate::keys::ACTIVE_PROFILE).ok().flatten();
-    let profiles: Vec<crate::models::profile::Profile> = read(crate::keys::PROFILES).unwrap_or_else(crate::store::default_profiles);
+    let profiles: Vec<crate::models::profile::Profile> = read(crate::keys::PROFILES).unwrap_or_default();
     profiles.iter().find(|p| Some(&p.id) == active.as_ref()).is_some_and(|p| p.is_kids)
 }
 
@@ -253,8 +246,7 @@ pub fn active_is_kids() -> bool {
 pub fn active_rating() -> Option<&'static str> {
     let storage = web_sys::window().and_then(|w| w.local_storage().ok().flatten())?;
     let active = storage.get_item(crate::keys::ACTIVE_PROFILE).ok().flatten();
-    // a browser that has saved no profiles still has the default main and Kids profiles, and the Kids one must be limited
-    let profiles: Vec<crate::models::profile::Profile> = read(crate::keys::PROFILES).unwrap_or_else(crate::store::default_profiles);
+    let profiles: Vec<crate::models::profile::Profile> = read(crate::keys::PROFILES).unwrap_or_default();
     let profile = profiles.iter().find(|p| Some(&p.id) == active.as_ref()).or_else(|| profiles.first())?;
     let prefs: HashMap<String, ProfilePrefs> = read(crate::keys::PROFILE_PREFS).unwrap_or_default();
     Some(prefs.get(&profile.id).cloned().unwrap_or_default().rating_for(profile.is_kids))

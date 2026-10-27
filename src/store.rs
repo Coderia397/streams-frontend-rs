@@ -115,53 +115,23 @@ pub struct ProfileStore {
     pub notice: RwSignal<Option<String>>,
 }
 
-/// The profiles of a browser that has saved none: the main profile and the Kids profile. They are not saved (signing in makes the account's first profiles when none are), so the
-/// main profile's face comes from this browser's device key: the same at every start (a random face changed colour at each visit, note 116).
-pub fn default_profiles() -> Vec<crate::models::profile::Profile> {
-    default_profiles_with(crate::data::avatars::smile_for(&crate::services::device::device_key()))
-}
-
-/// The first profiles of a browser, with the main profile's picture given (the device key needs the browser, so tests pass one).
-pub fn default_profiles_with(main_avatar: String) -> Vec<crate::models::profile::Profile> {
-    vec![
-        crate::models::profile::Profile {
-            id: "p1".to_string(),
-            name: crate::i18n::t("profile-default-main"),
-            avatar_url: Some(main_avatar),
-            is_kids: false,
-            is_default: Some(true),
-            pin: None,
-            sort_order: 0,
-        },
-        crate::models::profile::Profile {
-            id: "p2".to_string(),
-            name: crate::i18n::t("profile-default-kids"),
-            avatar_url: None,
-            is_kids: true,
-            is_default: Some(false),
-            pin: None,
-            sort_order: 1,
-        },
-    ]
-}
-
+/// The profiles are the account's only (owner, 2026-10-27, note 136): a browser without them has none, where it had a "Main" and a
+/// "Kids" of its own that were never saved and that Who's watching offered to visitors, also on the Help Centre's host.
 pub fn provide_profile_store() {
     let storage = web_sys::window().and_then(|w| w.local_storage().ok().flatten());
-    let stored = storage
+    // profiles kept by a browser without an account are those two, saved when one was picked on Who's watching: they go
+    if let Some(s) = storage.as_ref().filter(|_| !crate::services::account::has_account()) {
+        let _ = s.remove_item(crate::keys::PROFILES);
+        let _ = s.remove_item(crate::keys::ACTIVE_PROFILE);
+    }
+    let mut initial_profiles = storage
         .as_ref()
         .and_then(|s| s.get_item(crate::keys::PROFILES).ok().flatten())
-        .and_then(|raw| serde_json::from_str::<Vec<crate::models::profile::Profile>>(&raw).ok());
-    // a browser used for the first time (no profiles kept, no activity noted yet): its first profiles are new, for the guide (layout/tour.rs)
-    let first_use = stored.is_none() && storage.as_ref().is_some_and(|s| s.get_item(crate::keys::LAST_SEEN).ok().flatten().is_none());
-    let mut initial_profiles = stored.unwrap_or_else(default_profiles);
-    if first_use {
-        for p in &initial_profiles {
-            crate::components::layout::tour::mark_new(&p.id);
-        }
-    }
+        .and_then(|raw| serde_json::from_str::<Vec<crate::models::profile::Profile>>(&raw).ok())
+        .unwrap_or_default();
     crate::models::profile_rules::normalize(&mut initial_profiles);
     // the profile in use: the one this browser chose, if it still exists. Without one, a browser that holds an account shows Who's watching
-    // (as Netflix does after signing in or reloading before a choice); a browser without an account uses its first profile.
+    // (as Netflix does after signing in or reloading before a choice); a browser without an account uses its first profile, if it kept any.
     let saved = storage.as_ref().and_then(|s| s.get_item(crate::keys::ACTIVE_PROFILE).ok().flatten());
     let initial_profile = saved.filter(|id| initial_profiles.iter().any(|p| &p.id == id)).or_else(|| {
         if crate::services::account::has_account() { None } else { initial_profiles.first().map(|p| p.id.clone()) }
