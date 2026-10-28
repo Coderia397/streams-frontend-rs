@@ -29,7 +29,9 @@ def used(names):
     for f in sources:
         text = f.read_text(encoding="utf-8")
         found.update(n for n in re.findall(r"ph-([a-z0-9]+(?:-[a-z0-9]+)*)", text) if n not in MODIFIERS)
-        found.update(s for s in re.findall(r'"([a-z0-9]+(?:-[a-z0-9]+)*)"', text) if s in names)
+        # the address rules' quoted words are path segments ("watch"), not icon names
+        if f.name != "routing.rs":
+            found.update(s for s in re.findall(r'"([a-z0-9]+(?:-[a-z0-9]+)*)"', text) if s in names)
     return {n for n in found if n in names}
 
 

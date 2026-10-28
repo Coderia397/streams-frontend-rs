@@ -9,12 +9,6 @@ const STILL: &str = "/hqSTgj4AmxSfGssj4hoYwlzq6mv.jpg";
 /// Netflix's own code for this page, kept as the page shows it.
 const ERROR_CODE: &str = "NSES-404";
 
-/// `/NotFound?prev=` and the address of this page, for a page that finds its address is not one the site has.
-pub fn address_for_lost() -> String {
-    let here = web_sys::window().and_then(|w| w.location().href().ok()).unwrap_or_default();
-    format!("{}?prev={}", crate::config::routes::NOT_FOUND, String::from(js_sys::encode_uri_component(&here)))
-}
-
 #[component]
 pub fn NotFoundPage() -> impl IntoView {
     // the tab says the brand alone, as Netflix's says "Netflix"

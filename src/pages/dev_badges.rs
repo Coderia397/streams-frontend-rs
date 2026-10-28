@@ -28,8 +28,9 @@ const BACKGROUNDS: &[(&str, &str)] = &[
 
 #[component]
 pub fn DevBadgesPage() -> impl IntoView {
+    // a release build has no such page (routing::known): nothing to draw while the address moves
     if !cfg!(debug_assertions) {
-        return view! { <leptos_router::components::Redirect path="/" /> }.into_any();
+        return ().into_any();
     }
     view! {
         <div class="p-6 text-ink" style="background:#111">

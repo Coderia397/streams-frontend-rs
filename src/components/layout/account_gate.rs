@@ -4,10 +4,8 @@
 //! in or out): a member on a visitors' page goes where they were heading, or Home, as Netflix sends a signed in member away from its sign
 //! in page; a visitor on a members' page goes to sign in, which sends them back after they sign in. The engine can switch the members'
 //! side off for a while (`accounts_required: false` in `features.json`, read by `/api/features`); an engine that cannot be reached counts
-//! as "required".
+//! as "required". The rules are here; `routing::decide` applies them, after the host, moved and unknown addresses (note 139).
 
-use leptos::prelude::*;
-use leptos_router::hooks::{use_location, use_navigate};
 
 /// Who an address is for.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -42,46 +40,41 @@ pub fn is_open_to_visitors(path: &str) -> bool {
     access(path) != Access::Members
 }
 
-#[component]
-pub fn AccountGate() -> impl IntoView {
-    let location = use_location();
-    let navigate = use_navigate();
-    let signed_in = crate::services::account::signed_in();
-    let features = LocalResource::new(|| async { crate::services::ai_engine::fetch_features().await });
-    Effect::new(move |_| {
-        let path = location.pathname.get();
-        let member = signed_in.get();
-        let replace = leptos_router::NavigateOptions { replace: true, ..Default::default() };
-        match access(&path) {
-            Access::Everyone => {}
-            Access::Visitors => {
-                if member {
-                    navigate(&after_sign_in(), replace);
-                }
-            }
-            Access::Members => {
-                if member {
-                    return;
-                }
-                // the engine answers first (an engine that cannot be reached answers "required"); the switch is off only when it has said so
-                let Some(flags) = features.get() else { return };
-                if flags.get("accounts_required") == Some(&false) {
-                    return;
-                }
-                let search = location.search.get();
-                let search = if search.is_empty() || search.starts_with('?') { search } else { format!("?{search}") };
-                let back = js_sys::encode_uri_component(&format!("{path}{search}")).as_string().unwrap_or_default();
-                navigate(&format!("/login?next={back}"), replace);
-            }
-        }
-    });
-}
-
 /// Where to go after signing in: the address the gate took the person from (only an address of this site), otherwise Home.
 pub fn after_sign_in() -> String {
-    let search = web_sys::window().and_then(|w| w.location().search().ok()).unwrap_or_default();
-    let next = search.trim_start_matches('?').split('&').find_map(|kv| kv.strip_prefix("next=")).map(|v| js_sys::decode_uri_component(v).ok().and_then(|s| s.as_string()).unwrap_or_default());
+    after_sign_in_from(&web_sys::window().and_then(|w| w.location().search().ok()).unwrap_or_default())
+}
+
+/// `after_sign_in` for a given query (`?next=...`).
+pub fn after_sign_in_from(search: &str) -> String {
+    let next = search.trim_start_matches('?').split('&').find_map(|kv| kv.strip_prefix("next=")).map(decode);
     next.and_then(|n| safe_next(&n)).unwrap_or_else(|| crate::config::routes::BROWSE.to_string())
+}
+
+fn decode(v: &str) -> String {
+    #[cfg(target_arch = "wasm32")]
+    {
+        js_sys::decode_uri_component(v).ok().and_then(|s| s.as_string()).unwrap_or_default()
+    }
+    // the same as decodeURIComponent, for the tests on the host
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        let bytes = v.as_bytes();
+        let mut out = Vec::with_capacity(bytes.len());
+        let mut i = 0;
+        while i < bytes.len() {
+            if bytes[i] == b'%' && i + 2 < bytes.len() {
+                if let Ok(b) = u8::from_str_radix(&v[i + 1..i + 3], 16) {
+                    out.push(b);
+                    i += 3;
+                    continue;
+                }
+            }
+            out.push(bytes[i]);
+            i += 1;
+        }
+        String::from_utf8(out).unwrap_or_default()
+    }
 }
 
 /// `next` when it is an address of this site that needs an account. Browsers read a backslash as a slash and drop tabs and line breaks,

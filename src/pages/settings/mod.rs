@@ -201,6 +201,12 @@ impl Screen {
         }
     }
 
+    /// Whether `path` is one of the addresses this page is mounted at (lib.rs routes); routing::known asks `parse` about those only.
+    pub fn owns(path: &str) -> bool {
+        let first = path.split('/').find(|p| !p.is_empty()).unwrap_or("");
+        ["settings", "account", "password", "email", "phonenumber", "manageaccountaccess", "donottest", "notificationSettings"].contains(&first)
+    }
+
     /// An address of before 2026-10-27, which moves to the screen's address now.
     pub fn is_old(path: &str) -> bool {
         let parts: Vec<&str> = path.split('/').filter(|p| !p.is_empty()).collect();
@@ -386,24 +392,11 @@ pub fn SettingsPage() -> impl IntoView {
     let active = Memo::new(move |_| profiles.active_profile_id.get().unwrap_or_default());
     let parsed = Memo::new(move |_| Screen::parse(&location.pathname.get(), &active.get(), |id| profiles.profiles.with(|l| l.iter().any(|p| p.id == id))));
     let screen = Memo::new(move |_| parsed.get().unwrap_or(Screen::Account));
-    let navigate = leptos_router::hooks::use_navigate();
+    // an address the site does not have, or one of before, draws nothing: routing::AddressKeeper moves it (note 139)
+    let pathname = location.pathname;
+    let shown = move || parsed.with(|p| p.is_some()) && !Screen::is_old(&pathname.get());
     Effect::new(move |_| {
-        let path = location.pathname.get();
-        // the address has left this page (it moved to "Lost your way?" below and this page is being taken down)
-        if path == routes::NOT_FOUND {
-            return;
-        }
-        let replace = leptos_router::NavigateOptions { replace: true, ..Default::default() };
-        match parsed.get() {
-            // an address the site does not have: Netflix's "Lost your way?" (pages/not_found.rs)
-            None => navigate(&crate::pages::not_found::address_for_lost(), replace),
-            // the addresses of before 2026-10-27 move to Netflix's
-            Some(s) if Screen::is_old(&path) => navigate(&format!("{}{}", s.path(), location.search.get_untracked()), replace),
-            Some(_) => {}
-        }
-    });
-    Effect::new(move |_| {
-        if let Some(doc) = web_sys::window().and_then(|w| w.document()) {
+        if let (true, Some(doc)) = (shown(), web_sys::window().and_then(|w| w.document())) {
             doc.set_title(&format!("{} | {}", t(screen.get().title_key()), crate::brand::NAME));
         }
     });
@@ -419,6 +412,7 @@ pub fn SettingsPage() -> impl IntoView {
     let standalone = Memo::new(move |_| screen.get().standalone());
 
     view! {
+        <Show when=shown>
         <div class="theme-paper-wide min-h-screen bg-void font-sans text-ink selection:bg-brand selection:text-ink" class=("theme-paper", light_phone) class=("set-tiles", move || !light_phone())>
             <Show when=light_phone><shell::PhoneBar screen=screen /></Show>
             <div class=("lg:hidden", move || standalone.get())><shell::TopBar avatar=avatar signout_open=signout_open /></div>
@@ -446,6 +440,7 @@ pub fn SettingsPage() -> impl IntoView {
             <widgets::Toaster />
             <widgets::ConfirmDialog open=signout_open title=t("set-sign-out") body=t("set-sign-out-body") confirm_label=t("set-sign-out") on_confirm=Callback::new(|_| hub::sign_out_now()) />
         </div>
+        </Show>
     }
 }
 
@@ -606,6 +601,9 @@ mod tests {
         assert_eq!(read("/notificationSettings"), Some(Screen::Notifications("active".into())));
         // any other address the site does not have
         assert_eq!(read("/account/nosuchpage"), None);
+        // the addresses this page is mounted at (routing::known reads only those)
+        assert!(Screen::owns("/account/nosuchpage") && Screen::owns("/notificationSettings/email/p1") && Screen::owns("/settings"));
+        assert!(!Screen::owns("/login") && !Screen::owns("/NotFound") && !Screen::owns("/browse") && !Screen::owns("/accounts"));
         assert_eq!(read("/nosuchpage"), None);
     }
 

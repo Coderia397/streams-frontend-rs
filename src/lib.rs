@@ -9,6 +9,7 @@ pub mod keys;
 pub mod legacy_keys;
 pub mod models;
 pub mod pages;
+pub mod routing;
 pub mod services;
 pub mod store;
 pub mod utils;
@@ -122,16 +123,18 @@ pub fn App() -> impl IntoView {
         <crate::components::share::ShareHost />
         <crate::components::profiles::switch_overlay::GlobalSwitchOverlay />
         <Router>
-            <HostGuard />
+            // the one place that moves the address (the host, moved and unknown addresses, the account gate): pages only draw, and only once
+            // their address stays (note 139)
+            <crate::routing::AddressKeeper>
             <GlobalGate />
             <crate::components::media::info_modal::SharedTitleOpener />
-            // an address the site does not have: Netflix's "Lost your way?" at /NotFound (pages/not_found.rs)
-            <Routes fallback=|| view! { <UnknownAddress /> }>
+            // an address the site does not have draws nothing: routing::AddressKeeper moves it to "Lost your way?" (pages/not_found.rs)
+            <Routes fallback=|| ()>
                 <Route path=path!("/browse") view=|| view! { <HomeRoute kids=false /> } />
                 <Route path=path!("/kids") view=|| view! { <HomeRoute kids=true /> } />
-                // the developer pages exist only when the site is opened from this machine or its network (note 67 E8); anywhere else they go to the root, as an address the site does not have
-                <Route path=path!("/dev/badges") view=|| if is_local_host() { view! { <crate::pages::dev_badges::DevBadgesPage /> }.into_any() } else { view! { <leptos_router::components::Redirect path="/" /> }.into_any() } />
-                <Route path=path!("/dev/logos") view=|| if is_local_host() { view! { <crate::components::media::collection_logo::LogoGalleryPage /> }.into_any() } else { view! { <leptos_router::components::Redirect path="/" /> }.into_any() } />
+                // the developer pages exist only when the site is opened from this machine or its network (note 67 E8); anywhere else they are an address the site does not have (routing::known)
+                <Route path=path!("/dev/badges") view=|| crate::routing::is_local_host().then(|| view! { <crate::pages::dev_badges::DevBadgesPage /> }) />
+                <Route path=path!("/dev/logos") view=|| crate::routing::is_local_host().then(|| view! { <crate::components::media::collection_logo::LogoGalleryPage /> }) />
                 <Route path=path!("/browse/genre/:id") view=|| view! { <ProfileHold><crate::pages::category::GenreRoute /></ProfileHold> } />
                 <Route path=path!("/title/:slug") view=|| view! { <ProfileHold><crate::pages::title::TitlePage /></ProfileHold> } />
                 // the player waits for Who's watching: no film plays behind the profile picker (owner, 2026-10-25)
@@ -139,15 +142,8 @@ pub fn App() -> impl IntoView {
                 <Route path=path!("/watch/:kind/:id") view=|| view! { <ProfileHold><crate::pages::player::PlayerPage /></ProfileHold> } />
                 <Route
                     path=path!("")
-                    view=move || {
-                        if on_help_host {
-                            view! { <leptos_router::components::Redirect path="/help" /> }.into_any()
-                        } else if crate::services::account::is_returning() {
-                            view! { <leptos_router::components::Redirect path="/browse" /> }.into_any()
-                        } else {
-                            view! { <crate::pages::landing::LandingPage /> }.into_any()
-                        }
-                    }
+                    // the landing page; the Help Centre's host and a returning visitor move on (routing::decide)
+                    view=move || (!on_help_host && !crate::services::account::is_returning()).then(|| view! { <crate::pages::landing::LandingPage /> })
                 />
                 <Route path=path!("/profiles/manage") view=crate::components::profiles::whos_watching::ManageProfilesPage />
                 <Route path=path!("/help") view=crate::pages::help::HelpPage />
@@ -156,33 +152,23 @@ pub fn App() -> impl IntoView {
                 <Route path=path!("/help/article/:slug") view=crate::pages::help::ArticlePage />
                 <Route path=path!("/search") view=crate::pages::search::SearchPage />
                 <Route path=path!("/browse/my-list") view=crate::pages::my_list::MyListPage />
-                // the addresses of the app: Series is genre 83 and Films is genre 34399; the named addresses of before lead there
-                <Route path=path!("/browse/movies") view=|| view! { <leptos_router::components::Redirect path="/browse/genre/34399" /> } />
-                <Route path=path!("/browse/films") view=|| view! { <leptos_router::components::Redirect path="/browse/genre/34399" /> } />
-                <Route path=path!("/browse/shows") view=|| view! { <leptos_router::components::Redirect path="/browse/genre/83" /> } />
-                <Route path=path!("/browse/series") view=|| view! { <leptos_router::components::Redirect path="/browse/genre/83" /> } />
                 <Route path=path!("/browse/games") view=crate::pages::games::GamesPage />
                 <Route path=path!("/games") view=crate::pages::games::GamesPage />
-                <Route path=path!("/tv") view=|| view! { <leptos_router::components::Redirect path="/browse/shows" /> } />
-                <Route path=path!("/movies") view=|| view! { <leptos_router::components::Redirect path="/browse/movies" /> } />
-                <Route path=path!("/new") view=|| view! { <leptos_router::components::Redirect path="/latest" /> } />
-                <Route path=path!("/list") view=|| view! { <leptos_router::components::Redirect path="/browse/my-list" /> } />
                 <Route path=path!("/browse/original-audio") view=crate::pages::language::BrowseLanguagePage />
-                <Route path=path!("/browse/language") view=|| view! { <leptos_router::components::Redirect path="/browse/original-audio" /> } />
                 <Route path=path!("/latest") view=crate::pages::new_popular::NewPopularPage />
-                // Notifications have a page on the phone only (the website lists them under its bell): a computer goes Home (note 116)
+                // Notifications have a page on the phone only (the website lists them under its bell): a computer goes Home (routing::decide, note 116)
                 <Route path=path!("/notifications") view=|| view! {
                     <crate::form::ByForm
                         phone=|| view! { <crate::pages::notifications::NotificationsPage /> }
-                        desktop=|| view! { <leptos_router::components::Redirect path="/browse" /> }
+                        desktop=|| ()
                     />
                 } />
                 // Clips is the app's alone (Netflix's website has none): at a computer or tablet width the address goes Home, also when a phone
-                // is switched to a big screen while on it (note 116)
+                // is switched to a big screen while on it (routing::decide, note 116)
                 <Route path=path!("/clips") view=|| view! {
                     <crate::form::ByForm
                         phone=|| view! { <ProfileHold><crate::pages::clips::ClipsPage /></ProfileHold> }
-                        desktop=|| view! { <leptos_router::components::Redirect path="/browse" /> }
+                        desktop=|| ()
                     />
                 } />
                 <Route path=path!("/reads") view=crate::pages::reads::ReadsPage />
@@ -204,17 +190,15 @@ pub fn App() -> impl IntoView {
                 <Route path=path!("/signup") view=crate::pages::auth::SignupPage />
                 <Route path=path!("/forgot") view=crate::pages::auth::ForgotPage />
                 <Route path=path!("/auth/confirm") view=crate::pages::auth::ConfirmPage />
-                <Route path=path!("/welcome") view=|| view! { <leptos_router::components::Redirect path="/" /> } />
-                // the policies, at config::routes (their earlier addresses are in config::routes::MOVED, answered by UnknownAddress)
+                // the policies, at config::routes (their earlier addresses are in config::routes::MOVED, moved by routing::decide)
                 <Route path=path!("/help/legal/privacy") view=|| view! { <crate::pages::help::LegalPage doc="privacy" /> } />
                 <Route path=path!("/help/legal/terms") view=|| view! { <crate::pages::help::LegalPage doc="terms" /> } />
                 <Route path=path!("/help/legal/cookies") view=|| view! { <crate::pages::help::LegalPage doc="cookie-policy" /> } />
                 <Route path=path!("/help/legal/dmca") view=|| view! { <crate::pages::help::LegalPage doc="dmca" /> } />
                 <Route path=path!("/help/legal/credits") view=|| view! { <crate::pages::help::LegalPage doc="credits" /> } />
                 <Route path=path!("/help/legal/disclaimer") view=|| view! { <crate::pages::help::LegalPage doc="disclaimer" /> } />
-                <Route path=path!("/contact") view=|| view! { <leptos_router::components::Redirect path="/help/contact" /> } />
             </Routes>
-            <crate::components::layout::account_gate::AccountGate />
+            </crate::routing::AddressKeeper>
             <crate::components::consent::CookieManager />
         </Router>
     }
@@ -244,52 +228,13 @@ mod tests {
     }
 }
 
-/// True when the page is opened from this machine or a private network address (localhost, 127.0.0.1, 10.x, 192.168.x, 172.16 to 31.x, *.local): where the developer pages may show.
-fn is_local_host() -> bool {
-    let host = web_sys::window().and_then(|w| w.location().hostname().ok()).unwrap_or_default();
-    let private_172 = host.strip_prefix("172.").and_then(|r| r.split('.').next()).and_then(|n| n.parse::<u8>().ok()).is_some_and(|n| (16..=31).contains(&n));
-    host == "localhost" || host == "127.0.0.1" || host == "[::1]" || host.starts_with("10.") || host.starts_with("192.168.") || private_172 || host.ends_with(".local")
-}
-
-/// An address the app does not have: a policy's earlier or common address goes to the policy, anything else to Netflix's "Lost your way?"
-/// page with the address it was asked for (`/NotFound?prev=`, read live on netflix.com 2026-10-27, note 138).
-#[component]
-fn UnknownAddress() -> impl IntoView {
-    let to = crate::config::routes::moved(&leptos_router::hooks::use_location().pathname.get_untracked()).map(String::from).unwrap_or_else(crate::pages::not_found::address_for_lost);
-    let navigate = leptos_router::hooks::use_navigate();
-    // after the fallback is drawn: navigating while the router draws it writes the address the router is reading, which aborted the app on
-    // every unknown address (RwLock<Url>::write inside NestedRoutesView::build, 2026-10-25)
-    Effect::new(move |_| navigate(&to, leptos_router::NavigateOptions { replace: true, ..Default::default() }));
-}
-
-/// Keeps each host to its own pages: `/help` (with the policies under `/help/legal`) on the main address moves to the Help Centre's host, and anything else on that host
-/// (the app, sign in) moves back to the main one. The server does the same for crawlers (`functions/_middleware.js`); this covers a person moving between pages without a new page load.
-#[component]
-fn HostGuard() -> impl IntoView {
-    let location = leptos_router::hooks::use_location();
-    Effect::new(move |_| {
-        let path = location.pathname.get();
-        let Some(win) = web_sys::window() else { return };
-        let search = win.location().search().unwrap_or_default();
-        let is_help_path = path == "/help" || path.starts_with("/help/");
-        if crate::config::on_site_host() && is_help_path {
-            let _ = win.location().replace(&format!("{}{path}{search}", crate::config::HELP_URL));
-        } else if crate::config::on_help_host() && !is_help_path && path != "/" {
-            let _ = win.location().replace(&format!("{}{path}{search}", crate::config::SITE_URL));
-        }
-    });
-}
-
-/// The two homes. A Kids profile lives at `/kids` and the others at `/browse`; each address sends the other kind of profile where it belongs, and `/kids` opened by a
-/// profile that is not a Kids profile switches to the account's Kids profile (with the loading screen), as netflix.com/Kids does.
+/// The two homes. A Kids profile lives at `/kids` and the others at `/browse` (routing::decide moves each kind of profile to its own), and `/kids` opened by
+/// a profile that is not a Kids profile switches to the account's Kids profile (with the loading screen), as netflix.com/Kids does.
 #[component]
 fn HomeRoute(kids: bool) -> impl IntoView {
     // the tab's name: a page that sent the member here (a shared title's page) leaves its own
     crate::pages::help::set_site_title("");
     let kids_active = crate::pages::settings::prefs::active_is_kids();
-    // a move between the two homes keeps the query: a shared link's `?title=` opens the title's details on either home
-    let search = leptos_router::hooks::use_location().search.get_untracked();
-    let search = if search.is_empty() || search.starts_with('?') { search } else { format!("?{search}") };
     let has_active = web_sys::window().and_then(|w| w.local_storage().ok().flatten()).and_then(|s| s.get_item(crate::keys::ACTIVE_PROFILE).ok().flatten()).is_some();
     if kids && !kids_active {
         let store = crate::store::use_profile_store();
@@ -304,11 +249,12 @@ fn HomeRoute(kids: bool) -> impl IntoView {
                 crate::store::ask_who_is_watching(store);
                 view! { <span /> }.into_any()
             }
-            _ => view! { <leptos_router::components::Redirect path=format!("/browse{search}") /> }.into_any(),
+            // no Kids profile to switch to: routing::decide moves the address to /browse
+            _ => ().into_any(),
         };
     }
     if !kids && kids_active {
-        return view! { <leptos_router::components::Redirect path=format!("/kids{search}") /> }.into_any();
+        return ().into_any();
     }
     view! { <ProfileHold><BrowseHome /></ProfileHold> }.into_any()
 }

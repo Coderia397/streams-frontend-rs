@@ -36,10 +36,10 @@ pub fn TitlePage() -> impl IntoView {
     move || {
         let raw = params.with(|p| p.get("slug").unwrap_or_default());
         match parse_slug(&raw) {
-            // not a title's address: Netflix's "Lost your way?"
-            None => view! { <leptos_router::components::Redirect path=crate::pages::not_found::address_for_lost() /> }.into_any(),
-            // the opener on Home shows the details window once a profile is chosen (also when this browser signs in while the page is open)
-            Some(_) if signed_in.get() => view! { <leptos_router::components::Redirect path=format!("/browse?title={raw}") /> }.into_any(),
+            // not a title's address ("Lost your way?"), or a member, who sees the title in the details window on Home once a profile is
+            // chosen (also when this browser signs in while the page is open): routing::decide moves the address, this page draws nothing
+            None => ().into_any(),
+            Some(_) if signed_in.get() => ().into_any(),
             Some((is_tv, id)) => view! { <PublicTitle id=id is_tv=is_tv /> }.into_any(),
         }
     }
